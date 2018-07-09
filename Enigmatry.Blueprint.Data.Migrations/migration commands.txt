@@ -1,0 +1,4 @@
+﻿EntityFrameworkCore\Add-Migration -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Api -Context BlueprintContext -Name TODO
+
+EntityFrameworkCore\Update-Database -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Api -Context BlueprintContext
+

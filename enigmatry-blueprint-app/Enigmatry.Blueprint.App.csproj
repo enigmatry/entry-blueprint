@@ -1,16 +1,39 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Compile Remove="e2e\**" />
+    <Compile Remove="src\**" />
+    <Content Remove="dist\**" />
+    <Content Remove="e2e\**" />
+    <Content Remove="src\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="e2e\**" />
+    <EmbeddedResource Remove="src\**" />
+    <None Remove="dist\**" />
+    <None Remove="e2e\**" />
+    <None Remove="src\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="tslint.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="protractor.conf.js" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
   </ItemGroup>
 
 </Project>
