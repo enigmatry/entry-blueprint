@@ -22,7 +22,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            _startup.ConfigureServicesExceptMvc(services);
+            Startup.ConfigureServicesExceptMvc(services);
             services.AddMvc(options => { options.DefaultConfigure(); })
                 .AddApplicationPart(typeof(Startup).Assembly);
         }

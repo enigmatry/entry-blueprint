@@ -11,6 +11,7 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
@@ -31,8 +32,8 @@ namespace Enigmatry.Blueprint.Api
             LoggerFactory = loggerFactory;
         }
 
-        public IHostingEnvironment Environment { get; }
-        public ILoggerFactory LoggerFactory { get; }
+        private IHostingEnvironment Environment { get; }
+        private ILoggerFactory LoggerFactory { get; }
         private IConfiguration Configuration { get; }
 
         [UsedImplicitly]
@@ -40,10 +41,11 @@ namespace Enigmatry.Blueprint.Api
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureServicesExceptMvc(services);
-            services.AddMvc(options => options.DefaultConfigure());
+            services.AddMvc(options => options.DefaultConfigure())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
-        internal void ConfigureServicesExceptMvc(IServiceCollection services)
+        internal static void ConfigureServicesExceptMvc(IServiceCollection services)
         {
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -81,7 +83,23 @@ namespace Enigmatry.Blueprint.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            if (env.IsDevelopment())
+            {
+                app.UseCors(builder => builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            }
+            else
+            {
+                app.UseHttpsRedirection();
+            }
+
             app.UseMiddleware<LogContextMiddleware>();
+
+            app.UseHsts();
+
             app.UseMvc();
         }
 

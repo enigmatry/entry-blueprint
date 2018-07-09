@@ -1,14 +1,10 @@
 ﻿using System;
 using System.IO;
 using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Blueprint.Data.Migrations;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Events;
@@ -37,11 +33,7 @@ namespace Enigmatry.Blueprint.Api
             try
             {
                 Log.Information("Starting web host");
-                IWebHost host = BuildWebHost(args);
-
-                InitializeDb(host);
-
-                host.Run();
+                CreateWebHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
             {
@@ -54,38 +46,18 @@ namespace Enigmatry.Blueprint.Api
             }
         }
 
-        private static IWebHost BuildWebHost(string[] args)
+        private static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            IWebHostBuilder builder = WebHost.CreateDefaultBuilder(args)
-                .ConfigureServices(services => services.AddAutofac())
+            IWebHostBuilder builder = WebHost.CreateDefaultBuilder(args);
+
+            if (!string.IsNullOrEmpty(ApplicationInsightsInstrumentationKey))
+                builder.UseApplicationInsights(ApplicationInsightsInstrumentationKey);
+
+            builder.ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>()
                 .UseSerilog();
 
-            if (!string.IsNullOrEmpty(ApplicationInsightsInstrumentationKey))
-            {
-                builder.UseApplicationInsights();
-            }
-
-            return builder.Build();
-        }
-
-        // TODO: Vladan found a better approach - use approach from SBS or Index Init
-        private static void InitializeDb(IWebHost host)
-        {
-            using (IServiceScope scope = host.Services.CreateScope())
-            {
-                IServiceProvider services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<BlueprintContext>();
-                    DbInitializer.Initialize(context);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while seeding the database.");
-                }
-            }
+            return builder;
         }
 
         private static void ConfigureSerilog()
