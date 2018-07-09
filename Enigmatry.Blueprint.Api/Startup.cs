@@ -23,18 +23,14 @@ namespace Enigmatry.Blueprint.Api
     [UsedImplicitly]
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+        
         public Startup(IConfiguration configuration,
             IHostingEnvironment environment,
             ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;
-            Environment = environment;
-            LoggerFactory = loggerFactory;
+            _configuration = configuration;
         }
-
-        private IHostingEnvironment Environment { get; }
-        private ILoggerFactory LoggerFactory { get; }
-        private IConfiguration Configuration { get; }
 
         [UsedImplicitly]
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -49,6 +45,7 @@ namespace Enigmatry.Blueprint.Api
         {
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddCors();
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
         }
@@ -67,7 +64,7 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule<IdentityModule>();
         }
 
-        private ClaimsPrincipal GetPrincipal(IComponentContext c)
+        private static ClaimsPrincipal GetPrincipal(IComponentContext c)
         {
             var httpContextAccessor = c.Resolve<IHttpContextAccessor>();
             ClaimsPrincipal user = httpContextAccessor.HttpContext.User;
@@ -110,7 +107,7 @@ namespace Enigmatry.Blueprint.Api
             //TODO enable logging
             //optionsBuilder.UseLoggerFactory().EnableSensitiveDataLogging(false);
 
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("BlueprintContext"),
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"),
                 b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
 
             //replace default convention builder with our so we can add custom conventions

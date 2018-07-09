@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Infrastructure.Data.Configurations;
@@ -8,10 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 {
-
     [UsedImplicitly]
     public class BlueprintContext : DbContext
     {
+        public Action<ModelBuilder> ModelBuilderConfigurer { get; set; }
+
         public BlueprintContext(DbContextOptions options) : base(options)
         {
         }
@@ -21,6 +23,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             modelBuilder.UseEntityTypeConfiguration(typeof(UserConfiguration).Assembly);
 
             RegisterEntities(modelBuilder);
+
+            ModelBuilderConfigurer?.Invoke(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }

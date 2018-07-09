@@ -1,18 +1,14 @@
-﻿using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+﻿using System;
+using Enigmatry.Blueprint.Model.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Seeding
 {
     public class UserSeeding : ISeeding
     {
-        public void Seed(BlueprintContext context)
+        public void Seed(ModelBuilder modelBuilder)
         {
-            /*var user = context.Set<User>().FirstOrDefault(u => u.Name == "Test");
-            if (user == null)
-            {
-                user = User.Create("Test", "Test", DateTimeOffset.Now);
-
-                context.Set<User>().Add(user);
-            }*/
+            modelBuilder.Entity<User>().HasData(User.Create("Test", "Test", DateTimeOffset.Now).WithId(1));
         }
     }
 }

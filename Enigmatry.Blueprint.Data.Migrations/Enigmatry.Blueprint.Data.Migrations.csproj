@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Enigmatry.Blueprint.Infrastructure\Enigmatry.Blueprint.Infrastructure.csproj" />
   </ItemGroup>
 

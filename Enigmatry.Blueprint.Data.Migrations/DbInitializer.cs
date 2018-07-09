@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enigmatry.Blueprint.Data.Migrations.Seeding;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Data.Migrations
 {
@@ -13,16 +13,13 @@ namespace Enigmatry.Blueprint.Data.Migrations
             Seedings.Add(new UserSeeding());
         }
 
-        public static void Initialize(BlueprintContext context)
+        // EF Core way of seeding data: https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding
+        public static void SeedData(ModelBuilder modelBuilder)
         {
-            context.Database.EnsureCreated();
-
             foreach (ISeeding seeding in Seedings)
             {
-                seeding.Seed(context);
+                seeding.Seed(modelBuilder);
             }
-
-            context.SaveChanges();
         }
     }
 }

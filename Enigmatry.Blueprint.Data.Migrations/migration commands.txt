@@ -2,3 +2,10 @@
 
 EntityFrameworkCore\Update-Database -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Api -Context BlueprintContext
 
+// or using dotnet ef
+set ConnectionString=Server=.;Database=Blueprint-Core;Trusted_Connection=True;MultipleActiveResultSets=true
+dotnet ef migrations add TODO -p Enigmatry.Blueprint.Data.Migrations -s Enigmatry.Blueprint.Data.Migrations -c BlueprintContext 
+
+set ConnectionString=Server=.;Database=Blueprint-Core;Trusted_Connection=True;MultipleActiveResultSets=true
+dotnet ef database update -p Enigmatry.Blueprint.Data.Migrations -s Enigmatry.Blueprint.Data.Migrations -c BlueprintContext
+
