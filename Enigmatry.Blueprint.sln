@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Api.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Model.Tests", "Enigmatry.Blueprint.Model.Tests\Enigmatry.Blueprint.Model.Tests.csproj", "{9DA26A26-2739-4B85-AD67-25778FEE0194}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Blueprint.App", "enigmatry-blueprint-app\Enigmatry.Blueprint.App.csproj", "{7121954E-7356-4B8E-9F76-5B435814748D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.App", "enigmatry-blueprint-app\Enigmatry.Blueprint.App.csproj", "{7121954E-7356-4B8E-9F76-5B435814748D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

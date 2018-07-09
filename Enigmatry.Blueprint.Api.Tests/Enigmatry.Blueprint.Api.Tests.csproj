@@ -1,14 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoFixture.NUnit3" Version="4.2.0" />
-    <PackageReference Include="FluentAssertions" Version="5.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.0.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.4.0" />
+    <PackageReference Include="FluentAssertions" Version="5.4.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.6" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.1.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0-preview-20180510-03" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.11" />
     <PackageReference Include="NUnit" Version="3.10.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
   </ItemGroup>
