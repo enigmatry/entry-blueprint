@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Autofac.Extensions.DependencyInjection;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +23,9 @@ namespace Enigmatry.Blueprint.Api
                     true)
                 .Build();
 
+        private static string ApplicationInsightsInstrumentationKey =>
+            Configuration["ApplicationInsights:InstrumentationKey"];
+
         public static void Main(string[] args)
         {
             ConfigureSerilog();
@@ -43,11 +45,13 @@ namespace Enigmatry.Blueprint.Api
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
                 .UseSerilog();
+        }
 
         private static void ConfigureSerilog()
         {
