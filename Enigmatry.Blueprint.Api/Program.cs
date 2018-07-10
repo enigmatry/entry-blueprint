@@ -24,9 +24,6 @@ namespace Enigmatry.Blueprint.Api
                     true)
                 .Build();
 
-        private static string ApplicationInsightsInstrumentationKey =>
-            Configuration["ApplicationInsights:InstrumentationKey"];
-
         public static void Main(string[] args)
         {
             ConfigureSerilog();
@@ -46,19 +43,11 @@ namespace Enigmatry.Blueprint.Api
             }
         }
 
-        private static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            IWebHostBuilder builder = WebHost.CreateDefaultBuilder(args);
-
-            if (!string.IsNullOrEmpty(ApplicationInsightsInstrumentationKey))
-                builder.UseApplicationInsights(ApplicationInsightsInstrumentationKey);
-
-            builder.ConfigureServices(services => services.AddAutofac())
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseApplicationInsights()
                 .UseSerilog();
-
-            return builder;
-        }
 
         private static void ConfigureSerilog()
         {
