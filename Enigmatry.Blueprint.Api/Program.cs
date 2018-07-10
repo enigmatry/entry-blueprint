@@ -48,6 +48,7 @@ namespace Enigmatry.Blueprint.Api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
+                .UseKestrel((context, options) => { options.AddServerHeader = false; })
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
                 .UseSerilog();
