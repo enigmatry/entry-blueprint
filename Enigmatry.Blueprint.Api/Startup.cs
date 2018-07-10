@@ -45,7 +45,6 @@ namespace Enigmatry.Blueprint.Api
         {
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddCors();
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
         }
