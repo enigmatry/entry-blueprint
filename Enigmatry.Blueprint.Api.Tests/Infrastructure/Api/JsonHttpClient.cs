@@ -36,15 +36,26 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             return await response.DeserializeWithStatusCodeCheckAsync<T>();
         }
 
-        public async Task PutAsync<T>(string uri, T content)
+        public async Task PutAsJsonAsync<T>(string uri, T content)
         {
-            HttpResponseMessage response = await _client.PutAsync(uri, CreateJsonContent(content));
+            HttpResponseMessage response = await _client.PutAsJsonAsync(uri, CreateJsonContent(content));
             await response.EnsureSuccessStatusCodeAsync();
         }
 
-        public async Task<TResponse> PutAsync<T, TResponse>(string uri, T content)
+        public async Task<TResponse> PutAsJsonAsync<T, TResponse>(string uri, T content)
         {
-            HttpResponseMessage response = await _client.PutAsync(uri, CreateJsonContent(content));
+            HttpResponseMessage response = await _client.PutAsJsonAsync(uri, CreateJsonContent(content));
+            return await response.DeserializeWithStatusCodeCheckAsync<TResponse>();
+        }
+         public async Task PostAsJsonAsync<T>(string uri, T content)
+        {
+            HttpResponseMessage response = await _client.PostAsJsonAsync(uri, CreateJsonContent(content));
+            await response.EnsureSuccessStatusCodeAsync();
+        }
+
+        public async Task<TResponse> PostAsJsonAsync<T, TResponse>(string uri, T content)
+        {
+            HttpResponseMessage response = await _client.PostAsJsonAsync(uri, CreateJsonContent(content));
             return await response.DeserializeWithStatusCodeCheckAsync<TResponse>();
         }
 

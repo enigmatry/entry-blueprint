@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Filters;
 using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,14 @@ namespace Enigmatry.Blueprint.Api.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        private readonly IQueryable<User> _usersQuery;
+        private readonly IRepository<User> _userRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<UsersController> _log;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController(IQueryable<User> userQuery, IMapper mapper, ILogger<UsersController> log)
+        public UsersController(IRepository<User> userRepository, IMapper mapper, ILogger<UsersController> log)
         {
-            _usersQuery = userQuery;
+            _userRepository = userRepository;
             _mapper = mapper;
             _log = log;
         }
@@ -39,8 +41,17 @@ namespace Enigmatry.Blueprint.Api.Controllers
             // see https://github.com/serilog/serilog/wiki/Writing-Log-Events on best practice of writing log events.
             _log.LogInformation("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 
-            List<User> users = await _usersQuery.ToListAsync();
-            return _mapper.Map<IEnumerable<User>, IEnumerable<UserModel>>(users);
+            List<User> users = await _userRepository.QueryAll().ToListAsync();
+            return _mapper.Map<IEnumerable<UserModel>>(users);
+        }
+
+        [HttpPost]
+        public async Task<UserModel> Post([FromBody] UserCreateDto model)
+        {
+            User user = Model.Identity.User.Create(model);
+            _userRepository.Add(user);
+            await _unitOfWork.SaveChangesAsync();
+            return _mapper.Map<UserModel>(user);
         }
     }
 }

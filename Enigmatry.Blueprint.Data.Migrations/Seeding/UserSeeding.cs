@@ -10,11 +10,11 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
         public void Seed(ModelBuilder modelBuilder)
         {
             User user = User.Create(new UserCreateDto
-            {
-                Name = "Test",
-                UserName = "Test",
-                CreatedOn = DateTimeOffset.Now
-            });
+                {
+                    Name = "Test",
+                    UserName = "Test"
+                })
+                .CreatedOn(DateTimeOffset.Now, 0);
 
             modelBuilder.Entity<User>().HasData(user.WithId(1));
         }

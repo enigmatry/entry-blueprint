@@ -4,7 +4,7 @@ namespace Enigmatry.Blueprint.Model
 {
     public interface IEntityHasCreatedUpdated
     {
-        void SetCreated(DateTime createdOn, int createdBy);
-        void SetUpdated(DateTime updatedOn, int updatedBy);
+        void SetCreated(DateTimeOffset createdOn, int createdBy);
+        void SetUpdated(DateTimeOffset updatedOn, int updatedBy);
     }
 }

@@ -17,8 +17,13 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
         [SetUp]
         public void Setup()
         {
-            _user = User.Create(new UserCreateDto { UserName = "username1", Name ="name", CreatedOn = DateTimeOffset.Now});
-            _user2 = User.Create(new UserCreateDto{ UserName = "username2", Name = "name2", CreatedOn = DateTimeOffset.Now.AddDays(1)});
+            _user = new UserBuilder()
+                .UserName("username1")
+                .Name("name");
+            _user2 = new UserBuilder()
+                .UserName("username2")
+                .Name("name2");
+
             _query = new List<User> {_user, _user2}.AsQueryable();
         }
 

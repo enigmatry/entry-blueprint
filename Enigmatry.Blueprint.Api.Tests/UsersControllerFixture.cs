@@ -6,6 +6,7 @@ using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -20,19 +21,17 @@ namespace Enigmatry.Blueprint.Api.Tests
         public void SetUp()
         {
             _createdDate = Resolve<ITimeProvider>().Now;
-            User user = User.Create(new UserCreateDto
-            {
-                UserName = "userName",
-                Name = "John Doe",
-                CreatedOn = _createdDate
-            });
-
+            User user = new UserBuilder()
+                .UserName("userName")
+                .Name("John Doe")
+                .CreatedOn(_createdDate);
+            
             AddToRepository(user);
             SaveChanges();
         }
 
         [Test]
-        public async Task Users_GetAll()
+        public async Task TestGetAll()
         {
             List<UserModel> users = (await Client.GetAsync<IEnumerable<UserModel>>("api/users")).ToList();
 
@@ -40,8 +39,18 @@ namespace Enigmatry.Blueprint.Api.Tests
 
             UserModel user = users.First();
             user.UserName.Should().Be("userName");
-            user.Name.Should().Be("someName");
+            user.Name.Should().Be("John Doe");
             user.CreatedOn.Should().Be(_createdDate);
+        }
+
+        [Test]
+        public async Task TestPost()
+        {
+            var userToCreate = new UserCreateDto { Name = "some user", UserName = "some userName"};
+            UserModel user = await Client.PostAsJsonAsync<UserCreateDto, UserModel>("api/users", userToCreate);
+
+            user.UserName.Should().Be(userToCreate.UserName);
+            user.Name.Should().Be(userToCreate.Name);
         }
     }
 }

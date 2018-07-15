@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Enigmatry.Blueprint.Api\Enigmatry.Blueprint.Api.csproj" />
+    <ProjectReference Include="..\Enigmatry.Blueprint.Model.Tests\Enigmatry.Blueprint.Model.Tests.csproj" />
   </ItemGroup>
 
 </Project>

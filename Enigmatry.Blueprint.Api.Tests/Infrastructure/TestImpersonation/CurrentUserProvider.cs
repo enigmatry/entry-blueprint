@@ -10,9 +10,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
             User = User.Create(new UserCreateDto
             {
                 UserName = principal.UserName,
-                Name = "John Doe",
-                CreatedOn = timeProvider.Now
-            });
+                Name = "John Doe"
+            }).CreatedOn(timeProvider.Now, 0);
         }
 
         public int UserId => User.Id;
