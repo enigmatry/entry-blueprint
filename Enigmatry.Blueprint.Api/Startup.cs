@@ -1,12 +1,15 @@
 ﻿using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Infrastructure.Identity;
+using Enigmatry.Blueprint.Model.Identity;
+using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,11 +41,19 @@ namespace Enigmatry.Blueprint.Api
         {
             ConfigureServicesExceptMvc(services);
             services.AddMvc(options => options.DefaultConfigure())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(fv =>
+                {
+                    // disables standard data annotations validation
+                    // https://github.com/JeremySkinner/FluentValidation/wiki/i.-ASP.NET-Core-integration
+                    // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; // 
+                    fv.RegisterValidatorsFromAssemblyContaining<UserCreateDtoValidator>();
+                });
         }
 
         internal static void ConfigureServicesExceptMvc(IServiceCollection services)
         {
+            services.AddAutofac();
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<BlueprintContext>();

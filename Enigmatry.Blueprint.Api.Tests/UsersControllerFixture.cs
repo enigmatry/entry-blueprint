@@ -20,7 +20,12 @@ namespace Enigmatry.Blueprint.Api.Tests
         public void SetUp()
         {
             _createdDate = Resolve<ITimeProvider>().Now;
-            User user = User.Create("userName", "someName", _createdDate);
+            User user = User.Create(new UserCreateDto
+            {
+                UserName = "userName",
+                Name = "John Doe",
+                CreatedOn = _createdDate
+            });
 
             AddToRepository(user);
             SaveChanges();
@@ -30,9 +35,9 @@ namespace Enigmatry.Blueprint.Api.Tests
         public async Task Users_GetAll()
         {
             List<UserModel> users = (await Client.GetAsync<IEnumerable<UserModel>>("api/users")).ToList();
-            
+
             users.Count.Should().Be(1, "we saved one user to the db");
-            
+
             UserModel user = users.First();
             user.UserName.Should().Be("userName");
             user.Name.Should().Be("someName");

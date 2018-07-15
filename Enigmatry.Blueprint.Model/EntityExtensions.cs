@@ -1,6 +1,6 @@
 ﻿using Enigmatry.Blueprint.Core;
 
-namespace Enigmatry.Blueprint.Model.Identity
+namespace Enigmatry.Blueprint.Model
 {
     public static class EntityExtensions
     {
