@@ -15,6 +15,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
             });
         }
 
+        public int UserId => User.Id;
         public User User { get; }
 
         public bool IsAuthenticated => true;

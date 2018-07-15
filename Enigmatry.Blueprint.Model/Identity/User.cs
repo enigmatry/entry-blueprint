@@ -1,5 +1,6 @@
 ﻿using System;
 using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.Model.Auditing;
 
 namespace Enigmatry.Blueprint.Model.Identity
 {
@@ -11,12 +12,16 @@ namespace Enigmatry.Blueprint.Model.Identity
 
         public static User Create(UserCreateDto userCreateDto)
         {
-            return new User
+            var result = new User
             {
                 UserName = userCreateDto.UserName,
                 Name = userCreateDto.Name,
                 CreatedOn = userCreateDto.CreatedOn
             };
+
+            result.AddDomainEvent(new AuditableDomainEvent("User created", new {result.UserName}));
+
+            return result;
         }
     }
 }

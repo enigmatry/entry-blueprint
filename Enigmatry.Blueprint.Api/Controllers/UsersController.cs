@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Enigmatry.Blueprint.Api.Filters;
 using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.Model.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpGet]
+        [TransactionFilter]
         public async Task<IEnumerable<UserModel>> Get()
         {
             _log.LogError("Error example.");

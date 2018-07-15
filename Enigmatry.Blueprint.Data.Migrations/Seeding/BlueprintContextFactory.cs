@@ -1,5 +1,7 @@
 ﻿using System;
+using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Enigmatry.Blueprint.Infrastructure.MediatR;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -18,7 +20,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
                 b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
 
             var result =
-                new BlueprintContext(optionsBuilder.Options)
+                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider())
                 {
                     ModelBuilderConfigurer = DbInitializer.SeedData
                 };

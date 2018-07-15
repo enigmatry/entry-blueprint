@@ -1,8 +1,12 @@
-﻿namespace Enigmatry.Blueprint.Core.Data
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Enigmatry.Blueprint.Core.Data
 {
     public interface IUnitOfWork
     {
-        void SaveChanges();
+        int SaveChanges();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
         void CancelSaving();
     }
 }
