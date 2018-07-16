@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 {
@@ -38,31 +36,25 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 
         public async Task PutAsJsonAsync<T>(string uri, T content)
         {
-            HttpResponseMessage response = await _client.PutAsJsonAsync(uri, CreateJsonContent(content));
+            HttpResponseMessage response = await _client.PutAsJsonAsync(uri, content);
             await response.EnsureSuccessStatusCodeAsync();
         }
 
         public async Task<TResponse> PutAsJsonAsync<T, TResponse>(string uri, T content)
         {
-            HttpResponseMessage response = await _client.PutAsJsonAsync(uri, CreateJsonContent(content));
+            HttpResponseMessage response = await _client.PutAsJsonAsync(uri, content);
             return await response.DeserializeWithStatusCodeCheckAsync<TResponse>();
         }
          public async Task PostAsJsonAsync<T>(string uri, T content)
         {
-            HttpResponseMessage response = await _client.PostAsJsonAsync(uri, CreateJsonContent(content));
+            HttpResponseMessage response = await _client.PostAsJsonAsync(uri, content);
             await response.EnsureSuccessStatusCodeAsync();
         }
 
         public async Task<TResponse> PostAsJsonAsync<T, TResponse>(string uri, T content)
         {
-            HttpResponseMessage response = await _client.PostAsJsonAsync(uri, CreateJsonContent(content));
+            HttpResponseMessage response = await _client.PostAsJsonAsync(uri, content);
             return await response.DeserializeWithStatusCodeCheckAsync<TResponse>();
-        }
-
-        private static HttpContent CreateJsonContent(object content)
-        {
-            string json = JsonConvert.SerializeObject(content);
-            return new StringContent(json, Encoding.UTF8, "application/json");
         }
     }
 }

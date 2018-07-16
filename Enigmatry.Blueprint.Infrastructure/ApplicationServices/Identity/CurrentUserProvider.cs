@@ -4,7 +4,7 @@ using System.Security.Principal;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.Infrastructure.Identity
+namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
 {
     [UsedImplicitly]
     public class CurrentUserProvider : ICurrentUserProvider

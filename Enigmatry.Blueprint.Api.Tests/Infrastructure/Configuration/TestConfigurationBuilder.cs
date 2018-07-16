@@ -30,6 +30,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
 
             var dict = new Dictionary<string, string>
             {
+                {"UseDeveloperExceptionPage", "true"},
                 {
                     $"ConnectionStrings:{_dbContextName}",
                     _connectionString

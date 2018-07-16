@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Enigmatry.Blueprint.Core.Data
 {
@@ -13,6 +14,7 @@ namespace Enigmatry.Blueprint.Core.Data
         void Delete(T item);
         void Delete(int id);
         T FindById(int id);
+        Task<T> FindByIdAsync(int id);
         T FindByIdNoCache(int id);
         void DeleteRange(IEnumerable<T> entities);
     }

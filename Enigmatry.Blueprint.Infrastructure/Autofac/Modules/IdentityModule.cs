@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Enigmatry.Blueprint.Infrastructure.Identity;
+using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
 
 namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 {

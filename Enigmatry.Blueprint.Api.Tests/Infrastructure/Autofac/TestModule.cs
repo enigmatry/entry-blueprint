@@ -5,7 +5,7 @@ using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
+namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac
 {
     [UsedImplicitly]
     public class TestModule : Module
@@ -13,9 +13,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         protected override void Load(ContainerBuilder builder)
         {
             TestPrincipal principal = TestPrincipal.CreateDefault();
-            builder.Register(c => principal).As<IPrincipal>();
+            builder.Register(c => principal).As<IPrincipal>().InstancePerLifetimeScope();
             builder.Register(c => new CurrentUserProvider(principal, c.Resolve<ITimeProvider>()))
-                .As<ICurrentUserProvider>();
+                .As<ICurrentUserProvider>().InstancePerLifetimeScope();
         }
     }
 }

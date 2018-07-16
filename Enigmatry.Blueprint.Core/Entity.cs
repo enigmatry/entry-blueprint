@@ -5,14 +5,20 @@ namespace Enigmatry.Blueprint.Core
 {
     public abstract class Entity
     {
-        public int Id { get; set; }
+        // needs to be private so that EF does not map the field
+        private List<INotification> _domainEvents;
 
-        public List<INotification> DomainEvents { get; private set; }
+        public List<INotification> DomainEvents => _domainEvents;
+
+        /// <summary>
+        /// TODO change to Guid
+        /// </summary>
+        public int Id { get; set; }
 
         protected void AddDomainEvent(INotification eventItem)
         {
-            DomainEvents = DomainEvents ?? new List<INotification>();
-            DomainEvents.Add(eventItem);
+            _domainEvents = _domainEvents ?? new List<INotification>();
+            _domainEvents.Add(eventItem);
         }
     }
 }

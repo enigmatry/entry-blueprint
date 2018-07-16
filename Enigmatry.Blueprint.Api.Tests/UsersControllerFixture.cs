@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
+using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Tests.Identity;
@@ -22,35 +24,54 @@ namespace Enigmatry.Blueprint.Api.Tests
         {
             _createdDate = Resolve<ITimeProvider>().Now;
             User user = new UserBuilder()
-                .UserName("userName")
+                .UserName("john_doe@john.doe")
                 .Name("John Doe")
                 .CreatedOn(_createdDate);
-            
-            AddToRepository(user);
-            SaveChanges();
+
+            var userRepository = Resolve<IRepository<User>>();
+            var unitOfWork = Resolve<IUnitOfWork>();
+            userRepository.Add(user);
+            unitOfWork.SaveChanges();
         }
 
         [Test]
         public async Task TestGetAll()
         {
-            List<UserModel> users = (await Client.GetAsync<IEnumerable<UserModel>>("api/users")).ToList();
+            List<UserModel> users = (await JsonClient.GetAsync<IEnumerable<UserModel>>("api/users")).ToList();
 
             users.Count.Should().Be(1, "we saved one user to the db");
 
             UserModel user = users.First();
-            user.UserName.Should().Be("userName");
+            user.UserName.Should().Be("john_doe@john.doe");
             user.Name.Should().Be("John Doe");
             user.CreatedOn.Should().Be(_createdDate);
         }
 
-        [Test]
-        public async Task TestPost()
+        [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
+        public async Task TestCreate(string name, string userName)
         {
-            var userToCreate = new UserCreateDto { Name = "some user", UserName = "some userName"};
-            UserModel user = await Client.PostAsJsonAsync<UserCreateDto, UserModel>("api/users", userToCreate);
+            var userToCreate = new UserCreateDto {Name = name, UserName = userName};
+            UserModel user = await JsonClient.PostAsJsonAsync<UserCreateDto, UserModel>("api/users", userToCreate);
 
             user.UserName.Should().Be(userToCreate.UserName);
             user.Name.Should().Be(userToCreate.Name);
+            user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
+        }
+
+        [Test]
+        [TestCase("some user", "invalid email", "userName", "'User Name' is not a valid email address.", TestName =
+            "Invalid username")]
+        [TestCase("", "someuser@test.com", "name", "'Name' should not be empty.", TestName = "Missing name")]
+        [TestCase("some user", "", "userName", "'User Name' should not be empty.", TestName = "Missing username")]
+        [TestCase("John Doe", "john_doe@john.doe", "userName", "unique", TestName =
+            "Duplicate username")]
+        public async Task TestCreateReturnsValidationErrors(string name, string userName, string errorField,
+            string errorMessage)
+        {
+            var userToCreate = new UserCreateDto {Name = name, UserName = userName};
+            HttpResponseMessage response = await Client.PostAsJsonAsync("api/users", userToCreate);
+
+            response.Should().BeBadRequest().And.ContainValidationErrorForField(errorField, errorMessage);
         }
     }
 }

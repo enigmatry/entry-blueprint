@@ -18,16 +18,23 @@ namespace Enigmatry.Blueprint.Model.Identity
                 Name = userCreateDto.Name,
             };
 
+            result.AddDomainEvent(new UserCreatedDomainEvent(result.UserName));
             result.AddDomainEvent(new AuditableDomainEvent("User created", new {result.UserName}));
 
             return result;
+        }
+
+        public void Update(UserUpdateDto model)
+        {
+            UserName = model.UserName;
+            Name = model.Name;
         }
 
         public void SetCreated(DateTimeOffset createdOn, int createdBy)
         {
             CreatedOn = createdOn;
         }
-        
+
         public void SetUpdated(DateTimeOffset updatedOn, int updatedBy)
         {
         }

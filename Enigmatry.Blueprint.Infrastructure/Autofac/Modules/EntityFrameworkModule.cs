@@ -33,7 +33,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 ).AsImplementedInterfaces().InstancePerLifetimeScope();
 
             builder.Register(c => DbContextOptions).As<DbContextOptions>().InstancePerLifetimeScope();
-            builder.RegisterType<BlueprintContext>().As<DbContext>().InstancePerLifetimeScope();
+            // needs to be registered both as self and as DbContext or the tests might not work as expected
+            builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<DbContextUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
         }
 

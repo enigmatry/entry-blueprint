@@ -1,4 +1,5 @@
-﻿using Autofac.Extensions.DependencyInjection;
+﻿using System.Net.Http;
+using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Core.Data;
@@ -17,7 +18,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         private IConfiguration _configuration;
         private TestServer _server;
         private IServiceScope _testScope;
-        protected JsonHttpClient Client;
+        protected JsonHttpClient JsonClient;
+        protected HttpClient Client;
 
         [SetUp]
         protected void Setup()
@@ -35,11 +37,12 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 
             _server = new TestServer(webHostBuilder);
             CreateDatabase();
-            Client = new JsonHttpClient(_server.CreateClient());
+            Client = _server.CreateClient();
+            JsonClient = new JsonHttpClient(Client);
             _testScope = CreateScope();
         }
 
-        private IServiceScope CreateScope()
+        protected IServiceScope CreateScope()
         {
             return _server.Host.Services.CreateScope();
         }
@@ -48,7 +51,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             using (IServiceScope scope = CreateScope())
             {
-                var dbContext = scope.ServiceProvider.GetService<BlueprintContext>();
+                var dbContext = scope.Resolve<BlueprintContext>();
                 dbContext.Database.EnsureDeleted();
                 dbContext.Database.Migrate();
             }
@@ -58,25 +61,25 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         public void Teardown()
         {
             _testScope.Dispose();
-            Client.Dispose();
+            JsonClient.Dispose();
             _server.Dispose();
         }
 
         protected void SaveChanges()
         {
-            var unitOfWork = Resolve<IUnitOfWork>();
+            var unitOfWork = _testScope.Resolve<IUnitOfWork>();
             unitOfWork.SaveChanges();
-        }
-
-        protected void AddToRepository<T>(T entity) where T : Entity
-        {
-            var repository = Resolve<IRepository<T>>();
-            repository.Add(entity);
         }
 
         protected T Resolve<T>()
         {
-            return _testScope.ServiceProvider.GetRequiredService<T>();
+            return _testScope.Resolve<T>();
+        }
+
+        protected void AddToRepository<T>(T entity) where T : Entity
+        {
+            var repository = _testScope.Resolve<IRepository<T>>();
+            repository.Add(entity);
         }
     }
 }

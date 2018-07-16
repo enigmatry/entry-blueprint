@@ -4,17 +4,20 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
+using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
-using Enigmatry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Blueprint.Model.Identity;
 using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
@@ -27,20 +30,29 @@ namespace Enigmatry.Blueprint.Api
     public class Startup
     {
         private readonly IConfiguration _configuration;
-        
+        private readonly ILoggerFactory _loggerFactory;
+
         public Startup(IConfiguration configuration,
             IHostingEnvironment environment,
             ILoggerFactory loggerFactory)
         {
             _configuration = configuration;
+            _loggerFactory = loggerFactory;
         }
 
         [UsedImplicitly]
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AddMvc(services, _configuration, _loggerFactory);
             ConfigureServicesExceptMvc(services);
-            services.AddMvc(options => options.DefaultConfigure())
+        }
+
+        // IMvcBuilder needed for tests
+        internal static IMvcBuilder AddMvc(IServiceCollection services, IConfiguration configuration, ILoggerFactory loggerFactory)
+        {
+            return services
+                .AddMvc(options => options.DefaultConfigure(configuration, loggerFactory))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddFluentValidation(fv =>
                 {
@@ -58,6 +70,10 @@ namespace Enigmatry.Blueprint.Api
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
+            services.AddMediatR(
+                typeof(UserModel).Assembly,// this assembly
+                typeof(UserCreatedDomainEvent).Assembly, // domain assembly
+                typeof(UserCreatedDomainEventHandler).Assembly);
         }
 
         [UsedImplicitly]
@@ -85,7 +101,7 @@ namespace Enigmatry.Blueprint.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (_configuration.UseDeveloperExceptionPage())
             {
                 app.UseDeveloperExceptionPage();
             }

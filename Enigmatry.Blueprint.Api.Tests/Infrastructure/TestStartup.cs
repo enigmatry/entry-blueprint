@@ -1,8 +1,10 @@
 ﻿using Autofac;
 using AutoMapper;
+using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -12,10 +14,14 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
     [UsedImplicitly]
     public class TestStartup
     {
+        private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _loggerFactory;
         private readonly Startup _startup;
 
         public TestStartup(IConfiguration configuration, IHostingEnvironment environment, ILoggerFactory loggerFactory)
         {
+            _configuration = configuration;
+            _loggerFactory = loggerFactory;
             _startup = new Startup(configuration, environment, loggerFactory);
         }
 
@@ -23,7 +29,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         public void ConfigureServices(IServiceCollection services)
         {
             Startup.ConfigureServicesExceptMvc(services);
-            services.AddMvc(options => { options.DefaultConfigure(); })
+            Startup.AddMvc(services, _configuration, _loggerFactory)
                 .AddApplicationPart(typeof(Startup).Assembly);
         }
 

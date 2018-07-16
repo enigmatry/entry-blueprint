@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using MediatR;
 
-namespace Enigmatry.Blueprint.Infrastructure.Data.MediatR
+namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR
 {
     internal static class MediatorExtension
     {

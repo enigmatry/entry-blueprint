@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Filters;
@@ -15,16 +14,18 @@ namespace Enigmatry.Blueprint.Api.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        private readonly IRepository<User> _userRepository;
-        private readonly IMapper _mapper;
         private readonly ILogger<UsersController> _log;
+        private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IRepository<User> _userRepository;
 
-        public UsersController(IRepository<User> userRepository, IMapper mapper, ILogger<UsersController> log)
+        public UsersController(IRepository<User> userRepository, IMapper mapper, ILogger<UsersController> log,
+            IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _log = log;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -45,13 +46,36 @@ namespace Enigmatry.Blueprint.Api.Controllers
             return _mapper.Map<IEnumerable<UserModel>>(users);
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<UserModel>> Get(int id)
+        {
+            User user = await _userRepository.FindByIdAsync(id);
+            return _mapper.MapToResult<UserModel>(user);
+        }
+
         [HttpPost]
-        public async Task<UserModel> Post([FromBody] UserCreateDto model)
+        public async Task<ActionResult<UserModel>> Post([FromBody] UserCreateDto model)
         {
             User user = Model.Identity.User.Create(model);
             _userRepository.Add(user);
             await _unitOfWork.SaveChangesAsync();
-            return _mapper.Map<UserModel>(user);
+
+            return await Get(user.Id);
+        }
+
+
+        [HttpPut]
+        public async Task<ActionResult<UserModel>> Put([FromBody] UserUpdateDto model)
+        {
+            User user = _userRepository.FindById(model.Id);
+            if (user != null)
+            {
+                user.Update(model);
+                await _unitOfWork.SaveChangesAsync();
+            }
+
+            return await Get(model.Id);
         }
     }
 }

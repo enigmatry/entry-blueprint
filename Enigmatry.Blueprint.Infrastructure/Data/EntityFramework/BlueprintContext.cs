@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Infrastructure.Data.Configurations;
-using Enigmatry.Blueprint.Infrastructure.Data.MediatR;
+using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
@@ -55,12 +55,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-        }
-
-        public int SaveEntities(int userId)
-        {
-            Task<int> task = Task.Run(async () => await SaveEntitiesAsync(userId));
-            return task.Result;
         }
 
         public async Task<int> SaveEntitiesAsync(int currentUserId,

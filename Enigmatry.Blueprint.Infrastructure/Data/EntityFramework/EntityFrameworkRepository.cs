@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Core.Data;
 using JetBrains.Annotations;
@@ -75,6 +76,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
         public T FindById(int id)
         {
             return DbSet.Find(id);
+        }
+
+        public async Task<T> FindByIdAsync(int id)
+        {
+            return await DbSet.FindAsync(id);
         }
 
         public T FindByIdNoCache(int id)
