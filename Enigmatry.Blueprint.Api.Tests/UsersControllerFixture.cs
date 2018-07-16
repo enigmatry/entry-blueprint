@@ -58,7 +58,6 @@ namespace Enigmatry.Blueprint.Api.Tests
             user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
-        [Test]
         [TestCase("some user", "invalid email", "userName", "'User Name' is not a valid email address.", TestName =
             "Invalid username")]
         [TestCase("", "someuser@test.com", "name", "'Name' should not be empty.", TestName = "Missing name")]
