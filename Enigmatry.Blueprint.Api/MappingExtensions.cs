@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Enigmatry.Blueprint.Api.Controllers
+namespace Enigmatry.Blueprint.Api
 {
     public static class MappingExtensions
     {

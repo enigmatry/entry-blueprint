@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Api.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
@@ -29,7 +30,6 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpGet]
-        [TransactionFilter]
         public async Task<IEnumerable<UserModel>> Get()
         {
             _log.LogError("Error example.");
@@ -55,7 +55,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserModel>> Post([FromBody] UserCreateDto model)
+        public async Task<ActionResult<UserModel>> Post(UserCreateDto model)
         {
             User user = Model.Identity.User.Create(model);
             _userRepository.Add(user);
@@ -64,9 +64,8 @@ namespace Enigmatry.Blueprint.Api.Controllers
             return await Get(user.Id);
         }
 
-
         [HttpPut]
-        public async Task<ActionResult<UserModel>> Put([FromBody] UserUpdateDto model)
+        public async Task<ActionResult<UserModel>> Put(UserUpdateDto model)
         {
             User user = _userRepository.FindById(model.Id);
             if (user != null)

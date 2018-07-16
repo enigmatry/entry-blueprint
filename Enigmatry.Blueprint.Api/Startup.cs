@@ -1,9 +1,11 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
+using Enigmatry.Blueprint.Api.Models;
 using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
@@ -17,7 +19,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
@@ -65,6 +66,7 @@ namespace Enigmatry.Blueprint.Api
 
         internal static void ConfigureServicesExceptMvc(IServiceCollection services)
         {
+            
             services.AddAutofac();
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -74,6 +76,16 @@ namespace Enigmatry.Blueprint.Api
                 typeof(UserModel).Assembly,// this assembly
                 typeof(UserCreatedDomainEvent).Assembly, // domain assembly
                 typeof(UserCreatedDomainEventHandler).Assembly);
+
+            // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
+            services.PostConfigure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var model = new ValidationErrorModel(actionContext.ModelState);
+                    return new BadRequestObjectResult(model);
+                };
+            });
         }
 
         [UsedImplicitly]

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Enigmatry.Blueprint.Api.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -19,12 +20,12 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(string value)
         {
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, string value)
         {
         }
 

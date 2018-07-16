@@ -31,10 +31,11 @@ namespace Enigmatry.Blueprint.Api.Tests
         {
             AssertionScope assertion = Execute.Assertion;
             AssertionScope assertionScope = assertion.ForCondition(Subject.StatusCode == expected).BecauseOf(because, becauseArgs);
-            string message = "Expected response to have HttpStatusCode {0}{reason}, but found {1}.";
+            string message = "Expected response to have HttpStatusCode {0}{reason}, but found {1}. Response: {2}";
             object[] failArgs = {
                 expected,
-                Subject.StatusCode
+                Subject.StatusCode,
+                Subject.Content.ReadAsStringAsync().Result
             };
             assertionScope.FailWith(message, failArgs);
             return new AndConstraint<HttpResponseAssertions>(this);

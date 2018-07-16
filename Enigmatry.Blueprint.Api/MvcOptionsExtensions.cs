@@ -7,9 +7,10 @@ namespace Enigmatry.Blueprint.Api
 {
     public static class MvcOptionsExtensions
     {
-        public static MvcOptions DefaultConfigure(this MvcOptions options, IConfiguration configuration, ILoggerFactory loggerFactory)
+        public static MvcOptions DefaultConfigure(this MvcOptions options, IConfiguration configuration,
+            ILoggerFactory loggerFactory)
         {
-            options.Filters.Add(new ValidateModelAttribute());
+            options.Filters.Add(new CancelSavingAttribute());
             options.Filters.Add(new ExceptionAsJsonFilter(configuration.UseDeveloperExceptionPage(),
                 loggerFactory.CreateLogger<ExceptionAsJsonFilter>()));
             return options;
