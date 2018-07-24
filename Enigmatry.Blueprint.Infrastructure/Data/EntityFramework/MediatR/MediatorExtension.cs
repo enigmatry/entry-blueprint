@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core;
 using MediatR;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR
 {
@@ -9,18 +11,17 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR
     {
         public static async Task DispatchDomainEventsAsync(this IMediator mediator, BlueprintContext ctx)
         {
-            var domainEntities = ctx.ChangeTracker
-                .Entries<Entity>()
-                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any());
+            List<EntityEntry<Entity>> domainEntities = ctx.ChangeTracker
+                .Entries<Entity>().Where(x => x.Entity.DomainEvents.Any()).ToList();
 
-            var domainEvents = domainEntities
+            List<INotification> domainEvents = domainEntities
                 .SelectMany(x => x.Entity.DomainEvents)
                 .ToList();
 
-            domainEntities.ToList()
-                .ForEach(entity => entity.Entity.DomainEvents.Clear());
+            domainEntities
+                .ForEach(entity => entity.Entity.ClearDomainEvents());
 
-            var tasks = domainEvents
+            IEnumerable<Task> tasks = domainEvents
                 .Select(async domainEvent => { await mediator.Publish(domainEvent); });
 
             await Task.WhenAll(tasks);
