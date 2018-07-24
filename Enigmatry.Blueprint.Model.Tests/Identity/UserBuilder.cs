@@ -5,9 +5,10 @@ using Enigmatry.Blueprint.Model.Identity;
 namespace Enigmatry.Blueprint.Model.Tests.Identity
 {
     public class UserBuilder
-    {   
+    {
         private DateTimeOffset _createdOn;
         private string _name;
+        private DateTimeOffset _updatedOn;
         private string _userName;
 
         public UserBuilder UserName(string value)
@@ -28,6 +29,12 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
             return this;
         }
 
+        public UserBuilder UpdatedOn(DateTimeOffset value)
+        {
+            _updatedOn = value;
+            return this;
+        }
+
         public static implicit operator User(UserBuilder builder)
         {
             return builder.Build();
@@ -40,7 +47,8 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
                     Name = _name,
                     UserName = _userName
                 })
-                .CreatedOn(_createdOn, Guid.Empty);
+                .CreatedOn(_createdOn, Guid.Empty)
+                .UpdatedOn(_updatedOn, Guid.Empty);
         }
     }
 }

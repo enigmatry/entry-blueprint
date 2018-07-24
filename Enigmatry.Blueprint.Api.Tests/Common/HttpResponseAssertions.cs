@@ -40,14 +40,14 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             return new AndConstraint<HttpResponseAssertions>(this);
         }
 
-        public AndConstraint<HttpResponseAssertions> ContainValidationErrorForField(string expectedKey, string expectedMessage = "", string because = "", params object[] becauseArgs)
+        public AndConstraint<HttpResponseAssertions> ContainValidationError(string fieldName, string expectedValidationMessage = "", string because = "", params object[] becauseArgs)
         {
             var responseContent = Subject.Content.ReadAsStringAsync().Result;
             ErrorModel error = null;
             try
             {
                 ValidationErrorModel json = JsonConvert.DeserializeObject<ValidationErrorModel>(responseContent);
-                error = string.IsNullOrEmpty(expectedMessage) ? json.Errors.FirstOrDefault(e => e.Key == expectedKey) : json.Errors.FirstOrDefault(e => e.Key == expectedKey && e.ErrorMessage == expectedMessage);
+                error = string.IsNullOrEmpty(expectedValidationMessage) ? json.Errors.FirstOrDefault(e => e.Key == fieldName) : json.Errors.FirstOrDefault(e => e.Key == fieldName && e.ErrorMessage == expectedValidationMessage);
             }
             catch (Exception exception)
             {
@@ -57,12 +57,12 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             AssertionScope assertionScope = assertion.ForCondition(error != null).BecauseOf(because, becauseArgs);
             string message;
             object[] failArgs;
-            if (string.IsNullOrEmpty(expectedMessage))
+            if (string.IsNullOrEmpty(expectedValidationMessage))
             {
                 message = "Expected response to have validation message with key: {0}{reason}, but found {1}.";
                 failArgs =new object[]
                 {
-                    expectedKey,
+                    fieldName,
                     responseContent
                 };
             }
@@ -71,8 +71,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
                 message = "Expected response to have validation message with key: {0} and message: {1} {reason}, but found {2}.";
                 failArgs = new object[]
                 {
-                    expectedKey,
-                    expectedMessage,
+                    fieldName,
+                    expectedValidationMessage,
                     responseContent
                 };
             }

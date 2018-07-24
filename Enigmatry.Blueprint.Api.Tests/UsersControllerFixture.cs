@@ -4,11 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Api.Tests.Common;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
-using Enigmatry.Blueprint.Api.Tests.Common;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using NUnit.Framework;
@@ -27,7 +27,9 @@ namespace Enigmatry.Blueprint.Api.Tests
             User user = new UserBuilder()
                 .UserName("john_doe@john.doe")
                 .Name("John Doe")
-                .CreatedOn(_createdDate);
+                .CreatedOn(_createdDate)
+                .UpdatedOn(_createdDate.AddYears(1));
+
 
             var userRepository = Resolve<IRepository<User>>();
             var unitOfWork = Resolve<IUnitOfWork>();
@@ -52,11 +54,14 @@ namespace Enigmatry.Blueprint.Api.Tests
         public async Task TestCreate(string name, string userName)
         {
             var userToCreate = new UserCreateUpdateDto {Name = name, UserName = userName};
-            UserModel user = await JsonClient.PostAsJsonAsync<UserCreateUpdateDto, UserModel>("api/users", userToCreate);
+            UserModel user =
+                await JsonClient.PostAsJsonAsync<UserCreateUpdateDto, UserModel>("api/users", userToCreate);
 
             user.UserName.Should().Be(userToCreate.UserName);
             user.Name.Should().Be(userToCreate.Name);
             user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
+            user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
+            user.UpdatedOn.Date.Should().Be(DateTime.Now.AddYears(1).Date);
         }
 
         [TestCase("some user", "invalid email", "userName", "'User Name' is not a valid email address.", TestName =
@@ -65,13 +70,13 @@ namespace Enigmatry.Blueprint.Api.Tests
         [TestCase("some user", "", "userName", "'User Name' should not be empty.", TestName = "Missing username")]
         [TestCase("John Doe", "john_doe@john.doe", "userName", "unique", TestName =
             "Duplicate username")]
-        public async Task TestCreateReturnsValidationErrors(string name, string userName, string errorField,
-            string errorMessage)
+        public async Task TestCreateReturnsValidationErrors(string name, string userName, string validationField,
+            string validationErrorMessage)
         {
             var userToCreate = new UserCreateUpdateDto {Name = name, UserName = userName};
             HttpResponseMessage response = await Client.PostAsJsonAsync("api/users", userToCreate);
 
-            response.Should().BeBadRequest().And.ContainValidationErrorForField(errorField, errorMessage);
+            response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
         }
     }
 }
