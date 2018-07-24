@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Enigmatry.Blueprint.Api.Tests
+namespace Enigmatry.Blueprint.Api.Tests.Common
 {
     public static class AssertionExtensions
     {

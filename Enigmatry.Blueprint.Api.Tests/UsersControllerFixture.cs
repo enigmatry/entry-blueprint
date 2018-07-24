@@ -8,6 +8,7 @@ using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Api.Tests.Common;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using NUnit.Framework;
@@ -39,7 +40,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         {
             List<UserModel> users = (await JsonClient.GetAsync<IEnumerable<UserModel>>("api/users")).ToList();
 
-            users.Count.Should().Be(1, "we saved one user to the db");
+            users.Count.Should().Be(2, "we have two users in the db");
 
             UserModel user = users.First();
             user.UserName.Should().Be("john_doe@john.doe");

@@ -1,13 +1,15 @@
 ﻿using Autofac;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
+using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
 {
@@ -36,8 +38,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         [UsedImplicitly]
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            _startup.ConfigureContainer(builder);
-            builder.RegisterModule<TestModule>();
+          DbContextOptions dbContextOptions = CreateDbContextOptions();
+            _startup.ConfigureContainerInternal(builder, dbContextOptions);
+            builder.RegisterModule<TestModule>();// this allows certain components to be overriden
         }
 
         [UsedImplicitly]
@@ -46,6 +49,18 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         {
             _startup.Configure(app, env);
             applicationLifetime.ApplicationStopped.Register(Mapper.Reset);
+        }
+
+        private DbContextOptions CreateDbContextOptions()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"), 
+                b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
+
+            //replace default convention builder with our so we can add custom conventions
+            optionsBuilder.ReplaceService<IConventionSetBuilder, CustomSqlServerConventionSetBuilder>();
+
+            return optionsBuilder.Options;
         }
     }
 }

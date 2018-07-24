@@ -5,7 +5,6 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
-using Enigmatry.Blueprint.Api.Models;
 using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.Api.Models.Validation;
 using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
@@ -67,7 +66,6 @@ namespace Enigmatry.Blueprint.Api
 
         internal static void ConfigureServicesExceptMvc(IServiceCollection services)
         {
-            
             services.AddAutofac();
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -95,11 +93,16 @@ namespace Enigmatry.Blueprint.Api
         // here will override registrations made in ConfigureServices.
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            ConfigureContainerInternal(builder, CreateDbContextOptions());
+        }
+
+        internal void ConfigureContainerInternal(ContainerBuilder builder, DbContextOptions options)
+        {
             builder.RegisterModule<ConfigurationModule>();
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
             builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly}});
-            builder.RegisterModule(new EntityFrameworkModule {DbContextOptions = CreateDbContextOptions()});
+            builder.RegisterModule(new EntityFrameworkModule {DbContextOptions = options});
             builder.RegisterModule<IdentityModule>();
         }
 
@@ -146,8 +149,7 @@ namespace Enigmatry.Blueprint.Api
             //TODO enable logging
             //optionsBuilder.UseLoggerFactory().EnableSensitiveDataLogging(false);
 
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"),
-                b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"));
 
             //replace default convention builder with our so we can add custom conventions
             optionsBuilder.ReplaceService<IConventionSetBuilder, CustomSqlServerConventionSetBuilder>();

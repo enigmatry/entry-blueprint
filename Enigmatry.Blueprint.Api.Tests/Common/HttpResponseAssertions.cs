@@ -2,15 +2,13 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Enigmatry.Blueprint.Api.Models;
 using Enigmatry.Blueprint.Api.Models.Validation;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
-using Microsoft.EntityFrameworkCore.Internal;
 using Newtonsoft.Json;
 
-namespace Enigmatry.Blueprint.Api.Tests
+namespace Enigmatry.Blueprint.Api.Tests.Common
 {
     public class HttpResponseAssertions: ReferenceTypeAssertions<HttpResponseMessage, HttpResponseAssertions>
     {
@@ -27,7 +25,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             return HaveStatusCode(HttpStatusCode.BadRequest, because, becauseArgs);
         }
 
-        public AndConstraint<HttpResponseAssertions> HaveStatusCode(HttpStatusCode expected, string because = "",
+        private AndConstraint<HttpResponseAssertions> HaveStatusCode(HttpStatusCode expected, string because = "",
             params object[] becauseArgs)
         {
             AssertionScope assertion = Execute.Assertion;
