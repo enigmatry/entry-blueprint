@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Autofac.Extensions.DependencyInjection;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -45,10 +46,14 @@ namespace Enigmatry.Blueprint.Api
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        private static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
+            // The ConfigureServices call here allows for
+            // ConfigureContainer to be supported in Startup with
+            // a strongly-typed ContainerBuilder
             return WebHost.CreateDefaultBuilder(args)
                 .UseKestrel((context, options) => { options.AddServerHeader = false; })
+                .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
                 .UseSerilog();

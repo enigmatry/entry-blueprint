@@ -66,7 +66,6 @@ namespace Enigmatry.Blueprint.Api
 
         internal static void ConfigureServicesExceptMvc(IServiceCollection services)
         {
-            services.AddAutofac();
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<BlueprintContext>();
