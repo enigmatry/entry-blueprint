@@ -24,7 +24,7 @@ namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
 
         public bool IsAuthenticated => Principal.Identity.IsAuthenticated;
 
-        public int UserId => User.Id;
+        public Guid UserId => User.Id;
 
         public User User
         {

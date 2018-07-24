@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using Enigmatry.Blueprint.Api.Models;
+using Enigmatry.Blueprint.Api.Models.Validation;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;

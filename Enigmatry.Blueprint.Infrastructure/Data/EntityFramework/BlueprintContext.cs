@@ -57,7 +57,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
         {
         }
 
-        public async Task<int> SaveEntitiesAsync(int currentUserId,
+        public async Task<int> SaveEntitiesAsync(Guid currentUserId,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             PopulateCreatedUpdated(currentUserId);
@@ -74,7 +74,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             return await SaveChangesAsync(cancellationToken);
         }
 
-        private void PopulateCreatedUpdated(int currentUserId)
+        private void PopulateCreatedUpdated(Guid currentUserId)
         {
             var changedEntities = ChangeTracker
                 .Entries<Entity>()

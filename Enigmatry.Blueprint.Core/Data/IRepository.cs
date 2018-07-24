@@ -12,10 +12,10 @@ namespace Enigmatry.Blueprint.Core.Data
         IQueryable<T> QueryAllIncluding(params Expression<Func<T, object>>[] paths);
         void Add(T item);
         void Delete(T item);
-        void Delete(int id);
-        T FindById(int id);
-        Task<T> FindByIdAsync(int id);
-        T FindByIdNoCache(int id);
+        void Delete(Guid id);
+        T FindById(Guid id);
+        Task<T> FindByIdAsync(Guid id);
+        T FindByIdNoCache(Guid id);
         void DeleteRange(IEnumerable<T> entities);
     }
 }

@@ -5,7 +5,7 @@ namespace Enigmatry.Blueprint.Api
 {
     public static class MappingExtensions
     {
-        public static ActionResult<TDestination> MapToResult<TDestination>(this IMapper mapper, object value)
+        public static ActionResult<TDestination> MapToActionResult<TDestination>(this IMapper mapper, object value)
         {
             if (value == null)
             {

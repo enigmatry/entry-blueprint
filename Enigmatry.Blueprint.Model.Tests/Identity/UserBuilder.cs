@@ -1,4 +1,5 @@
 ﻿using System;
+using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Identity;
 
 namespace Enigmatry.Blueprint.Model.Tests.Identity
@@ -34,12 +35,12 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
 
         private User Build()
         {
-            return User.Create(new UserCreateDto
+            return User.Create(new UserCreateUpdateDto
                 {
                     Name = _name,
                     UserName = _userName
                 })
-                .CreatedOn(_createdOn, 0);
+                .CreatedOn(_createdOn, Guid.Empty);
         }
     }
 }

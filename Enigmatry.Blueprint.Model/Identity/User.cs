@@ -9,8 +9,9 @@ namespace Enigmatry.Blueprint.Model.Identity
         public string UserName { get; private set; }
         public string Name { get; private set; }
         public DateTimeOffset CreatedOn { get; private set; }
+        public DateTimeOffset UpdatedOn { get; private set; }
 
-        public static User Create(UserCreateDto userCreateDto)
+        public static User Create(UserCreateUpdateDto userCreateDto)
         {
             var result = new User
             {
@@ -24,19 +25,20 @@ namespace Enigmatry.Blueprint.Model.Identity
             return result;
         }
 
-        public void Update(UserUpdateDto model)
+        public void Update(UserCreateUpdateDto model)
         {
             UserName = model.UserName;
             Name = model.Name;
         }
 
-        public void SetCreated(DateTimeOffset createdOn, int createdBy)
+        public void SetCreated(DateTimeOffset createdOn, Guid createdBy)
         {
             CreatedOn = createdOn;
         }
 
-        public void SetUpdated(DateTimeOffset updatedOn, int updatedBy)
+        public void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy)
         {
+            UpdatedOn = updatedOn;
         }
     }
 }

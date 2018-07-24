@@ -46,7 +46,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
                 throw new ArgumentNullException(nameof(item));
             }
 
-            if (item.Id != 0)
+            if (item.Id != Guid.Empty)
             {
                 throw new InvalidOperationException("You cannot add entity that has Id set.");
             }
@@ -64,26 +64,26 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             DbSet.Remove(item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-            var item = FindById(id);
+            T item = FindById(id);
             if (item != null)
             {
                 Delete(item);
             }
         }
 
-        public T FindById(int id)
+        public T FindById(Guid id)
         {
             return DbSet.Find(id);
         }
 
-        public async Task<T> FindByIdAsync(int id)
+        public async Task<T> FindByIdAsync(Guid id)
         {
             return await DbSet.FindAsync(id);
         }
 
-        public T FindByIdNoCache(int id)
+        public T FindByIdNoCache(Guid id)
         {
             return DbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
         }

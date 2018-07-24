@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MediatR;
 
 namespace Enigmatry.Blueprint.Core
@@ -10,10 +11,7 @@ namespace Enigmatry.Blueprint.Core
 
         public List<INotification> DomainEvents => _domainEvents;
 
-        /// <summary>
-        /// TODO change to Guid
-        /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         protected void AddDomainEvent(INotification eventItem)
         {

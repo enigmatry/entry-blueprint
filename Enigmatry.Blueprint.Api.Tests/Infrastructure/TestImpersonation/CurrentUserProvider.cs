@@ -1,4 +1,6 @@
-﻿using Enigmatry.Blueprint.Model;
+﻿using System;
+using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
@@ -7,14 +9,14 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
     {
         public CurrentUserProvider(TestPrincipal principal, ITimeProvider timeProvider)
         {
-            User = User.Create(new UserCreateDto
+            User = User.Create(new UserCreateUpdateDto
             {
                 UserName = principal.UserName,
                 Name = "John Doe"
-            }).CreatedOn(timeProvider.Now, 0);
+            }).CreatedOn(timeProvider.Now, Guid.Empty);
         }
 
-        public int UserId => User.Id;
+        public Guid UserId => User.Id;
         public User User { get; }
 
         public bool IsAuthenticated => true;

@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.Api.Models
+namespace Enigmatry.Blueprint.Api.Models.Validation
 {
     [PublicAPI]
     public class ErrorModel

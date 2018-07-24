@@ -4,7 +4,7 @@ using Enigmatry.Blueprint.Core.Helpers;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Enigmatry.Blueprint.Api.Models
+namespace Enigmatry.Blueprint.Api.Models.Validation
 {
     [PublicAPI]
     // used to model the validation value message REST response

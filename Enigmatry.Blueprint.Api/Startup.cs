@@ -7,6 +7,7 @@ using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Api.Models;
 using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Api.Models.Validation;
 using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
@@ -60,7 +61,7 @@ namespace Enigmatry.Blueprint.Api
                     // disables standard data annotations validation
                     // https://github.com/JeremySkinner/FluentValidation/wiki/i.-ASP.NET-Core-integration
                     // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; // 
-                    fv.RegisterValidatorsFromAssemblyContaining<UserCreateDtoValidator>();
+                    fv.RegisterValidatorsFromAssemblyContaining<UserCreateUpdateDtoValidator>();
                 });
         }
 

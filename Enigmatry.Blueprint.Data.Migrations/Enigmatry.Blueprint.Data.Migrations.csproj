@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Enigmatry.Blueprint.Infrastructure\Enigmatry.Blueprint.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
