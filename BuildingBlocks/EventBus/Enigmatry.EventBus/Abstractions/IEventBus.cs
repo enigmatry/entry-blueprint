@@ -20,4 +20,6 @@ namespace Enigmatry.BuildingBlocks.EventBus.Abstractions
             where TH : IIntegrationEventHandler<T>
             where T : IntegrationEvent;
     }
+
+
 }

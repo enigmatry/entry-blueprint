@@ -103,6 +103,7 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly}});
             builder.RegisterModule(new EntityFrameworkModule {DbContextOptions = options});
             builder.RegisterModule<IdentityModule>();
+            builder.RegisterModule<EventBusModule>();
         }
 
         private static ClaimsPrincipal GetPrincipal(IComponentContext c)

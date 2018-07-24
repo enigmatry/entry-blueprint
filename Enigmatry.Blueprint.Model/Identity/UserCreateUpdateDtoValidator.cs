@@ -15,11 +15,11 @@ namespace Enigmatry.Blueprint.Model.Identity
         {
             _userRepository = userRepository;
             RuleFor(x => x.UserName).NotEmpty().MaximumLength(50).EmailAddress();
-            RuleFor(x => x.UserName).Must(UniqueUsername2).WithMessage("unique");
+            RuleFor(x => x.UserName).Must(UniqueUsername).WithMessage("unique");
             RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
         }
 
-        private bool UniqueUsername2(UserCreateUpdateDto dto, string name)
+        private bool UniqueUsername(UserCreateUpdateDto dto, string name)
         {
             return !_userRepository.QueryAll()
                 .ExceptWithId(dto.Id)

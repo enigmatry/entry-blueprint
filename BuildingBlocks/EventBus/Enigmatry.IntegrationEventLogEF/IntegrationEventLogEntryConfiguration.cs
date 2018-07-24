@@ -3,20 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Enigmatry.BuildingBlocks.IntegrationEventLogEF
 {
-    public class IntegrationEventLogContext : DbContext
-    {       
-        public IntegrationEventLogContext(DbContextOptions<IntegrationEventLogContext> options) : base(options)
-        {
-        }
-
-        public DbSet<IntegrationEventLogEntry> IntegrationEventLogs { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {          
-            builder.Entity<IntegrationEventLogEntry>(ConfigureIntegrationEventLogEntry);
-        }
-
-        void ConfigureIntegrationEventLogEntry(EntityTypeBuilder<IntegrationEventLogEntry> builder)
+    public class IntegrationEventLogEntryConfiguration : IEntityTypeConfiguration<IntegrationEventLogEntry>
+    {
+        public void Configure(EntityTypeBuilder<IntegrationEventLogEntry> builder)
         {
             builder.ToTable("IntegrationEventLog");
 
@@ -39,7 +28,6 @@ namespace Enigmatry.BuildingBlocks.IntegrationEventLogEF
 
             builder.Property(e => e.EventTypeName)
                 .IsRequired();
-
         }
     }
 }

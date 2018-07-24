@@ -35,9 +35,14 @@ namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
                     return _user;
                 }
 
+                //TODO replace with getting user from principal
                 _user = _userQuery
+                    .First();
+
+                // e.g. 
+                /*_user = _userQuery
                     .ByUserName(Principal.Identity.Name)
-                    .SingleOrDefault();
+                    .SingleOrDefault();*/
 
                 return _user;
             }

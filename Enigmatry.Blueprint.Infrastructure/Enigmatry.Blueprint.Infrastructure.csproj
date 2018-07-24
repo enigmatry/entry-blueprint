@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks\EventBus\Enigmatry.EventBus\Enigmatry.EventBus.csproj" />
+    <ProjectReference Include="..\BuildingBlocks\EventBus\Enigmatry.IntegrationEventLogEF\Enigmatry.IntegrationEventLogEF.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Core\Enigmatry.Blueprint.Core.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
   </ItemGroup>
