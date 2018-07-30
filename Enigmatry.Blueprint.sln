@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.EventBus", "Build
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.IntegrationEventLogEF", "BuildingBlocks\EventBus\Enigmatry.IntegrationEventLogEF\Enigmatry.IntegrationEventLogEF.csproj", "{AEED918D-755B-4740-9040-97C5322CA652}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.EventBusServiceBus", "BuildingBlocks\EventBus\Enigmatry.EventBusServiceBus\Enigmatry.EventBusServiceBus.csproj", "{48DE2E2D-4305-431A-B4FA-4C9F95881CE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{AEED918D-755B-4740-9040-97C5322CA652}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEED918D-755B-4740-9040-97C5322CA652}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEED918D-755B-4740-9040-97C5322CA652}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48DE2E2D-4305-431A-B4FA-4C9F95881CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48DE2E2D-4305-431A-B4FA-4C9F95881CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48DE2E2D-4305-431A-B4FA-4C9F95881CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48DE2E2D-4305-431A-B4FA-4C9F95881CE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{C609A10F-518A-4150-A908-A4C0FAD1454B} = {EF5D8839-3171-4961-ADA3-170CAA2BE5D6}
 		{EE206AFC-2882-4FFC-8F60-058DA6132A61} = {C609A10F-518A-4150-A908-A4C0FAD1454B}
 		{AEED918D-755B-4740-9040-97C5322CA652} = {C609A10F-518A-4150-A908-A4C0FAD1454B}
+		{48DE2E2D-4305-431A-B4FA-4C9F95881CE8} = {C609A10F-518A-4150-A908-A4C0FAD1454B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A4984E8-85A3-4F86-9B64-B95313AEDD15}

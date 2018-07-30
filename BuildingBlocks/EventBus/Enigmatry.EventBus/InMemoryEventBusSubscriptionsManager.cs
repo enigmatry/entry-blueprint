@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Enigmatry.BuildingBlocks.EventBus.Abstractions;
 using Enigmatry.BuildingBlocks.EventBus.Events;
+using JetBrains.Annotations;
 
 namespace Enigmatry.BuildingBlocks.EventBus
 {
+    [UsedImplicitly]
     public partial class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptionsManager
     {
         private readonly Dictionary<string, List<SubscriptionInfo>> _handlers;
