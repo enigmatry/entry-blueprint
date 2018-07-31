@@ -53,9 +53,9 @@ namespace Enigmatry.Blueprint.Api.Tests
         [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
         public async Task TestCreate(string name, string userName)
         {
-            var userToCreate = new UserCreateUpdateDto {Name = name, UserName = userName};
+            var userToCreate = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
             UserModel user =
-                await JsonClient.PostAsJsonAsync<UserCreateUpdateDto, UserModel>("api/users", userToCreate);
+                await JsonClient.PostAsJsonAsync<UserCreateOrUpdateCommand, UserModel>("api/users", userToCreate);
 
             user.UserName.Should().Be(userToCreate.UserName);
             user.Name.Should().Be(userToCreate.Name);
@@ -73,7 +73,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         public async Task TestCreateReturnsValidationErrors(string name, string userName, string validationField,
             string validationErrorMessage)
         {
-            var userToCreate = new UserCreateUpdateDto {Name = name, UserName = userName};
+            var userToCreate = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
             HttpResponseMessage response = await Client.PostAsJsonAsync("api/users", userToCreate);
 
             response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);

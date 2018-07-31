@@ -42,7 +42,7 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
 
         private User Build()
         {
-            return User.Create(new UserCreateUpdateDto
+            return User.Create(new UserCreateOrUpdateCommand
                 {
                     Name = _name,
                     UserName = _userName

@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace Enigmatry.Blueprint.Model.Identity
 {
     [PublicAPI]
-    public class UserCreateUpdateDto
+    public class UserCreateOrUpdateCommand
     {
         public Guid? Id { get; set; }
         public string UserName { get; set; }

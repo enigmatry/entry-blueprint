@@ -9,7 +9,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
     {
         public CurrentUserProvider(TestPrincipal principal, ITimeProvider timeProvider)
         {
-            User = User.Create(new UserCreateUpdateDto
+            User = User.Create(new UserCreateOrUpdateCommand
             {
                 UserName = principal.UserName,
                 Name = "John Doe"

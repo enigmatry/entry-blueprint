@@ -7,10 +7,14 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-	<PackageReference Include="Autofac" Version="4.6.2" />
+	<PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Enigmatry.EventBus\Enigmatry.EventBus.csproj" />
   </ItemGroup>
 
   

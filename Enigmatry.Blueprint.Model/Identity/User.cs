@@ -11,7 +11,7 @@ namespace Enigmatry.Blueprint.Model.Identity
         public DateTimeOffset CreatedOn { get; private set; }
         public DateTimeOffset UpdatedOn { get; private set; }
 
-        public static User Create(UserCreateUpdateDto userCreateDto)
+        public static User Create(UserCreateOrUpdateCommand userCreateDto)
         {
             var result = new User
             {
@@ -25,7 +25,7 @@ namespace Enigmatry.Blueprint.Model.Identity
             return result;
         }
 
-        public void Update(UserCreateUpdateDto model)
+        public void Update(UserCreateOrUpdateCommand model)
         {
             UserName = model.UserName;
             Name = model.Name;

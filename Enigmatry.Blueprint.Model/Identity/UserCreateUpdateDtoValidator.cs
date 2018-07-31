@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace Enigmatry.Blueprint.Model.Identity
 {
     [UsedImplicitly]
-    public class UserCreateUpdateDtoValidator : AbstractValidator<UserCreateUpdateDto>
+    public class UserCreateUpdateDtoValidator : AbstractValidator<UserCreateOrUpdateCommand>
     {
         private readonly IRepository<User> _userRepository;
 
@@ -19,7 +19,7 @@ namespace Enigmatry.Blueprint.Model.Identity
             RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
         }
 
-        private bool UniqueUsername(UserCreateUpdateDto dto, string name)
+        private bool UniqueUsername(UserCreateOrUpdateCommand dto, string name)
         {
             return !_userRepository.QueryAll()
                 .ExceptWithId(dto.Id)

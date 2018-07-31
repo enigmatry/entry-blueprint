@@ -9,7 +9,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
     {
         public void Seed(ModelBuilder modelBuilder)
         {
-            User user = User.Create(new UserCreateUpdateDto
+            User user = User.Create(new UserCreateOrUpdateCommand
             {
                 Name = "Test",
                 UserName = "Test"

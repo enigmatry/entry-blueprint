@@ -42,7 +42,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserModel>> Post(UserCreateUpdateDto model)
+        public async Task<ActionResult<UserModel>> Post(UserCreateOrUpdateCommand model)
         {
             User user = Model.Identity.User.Create(model);
             _userRepository.Add(user);
@@ -52,7 +52,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<UserModel>> Put(UserCreateUpdateDto model)
+        public async Task<ActionResult<UserModel>> Put(UserCreateOrUpdateCommand model)
         {
             if (!model.Id.HasValue)
             {
