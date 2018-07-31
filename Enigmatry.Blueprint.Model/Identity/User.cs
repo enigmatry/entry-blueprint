@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Auditing;
 
@@ -10,6 +11,15 @@ namespace Enigmatry.Blueprint.Model.Identity
         public string Name { get; private set; }
         public DateTimeOffset CreatedOn { get; private set; }
         public DateTimeOffset UpdatedOn { get; private set; }
+        
+        public Guid? CreatedById { get; private set; }
+        public Guid? UpdatedById { get; private set; }
+
+        public User CreatedBy { get; private set; }
+        public User UpdatedBy { get; private set; }
+
+        public ICollection<User> CreatedUsers { get; private set; }
+        public ICollection<User> UpdatedUsers { get; private set; }
 
         public static User Create(UserCreateOrUpdateCommand command)
         {
@@ -35,10 +45,22 @@ namespace Enigmatry.Blueprint.Model.Identity
 
         public void SetCreated(DateTimeOffset createdOn, Guid createdBy)
         {
+            SetCreated(createdOn);
+            CreatedById = createdBy;
+        }
+
+        public void SetCreated(DateTimeOffset createdOn)
+        {
             CreatedOn = createdOn;
         }
 
         public void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy)
+        {
+            SetUpdated(updatedOn);
+            UpdatedById = updatedBy;
+        }
+
+        public void SetUpdated(DateTimeOffset updatedOn)
         {
             UpdatedOn = updatedOn;
         }

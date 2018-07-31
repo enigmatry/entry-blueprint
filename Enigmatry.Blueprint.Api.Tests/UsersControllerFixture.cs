@@ -30,11 +30,9 @@ namespace Enigmatry.Blueprint.Api.Tests
                 .CreatedOn(_createdDate)
                 .UpdatedOn(_createdDate.AddYears(1));
 
-
             var userRepository = Resolve<IRepository<User>>();
-            var unitOfWork = Resolve<IUnitOfWork>();
             userRepository.Add(user);
-            unitOfWork.SaveChanges();
+            SaveChanges();
         }
 
         [Test]
@@ -42,7 +40,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         {
             List<UserModel> users = (await JsonClient.GetAsync<IEnumerable<UserModel>>("api/users")).ToList();
 
-            users.Count.Should().Be(2, "we have two users in the db");
+            users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
             UserModel user = users.First();
             user.UserName.Should().Be("john_doe@john.doe");
@@ -53,12 +51,12 @@ namespace Enigmatry.Blueprint.Api.Tests
         [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
         public async Task TestCreate(string name, string userName)
         {
-            var userToCreate = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
+            var command = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
             UserModel user =
-                await JsonClient.PostAsJsonAsync<UserCreateOrUpdateCommand, UserModel>("api/users", userToCreate);
+                await JsonClient.PostAsJsonAsync<UserCreateOrUpdateCommand, UserModel>("api/users", command);
 
-            user.UserName.Should().Be(userToCreate.UserName);
-            user.Name.Should().Be(userToCreate.Name);
+            user.UserName.Should().Be(command.UserName);
+            user.Name.Should().Be(command.Name);
             user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
             user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
             user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);

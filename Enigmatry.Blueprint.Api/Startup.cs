@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Api.Models.Identity;
@@ -50,7 +48,8 @@ namespace Enigmatry.Blueprint.Api
         }
 
         // IMvcBuilder needed for tests
-        internal static IMvcBuilder AddMvc(IServiceCollection services, IConfiguration configuration, ILoggerFactory loggerFactory)
+        internal static IMvcBuilder AddMvc(IServiceCollection services, IConfiguration configuration,
+            ILoggerFactory loggerFactory)
         {
             return services
                 .AddMvc(options => options.DefaultConfigure(configuration, loggerFactory))
@@ -71,7 +70,7 @@ namespace Enigmatry.Blueprint.Api
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
             services.AddMediatR(
-                typeof(UserModel).Assembly,// this assembly
+                typeof(UserModel).Assembly, // this assembly
                 typeof(UserCreatedDomainEvent).Assembly, // domain assembly
                 typeof(UserCreatedDomainEventHandler).Assembly);
 
@@ -103,7 +102,7 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly}});
             builder.RegisterModule(new EntityFrameworkModule {DbContextOptions = options});
             builder.RegisterModule<IdentityModule>();
-            builder.RegisterModule<EventBusModule>();
+            builder.RegisterModule(new EventBusModule { AzureServiceBusEnabled = _configuration.AppSettings().ServiceBus.AzureServiceBusEnabled});
         }
 
         private static ClaimsPrincipal GetPrincipal(IComponentContext c)

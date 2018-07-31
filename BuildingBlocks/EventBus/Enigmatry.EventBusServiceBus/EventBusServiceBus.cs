@@ -15,13 +15,13 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
 {
     public class EventBusServiceBus : IEventBus
     {
-        private const string INTEGRATION_EVENT_SUFIX = "IntegrationEvent";
+        private const string IntegrationEventSufix = "IntegrationEvent";
         private readonly ILifetimeScope _autofac;
         private readonly ILogger<EventBusServiceBus> _logger;
         private readonly IServiceBusPersisterConnection _serviceBusPersisterConnection;
         private readonly SubscriptionClient _subscriptionClient;
         private readonly IEventBusSubscriptionsManager _subsManager;
-        private readonly string AUTOFAC_SCOPE_NAME = "eshop_event_bus";
+        private readonly string AUTOFAC_SCOPE_NAME = "bluperint_event_bus";
 
         public EventBusServiceBus(IServiceBusPersisterConnection serviceBusPersisterConnection,
             ILogger<EventBusServiceBus> logger, IEventBusSubscriptionsManager subsManager,
@@ -43,7 +43,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
 
         public void Publish(IntegrationEvent @event)
         {
-            string eventName = @event.GetType().Name.Replace(INTEGRATION_EVENT_SUFIX, "");
+            string eventName = @event.GetType().Name.Replace(IntegrationEventSufix, "");
             string jsonMessage = JsonConvert.SerializeObject(@event);
             byte[] body = Encoding.UTF8.GetBytes(jsonMessage);
 
@@ -71,7 +71,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>
         {
-            string eventName = typeof(T).Name.Replace(INTEGRATION_EVENT_SUFIX, "");
+            string eventName = typeof(T).Name.Replace(IntegrationEventSufix, "");
 
             bool containsKey = _subsManager.HasSubscriptionsForEvent<T>();
             if (!containsKey)
@@ -97,7 +97,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>
         {
-            string eventName = typeof(T).Name.Replace(INTEGRATION_EVENT_SUFIX, "");
+            string eventName = typeof(T).Name.Replace(IntegrationEventSufix, "");
 
             try
             {
@@ -130,7 +130,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
             _subscriptionClient.RegisterMessageHandler(
                 async (message, token) =>
                 {
-                    string eventName = $"{message.Label}{INTEGRATION_EVENT_SUFIX}";
+                    string eventName = $"{message.Label}{IntegrationEventSufix}";
                     string messageData = Encoding.UTF8.GetString(message.Body);
                     await ProcessEvent(eventName, messageData);
 

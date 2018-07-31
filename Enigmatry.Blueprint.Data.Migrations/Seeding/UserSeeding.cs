@@ -13,7 +13,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
             {
                 Name = "Test",
                 UserName = "Test"
-            }).CreatedOn(DateTimeOffset.Now, Guid.Empty);
+            });
+
+            user.SetCreated(DateTimeOffset.Now);
 
             modelBuilder.Entity<User>().HasData(user.WithId(Guid.NewGuid()));
         }

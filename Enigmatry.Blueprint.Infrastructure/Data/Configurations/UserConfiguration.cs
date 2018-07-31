@@ -15,6 +15,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.Configurations
             builder.Property(x => x.CreatedOn).IsRequired();
 
             builder.HasIndex(x => x.UserName).IsUnique();
+
+            builder.HasMany(x => x.CreatedUsers).WithOne(x => x.CreatedBy);
+            builder.HasMany(x => x.UpdatedUsers).WithOne(x => x.UpdatedBy);
         }
     }
 }

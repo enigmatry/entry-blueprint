@@ -34,7 +34,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                 {
                     $"ConnectionStrings:{_dbContextName}",
                     _connectionString
-                }
+                },
+                {"App:ServiceBus:AzureServiceBusEnabled", "false"},
             };
 
             configurationBuilder.AddInMemoryCollection(dict);

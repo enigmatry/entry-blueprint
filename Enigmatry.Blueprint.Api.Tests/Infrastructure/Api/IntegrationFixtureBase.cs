@@ -4,6 +4,7 @@ using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Enigmatry.Blueprint.Model.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -37,12 +38,14 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 
             _server = new TestServer(webHostBuilder);
             CreateDatabase();
+            
             Client = _server.CreateClient();
             JsonClient = new JsonHttpClient(Client);
             _testScope = CreateScope();
+            AddCurrentUserToDb();
         }
 
-        protected IServiceScope CreateScope()
+        private IServiceScope CreateScope()
         {
             return _server.Host.Services.CreateScope();
         }
@@ -54,6 +57,18 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
                 var dbContext = scope.Resolve<BlueprintContext>();
                 dbContext.Database.EnsureDeleted();
                 dbContext.Database.Migrate();
+            }
+        }
+
+        private void AddCurrentUserToDb()
+        {
+            using (IServiceScope scope = CreateScope())
+            {
+                var currentUserProvider = scope.Resolve<ICurrentUserProvider>();
+                var dbContext = scope.Resolve<DbContext>();
+
+                dbContext.Add(currentUserProvider.User);
+                dbContext.SaveChanges();
             }
         }
 
@@ -76,10 +91,5 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             return _testScope.Resolve<T>();
         }
 
-        protected void AddToRepository<T>(T entity) where T : Entity
-        {
-            var repository = _testScope.Resolve<IRepository<T>>();
-            repository.Add(entity);
-        }
     }
 }

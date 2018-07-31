@@ -14,6 +14,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac
         {
             TestPrincipal principal = TestPrincipal.CreateDefault();
             builder.Register(c => principal).As<IPrincipal>().InstancePerLifetimeScope();
+            
             builder.Register(c => new CurrentUserProvider(principal, c.Resolve<ITimeProvider>()))
                 .As<ICurrentUserProvider>().InstancePerLifetimeScope();
         }

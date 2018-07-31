@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks\EventBus\Enigmatry.EventBusServiceBus\Enigmatry.EventBusServiceBus.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Infrastructure\Enigmatry.Blueprint.Infrastructure.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
   </ItemGroup>
