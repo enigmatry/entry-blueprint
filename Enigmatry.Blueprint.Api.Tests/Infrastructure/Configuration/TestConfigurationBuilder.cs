@@ -6,9 +6,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
 {
     public class TestConfigurationBuilder
     {
-        private string _connectionString =
-            @"Server=.;Database=TD_1.0_integration_testing;Trusted_Connection=True;MultipleActiveResultSets=true";
-
+        private string _connectionString;
         private string _dbContextName;
 
         public TestConfigurationBuilder WithConnectionString(string connectionString)
@@ -35,7 +33,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                     $"ConnectionStrings:{_dbContextName}",
                     _connectionString
                 },
-                {"App:ServiceBus:AzureServiceBusEnabled", "false"},
+                {"App:ServiceBus:AzureServiceBusEnabled", "false"}
             };
 
             configurationBuilder.AddInMemoryCollection(dict);

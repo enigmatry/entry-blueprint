@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Core;
@@ -19,7 +20,6 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         private IConfiguration _configuration;
         private TestServer _server;
         private IServiceScope _testScope;
-        protected JsonHttpClient JsonClient;
         protected HttpClient Client;
 
         [SetUp]
@@ -27,7 +27,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             _configuration = new TestConfigurationBuilder()
                 .WithConnectionString(
-                    "Server=.;Database=Blueprint-Core-integration-testing;Trusted_Connection=True;MultipleActiveResultSets=true")
+                    ConnectionString())
                 .WithDbContextName("BlueprintContext")
                 .Build();
 
@@ -40,9 +40,25 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             CreateDatabase();
             
             Client = _server.CreateClient();
-            JsonClient = new JsonHttpClient(Client);
             _testScope = CreateScope();
             AddCurrentUserToDb();
+        }
+
+        private static string ConnectionString()
+        {
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionString");
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                WriteLine("Reading connection string from environment variable.");
+                return connectionString;
+            }
+            WriteLine("Using localhost - hard coded connection string.");
+            return "Server=.;Database=Blueprint-Core-integration-testing;Trusted_Connection=True;MultipleActiveResultSets=true";
+        }
+
+        protected static void WriteLine(string message)
+        {
+            TestContext.WriteLine(message);
         }
 
         private IServiceScope CreateScope()
@@ -76,7 +92,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         public void Teardown()
         {
             _testScope.Dispose();
-            JsonClient.Dispose();
+            Client.Dispose();
             _server.Dispose();
         }
 
@@ -90,6 +106,5 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             return _testScope.Resolve<T>();
         }
-
     }
 }
