@@ -6,6 +6,7 @@ using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +47,8 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserModel>> Post(UserCreateOrUpdateCommand command)
+        // validatrion will be done by the mediatr pipeline so we can skip it
+        public async Task<ActionResult<UserModel>> Post([CustomizeValidator(Skip=true)] UserCreateOrUpdateCommand command)
         {
             User user = await _mediator.Send(command);
             await _unitOfWork.SaveChangesAsync();

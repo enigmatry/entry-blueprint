@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Enigmatry.Blueprint.Api.Models.Validation;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,12 +11,12 @@ using Microsoft.Net.Http.Headers;
 
 namespace Enigmatry.Blueprint.Api.Filters
 {
-    public class ExceptionAsJsonFilter : ExceptionFilterAttribute
+    public class HandleExceptionsFilter : ExceptionFilterAttribute
     {
-        private readonly ILogger<ExceptionAsJsonFilter> _logger;
+        private readonly ILogger<HandleExceptionsFilter> _logger;
         private readonly bool _useDeveloperExceptionPage;
 
-        public ExceptionAsJsonFilter(bool useDeveloperExceptionPage, ILogger<ExceptionAsJsonFilter> logger)
+        public HandleExceptionsFilter(bool useDeveloperExceptionPage, ILogger<HandleExceptionsFilter> logger)
         {
             _useDeveloperExceptionPage = useDeveloperExceptionPage;
             _logger = logger;
@@ -22,6 +24,13 @@ namespace Enigmatry.Blueprint.Api.Filters
 
         public override void OnException(ExceptionContext context)
         {
+            if (context.Exception is ValidationException validationException)
+            {
+                var model = new ValidationErrorModel(validationException);
+                context.Result = new BadRequestObjectResult(model);
+                return;
+            }
+
             IList<MediaTypeHeaderValue> accept = context.HttpContext.Request.GetTypedHeaders().Accept;
             if (accept != null && accept.All(header => header.MediaType != "application/json"))
             {

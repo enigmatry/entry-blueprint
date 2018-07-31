@@ -47,7 +47,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             try
             {
                 ValidationErrorModel json = JsonConvert.DeserializeObject<ValidationErrorModel>(responseContent);
-                error = string.IsNullOrEmpty(expectedValidationMessage) ? json.Errors.FirstOrDefault(e => e.Key == fieldName) : json.Errors.FirstOrDefault(e => e.Key == fieldName && e.ErrorMessage == expectedValidationMessage);
+                error = string.IsNullOrEmpty(expectedValidationMessage) ? json.Errors.FirstOrDefault(e => e.Field == fieldName) : json.Errors.FirstOrDefault(e => e.Field == fieldName && e.ErrorMessage == expectedValidationMessage);
             }
             catch (Exception exception)
             {

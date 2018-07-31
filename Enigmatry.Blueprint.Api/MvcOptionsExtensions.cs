@@ -11,8 +11,8 @@ namespace Enigmatry.Blueprint.Api
             ILoggerFactory loggerFactory)
         {
             options.Filters.Add(new CancelSavingTransactionAttribute());
-            options.Filters.Add(new ExceptionAsJsonFilter(configuration.UseDeveloperExceptionPage(),
-                loggerFactory.CreateLogger<ExceptionAsJsonFilter>()));
+            options.Filters.Add(new HandleExceptionsFilter(configuration.UseDeveloperExceptionPage(),
+                loggerFactory.CreateLogger<HandleExceptionsFilter>()));
             return options;
         }
     }
