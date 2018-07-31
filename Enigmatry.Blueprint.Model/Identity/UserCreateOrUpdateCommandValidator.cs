@@ -7,11 +7,11 @@ using JetBrains.Annotations;
 namespace Enigmatry.Blueprint.Model.Identity
 {
     [UsedImplicitly]
-    public class UserCreateUpdateDtoValidator : AbstractValidator<UserCreateOrUpdateCommand>
+    public class UserCreateOrUpdateCommandValidator : AbstractValidator<UserCreateOrUpdateCommand>
     {
         private readonly IRepository<User> _userRepository;
 
-        public UserCreateUpdateDtoValidator(IRepository<User> userRepository)
+        public UserCreateOrUpdateCommandValidator(IRepository<User> userRepository)
         {
             _userRepository = userRepository;
             RuleFor(x => x.UserName).NotEmpty().MaximumLength(50).EmailAddress();

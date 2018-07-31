@@ -11,12 +11,12 @@ namespace Enigmatry.Blueprint.Model.Identity
         public DateTimeOffset CreatedOn { get; private set; }
         public DateTimeOffset UpdatedOn { get; private set; }
 
-        public static User Create(UserCreateOrUpdateCommand userCreateDto)
+        public static User Create(UserCreateOrUpdateCommand command)
         {
             var result = new User
             {
-                UserName = userCreateDto.UserName,
-                Name = userCreateDto.Name,
+                UserName = command.UserName,
+                Name = command.Name,
             };
 
             result.AddDomainEvent(new UserCreatedDomainEvent(result.UserName));
@@ -25,10 +25,12 @@ namespace Enigmatry.Blueprint.Model.Identity
             return result;
         }
 
-        public void Update(UserCreateOrUpdateCommand model)
+        public void Update(UserCreateOrUpdateCommand command)
         {
-            UserName = model.UserName;
-            Name = model.Name;
+            UserName = command.UserName;
+            Name = command.Name;
+
+            AddDomainEvent(new UserUpdatedDomainEvent(UserName));
         }
 
         public void SetCreated(DateTimeOffset createdOn, Guid createdBy)

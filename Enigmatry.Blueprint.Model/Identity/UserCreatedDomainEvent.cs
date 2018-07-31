@@ -11,4 +11,14 @@ namespace Enigmatry.Blueprint.Model.Identity
 
         public string UserName { get; }
     }
+
+    public class UserUpdatedDomainEvent : INotification
+    {
+        public UserUpdatedDomainEvent(string userName)
+        {
+            UserName = userName;
+        }
+
+        public string UserName { get; }
+    }
 }

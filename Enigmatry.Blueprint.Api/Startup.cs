@@ -60,7 +60,7 @@ namespace Enigmatry.Blueprint.Api
                     // disables standard data annotations validation
                     // https://github.com/JeremySkinner/FluentValidation/wiki/i.-ASP.NET-Core-integration
                     // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; // 
-                    fv.RegisterValidatorsFromAssemblyContaining<UserCreateUpdateDtoValidator>();
+                    fv.RegisterValidatorsFromAssemblyContaining<UserCreateOrUpdateCommandValidator>();
                 });
         }
 
