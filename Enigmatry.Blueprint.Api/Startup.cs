@@ -75,6 +75,7 @@ namespace Enigmatry.Blueprint.Api
             // add Mediatr
             // preprocessing
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>)); 
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>)); 
             services.AddScoped(typeof(IRequestPreProcessor<>), typeof(PreRequestBehavior<>)); 
             services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(PostRequestBehavior<,>)); 
             services.AddMediatR(

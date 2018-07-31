@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
 
 namespace Enigmatry.Blueprint.Infrastructure.MediatR
 {
@@ -17,10 +18,14 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next)
         {
-            _logger.LogInformation($"Handling {typeof(TRequest).Name}");
-            TResponse response = await next();
-            _logger.LogInformation($"Handled {typeof(TResponse).Name}");
-            return response;
+            var requestType = typeof(TRequest).FullName;
+            using (LogContext.PushProperty("MediatRRequestType", requestType))
+            {
+                _logger.LogInformation("Handling {RequestType}", requestType);
+                TResponse response = await next();
+                _logger.LogInformation("Handled {RequestType}", requestType);
+                return response;
+            }
         }
     }
 }
