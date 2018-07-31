@@ -19,20 +19,22 @@ namespace Enigmatry.Blueprint.Api.Tests
     public class UsersControllerFixture : IntegrationFixtureBase
     {
         private DateTimeOffset _createdDate;
+        private DateTimeOffset _updatedOn;
+        private User _user;
 
         [SetUp]
         public void SetUp()
         {
             _createdDate = Resolve<ITimeProvider>().Now;
-            User user = new UserBuilder()
+            _updatedOn = _createdDate;
+            _user = new UserBuilder()
                 .UserName("john_doe@john.doe")
-                .Name("John Doe")
-                .CreatedOn(_createdDate)
-                .UpdatedOn(_createdDate.AddYears(1));
+                .Name("John Doe");
 
             var userRepository = Resolve<IRepository<User>>();
-            userRepository.Add(user);
+            userRepository.Add(_user);
             SaveChanges();
+            
         }
 
         [Test]
@@ -42,10 +44,11 @@ namespace Enigmatry.Blueprint.Api.Tests
 
             users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
-            UserModel user = users.First();
-            user.UserName.Should().Be("john_doe@john.doe");
-            user.Name.Should().Be("John Doe");
-            user.CreatedOn.Should().Be(_createdDate);
+            UserModel model = users.FirstOrDefault(u => u.UserName == "john_doe@john.doe");
+            model.Should().NotBeNull();
+            model.Name.Should().Be("John Doe");
+            model.CreatedOn.Should().Be(_createdDate);
+            model.UpdatedOn.Should().Be(_updatedOn);
         }
 
         [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
@@ -58,7 +61,19 @@ namespace Enigmatry.Blueprint.Api.Tests
             user.UserName.Should().Be(command.UserName);
             user.Name.Should().Be(command.Name);
             user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
-            user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
+            user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
+        }
+
+        [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
+        public async Task TestUpdate(string name, string userName)
+        {
+            var command = new UserCreateOrUpdateCommand { Id = _user.Id, Name = name, UserName = userName};
+            UserModel user =
+                await JsonClient.PostAsJsonAsync<UserCreateOrUpdateCommand, UserModel>("api/users", command);
+
+            user.UserName.Should().Be("john_doe@john.doe", "username is immutable");
+            user.Name.Should().Be(command.Name);
+            user.CreatedOn.Date.Should().Be(_user.CreatedOn.Date);
             user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 

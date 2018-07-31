@@ -9,10 +9,12 @@ using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Enigmatry.Blueprint.Infrastructure.MediatR;
 using Enigmatry.Blueprint.Model.Identity;
 using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
 using MediatR;
+using MediatR.Pipeline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -69,10 +71,18 @@ namespace Enigmatry.Blueprint.Api
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
+            
+            // add Mediatr
+            // preprocessing
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>)); 
+            services.AddScoped(typeof(IRequestPreProcessor<>), typeof(PreRequestBehavior<>)); 
+            services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(PostRequestBehavior<,>)); 
             services.AddMediatR(
                 typeof(UserModel).Assembly, // this assembly
                 typeof(UserCreatedDomainEvent).Assembly, // domain assembly
                 typeof(UserCreatedDomainEventHandler).Assembly);
+            // add postprocessing
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>)); 
 
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
             services.PostConfigure<ApiBehaviorOptions>(options =>
@@ -102,7 +112,10 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly}});
             builder.RegisterModule(new EntityFrameworkModule {DbContextOptions = options});
             builder.RegisterModule<IdentityModule>();
-            builder.RegisterModule(new EventBusModule { AzureServiceBusEnabled = _configuration.AppSettings().ServiceBus.AzureServiceBusEnabled});
+            builder.RegisterModule(new EventBusModule
+            {
+                AzureServiceBusEnabled = _configuration.ReadAppSettings().ServiceBus.AzureServiceBusEnabled
+            });
         }
 
         private static ClaimsPrincipal GetPrincipal(IComponentContext c)

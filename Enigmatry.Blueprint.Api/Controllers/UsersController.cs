@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,13 +19,15 @@ namespace Enigmatry.Blueprint.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<User> _userRepository;
+        private readonly IMediator _mediator;
 
         public UsersController(IRepository<User> userRepository, IMapper mapper,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork, IMediator mediator)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -37,37 +41,16 @@ namespace Enigmatry.Blueprint.Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult<UserModel>> Get(Guid id)
         {
-            User user = await _userRepository.FindByIdAsync(id);
+            User user = await _userRepository.QueryAll().ById(id).SingleAsync();
             return _mapper.MapToActionResult<UserModel>(user);
         }
 
         [HttpPost]
         public async Task<ActionResult<UserModel>> Post(UserCreateOrUpdateCommand command)
         {
-            User user = Model.Identity.User.Create(command);
-            _userRepository.Add(user);
+            User user = await _mediator.Send(command);
             await _unitOfWork.SaveChangesAsync();
-
             return await Get(user.Id);
-        }
-
-        [HttpPut]
-        public async Task<ActionResult<UserModel>> Put(UserCreateOrUpdateCommand command)
-        {
-            if (!command.Id.HasValue)
-            {
-                return BadRequest();
-            }
-
-            User user = await _userRepository.FindByIdAsync(command.Id.Value);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            user.Update(command);
-            await _unitOfWork.SaveChangesAsync();
-            return await Get(command.Id.Value);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => c.Resolve<IConfiguration>().AppSettings())
+            builder.Register(c => c.Resolve<IConfiguration>().ReadAppSettings())
                 .AsSelf()
                 .SingleInstance();
 

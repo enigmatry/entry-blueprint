@@ -6,7 +6,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 {
     public static class ConfigurationExtensions
     {
-        public static AppSettings AppSettings(this IConfiguration configuration)
+        public static AppSettings ReadAppSettings(this IConfiguration configuration)
         {
             var appSettings = configuration.GetSection("App").Get<AppSettings>();
             if (appSettings == null)

@@ -37,7 +37,6 @@ namespace Enigmatry.Blueprint.Model.Identity
 
         public void Update(UserCreateOrUpdateCommand command)
         {
-            UserName = command.UserName;
             Name = command.Name;
 
             AddDomainEvent(new UserUpdatedDomainEvent(UserName));
