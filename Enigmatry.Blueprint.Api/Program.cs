@@ -55,7 +55,6 @@ namespace Enigmatry.Blueprint.Api
                 .UseKestrel((context, options) => { options.AddServerHeader = false; })
                 .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
                 .UseSerilog();
         }
 
