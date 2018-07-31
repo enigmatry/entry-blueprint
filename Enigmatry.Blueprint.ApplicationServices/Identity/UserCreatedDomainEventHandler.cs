@@ -1,12 +1,13 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Enigmatry.Blueprint.ApplicationServices.Identity.IntegrationEvents.Events;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.BuildingBlocks.EventBus;
 using JetBrains.Annotations;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
+namespace Enigmatry.Blueprint.ApplicationServices.Identity
 {
     [UsedImplicitly]
     public class UserCreatedDomainEventHandler : INotificationHandler<UserCreatedDomainEvent>

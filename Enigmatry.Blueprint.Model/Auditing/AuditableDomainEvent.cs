@@ -2,16 +2,15 @@
 
 namespace Enigmatry.Blueprint.Model.Auditing
 {
-    public class AuditableDomainEvent : INotification
+    public abstract class AuditableDomainEvent : INotification
     {
-        public AuditableDomainEvent(string eventName, object payload)
+        protected AuditableDomainEvent(string eventName)
         {
             EventName = eventName;
-            Payload = payload;
         }
 
         public string EventName { get; }
 
-        public object Payload { get; }
+        public abstract object AuditPayload { get; }
     }
 }

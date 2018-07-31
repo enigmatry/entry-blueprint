@@ -30,15 +30,12 @@ namespace Enigmatry.Blueprint.Model.Identity
             };
 
             result.AddDomainEvent(new UserCreatedDomainEvent(result.UserName));
-            result.AddDomainEvent(new AuditableDomainEvent("User created", new {result.UserName}));
-
             return result;
         }
 
         public void Update(UserCreateOrUpdateCommand command)
         {
             Name = command.Name;
-
             AddDomainEvent(new UserUpdatedDomainEvent(UserName));
         }
 

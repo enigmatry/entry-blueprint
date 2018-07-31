@@ -1,7 +1,6 @@
-﻿using System;
-using Enigmatry.BuildingBlocks.EventBus.Events;
+﻿using Enigmatry.BuildingBlocks.EventBus.Events;
 
-namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
+namespace Enigmatry.Blueprint.ApplicationServices.Identity.IntegrationEvents.Events
 {
     public class UserCreatedIntegrationEvent : IntegrationEvent
     {

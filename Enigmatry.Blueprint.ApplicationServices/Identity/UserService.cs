@@ -4,7 +4,7 @@ using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
+namespace Enigmatry.Blueprint.ApplicationServices.Identity
 {
     [UsedImplicitly]
     public class UserService : IUserService

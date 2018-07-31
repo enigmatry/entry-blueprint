@@ -23,7 +23,7 @@ namespace Enigmatry.Blueprint.Model.Identity
         {
             return !_userRepository.QueryAll()
                 .ExceptWithId(dto.Id)
-                .ByUserName(name)
+                .QueryByUserName(name)
                 .Any();
         }
     }

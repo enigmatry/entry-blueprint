@@ -1,6 +1,6 @@
 ﻿using Autofac;
+using Enigmatry.Blueprint.ApplicationServices.Identity.IntegrationEvents.EventHandling;
 using Enigmatry.Blueprint.Core.Settings;
-using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
 using Enigmatry.BuildingBlocks.EventBus;
 using Enigmatry.BuildingBlocks.EventBus.Abstractions;
 using Enigmatry.BuildingBlocks.EventBusServiceBus;
@@ -12,7 +12,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 {
     public class EventBusModule : Module
     {
-        public bool AzureServiceBusEnabled { get; set; }
+        public bool AzureServiceBusEnabled { private get; set; }
 
         protected override void Load(ContainerBuilder builder)
         {

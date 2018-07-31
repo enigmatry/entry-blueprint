@@ -30,7 +30,7 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
         [Test]
         public void TestQueryEmptyList()
         {
-            List<User> result = new List<User>().AsQueryable().ByUserName("some").ToList();
+            List<User> result = new List<User>().AsQueryable().QueryByUserName("some").ToList();
             result.Should().BeEmpty();
         }
 
@@ -41,7 +41,7 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
         [TestCase("xyz", false)]
         public void TestQueryByUserName(string userName, bool expectedToFind)
         {
-            List<User> result = _query.ByUserName(userName).ToList();
+            List<User> result = _query.QueryByUserName(userName).ToList();
 
             result.Count.Should().Be(expectedToFind ? 1 : 0);
         }

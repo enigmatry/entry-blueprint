@@ -5,7 +5,8 @@ using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.Api.Models.Validation;
-using Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity;
+using Enigmatry.Blueprint.ApplicationServices.Identity;
+using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
@@ -74,7 +75,6 @@ namespace Enigmatry.Blueprint.Api
             services.AddAutoMapper();
             
             // add Mediatr
-            // preprocessing
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>)); 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>)); 
             services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>)); 
@@ -109,7 +109,7 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule<ConfigurationModule>();
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
-            builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly}});
+            builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
             builder.RegisterModule(new EntityFrameworkModule {DbContextOptions = options});
             builder.RegisterModule<IdentityModule>();
             builder.RegisterModule(new EventBusModule

@@ -1,13 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
-namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
+namespace Enigmatry.Blueprint.ApplicationServices.Identity
 {
     [UsedImplicitly]
     public class UserCreateOrUpdateCommandHandler : IRequestHandler<UserCreateOrUpdateCommand, User>
@@ -25,10 +23,7 @@ namespace Enigmatry.Blueprint.Infrastructure.ApplicationServices.Identity
             User user;
             if (request.Id.HasValue)
             {
-                user = await _userRepository.QueryAll()
-                    .ById(request.Id.Value)
-                    .SingleAsync(cancellationToken);
-
+                user = await _userRepository.FindByIdAsync(request.Id.Value);
                 user.Update(request);
             }
             else

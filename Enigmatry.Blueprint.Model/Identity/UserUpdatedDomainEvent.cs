@@ -2,9 +2,9 @@
 
 namespace Enigmatry.Blueprint.Model.Identity
 {
-    public class UserCreatedDomainEvent : AuditableDomainEvent
+    public class UserUpdatedDomainEvent : AuditableDomainEvent
     {
-        public UserCreatedDomainEvent(string userName) : base("UserCreated")
+        public UserUpdatedDomainEvent(string userName) : base("UserUpdated")
         {
             UserName = userName;
         }
