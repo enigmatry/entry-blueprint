@@ -5,11 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Infrastructure.MediatR
 {
-    public class PreRequestBehavior<TRequest> : IRequestPreProcessor<TRequest>
+    public class SamplePreRequestBehavior<TRequest> : IRequestPreProcessor<TRequest>
     {
-        private readonly ILogger<PreRequestBehavior<TRequest>> _logger;
+        private readonly ILogger<SamplePreRequestBehavior<TRequest>> _logger;
 
-        public PreRequestBehavior(ILogger<PreRequestBehavior<TRequest>> logger)
+        public SamplePreRequestBehavior(ILogger<SamplePreRequestBehavior<TRequest>> logger)
         {
             _logger = logger;
         }

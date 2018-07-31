@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Infrastructure.MediatR
 {
-    public class PostRequestBehavior<TRequest, TResponse> : IRequestPostProcessor<TRequest, TResponse>
+    public class SamplePostRequestBehavior<TRequest, TResponse> : IRequestPostProcessor<TRequest, TResponse>
     {
-        private readonly ILogger<PostRequestBehavior<TRequest, TResponse>> _logger;
+        private readonly ILogger<SamplePostRequestBehavior<TRequest, TResponse>> _logger;
 
-        public PostRequestBehavior(ILogger<PostRequestBehavior<TRequest, TResponse>> logger)
+        public SamplePostRequestBehavior(ILogger<SamplePostRequestBehavior<TRequest, TResponse>> logger)
         {
             _logger = logger;
         }

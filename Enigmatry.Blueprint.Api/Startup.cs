@@ -61,6 +61,7 @@ namespace Enigmatry.Blueprint.Api
                     // disables standard data annotations validation
                     // https://github.com/JeremySkinner/FluentValidation/wiki/i.-ASP.NET-Core-integration
                     // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; // 
+                    fv.ImplicitlyValidateChildProperties = true;
                     fv.RegisterValidatorsFromAssemblyContaining<UserCreateOrUpdateCommandValidator>();
                 });
         }
@@ -76,14 +77,12 @@ namespace Enigmatry.Blueprint.Api
             // preprocessing
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>)); 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>)); 
-            services.AddScoped(typeof(IRequestPreProcessor<>), typeof(PreRequestBehavior<>)); 
-            services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(PostRequestBehavior<,>)); 
+            services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>)); 
+            services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(SamplePostRequestBehavior<,>)); 
             services.AddMediatR(
                 typeof(UserModel).Assembly, // this assembly
                 typeof(UserCreatedDomainEvent).Assembly, // domain assembly
                 typeof(UserCreatedDomainEventHandler).Assembly);
-            // add postprocessing
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>)); 
 
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
             services.PostConfigure<ApiBehaviorOptions>(options =>
