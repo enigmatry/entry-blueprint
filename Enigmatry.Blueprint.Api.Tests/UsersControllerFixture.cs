@@ -61,7 +61,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             user.Name.Should().Be(userToCreate.Name);
             user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
             user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
-            user.UpdatedOn.Date.Should().Be(DateTime.Now.AddYears(1).Date);
+            user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
         [TestCase("some user", "invalid email", "userName", "'User Name' is not a valid email address.", TestName =
