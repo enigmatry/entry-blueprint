@@ -71,6 +71,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             // You will need to handle eventual consistency and compensatory actions in case of failures in any of the Handlers. 
             await _mediator.DispatchDomainEventsAsync(this);
 
+            // TODO: call populatecreatedupdated again?
+
             // After executing this line all the changes (from the Command Handler and Domain Event Handlers) 
             // performed throught the DbContext will be commited
             return await SaveChangesAsync(cancellationToken);
@@ -88,12 +90,12 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             {
                 if (entity.State == EntityState.Added)
                 {
-                    entity.Entity.SetCreated(_timeProvider.Now.DateTime, currentUserId);
-                    entity.Entity.SetUpdated(_timeProvider.Now.DateTime, currentUserId);
+                    entity.Entity.SetCreated(_timeProvider.Now, currentUserId);
+                    entity.Entity.SetUpdated(_timeProvider.Now, currentUserId);
                 }
 
                 if (entity.State == EntityState.Modified)
-                    entity.Entity.SetUpdated(_timeProvider.Now.DateTime, currentUserId);
+                    entity.Entity.SetUpdated(_timeProvider.Now, currentUserId);
             }
         }
     }
