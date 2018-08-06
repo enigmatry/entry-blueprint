@@ -46,7 +46,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
 
         private static string ReadConnectionString()
         {
-            var connectionString = Environment.GetEnvironmentVariable("ConnectionString");
+            var connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
             if (!string.IsNullOrEmpty(connectionString))
             {
                 var builder = new SqlConnectionStringBuilder(connectionString);
