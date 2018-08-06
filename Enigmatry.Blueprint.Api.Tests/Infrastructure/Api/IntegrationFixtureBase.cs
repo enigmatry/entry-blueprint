@@ -26,8 +26,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         protected void Setup()
         {
             _configuration = new TestConfigurationBuilder()
-                .WithConnectionString(
-                    ConnectionString())
+                .WithConnectionString(ReadConnectionString())
                 .WithDbContextName("BlueprintContext")
                 .Build();
 
@@ -44,7 +43,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             AddCurrentUserToDb();
         }
 
-        private static string ConnectionString()
+        private static string ReadConnectionString()
         {
             var connectionString = Environment.GetEnvironmentVariable("ConnectionString");
             if (!string.IsNullOrEmpty(connectionString))
