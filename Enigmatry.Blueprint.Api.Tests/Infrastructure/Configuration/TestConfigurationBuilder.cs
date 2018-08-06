@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using NUnit.Framework;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
 {
     public class TestConfigurationBuilder
     {
-        private string _connectionString;
         private string _dbContextName;
 
-        public TestConfigurationBuilder WithConnectionString(string connectionString)
-        {
-            _connectionString = connectionString;
-            return this;
-        }
-
+        
         public TestConfigurationBuilder WithDbContextName(string contextName)
         {
             _dbContextName = contextName;
@@ -31,7 +27,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                 {"UseDeveloperExceptionPage", "true"},
                 {
                     $"ConnectionStrings:{_dbContextName}",
-                    _connectionString
+                    ReadConnectionString()
                 },
                 {"App:ServiceBus:AzureServiceBusEnabled", "false"}
             };
@@ -46,11 +42,25 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
             {
                 throw new InvalidOperationException("Missing db context name");
             }
-
-            if (string.IsNullOrWhiteSpace(_connectionString))
-            {
-                throw new InvalidOperationException("Missing connection string");
-            }
         }
+
+        private static string ReadConnectionString()
+        {
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionString");
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                var builder = new SqlConnectionStringBuilder(connectionString);
+                WriteLine("Connection string read from environment variable.");
+                WriteLine($"Integration Tests using database: {builder.DataSource}");
+                return connectionString;
+            }
+
+            const string dbName = "TD_1.0_integration_testing";
+            WriteLine($"Integration Tests using database: {dbName}");
+            return $"Server=.;Database={dbName};Trusted_Connection=True;MultipleActiveResultSets=true";
+        }
+
+        private static void WriteLine(string message) => 
+            TestContext.WriteLine(message);
     }
 }

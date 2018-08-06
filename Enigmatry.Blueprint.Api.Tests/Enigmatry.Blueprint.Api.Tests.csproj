@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Infrastructure\Database\DropAllSql.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Infrastructure\Database\DropAllSql.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
     <PackageReference Include="AutoFixture.NUnit3" Version="4.5.0" />
     <PackageReference Include="FluentAssertions" Version="5.4.1" />

@@ -1,14 +1,15 @@
-﻿using System;
+﻿using System.Data.SqlClient;
 using System.Net.Http;
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
-using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.Api.Tests.Infrastructure.Database;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Model.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
@@ -26,7 +27,6 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         protected void Setup()
         {
             _configuration = new TestConfigurationBuilder()
-                .WithConnectionString(ReadConnectionString())
                 .WithDbContextName("BlueprintContext")
                 .Build();
 
@@ -43,34 +43,16 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             AddCurrentUserToDb();
         }
 
-        private static string ReadConnectionString()
-        {
-            var connectionString = Environment.GetEnvironmentVariable("ConnectionString");
-            if (!string.IsNullOrEmpty(connectionString))
-            {
-                WriteLine("Reading connection string from environment variable.");
-                return connectionString;
-            }
-            WriteLine("Using localhost - hard coded connection string.");
-            return "Server=.;Database=Blueprint-Core-integration-testing;Trusted_Connection=True;MultipleActiveResultSets=true";
-        }
-
-        protected static void WriteLine(string message)
-        {
-            TestContext.WriteLine(message);
-        }
-
-        private IServiceScope CreateScope()
-        {
-            return _server.Host.Services.CreateScope();
-        }
+        private IServiceScope CreateScope() => _server.Host.Services.CreateScope();
 
         private void CreateDatabase()
         {
             using (IServiceScope scope = CreateScope())
             {
                 var dbContext = scope.Resolve<BlueprintContext>();
-                dbContext.Database.EnsureDeleted();
+                // On Azure we cannot drop db, we can only delete all tables
+                DropAllDbObjects(dbContext.Database);
+                // dbContext.Database.EnsureDeleted(); -- this line deletes the db
                 dbContext.Database.Migrate();
             }
         }
@@ -101,9 +83,33 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             unitOfWork.SaveChanges();
         }
 
-        protected T Resolve<T>()
+        protected T Resolve<T>() => _testScope.Resolve<T>();
+
+        private static void DropAllDbObjects(DatabaseFacade database)
         {
-            return _testScope.Resolve<T>();
+            try
+            {
+                string dropAllSql = EmbeddedResource.ReadResourceContent("Enigmatry.Blueprint.Api.Tests.Infrastructure.Database.DropAllSql.sql");
+                foreach (var statement in dropAllSql.SplitStatements())
+                    // WriteLine("Executing: " + statement);
+                    database.ExecuteSqlCommand(statement);
+            }
+            catch (SqlException ex)
+            {
+                const int cannotOpenDatabaseErrorNumber = 4060;
+                if (ex.Number == cannotOpenDatabaseErrorNumber)
+                {
+                    WriteLine("Error while trying to drop all objects from database. Maybe database does not exist.");
+                    WriteLine("Continuing...");
+                    WriteLine(ex.ToString());
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
+
+        private static void WriteLine(string message) => TestContext.WriteLine(message);
     }
 }
