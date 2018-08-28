@@ -41,10 +41,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
         {
             builder.Register(context =>
                 {
-                    var logger = context.Resolve<ILogger<DefaultServiceBusPersisterConnection>>();
                     var configuration = context.Resolve<ServiceBusSettings>();
                     var serviceBusConnection = new ServiceBusConnectionStringBuilder(configuration.EventBusConnection);
-                    return new DefaultServiceBusPersisterConnection(serviceBusConnection, logger);
+                    return new DefaultServiceBusPersisterConnection(serviceBusConnection);
                 }).As<IServiceBusPersisterConnection>()
                 .SingleInstance();
 
@@ -55,10 +54,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                     var serviceBusPersisterConnection = context.Resolve<IServiceBusPersisterConnection>();
                     var iLifetimeScope = context.Resolve<ILifetimeScope>();
                     var logger = context.Resolve<ILogger<EventBusServiceBus>>();
-                    var eventBusSubcriptionsManager = context.Resolve<IEventBusSubscriptionsManager>();
+                    var eventBusSubscriptionsManager = context.Resolve<IEventBusSubscriptionsManager>();
 
                     return new EventBusServiceBus(serviceBusPersisterConnection, logger,
-                        eventBusSubcriptionsManager, subscriptionClientName, iLifetimeScope);
+                        eventBusSubscriptionsManager, subscriptionClientName, iLifetimeScope);
                 }).As<IEventBus>()
                 .SingleInstance();
         }
@@ -70,12 +69,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 
         private static void RegisterIntegrationEventHandlers(ContainerBuilder builder)
         {
+            //TODO this registration needs to be checked
             builder.RegisterAssemblyTypes(typeof(UserCreatedIntegrationEventHandler).Assembly)
                 .Where(
                     type => type.Name.EndsWith("IntegrationEventHandler")
                 ).AsSelf().InstancePerDependency();
-            //TODO this needs to be checked
-            //builder.RegisterType<UserCreatedIntegrationEventHandler>().AsSelf().InstancePerDependency();
         }
     }
 }

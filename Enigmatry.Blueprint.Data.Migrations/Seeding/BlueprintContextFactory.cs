@@ -22,7 +22,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
             var result =
                 new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider())
                 {
-                    ModelBuilderConfigurer = DbInitializer.SeedData
+                    ModelBuilderConfigurator = DbInitializer.SeedData
                 };
             return result;
         }

@@ -17,16 +17,13 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.Conventions
 
         public InternalModelBuilder Apply(InternalModelBuilder modelBuilder)
         {
-            foreach (var entity in modelBuilder.Metadata.GetEntityTypes())
+            foreach (EntityType entity in modelBuilder.Metadata.GetEntityTypes())
             {
-                foreach (var property in entity.GetProperties())
+                foreach (Property property in entity.GetProperties())
                 {
-                    if (property.ClrType == typeof(string))
+                    if (property.ClrType == typeof(string) && property.FindAnnotation(MaxLengthAnnotation) == null)
                     {
-                        if (property.FindAnnotation(MaxLengthAnnotation) == null)
-                        {
-                            property.AddAnnotation(MaxLengthAnnotation, _defaultStringLength);
-                        }
+                        property.AddAnnotation(MaxLengthAnnotation, _defaultStringLength);
                     }
                 }
             }

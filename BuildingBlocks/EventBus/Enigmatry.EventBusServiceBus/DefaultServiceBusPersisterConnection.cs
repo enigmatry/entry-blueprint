@@ -1,21 +1,14 @@
 ﻿using System;
 using Microsoft.Azure.ServiceBus;
-using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.BuildingBlocks.EventBusServiceBus
 {
     public class DefaultServiceBusPersisterConnection : IServiceBusPersisterConnection
     {
-        private readonly ILogger<DefaultServiceBusPersisterConnection> _logger;
-
-        private bool _disposed;
         private ITopicClient _topicClient;
 
-        public DefaultServiceBusPersisterConnection(ServiceBusConnectionStringBuilder serviceBusConnectionStringBuilder,
-            ILogger<DefaultServiceBusPersisterConnection> logger)
+        public DefaultServiceBusPersisterConnection(ServiceBusConnectionStringBuilder serviceBusConnectionStringBuilder)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
             ServiceBusConnectionStringBuilder = serviceBusConnectionStringBuilder ??
                                                 throw new ArgumentNullException(
                                                     nameof(serviceBusConnectionStringBuilder));
@@ -36,12 +29,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
 
         public void Dispose()
         {
-            if (_disposed)
-            {
-                return;
-            }
-
-            _disposed = true;
+            //TODO check topicClient closing
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
         private readonly IMediator _mediator;
         private readonly ITimeProvider _timeProvider;
 
-        public Action<ModelBuilder> ModelBuilderConfigurer { get; set; }
+        public Action<ModelBuilder> ModelBuilderConfigurator { private get; set; }
 
         public BlueprintContext(DbContextOptions options, IMediator mediator, ITimeProvider timeProvider) : base(options)
         {
@@ -37,7 +37,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
             RegisterEntities(modelBuilder);
 
-            ModelBuilderConfigurer?.Invoke(modelBuilder);
+            ModelBuilderConfigurator?.Invoke(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -55,10 +55,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             }
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-        }
-
         public async Task<int> SaveEntitiesAsync(Guid currentUserId,
             CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -71,10 +67,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             // You will need to handle eventual consistency and compensatory actions in case of failures in any of the Handlers. 
             await _mediator.DispatchDomainEventsAsync(this);
 
-            // TODO: call populatecreatedupdated again?
+            // TODO: call populate created updated again?
 
             // After executing this line all the changes (from the Command Handler and Domain Event Handlers) 
-            // performed throught the DbContext will be commited
+            // performed through the DbContext will be committed
             return await SaveChangesAsync(cancellationToken);
         }
 
