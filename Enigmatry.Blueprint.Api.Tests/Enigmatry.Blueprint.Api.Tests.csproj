@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+	<!-- SonarQube needs this -->
+	<ProjectGuid>{3b1f23fd-0bcc-4b79-974d-77454d048e81}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

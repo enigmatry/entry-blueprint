@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>Enigmatry.BuildingBlocks.IntegrationEventLogEF</RootNamespace>
+	<!-- SonarQube needs this -->
+	<ProjectGuid>{e90c2280-fd13-4f86-b793-058407944fae}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
