@@ -260,5 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 .mfractor/.txf.tmd.db
-Txf.Tmd.Backend.Api/appsettings.Development.json
 /.mfractor
