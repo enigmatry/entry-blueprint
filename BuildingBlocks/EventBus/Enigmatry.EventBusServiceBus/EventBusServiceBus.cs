@@ -140,9 +140,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
                 new MessageHandlerOptions(ExceptionReceivedHandler) {MaxConcurrentCalls = 10, AutoComplete = false});
         }
 
-#pragma warning disable S1144 // Unused private types or members should be removed
         private static Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
-#pragma warning restore S1144 // Unused private types or members should be removed
         {
             Console.WriteLine($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
             ExceptionReceivedContext context = exceptionReceivedEventArgs.ExceptionReceivedContext;
