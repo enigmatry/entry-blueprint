@@ -33,7 +33,7 @@ namespace Enigmatry.BuildingBlocks.IntegrationEventLogEF.Services
         {
             IntegrationEventLogEntry eventLogEntry = _dbSet.Single(ie => ie.EventId == @event.Id);
             eventLogEntry.TimesSent++;
-            eventLogEntry.State = EventStateEnum.Published;
+            eventLogEntry.State = EventState.Published;
 
             _dbSet.Update(eventLogEntry);
 

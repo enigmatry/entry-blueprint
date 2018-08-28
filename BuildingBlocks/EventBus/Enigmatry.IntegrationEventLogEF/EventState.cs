@@ -1,6 +1,6 @@
 ﻿namespace Enigmatry.BuildingBlocks.IntegrationEventLogEF
 {
-    public enum EventStateEnum
+    public enum EventState
     {
         NotPublished = 0,
         Published = 1,

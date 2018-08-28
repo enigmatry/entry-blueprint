@@ -6,9 +6,10 @@ namespace Enigmatry.BuildingBlocks.IntegrationEventLogEF.Utilities
 {
     public class ResilientTransaction
     {
-        private DbContext _context;
+        private readonly DbContext _context;
+
         private ResilientTransaction(DbContext context) =>
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
 
         public static ResilientTransaction New (DbContext context) =>
             new ResilientTransaction(context);        
