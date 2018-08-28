@@ -14,9 +14,9 @@ namespace Enigmatry.Blueprint.Api.Filters
 
             if (resultContext.Exception == null &&
                 context.HttpContext.Response.StatusCode >= 200 &&
-                context.HttpContext.Response.StatusCode < 300)
-                if (context.ModelState.IsValid)
-                    await unitOfWork.SaveChangesAsync();
+                context.HttpContext.Response.StatusCode < 300 && 
+                context.ModelState.IsValid)
+                await unitOfWork.SaveChangesAsync();
         }
     }
 }

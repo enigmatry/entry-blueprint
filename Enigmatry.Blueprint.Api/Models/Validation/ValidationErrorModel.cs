@@ -31,13 +31,15 @@ namespace Enigmatry.Blueprint.Api.Models.Validation
         public static IEnumerable<ErrorModel> MapValidationErrors(ModelStateDictionary modelState)
         {
             foreach (KeyValuePair<string, ModelStateEntry> error in modelState)
-            foreach (ModelError modelError in error.Value.Errors)
             {
-                yield return new ErrorModel
+                foreach (ModelError modelError in error.Value.Errors)
                 {
-                    Field = error.Key.FirstLetterToLowerCase(),
-                    ErrorMessage = modelError.ErrorMessage
-                };
+                    yield return new ErrorModel
+                    {
+                        Field = error.Key.FirstLetterToLowerCase(),
+                        ErrorMessage = modelError.ErrorMessage
+                    };
+                }
             }
         }
 
@@ -48,7 +50,7 @@ namespace Enigmatry.Blueprint.Api.Models.Validation
                 yield return new ErrorModel
                 {
                     Field = error.PropertyName.FirstLetterToLowerCase(),
-                    ErrorMessage = error.ErrorMessage,
+                    ErrorMessage = error.ErrorMessage
                 };
             }
         }

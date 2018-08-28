@@ -52,7 +52,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
                 var dbContext = scope.Resolve<BlueprintContext>();
                 // On Azure we cannot drop db, we can only delete all tables
                 DropAllDbObjects(dbContext.Database);
-                // dbContext.Database.EnsureDeleted(); -- this line deletes the db
+                // In case that we want to delete db call: dbContext.Database.EnsureDeleted()
                 dbContext.Database.Migrate();
             }
         }
