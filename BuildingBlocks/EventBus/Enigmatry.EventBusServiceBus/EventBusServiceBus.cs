@@ -21,7 +21,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
         private readonly IServiceBusPersisterConnection _serviceBusPersisterConnection;
         private readonly SubscriptionClient _subscriptionClient;
         private readonly IEventBusSubscriptionsManager _subsManager;
-        private readonly string AUTOFAC_SCOPE_NAME = "blueprint_event_bus";
+        private const string AutofacScopeName = "blueprint_event_bus";
 
         public EventBusServiceBus(IServiceBusPersisterConnection serviceBusPersisterConnection,
             ILogger<EventBusServiceBus> logger, IEventBusSubscriptionsManager subsManager,
@@ -132,7 +132,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
                 {
                     string eventName = $"{message.Label}{IntegrationEventSuffix}";
                     string messageData = Encoding.UTF8.GetString(message.Body);
-                    await ProcessEvent(eventName, messageData);
+                    await ProcessEvent(eventName, messageData).ConfigureAwait(false);
 
                     // Complete the message so that it is not received again.
                     await _subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
@@ -140,7 +140,9 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
                 new MessageHandlerOptions(ExceptionReceivedHandler) {MaxConcurrentCalls = 10, AutoComplete = false});
         }
 
+#pragma warning disable S1144 // Unused private types or members should be removed
         private static Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
+#pragma warning restore S1144 // Unused private types or members should be removed
         {
             Console.WriteLine($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
             ExceptionReceivedContext context = exceptionReceivedEventArgs.ExceptionReceivedContext;
@@ -155,7 +157,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
         {
             if (_subsManager.HasSubscriptionsForEvent(eventName))
             {
-                using (ILifetimeScope scope = _autofac.BeginLifetimeScope(AUTOFAC_SCOPE_NAME))
+                using (ILifetimeScope scope = _autofac.BeginLifetimeScope(AutofacScopeName))
                 {
                     IEnumerable<InMemoryEventBusSubscriptionsManager.SubscriptionInfo> subscriptions =
                         _subsManager.GetHandlersForEvent(eventName);
