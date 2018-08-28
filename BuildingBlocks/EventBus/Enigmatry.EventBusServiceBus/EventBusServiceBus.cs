@@ -120,11 +120,6 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
             _subsManager.RemoveDynamicSubscription<TH>(eventName);
         }
 
-        public void Dispose()
-        {
-            _subsManager.Clear();
-        }
-
         private void RegisterSubscriptionClientMessageHandler()
         {
             _subscriptionClient.RegisterMessageHandler(
