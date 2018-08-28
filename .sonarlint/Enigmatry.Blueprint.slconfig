@@ -1,0 +1,11 @@
+{
+  "ServerUri": "http://sonarqube.enigmatry.local",
+  "Organization": null,
+  "ProjectKey": "AspNetCoreAngular_EnigmatryWebApplicationBlueprintCore",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "cs-sonar-way-06605",
+      "ProfileTimestamp": "2017-08-24T17:20:36+02:00"
+    }
+  }
+}

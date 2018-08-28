@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="SonarQube - Enigmatry - Web Application Blueprint Core Sonar way (outdated copy)" ToolsVersion="15.0">
+  <Include Path="..\..\..\.sonarlint\aspnetcoreangular_enigmatrywebapplicationblueprintcorecsharp.ruleset" Action="Default" />
+</RuleSet>
