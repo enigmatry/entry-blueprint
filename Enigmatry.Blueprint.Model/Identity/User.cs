@@ -61,36 +61,5 @@ namespace Enigmatry.Blueprint.Model.Identity
         {
             UpdatedOn = updatedOn;
         }
-
-        public void TestDuplication()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-               
-            }
-
-            for (int i = 0; i < 100; i++)
-            {
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-            }
-
-            for (int i = 0; i < 100; i++)
-            {
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-            }
-        }
     }
 }
