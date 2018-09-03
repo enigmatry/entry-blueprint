@@ -71,16 +71,7 @@ namespace Enigmatry.Blueprint.Model.Identity
                 Debug.WriteLine("duplication here");
                 
                 Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
+               
             }
 
             for (int i = 0; i < 100; i++)
@@ -90,49 +81,10 @@ namespace Enigmatry.Blueprint.Model.Identity
                 Debug.WriteLine("duplication here");
                 
                 Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
             }
 
             for (int i = 0; i < 100; i++)
             {
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-            }
-
-            for (int i = 0; i < 100; i++)
-            {
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
-                Debug.WriteLine("duplication here");
-                
                 Debug.WriteLine("duplication here");
                 
                 Debug.WriteLine("duplication here");
