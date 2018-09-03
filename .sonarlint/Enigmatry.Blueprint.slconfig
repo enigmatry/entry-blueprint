@@ -1,6 +1,6 @@
 {
   "ServerUri": "http://sonarqube.enigmatry.local",
-  "Organization": null,
+  "Organization": "Enigmatry",
   "ProjectKey": "AspNetCoreAngular_EnigmatryWebApplicationBlueprintCore",
   "Profiles": {
     "CSharp": {
