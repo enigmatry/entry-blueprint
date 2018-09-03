@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Auditing;
 
@@ -59,6 +60,85 @@ namespace Enigmatry.Blueprint.Model.Identity
         public void SetUpdated(DateTimeOffset updatedOn)
         {
             UpdatedOn = updatedOn;
+        }
+
+        public void TestDuplication()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+                
+                Debug.WriteLine("duplication here");
+            }
         }
     }
 }
