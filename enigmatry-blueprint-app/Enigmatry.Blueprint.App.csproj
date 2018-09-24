@@ -30,6 +30,13 @@
     <None Remove="e2e\**" />
     <None Remove="src\**" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <_CustomFiles Include="$(MSBuildProjectDirectory)/dist/**/*" />
+    <DotnetPublishFiles Include="@(_CustomFiles)">
+      <DestinationRelativePath>%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+    </DotnetPublishFiles>
+  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="tslint.json" />
