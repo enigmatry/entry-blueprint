@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- uncomment if you want to exclude files from deployment -->
+<!--    <ExcludeFilesFromDeployment>-->
+<!--      _references.js;_references.js.map-->
+<!--    </ExcludeFilesFromDeployment>-->
+    <ExcludeFoldersFromDeployment>
+      node_modules
+    </ExcludeFoldersFromDeployment>
+  </PropertyGroup>
+  
+  <!-- including additional files that are not part of the project (e.g. generated) -->
+  <ItemGroup>
+    <AdditionalFilesToCopy Include="dist\**\*.*" />
+  </ItemGroup>
+  <Target Name="AdditionalFilesForPackage" AfterTargets="CopyAllFilesToSingleFolderForMsdeploy">
+    <Copy SourceFiles="@(AdditionalFilesToCopy)" 
+	DestinationFiles="@(AdditionalFilesToCopy->'$(_PackageTempDir)\%(RecursiveDir)%(Filename)%(Extension)')"  />
+  </Target>
+</Project>
