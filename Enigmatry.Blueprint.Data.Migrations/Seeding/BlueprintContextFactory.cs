@@ -32,7 +32,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
             string connectionString = Environment.GetEnvironmentVariable("MigrateDatabaseConnectionString");
             Console.WriteLine(string.IsNullOrEmpty(connectionString)
                 ? "ConnectionString variable not set."
-                : "ConnectionString variable found.");
+                : "ConnectionString variable found. " + connectionString);
 
             return connectionString;
         }
