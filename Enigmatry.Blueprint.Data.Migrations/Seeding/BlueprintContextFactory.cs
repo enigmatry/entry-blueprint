@@ -29,10 +29,11 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
 
         private static string ReadConnectionString()
         {
-            string connectionString = Environment.GetEnvironmentVariable("MigrateDatabaseConnectionString");
+            var environmentVariableName = "MigrateDatabaseConnectionString";
+            string connectionString = Environment.GetEnvironmentVariable(environmentVariableName);
             Console.WriteLine(string.IsNullOrEmpty(connectionString)
-                ? "ConnectionString variable not set."
-                : "ConnectionString variable found. " + connectionString);
+                ? $"{environmentVariableName} environment variable is not set."
+                : $"{environmentVariableName} variable was found. " + connectionString);
 
             return connectionString;
         }
