@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-	<!-- SonarQube needs this -->
-	<ProjectGuid>{17d4e243-a0e4-47c6-b973-eb34f633ff68}</ProjectGuid>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{17d4e243-a0e4-47c6-b973-eb34f633ff68}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -30,11 +30,11 @@
     <None Remove="e2e\**" />
     <None Remove="src\**" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <_CustomFiles Include="$(MSBuildProjectDirectory)/dist/**/*" />
     <DotnetPublishFiles Include="@(_CustomFiles)">
-      <DestinationRelativePath>%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      <DestinationRelativePath>dist/%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
     </DotnetPublishFiles>
   </ItemGroup>
 
@@ -54,4 +54,10 @@
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
   </ItemGroup>
 
+  <Target Name="OverwriteParametersXml" AfterTargets="_CreateParameterFiles">
+    <Copy SourceFiles="parameters.xml" DestinationFiles="$(_MSDeployParametersFilePath)" />
+    <XmlPoke XmlInputPath="$(_MSDeployParametersFilePath)" Query="//parameterEntry[@kind='ProviderPath']/@match" Value="^$([System.Text.RegularExpressions.Regex]::Escape($(PublishIntermediateOutputPath)))$">
+    </XmlPoke>
+  </Target>
+  
 </Project>

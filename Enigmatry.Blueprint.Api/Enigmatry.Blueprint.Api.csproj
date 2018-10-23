@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-	<!-- SonarQube needs this -->
-	<ProjectGuid>{2212e56d-21ae-4b9a-8628-3b7d2d3c67fd}</ProjectGuid>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{2212e56d-21ae-4b9a-8628-3b7d2d3c67fd}</ProjectGuid>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -45,5 +45,11 @@
     <ProjectReference Include="..\Enigmatry.Blueprint.Infrastructure\Enigmatry.Blueprint.Infrastructure.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
   </ItemGroup>
+
+  <Target Name="OverwriteParametersXml" AfterTargets="_CreateParameterFiles">
+    <Copy SourceFiles="parameters.xml" DestinationFiles="$(_MSDeployParametersFilePath)" />
+    <XmlPoke XmlInputPath="$(_MSDeployParametersFilePath)" Query="//parameterEntry[@kind='ProviderPath']/@match" Value="^$([System.Text.RegularExpressions.Regex]::Escape($(PublishIntermediateOutputPath)))$">
+    </XmlPoke>
+  </Target>
 
 </Project>
