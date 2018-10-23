@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+  <parameter name="IIS Web Application Name" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="__iisProviderPath__" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="__iisProviderPath__" />
+  </parameter>
+  <parameter name="SQLDB Connection String" description="SQLDB Connection String" defaultValue="">
+    <parameterEntry kind="TextFile" scope="appsettings.json" match="__sqlDbConnectionString__" />
+  </parameter>
+  <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey" defaultValue="">
+    <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsInstrumentationKey__" />
+  </parameter>
+</parameters>
