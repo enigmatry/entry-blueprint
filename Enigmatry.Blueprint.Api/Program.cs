@@ -53,6 +53,7 @@ namespace Enigmatry.Blueprint.Api
             // a strongly-typed ContainerBuilder
             return WebHost.CreateDefaultBuilder(args)
                 .UseKestrel((context, options) => { options.AddServerHeader = false; })
+                .UseApplicationInsights()
                 .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>()
                 .UseSerilog();
