@@ -16,7 +16,7 @@ using Microsoft.Extensions.Configuration;
 namespace Enigmatry.Blueprint.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class UsersController : Controller
     {
         private readonly IMapper _mapper;
