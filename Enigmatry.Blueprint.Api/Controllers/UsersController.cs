@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Models.Identity;
@@ -10,6 +11,7 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Blueprint.Api.Controllers
 {
@@ -21,14 +23,16 @@ namespace Enigmatry.Blueprint.Api.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<User> _userRepository;
         private readonly IMediator _mediator;
+        private readonly IConfiguration _configuration;
 
         public UsersController(IRepository<User> userRepository, IMapper mapper,
-            IUnitOfWork unitOfWork, IMediator mediator)
+            IUnitOfWork unitOfWork, IMediator mediator, IConfiguration configuration)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _mediator = mediator;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -47,12 +51,19 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpPost]
-        // validatrion will be done by the mediatr pipeline so we can skip it
+        // validation will be done by the mediatr pipeline so we can skip it
         public async Task<ActionResult<UserModel>> Post([CustomizeValidator(Skip=true)] UserCreateOrUpdateCommand command)
         {
             User user = await _mediator.Send(command);
             await _unitOfWork.SaveChangesAsync();
             return await Get(user.Id);
+        }
+
+        [HttpGet]
+        [Route("secret")]
+        public string GetSecret()
+        {
+            return _configuration.GetValue<string>("App:SampleKeyVaultSecret");
         }
     }
 }
