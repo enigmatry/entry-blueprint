@@ -40,7 +40,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestGetAll()
         {
-            List<UserModel> users = (await Client.GetAsync<IEnumerable<UserModel>>("api/users")).ToList();
+            List<UserModel> users = (await Client.GetAsync<IEnumerable<UserModel>>("users")).ToList();
 
             users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
@@ -56,7 +56,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         {
             var command = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
             UserModel user =
-                await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("api/users", command);
+                await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("users", command);
 
             user.UserName.Should().Be(command.UserName);
             user.Name.Should().Be(command.Name);
@@ -69,7 +69,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         {
             var command = new UserCreateOrUpdateCommand { Id = _user.Id, Name = name, UserName = userName};
             UserModel user =
-                await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("api/users", command);
+                await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("users", command);
 
             user.UserName.Should().Be("john_doe@john.doe", "username is immutable");
             user.Name.Should().Be(command.Name);
@@ -87,7 +87,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             string validationErrorMessage)
         {
             var userToCreate = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
-            HttpResponseMessage response = await Client.PostAsJsonAsync("api/users", userToCreate);
+            HttpResponseMessage response = await Client.PostAsJsonAsync("users", userToCreate);
 
             response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
         }
