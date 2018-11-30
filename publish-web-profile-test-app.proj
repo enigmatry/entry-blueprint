@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" 
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.App.zip</PackageFile>
-    <SetParametersFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.App.SetParameters.xml</SetParametersFile>
     <IisApplicationName>enigmatry-blueprint-test</IisApplicationName>
-    <WebDeployEndPoint>https://enigmatry-blueprint-test.scm.azurewebsites.net:443/msdeploy.axd</WebDeployEndPoint>
-    <SkipExtraFilesOnServer>false</SkipExtraFilesOnServer>
+    <WebDeployEndPoint>https://enigmatry-blueprint-test.scm.azurewebsites.net/msdeploy.axd</WebDeployEndPoint>
     <GenerateSetParameters>true</GenerateSetParameters>
     <AuthType>Basic</AuthType>
     <CredentialName>enigmatry_blueprint_test</CredentialName>
   </PropertyGroup>
-
   <ItemGroup>
-    <ParameterValue Include="IIS Web Application Name">
-      <Value>$(IisApplicationName)</Value>
-    </ParameterValue>
     <ParameterValue Include="API Uri">
       <Value>/api</Value>
     </ParameterValue>

@@ -1,26 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" 
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.Api.zip</PackageFile>
-    <SetParametersFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.Api.SetParameters.xml</SetParametersFile>
     <IisApplicationName>enigmatry-blueprint-test</IisApplicationName>
-    <IisWebApplicationName>$(IisApplicationName)/api</IisWebApplicationName>
+    <IisWebApplicationName>enigmatry-blueprint-test/api</IisWebApplicationName>
     <WebDeployEndPoint>https://enigmatry-blueprint-test.scm.azurewebsites.net/msdeploy.axd</WebDeployEndPoint>
-    <SkipExtraFilesOnServer>false</SkipExtraFilesOnServer>
     <GenerateSetParameters>true</GenerateSetParameters>
     <AuthType>Basic</AuthType>
     <CredentialName>enigmatry_blueprint_test</CredentialName>
   </PropertyGroup>
   <ItemGroup>
-    <ParameterValue Include="IIS Web Application Name">
-      <Value>$(IisWebApplicationName)</Value>
-    </ParameterValue>
     <ParameterValue Include="SQLDB Connection String">
-      <Value>Server=tcp:enigmatry-test.database.windows.net,1433;Database=enigmatry-blueprint;Uid=$(DbApiUser);Pwd=$(DbApiPass);Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30</Value>
+      <Value>Server=tcp:enigmatry-test.database.windows.net,1433;Database=enigmatry-blueprint-test;Uid=$(DbApiUser);Pwd=$(DbApiPass);Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30</Value>
     </ParameterValue>
-     <ParameterValue Include="ApplicationInsights InstrumentationKey">
-     <Value>94c1328f-5630-40b0-b645-009053260bb4</Value>
+    <ParameterValue Include="ApplicationInsights InstrumentationKey">
+      <Value>c8f0815e-5d8f-460e-9e87-436be3bebd3e</Value>
     </ParameterValue>
   </ItemGroup>
 </Project>
