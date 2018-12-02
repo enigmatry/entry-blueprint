@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
 using AutoMapper;
@@ -22,6 +23,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -163,7 +165,14 @@ namespace Enigmatry.Blueprint.Api
                 .UseLoggerFactory(_loggerFactory)
                 .EnableSensitiveDataLogging(_configuration.SensitiveDataLoggingEnabled());
 
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"));
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"),
+                //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
+                sqlOptions => sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 10,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null))
+                // Throw an exception when you are evaluating a query in-memory instead of in SQL.
+                .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning));
 
             //replace default convention builder with our so we can add custom conventions
             optionsBuilder.ReplaceService<IConventionSetBuilder, CustomSqlServerConventionSetBuilder>();

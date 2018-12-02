@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Models.Identity;
@@ -46,7 +47,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult<UserModel>> Get(Guid id)
         {
-            User user = await _userRepository.QueryAll().ById(id).SingleAsync();
+            User user = await _userRepository.QueryAll().ById(id).SingleOrDefaultAsync();
             return _mapper.MapToActionResult<UserModel>(user);
         }
 
