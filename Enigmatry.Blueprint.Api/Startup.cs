@@ -4,14 +4,15 @@ using Autofac;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Api.Models.Identity;
-using Enigmatry.Blueprint.Api.Models.Validation;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Infrastructure.MediatR;
+using Enigmatry.Blueprint.Infrastructure.Validation;
 using Enigmatry.Blueprint.Model.Identity;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
 using MediatR;
@@ -60,7 +61,7 @@ namespace Enigmatry.Blueprint.Api
                 .AddFluentValidation(fv =>
                 {
                     // disables standard data annotations validation
-                    // https://github.com/JeremySkinner/FluentValidation/wiki/i.-ASP.NET-Core-integration
+                    // https://fluentvalidation.net/aspnet.html#asp-net-core
                     // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; // 
                     fv.ImplicitlyValidateChildProperties = true;
                     fv.RegisterValidatorsFromAssemblyContaining<UserCreateOrUpdateCommandValidator>();
@@ -87,11 +88,7 @@ namespace Enigmatry.Blueprint.Api
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
             services.PostConfigure<ApiBehaviorOptions>(options =>
             {
-                options.InvalidModelStateResponseFactory = actionContext =>
-                {
-                    var model = new ValidationErrorModel(actionContext.ModelState);
-                    return new BadRequestObjectResult(model);
-                };
+                options.InvalidModelStateResponseFactory = context => context.HttpContext.CreateValidationProblemDetailsResponse(context.ModelState);
             });
         }
 
@@ -129,6 +126,10 @@ namespace Enigmatry.Blueprint.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //TODO: Consult with Andries - problem with this approach is that it also changes the message
+            // see UsersControllerFixture InvalidUserName
+            //ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+
             if (_configuration.UseDeveloperExceptionPage())
             {
                 app.UseDeveloperExceptionPage();
@@ -158,8 +159,9 @@ namespace Enigmatry.Blueprint.Api
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
-            //TODO enable logging
-            //optionsBuilder.UseLoggerFactory().EnableSensitiveDataLogging(false);
+            optionsBuilder
+                .UseLoggerFactory(_loggerFactory)
+                .EnableSensitiveDataLogging(_configuration.SensitiveDataLoggingEnabled());
 
             optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"));
 

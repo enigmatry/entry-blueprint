@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using Enigmatry.Blueprint.Api.Models.Validation;
+using Enigmatry.Blueprint.Infrastructure.Validation;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,8 +26,7 @@ namespace Enigmatry.Blueprint.Api.Filters
         {
             if (context.Exception is ValidationException validationException)
             {
-                var model = new ValidationErrorModel(validationException);
-                context.Result = new BadRequestObjectResult(model);
+                context.Result = context.HttpContext.CreateValidationProblemDetailsResponse(validationException);
                 return;
             }
 

@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Enigmatry.Blueprint.Api.Models.Validation;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Enigmatry.Blueprint.Api.Tests.Common
@@ -42,19 +42,25 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
 
         public AndConstraint<HttpResponseAssertions> ContainValidationError(string fieldName, string expectedValidationMessage = "", string because = "", params object[] becauseArgs)
         {
-            var responseContent = Subject.Content.ReadAsStringAsync().Result;
-            ErrorModel error = null;
+            string responseContent = Subject.Content.ReadAsStringAsync().Result;
+            var errorFound = false;
             try
             {
-                ValidationErrorModel json = JsonConvert.DeserializeObject<ValidationErrorModel>(responseContent);
-                error = string.IsNullOrEmpty(expectedValidationMessage) ? json.Errors.FirstOrDefault(e => e.Field == fieldName) : json.Errors.FirstOrDefault(e => e.Field == fieldName && e.ErrorMessage == expectedValidationMessage);
+                var json = JsonConvert.DeserializeObject<ValidationProblemDetails>(responseContent);
+                
+                if (json.Errors.TryGetValue(fieldName, out string[] errorsField))
+                {
+                    errorFound = string.IsNullOrEmpty(expectedValidationMessage)
+                        ? errorsField.Any()
+                        : errorsField.Any(msg => msg == expectedValidationMessage);
+                }
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
             }
             AssertionScope assertion = Execute.Assertion;
-            AssertionScope assertionScope = assertion.ForCondition(error != null).BecauseOf(because, becauseArgs);
+            AssertionScope assertionScope = assertion.ForCondition(errorFound).BecauseOf(because, becauseArgs);
             string message;
             object[] failArgs;
             if (string.IsNullOrEmpty(expectedValidationMessage))
