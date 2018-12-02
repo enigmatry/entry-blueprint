@@ -52,7 +52,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         }
 
         [HttpPost]
-        // validation will be done by the mediatr pipeline so we can skip it
+        // validation will be done by the MediatR pipeline so we can skip it
         public async Task<ActionResult<UserModel>> Post([CustomizeValidator(Skip=true)] UserCreateOrUpdateCommand command)
         {
             User user = await _mediator.Send(command);

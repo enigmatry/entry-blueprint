@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using Enigmatry.Blueprint.Infrastructure.Validation;
@@ -26,9 +27,12 @@ namespace Enigmatry.Blueprint.Api.Filters
         {
             if (context.Exception is ValidationException validationException)
             {
+                _logger.LogDebug(context.Exception, "Validation exception");
                 context.Result = context.HttpContext.CreateValidationProblemDetailsResponse(validationException);
                 return;
             }
+
+            _logger.LogError(context.Exception, "Unexpected error");
 
             IList<MediaTypeHeaderValue> accept = context.HttpContext.Request.GetTypedHeaders().Accept;
             if (accept != null && accept.All(header => header.MediaType != "application/json"))
@@ -36,21 +40,29 @@ namespace Enigmatry.Blueprint.Api.Filters
                 return;
             }
 
-            _logger.LogError(context.Exception, "Unexpected error");
-            var jsonResult = new JsonResult(GetError(context))
+            var jsonResult = new JsonResult(GetProblemDetails(context))
             {
-                StatusCode = (int) HttpStatusCode.InternalServerError
+                StatusCode = (int) HttpStatusCode.InternalServerError,
+                ContentType = "application/problem+json"
             };
             context.Result = jsonResult;
         }
 
-        private object GetError(ExceptionContext context)
+        private ProblemDetails GetProblemDetails(ExceptionContext context)
         {
-            return new
+            string errorDetail = context.HttpContext.Request.IsTrusted(_useDeveloperExceptionPage)
+                ? context.Exception.Demystify().ToString()
+                : "The instance value should be used to identify the problem when calling customer support";
+
+            var problemDetails = new ProblemDetails
             {
-                message = _useDeveloperExceptionPage ? context.Exception.Message : "Unexpected error",
-                stackTrace = _useDeveloperExceptionPage ? context.Exception.StackTrace : string.Empty
+                Title = "An unexpected error occurred!",
+                Instance = context.HttpContext.Request.Path,
+                Status = StatusCodes.Status500InternalServerError,
+                Detail = errorDetail
             };
+
+            return problemDetails;
         }
     }
 }
