@@ -2,7 +2,7 @@
 using Enigmatry.Blueprint.Core.Settings;
 using Microsoft.Extensions.Configuration;
 
-namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
+namespace Enigmatry.Blueprint.Infrastructure
 {
     public static class ConfigurationExtensions
     {
