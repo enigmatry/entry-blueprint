@@ -37,6 +37,7 @@ namespace Enigmatry.Blueprint.Api.Filters
             IList<MediaTypeHeaderValue> accept = context.HttpContext.Request.GetTypedHeaders().Accept;
             if (accept != null && accept.All(header => header.MediaType != "application/json"))
             {
+                // server does not accept Json, leaving to default MVC error page handler.
                 return;
             }
 
