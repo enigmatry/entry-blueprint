@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
 	<!-- SonarQube needs this -->
 	  <ProjectGuid>{e02001e1-d55a-458d-a57a-79ccae697936}</ProjectGuid>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.4" />    
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />    
   </ItemGroup>
 
   <ItemGroup>

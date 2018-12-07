@@ -15,7 +15,7 @@ namespace Enigmatry.Blueprint.Model.Identity
         {
             _userRepository = userRepository;
             RuleFor(x => x.UserName).NotEmpty().MaximumLength(50).EmailAddress();
-            RuleFor(x => x.UserName).Must(UniqueUsername).WithMessage("unique");
+            RuleFor(x => x.UserName).Must(UniqueUsername).WithMessage("Username already taken");
             RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
         }
 

@@ -30,7 +30,5 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
 
             return null;
         }
-
-        
     }
 }

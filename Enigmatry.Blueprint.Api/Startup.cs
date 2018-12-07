@@ -28,6 +28,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Enigmatry.Blueprint.Api
 {
@@ -130,7 +131,7 @@ namespace Enigmatry.Blueprint.Api
         {
             //TODO: Consult with Andries - problem with this approach is that it also changes the message
             // see UsersControllerFixture InvalidUserName
-            //ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+            // ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
 
             if (_configuration.UseDeveloperExceptionPage())
             {
