@@ -5,7 +5,6 @@
     <IisApplicationName>enigmatry-blueprint-test</IisApplicationName>
     <IisWebApplicationName>enigmatry-blueprint-test/api</IisWebApplicationName>
     <WebDeployEndPoint>https://enigmatry-blueprint-test.scm.azurewebsites.net/msdeploy.axd</WebDeployEndPoint>
-    <GenerateSetParameters>true</GenerateSetParameters>
     <AuthType>Basic</AuthType>
     <CredentialName>enigmatry_blueprint_test</CredentialName>
   </PropertyGroup>

@@ -4,7 +4,6 @@
     <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.App.zip</PackageFile>
     <IisApplicationName>enigmatry-blueprint-test</IisApplicationName>
     <WebDeployEndPoint>https://enigmatry-blueprint-test.scm.azurewebsites.net/msdeploy.axd</WebDeployEndPoint>
-    <GenerateSetParameters>true</GenerateSetParameters>
     <AuthType>Basic</AuthType>
     <CredentialName>enigmatry_blueprint_test</CredentialName>
   </PropertyGroup>
