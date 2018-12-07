@@ -53,12 +53,5 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-
-
-  <Target Name="OverwriteParametersXml" AfterTargets="_CreateParameterFiles">
-    <Copy SourceFiles="parameters.xml" DestinationFiles="$(_MSDeployParametersFilePath)" />
-    <XmlPoke XmlInputPath="$(_MSDeployParametersFilePath)" Query="//parameterEntry[@kind='ProviderPath']/@match" Value="^$([System.Text.RegularExpressions.Regex]::Escape($(PublishIntermediateOutputPath)))$">
-    </XmlPoke>
-  </Target>
   
 </Project>
