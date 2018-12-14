@@ -50,6 +50,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             model.UpdatedOn.Should().Be(_updatedOn);
         }
 
+        [Test]
         [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
         public async Task TestCreate(string name, string userName)
         {
@@ -63,6 +64,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
+        [Test]
         [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
         public async Task TestUpdate(string name, string userName)
         {
@@ -76,6 +78,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
+        [Test]
         [TestCase("some user", "invalid email", "userName", "'Username' is not a valid email address.", TestName =
             "Invalid username")]
         [TestCase("", "someuser@test.com", "name", "'Name' must not be empty.", TestName = "Missing name")]
