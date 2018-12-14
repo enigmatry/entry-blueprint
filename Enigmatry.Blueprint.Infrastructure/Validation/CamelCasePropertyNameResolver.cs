@@ -12,7 +12,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
     {
         public static string ResolvePropertyName(Type type, MemberInfo memberInfo, LambdaExpression expression)
         {
-            return DefaultPropertyNameResolver(type, memberInfo, expression).ToCamelCase();
+            string propertyName = DefaultPropertyNameResolver(type, memberInfo, expression);
+
+            return propertyName.ToCamelCase();
         }
 
         private static string DefaultPropertyNameResolver(Type type, MemberInfo memberInfo, LambdaExpression expression)
@@ -23,12 +25,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
                 if (chain.Count > 0) return chain.ToString();
             }
 
-            if (memberInfo != null)
-            {
-                return memberInfo.Name;
-            }
-
-            return null;
+            return memberInfo != null ? memberInfo.Name : null;
         }
     }
 }

@@ -16,6 +16,7 @@ using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Infrastructure.MediatR;
 using Enigmatry.Blueprint.Infrastructure.Validation;
 using Enigmatry.Blueprint.Model.Identity;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
 using MediatR;
@@ -64,12 +65,12 @@ namespace Enigmatry.Blueprint.Api
         {
             return services
                 .AddMvc(options => options.DefaultConfigure(configuration, loggerFactory))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv =>
                 {
                     // disables standard data annotations validation
                     // https://fluentvalidation.net/aspnet.html#asp-net-core
-                    // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; // 
+                    fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; 
                     fv.ImplicitlyValidateChildProperties = true;
                     fv.RegisterValidatorsFromAssemblyContaining<UserCreateOrUpdateCommandValidator>();
                 });
@@ -82,7 +83,7 @@ namespace Enigmatry.Blueprint.Api
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
             
-            // add Mediatr
+            // add MediatR
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>)); 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>)); 
             services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>)); 
@@ -171,9 +172,7 @@ namespace Enigmatry.Blueprint.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //TODO: Consult with Andries - problem with this approach is that it also changes the message
-            // see UsersControllerFixture InvalidUserName
-            // ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
 
             if (_configuration.UseDeveloperExceptionPage())
             {

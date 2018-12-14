@@ -51,7 +51,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
         {
             foreach (ValidationFailure validationExceptionError in validationExceptionErrors)
             {
-                string key = validationExceptionError.PropertyName.ToCamelCase();
+                string key = validationExceptionError.PropertyName;
                 if (!problemDetails.Errors.TryGetValue(key, out string[] messages))
                 {
                     messages = new string[] { };
