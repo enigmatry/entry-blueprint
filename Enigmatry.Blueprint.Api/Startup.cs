@@ -144,16 +144,11 @@ namespace Enigmatry.Blueprint.Api
         // here will override registrations made in ConfigureServices.
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            ConfigureContainerInternal(builder, CreateDbContextOptions());
-        }
-
-        internal void ConfigureContainerInternal(ContainerBuilder builder, DbContextOptions options)
-        {
             builder.RegisterModule<ConfigurationModule>();
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
             builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
-            builder.RegisterModule(new EntityFrameworkModule {DbContextOptions = options});
+            builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule<IdentityModule>();
             builder.RegisterModule(new EventBusModule
             {
@@ -203,29 +198,6 @@ namespace Enigmatry.Blueprint.Api
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); });
 
             app.UseMvc();
-        }
-
-        private DbContextOptions CreateDbContextOptions()
-        {
-            var optionsBuilder = new DbContextOptionsBuilder();
-
-            optionsBuilder
-                .UseLoggerFactory(_loggerFactory)
-                .EnableSensitiveDataLogging(_configuration.SensitiveDataLoggingEnabled());
-
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("BlueprintContext"),
-                //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
-                sqlOptions => sqlOptions.EnableRetryOnFailure(
-                    maxRetryCount: 10,
-                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null))
-                // Throw an exception when you are evaluating a query in-memory instead of in SQL.
-                .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning));
-
-            //replace default convention builder with our so we can add custom conventions
-            optionsBuilder.ReplaceService<IConventionSetBuilder, CustomSqlServerConventionSetBuilder>();
-
-            return optionsBuilder.Options;
         }
     }
 }

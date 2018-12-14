@@ -2,14 +2,21 @@
 using System.Linq;
 using Autofac;
 using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.Core.Settings;
+using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 {
     public class EntityFrameworkModule : Module
     {
-        public DbContextOptions DbContextOptions { get; set; }
+        public bool RegisterMigrationsAssembly { private get; set; }
 
         protected override void Load(ContainerBuilder builder)
         {
@@ -32,7 +39,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                         type.Name.EndsWith("Repository")
                 ).AsImplementedInterfaces().InstancePerLifetimeScope();
 
-            builder.Register(c => DbContextOptions).As<DbContextOptions>().InstancePerLifetimeScope();
+            builder.Register(CreateDbContextOptions).As<DbContextOptions>().SingleInstance();
             // needs to be registered both as self and as DbContext or the tests might not work as expected
             builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<DbContextUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
@@ -46,6 +53,46 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                         (interfaceType.IsGenericTypeDefinition && t.IsGenericType
                             ? t.GetGenericTypeDefinition()
                             : t) == interfaceType);
+        }
+
+        private DbContextOptions CreateDbContextOptions(IComponentContext container)
+        {
+            var loggerFactory = container.Resolve<ILoggerFactory>();
+            var configuration = container.Resolve<IConfiguration>();
+            var dbContextSettings = container.Resolve<DbContextSettings>();
+
+            var optionsBuilder = new DbContextOptionsBuilder();
+
+            optionsBuilder
+                .UseLoggerFactory(loggerFactory)
+                .EnableSensitiveDataLogging(configuration.SensitiveDataLoggingEnabled());
+
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext"),
+                    sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings))
+                // Throw an exception when you are evaluating a query in-memory instead of in SQL.
+                .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning));
+
+            //replace default convention builder with our so we can add custom conventions
+            optionsBuilder.ReplaceService<IConventionSetBuilder, CustomSqlServerConventionSetBuilder>();
+
+            return optionsBuilder.Options;
+        }
+
+        private SqlServerDbContextOptionsBuilder SetupSqlOptions(SqlServerDbContextOptionsBuilder sqlOptions,
+            DbContextSettings dbContextSettings)
+        {
+            //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
+            sqlOptions = sqlOptions.EnableRetryOnFailure(
+                dbContextSettings.ConnectionResiliencyMaxRetryCount,
+                dbContextSettings.ConnectionResiliencyMaxRetryDelay,
+                null);
+
+            if (RegisterMigrationsAssembly)
+            {
+                sqlOptions = sqlOptions.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations");
+            }
+
+            return sqlOptions;
         }
     }
 }

@@ -8,12 +8,17 @@ namespace Enigmatry.Blueprint.Infrastructure
     {
         public static AppSettings ReadAppSettings(this IConfiguration configuration)
         {
-            var appSettings = configuration.GetSection("App").Get<AppSettings>();
-            if (appSettings == null)
+            return configuration.ReadSettingsSection<AppSettings>("App");
+        }
+
+        public static T ReadSettingsSection<T>(this IConfiguration configuration, string sectionName)
+        {
+            var sectionSettings = configuration.GetSection(sectionName).Get<T>();
+            if (sectionSettings == null)
             {
-                throw new InvalidOperationException("App section is missing from configuration.");
+                throw new InvalidOperationException($"Section is missing from configuration. Section Name: {sectionName}");
             }
-            return appSettings;
+            return sectionSettings;
         }
     }
 }

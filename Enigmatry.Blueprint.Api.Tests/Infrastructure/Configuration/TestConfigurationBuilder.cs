@@ -25,6 +25,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
             var dict = new Dictionary<string, string>
             {
                 {"UseDeveloperExceptionPage", "true"},
+                {"DbContext:SensitiveDataLoggingEnabled", "true"},
+                {"DbContext:ConnectionResiliencyMaxRetryCount", "10"},
+                {"DbContext:ConnectionResiliencyMaxRetryDelay", "0.00:00:30"},
                 {
                     $"ConnectionStrings:{_dbContextName}",
                     ReadConnectionString()

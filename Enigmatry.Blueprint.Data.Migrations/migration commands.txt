@@ -1,4 +1,7 @@
-﻿// add migration
+﻿Run this from command line NOT the Package Manager Console. 
+Install Visual Studio Extension: "Open command line"
+
+// add migration
 set MigrateDatabaseConnectionString=Server=.;Database=Blueprint-Core;Trusted_Connection=True;MultipleActiveResultSets=true
 dotnet ef migrations add TODO -p Enigmatry.Blueprint.Data.Migrations -s Enigmatry.Blueprint.Data.Migrations -c BlueprintContext 
 
