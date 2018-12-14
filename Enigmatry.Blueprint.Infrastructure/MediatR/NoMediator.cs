@@ -6,6 +6,11 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
 {
     public class NoMediator : IMediator
     {
+        public Task Publish(object notification, CancellationToken cancellationToken = new CancellationToken())
+        {
+            return Task.CompletedTask;
+        }
+
         public Task Publish<TNotification>(TNotification notification,
             CancellationToken cancellationToken = default(CancellationToken)) where TNotification : INotification
         {
@@ -16,11 +21,6 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
             CancellationToken cancellationToken = default(CancellationToken))
         {
             return Task.FromResult(default(TResponse));
-        }
-
-        public Task Send(IRequest request, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return Task.CompletedTask;
         }
     }
 }
