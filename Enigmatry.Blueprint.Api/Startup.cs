@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
@@ -13,7 +16,6 @@ using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Infrastructure.MediatR;
 using Enigmatry.Blueprint.Infrastructure.Validation;
 using Enigmatry.Blueprint.Model.Identity;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
 using MediatR;
@@ -28,7 +30,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Enigmatry.Blueprint.Api
 {
@@ -93,6 +97,44 @@ namespace Enigmatry.Blueprint.Api
             {
                 options.InvalidModelStateResponseFactory = context => context.HttpContext.CreateValidationProblemDetailsResponse(context.ModelState);
             });
+
+            services.AddSwaggerGen(SetupSwaggerAction);
+        }
+
+        private static void SetupSwaggerAction(SwaggerGenOptions c)
+        {
+            c.SwaggerDoc("v1", new Info
+            {
+                Title = "XPOSI Api",
+                Version = "v1",
+                Description = "XPOSI Api",
+                Contact = new Contact
+                {
+                    Name = "Andries van Waas",
+                    Email = "a.vanwaas@enigmatry.com",
+                    Url = "https://www.enigmatry.com"
+                }
+            });
+
+            // TODO: uncomment after authentication scheme is setup
+            //c.OperationFilter<AuthResponsesOperationFilter>();
+
+            // Set the comments path for the Swagger JSON and UI.
+            string path = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath,
+                Assembly.GetExecutingAssembly().GetName().Name + ".xml");
+            c.IncludeXmlComments(path);
+
+            c.AddSecurityDefinition("oauth2", new OAuth2Scheme
+            {
+                Type = "oauth2",
+                Description = "This API uses OAuth 2 with the client credentials flow.",
+                Flow = "application",
+                TokenUrl = "/connect/token",
+                Scopes = new Dictionary<string, string> {{"read", "Access read operations"}}
+            });
+
+            // Scan FluentValidations Rules to generate the Swagger documentation
+            c.AddFluentValidationRules();
         }
 
         [UsedImplicitly]
@@ -154,6 +196,12 @@ namespace Enigmatry.Blueprint.Api
             app.UseMiddleware<LogContextMiddleware>();
 
             app.UseHsts();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); });
 
             app.UseMvc();
         }
