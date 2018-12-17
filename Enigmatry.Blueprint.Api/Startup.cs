@@ -106,13 +106,13 @@ namespace Enigmatry.Blueprint.Api
         {
             c.SwaggerDoc("v1", new Info
             {
-                Title = "XPOSI Api",
+                Title = "Blueprint Api",
                 Version = "v1",
-                Description = "XPOSI Api",
+                Description = "Blueprint Api",
                 Contact = new Contact
                 {
-                    Name = "Andries van Waas",
-                    Email = "a.vanwaas@enigmatry.com",
+                    Name = "TBD",
+                    Email = "tbd@tbd.com",
                     Url = "https://www.enigmatry.com"
                 }
             });
@@ -124,15 +124,6 @@ namespace Enigmatry.Blueprint.Api
             string path = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath,
                 Assembly.GetExecutingAssembly().GetName().Name + ".xml");
             c.IncludeXmlComments(path);
-
-            c.AddSecurityDefinition("oauth2", new OAuth2Scheme
-            {
-                Type = "oauth2",
-                Description = "This API uses OAuth 2 with the client credentials flow.",
-                Flow = "application",
-                TokenUrl = "/connect/token",
-                Scopes = new Dictionary<string, string> {{"read", "Access read operations"}}
-            });
 
             // Scan FluentValidations Rules to generate the Swagger documentation
             c.AddFluentValidationRules();

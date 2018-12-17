@@ -39,10 +39,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         ///     Gets listing of all available users
         /// </summary>
         /// <returns>List of users</returns>
-        /// <response code="200">Returns found users
-        /// </response>
         [HttpGet]
-        [ProducesResponseType(200)]
         public async Task<IEnumerable<UserModel>> Get()
         {
             List<User> users = await _userRepository.QueryAll().ToListAsync();
@@ -53,12 +50,8 @@ namespace Enigmatry.Blueprint.Api.Controllers
         ///     Get user for given id
         /// </summary>
         /// <param name="id">User Id</param>
-        /// <response code="200">Returns the user</response>
-        /// <response code="400">If the user is not found</response>     
         [HttpGet]
         [Route("{id}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
         public async Task<ActionResult<UserModel>> Get(Guid id)
         {
             User user = await GetById(id);
@@ -69,13 +62,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
         ///  Creates or updates
         /// </summary>
         /// <param name="command">User data</param>
-        /// <response code="200">Returns the user</response>
-        /// <response code="201">Returns created user</response>
-        /// <response code="400">If the user is not found</response>     
         [HttpPost]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(201)]
-        [ProducesResponseType(400)]
         // validation will be done by the MediatR pipeline so we can skip it
         public async Task<ActionResult<UserModel>> Post(UserCreateOrUpdateCommand command)
         {
@@ -93,7 +80,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
 
         [HttpGet]
         [Route("file")]
-        [ProducesResponseType(200)]
+        [Produces("application/txt")]
         public FileContentResult GetFile()
         {
             byte[] fileBytes = CreateInMemoryFile();
