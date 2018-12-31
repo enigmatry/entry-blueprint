@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.GitHubApi;
@@ -11,8 +12,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using UserModel = Enigmatry.Blueprint.Api.Models.Identity.UserModel;
-using Microsoft.AspNetCore.Http;
+using Refit;
 using User = Enigmatry.Blueprint.Model.Identity.User;
 
 namespace Enigmatry.Blueprint.Api.Controllers
@@ -28,10 +30,12 @@ namespace Enigmatry.Blueprint.Api.Controllers
         private readonly IMediator _mediator;
         private readonly IConfiguration _configuration;
         private readonly IGitHubClient _gitHubClient;
+        private ILogger<UsersController> _log;
 
         public UsersController(IRepository<User> userRepository, IMapper mapper,
             IUnitOfWork unitOfWork, IMediator mediator, 
-            IConfiguration configuration, IGitHubClient gitHubClient)
+            IConfiguration configuration, IGitHubClient gitHubClient, 
+            ILogger<UsersController> log)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -39,6 +43,7 @@ namespace Enigmatry.Blueprint.Api.Controllers
             _mediator = mediator;
             _configuration = configuration;
             _gitHubClient = gitHubClient;
+            _log = log;
         }
 
         /// <summary>
@@ -67,7 +72,18 @@ namespace Enigmatry.Blueprint.Api.Controllers
             }
 
             var model = _mapper.Map<UserModel>(user);
-            model.GitHubUser = await _gitHubClient.GetUser(user.Name);
+            try
+            {
+                model.GitHubUser = await _gitHubClient.GetUser(user.Name);
+            }
+            catch (ApiException exception)
+            {
+                if (exception.StatusCode != HttpStatusCode.NotFound)
+                {
+                    _log.LogInformation("User {Name} was not found on GitHub.", user.Name);
+                }
+            }
+
             return model;
         }
 
