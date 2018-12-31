@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
 using AutoMapper;
+using Enigmatry.Blueprint.Api.GitHubApi;
 using Enigmatry.Blueprint.Api.Logging;
-using Enigmatry.Blueprint.Api.Models.Identity;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
+using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
-using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Infrastructure.MediatR;
 using Enigmatry.Blueprint.Infrastructure.Validation;
@@ -25,21 +25,25 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Polly;
+using Polly.Registry;
+using Polly.Timeout;
+using Refit;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using UserModel = Enigmatry.Blueprint.Api.Models.Identity.UserModel;
 
 namespace Enigmatry.Blueprint.Api
 {
     [UsedImplicitly]
     public class Startup
     {
+        private const string GlobalTimeoutPolicyName = "global-timeout";
+
         private readonly IConfiguration _configuration;
         private readonly ILoggerFactory _loggerFactory;
 
@@ -56,7 +60,7 @@ namespace Enigmatry.Blueprint.Api
         public void ConfigureServices(IServiceCollection services)
         {
             AddMvc(services, _configuration, _loggerFactory);
-            ConfigureServicesExceptMvc(services);
+            ConfigureServicesExceptMvc(services, _configuration);
         }
 
         // IMvcBuilder needed for tests
@@ -70,36 +74,81 @@ namespace Enigmatry.Blueprint.Api
                 {
                     // disables standard data annotations validation
                     // https://fluentvalidation.net/aspnet.html#asp-net-core
-                    fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; 
+                    fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                     fv.ImplicitlyValidateChildProperties = true;
                     fv.RegisterValidatorsFromAssemblyContaining<UserCreateOrUpdateCommandValidator>();
                 });
         }
 
-        internal static void ConfigureServicesExceptMvc(IServiceCollection services)
+        // this also called by tests. Mvc is configured slightly differently in integration tests
+        internal static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
         {
+            ConfigurePolly(services);
+
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
-            
-            // add MediatR
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>)); 
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>)); 
-            services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>)); 
-            services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(SamplePostRequestBehavior<,>)); 
-            services.AddMediatR(
-                typeof(UserModel).Assembly, // this assembly
-                typeof(UserCreatedDomainEvent).Assembly, // domain assembly
-                typeof(UserCreatedDomainEventHandler).Assembly);
+
+            ConfigureConfiguration(services, configuration);
+            ConfigureMediatR(services);
+            ConfigureTypedClients(services, configuration);
 
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
             services.PostConfigure<ApiBehaviorOptions>(options =>
             {
-                options.InvalidModelStateResponseFactory = context => context.HttpContext.CreateValidationProblemDetailsResponse(context.ModelState);
+                options.InvalidModelStateResponseFactory = context =>
+                    context.HttpContext.CreateValidationProblemDetailsResponse(context.ModelState);
             });
 
             services.AddSwaggerGen(SetupSwaggerAction);
+        }
+
+        private static void ConfigurePolly(IServiceCollection services)
+        {
+            // Add registry
+            IPolicyRegistry<string> policyRegistry = services.AddPolicyRegistry();
+
+            // Centrally stored policies
+            TimeoutPolicy<HttpResponseMessage> timeoutPolicy =
+                Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500));
+            policyRegistry.Add(GlobalTimeoutPolicyName, timeoutPolicy);
+        }
+
+        private static void ConfigureConfiguration(IServiceCollection services, IConfiguration configuration)
+        {
+            // Options for particular external services
+            services.Configure<GitHubApiSettings>(configuration.GetSection("App:GitHubApi"));
+        }
+
+        private static void ConfigureMediatR(IServiceCollection services)
+        {
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>));
+            services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(SamplePostRequestBehavior<,>));
+            services.AddMediatR(
+                typeof(UserModel).Assembly, // this assembly
+                typeof(UserCreatedDomainEvent).Assembly, // domain assembly
+                typeof(UserCreatedDomainEventHandler).Assembly);
+        }
+
+        private static void ConfigureTypedClients(IServiceCollection services, IConfiguration configuration)
+        {
+            string baseUrl = configuration.ReadAppSettings().GitHubApi.BaseUrl;
+            services.AddHttpClient("GitHub", options =>
+                {
+                    options.BaseAddress = new Uri(baseUrl);
+                    options.Timeout = TimeSpan.FromMilliseconds(15000);
+                    options.DefaultRequestHeaders.Add("User-Agent", "request");// needed to call GitHub API
+                })
+                // these are some examples of policies, not all are needed (e.g. both timeout policies)
+                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500)))
+                .AddPolicyHandlerFromRegistry(GlobalTimeoutPolicyName)
+                // Handle 5xx status code and any responses with a 408 (Request Timeout) status code,
+                // see: https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory#using-addtransienthttperrorpolicy
+                .AddTransientHttpErrorPolicy(p => p.RetryAsync(3))
+                .AddTypedClient(RestService.For<IGitHubClient>);
         }
 
         private static void SetupSwaggerAction(SwaggerGenOptions c)
@@ -138,7 +187,8 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule<ConfigurationModule>();
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
-            builder.RegisterModule(new ServiceModule {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
+            builder.RegisterModule(new ServiceModule
+                {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
             builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule<IdentityModule>();
             builder.RegisterModule(new EventBusModule

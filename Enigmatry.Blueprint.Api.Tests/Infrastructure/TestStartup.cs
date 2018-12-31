@@ -31,9 +31,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            Startup.ConfigureServicesExceptMvc(services);
             Startup.AddMvc(services, _configuration, _loggerFactory)
                 .AddApplicationPart(typeof(Startup).Assembly);
+            Startup.ConfigureServicesExceptMvc(services, _configuration);
         }
 
         [UsedImplicitly]

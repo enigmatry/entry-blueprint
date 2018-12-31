@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
-using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Api.GitHubApi;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
@@ -11,6 +11,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using UserModel = Enigmatry.Blueprint.Api.Models.Identity.UserModel;
+using Microsoft.AspNetCore.Http;
+using User = Enigmatry.Blueprint.Model.Identity.User;
 
 namespace Enigmatry.Blueprint.Api.Controllers
 {
@@ -24,15 +27,18 @@ namespace Enigmatry.Blueprint.Api.Controllers
         private readonly IRepository<User> _userRepository;
         private readonly IMediator _mediator;
         private readonly IConfiguration _configuration;
+        private readonly IGitHubClient _gitHubClient;
 
         public UsersController(IRepository<User> userRepository, IMapper mapper,
-            IUnitOfWork unitOfWork, IMediator mediator, IConfiguration configuration)
+            IUnitOfWork unitOfWork, IMediator mediator, 
+            IConfiguration configuration, IGitHubClient gitHubClient)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _mediator = mediator;
             _configuration = configuration;
+            _gitHubClient = gitHubClient;
         }
 
         /// <summary>
@@ -55,7 +61,14 @@ namespace Enigmatry.Blueprint.Api.Controllers
         public async Task<ActionResult<UserModel>> Get(Guid id)
         {
             User user = await GetById(id);
-            return _mapper.MapToActionResult<UserModel>(user);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var model = _mapper.Map<UserModel>(user);
+            model.GitHubUser = await _gitHubClient.GetUser(user.Name);
+            return model;
         }
 
         /// <summary>
