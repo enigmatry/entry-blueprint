@@ -33,7 +33,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                     ReadConnectionString()
                 },
                 {"App:ServiceBus:AzureServiceBusEnabled", "false"},
-                {"App:GitHubApi:BaseUrl", "https://api.github.com"}
+                {"App:GitHubApi:BaseUrl", "https://api.github.com"},
+                {"App:GitHubApi:Timeout", "0.00:00:15"}
             };
 
             configurationBuilder.AddInMemoryCollection(dict);

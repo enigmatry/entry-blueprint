@@ -135,15 +135,15 @@ namespace Enigmatry.Blueprint.Api
 
         private static void ConfigureTypedClients(IServiceCollection services, IConfiguration configuration)
         {
-            string baseUrl = configuration.ReadAppSettings().GitHubApi.BaseUrl;
+            GitHubApiSettings gitHubApiSettings = configuration.ReadAppSettings().GitHubApi;
             services.AddHttpClient("GitHub", options =>
                 {
-                    options.BaseAddress = new Uri(baseUrl);
-                    options.Timeout = TimeSpan.FromMilliseconds(15000);
-                    options.DefaultRequestHeaders.Add("User-Agent", "request");// needed to call GitHub API
+                    options.BaseAddress = new Uri(gitHubApiSettings.BaseUrl);
+                    options.Timeout = gitHubApiSettings.Timeout;
+                    options.DefaultRequestHeaders.Add("User-Agent", "request"); // needed to call GitHub API
                 })
                 // these are some examples of policies, not all are needed (e.g. both timeout policies)
-                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500)))
+                .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(gitHubApiSettings.Timeout))
                 .AddPolicyHandlerFromRegistry(GlobalTimeoutPolicyName)
                 // Handle 5xx status code and any responses with a 408 (Request Timeout) status code,
                 // see: https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory#using-addtransienthttperrorpolicy

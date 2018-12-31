@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.Core.Settings
 {
@@ -6,5 +7,6 @@ namespace Enigmatry.Blueprint.Core.Settings
     public class GitHubApiSettings
     {
         public string BaseUrl { get; set; }
+        public TimeSpan Timeout { get; set; }
     }
 }
