@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Mime;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
 using AutoMapper;
+using BeatPulse;
 using Enigmatry.Blueprint.Api.GitHubApi;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
@@ -22,13 +25,16 @@ using JetBrains.Annotations;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json;
 using Polly;
 using Polly.Registry;
 using Polly.Timeout;
@@ -53,6 +59,62 @@ namespace Enigmatry.Blueprint.Api
         {
             _configuration = configuration;
             _loggerFactory = loggerFactory;
+        }
+
+        [UsedImplicitly]
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+
+            if (_configuration.UseDeveloperExceptionPage())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            if (env.IsDevelopment())
+            {
+                app.UseCors(builder => builder
+                    .WithOrigins("http://localhost:4200")
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            }
+            else
+            {
+                app.UseHttpsRedirection();
+            }
+
+            app.UseMiddleware<LogContextMiddleware>();
+
+            app.UseHsts();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); });
+
+            app.UseMvc();
+
+            // Enable healthchecks on the configured endpoint.
+            app.UseHealthChecks("/healthcheck",
+               new HealthCheckOptions
+               {
+                   // Specify a custom ResponseWriter, so we can return json with additional information,
+                   // Otherwise it will just return plain text with the status.
+                   ResponseWriter = async (context, report) =>
+                   {
+                       var result = JsonConvert.SerializeObject(
+                           new
+                           {
+                               status = report.Status.ToString(),
+                               errors = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
+                           });
+                       context.Response.ContentType = MediaTypeNames.Application.Json;
+                       await context.Response.WriteAsync(result);
+                   }
+               });
         }
 
         [UsedImplicitly]
@@ -90,6 +152,8 @@ namespace Enigmatry.Blueprint.Api
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper();
 
+            ConfigureHealthChecks(services, configuration);
+
             ConfigureConfiguration(services, configuration);
             ConfigureMediatR(services);
             ConfigureTypedClients(services, configuration);
@@ -102,6 +166,21 @@ namespace Enigmatry.Blueprint.Api
             });
 
             services.AddSwaggerGen(SetupSwaggerAction);
+        }
+
+        private static void ConfigureHealthChecks(IServiceCollection services, IConfiguration configuration)
+        {
+            // Here we can configure the different healthchecks:
+            services.AddHealthChecks()
+                // Check the sql server cnnection
+                .AddSqlServer(configuration["ConnectionStrings:BlueprintContext"], "SELECT 1")
+                // Check the EF Core Context
+                .AddDbContextCheck<BlueprintContext>()
+                // Check a Custom url
+                //.AddUrlGroup(new Uri("https://api.myapplication.com/v1/something.json"), "Test API", HealthStatus.Degraded);
+                // We can also push the results to Application Insights.
+                .AddApplicationInsightsPublisher(configuration["ApplicationInsights:InstrumentationKey"]);
+                
         }
 
         private static void ConfigurePolly(IServiceCollection services)
@@ -188,7 +267,7 @@ namespace Enigmatry.Blueprint.Api
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
             builder.RegisterModule(new ServiceModule
-                {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
+            { Assemblies = new[] { typeof(UserService).Assembly, typeof(TimeProvider).Assembly } });
             builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule<IdentityModule>();
             builder.RegisterModule(new EventBusModule
@@ -202,43 +281,6 @@ namespace Enigmatry.Blueprint.Api
             var httpContextAccessor = c.Resolve<IHttpContextAccessor>();
             ClaimsPrincipal user = httpContextAccessor.HttpContext.User;
             return user;
-        }
-
-        [UsedImplicitly]
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
-
-            if (_configuration.UseDeveloperExceptionPage())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            if (env.IsDevelopment())
-            {
-                app.UseCors(builder => builder
-                    .WithOrigins("http://localhost:4200")
-                    .AllowCredentials()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            }
-            else
-            {
-                app.UseHttpsRedirection();
-            }
-
-            app.UseMiddleware<LogContextMiddleware>();
-
-            app.UseHsts();
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); });
-
-            app.UseMvc();
         }
     }
 }
