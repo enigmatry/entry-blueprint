@@ -177,7 +177,9 @@ namespace Enigmatry.Blueprint.Api
                 // Check the EF Core Context
                 .AddDbContextCheck<BlueprintContext>()
                 // Check a Custom url
-                //.AddUrlGroup(new Uri("https://api.myapplication.com/v1/something.json"), "Test API", HealthStatus.Degraded);
+                .AddUrlGroup(new Uri("https://api.myapplication.com/v1/something.json"), "API ping Test", HealthStatus.Degraded)
+                // Check metrics
+                .AddPrivateMemoryHealthCheck(1024*1024*200, "Available memory test", HealthStatus.Degraded)
                 // We can also push the results to Application Insights.
                 .AddApplicationInsightsPublisher(configuration["ApplicationInsights:InstrumentationKey"]);
                 
