@@ -92,7 +92,6 @@ namespace Enigmatry.Blueprint.Api.Controllers
         /// </summary>
         /// <param name="command">User data</param>
         [HttpPost]
-        // validation will be done by the MediatR pipeline so we can skip it
         public async Task<ActionResult<UserModel>> Post(UserCreateOrUpdateCommand command)
         {
             User user = await _mediator.Send(command);

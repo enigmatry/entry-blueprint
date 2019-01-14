@@ -12,6 +12,7 @@ namespace Enigmatry.Blueprint.Api
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
             {
                 new CultureInfo("en-US"),
+                new CultureInfo("nl"),
                 new CultureInfo("nl-NL"),
             };
             app.UseRequestLocalization(new RequestLocalizationOptions

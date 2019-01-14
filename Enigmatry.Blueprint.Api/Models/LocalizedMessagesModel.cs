@@ -1,6 +1,6 @@
 ﻿namespace Enigmatry.Blueprint.Api.Models
 {
-    public class HomeModel
+    public class LocalizedMessagesModel
     {
         public string Message1 { get; set; }
 
