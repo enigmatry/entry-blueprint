@@ -7,10 +7,14 @@
         "api-url": "Api Url",
         "select-title-to-set-on-html-document": "Selecteer een titel om in te stellen op het huidige HTML-document",
         "use-language": "Gebruik taal",
-        "set-to": "Stel in op {{name}}"
+        "set-to": "Stel in op {name}"
     },
     "language": {
-        "english": "Engels",
+        "english": "Engels", 
         "dutch": "Nederlands"
+    },
+    "pluralization": {
+        "things": "Er {count, plural, =0{is} one{is} other{zijn}} {count, plural, =0{} one{} other{verschillende}} {count, plural, =0{niets} one{iets} other{dingen}}",
+        "people": "{gender, select, male{Zijn naam is} female{Haar naam is} other{Hun namen zijn }} {name}"
     }
 }
