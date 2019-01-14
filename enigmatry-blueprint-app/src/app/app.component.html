@@ -48,6 +48,7 @@
   {{ 'home.select-title-to-set-on-html-document' | translate}}:
 </p>
 <ul>
+  <!-- example of using dynamic translation-->
   <li><a class="btn btn-primary" (click)="setTitle('Title 1!')">{{ 'home.set-to' | translate:{'name':'Title 1'} }} </a></li>
   <li><a class="btn btn-primary" (click)="setTitle('Title 2!')">{{ 'home.set-to' | translate:{'name':'Title 2'} }} </a></li>
   <li><a class="btn btn-primary" (click)="setTitle('Title 3!')">{{ 'home.set-to' | translate:{'name':'Title 3'} }} </a></li>
