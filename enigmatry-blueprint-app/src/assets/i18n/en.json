@@ -4,8 +4,10 @@
         "description": "This is a sample Angular app for Enigmatry projects"
     },
     "home": {
-        "url": "Api Url",
-        "use-language": "Use language"
+        "api-url": "Api Url",
+        "select-title-to-set-on-html-document": "Select a title to set on the current HTML document",
+        "use-language": "Use language",
+        "set-to": "Set to {{name}}"
     },
     "language": {
         "english": "English",

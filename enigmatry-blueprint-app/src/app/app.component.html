@@ -5,7 +5,7 @@
   <h2 translate>app.description</h2>
 </div>
 <div>
-  {{ 'home.url' | translate }}: {{ apiUrl }}
+  {{ 'home.api-url' | translate }}: {{ apiUrl }}
 </div>
 <hr />
 <div>
@@ -45,10 +45,10 @@
 
 <hr />
 <p>
-  Select a title to set on the current HTML document:
+  {{ 'home.select-title-to-set-on-html-document' | translate}}:
 </p>
 <ul>
-  <li><a class="btn btn-primary" (click)="setTitle('Title 1!')">Set Title 1</a></li>
-  <li><a class="btn btn-primary" (click)="setTitle('Title 2!')">Set Title 2</a></li>
-  <li><a class="btn btn-primary" (click)="setTitle('Title 3!')">Set Title 3</a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 1!')">{{ 'home.set-to' | translate:{'name':'Title 1'} }} </a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 2!')">{{ 'home.set-to' | translate:{'name':'Title 2'} }} </a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 3!')">{{ 'home.set-to' | translate:{'name':'Title 3'} }} </a></li>
 </ul>
