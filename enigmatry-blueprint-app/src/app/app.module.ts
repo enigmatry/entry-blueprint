@@ -9,6 +9,10 @@ import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-comp
 import { MESSAGE_FORMAT_CONFIG } from 'ngx-translate-messageformat-compiler';
 import { AppComponent } from './app.component';
 
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { nlLocale } from 'ngx-bootstrap/locale';
+defineLocale('nl', nlLocale);
+
 @NgModule({
   declarations: [
     AppComponent,
