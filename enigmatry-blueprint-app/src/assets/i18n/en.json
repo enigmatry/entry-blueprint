@@ -1,0 +1,14 @@
+{
+    "app": {
+        "title": "Enigmatry Blueprint demo",
+        "description": "This is a sample Angular app for Enigmatry projects"
+    },
+    "home": {
+        "url": "Api Url",
+        "use-language": "Use language"
+    },
+    "language": {
+        "english": "English",
+        "dutch": "Dutch"
+    }
+}

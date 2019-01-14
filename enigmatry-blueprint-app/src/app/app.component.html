@@ -1,13 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<!-- For translations see: https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-angular7-app-with-ngx-translate-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+  <h1 translate>app.title</h1>
+  <h2 translate>app.description</h2>
 </div>
 <div>
-  Api url: {{ apiUrl }}
+  {{ 'home.url' | translate }}: {{ apiUrl }}
 </div>
-<h2>Accordion: </h2>
+<hr />
+<div>
+  {{ 'home.use-language' | translate }}:
+  <button (click)="useLanguage('en')" translate>language.english</button>
+  <button (click)="useLanguage('nl')" translate>language.dutch</button>
+</div>
+<hr />
+<h2>Sample of an accordion: </h2>
 <accordion>
   <accordion-group heading="Static Header, initially expanded">
     This content is straight in the template.
@@ -23,6 +30,8 @@
   </accordion-group>
 </accordion>
 
+
+<hr />
 <!-- Datepicker example -->
 <!-- https://valor-software.com/ngx-bootstrap/#/datepicker -->
 <div class="row">
@@ -34,11 +43,12 @@
   </div>
 </div>
 
+<hr />
 <p>
   Select a title to set on the current HTML document:
 </p>
 <ul>
-  <li><a (click)="setTitle('Good morning!')">Good morning</a>.</li>
-  <li><a (click)="setTitle('Good afternoon!')">Good afternoon</a>.</li>
-  <li><a (click)="setTitle('Good evening!')">Good evening</a>.</li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 1!')">Set Title 1</a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 2!')">Set Title 2</a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 3!')">Set Title 3</a></li>
 </ul>
