@@ -17,6 +17,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             LocalizedMessagesModel result = await Client.GetAsync<LocalizedMessagesModel>("localizedmessages");
             result.Message1.Should().Be("Good morning");
             result.Message2.Should().Be("Good evening");
+            result.Message3.Should().Be("Additional Resource Message EN");
         }
 
         [Test]
@@ -25,6 +26,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             LocalizedMessagesModel result = await Client.GetAsync<LocalizedMessagesModel>("localizedmessages?culture=nl-NL");
             result.Message1.Should().Be("Goedemorgen");
             result.Message2.Should().Be("Goedenavond");
+            result.Message3.Should().Be("Additional Resource Message NL");
         }
 
         [Test]

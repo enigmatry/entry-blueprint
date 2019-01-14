@@ -73,10 +73,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Localization.SharedResource.nl-NL.Designer.cs">
+    <Compile Update="Resources\Localization.AdditionalResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Localization.SharedResource.nl-NL.resx</DependentUpon>
+      <DependentUpon>Localization.AdditionalResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Localization.SharedResource.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -88,13 +88,19 @@
   <ItemGroup>
     <EmbeddedResource Update="Resources\Localization.SharedResource.nl-NL.resx">
       <CustomToolNamespace></CustomToolNamespace>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Localization.SharedResource.nl-NL.Designer.cs</LastGenOutput>
+      <Generator></Generator>
+    </EmbeddedResource>
+<EmbeddedResource Update="Resources\Localization.AdditionalResource.nl-NL.resx">
+      <CustomToolNamespace></CustomToolNamespace>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization.SharedResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Localization.SharedResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
+	<EmbeddedResource Update="Resources\Localization.AdditionalResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Localization.AdditionalResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>  </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 ﻿using Enigmatry.Blueprint.Api.Localization;
 using Enigmatry.Blueprint.Api.Models;
-using Enigmatry.Blueprint.Api.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -11,20 +10,23 @@ namespace Enigmatry.Blueprint.Api.Controllers
     [ApiController]
     public class LocalizedMessagesController : Controller
     {
-        private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IStringLocalizer<AdditionalResource> _additionalResourceLocalizer;
+        private readonly IStringLocalizer<SharedResource> _sharedResourceLocalizer;
 
-        public LocalizedMessagesController(IStringLocalizer<SharedResource> localizer)
+        public LocalizedMessagesController(IStringLocalizer<SharedResource> sharedResourceLocalizer, IStringLocalizer<AdditionalResource> additionalResourceLocalizer)
         {
-            _localizer = localizer;
+            _sharedResourceLocalizer = sharedResourceLocalizer;
+            _additionalResourceLocalizer = additionalResourceLocalizer;
         }
 
         [HttpGet]
         public LocalizedMessagesModel Get()
         {
-            LocalizedString message1 = _localizer["GoodMorning"];
-            LocalizedString message2 = _localizer["GoodEvening"];
+            string message1 = _sharedResourceLocalizer["GoodMorning"];
+            string message2 = _sharedResourceLocalizer["GoodEvening"];
+            string message3 = _additionalResourceLocalizer["AdditionalResourceMessage"];
 
-            return new LocalizedMessagesModel {Message1 = message1, Message2 = message2};
+            return new LocalizedMessagesModel {Message1 = message1, Message2 = message2, Message3 = message3};
         }
 
         [HttpPost]
