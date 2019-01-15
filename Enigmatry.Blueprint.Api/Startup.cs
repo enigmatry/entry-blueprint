@@ -9,6 +9,7 @@ using System.Security.Principal;
 using Autofac;
 using AutoMapper;
 using Enigmatry.Blueprint.Api.GitHubApi;
+using Enigmatry.Blueprint.Api.Localization;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Api.Models;
 using Enigmatry.Blueprint.Api.Models.Identity;
@@ -140,7 +141,7 @@ namespace Enigmatry.Blueprint.Api
                 .AddMvc(options => options.DefaultConfigure(configuration, loggerFactory))
                 .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
-                        factory.Create(typeof(Localization_SharedResource));
+                        factory.Create(typeof(SharedResource));
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv =>
@@ -214,6 +215,7 @@ namespace Enigmatry.Blueprint.Api
         private static void ConfigureLocalization(IServiceCollection services, IConfiguration configuration,
             IHostingEnvironment environment)
         {
+            // https://joonasw.net/view/aspnet-core-localization-deep-dive
             services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 
             // LocalizationSettings localizationSettings = configuration.ReadAppSettings().Localization;
