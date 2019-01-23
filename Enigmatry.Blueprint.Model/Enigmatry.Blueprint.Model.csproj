@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="8.1.2" />
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
   </ItemGroup>
 

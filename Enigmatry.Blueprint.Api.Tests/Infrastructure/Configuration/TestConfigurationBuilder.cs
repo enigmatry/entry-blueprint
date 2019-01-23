@@ -10,7 +10,6 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
     {
         private string _dbContextName;
 
-        
         public TestConfigurationBuilder WithDbContextName(string contextName)
         {
             _dbContextName = contextName;
@@ -30,9 +29,10 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                 {"DbContext:ConnectionResiliencyMaxRetryDelay", "0.00:00:30"},
                 {
                     $"ConnectionStrings:{_dbContextName}",
-                    ReadConnectionString()
+                    GetConnectionString()
                 },
                 {"App:ServiceBus:AzureServiceBusEnabled", "false"},
+                {"App:Localization:CacheDuration", "0:00:00:30"},
                 {"App:GitHubApi:BaseUrl", "https://api.github.com"},
                 {"App:GitHubApi:Timeout", "0.00:00:15"}
             };
@@ -49,9 +49,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
             }
         }
 
-        private static string ReadConnectionString()
+        private static string GetConnectionString()
         {
-            var connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
+            string connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
             if (!string.IsNullOrEmpty(connectionString))
             {
                 var builder = new SqlConnectionStringBuilder(connectionString);

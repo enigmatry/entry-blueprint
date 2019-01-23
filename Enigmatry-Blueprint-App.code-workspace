@@ -20,5 +20,7 @@
 			"**/bower_components": true,
 			"**/tmp": true
 		}],
+		"gitblame.isWebPathPlural": true,
+		"typescript.tsdk": "node_modules\\typescript\\lib"
 	}
 }

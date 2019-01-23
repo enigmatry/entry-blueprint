@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,20 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
   apiUrl = environment.apiUrl;
 
-  public constructor(private titleService: Title ) { }
+  constructor(private titleService: Title, private translate: TranslateService,
+    private localeService: BsLocaleService) {
+    this.translate.setDefaultLang('nl');
+    this.localeService.use('nl');
+  }
 
-  public setTitle( newTitle: string) {
-    this.titleService.setTitle( newTitle );
+  setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
+  }
+
+  public useLanguage(language: string) {
+    this.translate.use(language);
+    this.localeService.use(language);
   }
 }

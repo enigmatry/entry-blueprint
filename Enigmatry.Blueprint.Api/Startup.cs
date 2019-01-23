@@ -8,9 +8,12 @@ using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
 using AutoMapper;
-using BeatPulse;
 using Enigmatry.Blueprint.Api.GitHubApi;
+using Enigmatry.Blueprint.Api.Localization;
 using Enigmatry.Blueprint.Api.Logging;
+using Enigmatry.Blueprint.Api.Models;
+using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Api.Resources;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure;
@@ -41,7 +44,6 @@ using Polly.Timeout;
 using Refit;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using UserModel = Enigmatry.Blueprint.Api.Models.Identity.UserModel;
 
 namespace Enigmatry.Blueprint.Api
 {
@@ -51,6 +53,7 @@ namespace Enigmatry.Blueprint.Api
         private const string GlobalTimeoutPolicyName = "global-timeout";
 
         private readonly IConfiguration _configuration;
+        private readonly IHostingEnvironment _environment;
         private readonly ILoggerFactory _loggerFactory;
 
         public Startup(IConfiguration configuration,
@@ -59,6 +62,7 @@ namespace Enigmatry.Blueprint.Api
         {
             _configuration = configuration;
             _loggerFactory = loggerFactory;
+            _environment = environment;
         }
 
         [UsedImplicitly]
@@ -66,7 +70,8 @@ namespace Enigmatry.Blueprint.Api
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
-
+            //ValidatorOptions.DisplayNameResolver = LocalizedDisplayNameResolver.ResolveDisplayName(Localization_SharedResource.ResourceManager);
+            
             if (_configuration.UseDeveloperExceptionPage())
             {
                 app.UseDeveloperExceptionPage();
@@ -95,34 +100,37 @@ namespace Enigmatry.Blueprint.Api
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); });
 
+            app.UseCultures();
+            
             app.UseMvc();
 
             // Enable healthchecks on the configured endpoint.
             app.UseHealthChecks("/healthcheck",
-               new HealthCheckOptions
-               {
-                   // Specify a custom ResponseWriter, so we can return json with additional information,
-                   // Otherwise it will just return plain text with the status.
-                   ResponseWriter = async (context, report) =>
-                   {
-                       var result = JsonConvert.SerializeObject(
-                           new
-                           {
-                               status = report.Status.ToString(),
-                               errors = report.Entries.Select(e => new { key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status) })
-                           });
-                       context.Response.ContentType = MediaTypeNames.Application.Json;
-                       await context.Response.WriteAsync(result);
-                   }
-               });
+                new HealthCheckOptions
+                {
+                    // Specify a custom ResponseWriter, so we can return json with additional information,
+                    // Otherwise it will just return plain text with the status.
+                    ResponseWriter = async (context, report) =>
+                    {
+                        string result = JsonConvert.SerializeObject(
+                            new
+                            {
+                                status = report.Status.ToString(),
+                                errors = report.Entries.Select(e => new
+                                    {key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status)})
+                            });
+                        context.Response.ContentType = MediaTypeNames.Application.Json;
+                        await context.Response.WriteAsync(result);
+                    }
+                });
         }
 
         [UsedImplicitly]
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureServicesExceptMvc(services, _configuration, _environment);
             AddMvc(services, _configuration, _loggerFactory);
-            ConfigureServicesExceptMvc(services, _configuration);
         }
 
         // IMvcBuilder needed for tests
@@ -131,6 +139,10 @@ namespace Enigmatry.Blueprint.Api
         {
             return services
                 .AddMvc(options => options.DefaultConfigure(configuration, loggerFactory))
+                .AddDataAnnotationsLocalization(options => {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedResource));
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv =>
                 {
@@ -139,13 +151,17 @@ namespace Enigmatry.Blueprint.Api
                     fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                     fv.ImplicitlyValidateChildProperties = true;
                     fv.RegisterValidatorsFromAssemblyContaining<UserCreateOrUpdateCommandValidator>();
+                    fv.RegisterValidatorsFromAssemblyContaining<LocalizedMessagesPostModel.LocalizedMessagesPostModelValidator>();
                 });
         }
 
         // this also called by tests. Mvc is configured slightly differently in integration tests
-        internal static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
+        internal static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration,
+            IHostingEnvironment environment)
         {
             ConfigurePolly(services);
+
+            ConfigureLocalization(services, configuration, environment);
 
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -170,19 +186,19 @@ namespace Enigmatry.Blueprint.Api
 
         private static void ConfigureHealthChecks(IServiceCollection services, IConfiguration configuration)
         {
-            // Here we can configure the different healthchecks:
+            // Here we can configure the different health checks:
             services.AddHealthChecks()
-                // Check the sql server cnnection
+                // Check the sql server connection
                 .AddSqlServer(configuration["ConnectionStrings:BlueprintContext"], "SELECT 1")
                 // Check the EF Core Context
                 .AddDbContextCheck<BlueprintContext>()
                 // Check a Custom url
-                .AddUrlGroup(new Uri("https://api.myapplication.com/v1/something.json"), "API ping Test", HealthStatus.Degraded)
+                .AddUrlGroup(new Uri("https://api.myapplication.com/v1/something.json"), "API ping Test",
+                    HealthStatus.Degraded)
                 // Check metrics
-                .AddPrivateMemoryHealthCheck(1024*1024*200, "Available memory test", HealthStatus.Degraded)
+                .AddPrivateMemoryHealthCheck(1024 * 1024 * 200, "Available memory test", HealthStatus.Degraded)
                 // We can also push the results to Application Insights.
                 .AddApplicationInsightsPublisher(configuration["ApplicationInsights:InstrumentationKey"]);
-                
         }
 
         private static void ConfigurePolly(IServiceCollection services)
@@ -194,6 +210,24 @@ namespace Enigmatry.Blueprint.Api
             TimeoutPolicy<HttpResponseMessage> timeoutPolicy =
                 Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500));
             policyRegistry.Add(GlobalTimeoutPolicyName, timeoutPolicy);
+        }
+
+        private static void ConfigureLocalization(IServiceCollection services, IConfiguration configuration,
+            IHostingEnvironment environment)
+        {
+            // https://joonasw.net/view/aspnet-core-localization-deep-dive
+            services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
+
+            // LocalizationSettings localizationSettings = configuration.ReadAppSettings().Localization;
+
+            // https://github.com/AlexTeixeira/Askmethat-Aspnet-JsonLocalizer
+            /*services.AddJsonLocalization(options =>
+            {
+                options.CacheDuration = localizationSettings.CacheDuration;
+                options.IsAbsolutePath = true;
+                options.ResourcesPath = $"{environment.ContentRootPath}/Resources";
+                options.FileEncoding = Encoding.UTF8;
+            });*/
         }
 
         private static void ConfigureConfiguration(IServiceCollection services, IConfiguration configuration)
@@ -211,7 +245,7 @@ namespace Enigmatry.Blueprint.Api
             services.AddMediatR(
                 typeof(UserModel).Assembly, // this assembly
                 typeof(UserCreatedDomainEvent).Assembly, // domain assembly
-                typeof(UserCreatedDomainEventHandler).Assembly);
+                typeof(UserCreatedDomainEventHandler).Assembly); // app services assembly
         }
 
         private static void ConfigureTypedClients(IServiceCollection services, IConfiguration configuration)
@@ -269,7 +303,7 @@ namespace Enigmatry.Blueprint.Api
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
             builder.RegisterModule(new ServiceModule
-            { Assemblies = new[] { typeof(UserService).Assembly, typeof(TimeProvider).Assembly } });
+                {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
             builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule<IdentityModule>();
             builder.RegisterModule(new EventBusModule

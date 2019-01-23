@@ -2,15 +2,12 @@
 using AutoMapper;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
-using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
 {
@@ -19,12 +16,14 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
     {
         private readonly IConfiguration _configuration;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly IHostingEnvironment _environment;
         private readonly Startup _startup;
 
         public TestStartup(IConfiguration configuration, IHostingEnvironment environment, ILoggerFactory loggerFactory)
         {
             _configuration = configuration;
             _loggerFactory = loggerFactory;
+            _environment = environment;
             _startup = new Startup(configuration, environment, loggerFactory);
         }
 
@@ -33,7 +32,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         {
             Startup.AddMvc(services, _configuration, _loggerFactory)
                 .AddApplicationPart(typeof(Startup).Assembly);
-            Startup.ConfigureServicesExceptMvc(services, _configuration);
+            Startup.ConfigureServicesExceptMvc(services, _configuration, _environment);
         }
 
         [UsedImplicitly]

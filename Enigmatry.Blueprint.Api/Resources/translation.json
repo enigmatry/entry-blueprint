@@ -1,0 +1,16 @@
+[
+  {
+    "Key": "GoodMorning",
+    "Values" : {
+      "en-US":  "Good morning", 
+      "nl-NL": "Goedemorgen"
+    }
+  },
+  {
+    "Key": "'{PropertyName}' must be unique.",
+    "Values" : {
+      "en-US":  "PN Eng", 
+      "nl-NL":  "PN NL"
+    }
+  }
+]

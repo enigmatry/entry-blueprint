@@ -1,13 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<!-- For translations see: https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-angular7-app-with-ngx-translate-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+  <h1 translate>app.title</h1>
+  <h2 translate>app.description</h2>
 </div>
 <div>
-  Api url: {{ apiUrl }}
+  {{ 'home.api-url' | translate }}: {{ apiUrl }}
 </div>
-<h2>Accordion: </h2>
+<hr />
+<div>
+  {{ 'home.use-language' | translate }}:
+  <button (click)="useLanguage('en')" translate>language.english</button>
+  <button (click)="useLanguage('nl')" translate>language.dutch</button>
+</div>
+<hr />
+<h2>Sample of an accordion: </h2>
 <accordion>
   <accordion-group heading="Static Header, initially expanded">
     This content is straight in the template.
@@ -23,6 +30,8 @@
   </accordion-group>
 </accordion>
 
+
+<hr />
 <!-- Datepicker example -->
 <!-- https://valor-software.com/ngx-bootstrap/#/datepicker -->
 <div class="row">
@@ -34,11 +43,26 @@
   </div>
 </div>
 
+<hr />
 <p>
-  Select a title to set on the current HTML document:
+  {{ 'home.select-title-to-set-on-html-document' | translate}}:
 </p>
 <ul>
-  <li><a (click)="setTitle('Good morning!')">Good morning</a>.</li>
-  <li><a (click)="setTitle('Good afternoon!')">Good afternoon</a>.</li>
-  <li><a (click)="setTitle('Good evening!')">Good evening</a>.</li>
+  <!-- example of using dynamic translation-->
+  <li><a class="btn btn-primary" (click)="setTitle('Title 1!')">{{ 'home.set-to' | translate:{'name':'Title 1'} }} </a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 2!')">{{ 'home.set-to' | translate:{'name':'Title 2'} }} </a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 3!')">{{ 'home.set-to' | translate:{'name':'Title 3'} }} </a></li>
+</ul>
+
+<hr />
+<p>Pluralization translation sample</p>
+<ul>
+  <li translate [translateParams]="{ count: 0 }">pluralization.things</li>
+  <li translate [translateParams]="{ count: 1 }">pluralization.things</li>
+  <li>{{'pluralization.things' | translate:"{ count: 2 }"}}</li>
+</ul>
+<ul>
+  <li translate [translateParams]="{ gender: 'female', name: 'Sarah' }">pluralization.people</li>
+  <li translate [translateParams]="{ gender: 'male', name: 'Peter' }">pluralization.people</li>
+  <li>{{'pluralization.people' | translate:"{ name: 'Sarah + Peter' }"}}</li>
 </ul>
