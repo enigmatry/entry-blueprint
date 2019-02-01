@@ -7,17 +7,17 @@ using FluentValidation.Internal;
 namespace Enigmatry.Blueprint.Infrastructure.Validation
 {
     // Enables FluentValidation error messages to contain camel cased property names instead of pascal cased.
-    // E.g. Instead of UserName we get userName
+    // E.g. Instead of 'UserName' we get 'userName'
     public static class CamelCasePropertyNameResolver
     {
         public static string ResolvePropertyName(Type type, MemberInfo memberInfo, LambdaExpression expression)
         {
-            string propertyName = DefaultPropertyNameResolver(type, memberInfo, expression);
+            string propertyName = DefaultPropertyNameResolver(memberInfo, expression);
 
             return propertyName.ToCamelCase();
         }
 
-        private static string DefaultPropertyNameResolver(Type type, MemberInfo memberInfo, LambdaExpression expression)
+        private static string DefaultPropertyNameResolver(MemberInfo memberInfo, LambdaExpression expression)
         {
             if (expression != null)
             {

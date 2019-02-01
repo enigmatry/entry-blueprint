@@ -13,6 +13,7 @@ using Enigmatry.Blueprint.Api.Localization;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Api.Models;
 using Enigmatry.Blueprint.Api.Models.Identity;
+using Enigmatry.Blueprint.Api.Resources;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure;
@@ -68,9 +69,8 @@ namespace Enigmatry.Blueprint.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
-            //ValidatorOptions.DisplayNameResolver = LocalizedDisplayNameResolver.ResolveDisplayName(Localization_SharedResource.ResourceManager);
-            
+            ConfigureFluentValidatorOptions();
+
             if (_configuration.UseDeveloperExceptionPage())
             {
                 app.UseDeveloperExceptionPage();
@@ -122,6 +122,13 @@ namespace Enigmatry.Blueprint.Api
                         await context.Response.WriteAsync(result);
                     }
                 });
+        }
+
+        private static void ConfigureFluentValidatorOptions()
+        {
+            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+            ValidatorOptions.DisplayNameResolver =
+                LocalizedDisplayNameResolver.ResolveDisplayName(Localization_SharedResource.ResourceManager);
         }
 
         [UsedImplicitly]
