@@ -13,7 +13,6 @@ using Enigmatry.Blueprint.Api.Localization;
 using Enigmatry.Blueprint.Api.Logging;
 using Enigmatry.Blueprint.Api.Models;
 using Enigmatry.Blueprint.Api.Models.Identity;
-using Enigmatry.Blueprint.Api.Resources;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure;
@@ -161,7 +160,7 @@ namespace Enigmatry.Blueprint.Api
         {
             ConfigurePolly(services);
 
-            ConfigureLocalization(services, configuration, environment);
+            ConfigureLocalization(services);
 
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -212,22 +211,10 @@ namespace Enigmatry.Blueprint.Api
             policyRegistry.Add(GlobalTimeoutPolicyName, timeoutPolicy);
         }
 
-        private static void ConfigureLocalization(IServiceCollection services, IConfiguration configuration,
-            IHostingEnvironment environment)
+        private static void ConfigureLocalization(IServiceCollection services)
         {
             // https://joonasw.net/view/aspnet-core-localization-deep-dive
             services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
-
-            // LocalizationSettings localizationSettings = configuration.ReadAppSettings().Localization;
-
-            // https://github.com/AlexTeixeira/Askmethat-Aspnet-JsonLocalizer
-            /*services.AddJsonLocalization(options =>
-            {
-                options.CacheDuration = localizationSettings.CacheDuration;
-                options.IsAbsolutePath = true;
-                options.ResourcesPath = $"{environment.ContentRootPath}/Resources";
-                options.FileEncoding = Encoding.UTF8;
-            });*/
         }
 
         private static void ConfigureConfiguration(IServiceCollection services, IConfiguration configuration)
