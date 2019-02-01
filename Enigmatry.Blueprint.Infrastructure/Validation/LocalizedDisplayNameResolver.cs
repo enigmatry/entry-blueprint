@@ -51,8 +51,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
 
             if (displayAttribute != null)
             {
-                string result = GetLocalizedName(displayAttribute.GetName());
-                return () => result;
+                // if ResourceType is specified, GetName() already returns localized message
+                return () => displayAttribute.ResourceType != null ? 
+                    displayAttribute.GetName() : 
+                    GetLocalizedName(displayAttribute.Name, localizationResourceManager);
             }
 
             // Couldn't find a name from a DisplayAttribute. Try DisplayNameAttribute instead.
@@ -60,17 +62,18 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
 
             if (displayNameAttribute != null)
             {
-                string result = GetLocalizedName(displayNameAttribute.DisplayName);
-                return () => result;
+                // ReSharper disable once ImplicitlyCapturedClosure, we need to capture resourceManager so that 
+                // function for each language is properly resolved
+                return () => GetLocalizedName(displayNameAttribute.DisplayName, localizationResourceManager);
             }
 
             return null;
+        }
 
-            string GetLocalizedName(string displayName)
-            {
-                string result = localizationResourceManager.GetString(displayName);
-                return !IsNullOrEmpty(result) ? result : displayName;
-            }
+        private static string GetLocalizedName(string displayName, ResourceManager localizationResourceManager)
+        {
+            string result = localizationResourceManager.GetString(displayName);
+            return !IsNullOrEmpty(result) ? result : displayName;
         }
     }
 }
