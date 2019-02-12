@@ -69,9 +69,8 @@ namespace Enigmatry.Blueprint.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
-            //ValidatorOptions.DisplayNameResolver = LocalizedDisplayNameResolver.ResolveDisplayName(Localization_SharedResource.ResourceManager);
-            
+            ConfigureFluentValidatorOptions();
+
             if (_configuration.UseDeveloperExceptionPage())
             {
                 app.UseDeveloperExceptionPage();
@@ -125,6 +124,13 @@ namespace Enigmatry.Blueprint.Api
                 });
         }
 
+        private static void ConfigureFluentValidatorOptions()
+        {
+            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+            ValidatorOptions.DisplayNameResolver =
+                LocalizedDisplayNameResolver.ResolveDisplayName(Localization_SharedResource.ResourceManager);
+        }
+
         [UsedImplicitly]
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -161,7 +167,7 @@ namespace Enigmatry.Blueprint.Api
         {
             ConfigurePolly(services);
 
-            ConfigureLocalization(services, configuration, environment);
+            ConfigureLocalization(services);
 
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -212,22 +218,10 @@ namespace Enigmatry.Blueprint.Api
             policyRegistry.Add(GlobalTimeoutPolicyName, timeoutPolicy);
         }
 
-        private static void ConfigureLocalization(IServiceCollection services, IConfiguration configuration,
-            IHostingEnvironment environment)
+        private static void ConfigureLocalization(IServiceCollection services)
         {
             // https://joonasw.net/view/aspnet-core-localization-deep-dive
             services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
-
-            // LocalizationSettings localizationSettings = configuration.ReadAppSettings().Localization;
-
-            // https://github.com/AlexTeixeira/Askmethat-Aspnet-JsonLocalizer
-            /*services.AddJsonLocalization(options =>
-            {
-                options.CacheDuration = localizationSettings.CacheDuration;
-                options.IsAbsolutePath = true;
-                options.ResourcesPath = $"{environment.ContentRootPath}/Resources";
-                options.FileEncoding = Encoding.UTF8;
-            });*/
         }
 
         private static void ConfigureConfiguration(IServiceCollection services, IConfiguration configuration)

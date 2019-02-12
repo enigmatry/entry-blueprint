@@ -10,7 +10,7 @@ namespace Enigmatry.Blueprint.Api.Models
     {
         [Display(Name ="Id")] public int Id { get; set; }
 
-        [Display(Name="Name", ResourceType = typeof(Localization_SharedResource))] 
+        [Display(Name="Name")] 
         public string Name { get; set; }
 
         [Display(Name ="Email")] public string Email { get; set; }

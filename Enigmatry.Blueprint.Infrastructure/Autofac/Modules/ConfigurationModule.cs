@@ -19,10 +19,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
             builder.Register(c => c.Resolve<AppSettings>().ServiceBus).As<ServiceBusSettings>()
                 .SingleInstance();
 
-            builder.Register(c => c.Resolve<AppSettings>().Localization)
-                .AsSelf()
-                .SingleInstance();
-
             builder.Register(c => c.Resolve<AppSettings>().GitHubApi)
                 .AsSelf()
                 .SingleInstance();

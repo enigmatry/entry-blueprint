@@ -1,34 +1,79 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Resources;
+using static System.String;
 
 namespace Enigmatry.Blueprint.Infrastructure.Validation
 {
     public static class LocalizedDisplayNameResolver
     {
-        private static ResourceManager LocalizationResourceManager {get;set;}
+        private static ResourceManager ResourceManager { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resourceManager">ResourceManager from which to read localized display names</param>
+        /// <returns></returns>
+        public static Func<Type, MemberInfo, LambdaExpression, string> ResolveDisplayName(
+            ResourceManager resourceManager)
+        {
+            ResourceManager = resourceManager;
+            return ResolveDisplayName;
+        }
 
         private static string ResolveDisplayName(Type type, MemberInfo memberInfo, LambdaExpression arg3)
         {
-            //this will get in this case, "DocumentNumber", the property name. 
-            //If we don't find anything in metadata / resource, that what will be displayed in the error message.
-            string displayName = memberInfo.Name;
-            var displayAttribute = memberInfo.GetCustomAttribute<DisplayAttribute>();
-            if (displayAttribute != null)
-            {
-                displayName = displayAttribute.GetName();
-                return LocalizationResourceManager.GetString(displayName);
-            }
+            return memberInfo == null ? null : DisplayNameCache.GetCachedDisplayName(memberInfo, ResourceManager);
+        }
+    }
 
-            return displayName;
+    // Taken from FluentValidation.DisplayNameCache - except it supports localization
+    internal static class DisplayNameCache
+    {
+        private static readonly ConcurrentDictionary<MemberInfo, Func<string>> Cache =
+            new ConcurrentDictionary<MemberInfo, Func<string>>();
+
+        public static string GetCachedDisplayName(MemberInfo member, ResourceManager localizationResourceManager)
+        {
+            Func<string> result = Cache.GetOrAdd(member, m => GetDisplayName(m, localizationResourceManager));
+            return result?.Invoke();
         }
 
-        public static Func<Type, MemberInfo, LambdaExpression, string> ResolveDisplayName(ResourceManager resourceManager)
+        private static Func<string> GetDisplayName(MemberInfo member, ResourceManager localizationResourceManager)
         {
-            LocalizationResourceManager = resourceManager;
-            return ResolveDisplayName;
+            if (member == null) return null;
+
+            var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
+
+            if (displayAttribute != null)
+            {
+                // if ResourceType is specified, GetName() already returns localized message
+                return () => displayAttribute.ResourceType != null ? 
+                    displayAttribute.GetName() : 
+                    GetLocalizedName(displayAttribute.Name, localizationResourceManager);
+            }
+
+            // Couldn't find a name from a DisplayAttribute. Try DisplayNameAttribute instead.
+            var displayNameAttribute = member.GetCustomAttribute<DisplayNameAttribute>();
+
+            if (displayNameAttribute != null)
+            {
+                // ReSharper disable once ImplicitlyCapturedClosure, we need to capture resourceManager so that 
+                // function for each language is properly resolved
+                return () => GetLocalizedName(displayNameAttribute.DisplayName, localizationResourceManager);
+            }
+
+            return null;
+        }
+
+        private static string GetLocalizedName(string displayName, ResourceManager localizationResourceManager)
+        {
+            string result = localizationResourceManager.GetString(displayName);
+            return !IsNullOrEmpty(result) ? result : displayName;
         }
     }
 }
