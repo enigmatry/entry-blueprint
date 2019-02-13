@@ -52,7 +52,7 @@ namespace Enigmatry.Blueprint.Api
             // ConfigureContainer to be supported in Startup with
             // a strongly-typed ContainerBuilder
             return WebHost.CreateDefaultBuilder(args)
-                .UseKestrel((context, options) => { options.AddServerHeader = false; })
+                .ConfigureKestrel(options => options.AddServerHeader = false)
                 .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>()
                 .UseApplicationInsights()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +19,7 @@ namespace Enigmatry.Blueprint.App
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureKestrel(options => options.AddServerHeader = false)
                 .UseStartup<Startup>()
                 .Build();
     }
