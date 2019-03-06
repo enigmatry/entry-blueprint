@@ -29,6 +29,9 @@ namespace Enigmatry.Blueprint.Api
 
         public static void Main(string[] args)
         {
+            // there is an issue with in-process hosting and getting current directory
+            // current workaround for .net core 2.2 is: https://github.com/aspnet/AspNetCore/issues/4206#issuecomment-445612167)
+            CurrentDirectoryHelpers.SetCurrentDirectory();
             ConfigureSerilog();
             try
             {
