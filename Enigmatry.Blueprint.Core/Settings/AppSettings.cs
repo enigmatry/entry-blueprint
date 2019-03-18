@@ -7,5 +7,6 @@ namespace Enigmatry.Blueprint.Core.Settings
     {
         public ServiceBusSettings ServiceBus { get; set; }
         public GitHubApiSettings GitHubApi { get; set; }
+        public SmtpSettings Smtp { get; set; }
     }
 }

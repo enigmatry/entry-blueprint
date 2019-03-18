@@ -18,6 +18,7 @@ using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
+using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Infrastructure.MediatR;
 using Enigmatry.Blueprint.Infrastructure.Validation;
@@ -97,7 +98,11 @@ namespace Enigmatry.Blueprint.Api
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); 
+                c.RoutePrefix = String.Empty;
+            });
 
             app.UseCultures();
             
@@ -300,6 +305,7 @@ namespace Enigmatry.Blueprint.Api
                 {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
             builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule<IdentityModule>();
+            builder.RegisterModule<EmailModule>();
             builder.RegisterModule(new EventBusModule
             {
                 AzureServiceBusEnabled = _configuration.ReadAppSettings().ServiceBus.AzureServiceBusEnabled

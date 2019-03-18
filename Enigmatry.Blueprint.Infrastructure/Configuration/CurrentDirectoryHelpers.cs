@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Enigmatry.Blueprint.Api
+namespace Enigmatry.Blueprint.Infrastructure.Configuration
 {
     public class CurrentDirectoryHelpers
     {

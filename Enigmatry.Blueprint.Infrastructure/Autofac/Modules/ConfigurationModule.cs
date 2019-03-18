@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Enigmatry.Blueprint.Core.Settings;
+using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
@@ -20,6 +21,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 .SingleInstance();
 
             builder.Register(c => c.Resolve<AppSettings>().GitHubApi)
+                .AsSelf()
+                .SingleInstance();
+
+            builder.Register(c => c.Resolve<AppSettings>().Smtp)
                 .AsSelf()
                 .SingleInstance();
         }

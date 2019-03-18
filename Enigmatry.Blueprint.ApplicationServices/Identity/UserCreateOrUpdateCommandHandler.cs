@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.Core.Email;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 using MediatR;
@@ -11,10 +12,12 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
     public class UserCreateOrUpdateCommandHandler : IRequestHandler<UserCreateOrUpdateCommand, User>
     {
         private readonly IRepository<User> _userRepository;
+        private readonly IEmailClient _emailClient;
 
-        public UserCreateOrUpdateCommandHandler(IRepository<User> userRepository)
+        public UserCreateOrUpdateCommandHandler(IRepository<User> userRepository, IEmailClient emailClient)
         {
             _userRepository = userRepository;
+            _emailClient = emailClient;
         }
 
         public async Task<User> Handle(UserCreateOrUpdateCommand request,
@@ -30,6 +33,8 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
             {
                 user = User.Create(request);
                 _userRepository.Add(user);
+
+                _emailClient.Send(new EmailMessage("New user", "Your account is successfully created.", new[] {user.UserName}));
             }
 
             return user;

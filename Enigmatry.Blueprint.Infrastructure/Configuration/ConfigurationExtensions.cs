@@ -2,7 +2,7 @@
 using Enigmatry.Blueprint.Core.Settings;
 using Microsoft.Extensions.Configuration;
 
-namespace Enigmatry.Blueprint.Infrastructure
+namespace Enigmatry.Blueprint.Infrastructure.Configuration
 {
     public static class ConfigurationExtensions
     {

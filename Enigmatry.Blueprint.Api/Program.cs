@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Autofac.Extensions.DependencyInjection;
+using Enigmatry.Blueprint.Infrastructure;
+using Enigmatry.Blueprint.Infrastructure.Configuration;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +32,7 @@ namespace Enigmatry.Blueprint.Api
         public static void Main(string[] args)
         {
             // there is an issue with in-process hosting and getting current directory
-            // current workaround for .net core 2.2 is: https://github.com/aspnet/AspNetCore/issues/4206#issuecomment-445612167)
+            // current workaround for .net core 2.2 is: https://github.com/aspnet/AspNetCore/issues/4206#issuecomment-445612167
             CurrentDirectoryHelpers.SetCurrentDirectory();
             ConfigureSerilog();
             try
