@@ -310,6 +310,7 @@ namespace Enigmatry.Blueprint.Api
             {
                 AzureServiceBusEnabled = _configuration.ReadAppSettings().ServiceBus.AzureServiceBusEnabled
             });
+            builder.RegisterModule<TemplatingModule>();
         }
 
         private static ClaimsPrincipal GetPrincipal(IComponentContext c)
