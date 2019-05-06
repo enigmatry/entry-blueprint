@@ -22,12 +22,12 @@
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-        <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.19" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+        <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.20" />
         <PackageReference Include="NUnit" Version="3.11.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="3.12.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
         
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     </ItemGroup>
 
     <ItemGroup>

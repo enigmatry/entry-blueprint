@@ -177,7 +177,7 @@ namespace Enigmatry.Blueprint.Api
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<BlueprintContext>();
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(Startup).Assembly);
 
             ConfigureHealthChecks(services, configuration);
 
@@ -218,7 +218,7 @@ namespace Enigmatry.Blueprint.Api
             IPolicyRegistry<string> policyRegistry = services.AddPolicyRegistry();
 
             // Centrally stored policies
-            TimeoutPolicy<HttpResponseMessage> timeoutPolicy =
+           AsyncTimeoutPolicy<HttpResponseMessage> timeoutPolicy =
                 Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500));
             policyRegistry.Add(GlobalTimeoutPolicyName, timeoutPolicy);
         }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
@@ -13,7 +14,7 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
             _logger = logger;
         }
 
-        public Task Process(TRequest request, TResponse response)
+        public Task Process(TRequest request, TResponse response, CancellationToken cancellationToken)
         {
             _logger.LogDebug("Post processing");
             return Task.CompletedTask;

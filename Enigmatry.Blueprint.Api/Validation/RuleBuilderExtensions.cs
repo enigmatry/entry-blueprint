@@ -7,8 +7,7 @@ namespace Enigmatry.Blueprint.Api.Validation
         public static IRuleBuilderOptions<T, TProperty> WithUniquePropertyViolationMessage<T, TProperty>(
             this IRuleBuilderOptions<T, TProperty> rule)
         {
-            return rule.WithLocalizedMessage(typeof(Localization_SharedResource),
-                nameof(Localization_SharedResource.PropertyNameMustBeUnique));
+            return rule.WithMessage(x => Localization_SharedResource.PropertyNameMustBeUnique);
         }
     }
 }

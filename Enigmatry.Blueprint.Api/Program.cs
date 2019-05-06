@@ -4,12 +4,14 @@ using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using JetBrains.Annotations;
+using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters;
 using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Enigmatry.Blueprint.Api
@@ -78,7 +80,7 @@ namespace Enigmatry.Blueprint.Api
 
             if (!string.IsNullOrEmpty(ApplicationInsightsInstrumentationKey))
             {
-                config.WriteTo.ApplicationInsightsTraces(ApplicationInsightsInstrumentationKey,
+                config.WriteTo.ApplicationInsights(ApplicationInsightsInstrumentationKey, TelemetryConverter.Traces,
                     LogEventLevel.Information);
             }
 

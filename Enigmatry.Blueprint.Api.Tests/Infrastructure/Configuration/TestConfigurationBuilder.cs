@@ -34,12 +34,17 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                 {"App:ServiceBus:AzureServiceBusEnabled", "false"},
                 {"App:Localization:CacheDuration", "0:00:00:30"},
                 {"App:GitHubApi:BaseUrl", "https://api.github.com"},
-                {"App:GitHubApi:Timeout", "0.00:00:15"}
+                {"App:GitHubApi:Timeout", "0.00:00:15"},
+                {"App:Smtp:UsePickupDirectory", "true"},
+                {"App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation()}
             };
 
             configurationBuilder.AddInMemoryCollection(dict);
             return configurationBuilder.Build();
         }
+
+        public static string GetSmtpPickupDirectoryLocation() => TestContext.CurrentContext.TestDirectory;
+
 
         private void EnsureParametersBeforeBuild()
         {
