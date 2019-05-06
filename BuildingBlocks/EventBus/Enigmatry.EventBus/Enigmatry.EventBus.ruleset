@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Rules for SonarLint" ToolsVersion="15.0">
+<RuleSet Name="Rules for SonarLint" ToolsVersion="16.0">
   <Include Path="..\..\..\.sonarlint\aspnetcoreangular_enigmatrywebapplicationblueprintcorecsharp.ruleset" Action="Default" />
 </RuleSet>
