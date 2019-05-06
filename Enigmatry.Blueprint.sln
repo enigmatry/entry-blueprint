@@ -37,7 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Enigmatry.Blueprint.sln.DotSettings = Enigmatry.Blueprint.sln.DotSettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Blueprint.Infrastructure.Tests", "Enigmatry.Blueprint.Infrastructure.Tests\Enigmatry.Blueprint.Infrastructure.Tests.csproj", "{427859D6-D123-4086-A7C9-25F060E2F5B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Infrastructure.Tests", "Enigmatry.Blueprint.Infrastructure.Tests\Enigmatry.Blueprint.Infrastructure.Tests.csproj", "{427859D6-D123-4086-A7C9-25F060E2F5B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Blueprint.Data.Migrations.Runner", "Enigmatry.Blueprint.Data.Migrations.Runner\Enigmatry.Blueprint.Data.Migrations.Runner.csproj", "{C98497F8-5755-4258-A3B3-F3C0B4756EDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,10 @@ Global
 		{427859D6-D123-4086-A7C9-25F060E2F5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{427859D6-D123-4086-A7C9-25F060E2F5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{427859D6-D123-4086-A7C9-25F060E2F5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

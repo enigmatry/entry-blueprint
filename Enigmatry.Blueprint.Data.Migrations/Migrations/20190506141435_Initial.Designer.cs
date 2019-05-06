@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(BlueprintContext))]
-    [Migration("20180731083206_AddUserAudit")]
-    partial class AddUserAudit
+    [Migration("20190506141435_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -54,8 +54,14 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { Id = new Guid("123a918d-1f34-4c91-8ba9-7409ff936c1a"), CreatedOn = new DateTimeOffset(new DateTime(2018, 7, 31, 10, 32, 5, 764, DateTimeKind.Unspecified), new TimeSpan(0, 2, 0, 0, 0)), Name = "Test", UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), UserName = "Test" }
-                    );
+                        new
+                        {
+                            Id = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2019, 5, 6, 14, 31, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Test",
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            UserName = "Test"
+                        });
                 });
 
             modelBuilder.Entity("Enigmatry.BuildingBlocks.IntegrationEventLogEF.IntegrationEventLogEntry", b =>
