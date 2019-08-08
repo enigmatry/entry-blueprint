@@ -7,7 +7,7 @@
     "test": "testcafe chrome tests/**/*.fixture.ts --env=local --user=user1@example.com  --selector-timeout 10000 --debug-on-fail -S -s screenshots",
     "test:json": "npm test -- --reporter cucumber-json:reports/report.json --reporter-app-name='My App' --reporter-app-version='x.y.z'",
     "test:live": "testcafe chrome tests/**/*.live.ts --live --env=local --user=user1@example.com  --selector-timeout 10000",
-    "test:teamcity": "testcafe \"chrome --ignore-certificate-errors\" tests/**/*.fixture.ts --env=local --user=user1@example.com  --selector-timeout 10000 --reporter teamcity -S -s screenshots --quarantine-mode",
+    "test:teamcity": "testcafe 'chrome --ignore-certificate-errors' tests/**/*.fixture.ts --env=devci --user=user1@example.com  --selector-timeout 10000 --reporter teamcity -S -s screenshots --quarantine-mode",
     "tsc": "tsc",
     "tsc:init": "tsc --init",
     "tslint:init": "tslint --init",
