@@ -1,0 +1,6 @@
+{
+  "src": "tests/**/*.fixture.ts",
+  "screenshotPath": "screenshots",
+  "takeScreenshotsOnFails": true,
+  "selectorTimeout": 10000
+}

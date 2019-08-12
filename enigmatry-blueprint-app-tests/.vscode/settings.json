@@ -29,6 +29,7 @@
   "prettier.requireConfig": true,
   "workbench.colorCustomizations": {},
   "cSpell.words": [
-    "jsome"
+    "jsome",
+    "testcafe"
   ],
 }
