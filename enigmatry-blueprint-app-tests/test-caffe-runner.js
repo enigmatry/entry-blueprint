@@ -5,9 +5,12 @@ const minimist = require('minimist');
 
 /*/ Each sub array defines a batch of browserstack workers.
  into N batches that run will run consecutively. /*/
-const SUPPORTED_BROWSERS = [
+const SUPPORTED_BROWSERS_BATCHES = [
   [
-    "browserstack:firefox",
+    "chrome",
+  ],
+  [
+    "firefox"
   ]
 ];
 
@@ -46,4 +49,4 @@ async function startTests(browsers) {
   }
 }
 
-startTests(SUPPORTED_BROWSERS);
+startTests(SUPPORTED_BROWSERS_BATCHES);
