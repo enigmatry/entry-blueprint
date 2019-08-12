@@ -2,7 +2,6 @@
   "src": "tests/**/*.fixture.ts",
   "browsers": [
     "chrome",
-    "firefox",
     "browserstack:firefox@68.0:Windows 10"
   ],
   "concurrency": 1,
