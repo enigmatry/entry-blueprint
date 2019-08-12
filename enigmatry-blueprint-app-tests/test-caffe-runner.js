@@ -7,10 +7,10 @@ const minimist = require('minimist');
  into N batches that run will run consecutively. /*/
 const SUPPORTED_BROWSERS_BATCHES = [
   [
-    "chrome",
+    "browserstack:firefox@68.0:Windows 10"
   ],
   [
-    "firefox"
+    "browserstack:firefox@68.0:OS X Sierra"
   ]
 ];
 
