@@ -5,7 +5,7 @@
   "scripts": {
     "pretest": "rimraf screenshots/* && rimraf reports/*",
     "test": "testcafe chrome --env=local --user=user1@example.com --debug-on-fail",
-    "test:json": "npm test -- --reporter cucumber-json:reports/report.json --reporter-app-name='My App' --reporter-app-version='x.y.z'",
+    "test:json": "npm test --reporter cucumber-json:reports/report.json --reporter-app-name='My App' --reporter-app-version='x.y.z'",
     "test:live": "testcafe chrome tests/**/*.live.ts --live --env=local --user=user1@example.com",
     "test:teamcity": "testcafe 'chrome --ignore-certificate-errors' --env=devci --user=user1@example.com --reporter teamcity --quarantine-mode",
     "test:teamcity-all": "node test-caffe-runner.js --env=devci --user=user1@example.com --reporter teamcity",
