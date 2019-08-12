@@ -8,7 +8,7 @@
     "test:json": "npm test --reporter cucumber-json:reports/report.json --reporter-app-name='My App' --reporter-app-version='x.y.z'",
     "test:live": "testcafe chrome tests/**/*.live.ts --live --env=local --user=user1@example.com",
     "test:teamcity": "testcafe 'chrome --ignore-certificate-errors' --env=devci --user=user1@example.com --reporter teamcity --quarantine-mode",
-    "test:teamcity-all": "testcafe tests/**/*.fixture.ts --env=devci --user=user1@example.com --reporter teamcity",
+    "test:teamcity-all": "testcafe tests/**/*.fixture.ts --env=devci --user=user1@example.com --reporter teamcity --quarantine-mode",
     "tsc": "tsc",
     "tsc:init": "tsc --init",
     "tslint:init": "tslint --init",
