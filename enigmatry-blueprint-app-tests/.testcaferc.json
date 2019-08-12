@@ -2,7 +2,11 @@
   "src": "tests/**/*.fixture.ts",
   "browsers": [
     "chrome",
-    "browserstack:firefox@68.0:Windows 10"
+    "browserstack:firefox@68.0:Windows 10",
+    "browserstack:firefox@68.0:OS X Mojave",
+    "browserstack:chrome@75.0:OS X Mojave",
+    "browserstack:edge@18.0:Windows 10",
+    "browserstack:chrome@76.0:Windows 10"
   ],
   "concurrency": 1,
   "screenshotPath": "screenshots",
