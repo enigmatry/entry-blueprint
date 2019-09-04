@@ -33,7 +33,6 @@ if (args && args.shortTimeout) {
 }
 
 if (args && args.showConfig) {
-  config.showConfig = args.showConfig === "false" ? false : true;
+  config.showConfig = args.showConfig !== "false";
 }
-
 export const parsedConfig = config;

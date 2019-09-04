@@ -1,5 +1,5 @@
 export const environments: IEnvInfo[] = [
-  { name: 'local', url: 'http://localhost:4200' },
+  { name: 'local', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },
   { name: 'devci', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },
   { name: 'uat1', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },
   { name: 'prod', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },

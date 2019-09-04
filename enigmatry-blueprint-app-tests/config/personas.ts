@@ -5,7 +5,6 @@ export const personas: IUserInfo[] = [
 ];
 
 const userLogins: string[] = personas.map((p) => p.login);
-
 export function user(login: Email | undefined, password: string | undefined): IUserInfo | undefined {
   if (login === undefined) {
     // tslint:disable-next-line:no-console

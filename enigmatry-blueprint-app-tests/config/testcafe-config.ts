@@ -43,12 +43,10 @@ if (config.showConfig) {
 }
 
 export default config;
-
 export function getBaseUrl(): string {
   const url = config.env ? config.env.url : '';
   return url;
 }
-
 export function getCurrentConfig(t?: TestController): IConfig {
   if (t && t.ctx && t.ctx.config) {
     return t.ctx.config;
