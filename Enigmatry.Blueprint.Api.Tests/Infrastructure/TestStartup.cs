@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using AutoMapper;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using JetBrains.Annotations;
@@ -45,11 +44,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         }
 
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
-            IApplicationLifetime applicationLifetime)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             _startup.Configure(app, env);
-            applicationLifetime.ApplicationStopped.Register(Mapper.Reset);
         }
     }
 }
