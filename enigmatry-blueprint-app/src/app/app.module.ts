@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { nlLocale } from 'ngx-bootstrap/locale';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 defineLocale('nl', nlLocale);
 
 @NgModule({
@@ -33,7 +34,8 @@ defineLocale('nl', nlLocale);
         provide: TranslateCompiler,
         useClass: TranslateMessageFormatCompiler
       }
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [Title, { provide: MESSAGE_FORMAT_CONFIG, useValue: { locales: ['en', 'nl'] } }],
   bootstrap: [AppComponent]
