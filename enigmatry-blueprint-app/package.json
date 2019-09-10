@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "sass-lint": "sass-lint -v -q",
     "e2e": "ng e2e",
-    "extract-translations": "ngx-translate-extract --input ./src --output ./src/assets/i18n/extracted-translation.json --clean --sort --format namespaced-json --marker _"
+    "extract-translations": "ngx-translate-extract --input ./src --output ./src/assets/i18n/extracted-translation.json --clean --sort --format namespaced-json --marker _",
+    "audit:ci": "npm audit --json|npm-audit-reporter-teamcity"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,7 @@
     "messageformat": "2.1.0",
     "ngx-bootstrap": "3.2.0",
     "ngx-translate-messageformat-compiler": "4.4.0",
+    "npm-audit-reporter-teamcity": "0.2.3",
     "popper.js": "1.14.7",
     "rxjs": "6.4.0",
     "tslib": "1.9.3",
