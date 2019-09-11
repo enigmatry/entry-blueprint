@@ -17,5 +17,5 @@ test("English language selection", async t => {
   await page.selectLanguage('English')
   await t
     .expect(page.subHeader.innerText)
-    .eql('This is a sample Angular app for Enigmatry project');
+    .eql('This is a sample Angular app for Enigmatry projects');
 });
