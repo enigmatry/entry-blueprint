@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+	<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <RootNamespace>Enigmatry.BuildingBlocks.IntegrationEventLogEF</RootNamespace>
 	<!-- SonarQube needs this -->
 	<ProjectGuid>{e90c2280-fd13-4f86-b793-058407944fae}</ProjectGuid>

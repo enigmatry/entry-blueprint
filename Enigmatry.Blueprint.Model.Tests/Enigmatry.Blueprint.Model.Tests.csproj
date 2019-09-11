@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+	<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
 	<!-- SonarQube needs this -->
 	<ProjectGuid>{c86a6899-ea1d-4f23-8888-aa4429f1f407}</ProjectGuid>
   </PropertyGroup>
