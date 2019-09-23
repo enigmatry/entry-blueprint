@@ -1,17 +1,13 @@
 ﻿using System;
 using System.IO;
 using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using JetBrains.Annotations;
-using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters;
 using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Enigmatry.Blueprint.Api
@@ -27,9 +23,6 @@ namespace Enigmatry.Blueprint.Api
                     $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json",
                     true)
                 .Build();
-
-        private static string ApplicationInsightsInstrumentationKey =>
-            Configuration["ApplicationInsights:InstrumentationKey"];
 
         public static void Main(string[] args)
         {
@@ -77,12 +70,6 @@ namespace Enigmatry.Blueprint.Api
                 .Enrich.WithProperty("AppVersion", PlatformServices.Default.Application.ApplicationVersion)
                 .WriteTo.Console(theme: SystemConsoleTheme
                     .Literate); // https://github.com/serilog/serilog-sinks-console
-
-            if (!string.IsNullOrEmpty(ApplicationInsightsInstrumentationKey))
-            {
-                config.WriteTo.ApplicationInsights(ApplicationInsightsInstrumentationKey, TelemetryConverter.Traces,
-                    LogEventLevel.Information);
-            }
 
             Log.Logger = config.CreateLogger();
             // for enabling self diagnostics see https://github.com/serilog/serilog/wiki/Debugging-and-Diagnostics
