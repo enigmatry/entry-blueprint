@@ -2,6 +2,7 @@
 using Enigmatry.Blueprint.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Api.Controllers
 {
@@ -12,21 +13,25 @@ namespace Enigmatry.Blueprint.Api.Controllers
     {
         private readonly IStringLocalizer<AdditionalResource> _additionalResourceLocalizer;
         private readonly IStringLocalizer<SharedResource> _sharedResourceLocalizer;
+        private readonly ILogger<LocalizedMessagesController> _logger;
 
-        public LocalizedMessagesController(IStringLocalizer<SharedResource> sharedResourceLocalizer, IStringLocalizer<AdditionalResource> additionalResourceLocalizer)
+        public LocalizedMessagesController(IStringLocalizer<SharedResource> sharedResourceLocalizer, IStringLocalizer<AdditionalResource> additionalResourceLocalizer, ILogger<LocalizedMessagesController> logger)
         {
             _sharedResourceLocalizer = sharedResourceLocalizer;
             _additionalResourceLocalizer = additionalResourceLocalizer;
+            _logger = logger;
         }
 
         [HttpGet]
         public LocalizedMessagesModel Get()
         {
-            string message1 = _sharedResourceLocalizer["GoodMorning"];
-            string message2 = _sharedResourceLocalizer["GoodEvening"];
+            string goodMorning = _sharedResourceLocalizer["GoodMorning"];
+            string goodEvening = _sharedResourceLocalizer["GoodEvening"];
             string message3 = _additionalResourceLocalizer["AdditionalResourceMessage"];
 
-            return new LocalizedMessagesModel {Message1 = message1, Message2 = message2, Message3 = message3};
+            _logger.LogInformation("Returning localized messages: {GoodMorning} and {GoodEvening}", goodMorning, goodEvening);
+
+            return new LocalizedMessagesModel {Message1 = goodMorning, Message2 = goodEvening, Message3 = message3};
         }
 
         [HttpPost]

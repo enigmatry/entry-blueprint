@@ -11,6 +11,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Configuration
             return configuration.ReadSettingsSection<AppSettings>("App");
         }
 
+        public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration)
+        {
+            return configuration.ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights");
+        }
+
         public static T ReadSettingsSection<T>(this IConfiguration configuration, string sectionName)
         {
             var sectionSettings = configuration.GetSection(sectionName).Get<T>();

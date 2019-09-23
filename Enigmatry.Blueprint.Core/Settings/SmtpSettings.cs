@@ -1,5 +1,8 @@
-﻿namespace Enigmatry.Blueprint.Core.Settings
+﻿using JetBrains.Annotations;
+
+namespace Enigmatry.Blueprint.Core.Settings
 {
+    [UsedImplicitly]
     public class SmtpSettings
     {
         public string Server { get; set; }

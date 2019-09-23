@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Autofac.Extensions.DependencyInjection;
+using Enigmatry.Blueprint.Infrastructure.ApplicationInsights;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore;
@@ -67,11 +68,13 @@ namespace Enigmatry.Blueprint.Api
                 .Enrich.WithThreadId()
                 .Enrich.WithProcessId()
                 .Enrich.WithMachineName()
+                .Enrich.With(new OperationIdEnricher())
                 .Enrich.WithProperty("AppVersion", PlatformServices.Default.Application.ApplicationVersion)
                 .WriteTo.Console(theme: SystemConsoleTheme
                     .Literate); // https://github.com/serilog/serilog-sinks-console
 
             Log.Logger = config.CreateLogger();
+
             // for enabling self diagnostics see https://github.com/serilog/serilog/wiki/Debugging-and-Diagnostics
             // Serilog.Debugging.SelfLog.Enable(Console.Error);
         }

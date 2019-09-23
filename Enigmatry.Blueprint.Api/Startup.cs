@@ -17,6 +17,7 @@ using Enigmatry.Blueprint.Api.Resources;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure;
+using Enigmatry.Blueprint.Infrastructure.ApplicationInsights;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
@@ -28,6 +29,8 @@ using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
 using MediatR;
 using MediatR.Pipeline;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -54,21 +57,17 @@ namespace Enigmatry.Blueprint.Api
         private const string GlobalTimeoutPolicyName = "global-timeout";
 
         private readonly IConfiguration _configuration;
-        private readonly IHostingEnvironment _environment;
         private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IConfiguration configuration,
-            IHostingEnvironment environment,
-            ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             _configuration = configuration;
             _loggerFactory = loggerFactory;
-            _environment = environment;
         }
 
         [UsedImplicitly]
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TelemetryConfiguration telemetryConfiguration)
         {
             ConfigureFluentValidatorOptions();
 
@@ -127,6 +126,8 @@ namespace Enigmatry.Blueprint.Api
                         await context.Response.WriteAsync(result);
                     }
                 });
+
+            telemetryConfiguration.ConfigureTelemetry(_configuration.ReadApplicationInsightsSettings());
         }
 
         private static void ConfigureFluentValidatorOptions()
@@ -140,7 +141,7 @@ namespace Enigmatry.Blueprint.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureServicesExceptMvc(services, _configuration, _environment);
+            ConfigureServicesExceptMvc(services, _configuration);
             AddMvc(services, _configuration, _loggerFactory);
         }
 
@@ -167,8 +168,7 @@ namespace Enigmatry.Blueprint.Api
         }
 
         // this also called by tests. Mvc is configured slightly differently in integration tests
-        internal static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration,
-            IHostingEnvironment environment)
+        internal static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
         {
             ConfigurePolly(services);
 
@@ -184,6 +184,7 @@ namespace Enigmatry.Blueprint.Api
             ConfigureConfiguration(services, configuration);
             ConfigureMediatR(services);
             ConfigureTypedClients(services, configuration);
+            ConfigureApplicationInsights(services);
 
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
             services.PostConfigure<ApiBehaviorOptions>(options =>
@@ -204,8 +205,8 @@ namespace Enigmatry.Blueprint.Api
                 // Check the EF Core Context
                 .AddDbContextCheck<BlueprintContext>()
                 // Check a Custom url
-                .AddUrlGroup(new Uri("https://api.myapplication.com/v1/something.json"), "API ping Test",
-                    HealthStatus.Degraded)
+                /*.AddUrlGroup(new Uri("https://api.myapplication.com/v1/something.json"), "API ping Test",
+                    HealthStatus.Degraded)*/
                 // Check metrics
                 .AddPrivateMemoryHealthCheck(1024 * 1024 * 200, "Available memory test", HealthStatus.Degraded)
                 // We can also push the results to Application Insights.
@@ -290,6 +291,17 @@ namespace Enigmatry.Blueprint.Api
 
             // Scan FluentValidations Rules to generate the Swagger documentation
             c.AddFluentValidationRules();
+        }
+
+        private static void ConfigureApplicationInsights(IServiceCollection services)
+        {
+            // first disable adaptive sampling, it is re-enabled later with custom settings
+            // https://docs.microsoft.com/en-us/azure/azure-monitor/app/sampling
+            var aiOptions = new ApplicationInsightsServiceOptions
+            {
+                EnableAdaptiveSampling = false
+            };
+            services.AddApplicationInsightsTelemetry(aiOptions);
         }
 
         [UsedImplicitly]

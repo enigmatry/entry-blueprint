@@ -2,6 +2,7 @@
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using JetBrains.Annotations;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,15 +16,13 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
     {
         private readonly IConfiguration _configuration;
         private readonly ILoggerFactory _loggerFactory;
-        private readonly IHostingEnvironment _environment;
         private readonly Startup _startup;
 
-        public TestStartup(IConfiguration configuration, IHostingEnvironment environment, ILoggerFactory loggerFactory)
+        public TestStartup(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             _configuration = configuration;
             _loggerFactory = loggerFactory;
-            _environment = environment;
-            _startup = new Startup(configuration, environment, loggerFactory);
+            _startup = new Startup(configuration, loggerFactory);
         }
 
         [UsedImplicitly]
@@ -31,7 +30,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         {
             Startup.AddMvc(services, _configuration, _loggerFactory)
                 .AddApplicationPart(typeof(Startup).Assembly);
-            Startup.ConfigureServicesExceptMvc(services, _configuration, _environment);
+            Startup.ConfigureServicesExceptMvc(services, _configuration);
         }
 
         [UsedImplicitly]
@@ -44,9 +43,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         }
 
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TelemetryConfiguration configuration)
         {
-            _startup.Configure(app, env);
+            _startup.Configure(app, env, configuration);
         }
     }
 }
