@@ -20,7 +20,9 @@ namespace Enigmatry.Blueprint.Api.Tests
     {
         private DateTimeOffset _createdDate;
         private DateTimeOffset _updatedOn;
+#pragma warning disable CS8618 // Created in Setup
         private User _user;
+#pragma warning restore CS8618 //
 
         [SetUp]
         public void SetUp()
@@ -39,21 +41,20 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestGetAll()
         {
-            List<UserModel> users = (await Client.GetAsync<IEnumerable<UserModel>>("users")).ToList();
+            var users = (await Client.GetAsync<IEnumerable<UserModel>>("users")).ToList();
 
             users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
-            UserModel model = users.FirstOrDefault(u => u.UserName == "john_doe@john.doe");
-            model.Should().NotBeNull();
+            UserModel model = users.Single(u => u.UserName == "john_doe@john.doe");
             model.Name.Should().Be("John Doe");
             model.CreatedOn.Should().Be(_createdDate);
             model.UpdatedOn.Should().Be(_updatedOn);
         }
 
-        [TestCase("some user", "someuser@test.com", TestName = "Create valid user")]
-        public async Task TestCreate(string name, string userName)
+        [Test]
+        public async Task TestCreate()
         {
-            var command = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
+            var command = new UserCreateOrUpdateCommand {Name = "some user", UserName = "someuser@test.com"};
             UserModel user =
                 await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("users", command);
 
@@ -63,10 +64,10 @@ namespace Enigmatry.Blueprint.Api.Tests
             user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
-        [TestCase("some user", "someuser@test.com", TestName = "Update valid user")]
-        public async Task TestUpdate(string name, string userName)
+        [Test]
+        public async Task TestUpdate()
         {
-            var command = new UserCreateOrUpdateCommand { Id = _user.Id, Name = name, UserName = userName};
+            var command = new UserCreateOrUpdateCommand { Id = _user.Id, Name = "some user", UserName = "someuser@test.com"};
             UserModel user =
                 await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("users", command);
 

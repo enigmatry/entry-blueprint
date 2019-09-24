@@ -8,7 +8,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
 {
     public class TestConfigurationBuilder
     {
-        private string _dbContextName;
+        private string _dbContextName = String.Empty;
 
         public TestConfigurationBuilder WithDbContextName(string contextName)
         {
@@ -44,12 +44,11 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
             return configurationBuilder.Build();
         }
 
-        public static string GetSmtpPickupDirectoryLocation() => TestContext.CurrentContext.TestDirectory;
-
+        private static string GetSmtpPickupDirectoryLocation() => TestContext.CurrentContext.TestDirectory;
 
         private void EnsureParametersBeforeBuild()
         {
-            if (string.IsNullOrWhiteSpace(_dbContextName))
+            if (String.IsNullOrWhiteSpace(_dbContextName))
             {
                 throw new InvalidOperationException("Missing db context name");
             }
@@ -57,8 +56,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
 
         private static string GetConnectionString()
         {
-            string connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
-            if (!string.IsNullOrEmpty(connectionString))
+            string? connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
+            if (!String.IsNullOrEmpty(connectionString))
             {
                 var builder = new SqlConnectionStringBuilder(connectionString);
                 WriteLine("Connection string read from environment variable.");

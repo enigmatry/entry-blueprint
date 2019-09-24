@@ -25,8 +25,8 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
         private static string ReadConnectionString()
         {
             const string environmentVariableName = "MigrateDatabaseConnectionString";
-            string connectionString = Environment.GetEnvironmentVariable(environmentVariableName);
-            Console.WriteLine(string.IsNullOrEmpty(connectionString)
+            string? connectionString = Environment.GetEnvironmentVariable(environmentVariableName);
+            Console.WriteLine(String.IsNullOrEmpty(connectionString)
                 ? $"{environmentVariableName} environment variable is not set."
                 : $"{environmentVariableName} variable was found. ");
 

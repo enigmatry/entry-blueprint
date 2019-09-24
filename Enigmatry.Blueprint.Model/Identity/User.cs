@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Model.Auditing;
 
 namespace Enigmatry.Blueprint.Model.Identity
 {
     public class User : Entity, IEntityHasCreatedUpdated
     {
-        public string UserName { get; private set; }
-        public string Name { get; private set; }
+        public string UserName { get; private set; } = "";
+        public string Name { get; private set; } = "";
         public DateTimeOffset CreatedOn { get; private set; }
         public DateTimeOffset UpdatedOn { get; private set; }
         
         public Guid? CreatedById { get; private set; }
         public Guid? UpdatedById { get; private set; }
 
-        public User CreatedBy { get; private set; }
-        public User UpdatedBy { get; private set; }
+        public User? CreatedBy { get; private set; }
+        public User? UpdatedBy { get; private set; }
 
-        public ICollection<User> CreatedUsers { get; private set; }
-        public ICollection<User> UpdatedUsers { get; private set; }
+        public ICollection<User>? CreatedUsers { get; private set; }
+        public ICollection<User>? UpdatedUsers { get; private set; }
 
         public static User Create(UserCreateOrUpdateCommand command)
         {

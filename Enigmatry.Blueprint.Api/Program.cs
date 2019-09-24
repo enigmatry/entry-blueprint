@@ -9,6 +9,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Events;
@@ -31,9 +32,6 @@ namespace Enigmatry.Blueprint.Api
 
         public static void Main(string[] args)
         {
-            // there is an issue with in-process hosting and getting current directory
-            // current workaround for .net core 2.2 is: https://github.com/aspnet/AspNetCore/issues/4206#issuecomment-445612167
-            CurrentDirectoryHelpers.SetCurrentDirectory();
             ConfigureSerilog();
             try
             {
@@ -51,18 +49,19 @@ namespace Enigmatry.Blueprint.Api
             }
         }
 
-        private static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        private static IHostBuilder CreateWebHostBuilder(string[] args)
         {
-            // The ConfigureServices call here allows for
-            // ConfigureContainer to be supported in Startup with
-            // a strongly-typed ContainerBuilder
-            return WebHost.CreateDefaultBuilder(args)
-                .ConfigureKestrel(options => options.AddServerHeader = false)
-                .ConfigureServices(services => services.AddAutofac())
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseSerilog();
+            return Host.CreateDefaultBuilder(args)
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureKestrel(options =>
+                        {
+                            options.AddServerHeader = false;
+                        })
+                        .UseStartup<Startup>()
+                        .UseSerilog();
+                });
         }
 
         private static void ConfigureSerilog()

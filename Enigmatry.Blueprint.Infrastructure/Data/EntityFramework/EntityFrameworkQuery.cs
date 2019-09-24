@@ -10,18 +10,13 @@ using Microsoft.EntityFrameworkCore;
 namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 {
     [UsedImplicitly]
-    public class EntityFrameworkQuery<T> : IQueryable<T>, IAsyncEnumerable<T> where T : Entity
+    public class EntityFrameworkQuery<T> : IQueryable<T> where T : Entity
     {
         private readonly IQueryable<T> _queryable;
 
         public EntityFrameworkQuery(DbContext context)
         {
             _queryable = context.Set<T>();
-        }
-
-        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
-        {
-            return _queryable.ToAsyncEnumerable().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Infrastructure.Templating;
 using FluentAssertions;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.PlatformAbstractions;
 using NUnit.Framework;
@@ -22,9 +22,12 @@ namespace Enigmatry.Blueprint.Infrastructure.Tests.Templating
     // https://github.com/aspnet/Razor/issues/1212
     // https://codeopinion.com/using-razor-in-a-console-application/
     [Category("unit")]
+    [Explicit]
     public class RazorTemplatingEngineFixture
     {
+#pragma warning disable CS8618 // It is initialized in Setup
         private IServiceScopeFactory _scopeFactory;
+#pragma warning restore CS8618
 
         [SetUp]
         public void Setup()
@@ -37,16 +40,14 @@ namespace Enigmatry.Blueprint.Infrastructure.Tests.Templating
         [Test]
         public async Task TestRenderFromFile()
         {
-            using (IServiceScope serviceScope = _scopeFactory.CreateScope())
-            {
-                var engine = serviceScope.ServiceProvider.GetRequiredService<RazorTemplatingEngine>();
+            using IServiceScope serviceScope = _scopeFactory.CreateScope();
+            var engine = serviceScope.ServiceProvider.GetRequiredService<RazorTemplatingEngine>();
 
-                string result = await engine.RenderFromFileAsync("~/Templating/Sample.cshtml", new EmailModel
-                    {SampleText = "Hello world!"});
+            string result = await engine.RenderFromFileAsync("~/Templating/Sample.cshtml", new EmailModel
+                {SampleText = "Hello world!"});
                
-                result.Should().Contain("Hello world!");
-                result.Should().Contain("Congratulations!");
-            }
+            result.Should().Contain("Hello world!");
+            result.Should().Contain("Congratulations!");
         }
 
         private ServiceProvider ConfigureDefaultServices(ServiceCollection services)
@@ -56,16 +57,19 @@ namespace Enigmatry.Blueprint.Infrastructure.Tests.Templating
 
             string appDirectory = Directory.GetCurrentDirectory();
 
+            services.AddMvc();
+            services.AddRazorPages();
+
             var environment = new HostingEnvironment
             {
-                ApplicationName = Assembly.GetEntryAssembly().GetName().Name
+                ApplicationName = Assembly.GetEntryAssembly()?.GetName().Name
             };
-            services.AddSingleton<IHostingEnvironment>(environment);
+            services.AddSingleton<IHostEnvironment>(serviceProvider => environment);
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
-                options.FileProviders.Clear();
-                options.FileProviders.Add(new PhysicalFileProvider(appDirectory));
+              //  options.FileProviders.Clear();
+              //  options.FileProviders.Add(new PhysicalFileProvider(appDirectory));
             });
 
             services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
@@ -74,7 +78,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Tests.Templating
             services.AddSingleton<DiagnosticSource>(diagnosticSource);
 
             services.AddLogging();
-            services.AddMvc();
+
             services.AddSingleton<RazorTemplatingEngine>();
             ServiceProvider provider = services.BuildServiceProvider();
             return provider;

@@ -36,15 +36,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
-using Newtonsoft.Json;
 using Polly;
 using Polly.Registry;
 using Polly.Timeout;
 using Refit;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+
+//using Microsoft.OpenApi.Models;
+//using Swashbuckle.AspNetCore.Swagger;
 
 namespace Enigmatry.Blueprint.Api
 {
@@ -54,19 +57,19 @@ namespace Enigmatry.Blueprint.Api
         private const string GlobalTimeoutPolicyName = "global-timeout";
 
         private readonly IConfiguration _configuration;
-        private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
-            _loggerFactory = loggerFactory;
         }
 
         [UsedImplicitly]
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             ConfigureFluentValidatorOptions();
+
+            app.UseRouting();
 
             if (_configuration.UseDeveloperExceptionPage())
             {
@@ -91,18 +94,22 @@ namespace Enigmatry.Blueprint.Api
             app.UseHsts();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
+            /*app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blueprint Api V1"); 
                 c.RoutePrefix = String.Empty;
-            });
+            });*/
 
             app.UseCultures();
-            
-            app.UseMvc();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+               // endpoints.MapHealthChecks("/health");
+            });
 
             // Enable healthchecks on the configured endpoint.
             app.UseHealthChecks("/healthcheck",
@@ -137,20 +144,20 @@ namespace Enigmatry.Blueprint.Api
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureServicesExceptMvc(services, _configuration);
-            AddMvc(services, _configuration, _loggerFactory);
+            AddMvc(services, _configuration);
         }
 
         // IMvcBuilder needed for tests
-        internal static IMvcBuilder AddMvc(IServiceCollection services, IConfiguration configuration,
-            ILoggerFactory loggerFactory)
+        internal static IMvcBuilder AddMvc(IServiceCollection services, IConfiguration configuration)
         {
             return services
-                .AddMvc(options => options.DefaultConfigure(configuration, loggerFactory))
+                .AddControllers(options => options.DefaultConfigure(configuration))
+                .AddNewtonsoftJson()
                 .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                         factory.Create(typeof(SharedResource));
                 })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddFluentValidation(fv =>
                 {
                     // disables standard data annotations validation
@@ -188,7 +195,7 @@ namespace Enigmatry.Blueprint.Api
                     context.HttpContext.CreateValidationProblemDetailsResponse(context.ModelState);
             });
 
-            services.AddSwaggerGen(SetupSwaggerAction);
+            //services.AddSwaggerGen(SetupSwaggerAction);
         }
 
         private static void ConfigureHealthChecks(IServiceCollection services, IConfiguration configuration)
@@ -266,18 +273,18 @@ namespace Enigmatry.Blueprint.Api
                 .AddTypedClient(RestService.For<IGitHubClient>);
         }
 
-        private static void SetupSwaggerAction(SwaggerGenOptions c)
+        /*private static void SetupSwaggerAction(SwaggerGenOptions c)
         {
-            c.SwaggerDoc("v1", new Info
+            c.SwaggerDoc("v1", new OpenApiInfo 
             {
                 Title = "Blueprint Api",
                 Version = "v1",
                 Description = "Blueprint Api",
-                Contact = new Contact
+                Contact = new OpenApiContact
                 {
                     Name = "TBD",
                     Email = "tbd@tbd.com",
-                    Url = "https://www.enigmatry.com"
+                    Url = new Uri("https://www.enigmatry.com")
                 }
             });
 
@@ -285,13 +292,13 @@ namespace Enigmatry.Blueprint.Api
             //c.OperationFilter<AuthResponsesOperationFilter>();
 
             // Set the comments path for the Swagger JSON and UI.
-            string path = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath,
-                Assembly.GetExecutingAssembly().GetName().Name + ".xml");
-            c.IncludeXmlComments(path);
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            //c.IncludeXmlComments(xmlPath);
 
             // Scan FluentValidations Rules to generate the Swagger documentation
-            c.AddFluentValidationRules();
-        }
+            //c.AddFluentValidationRules();
+        }*/
 
         [UsedImplicitly]
         // ConfigureContainer is where you can register things directly

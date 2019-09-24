@@ -1,7 +1,9 @@
-﻿namespace Enigmatry.Blueprint.Infrastructure.Tests.Templating
+﻿using System;
+
+namespace Enigmatry.Blueprint.Infrastructure.Tests.Templating
 {
     public class EmailModel
     {
-        public string SampleText { get; set; }
+        public string SampleText { get; set; } = String.Empty;
     }
 }
