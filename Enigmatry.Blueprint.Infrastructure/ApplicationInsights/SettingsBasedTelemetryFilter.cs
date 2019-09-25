@@ -1,21 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Enigmatry.Blueprint.Core.Settings;
+using JetBrains.Annotations;
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.Extensibility;
 
 namespace Enigmatry.Blueprint.Infrastructure.ApplicationInsights
 {
-    public class SuccessfulDependencyFilter : ITelemetryProcessor
+    [UsedImplicitly]
+    public class SettingsBasedTelemetryFilter : ITelemetryProcessor
     {
         private readonly Dictionary<string, string> _excludedTypes;
         private ITelemetryProcessor Next { get; }
 
         // Link processors to each other in a chain.
-        public SuccessfulDependencyFilter(ITelemetryProcessor next, ApplicationInsightsSettings.TelemetryProcessorSettings settings)
+        public SettingsBasedTelemetryFilter(ITelemetryProcessor next, ApplicationInsightsSettings settings)
         {
             Next = next;
-            _excludedTypes = PrepareIncludedTypes(settings.ExcludedTypes);
+            _excludedTypes = PrepareIncludedTypes(settings.TelemetryProcessor.ExcludedTypes);
         }
 
         public void Process(ITelemetry item)

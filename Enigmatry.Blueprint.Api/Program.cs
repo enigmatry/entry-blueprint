@@ -21,6 +21,7 @@ namespace Enigmatry.Blueprint.Api
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile(
+
                     $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json",
                     true)
                 .Build();
@@ -55,8 +56,9 @@ namespace Enigmatry.Blueprint.Api
             return WebHost.CreateDefaultBuilder(args)
                 .ConfigureKestrel(options => options.AddServerHeader = false)
                 .ConfigureServices(services => services.AddAutofac())
+                .UseKestrel()
+                .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
                 .UseSerilog();
         }
 

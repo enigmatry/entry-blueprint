@@ -27,6 +27,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
             builder.Register(c => c.Resolve<AppSettings>().Smtp)
                 .AsSelf()
                 .SingleInstance();
+
+            builder.Register(c => c.Resolve<IConfiguration>()
+                    .ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights"))
+                .AsSelf()
+                .SingleInstance();
         }
     }
 }

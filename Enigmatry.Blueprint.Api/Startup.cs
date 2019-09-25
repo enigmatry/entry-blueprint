@@ -108,7 +108,7 @@ namespace Enigmatry.Blueprint.Api
             app.UseMvc();
 
             // Enable healthchecks on the configured endpoint.
-            app.UseHealthChecks("/healthcheck",
+            /*app.UseHealthChecks("/healthcheck",
                 new HealthCheckOptions
                 {
                     // Specify a custom ResponseWriter, so we can return json with additional information,
@@ -125,7 +125,7 @@ namespace Enigmatry.Blueprint.Api
                         context.Response.ContentType = MediaTypeNames.Application.Json;
                         await context.Response.WriteAsync(result);
                     }
-                });
+                });*/
 
             telemetryConfiguration.ConfigureTelemetry(_configuration.ReadApplicationInsightsSettings());
         }
@@ -179,7 +179,7 @@ namespace Enigmatry.Blueprint.Api
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper(typeof(Startup).Assembly);
 
-            ConfigureHealthChecks(services, configuration);
+            //ConfigureHealthChecks(services, configuration);
 
             ConfigureConfiguration(services, configuration);
             ConfigureMediatR(services);
@@ -302,6 +302,7 @@ namespace Enigmatry.Blueprint.Api
                 EnableAdaptiveSampling = false
             };
             services.AddApplicationInsightsTelemetry(aiOptions);
+            services.AddApplicationInsightsTelemetryProcessor<SettingsBasedTelemetryFilter>();
         }
 
         [UsedImplicitly]
