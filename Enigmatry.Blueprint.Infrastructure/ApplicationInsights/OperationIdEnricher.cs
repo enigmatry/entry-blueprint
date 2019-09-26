@@ -14,7 +14,7 @@ namespace Enigmatry.Blueprint.Infrastructure.ApplicationInsights
         {
             if (logEvent.Properties.TryGetValue("RequestId", out var requestId))
             {
-                logEvent.AddPropertyIfAbsent(new LogEventProperty("operationId", requestId));
+               // logEvent.AddPropertyIfAbsent(new LogEventProperty("operationId", requestId));
             }
         }
     }
