@@ -302,7 +302,7 @@ namespace Enigmatry.Blueprint.Api
                 EnableAdaptiveSampling = false
             };
             services.AddApplicationInsightsTelemetry(aiOptions);
-            services.AddApplicationInsightsTelemetryProcessor<SettingsBasedTelemetryFilter>();
+            services.AddApplicationInsightsTelemetryProcessor<SettingsBasedTelemetryProcessor>();
         }
 
         [UsedImplicitly]

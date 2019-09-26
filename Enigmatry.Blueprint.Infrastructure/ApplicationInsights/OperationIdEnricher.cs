@@ -13,8 +13,8 @@ namespace Enigmatry.Blueprint.Infrastructure.ApplicationInsights
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
             if (logEvent.Properties.TryGetValue("RequestId", out var requestId))
-            {
-               // logEvent.AddPropertyIfAbsent(new LogEventProperty("operationId", requestId));
+            { 
+                logEvent.AddPropertyIfAbsent(new LogEventProperty("operationId", requestId));
             }
         }
     }

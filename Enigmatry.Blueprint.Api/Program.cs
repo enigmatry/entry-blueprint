@@ -1,14 +1,17 @@
 ﻿using System;
 using System.IO;
 using Autofac.Extensions.DependencyInjection;
+using Enigmatry.Blueprint.Core.Helpers;
 using Enigmatry.Blueprint.Infrastructure.ApplicationInsights;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using JetBrains.Annotations;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
+using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Enigmatry.Blueprint.Api
@@ -21,7 +24,6 @@ namespace Enigmatry.Blueprint.Api
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile(
-
                     $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json",
                     true)
                 .Build();
@@ -75,10 +77,21 @@ namespace Enigmatry.Blueprint.Api
                 .WriteTo.Console(theme: SystemConsoleTheme
                     .Literate); // https://github.com/serilog/serilog-sinks-console
 
+            AddAppInsightsToSerilog(config);
+
             Log.Logger = config.CreateLogger();
 
             // for enabling self diagnostics see https://github.com/serilog/serilog/wiki/Debugging-and-Diagnostics
             // Serilog.Debugging.SelfLog.Enable(Console.Error);
+        }
+
+        private static void AddAppInsightsToSerilog(LoggerConfiguration config)
+        {
+            var settings = Configuration.ReadApplicationInsightsSettings();
+            if (settings.InstrumentationKey.HasContent())
+            {
+                config.WriteTo.ApplicationInsights(settings.InstrumentationKey, new SettingsBasedTraceTelemetryConverter(settings), settings.SerilogLogsRestrictedToMinimumLevel);
+            }
         }
     }
 }
