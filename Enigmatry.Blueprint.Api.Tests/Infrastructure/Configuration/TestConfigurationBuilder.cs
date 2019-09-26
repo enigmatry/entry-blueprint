@@ -36,7 +36,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                 {"App:GitHubApi:BaseUrl", "https://api.github.com"},
                 {"App:GitHubApi:Timeout", "0.00:00:15"},
                 {"App:Smtp:UsePickupDirectory", "true"},
-                {"App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation()}
+                {"App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation()},
+                {"ApplicationInsights:TelemetryProcessor:ExcludedTypes", String.Empty }
             };
 
             configurationBuilder.AddInMemoryCollection(dict);

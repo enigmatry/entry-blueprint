@@ -1,4 +1,5 @@
-﻿using Enigmatry.Blueprint.Api.Localization;
+﻿using System;
+using Enigmatry.Blueprint.Api.Localization;
 using Enigmatry.Blueprint.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -32,6 +33,13 @@ namespace Enigmatry.Blueprint.Api.Controllers
             _logger.LogInformation("Returning localized messages: {GoodMorning} and {GoodEvening}", goodMorning, goodEvening);
 
             return new LocalizedMessagesModel {Message1 = goodMorning, Message2 = goodEvening, Message3 = message3};
+        }
+
+        [HttpGet]
+        [Route("exception")]
+        public LocalizedMessagesModel GetException()
+        {
+            throw new Exception("Exception from test");
         }
 
         [HttpPost]
