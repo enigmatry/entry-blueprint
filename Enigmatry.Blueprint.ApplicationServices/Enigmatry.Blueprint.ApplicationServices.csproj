@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-	<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
 	<!-- SonarQube needs this -->
 	<ProjectGuid>{31dcd75f-4746-421d-bb72-078e7b0cc684}</ProjectGuid>
   </PropertyGroup>

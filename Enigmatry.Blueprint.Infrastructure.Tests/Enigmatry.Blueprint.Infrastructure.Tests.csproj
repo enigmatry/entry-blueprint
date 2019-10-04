@@ -2,7 +2,6 @@
   <Import Project=".\build\testing.targets" />
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-	<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
 
   <ItemGroup>

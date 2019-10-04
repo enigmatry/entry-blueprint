@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-	<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <RootNamespace>Enigmatry.BuildingBlocks.EventBusServiceBus</RootNamespace>
 	<!-- SonarQube needs this -->
 	<ProjectGuid>{888b2d86-e0db-415d-841f-d5486a64709e}</ProjectGuid>
