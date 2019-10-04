@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters;
 using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Enigmatry.Blueprint.Api
@@ -90,7 +91,7 @@ namespace Enigmatry.Blueprint.Api
             var settings = Configuration.ReadApplicationInsightsSettings();
             if (settings.InstrumentationKey.HasContent())
             {
-                config.WriteTo.ApplicationInsights(settings.InstrumentationKey, new SettingsBasedTraceTelemetryConverter(settings), settings.SerilogLogsRestrictedToMinimumLevel);
+                config.WriteTo.ApplicationInsights(settings.InstrumentationKey, new TraceTelemetryConverter(), settings.SerilogLogsRestrictedToMinimumLevel);
             }
         }
     }

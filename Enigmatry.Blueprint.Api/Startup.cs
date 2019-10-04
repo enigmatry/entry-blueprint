@@ -17,7 +17,6 @@ using Enigmatry.Blueprint.Api.Resources;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure;
-using Enigmatry.Blueprint.Infrastructure.ApplicationInsights;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
@@ -29,8 +28,6 @@ using FluentValidation.AspNetCore;
 using JetBrains.Annotations;
 using MediatR;
 using MediatR.Pipeline;
-using Microsoft.ApplicationInsights.AspNetCore.Extensions;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -67,7 +64,7 @@ namespace Enigmatry.Blueprint.Api
 
         [UsedImplicitly]
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TelemetryConfiguration telemetryConfiguration)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             ConfigureFluentValidatorOptions();
 
@@ -108,7 +105,7 @@ namespace Enigmatry.Blueprint.Api
             app.UseMvc();
 
             // Enable healthchecks on the configured endpoint.
-            /*app.UseHealthChecks("/healthcheck",
+            app.UseHealthChecks("/healthcheck",
                 new HealthCheckOptions
                 {
                     // Specify a custom ResponseWriter, so we can return json with additional information,
@@ -125,9 +122,7 @@ namespace Enigmatry.Blueprint.Api
                         context.Response.ContentType = MediaTypeNames.Application.Json;
                         await context.Response.WriteAsync(result);
                     }
-                });*/
-
-            telemetryConfiguration.ConfigureTelemetry(_configuration.ReadApplicationInsightsSettings());
+                });
         }
 
         private static void ConfigureFluentValidatorOptions()
@@ -179,12 +174,12 @@ namespace Enigmatry.Blueprint.Api
             services.AddDbContext<BlueprintContext>();
             services.AddAutoMapper(typeof(Startup).Assembly);
 
-            //ConfigureHealthChecks(services, configuration);
+            ConfigureHealthChecks(services, configuration);
 
             ConfigureConfiguration(services, configuration);
             ConfigureMediatR(services);
             ConfigureTypedClients(services, configuration);
-            ConfigureApplicationInsights(services);
+            services.AddApplicationInsightsTelemetry();
 
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
             services.PostConfigure<ApiBehaviorOptions>(options =>
@@ -201,7 +196,7 @@ namespace Enigmatry.Blueprint.Api
             // Here we can configure the different health checks:
             services.AddHealthChecks()
                 // Check the sql server connection
-                .AddSqlServer(configuration["ConnectionStrings:BlueprintContext"], "SELECT 1")
+                //.AddSqlServer(configuration["ConnectionStrings:BlueprintContext"], "SELECT 1")
                 // Check the EF Core Context
                 .AddDbContextCheck<BlueprintContext>()
                 // Check a Custom url
@@ -210,7 +205,7 @@ namespace Enigmatry.Blueprint.Api
                 // Check metrics
                 .AddPrivateMemoryHealthCheck(1024 * 1024 * 200, "Available memory test", HealthStatus.Degraded)
                 // We can also push the results to Application Insights.
-                .AddApplicationInsightsPublisher(configuration["ApplicationInsights:InstrumentationKey"]);
+                .AddApplicationInsightsPublisher(configuration.ReadApplicationInsightsSettings().InstrumentationKey);
         }
 
         private static void ConfigurePolly(IServiceCollection services)
@@ -291,18 +286,6 @@ namespace Enigmatry.Blueprint.Api
 
             // Scan FluentValidations Rules to generate the Swagger documentation
             c.AddFluentValidationRules();
-        }
-
-        private static void ConfigureApplicationInsights(IServiceCollection services)
-        {
-            // first disable adaptive sampling, it is re-enabled later with custom settings
-            // https://docs.microsoft.com/en-us/azure/azure-monitor/app/sampling
-            var aiOptions = new ApplicationInsightsServiceOptions
-            {
-                EnableAdaptiveSampling = false
-            };
-            services.AddApplicationInsightsTelemetry(aiOptions);
-            services.AddApplicationInsightsTelemetryProcessor<SettingsBasedTelemetryProcessor>();
         }
 
         [UsedImplicitly]

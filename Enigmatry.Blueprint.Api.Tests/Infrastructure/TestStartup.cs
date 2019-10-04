@@ -43,9 +43,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         }
 
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TelemetryConfiguration configuration)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            _startup.Configure(app, env, configuration);
+            _startup.Configure(app, env);
         }
     }
 }
