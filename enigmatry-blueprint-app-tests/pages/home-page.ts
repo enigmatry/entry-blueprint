@@ -4,16 +4,29 @@ import { getBaseUrl } from '../config/testcafe-config';
 export default class HomePage {
   public header = Selector('h1')
   public subHeader = Selector('h2')
-  public useLanguageButton = Selector('button');
-  public datePickerInput = Selector('input.bsdatepicker');
+  public useLanguageButton = Selector('body > app-root > div > button');
+  public datePickerInput = Selector('body > app-root > div.row > div > input');
+  public staticHeader = Selector('body > app-root > accordion > accordion-group.panel.panel-open > div > div.panel-heading.card-header.panel-enabled > div > div > button')
+  public staticHeaderContent = Selector('body > app-root > accordion > accordion-group.panel.panel-open > div > div.panel-collapse.collapse.in.show > div')
   public dateRangePickerInput = Selector('input.bsdaterangepicker');
   public setTitleButtons = Selector('.btn i.icon-loader');
   public url: string;
+
   constructor() {
     this.url = getBaseUrl();
   }
+
   public async selectLanguage(language: 'Dutch' | 'English') {
     const index = language === 'English' ? 0 : 1
     await t.click(this.useLanguageButton.nth(index))
   }
+
+  public async inputDatePicker(date: string) {
+    await t.typeText(this.datePickerInput, date)
+  }
+
+  public async clickStaticHeader(){
+    await t.click(this.staticHeader)
+  } 
+  
 }
