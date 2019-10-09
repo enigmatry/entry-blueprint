@@ -23,7 +23,7 @@ test("English language selection", async t => {
 test("Static header content", async t => {
   await page.clickStaticHeader()
   await t
-    .expect(page.staticHeaderContent.value)
+    .expect(page.staticHeaderContent.textContent)
     .eql(' This content is straight in the template. ');
 });
 
