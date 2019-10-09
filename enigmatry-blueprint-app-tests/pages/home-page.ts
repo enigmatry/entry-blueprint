@@ -6,8 +6,8 @@ export default class HomePage {
   public subHeader = Selector('h2')
   public useLanguageButton = Selector('body > app-root > div > button');
   public datePickerInput = Selector('body > app-root > div.row > div > input');
-  public staticHeader = Selector('body > app-root > accordion > accordion-group.panel.panel-open > div > div.panel-heading.card-header.panel-enabled > div > div > button')
-  public staticHeaderContent = Selector('body > app-root > accordion > accordion-group.panel.panel-open > div > div.panel-collapse.collapse.in.show > div')
+  public staticHeader = Selector("accordion-group[heading='Static Header, initially expanded']")
+  public staticHeaderContent = Selector("div[class='panel-body card-block card-body']")
   public dateRangePickerInput = Selector('input.bsdaterangepicker');
   public setTitleButtons = Selector('.btn i.icon-loader');
   public url: string;
@@ -27,6 +27,5 @@ export default class HomePage {
 
   public async clickStaticHeader(){
     await t.click(this.staticHeader)
-  } 
-  
+  }  
 }
