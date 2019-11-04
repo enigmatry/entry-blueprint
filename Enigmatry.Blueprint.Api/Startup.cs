@@ -204,7 +204,12 @@ namespace Enigmatry.Blueprint.Api
                     HealthStatus.Degraded)*/
                 // Check metrics
                 .AddPrivateMemoryHealthCheck(1024 * 1024 * 200, "Available memory test", HealthStatus.Degraded)
-                // We can also push the results to Application Insights.
+                // Check Redis
+                //.AddRedis(redisConnectionString: configuration["ConnectionStrings:RedisConnection"],
+                //    name: "Redis",
+                //    failureStatus: HealthStatus.Degraded)
+                // We can also push the results to Application Insights. This will be done every 30 seconds
+				// Can be checked from the Azure Portal under metrics, by selecting the azure.applicationinsights namespace.
                 .AddApplicationInsightsPublisher(configuration.ReadApplicationInsightsSettings().InstrumentationKey);
         }
 
