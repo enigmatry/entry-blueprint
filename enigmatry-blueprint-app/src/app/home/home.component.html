@@ -1,0 +1,33 @@
+<div>
+  {{ 'home.api-url' | translate }}: {{ apiUrl }}
+</div>
+<hr />
+<div>
+  {{ 'home.use-language' | translate }}:
+  <button (click)="useLanguage('en')" translate>language.english</button>
+  <button (click)="useLanguage('nl')" translate>language.dutch</button>
+</div>
+
+<hr />
+<p>
+  {{ 'home.select-title-to-set-on-html-document' | translate}}:
+</p>
+<ul>
+  <!-- example of using dynamic translation-->
+  <li><a class="btn btn-primary" (click)="setTitle('Title 1!')">{{ 'home.set-to' | translate:{'name':'Title 1'} }} </a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 2!')">{{ 'home.set-to' | translate:{'name':'Title 2'} }} </a></li>
+  <li><a class="btn btn-primary" (click)="setTitle('Title 3!')">{{ 'home.set-to' | translate:{'name':'Title 3'} }} </a></li>
+</ul>
+
+<hr />
+<p>Pluralization translation sample</p>
+<ul>
+  <li translate [translateParams]="{ count: 0 }">pluralization.things</li>
+  <li translate [translateParams]="{ count: 1 }">pluralization.things</li>
+  <li>{{'pluralization.things' | translate:"{ count: 2 }"}}</li>
+</ul>
+<ul>
+  <li translate [translateParams]="{ gender: 'female', name: 'Sarah' }">pluralization.people</li>
+  <li translate [translateParams]="{ gender: 'male', name: 'Peter' }">pluralization.people</li>
+  <li>{{'pluralization.people' | translate:"{ name: 'Sarah + Peter' }"}}</li>
+</ul>
