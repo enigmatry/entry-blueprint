@@ -13,6 +13,15 @@ import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
+import {
+  MatFormFieldModule,
+  MatInputModule,
+} from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +32,11 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
     // setup translations
     TranslateModule.forRoot({
       loader: {
