@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Enigmatry.Blueprint.Api.Init;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using JetBrains.Annotations;
@@ -12,8 +13,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
     [UsedImplicitly]
     public class TestStartup
     {
-        private readonly IConfiguration _configuration;
         private readonly Startup _startup;
+        private readonly IConfiguration _configuration;
 
         public TestStartup(IConfiguration configuration)
         {
@@ -24,8 +25,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         [UsedImplicitly]
         public void ConfigureServices(IServiceCollection services)
         {
-            Startup.AddMvc(services, _configuration)
-                .AddApplicationPart(typeof(Startup).Assembly);
+            services.AppAddMvc(_configuration)
+                .AddApplicationPart(AssemblyFinder.ApiAssembly); // needed only because of tests
             Startup.ConfigureServicesExceptMvc(services, _configuration);
         }
 

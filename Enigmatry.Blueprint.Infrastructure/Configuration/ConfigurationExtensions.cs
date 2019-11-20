@@ -6,9 +6,16 @@ namespace Enigmatry.Blueprint.Infrastructure.Configuration
 {
     public static class ConfigurationExtensions
     {
+        public static bool AppUseDeveloperExceptionPage(this IConfiguration configuration) => configuration.GetValue("UseDeveloperExceptionPage", false);
+
         public static AppSettings ReadAppSettings(this IConfiguration configuration)
         {
             return configuration.ReadSettingsSection<AppSettings>("App");
+        }
+
+        public static string ApplicationInsightsInstrumentationKey(this IConfiguration configuration)
+        {
+            return configuration.ReadApplicationInsightsSettings().InstrumentationKey;
         }
 
         public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration)

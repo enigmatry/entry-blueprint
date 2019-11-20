@@ -5,8 +5,8 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
 {
     public class UserBuilder
     {
-        private string _name;
-        private string _userName;
+        private string _name = String.Empty;
+        private string _userName = String.Empty;
 
         public UserBuilder UserName(string value)
         {
