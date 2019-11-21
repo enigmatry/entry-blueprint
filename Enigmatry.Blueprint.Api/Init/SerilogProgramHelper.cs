@@ -31,9 +31,7 @@ namespace Enigmatry.Blueprint.Api.Init
                 .Enrich.WithProcessId()
                 .Enrich.WithMachineName()
                 .Enrich.With(new OperationIdEnricher())
-                .Enrich.WithProperty("AppVersion", PlatformServices.Default.Application.ApplicationVersion)
-                .WriteTo.Console(theme: SystemConsoleTheme
-                    .Literate); // https://github.com/serilog/serilog-sinks-console
+                .Enrich.WithProperty("AppVersion", PlatformServices.Default.Application.ApplicationVersion);
 
             AddAppInsightsToSerilog(config);
 

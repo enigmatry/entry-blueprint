@@ -33,9 +33,7 @@ namespace Enigmatry.Blueprint.Api.Tests
                 .UserName("john_doe@john.doe")
                 .Name("John Doe");
 
-            var userRepository = Resolve<IRepository<User>>();
-            userRepository.Add(_user);
-            SaveChanges();
+            AddAndSaveChanges(_user);
         }
 
         [Test]
@@ -77,12 +75,10 @@ namespace Enigmatry.Blueprint.Api.Tests
             user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
-        [TestCase("some user", "invalid email", "userName", "'Username' is not a valid email address.", TestName =
-            "Invalid username")]
-        [TestCase("", "someuser@test.com", "name", "'Name' must not be empty.", TestName = "Missing name")]
-        [TestCase("some user", "", "userName", "'Username' must not be empty.", TestName = "Missing username")]
-        [TestCase("John Doe", "john_doe@john.doe", "userName", "Username already taken", TestName =
-            "Duplicate username")]
+        [TestCase("some user", "invalid email", "userName", "'Username' is not a valid email address.")]
+        [TestCase("", "someuser@test.com", "name", "'Name' must not be empty.")]
+        [TestCase("some user", "", "userName", "'Username' must not be empty.")]
+        [TestCase("John Doe", "john_doe@john.doe", "userName", "Username already taken")]
         public async Task TestCreateReturnsValidationErrors(string name, string userName, string validationField,
             string validationErrorMessage)
         {

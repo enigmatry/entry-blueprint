@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Security.Principal;
+using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Enigmatry.Blueprint.Infrastructure.MediatR;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Seeding
 {
@@ -46,11 +49,16 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
                 b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
 
             var result =
-                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider())
+                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>())
                 {
                     ModelBuilderConfigurator = DbInitializer.SeedData
                 };
             return result;
+        }
+
+        private IPrincipal CreateEmptyPrincipal()
+        {
+            return new GenericPrincipal(new GenericIdentity(""), new string[0]);
         }
     }
 }

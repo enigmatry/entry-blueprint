@@ -13,11 +13,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Configuration
             return configuration.ReadSettingsSection<AppSettings>("App");
         }
 
-        public static string ApplicationInsightsInstrumentationKey(this IConfiguration configuration)
-        {
-            return configuration.ReadApplicationInsightsSettings().InstrumentationKey;
-        }
-
         public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration)
         {
             return configuration.ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights");

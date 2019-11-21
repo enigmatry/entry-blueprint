@@ -25,12 +25,7 @@ namespace Enigmatry.Blueprint.Api.Init
                     ResponseWriter = async (context, report) =>
                     {
                         string result = JsonConvert.SerializeObject(
-                            new
-                            {
-                                status = report.Status.ToString(),
-                                errors = report.Entries.Select(e => new
-                                    {key = e.Key, value = Enum.GetName(typeof(HealthStatus), e.Value.Status)})
-                            });
+                            new {status = report.Status.ToString(), entries = report.Entries.Select(e => new {key = e.Key, value = e.Value.Status.ToString()})});
                         context.Response.ContentType = MediaTypeNames.Application.Json;
                         await context.Response.WriteAsync(result);
                     }

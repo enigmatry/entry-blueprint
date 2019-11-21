@@ -13,14 +13,12 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
     {
         private readonly BlueprintContext _context;
         private readonly ILogger<DbContextUnitOfWork> _logger;
-        private readonly ICurrentUserProvider _currentUserProvider;
         private bool _cancelSaving;
 
         public DbContextUnitOfWork(BlueprintContext context, ILogger<DbContextUnitOfWork> logger, ICurrentUserProvider currentUserProvider)
         {
             _context = context;
             _logger = logger;
-            _currentUserProvider = currentUserProvider;
         }
 
         public int SaveChanges()
@@ -29,7 +27,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             return task.Result;
         }
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             if (_cancelSaving)
             {
@@ -37,7 +35,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
                 return 0;
             }
 
-            int numberOfChanges = await _context.SaveEntitiesAsync(_currentUserProvider.UserId, cancellationToken);
+            int numberOfChanges = await _context.SaveChangesAsync(cancellationToken);
             _logger.LogDebug(
                 $"{numberOfChanges} of changed were saved to database {_context.Database.GetDbConnection().Database}");
             return numberOfChanges;

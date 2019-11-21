@@ -13,6 +13,7 @@ using Enigmatry.BuildingBlocks.IntegrationEventLogEF;
 using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 {
@@ -21,13 +22,16 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
     {
         private readonly IMediator _mediator;
         private readonly ITimeProvider _timeProvider;
+        private readonly ICurrentUserIdProvider _currentUserIdProvider;
+        private readonly ILogger<BlueprintContext> _logger;
+        public Action<ModelBuilder>? ModelBuilderConfigurator { private get; set; }
 
-        public Action<ModelBuilder> ModelBuilderConfigurator { private get; set; }
-
-        public BlueprintContext(DbContextOptions options, IMediator mediator, ITimeProvider timeProvider) : base(options)
+        public BlueprintContext(DbContextOptions options, IMediator mediator, ITimeProvider timeProvider, ICurrentUserIdProvider currentUserIdProvider, ILogger<BlueprintContext> logger) : base(options)
         {
             _mediator = mediator;
             _timeProvider = timeProvider;
+            _currentUserIdProvider = currentUserIdProvider;
+            _logger = logger;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,12 +46,15 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             base.OnModelCreating(modelBuilder);
         }
 
-        private void RegisterEntities(ModelBuilder modelBuilder)
+        private static void RegisterEntities(ModelBuilder modelBuilder)
         {
             MethodInfo entityMethod = typeof(ModelBuilder).GetMethods().First(m => m.Name == "Entity" && m.IsGenericMethod);
 
-            IEnumerable<Type> entityTypes = Assembly.GetAssembly(typeof(User)).GetTypes()
-                .Where(x => x.IsSubclassOf(typeof(Entity)) && !x.IsAbstract);
+            Assembly? entitiesAssembly = Assembly.GetAssembly(typeof(User));
+            var types = entitiesAssembly != null? entitiesAssembly.GetTypes(): Enumerable.Empty<Type>();
+
+            IEnumerable<Type> entityTypes = types
+                    .Where(x => x.IsSubclassOf(typeof(Entity)) && !x.IsAbstract);
 
             foreach (Type type in entityTypes)
             {
@@ -55,43 +62,61 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             }
         }
 
-        public async Task<int> SaveEntitiesAsync(Guid currentUserId,
-            CancellationToken cancellationToken = default(CancellationToken))
+        public override int SaveChanges()
         {
-            PopulateCreatedUpdated(currentUserId);
+            var task = Task.Run(async () => await SaveChangesAsync());
+            return task.GetAwaiter().GetResult();
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            PopulateCreatedUpdated();
+
+            // we need to gather domain events before saving, so that we include events
+            // for deleted entities (otherwise they are lost due to deletion of the object from context)
+            IEnumerable<INotification> domainEvents = this.GatherDomainEventsFromContext();
+
             // Dispatch Domain Events collection. 
             // Choices:
             // A) Right BEFORE committing data (EF SaveChanges) into the DB will make a single transaction including  
             // side effects from the domain event handlers which are using the same DbContext with "InstancePerLifetimeScope" or "scoped" lifetime
             // B) Right AFTER committing data (EF SaveChanges) into the DB will make multiple transactions. 
             // You will need to handle eventual consistency and compensatory actions in case of failures in any of the Handlers. 
-            await _mediator.DispatchDomainEventsAsync(this);
-
-            // TODO: call populate created updated again?
 
             // After executing this line all the changes (from the Command Handler and Domain Event Handlers) 
             // performed through the DbContext will be committed
-            return await SaveChangesAsync(cancellationToken);
+            var saved = await base.SaveChangesAsync(cancellationToken);
+
+            await _mediator.DispatchDomainEventsAsync(domainEvents, _logger);
+
+            return saved;
         }
 
-        private void PopulateCreatedUpdated(Guid currentUserId)
+        private void PopulateCreatedUpdated()
         {
+            Guid? userId = _currentUserIdProvider.IsAuthenticated
+                ? _currentUserIdProvider.UserId
+                : null;
+
             var changedEntities = ChangeTracker
                 .Entries<Entity>()
                 .Where(x => (x.State == EntityState.Added || x.State == EntityState.Modified) &&
                             x.Entity is IEntityHasCreatedUpdated)
-                .Select(x => new {x.State, Entity = (IEntityHasCreatedUpdated) x.Entity}).ToList();
+                .Select(x => new {x.State, Entity = (IEntityHasCreatedUpdated)x.Entity}).ToList();
 
-            foreach (var entity in changedEntities)
+            if (userId.HasValue)
             {
-                if (entity.State == EntityState.Added)
+                foreach (var entity in changedEntities)
                 {
-                    entity.Entity.SetCreated(_timeProvider.Now, currentUserId);
-                    entity.Entity.SetUpdated(_timeProvider.Now, currentUserId);
-                }
+                    if (entity.State == EntityState.Added)
+                    {
+                        entity.Entity.SetCreated(_timeProvider.Now, userId.Value);
+                        entity.Entity.SetUpdated(_timeProvider.Now, userId.Value);
+                    }
 
-                if (entity.State == EntityState.Modified)
-                    entity.Entity.SetUpdated(_timeProvider.Now, currentUserId);
+                    if (entity.State == EntityState.Modified)
+                        entity.Entity.SetUpdated(_timeProvider.Now, userId.Value);
+                }
             }
         }
     }
