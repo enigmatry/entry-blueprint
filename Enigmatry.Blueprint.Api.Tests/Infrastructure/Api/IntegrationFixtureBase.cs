@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Net.Http;
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
@@ -18,10 +20,12 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 {
     public class IntegrationFixtureBase
     {
+#pragma warning disable CS8618 // Initialized in Setup
         private IConfiguration _configuration;
         private TestServer _server;
         private IServiceScope _testScope;
         protected HttpClient Client;
+#pragma warning restore CS8618 //
 
         [SetUp]
         protected void Setup()
@@ -47,43 +51,13 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 
         private void CreateDatabase()
         {
-            using (IServiceScope scope = CreateScope())
-            {
-                var dbContext = scope.Resolve<BlueprintContext>();
-                // On Azure we cannot drop db, we can only delete all tables
-                DropAllDbObjects(dbContext.Database);
-                // In case that we want to delete db call: dbContext.Database.EnsureDeleted()
-                dbContext.Database.Migrate();
-            }
+            using IServiceScope scope = CreateScope();
+            var dbContext = scope.Resolve<BlueprintContext>();
+            // On Azure we cannot drop db, we can only delete all tables
+            DropAllDbObjects(dbContext.Database);
+            // In case that we want to delete db call: dbContext.Database.EnsureDeleted()
+            dbContext.Database.Migrate();
         }
-
-        private void AddCurrentUserToDb()
-        {
-            using (IServiceScope scope = CreateScope())
-            {
-                var currentUserProvider = scope.Resolve<ICurrentUserProvider>();
-                var dbContext = scope.Resolve<DbContext>();
-
-                dbContext.Add(currentUserProvider.User);
-                dbContext.SaveChanges();
-            }
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            _testScope.Dispose();
-            Client.Dispose();
-            _server.Dispose();
-        }
-
-        protected void SaveChanges()
-        {
-            var unitOfWork = _testScope.Resolve<IUnitOfWork>();
-            unitOfWork.SaveChanges();
-        }
-
-        protected T Resolve<T>() => _testScope.Resolve<T>();
 
         private static void DropAllDbObjects(DatabaseFacade database)
         {
@@ -92,7 +66,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
                 string dropAllSql = EmbeddedResource.ReadResourceContent("Enigmatry.Blueprint.Api.Tests.Infrastructure.Database.DropAllSql.sql");
                 foreach (var statement in dropAllSql.SplitStatements())
                     // WriteLine("Executing: " + statement);
-                    database.ExecuteSqlCommand(statement);
+                    database.ExecuteSqlRaw(statement);
             }
             catch (SqlException ex)
             {
@@ -109,6 +83,63 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
                 }
             }
         }
+
+        private void AddCurrentUserToDb()
+        {
+            using IServiceScope scope = CreateScope();
+            var currentUserProvider = scope.Resolve<ICurrentUserProvider>();
+            var dbContext = scope.Resolve<DbContext>();
+
+            dbContext.Add(currentUserProvider.User);
+            dbContext.SaveChanges();
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            _testScope.Dispose();
+            Client.Dispose();
+            _server.Dispose();
+        }
+
+        protected void AddAndSaveChanges(params object[] entities)
+        {
+            var dbContext = Resolve<DbContext>();
+
+            foreach (object entity in entities)
+            {
+                dbContext.Add(entity);
+            }
+
+            dbContext.SaveChanges();
+        }
+
+        protected void AddToContext(params object[] entities) =>
+            AddToContext(entities.AsEnumerable());
+
+        protected void AddToContext(IEnumerable<object> entities)
+        {
+            var dbContext = Resolve<DbContext>();
+
+            foreach (object entity in entities)
+            {
+                dbContext.Add(entity);
+            }
+        }
+
+        protected void SaveChanges()
+        {
+            var unitOfWork = _testScope.Resolve<IUnitOfWork>();
+            unitOfWork.SaveChanges();
+        }
+
+        protected IQueryable<T> QueryDb<T>() where T : class =>
+            Resolve<DbContext>().Set<T>();
+
+        protected IQueryable<T> QueryDbSkipCache<T>() where T : class =>
+            Resolve<DbContext>().Set<T>().AsNoTracking();
+
+        protected T Resolve<T>() => _testScope.Resolve<T>();
 
         private static void WriteLine(string message) => TestContext.WriteLine(message);
     }

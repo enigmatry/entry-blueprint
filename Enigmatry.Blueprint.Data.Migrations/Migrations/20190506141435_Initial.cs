@@ -55,7 +55,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "CreatedById", "CreatedOn", "Name", "UpdatedById", "UpdatedOn", "UserName" },
-                values: new object[] { new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"), null, new DateTimeOffset(new DateTime(2019, 5, 6, 14, 31, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Test", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Test" });
+                values: new object?[] { new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"), null, new DateTimeOffset(new DateTime(2019, 5, 6, 14, 31, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Test", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Test" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_CreatedById",

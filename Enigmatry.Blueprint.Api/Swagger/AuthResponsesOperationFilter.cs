@@ -2,15 +2,14 @@
 using System.Linq;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Enigmatry.Blueprint.Api.Swagger
 {
-    [UsedImplicitly]
+    /*[UsedImplicitly]
     public class AuthResponsesOperationFilter : IOperationFilter
     {
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             IEnumerable<AuthorizeAttribute> authAttributes = context.MethodInfo.DeclaringType.GetCustomAttributes(true)
                 .Union(context.MethodInfo.GetCustomAttributes(true))
@@ -18,11 +17,11 @@ namespace Enigmatry.Blueprint.Api.Swagger
 
             if (authAttributes.Any())
             {
-                operation.Responses.Add("401", new Response {Description = "Unauthorized"});
+                operation.Responses.Add("401", new OpenApiResponse {Description = "Unauthorized"});
             }
 
             // TODO: scopes?
             // operation.Security.Add(new Dictionary<string, IEnumerable<string>>());
         }
-    }
+    }*/
 }

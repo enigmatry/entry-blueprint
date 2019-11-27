@@ -11,12 +11,13 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
         {
             try
             {
-                using (Stream stream = typeof(EmbeddedResource).GetTypeInfo().Assembly
-                    .GetManifestResourceStream(namespaceAndFileName))
-                using (var reader = new StreamReader(stream, Encoding.UTF8))
+                using Stream? stream = typeof(EmbeddedResource).GetTypeInfo().Assembly.GetManifestResourceStream(namespaceAndFileName);
+                if (stream == null)
                 {
-                    return reader.ReadToEnd();
+                    return String.Empty;
                 }
+                using var reader = new StreamReader(stream, Encoding.UTF8);
+                return reader.ReadToEnd();
             }
             catch (Exception exception)
             {

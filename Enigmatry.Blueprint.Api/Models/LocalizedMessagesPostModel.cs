@@ -1,19 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Enigmatry.Blueprint.Api.Resources;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Enigmatry.Blueprint.Api.Validation;
 using FluentValidation;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.Api.Models
 {
+    [PublicAPI]
     public class LocalizedMessagesPostModel
     {
-        [Display(Name ="Id")] public int Id { get; set; }
+        [Display(Name ="Id")] 
+        public int Id { get; set; }
 
-        [Display(Name="Name")] 
-        public string Name { get; set; }
+        [Display(Name = "Name")] 
+        public string Name { get; set; } = String.Empty;
 
-        [Display(Name ="Email")] public string Email { get; set; }
+        [Display(Name ="Email")] 
+        public string Email { get; set; } = String.Empty;
 
         [UsedImplicitly]
         public class LocalizedMessagesPostModelValidator : AbstractValidator<LocalizedMessagesPostModel>

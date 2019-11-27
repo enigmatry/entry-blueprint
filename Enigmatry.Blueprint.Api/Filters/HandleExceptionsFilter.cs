@@ -14,25 +14,24 @@ namespace Enigmatry.Blueprint.Api.Filters
 {
     public class HandleExceptionsFilter : ExceptionFilterAttribute
     {
-        private readonly ILogger<HandleExceptionsFilter> _logger;
         private readonly bool _useDeveloperExceptionPage;
 
-        public HandleExceptionsFilter(bool useDeveloperExceptionPage, ILogger<HandleExceptionsFilter> logger)
+        public HandleExceptionsFilter(bool useDeveloperExceptionPage)
         {
             _useDeveloperExceptionPage = useDeveloperExceptionPage;
-            _logger = logger;
         }
 
         public override void OnException(ExceptionContext context)
         {
+            ILogger<HandleExceptionsFilter> logger = context.HttpContext.Resolve<ILogger<HandleExceptionsFilter>>();
             if (context.Exception is ValidationException validationException)
             {
-                _logger.LogDebug(context.Exception, "Validation exception");
+                logger.LogDebug(context.Exception, "Validation exception");
                 context.Result = context.HttpContext.CreateValidationProblemDetailsResponse(validationException);
                 return;
             }
 
-            _logger.LogError(context.Exception, "Unexpected error");
+            logger.LogError(context.Exception, "Unexpected error");
 
             IList<MediaTypeHeaderValue> accept = context.HttpContext.Request.GetTypedHeaders().Accept;
             if (accept != null && accept.All(header => header.MediaType != "application/json"))
@@ -41,11 +40,7 @@ namespace Enigmatry.Blueprint.Api.Filters
                 return;
             }
 
-            var jsonResult = new JsonResult(GetProblemDetails(context))
-            {
-                StatusCode = (int) HttpStatusCode.InternalServerError,
-                ContentType = "application/problem+json"
-            };
+            var jsonResult = new JsonResult(GetProblemDetails(context)) {StatusCode = (int)HttpStatusCode.InternalServerError, ContentType = "application/problem+json"};
             context.Result = jsonResult;
         }
 
@@ -55,13 +50,7 @@ namespace Enigmatry.Blueprint.Api.Filters
                 ? context.Exception.Demystify().ToString()
                 : "The instance value should be used to identify the problem when calling customer support";
 
-            var problemDetails = new ProblemDetails
-            {
-                Title = "An unexpected error occurred!",
-                Instance = context.HttpContext.Request.Path,
-                Status = StatusCodes.Status500InternalServerError,
-                Detail = errorDetail
-            };
+            var problemDetails = new ProblemDetails {Title = "An unexpected error occurred!", Instance = context.HttpContext.Request.Path, Status = StatusCodes.Status500InternalServerError, Detail = errorDetail};
 
             return problemDetails;
         }

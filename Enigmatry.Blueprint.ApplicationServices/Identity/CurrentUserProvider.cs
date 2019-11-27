@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Principal;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 
@@ -9,30 +8,33 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
     [UsedImplicitly]
     public class CurrentUserProvider : ICurrentUserProvider
     {
-        private readonly Func<IPrincipal> _principalProvider;
+        private readonly ICurrentUserIdProvider _currentUserIdProvider;
         private readonly IQueryable<User> _userQuery;
-        private User _user;
+        private User? _user;
 
-        public CurrentUserProvider(Func<IPrincipal> principalProvider,
+        public CurrentUserProvider(ICurrentUserIdProvider currentUserIdProvider,
             IQueryable<User> userQuery)
         {
-            _principalProvider = principalProvider;
             _userQuery = userQuery;
+            _currentUserIdProvider = currentUserIdProvider;
         }
 
-        private IPrincipal Principal => _principalProvider();
+        public bool IsAuthenticated => _currentUserIdProvider.IsAuthenticated;
 
-        public bool IsAuthenticated => Principal.Identity.IsAuthenticated;
+        public Guid? UserId => _currentUserIdProvider.UserId.GetValueOrDefault();
 
-        public Guid UserId => User.Id;
-
-        public User User
+        public User? User
         {
             get
             {
                 if (_user != null)
                 {
                     return _user;
+                }
+
+                if (!IsAuthenticated)
+                {
+                    return null;
                 }
 
                 //TODO replace with getting user from principal

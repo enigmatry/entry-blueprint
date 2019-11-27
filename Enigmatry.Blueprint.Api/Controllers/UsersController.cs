@@ -117,15 +117,13 @@ namespace Enigmatry.Blueprint.Api.Controllers
 
         private static byte[] CreateInMemoryFile()
         {
-            using (var ms = new MemoryStream())
-            {
-                TextWriter tw = new StreamWriter(ms);
-                tw.WriteLine("some line");
-                tw.WriteLine("another line");
-                tw.Flush();
-                ms.Position = 0;
-                return ms.ToArray();
-            }
+            using var ms = new MemoryStream();
+            TextWriter tw = new StreamWriter(ms);
+            tw.WriteLine("some line");
+            tw.WriteLine("another line");
+            tw.Flush();
+            ms.Position = 0;
+            return ms.ToArray();
         }
 
         /// <summary>

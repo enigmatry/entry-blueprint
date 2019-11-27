@@ -10,11 +10,11 @@ namespace Enigmatry.Blueprint.Model.Identity
     {
         public Guid? Id { get; set; }
 
-        [DisplayName("Username")]
-        public string UserName { get; set; }
-        
-        [DisplayName("Name")]
-        public string Name { get; set; }
+        [DisplayName("Username")] 
+        public string UserName { get; set; } = "";
+
+        [DisplayName("Name")] 
+        public string Name { get; set; } = "";
 
         public bool IsCreate => !Id.HasValue;
     }

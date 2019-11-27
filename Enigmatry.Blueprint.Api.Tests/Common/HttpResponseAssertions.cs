@@ -48,9 +48,9 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             {
                 var json = JsonConvert.DeserializeObject<ValidationProblemDetails>(responseContent);
                 
-                if (json.Errors.TryGetValue(fieldName, out string[] errorsField))
+                if (json.Errors.TryGetValue(fieldName, out string[]? errorsField))
                 {
-                    errorFound = string.IsNullOrEmpty(expectedValidationMessage)
+                    errorFound = String.IsNullOrEmpty(expectedValidationMessage)
                         ? errorsField.Any()
                         : errorsField.Any(msg => msg == expectedValidationMessage);
                 }
@@ -63,7 +63,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             AssertionScope assertionScope = assertion.ForCondition(errorFound).BecauseOf(because, becauseArgs);
             string message;
             object[] failArgs;
-            if (string.IsNullOrEmpty(expectedValidationMessage))
+            if (String.IsNullOrEmpty(expectedValidationMessage))
             {
                 message = "Expected response to have validation message with key: {0}{reason}, but found {1}.";
                 failArgs =new object[]

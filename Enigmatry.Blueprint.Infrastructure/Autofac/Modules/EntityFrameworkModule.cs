@@ -3,12 +3,9 @@ using System.Linq;
 using Autofac;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Core.Settings;
-using Enigmatry.Blueprint.Infrastructure.Data.Conventions;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -68,12 +65,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 .EnableSensitiveDataLogging(configuration.SensitiveDataLoggingEnabled());
 
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext"),
-                    sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings))
-                // Throw an exception when you are evaluating a query in-memory instead of in SQL.
-                .ConfigureWarnings(x => x.Throw(RelationalEventId.QueryClientEvaluationWarning));
-
-            //replace default convention builder with our so we can add custom conventions
-            optionsBuilder.ReplaceService<IConventionSetBuilder, CustomSqlServerConventionSetBuilder>();
+                sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
 
             return optionsBuilder.Options;
         }

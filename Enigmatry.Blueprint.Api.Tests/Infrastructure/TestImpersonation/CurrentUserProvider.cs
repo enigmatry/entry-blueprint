@@ -1,26 +1,22 @@
 ﻿using System;
 using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
 {
-    internal class CurrentUserProvider : ICurrentUserProvider
+    internal class TestCurrentUserProvider : ICurrentUserProvider
     {
-        // static so that we remember Id bettwen each resolve of CurrentUserProvider
-        private static Guid userId = Guid.NewGuid();
-
-        public CurrentUserProvider(TestPrincipal principal, ITimeProvider timeProvider)
+        public TestCurrentUserProvider(TestPrincipal principal)
         {
             User = User.Create(new UserCreateOrUpdateCommand
             {
                 UserName = principal.UserName,
                 Name = "INTEGRATION_TEST"
-            }).WithId(userId);
+            }).WithId(principal.UserId);
         }
 
-        public Guid UserId => User.Id;
-        public User User { get; }
+        public Guid? UserId => User?.Id;
+        public User? User { get; }
 
         public bool IsAuthenticated => true;
     }

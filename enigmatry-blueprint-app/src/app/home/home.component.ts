@@ -9,11 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  apiUrl = environment.apiUrl;
 
   ngOnInit() {
   }
-
-  apiUrl = environment.apiUrl;
 
   constructor(
     private titleService: Title,

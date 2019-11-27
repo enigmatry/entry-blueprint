@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Serilog.Context;
@@ -30,7 +31,7 @@ namespace Enigmatry.Blueprint.Api.Logging
         {
             return new ILogEventEnricher[]
             {
-                new PropertyEnricher("User", context.User.Identity.Name ?? string.Empty),
+                new PropertyEnricher("User", context.User.Identity.Name ?? String.Empty),
                 new PropertyEnricher("Address", context.Connection.RemoteIpAddress)
             };
         }
