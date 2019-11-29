@@ -21,8 +21,24 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="rowSelected(row)"
+      [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+      (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+    </tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 2, 10]"></mat-paginator>
 </div>
+
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Placeholder" [(ngModel)]="selectedName">
+  </mat-form-field>
+</p>
+
+<p>
+  <button mat-raised-button (click)="updateUser()">Update</button>
+</p>
+

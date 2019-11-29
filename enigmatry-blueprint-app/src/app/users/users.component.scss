@@ -10,3 +10,11 @@ table {
 td, th {
   width: 33%;
 }
+
+.mat-row.hovered {
+  background: #eee;
+}
+
+.mat-row.highlighted {
+  background: #999;
+}

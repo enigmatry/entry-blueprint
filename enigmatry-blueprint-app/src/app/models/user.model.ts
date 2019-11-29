@@ -1,5 +1,5 @@
-export class User {
-  public userName: string;
-  public name: string;
-  public createdOn: Date;
+export interface User {
+  userName: string;
+  name: string;
+  createdOn: Date;
 }
