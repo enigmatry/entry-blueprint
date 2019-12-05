@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Core.Email;
@@ -34,7 +36,7 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
                 user = User.Create(request);
                 _userRepository.Add(user);
 
-                _emailClient.Send(new EmailMessage("New user", "Your account is successfully created.", new[] {user.UserName}));
+                _emailClient.Send(new EmailMessage("New user", "Your account is successfully created.", new[] {user.UserName}, Enumerable.Empty<string>()));
             }
 
             return user;
