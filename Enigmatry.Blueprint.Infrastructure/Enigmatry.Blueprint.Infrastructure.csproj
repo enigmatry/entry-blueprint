@@ -2,9 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
-        <!-- SonarQube needs this -->
-        <ProjectGuid>{d620781e-9e45-4be7-95f3-a70c5eab7ac0}</ProjectGuid>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
