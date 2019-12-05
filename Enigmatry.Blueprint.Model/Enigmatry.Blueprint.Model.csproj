@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 	<!-- SonarQube needs this -->
 	<ProjectGuid>{d069b69f-e52b-4d72-b581-1fb96b312deb}</ProjectGuid>
     <Nullable>enable</Nullable>
