@@ -6,7 +6,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 {
     public class ServiceModule : Module
     {
-        public Assembly[] Assemblies { private get; set; }
+        public Assembly[] Assemblies { private get; set; } = new Assembly[0];
 
         protected override void Load(ContainerBuilder builder)
         {

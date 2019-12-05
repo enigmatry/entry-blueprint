@@ -11,16 +11,16 @@ namespace Enigmatry.BuildingBlocks.IntegrationEventLogEF
         {
             EventId = @event.Id;
             CreationTime = @event.CreationDate;
-            EventTypeName = @event.GetType().FullName;
+            EventTypeName = @event.GetType().FullName ?? String.Empty;
             Content = JsonConvert.SerializeObject(@event);
             State = EventState.NotPublished;
             TimesSent = 0;
         }
         public Guid EventId { get; private set; }
-        public string EventTypeName { get; private set; }
+        public string EventTypeName { get; private set; } = String.Empty;
         public EventState State { get; set; }
         public int TimesSent { get; set; }
         public DateTime CreationTime { get; private set; }
-        public string Content { get; private set; }
+        public string Content { get; private set; } = String.Empty;
     }
 }

@@ -25,7 +25,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
                 if (chain.Count > 0) return chain.ToString();
             }
 
-            return memberInfo != null ? memberInfo.Name : null;
+            return memberInfo != null ? memberInfo.Name : String.Empty;
         }
     }
 }

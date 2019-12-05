@@ -16,8 +16,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.Configurations
 
             builder.HasIndex(x => x.UserName).IsUnique();
 
+#pragma warning disable CS8603 // Possible null reference return. This is configuration class
             builder.HasMany(x => x.CreatedUsers).WithOne(x => x.CreatedBy);
             builder.HasMany(x => x.UpdatedUsers).WithOne(x => x.UpdatedBy);
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }

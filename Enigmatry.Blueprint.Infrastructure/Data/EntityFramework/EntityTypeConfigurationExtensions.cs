@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -24,7 +24,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
         public static ModelBuilder UseEntityTypeConfiguration(this ModelBuilder modelBuilder, Assembly assembly)
         {
-            if (!TypesPerAssembly.TryGetValue(assembly, out IEnumerable<Type> configurationTypes))
+            if (!TypesPerAssembly.TryGetValue(assembly, out IEnumerable<Type>? configurationTypes))
             {
                 TypesPerAssembly[assembly] = configurationTypes = assembly
                     .GetExportedTypes()
@@ -33,11 +33,14 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
                                     typeof(IEntityTypeConfiguration<>)));
             }
 
-            IEnumerable<object> configurations = configurationTypes.Select(Activator.CreateInstance);
+            IEnumerable<object?> configurations = configurationTypes.Select(Activator.CreateInstance);
 
-            foreach (dynamic configuration in configurations)
+            foreach (dynamic? configuration in configurations)
             {
-                ApplyConfiguration(modelBuilder, configuration);
+                if (configuration != null)
+                {
+                    ApplyConfiguration(modelBuilder, configuration);
+                }
             }
 
             return modelBuilder;
@@ -48,11 +51,14 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
         {
             Type entityType = FindEntityType(configuration.GetType());
 
-            dynamic entityTypeBuilder = EntityMethod
+            dynamic? entityTypeBuilder = EntityMethod
                 .MakeGenericMethod(entityType)
                 .Invoke(modelBuilder, new object[0]);
 
-            configuration.Configure(entityTypeBuilder);
+            if (entityTypeBuilder != null)
+            {
+                configuration.Configure(entityTypeBuilder);
+            }
         }
     }
 }
