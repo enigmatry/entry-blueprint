@@ -4,7 +4,7 @@ import { getBaseUrl } from '../config/testcafe-config';
 export default class HomePage {
   public header = Selector('h1')
   public subHeader = Selector('h2')
-  public useLanguageButton = Selector('body > app-root > div > button');
+  public useLanguageButton = Selector('body > app-root > app-home > div > button');
   public datePickerInput = Selector('body > app-root > div.row > div > input');
   public staticHeader = Selector("accordion-group[heading='Static Header, initially expanded']")
   public staticHeaderContent = Selector("div[class='panel-body card-block card-body']")
@@ -25,7 +25,7 @@ export default class HomePage {
     await t.typeText(this.datePickerInput, date)
   }
 
-  public async clickStaticHeader(){
+  public async clickStaticHeader() {
     await t.click(this.staticHeader)
-  }  
+  }
 }
