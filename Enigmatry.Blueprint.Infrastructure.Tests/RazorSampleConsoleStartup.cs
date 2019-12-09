@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
 
 namespace Enigmatry.Blueprint.Infrastructure.Tests
 {
@@ -13,20 +14,21 @@ namespace Enigmatry.Blueprint.Infrastructure.Tests
     public class RazorSampleConsoleStartup
     {
         private readonly IConfiguration _configuration;
+        private readonly IHostEnvironment _environment;
 
-        public RazorSampleConsoleStartup(IConfiguration configuration)
+        public RazorSampleConsoleStartup(IConfiguration configuration, IHostEnvironment environment)
         {
             _configuration = configuration;
+            _environment = environment;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string appDirectory = _configuration.GetValue<string>("App:RazorViewsRootDirectory");
             services.AddRazorPages().AddRazorRuntimeCompilation(options =>
             {
                 options.FileProviders.Clear();
-                options.FileProviders.Add(new PhysicalFileProvider(appDirectory));
+                options.FileProviders.Add(new PhysicalFileProvider(_environment.ContentRootPath));
             });
 
             services.AddSingleton<RazorTemplatingEngine>();

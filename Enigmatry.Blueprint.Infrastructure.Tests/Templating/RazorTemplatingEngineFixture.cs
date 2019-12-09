@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Enigmatry.Blueprint.Infrastructure.Templating;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NUnit.Framework;
@@ -39,23 +36,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Tests.Templating
 
         private static IHost BuildHost()
         {
-            IConfiguration configuration = BuildConfiguration();
             return Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<RazorSampleConsoleStartup>()
-                        .UseConfiguration(configuration);
+                    webBuilder.UseStartup<RazorSampleConsoleStartup>();
                 }).Build();
-        }
-
-        private static IConfiguration BuildConfiguration()
-        {
-            var rootDirectory = Directory.GetCurrentDirectory();
-            var configValues = new Dictionary<string, string> {{"App:RazorViewsRootDirectory", rootDirectory}};
-
-            return new ConfigurationBuilder()
-                .AddInMemoryCollection(configValues)
-                .Build();
         }
     }
 }
