@@ -10,9 +10,11 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
     [Category("unit")]
     public class UserQueryableExtensionsFixture
     {
+#pragma warning disable CS8618 // These fields are initialized in setup
         private IQueryable<User> _query;
         private User _user;
         private User _user2;
+#pragma warning restore CS8618 // 
 
         [SetUp]
         public void Setup()

@@ -2,9 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-	<!-- SonarQube needs this -->
-	  <ProjectGuid>{e02001e1-d55a-458d-a57a-79ccae697936}</ProjectGuid>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 

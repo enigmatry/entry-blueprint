@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace Enigmatry.Blueprint.Core.Helpers
 {
@@ -6,17 +7,17 @@ namespace Enigmatry.Blueprint.Core.Helpers
     {
         public static bool HasContent(this string value)
         {
-            return !string.IsNullOrEmpty(value);
+            return !String.IsNullOrEmpty(value);
         }
 
-        public static string ToNullIfEmpty(this string value)
+        public static string? ToNullIfEmpty(this string value)
         {
-            return string.IsNullOrEmpty(value) ? null : value;
+            return String.IsNullOrEmpty(value) ? null : value;
         }
 
         public static string ToCamelCase(this string s)
         {
-            if (string.IsNullOrEmpty(s) || !char.IsUpper(s[0]))
+            if (String.IsNullOrEmpty(s) || !Char.IsUpper(s[0]))
             {
                 return s;
             }
@@ -25,18 +26,18 @@ namespace Enigmatry.Blueprint.Core.Helpers
 
             for (var i = 0; i < chars.Length; i++)
             {
-                if (i == 1 && !char.IsUpper(chars[i]))
+                if (i == 1 && !Char.IsUpper(chars[i]))
                 {
                     break;
                 }
 
                 bool hasNext = i + 1 < chars.Length;
-                if (i > 0 && hasNext && !char.IsUpper(chars[i + 1]))
+                if (i > 0 && hasNext && !Char.IsUpper(chars[i + 1]))
                 {
                     break;
                 }
 
-                chars[i] = char.ToLower(chars[i], CultureInfo.InvariantCulture);
+                chars[i] = Char.ToLower(chars[i], CultureInfo.InvariantCulture);
             }
 
             return new string(chars);

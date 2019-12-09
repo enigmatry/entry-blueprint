@@ -25,7 +25,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
         }
 
         private static ValidationProblemDetails CreateValidationProblemDetails(HttpContext context,
-            ModelStateDictionary modelState = null)
+            ModelStateDictionary? modelState = null)
         {
             ValidationProblemDetails details = modelState != null ? 
                 new ValidationProblemDetails(modelState) : 
@@ -52,7 +52,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
             foreach (ValidationFailure validationExceptionError in validationExceptionErrors)
             {
                 string key = validationExceptionError.PropertyName;
-                if (!problemDetails.Errors.TryGetValue(key, out string[] messages))
+                if (!problemDetails.Errors.TryGetValue(key, out string[]? messages))
                 {
                     messages = new string[] { };
                 }

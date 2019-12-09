@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-	<!-- SonarQube needs this -->
-	<ProjectGuid>{c86a6899-ea1d-4f23-8888-aa4429f1f407}</ProjectGuid>
-    <Nullable>enable</Nullable>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoFixture.NUnit3" Version="4.11.0" />
+    <PackageReference Include="FakeItEasy" Version="5.5.0" />
     <PackageReference Include="FluentAssertions" Version="5.9.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="NUnit" Version="3.12.0" />

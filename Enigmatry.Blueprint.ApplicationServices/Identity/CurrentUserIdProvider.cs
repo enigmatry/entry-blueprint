@@ -14,7 +14,7 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
 
         private IPrincipal Principal => _principalProvider();
 
-        public bool IsAuthenticated => Principal.Identity.IsAuthenticated;
+        public bool IsAuthenticated => (Principal.Identity?.IsAuthenticated).GetValueOrDefault();
 
         public Guid? UserId
         {
@@ -26,9 +26,11 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
                 }
 
                 //TODO replace with getting userId from principal
-                Guid? userId = null;
+                return null;
 
-                return userId;
+                //Guid? userId = null;
+
+                //return userId;
             }
         }
     }

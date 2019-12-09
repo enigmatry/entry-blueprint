@@ -23,7 +23,7 @@ namespace Enigmatry.Blueprint.ApplicationServices.Auditing
         public Task Handle(AuditableDomainEvent notification, CancellationToken cancellationToken)
         {
             // here you can enter record in Audit table, 
-            _log.LogDebug("Event name: {EventName}, Payload: {@Payload}, initiated by: {UserName}", notification.EventName, notification.AuditPayload, _currentUserProvider.User.UserName);
+            _log.LogDebug("Event name: {EventName}, Payload: {@Payload}, initiated by: {UserName}", notification.EventName, notification.AuditPayload, _currentUserProvider.User?.UserName);
             return Task.CompletedTask;
         }
     }

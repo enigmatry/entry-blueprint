@@ -24,7 +24,8 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
         private const string AutofacScopeName = "blueprint_event_bus";
 
         public EventBusServiceBus(IServiceBusPersisterConnection serviceBusPersisterConnection,
-            ILogger<EventBusServiceBus> logger, IEventBusSubscriptionsManager subsManager,
+            ILogger<EventBusServiceBus> logger,
+            IEventBusSubscriptionsManager subsManager,
             string subscriptionClientName,
             ILifetimeScope autofac)
         {
@@ -47,12 +48,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
             string jsonMessage = JsonConvert.SerializeObject(@event);
             byte[] body = Encoding.UTF8.GetBytes(jsonMessage);
 
-            var message = new Message
-            {
-                MessageId = Guid.NewGuid().ToString(),
-                Body = body,
-                Label = eventName
-            };
+            var message = new Message {MessageId = Guid.NewGuid().ToString(), Body = body, Label = eventName};
 
             ITopicClient topicClient = _serviceBusPersisterConnection.CreateModel();
 
@@ -78,11 +74,7 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
             {
                 try
                 {
-                    _subscriptionClient.AddRuleAsync(new RuleDescription
-                    {
-                        Filter = new CorrelationFilter {Label = eventName},
-                        Name = eventName
-                    }).GetAwaiter().GetResult();
+                    _subscriptionClient.AddRuleAsync(new RuleDescription {Filter = new CorrelationFilter {Label = eventName}, Name = eventName}).GetAwaiter().GetResult();
                 }
                 catch (ServiceBusException)
                 {
@@ -150,26 +142,36 @@ namespace Enigmatry.BuildingBlocks.EventBusServiceBus
         {
             if (_subsManager.HasSubscriptionsForEvent(eventName))
             {
-                using (ILifetimeScope scope = _autofac.BeginLifetimeScope(AutofacScopeName))
+                using ILifetimeScope scope = _autofac.BeginLifetimeScope(AutofacScopeName);
+                IEnumerable<InMemoryEventBusSubscriptionsManager.SubscriptionInfo> subscriptions =
+                    _subsManager.GetHandlersForEvent(eventName);
+                foreach (InMemoryEventBusSubscriptionsManager.SubscriptionInfo subscription in subscriptions)
                 {
-                    IEnumerable<InMemoryEventBusSubscriptionsManager.SubscriptionInfo> subscriptions =
-                        _subsManager.GetHandlersForEvent(eventName);
-                    foreach (InMemoryEventBusSubscriptionsManager.SubscriptionInfo subscription in subscriptions)
+                    if (subscription.IsDynamic)
                     {
-                        if (subscription.IsDynamic)
+                        IDynamicIntegrationEventHandler? handler =
+                            scope.ResolveOptional(subscription.HandlerType) as IDynamicIntegrationEventHandler;
+                        dynamic eventData = JObject.Parse(message);
+                        if (handler != null)
                         {
-                            var handler =
-                                scope.ResolveOptional(subscription.HandlerType) as IDynamicIntegrationEventHandler;
-                            dynamic eventData = JObject.Parse(message);
                             await handler.Handle(eventData);
                         }
-                        else
+                    }
+                    else
+                    {
+                        Type eventType = _subsManager.GetEventTypeByName(eventName);
+                        object? integrationEvent = JsonConvert.DeserializeObject(message, eventType);
+                        object? handler = scope.ResolveOptional(subscription.HandlerType);
+                        Type concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
+                        if (handler != null)
                         {
-                            Type eventType = _subsManager.GetEventTypeByName(eventName);
-                            object integrationEvent = JsonConvert.DeserializeObject(message, eventType);
-                            object handler = scope.ResolveOptional(subscription.HandlerType);
-                            Type concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
-                            await (Task) concreteType.GetMethod("Handle").Invoke(handler, new[] {integrationEvent});
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+                            // ReSharper disable once PossibleNullReferenceException
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                            await (Task)concreteType.GetMethod("Handle").Invoke(handler, new[] {integrationEvent});
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                         }
                     }
                 }

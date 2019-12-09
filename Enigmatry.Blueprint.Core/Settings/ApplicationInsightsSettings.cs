@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using Serilog.Events;
 
 namespace Enigmatry.Blueprint.Core.Settings
@@ -6,7 +7,10 @@ namespace Enigmatry.Blueprint.Core.Settings
     [UsedImplicitly]
     public class ApplicationInsightsSettings
     {
-        public string InstrumentationKey { get; set; }
+        [UsedImplicitly]
+        public string InstrumentationKey { get; set; } = String.Empty;
+
+        [UsedImplicitly]
         public LogEventLevel SerilogLogsRestrictedToMinimumLevel { get; set; }
     }
 }
