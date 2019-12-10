@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.Core.Helpers;
 using Enigmatry.Blueprint.Infrastructure.Data.Configurations;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR;
 using Enigmatry.Blueprint.Model;
@@ -12,6 +13,7 @@ using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.BuildingBlocks.IntegrationEventLogEF;
 using JetBrains.Annotations;
 using MediatR;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -24,14 +26,28 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
         private readonly ITimeProvider _timeProvider;
         private readonly ICurrentUserIdProvider _currentUserIdProvider;
         private readonly ILogger<BlueprintContext> _logger;
+        private readonly IDbContextAccessTokenProvider _dbContextAccessTokenProvider;
         public Action<ModelBuilder>? ModelBuilderConfigurator { private get; set; }
 
-        public BlueprintContext(DbContextOptions options, IMediator mediator, ITimeProvider timeProvider, ICurrentUserIdProvider currentUserIdProvider, ILogger<BlueprintContext> logger) : base(options)
+        public BlueprintContext(DbContextOptions options, IMediator mediator, ITimeProvider timeProvider, ICurrentUserIdProvider currentUserIdProvider, ILogger<BlueprintContext> logger, IDbContextAccessTokenProvider dbContextAccessTokenProvider) : base(options)
         {
             _mediator = mediator;
             _timeProvider = timeProvider;
             _currentUserIdProvider = currentUserIdProvider;
             _logger = logger;
+            _dbContextAccessTokenProvider = dbContextAccessTokenProvider;
+
+            SetupManagedServiceIdentityAccessToken();
+        }
+
+        private void SetupManagedServiceIdentityAccessToken()
+        {
+            var accessToken = _dbContextAccessTokenProvider.GetAccessTokenAsync().GetAwaiter().GetResult();
+            if (accessToken.HasContent())
+            {
+                var connection = (SqlConnection)Database.GetDbConnection();
+                connection.AccessToken = accessToken;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

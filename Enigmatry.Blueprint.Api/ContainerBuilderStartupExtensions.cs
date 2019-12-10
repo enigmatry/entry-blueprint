@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
+using Enigmatry.Blueprint.Api.Init;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
@@ -17,15 +18,15 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule<ConfigurationModule>();
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
-            builder.RegisterModule(new ServiceModule
-                {Assemblies = new[] {typeof(UserService).Assembly, typeof(TimeProvider).Assembly}});
+            builder.RegisterModule(new ServiceModule {Assemblies = new[]
+            {
+                AssemblyFinder.ApplicationServicesAssembly, 
+                AssemblyFinder.InfrastructureAssembly
+            }});
             builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule<IdentityModule>();
             builder.RegisterModule<EmailModule>();
-            builder.RegisterModule(new EventBusModule
-            {
-                AzureServiceBusEnabled = configuration.ReadAppSettings().ServiceBus.AzureServiceBusEnabled
-            });
+            builder.RegisterModule(new EventBusModule {AzureServiceBusEnabled = configuration.ReadAppSettings().ServiceBus.AzureServiceBusEnabled});
             builder.RegisterModule<TemplatingModule>();
         }
 
