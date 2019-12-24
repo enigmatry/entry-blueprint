@@ -53,16 +53,16 @@ namespace Enigmatry.Blueprint.Api
 
             app.UseCultures();
 
+            //app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-
-                // endpoints.MapHealthChecks("/health");
+                endpoints.AppMapHealthCheck();
             });
 
             app.AppUseSwagger();
             app.AppConfigureFluentValidation();
-            app.AppUseHealthChecks();
         }
 
         [UsedImplicitly]
@@ -71,7 +71,7 @@ namespace Enigmatry.Blueprint.Api
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureServicesExceptMvc(services, _configuration);
-            services.AppAddMvc(_configuration); 
+            services.AppAddMvc(_configuration);
         }
 
         // this also called by tests. Mvc is configured slightly differently in integration tests
