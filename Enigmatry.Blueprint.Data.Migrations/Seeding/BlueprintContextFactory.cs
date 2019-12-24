@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
 using Enigmatry.Blueprint.Infrastructure;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
@@ -49,7 +50,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
                 b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
 
             var result =
-                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>())
+                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>(), new NullDbContextAccessTokenProvider())
                 {
                     ModelBuilderConfigurator = DbInitializer.SeedData
                 };
@@ -60,5 +61,15 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
         {
             return new GenericPrincipal(new GenericIdentity(""), new string[0]);
         }
+
+        private class NullDbContextAccessTokenProvider : IDbContextAccessTokenProvider
+        {
+            public Task<string> GetAccessTokenAsync()
+            {
+                return Task.FromResult(String.Empty);
+            }
+        }
     }
+
+    
 }
