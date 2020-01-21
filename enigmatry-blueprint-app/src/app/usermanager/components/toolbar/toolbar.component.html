@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+
+  <button mat-button class="sidenav-toggle" (click)="toggleSideNav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>User Manager</span>
+
+  <span class="example-spacer"></span>
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openNewContactDialog()">New Contact</button>
+  </mat-menu>
+
+</mat-toolbar>

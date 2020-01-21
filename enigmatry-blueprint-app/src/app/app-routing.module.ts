@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from '../home/home.component';
-import { UsersComponent } from '../users/users.component';
+import { HomeComponent } from './home/home.component';
 import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, data: {title: 'Home'} },
-  { path: 'users', component: UsersComponent, data: {title: 'Users'} },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: 'users', loadChildren: './usermanager/usermanager.module#UserManagerModule' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -17,6 +16,4 @@ export const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

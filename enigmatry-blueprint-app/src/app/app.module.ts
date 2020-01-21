@@ -7,10 +7,10 @@ import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-comp
 import { MESSAGE_FORMAT_CONFIG } from 'ngx-translate-messageformat-compiler';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomeComponent } from './home/home.component';
-import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { ApplicationInsightsService } from './services/application-insights.service';
 import { UserService } from './services/user.service';
@@ -19,26 +19,33 @@ import { UsersComponent } from './users/users.component';
 import {
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     HomeComponent,
+    UserUpdateComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,

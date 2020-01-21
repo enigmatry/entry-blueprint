@@ -31,14 +31,8 @@
   <mat-paginator [pageSizeOptions]="[5, 2, 10]"></mat-paginator>
 </div>
 
-<p>
-  <mat-form-field appearance="standard">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Placeholder" [(ngModel)]="selectedName">
-  </mat-form-field>
-</p>
+<div *ngIf="selection.selected[0]" >
 
-<p>
-  <button mat-raised-button (click)="updateUser()">Update</button>
-</p>
+  <app-user-update [selectedUser]="selection.selected[0]"></app-user-update>
+</div>
 

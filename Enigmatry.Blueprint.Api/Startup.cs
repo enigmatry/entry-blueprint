@@ -53,16 +53,16 @@ namespace Enigmatry.Blueprint.Api
 
             app.UseCultures();
 
+            //app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-
-                // endpoints.MapHealthChecks("/health");
+                endpoints.AppMapHealthCheck();
             });
 
             app.AppUseSwagger();
             app.AppConfigureFluentValidation();
-            app.AppUseHealthChecks();
         }
 
         [UsedImplicitly]

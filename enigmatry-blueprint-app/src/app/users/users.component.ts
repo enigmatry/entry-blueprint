@@ -14,14 +14,12 @@ import { User } from '../models/user.model';
 export class UsersComponent implements OnInit {
   displayedColumns = ['userName','name', 'createdOn'];
   users = new MatTableDataSource();
-  selection = new SelectionModel<User>(false, []);
-  selectedName: string;
+  selection = new SelectionModel<User>(false, [this.users[0]]);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private userService: UserService) {
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.getUsers();
@@ -52,21 +50,9 @@ export class UsersComponent implements OnInit {
 
   rowSelected(row: any) {
     this.selection.toggle(row);
-    this.selectedName = this.selection.selected[0].name;
-  }
-
-  updateUser() {
-    if (this.selection.selected[0])
-    {
-      this.selection.selected[0].name = this.selectedName;
-
-      this.userService.updateUser(this.selection.selected[0]).subscribe(
-        data => {
-          console.log(data);
-        },
-        err => console.error(err),
-        () => console.log('Done')
-      );
-    }
+    //userName
+    //this.userName
+    //this.selectedName = this.selection.selected[0].name;
+    //this.selectedDate.value = this.selection.selected[0].name;
   }
 }
