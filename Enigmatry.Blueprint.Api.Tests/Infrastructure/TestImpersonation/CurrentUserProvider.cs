@@ -1,6 +1,7 @@
 ﻿using System;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Model.Identity.Commands;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
 {
@@ -8,7 +9,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
     {
         public TestCurrentUserProvider(TestPrincipal principal)
         {
-            User = User.Create(new UserCreateOrUpdateCommand
+            User = User.Create(new UserCreateOrUpdate.Command
             {
                 UserName = principal.UserName,
                 Name = "INTEGRATION_TEST"

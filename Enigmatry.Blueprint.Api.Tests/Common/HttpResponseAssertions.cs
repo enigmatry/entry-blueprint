@@ -25,6 +25,12 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             return HaveStatusCode(HttpStatusCode.BadRequest, because, becauseArgs);
         }
 
+        public AndConstraint<HttpResponseAssertions> BeNotFound(string because = "",
+            params object[] becauseArgs)
+        {
+            return HaveStatusCode(HttpStatusCode.NotFound, because, becauseArgs);
+        }
+
         private AndConstraint<HttpResponseAssertions> HaveStatusCode(HttpStatusCode expected, string because = "",
             params object[] becauseArgs)
         {

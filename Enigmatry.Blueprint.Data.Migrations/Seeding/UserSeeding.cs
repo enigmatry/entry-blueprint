@@ -1,6 +1,7 @@
 ﻿using System;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Model.Identity.Commands;
 using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Seeding
@@ -9,7 +10,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
     {
         public void Seed(ModelBuilder modelBuilder)
         {
-            User user = User.Create(new UserCreateOrUpdateCommand
+            User user = User.Create(new UserCreateOrUpdate.Command
             {
                 Name = "Test",
                 UserName = "Test"

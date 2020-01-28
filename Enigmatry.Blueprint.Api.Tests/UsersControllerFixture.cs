@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.Api.Models.Identity;
-using Enigmatry.Blueprint.Api.Tests.Common;
+using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
+using Enigmatry.Blueprint.Api.Tests.Common;
+using Enigmatry.Blueprint.Model.Identity.Commands;
 using NUnit.Framework;
 
 namespace Enigmatry.Blueprint.Api.Tests
@@ -18,17 +17,15 @@ namespace Enigmatry.Blueprint.Api.Tests
     [Category("integration")]
     public class UsersControllerFixture : IntegrationFixtureBase
     {
-        private DateTimeOffset _createdDate;
+        private DateTimeOffset _createdOn;
         private DateTimeOffset _updatedOn;
-#pragma warning disable CS8618 // Created in Setup
-        private User _user;
-#pragma warning restore CS8618 //
+        private User _user=null!;
 
         [SetUp]
         public void SetUp()
         {
-            _createdDate = Resolve<ITimeProvider>().Now;
-            _updatedOn = _createdDate;
+            _createdOn = Resolve<ITimeProvider>().Now;
+            _updatedOn = _createdOn;
             _user = new UserBuilder()
                 .UserName("john_doe@john.doe")
                 .Name("John Doe");
@@ -39,22 +36,43 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestGetAll()
         {
-            var users = (await Client.GetAsync<IEnumerable<UserModel>>("users")).ToList();
+            var users = (await Client.GetAsync<GetUsers.Response>("users")).Items.ToList();
 
             users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
-            UserModel model = users.Single(u => u.UserName == "john_doe@john.doe");
-            model.Name.Should().Be("John Doe");
-            model.CreatedOn.Should().Be(_createdDate);
-            model.UpdatedOn.Should().Be(_updatedOn);
+            GetUsers.Response.Item item = users.Single(u => u.UserName == "john_doe@john.doe");
+            item.Name.Should().Be("John Doe");
+            item.CreatedOn.Should().Be(_createdOn);
+            item.UpdatedOn.Should().Be(_updatedOn);
+        }
+
+        [Test]
+        public async Task GivenValidUserId_GetById_ReturnsUserDetails()
+        {
+            var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
+
+            user.Should().NotBeNull();
+
+            user.Name.Should().Be("John Doe");
+            user.UserName.Should().Be("john_doe@john.doe");
+            user.CreatedOn.Should().Be(_createdOn);
+            user.UpdatedOn.Should().Be(_updatedOn);
+        }
+
+        [Test]
+        public async Task GivenNonExistingUserId_GetById_ReturnsNotFound()
+        {
+            var response = await Client.GetAsync($"users/{Guid.NewGuid()}");
+
+            response.Should().BeNotFound();
         }
 
         [Test]
         public async Task TestCreate()
         {
-            var command = new UserCreateOrUpdateCommand {Name = "some user", UserName = "someuser@test.com"};
-            UserModel user =
-                await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("users", command);
+            var command = new UserCreateOrUpdate.Command {Name = "some user", UserName = "someuser@test.com"};
+            GetUserDetails.Response user =
+                await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
             user.UserName.Should().Be(command.UserName);
             user.Name.Should().Be(command.Name);
@@ -65,9 +83,9 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestUpdate()
         {
-            var command = new UserCreateOrUpdateCommand { Id = _user.Id, Name = "some user", UserName = "someuser@test.com"};
-            UserModel user =
-                await Client.PostAsync<UserCreateOrUpdateCommand, UserModel>("users", command);
+            var command = new UserCreateOrUpdate.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com"};
+            GetUserDetails.Response user =
+                await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
             user.UserName.Should().Be("john_doe@john.doe", "username is immutable");
             user.Name.Should().Be(command.Name);
@@ -82,8 +100,8 @@ namespace Enigmatry.Blueprint.Api.Tests
         public async Task TestCreateReturnsValidationErrors(string name, string userName, string validationField,
             string validationErrorMessage)
         {
-            var userToCreate = new UserCreateOrUpdateCommand {Name = name, UserName = userName};
-            HttpResponseMessage response = await Client.PostAsJsonAsync("users", userToCreate);
+            var command = new UserCreateOrUpdate.Command {Name = name, UserName = userName};
+            HttpResponseMessage response = await Client.PostAsJsonAsync("users", command);
 
             response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
         }

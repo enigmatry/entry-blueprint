@@ -1,5 +1,6 @@
 ﻿using System;
 using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Model.Identity.Commands;
 
 namespace Enigmatry.Blueprint.Model.Tests.Identity
 {
@@ -27,7 +28,7 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
 
         private User Build()
         {
-            User result = User.Create(new UserCreateOrUpdateCommand
+            User result = User.Create(new UserCreateOrUpdate.Command
             {
                 Name = _name,
                 UserName = _userName

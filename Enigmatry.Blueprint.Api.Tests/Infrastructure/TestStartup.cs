@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Enigmatry.Blueprint.Api.Init;
+using Enigmatry.Blueprint.Api.Infrastructure.Init;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using JetBrains.Annotations;

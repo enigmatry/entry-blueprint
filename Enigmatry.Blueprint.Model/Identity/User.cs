@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.Model.Identity.Commands;
+using Enigmatry.Blueprint.Model.Identity.DomainEvents;
 
 namespace Enigmatry.Blueprint.Model.Identity
 {
@@ -21,7 +22,7 @@ namespace Enigmatry.Blueprint.Model.Identity
         public ICollection<User>? CreatedUsers { get; private set; }
         public ICollection<User>? UpdatedUsers { get; private set; }
 
-        public static User Create(UserCreateOrUpdateCommand command)
+        public static User Create(UserCreateOrUpdate.Command command)
         {
             var result = new User
             {
@@ -33,7 +34,7 @@ namespace Enigmatry.Blueprint.Model.Identity
             return result;
         }
 
-        public void Update(UserCreateOrUpdateCommand command)
+        public void Update(UserCreateOrUpdate.Command command)
         {
             Name = command.Name;
             AddDomainEvent(new UserUpdatedDomainEvent(UserName));

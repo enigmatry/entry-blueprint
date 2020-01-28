@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using Enigmatry.Blueprint.Api.Init;
-using Enigmatry.Blueprint.Api.Logging;
+using Enigmatry.Blueprint.Api.Infrastructure.Init;
+using Enigmatry.Blueprint.Api.Infrastructure.Logging;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using JetBrains.Annotations;
@@ -51,7 +51,7 @@ namespace Enigmatry.Blueprint.Api
             app.UseMiddleware<LogContextMiddleware>();
             app.UseHsts();
 
-            app.UseCultures();
+            app.AppUseCultures();
 
             //app.UseAuthorization();
 

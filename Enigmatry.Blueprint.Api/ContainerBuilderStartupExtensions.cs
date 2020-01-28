@@ -1,9 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
-using Enigmatry.Blueprint.Api.Init;
-using Enigmatry.Blueprint.ApplicationServices.Identity;
-using Enigmatry.Blueprint.Infrastructure;
+using Enigmatry.Blueprint.Api.Infrastructure.Init;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Http;
