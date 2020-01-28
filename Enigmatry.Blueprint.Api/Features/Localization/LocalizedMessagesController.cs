@@ -9,7 +9,6 @@ namespace Enigmatry.Blueprint.Api.Features.Localization
 {
     [Produces("application/json")]
     [Route("[controller]")]
-    [ApiController]
     public class LocalizedMessagesController : Controller
     {
         private readonly IStringLocalizer<AdditionalResource> _additionalResourceLocalizer;

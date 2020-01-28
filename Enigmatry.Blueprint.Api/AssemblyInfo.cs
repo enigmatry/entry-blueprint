@@ -3,3 +3,4 @@ using Microsoft.AspNetCore.Mvc;
 
 [assembly:InternalsVisibleTo("Enigmatry.Blueprint.Api.Tests")]
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
+[assembly: ApiController]

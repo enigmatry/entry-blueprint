@@ -24,5 +24,12 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
             return Task.FromResult(default(TResponse));
 #pragma warning restore CS8653 // A default expression introduces a null value for a type parameter.
         }
+
+        public Task<object> Send(object request, CancellationToken cancellationToken = new CancellationToken())
+        {
+#pragma warning disable CS8653 // A default expression introduces a null value for a type parameter.
+            return Task.FromResult(default(object));
+#pragma warning restore CS8653 // A default expression introduces a null value for a type parameter.
+        }
     }
 }
