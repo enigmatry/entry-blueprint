@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Enigmatry.Blueprint.Api.Models
+namespace Enigmatry.Blueprint.Api.Features.Localization
 {
     public class LocalizedMessagesModel
     {

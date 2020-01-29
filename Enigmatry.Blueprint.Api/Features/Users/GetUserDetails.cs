@@ -13,8 +13,10 @@ namespace Enigmatry.Blueprint.Api.Features.Users
         public class Query : IRequest<Response>
         {
             public Guid Id { get; set; }
-
+            public int? OrganizationId { get; set;  }
             public static Query ById(Guid id) => new Query {Id = id};
+
+
         }
 
         [PublicAPI]

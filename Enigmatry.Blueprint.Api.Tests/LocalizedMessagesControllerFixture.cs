@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.Api.Models;
+using Enigmatry.Blueprint.Api.Features.Localization;
 using Enigmatry.Blueprint.Api.Tests.Common;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api; 
 using FluentAssertions;

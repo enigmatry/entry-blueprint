@@ -1,6 +1,5 @@
 ﻿using System;
 using Enigmatry.Blueprint.Api.Localization;
-using Enigmatry.Blueprint.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;

@@ -4,7 +4,7 @@ using Enigmatry.Blueprint.Api.Infrastructure.Validation;
 using FluentValidation;
 using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.Api.Models
+namespace Enigmatry.Blueprint.Api.Features.Localization
 {
     [PublicAPI]
     public class LocalizedMessagesPostModel
