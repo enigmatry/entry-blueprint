@@ -18,8 +18,7 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSnackBarModule }
-   from '@angular/material';
+  MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   imports: [

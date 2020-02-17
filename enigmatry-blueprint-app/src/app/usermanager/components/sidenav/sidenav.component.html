@@ -5,7 +5,7 @@
     <mat-toolbar color="primary">Users</mat-toolbar>
      <mat-nav-list>
        <mat-list-item *ngFor="let user of users | async">
-         <a matLine [routerLink]="['/usermanager', user.id]">
+         <a matLine [routerLink]="['/users', user.id]">
            <!--<mat-icon svgIcon="{{user.avatar}}"></mat-icon>-->
            {{user.name}}</a>
        </mat-list-item>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material';
-//import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
+import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,22 +17,22 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  // openNewContactDialog(): void {
-  //   const dialogRef = this.dialog.open(NewContactDialogComponent, {
-  //     width: '450px'
-  //   });
+  openNewContactDialog(): void {
+    const dialogRef = this.dialog.open(NewContactDialogComponent, {
+      width: '450px'
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('closed', result);
+     dialogRef.afterClosed().subscribe(result => {
+       console.log('closed', result);
 
-  //     if (result) {
-  //       this.openSnackBar('Contact Added', 'Navigate')
-  //         .onAction().subscribe(() => {
-  //           this.router.navigate(['/contactmanager', result.id]);
-  //         });
-  //     }
-  //   });
-  // }
+       if (result) {
+         this.openSnackBar('Contact Added', 'Navigate')
+           .onAction().subscribe(() => {
+             this.router.navigate(['/contactmanager', result.id]);
+           });
+       }
+    });
+  }
 
   openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(message, action, {

@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { ApplicationInsightsService } from './services/application-insights.service';
 import { UserService } from './services/user.service';
-import { UsersComponent } from './users/users.component';
 
 import {
   MatFormFieldModule,
@@ -26,14 +25,11 @@ import {
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { UserUpdateComponent } from './users/user-update/user-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
     HomeComponent,
-    UserUpdateComponent,
   ],
   imports: [
     AppRoutingModule,
