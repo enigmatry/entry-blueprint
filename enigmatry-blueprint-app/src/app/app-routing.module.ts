@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
   { path: 'translation', component: TranslationComponent, data: {title: 'Translation'} },
-  { path: 'users', loadChildren: './usermanager/usermanager.module#UserManagerModule' },
+  { path: 'users', loadChildren: () => import('./usermanager/usermanager.module').then(m => m.UserManagerModule) },
   { path: '', redirectTo: 'users', pathMatch: 'full' }
 ];
 
