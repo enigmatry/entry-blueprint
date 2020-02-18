@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { User } from '../shared/user.model';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../shared/user.service';

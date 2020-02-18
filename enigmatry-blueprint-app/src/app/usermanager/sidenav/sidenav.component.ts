@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/usermanager/shared/user.model';
 import { UserService } from 'src/app/usermanager/shared/user.service';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 
 const SMALL_WIDTH_BREAK = 720;
@@ -20,7 +20,7 @@ export class SidenavComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  @ViewChild(MatSidenav, null) sidenav: MatSidenav;
+  @ViewChild(MatSidenav) sidenav: MatSidenav;
 
   ngOnInit() {
     this.users = this.userService.getUsers();

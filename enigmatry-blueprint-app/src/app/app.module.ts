@@ -15,13 +15,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ApplicationInsightsService } from './core/application-insights.service';
 import { UserService } from './usermanager/shared/user.service';
 
-import {
-  MatFormFieldModule,
-  MatInputModule,
-  MatButtonModule,
-  MatDatepickerModule,
-  MatNativeDateModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -54,7 +52,7 @@ import { MatTableModule } from '@angular/material/table';
       },
       compiler: {
         provide: TranslateCompiler,
-        useClass: TranslateMessageFormatCompiler
+        useFactory: TranslateMessageFormatCompilerFactory
       }
     }),
     BrowserAnimationsModule
@@ -67,4 +65,8 @@ export class AppModule { }
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+export function TranslateMessageFormatCompilerFactory() {
+  return new TranslateMessageFormatCompiler();
 }
