@@ -22,15 +22,15 @@ export class ToolbarComponent implements OnInit {
       width: '450px'
     });
 
-     dialogRef.afterClosed().subscribe(result => {
-       console.log('closed', result);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('closed', result);
 
-       if (result) {
-         this.openSnackBar('Contact Added', 'Navigate')
-           .onAction().subscribe(() => {
-             this.router.navigate(['/contactmanager', result.id]);
-           });
-       }
+      if (result) {
+        this.openSnackBar('Contact Added', 'Navigate')
+          .onAction().subscribe(() => {
+            this.router.navigate(['/contactmanager', result.id]);
+          });
+      }
     });
   }
 

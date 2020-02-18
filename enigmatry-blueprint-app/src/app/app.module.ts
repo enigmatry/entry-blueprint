@@ -12,8 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslationComponent } from './translation/translation.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { ApplicationInsightsService } from './services/application-insights.service';
-import { UserService } from './services/user.service';
+import { ApplicationInsightsService } from './core/application-insights.service';
+import { UserService } from './usermanager/shared/user.service';
 
 import {
   MatFormFieldModule,

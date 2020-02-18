@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/usermanager/shared/user.model';
+import { UserService } from 'src/app/usermanager/shared/user.service';
 import { MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 

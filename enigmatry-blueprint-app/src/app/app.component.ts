@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { ApplicationInsightsService } from './services/application-insights.service';
+import { ApplicationInsightsService } from './core/application-insights.service';
 import { Router } from '@angular/router';
 
 @Component({

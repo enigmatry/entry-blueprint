@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { User } from '../../../models/user.model';
+import { User } from '../shared/user.model';
 import { FormControl, Validators } from '@angular/forms';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-new-contact-dialog',
