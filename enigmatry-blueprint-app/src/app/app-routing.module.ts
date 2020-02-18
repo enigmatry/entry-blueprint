@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
+import { TranslationComponent } from './translation/translation.component';
 import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent, data: {title: 'Home'} },
+  { path: 'translation', component: TranslationComponent, data: {title: 'Translation'} },
   { path: 'users', loadChildren: './usermanager/usermanager.module#UserManagerModule' },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'users', pathMatch: 'full' }
 ];
 
 @NgModule({

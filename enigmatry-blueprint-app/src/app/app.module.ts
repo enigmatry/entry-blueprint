@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HomeComponent } from './home/home.component';
+import { TranslationComponent } from './translation/translation.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ApplicationInsightsService } from './services/application-insights.service';
@@ -29,7 +29,7 @@ import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    TranslationComponent,
   ],
   imports: [
     AppRoutingModule,

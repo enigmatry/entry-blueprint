@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../services/user.service'
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main-content',
