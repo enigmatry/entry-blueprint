@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5440'
+  apiUrl: 'http://localhost:5440/',
+  applicationInsightsInstrumentationKey: 'c8f0815e-5d8f-460e-9e87-436be3bebd3e'
 };

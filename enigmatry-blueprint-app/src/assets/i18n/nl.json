@@ -7,10 +7,11 @@
         "api-url": "Api Url",
         "select-title-to-set-on-html-document": "Selecteer een titel om in te stellen op het huidige HTML-document",
         "use-language": "Gebruik taal",
-        "set-to": "Stel in op {name}"
+        "set-to": "Stel in op {name}",
+        "back-to": "Terug naar {module}"
     },
     "language": {
-        "english": "Engels", 
+        "english": "Engels",
         "dutch": "Nederlands"
     },
     "pluralization": {
