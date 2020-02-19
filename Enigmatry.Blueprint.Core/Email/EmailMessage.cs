@@ -5,12 +5,12 @@ namespace Enigmatry.Blueprint.Core.Email
 {
     public class EmailMessage
     {
-        public EmailMessage(string subject, string content, IEnumerable<string> to, IEnumerable<string> from = null)
+        public EmailMessage(string subject, string content, IEnumerable<string> to, IEnumerable<string> from)
         {
             Subject = subject;
             Content = content;
             To = to;
-            From = from ?? Enumerable.Empty<string>();
+            From = from;
         }
 
         public string Subject { get; }

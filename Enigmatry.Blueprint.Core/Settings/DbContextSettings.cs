@@ -6,6 +6,8 @@ namespace Enigmatry.Blueprint.Core.Settings
     [UsedImplicitly]
     public class DbContextSettings
     {
+        public bool UseAccessToken { get; set; }
+
         public bool SensitiveDataLoggingEnabled { get; set; }
 
         public int ConnectionResiliencyMaxRetryCount { get; set; }

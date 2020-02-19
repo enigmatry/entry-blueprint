@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Enigmatry.BuildingBlocks.EventBus</RootNamespace>
 	<!-- SonarQube needs this -->
 	<ProjectGuid>{EE206AFC-2882-4FFC-8F60-058DA6132A61}</ProjectGuid>

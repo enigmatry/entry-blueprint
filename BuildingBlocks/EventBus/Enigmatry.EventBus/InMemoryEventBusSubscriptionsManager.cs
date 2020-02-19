@@ -12,8 +12,7 @@ namespace Enigmatry.BuildingBlocks.EventBus
     {
         private readonly Dictionary<string, List<SubscriptionInfo>> _handlers;
         private readonly List<Type> _eventTypes;
-
-        public event EventHandler<string> OnEventRemoved;
+        public event EventHandler<string>? OnEventRemoved;
 
         public InMemoryEventBusSubscriptionsManager()
         {
@@ -22,12 +21,13 @@ namespace Enigmatry.BuildingBlocks.EventBus
         }
 
         public bool IsEmpty => !_handlers.Keys.Any();
+
         public void Clear() => _handlers.Clear();
 
         public void AddDynamicSubscription<TH>(string eventName)
             where TH : IDynamicIntegrationEventHandler
         {
-            DoAddSubscription(typeof(TH), eventName, isDynamic: true);
+            DoAddSubscription(typeof(TH), eventName, true);
         }
 
         public void AddSubscription<T, TH>()
@@ -35,7 +35,7 @@ namespace Enigmatry.BuildingBlocks.EventBus
             where TH : IIntegrationEventHandler<T>
         {
             var eventName = GetEventKey<T>();
-            DoAddSubscription(typeof(TH), eventName, isDynamic: false);
+            DoAddSubscription(typeof(TH), eventName, false);
             _eventTypes.Add(typeof(T));
         }
 
@@ -62,14 +62,12 @@ namespace Enigmatry.BuildingBlocks.EventBus
             }
         }
 
-
         public void RemoveDynamicSubscription<TH>(string eventName)
             where TH : IDynamicIntegrationEventHandler
         {
             var handlerToRemove = FindDynamicSubscriptionToRemove<TH>(eventName);
             DoRemoveHandler(eventName, handlerToRemove);
         }
-
 
         public void RemoveSubscription<T, TH>()
             where TH : IIntegrationEventHandler<T>
@@ -80,8 +78,7 @@ namespace Enigmatry.BuildingBlocks.EventBus
             DoRemoveHandler(eventName, handlerToRemove);
         }
 
-
-        private void DoRemoveHandler(string eventName, SubscriptionInfo subsToRemove)
+        private void DoRemoveHandler(string eventName, SubscriptionInfo? subsToRemove)
         {
             if (subsToRemove != null)
             {
@@ -96,7 +93,6 @@ namespace Enigmatry.BuildingBlocks.EventBus
                     }
                     RaiseOnEventRemoved(eventName);
                 }
-
             }
         }
 
@@ -105,34 +101,30 @@ namespace Enigmatry.BuildingBlocks.EventBus
             var key = GetEventKey<T>();
             return GetHandlersForEvent(key);
         }
+
         public IEnumerable<SubscriptionInfo> GetHandlersForEvent(string eventName) => _handlers[eventName];
 
         private void RaiseOnEventRemoved(string eventName)
         {
             var handler = OnEventRemoved;
-            if (handler != null)
-            {
-                OnEventRemoved(this, eventName);
-            }
+            handler?.Invoke(this, eventName);
         }
 
-
-        private SubscriptionInfo FindDynamicSubscriptionToRemove<TH>(string eventName)
+        private SubscriptionInfo? FindDynamicSubscriptionToRemove<TH>(string eventName)
             where TH : IDynamicIntegrationEventHandler
         {
             return DoFindSubscriptionToRemove(eventName, typeof(TH));
         }
 
-
-        private SubscriptionInfo FindSubscriptionToRemove<T, TH>()
-             where T : IntegrationEvent
-             where TH : IIntegrationEventHandler<T>
+        private SubscriptionInfo? FindSubscriptionToRemove<T, TH>()
+            where T : IntegrationEvent
+            where TH : IIntegrationEventHandler<T>
         {
             var eventName = GetEventKey<T>();
             return DoFindSubscriptionToRemove(eventName, typeof(TH));
         }
 
-        private SubscriptionInfo DoFindSubscriptionToRemove(string eventName, Type handlerType)
+        private SubscriptionInfo? DoFindSubscriptionToRemove(string eventName, Type handlerType)
         {
             if (!HasSubscriptionsForEvent(eventName))
             {
@@ -140,7 +132,6 @@ namespace Enigmatry.BuildingBlocks.EventBus
             }
 
             return _handlers[eventName].SingleOrDefault(s => s.HandlerType == handlerType);
-
         }
 
         public bool HasSubscriptionsForEvent<T>() where T : IntegrationEvent
@@ -148,6 +139,7 @@ namespace Enigmatry.BuildingBlocks.EventBus
             var key = GetEventKey<T>();
             return HasSubscriptionsForEvent(key);
         }
+
         public bool HasSubscriptionsForEvent(string eventName) => _handlers.ContainsKey(eventName);
 
         public Type GetEventTypeByName(string eventName) => _eventTypes.SingleOrDefault(t => t.Name == eventName);

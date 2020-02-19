@@ -11,7 +11,9 @@ namespace Enigmatry.Blueprint.Api.Init
         public static IMvcBuilder AppAddMvc(this IServiceCollection services, IConfiguration configuration)
         {
             return services
-                .AddControllers(options => options.ConfigureMvc(configuration))
+                // The following adds support for controllers, API-related features, and views, not pages. 
+                // Views are required for templating with RazorTemplatingEngine(e.g. emails)
+                .AddControllersWithViews(options => options.ConfigureMvc(configuration))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson()
                 .AppAddLocalization()

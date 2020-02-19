@@ -5,13 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Resources;
-using static System.String;
 
 namespace Enigmatry.Blueprint.Infrastructure.Validation
 {
     public static class LocalizedDisplayNameResolver
     {
-        private static ResourceManager ResourceManager { get; set; }
+        private static ResourceManager? ResourceManager { get; set; }
 
         /// <summary>
         /// 
@@ -27,23 +26,25 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
 
         private static string ResolveDisplayName(Type type, MemberInfo memberInfo, LambdaExpression arg3)
         {
-            return memberInfo == null ? null : DisplayNameCache.GetCachedDisplayName(memberInfo, ResourceManager);
+            return memberInfo == null || ResourceManager == null ? 
+                String.Empty : 
+                DisplayNameCache.GetCachedDisplayName(memberInfo, ResourceManager) ?? String.Empty;
         }
     }
 
     // Taken from FluentValidation.DisplayNameCache - except it supports localization
     internal static class DisplayNameCache
     {
-        private static readonly ConcurrentDictionary<MemberInfo, Func<string>> Cache =
-            new ConcurrentDictionary<MemberInfo, Func<string>>();
+        private static readonly ConcurrentDictionary<MemberInfo, Func<string>?> Cache =
+            new ConcurrentDictionary<MemberInfo, Func<string>?>();
 
-        public static string GetCachedDisplayName(MemberInfo member, ResourceManager localizationResourceManager)
+        public static string? GetCachedDisplayName(MemberInfo member, ResourceManager localizationResourceManager)
         {
-            Func<string> result = Cache.GetOrAdd(member, m => GetDisplayName(m, localizationResourceManager));
+            Func<string>? result = Cache.GetOrAdd(member, m => GetDisplayName(m, localizationResourceManager));
             return result?.Invoke();
         }
 
-        private static Func<string> GetDisplayName(MemberInfo member, ResourceManager localizationResourceManager)
+        private static Func<string>? GetDisplayName(MemberInfo member, ResourceManager localizationResourceManager)
         {
             if (member == null) return null;
 
@@ -52,9 +53,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
             if (displayAttribute != null)
             {
                 // if ResourceType is specified, GetName() already returns localized message
-                return () => displayAttribute.ResourceType != null ? 
-                    displayAttribute.GetName() : 
-                    GetLocalizedName(displayAttribute.Name, localizationResourceManager);
+                return () => displayAttribute.ResourceType != null ? displayAttribute.GetName() : GetLocalizedName(displayAttribute.Name, localizationResourceManager);
             }
 
             // Couldn't find a name from a DisplayAttribute. Try DisplayNameAttribute instead.
@@ -72,8 +71,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
 
         private static string GetLocalizedName(string displayName, ResourceManager localizationResourceManager)
         {
-            string result = localizationResourceManager.GetString(displayName);
-            return !IsNullOrEmpty(result) ? result : displayName;
+            string? result = localizationResourceManager.GetString(displayName);
+            return !String.IsNullOrEmpty(result) ? result : displayName;
         }
     }
 }
