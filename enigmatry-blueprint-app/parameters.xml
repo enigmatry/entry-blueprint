@@ -7,4 +7,7 @@
   <parameter name="API Uri" description="API Uri" defaultValue="">
     <parameterEntry kind="TextFile" scope="main.*.js" match="__apiUrl__" />
   </parameter>
+  <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey" defaultValue="">
+    <parameterEntry kind="TextFile" scope="main.*.js" match="__appInsightsKey__" />
+  </parameter>
 </parameters>

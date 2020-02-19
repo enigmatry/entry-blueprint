@@ -20,7 +20,7 @@ export class MainContentComponent implements OnInit {
       // }, err => console.error(err)
 
       const idKey = 'id';
-      let id = data[idKey];
+      let id = routeData[idKey];
       if (!id) {
         id = '0118170f-b84f-4cae-c74a-08d7a5280e6e';
       }
