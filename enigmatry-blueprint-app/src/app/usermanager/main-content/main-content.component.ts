@@ -14,9 +14,9 @@ export class MainContentComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: UserService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(data => {
+    this.route.params.subscribe(routeData => {
       // In case we want to use the Route Resolver instead:
-      //   this.user = data.user;
+      //   this.user = routeData.user;
       // }, err => console.error(err)
 
       const idKey = 'id';
