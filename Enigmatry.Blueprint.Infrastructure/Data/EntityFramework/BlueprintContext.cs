@@ -52,8 +52,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseEntityTypeConfiguration(typeof(UserConfiguration).Assembly);
-            modelBuilder.UseEntityTypeConfiguration(typeof(IntegrationEventLogEntryConfiguration).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfiguration).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(IntegrationEventLogEntryConfiguration).Assembly);
 
             RegisterEntities(modelBuilder);
 
