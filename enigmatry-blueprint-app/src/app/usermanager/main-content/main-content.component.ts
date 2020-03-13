@@ -20,12 +20,12 @@ export class MainContentComponent implements OnInit {
       // }, err => console.error(err)
 
       const idKey = 'id';
-      let id = routeData[idKey];
+      const id = routeData[idKey];
       this.user = null;
 
       // Implement a timeout, just to show the spinner!
       setTimeout(() => {
-        if (!id){
+        if (!id) {
           this.service.getUsers().subscribe(
             data => {
               this.user = data[0];
