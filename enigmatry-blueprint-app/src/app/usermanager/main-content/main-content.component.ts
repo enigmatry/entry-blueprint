@@ -21,19 +21,25 @@ export class MainContentComponent implements OnInit {
 
       const idKey = 'id';
       let id = routeData[idKey];
-      if (!id) {
-        id = '0118170f-b84f-4cae-c74a-08d7a5280e6e';
-      }
-
-      // Just to show the spinner!
       this.user = null;
+
+      // Implement a timeout, just to show the spinner!
       setTimeout(() => {
-        this.service.userById(id).subscribe(
-          data => {
-            this.user = data;
-          },
-          err => console.error(err)
-        );
+        if (!id){
+          this.service.getUsers().subscribe(
+            data => {
+              this.user = data[0];
+            },
+            err => console.error(err)
+          );
+        } else {
+          this.service.userById(id).subscribe(
+            data => {
+              this.user = data;
+            },
+            err => console.error(err)
+          );
+        }
       }, 500);
     });
   }

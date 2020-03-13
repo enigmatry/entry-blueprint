@@ -12,18 +12,18 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   public getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(environment.apiUrl + 'users');
+    return this.httpClient.get<User[]>(environment.apiUrl + '/users');
   }
 
   public updateUser(user: User): Observable<User> {
     console.log(user);
     return this.httpClient
-      .post<User>(environment.apiUrl + 'users', user);
+      .post<User>(environment.apiUrl + '/users', user);
   }
 
   userById(id: string): Observable<User> {
 
-    return this.httpClient.get<User>(environment.apiUrl + 'users/' + id);
+    return this.httpClient.get<User>(environment.apiUrl + '/users/' + id);
   }
 
   addUser(user: User): Promise<User> {
