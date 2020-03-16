@@ -89,7 +89,7 @@ namespace Enigmatry.Blueprint.Api
             services.AppAddHealthChecks(configuration);
             services.AppAddMediatR();
             services.AppAddTypedHttpClients(configuration.ReadAppSettings());
-            services.AppAddSwagger();
+            services.AppAddSwagger("Blueprint API");
 
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
             services.PostConfigure<ApiBehaviorOptions>(options => options.AppAddFluentValidationApiBehaviorOptions());
