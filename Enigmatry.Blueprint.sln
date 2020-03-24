@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Infrast
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Data.Migrations.Runner", "Enigmatry.Blueprint.Data.Migrations.Runner\Enigmatry.Blueprint.Data.Migrations.Runner.csproj", "{C98497F8-5755-4258-A3B3-F3C0B4756EDE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Scheduler", "Enigmatry.Blueprint.Scheduler\Enigmatry.Blueprint.Scheduler.csproj", "{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
