@@ -1,7 +1,7 @@
 import { Selector, t } from 'testcafe';
 import { getBaseUrl } from '../config/testcafe-config';
 
-export default class HomePage {
+export default class TranslationPage {
   public header = Selector('h1')
   public subHeader = Selector('h2')
   public useLanguageButton = Selector('body > app-root > app-home > div > button');
@@ -13,7 +13,7 @@ export default class HomePage {
   public url: string;
 
   constructor() {
-    this.url = getBaseUrl();
+    this.url = getBaseUrl() + '/translation';
   }
 
   public async selectLanguage(language: 'Dutch' | 'English') {

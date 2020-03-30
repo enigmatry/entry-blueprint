@@ -1,7 +1,7 @@
 
-import HomePage from "../pages/home-page";
+import TranslationPage from "../pages/translation-page";
 
-const page = new HomePage();
+const page = new TranslationPage();
 
 fixture('Home page')
   .page(page.url)
