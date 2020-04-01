@@ -19,16 +19,12 @@
   <ItemGroup>
     <Compile Remove="dist\**" />
     <Compile Remove="e2e\**" />
-    <Compile Remove="src\**" />
     <Content Remove="dist\**" />
     <Content Remove="e2e\**" />
-    <Content Remove="src\**" />
     <EmbeddedResource Remove="dist\**" />
     <EmbeddedResource Remove="e2e\**" />
-    <EmbeddedResource Remove="src\**" />
     <None Remove="dist\**" />
     <None Remove="e2e\**" />
-    <None Remove="src\**" />
   </ItemGroup>
 
   <ItemGroup>
