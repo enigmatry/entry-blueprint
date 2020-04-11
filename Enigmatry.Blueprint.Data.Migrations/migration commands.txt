@@ -1,7 +1,7 @@
 ﻿Run this from Package Manager Console. 
 
 // add migration
-EntityFrameworkCore\Add-Migration -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext -Name TODO
+Add-Migration -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext -Name TODO
 
 // update database
-EntityFrameworkCore\Update-Database -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext
+Update-Database -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext
