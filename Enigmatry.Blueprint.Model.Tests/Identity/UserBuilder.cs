@@ -1,4 +1,6 @@
 ﻿using System;
+using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 
@@ -8,16 +10,23 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
     {
         private string _name = String.Empty;
         private string _userName = String.Empty;
+        private Guid _id = SequentialGuidValueGenerator.Generate();
 
-        public UserBuilder UserName(string value)
+        public UserBuilder WithUserName(string value)
         {
             _userName = value;
             return this;
         }
 
-        public UserBuilder Name(string value)
+        public UserBuilder WithName(string value)
         {
             _name = value;
+            return this;
+        }
+
+        public UserBuilder WithId(Guid id)
+        {
+            _id = id;
             return this;
         }
 
@@ -26,13 +35,13 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
             return builder.Build();
         }
 
-        private User Build()
+        public User Build()
         {
             User result = User.Create(new UserCreateOrUpdate.Command
             {
                 Name = _name,
                 UserName = _userName
-            });
+            }).WithId(_id);
 
             return result;
         }

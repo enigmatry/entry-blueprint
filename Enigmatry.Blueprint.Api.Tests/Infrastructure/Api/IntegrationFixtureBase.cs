@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
@@ -25,6 +26,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         private TestServer _server;
         private IServiceScope _testScope;
         protected HttpClient Client;
+        protected bool _seedUsers = true;
 #pragma warning restore CS8618 //
 
         [SetUp]
@@ -44,7 +46,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             
             Client = _server.CreateClient();
             _testScope = CreateScope();
-            AddCurrentUserToDb();
+            SeedUsers();
         }
 
         private IServiceScope CreateScope() => _server.Host.Services.CreateScope();
@@ -84,6 +86,19 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             }
         }
 
+        protected void DoNotSeedUsers()
+        {
+            _seedUsers = false;
+        }
+
+        private void SeedUsers()
+        {
+            if (_seedUsers)
+            {
+                AddCurrentUserToDb();
+            }
+        }
+
         private void AddCurrentUserToDb()
         {
             using IServiceScope scope = CreateScope();
@@ -100,6 +115,18 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             _testScope.Dispose();
             Client.Dispose();
             _server.Dispose();
+        }
+
+        protected void AddAndSaveChanges<T>(params T[] entities)
+        {
+            var dbContext = Resolve<DbContext>();
+
+            foreach (T entity in entities)
+            {
+                dbContext.Add(entity);
+            }
+
+            dbContext.SaveChanges();
         }
 
         protected void AddAndSaveChanges(params object[] entities)

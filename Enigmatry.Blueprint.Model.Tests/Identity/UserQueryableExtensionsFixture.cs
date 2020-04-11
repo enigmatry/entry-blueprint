@@ -20,11 +20,11 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
         public void Setup()
         {
             _user = new UserBuilder()
-                .UserName("username1")
-                .Name("name");
+                .WithUserName("username1")
+                .WithName("name");
             _user2 = new UserBuilder()
-                .UserName("username2")
-                .Name("name2");
+                .WithUserName("username2")
+                .WithName("name2");
 
             _query = new List<User> {_user, _user2}.AsQueryable();
         }

@@ -19,7 +19,7 @@ namespace Enigmatry.Blueprint.Api.Tests
     {
         private DateTimeOffset _createdOn;
         private DateTimeOffset _updatedOn;
-        private User _user=null!;
+        private User _user = null!;
 
         [SetUp]
         public void SetUp()
@@ -27,8 +27,8 @@ namespace Enigmatry.Blueprint.Api.Tests
             _createdOn = Resolve<ITimeProvider>().Now;
             _updatedOn = _createdOn;
             _user = new UserBuilder()
-                .UserName("john_doe@john.doe")
-                .Name("John Doe");
+                .WithUserName("john_doe@john.doe")
+                .WithName("John Doe");
 
             AddAndSaveChanges(_user);
         }
@@ -83,7 +83,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestUpdate()
         {
-            var command = new UserCreateOrUpdate.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com"};
+            var command = new UserCreateOrUpdate.Command {Id = _user.Id, Name = "some user", UserName = "someuser@test.com"};
             GetUserDetails.Response user =
                 await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
@@ -97,7 +97,9 @@ namespace Enigmatry.Blueprint.Api.Tests
         [TestCase("", "someuser@test.com", "name", "'Name' must not be empty.")]
         [TestCase("some user", "", "userName", "'Username' must not be empty.")]
         [TestCase("John Doe", "john_doe@john.doe", "userName", "Username already taken")]
-        public async Task TestCreateReturnsValidationErrors(string name, string userName, string validationField,
+        public async Task TestCreateReturnsValidationErrors(string name,
+            string userName,
+            string validationField,
             string validationErrorMessage)
         {
             var command = new UserCreateOrUpdate.Command {Name = name, UserName = userName};
