@@ -15,7 +15,7 @@ namespace Enigmatry.Blueprint.Scheduler.Extensions
                             : t) == interfaceType);
         }
 
-        public static bool HasValidHandlerAttributes<T>(this Type concreteType) where T : Attribute
+        public static bool HasAttributes<T>(this Type concreteType) where T : Attribute
         {
             return concreteType.GetAttribute<T>() != null;
         }

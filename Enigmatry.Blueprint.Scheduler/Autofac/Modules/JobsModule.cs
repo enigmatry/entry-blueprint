@@ -1,8 +1,8 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Enigmatry.Blueprint.Scheduler.Attributes;
 using Enigmatry.Blueprint.Scheduler.Extensions;
 using Enigmatry.Blueprint.Scheduler.Jobs.Common;
+using System;
 
 namespace Enigmatry.Blueprint.Scheduler.Autofac.Modules
 {
@@ -17,7 +17,7 @@ namespace Enigmatry.Blueprint.Scheduler.Autofac.Modules
                 .Where(
                     type =>
                         type.ImplementsInterface(typeof(IJobBase))
-                        && type.HasValidHandlerAttributes<JobNameAttribute>()
+                        && type.HasAttributes<JobNameAttribute>()
                 )
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();

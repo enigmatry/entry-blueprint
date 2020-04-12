@@ -14,8 +14,7 @@ namespace Enigmatry.Blueprint.Scheduler.Autofac.Modules
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 
-            //TODO: casting quartz section return empty collection
-            builder.RegisterModule(new QuartzAutofacFactoryModule {ConfigurationProvider = c => c.Resolve<IConfiguration>().ReadSettingsSection<IConfigurationSection>("quartz").Get<NameValueCollection>()});
+            builder.RegisterModule(new QuartzAutofacFactoryModule { ConfigurationProvider = c => c.Resolve<IConfiguration>().ReadAsNameValueCollection("quartz") });
 
             builder.RegisterModule(new QuartzAutofacJobsModule(GetType().Assembly));
         }

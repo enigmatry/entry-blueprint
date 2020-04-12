@@ -72,7 +72,9 @@ namespace Enigmatry.Blueprint.Scheduler
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithProcessId()
-                .Enrich.WithMachineName();
+                .Enrich.WithMachineName()
+                .Enrich.WithAssemblyName()
+                .Enrich.WithAssemblyVersion();
 
             Log.Logger = config.CreateLogger();
 
