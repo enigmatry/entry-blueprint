@@ -20,16 +20,12 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
         public Task<TResponse> Send<TResponse>(IRequest<TResponse> request,
             CancellationToken cancellationToken = default)
         {
-#pragma warning disable CS8653 // A default expression introduces a null value for a type parameter.
-            return Task.FromResult(default(TResponse));
-#pragma warning restore CS8653 // A default expression introduces a null value for a type parameter.
+            return Task.FromResult(default(TResponse)!);
         }
 
         public Task<object> Send(object request, CancellationToken cancellationToken = new CancellationToken())
         {
-#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
-            return Task.FromResult(default(object));
-#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
+            return Task.FromResult(default(object)!);
         }
     }
 }
