@@ -10,4 +10,10 @@
   <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey" defaultValue="">
     <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsInstrumentationKey__" />
   </parameter>
+  <parameter name="Default Log Level" description="Default Log Level" defaultValue="Information">
+    <parameterEntry kind="TextFile" scope="appsettings.json" match="__defaultLogLevel__" />
+  </parameter>
+  <parameter name="Rolling Log File Path" description="Rolling Log File Path" defaultValue="">
+    <parameterEntry kind="TextFile" scope="appsettings.json" match="__rollingLogFilePath__" />
+  </parameter>
 </parameters>

@@ -15,5 +15,11 @@
     <ParameterValue Include="ApplicationInsights InstrumentationKey">
       <Value>c8f0815e-5d8f-460e-9e87-436be3bebd3e</Value>
     </ParameterValue>
+    <ParameterValue Include="Default Log Level">
+      <Value>Information</Value>
+    </ParameterValue>
+    <ParameterValue Include="Rolling Log File Path">
+      <Value>D:/home/LogFiles/api/enigmatry-blueprint-api-{Date}.log</Value>
+    </ParameterValue>
   </ItemGroup>
 </Project>
