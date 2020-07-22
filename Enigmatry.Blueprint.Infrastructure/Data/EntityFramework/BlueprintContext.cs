@@ -10,7 +10,6 @@ using Enigmatry.Blueprint.Infrastructure.Data.Configurations;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
-using Enigmatry.BuildingBlocks.IntegrationEventLogEF;
 using JetBrains.Annotations;
 using MediatR;
 using Microsoft.Data.SqlClient;
@@ -53,7 +52,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfiguration).Assembly);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(IntegrationEventLogEntryConfiguration).Assembly);
 
             RegisterEntities(modelBuilder);
 

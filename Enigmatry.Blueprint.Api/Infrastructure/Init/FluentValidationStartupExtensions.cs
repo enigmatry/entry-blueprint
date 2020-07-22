@@ -1,5 +1,4 @@
-﻿using Enigmatry.Blueprint.Api.Resources;
-using Enigmatry.Blueprint.Infrastructure.Validation;
+﻿using Enigmatry.Blueprint.Infrastructure.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -13,8 +12,6 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Init
         public static void AppConfigureFluentValidation(this IApplicationBuilder app)
         {
             ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
-            ValidatorOptions.DisplayNameResolver =
-                LocalizedDisplayNameResolver.ResolveDisplayName(Localization_SharedResource.ResourceManager);
         }
 
         public static void AppAddFluentValidationApiBehaviorOptions(this ApiBehaviorOptions options)

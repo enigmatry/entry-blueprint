@@ -1,26 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
-import { ApplicationInsightsService } from './core/application-insights.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  private appInsights;
-
-  constructor(
-    private titleService: Title,
-    private translate: TranslateService,
-    private router: Router) {
-      this.translate.setDefaultLang('nl');
-      this.appInsights = new ApplicationInsightsService(router);
-  }
-
-  ngOnInit() {
-    this.titleService.setTitle('Blueprint');
-  }
+export class AppComponent {
+  title = 'enigmatry-blueprint-app';
 }

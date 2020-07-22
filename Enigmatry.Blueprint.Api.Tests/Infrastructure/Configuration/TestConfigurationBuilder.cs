@@ -31,10 +31,6 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                     $"ConnectionStrings:{_dbContextName}",
                     GetConnectionString()
                 },
-                {"App:ServiceBus:AzureServiceBusEnabled", "false"},
-                {"App:Localization:CacheDuration", "0:00:00:30"},
-                {"App:GitHubApi:BaseUrl", "https://api.github.com"},
-                {"App:GitHubApi:Timeout", "0.00:00:15"},
                 {"App:Smtp:UsePickupDirectory", "true"},
                 {"App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation()},
                 {"ApplicationInsights:TelemetryProcessor:ExcludedTypes", String.Empty }

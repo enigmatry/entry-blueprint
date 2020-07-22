@@ -14,6 +14,12 @@
     </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Infrastructure\Database\DropAllSql.sql" />
   </ItemGroup>
 
@@ -36,10 +42,6 @@
     <ProjectReference Include="..\Enigmatry.Blueprint.Api\Enigmatry.Blueprint.Api.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Data.Migrations\Enigmatry.Blueprint.Data.Migrations.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Model.Tests\Enigmatry.Blueprint.Model.Tests.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,15 +3,6 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    <ItemGroup>
-        <Content Remove="Templating\Sample.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="Templating\Sample.cshtml">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
       
     <ItemGroup>
         <PackageReference Include="AutoFixture.NUnit3" Version="4.11.0" />

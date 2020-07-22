@@ -10,7 +10,6 @@ namespace Enigmatry.Blueprint.Data.Migrations
 
         static DbInitializer()
         {
-            Seedings.Add(new UserSeeding());
         }
 
         // EF Core way of seeding data: https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding

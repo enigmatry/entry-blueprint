@@ -21,14 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.App", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{EF5D8839-3171-4961-ADA3-170CAA2BE5D6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{C609A10F-518A-4150-A908-A4C0FAD1454B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.EventBus", "BuildingBlocks\EventBus\Enigmatry.EventBus\Enigmatry.EventBus.csproj", "{EE206AFC-2882-4FFC-8F60-058DA6132A61}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.IntegrationEventLogEF", "BuildingBlocks\EventBus\Enigmatry.IntegrationEventLogEF\Enigmatry.IntegrationEventLogEF.csproj", "{E90C2280-FD13-4F86-B793-058407944FAE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.EventBusServiceBus", "BuildingBlocks\EventBus\Enigmatry.EventBusServiceBus\Enigmatry.EventBusServiceBus.csproj", "{888B2D86-E0DB-415D-841F-D5486A64709E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.ApplicationServices", "Enigmatry.Blueprint.ApplicationServices\Enigmatry.Blueprint.ApplicationServices.csproj", "{31DCD75F-4746-421D-BB72-078E7B0CC684}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1018A9E-9611-4FFA-8D47-1C4E5601DB86}"
@@ -40,8 +32,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Infrastructure.Tests", "Enigmatry.Blueprint.Infrastructure.Tests\Enigmatry.Blueprint.Infrastructure.Tests.csproj", "{427859D6-D123-4086-A7C9-25F060E2F5B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Data.Migrations.Runner", "Enigmatry.Blueprint.Data.Migrations.Runner\Enigmatry.Blueprint.Data.Migrations.Runner.csproj", "{C98497F8-5755-4258-A3B3-F3C0B4756EDE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Scheduler", "Enigmatry.Blueprint.Scheduler\Enigmatry.Blueprint.Scheduler.csproj", "{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{B11717EB-1E91-4227-97FA-2F4A73899289}"
 	ProjectSection(SolutionItems) = preProject
@@ -87,18 +77,6 @@ Global
 		{17D4E243-A0E4-47C6-B973-EB34F633FF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17D4E243-A0E4-47C6-B973-EB34F633FF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17D4E243-A0E4-47C6-B973-EB34F633FF68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE206AFC-2882-4FFC-8F60-058DA6132A61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE206AFC-2882-4FFC-8F60-058DA6132A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE206AFC-2882-4FFC-8F60-058DA6132A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE206AFC-2882-4FFC-8F60-058DA6132A61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E90C2280-FD13-4F86-B793-058407944FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E90C2280-FD13-4F86-B793-058407944FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E90C2280-FD13-4F86-B793-058407944FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E90C2280-FD13-4F86-B793-058407944FAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{888B2D86-E0DB-415D-841F-D5486A64709E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{888B2D86-E0DB-415D-841F-D5486A64709E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{888B2D86-E0DB-415D-841F-D5486A64709E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{888B2D86-E0DB-415D-841F-D5486A64709E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{31DCD75F-4746-421D-BB72-078E7B0CC684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31DCD75F-4746-421D-BB72-078E7B0CC684}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31DCD75F-4746-421D-BB72-078E7B0CC684}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -111,19 +89,9 @@ Global
 		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C98497F8-5755-4258-A3B3-F3C0B4756EDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1CCF015-180A-43C4-A6D4-C7039EAA92F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C609A10F-518A-4150-A908-A4C0FAD1454B} = {EF5D8839-3171-4961-ADA3-170CAA2BE5D6}
-		{EE206AFC-2882-4FFC-8F60-058DA6132A61} = {C609A10F-518A-4150-A908-A4C0FAD1454B}
-		{E90C2280-FD13-4F86-B793-058407944FAE} = {C609A10F-518A-4150-A908-A4C0FAD1454B}
-		{888B2D86-E0DB-415D-841F-D5486A64709E} = {C609A10F-518A-4150-A908-A4C0FAD1454B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A4984E8-85A3-4F86-9B64-B95313AEDD15}

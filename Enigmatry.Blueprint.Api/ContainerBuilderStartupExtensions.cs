@@ -22,10 +22,7 @@ namespace Enigmatry.Blueprint.Api
                 AssemblyFinder.InfrastructureAssembly
             }});
             builder.RegisterModule<EntityFrameworkModule>();
-            builder.RegisterModule<IdentityModule>();
             builder.RegisterModule<EmailModule>();
-            builder.RegisterModule(new EventBusModule {AzureServiceBusEnabled = configuration.ReadAppSettings().ServiceBus.AzureServiceBusEnabled});
-            builder.RegisterModule<TemplatingModule>();
         }
 
         private static ClaimsPrincipal GetPrincipal(IComponentContext c)

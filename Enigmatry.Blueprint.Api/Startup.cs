@@ -51,10 +51,6 @@ namespace Enigmatry.Blueprint.Api
             app.UseMiddleware<LogContextMiddleware>();
             app.UseHsts();
 
-            app.AppUseCultures();
-
-            //app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
@@ -84,11 +80,9 @@ namespace Enigmatry.Blueprint.Api
 
             services.AppAddSettings(configuration);
             services.AppAddPolly();
-            services.AppAddLocalization();
             services.AppAddAutoMapper();
             services.AppAddHealthChecks(configuration);
             services.AppAddMediatR();
-            services.AppAddTypedHttpClients(configuration.ReadAppSettings());
             services.AppAddSwagger("Blueprint API");
 
             // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
