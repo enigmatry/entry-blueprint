@@ -16,6 +16,18 @@
         "type": "parameter",
         "defaultValue": "Enigmatry.Blueprint",
         "replaces": "Enigmatry.Blueprint"
+        },
+        "appProjectName": {
+          "type": "parameter",
+          "replaces": "enigmatry-blueprint",
+          "FileRename": "enigmatry-blueprint",
+          "description": "the kebab-cased name (i.e. enigmatry-blueprint)"
+        },
+        "contextName": {
+          "type": "parameter",
+          "replaces": "BlueprintContext",
+          "FileRename": "BlueprintContext",
+          "description": "The DbContext name, PascalCased"
         }
     }
   }
