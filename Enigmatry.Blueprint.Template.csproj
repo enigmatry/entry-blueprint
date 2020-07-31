@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**" />
+    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**" />
     <Compile Remove="**\*" />
   </ItemGroup>
 
