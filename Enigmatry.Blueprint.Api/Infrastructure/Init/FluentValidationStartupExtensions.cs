@@ -11,7 +11,7 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Init
     {
         public static void AppConfigureFluentValidation(this IApplicationBuilder app)
         {
-            ValidatorOptions.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+            ValidatorOptions.Global.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
         }
 
         public static void AppAddFluentValidationApiBehaviorOptions(this ApiBehaviorOptions options)
