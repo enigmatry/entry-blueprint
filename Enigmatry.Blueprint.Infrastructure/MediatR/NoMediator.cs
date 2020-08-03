@@ -23,9 +23,9 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
             return Task.FromResult(default(TResponse)!);
         }
 
-        public Task<object> Send(object request, CancellationToken cancellationToken = new CancellationToken())
+        public Task<object?> Send(object request, CancellationToken cancellationToken = new CancellationToken())
         {
-            return Task.FromResult(default(object)!);
+            return Task.FromResult(default(object));
         }
     }
 }
