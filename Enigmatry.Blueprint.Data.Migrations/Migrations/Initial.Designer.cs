@@ -4,46 +4,41 @@ using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(BlueprintContext))]
-    partial class BlueprintContextModelSnapshot : ModelSnapshot
+    [Migration("Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
             {
                 b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("uniqueidentifier");
+                    .ValueGeneratedOnAdd();
 
-                b.Property<Guid?>("CreatedById")
-                    .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("CreatedById");
 
-                b.Property<DateTimeOffset>("CreatedOn")
-                    .HasColumnType("datetimeoffset");
+                b.Property<DateTimeOffset>("CreatedOn");
 
                 b.Property<string>("Name")
                     .IsRequired()
-                    .HasColumnType("nvarchar(200)")
                     .HasMaxLength(200);
 
-                b.Property<Guid?>("UpdatedById")
-                    .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("UpdatedById");
 
-                b.Property<DateTimeOffset>("UpdatedOn")
-                    .HasColumnType("datetimeoffset");
+                b.Property<DateTimeOffset>("UpdatedOn");
 
                 b.Property<string>("UserName")
                     .IsRequired()
-                    .HasColumnType("nvarchar(200)")
                     .HasMaxLength(200);
 
                 b.HasKey("Id");
@@ -71,25 +66,19 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
             modelBuilder.Entity("Enigmatry.BuildingBlocks.IntegrationEventLogEF.IntegrationEventLogEntry", b =>
             {
                 b.Property<Guid>("EventId")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("uniqueidentifier");
+                    .ValueGeneratedOnAdd();
 
                 b.Property<string>("Content")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                    .IsRequired();
 
-                b.Property<DateTime>("CreationTime")
-                    .HasColumnType("datetime2");
+                b.Property<DateTime>("CreationTime");
 
                 b.Property<string>("EventTypeName")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                    .IsRequired();
 
-                b.Property<int>("State")
-                    .HasColumnType("int");
+                b.Property<int>("State");
 
-                b.Property<int>("TimesSent")
-                    .HasColumnType("int");
+                b.Property<int>("TimesSent");
 
                 b.HasKey("EventId");
 
