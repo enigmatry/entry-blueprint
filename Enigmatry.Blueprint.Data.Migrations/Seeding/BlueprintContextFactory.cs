@@ -24,6 +24,20 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
             return CreateDbContext(ReadConnectionString());
         }
 
+        public BlueprintContext CreateDbContext(string connectionString)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<BlueprintContext>();
+            optionsBuilder.UseSqlServer(connectionString,
+                b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
+
+            var result =
+                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>(), new NullDbContextAccessTokenProvider())
+                {
+                    ModelBuilderConfigurator = DbInitializer.SeedData
+                };
+            return result;
+        }
+
         // reading Environment variables because arguments cannot be passed in
         // https://github.com/aspnet/EntityFrameworkCore/issues/8332
         private static string ReadConnectionString()
@@ -41,20 +55,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
             }
 
             return connectionString;
-        }
-
-        public BlueprintContext CreateDbContext(string connectionString)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<BlueprintContext>();
-            optionsBuilder.UseSqlServer(connectionString,
-                b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
-
-            var result =
-                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>(), new NullDbContextAccessTokenProvider())
-                {
-                    ModelBuilderConfigurator = DbInitializer.SeedData
-                };
-            return result;
         }
 
         private IPrincipal CreateEmptyPrincipal()

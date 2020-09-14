@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Enigmatry.Blueprint.Api.Infrastructure.Swagger;
+﻿using Enigmatry.Blueprint.Api.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using NJsonSchema.Generation;

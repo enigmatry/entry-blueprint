@@ -3,7 +3,6 @@ using System.Security.Principal;
 using Autofac;
 using Enigmatry.Blueprint.Api.Infrastructure.Init;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
-using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
