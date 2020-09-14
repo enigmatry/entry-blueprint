@@ -58,7 +58,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
                 {
                     errorFound = String.IsNullOrEmpty(expectedValidationMessage)
                         ? errorsField.Any()
-                        : errorsField.Any(msg => msg == expectedValidationMessage);
+                        : errorsField.Any(msg => msg.Contains(expectedValidationMessage, StringComparison.OrdinalIgnoreCase));
                 }
             }
             catch (Exception exception)
