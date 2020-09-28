@@ -21,7 +21,6 @@ namespace Enigmatry.Blueprint.Api
                 AssemblyFinder.InfrastructureAssembly
             }});
             builder.RegisterModule<EntityFrameworkModule>();
-            builder.RegisterModule<EmailModule>();
         }
 
         private static ClaimsPrincipal GetPrincipal(IComponentContext c)
