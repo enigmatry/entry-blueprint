@@ -23,7 +23,7 @@
     "minimist": "1.2.5",
     "rimraf": "3.0.2",
     "slash": "3.0.0",
-    "testcafe": "1.9.3",
+    "testcafe": "1.9.4",
     "testcafe-browser-provider-browserstack": "^1.13.0",
     "testcafe-reporter-cucumber-json": "6.2.0",
     "testcafe-reporter-teamcity": "1.0.12",
