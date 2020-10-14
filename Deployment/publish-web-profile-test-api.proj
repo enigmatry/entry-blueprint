@@ -19,7 +19,7 @@
       <Value>Information</Value>
     </ParameterValue>
     <ParameterValue Include="Rolling Log File Path">
-      <Value>D:/home/LogFiles/api/enigmatry-blueprint-api-{Date}.log</Value>
+      <Value>D:/home/LogFiles/api/enigmatry-blueprint-api-.log</Value>
     </ParameterValue>
   </ItemGroup>
 </Project>
