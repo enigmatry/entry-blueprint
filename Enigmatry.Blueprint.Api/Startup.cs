@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Enigmatry.Blueprint.Api.Infrastructure.Init;
 using Enigmatry.Blueprint.Api.Infrastructure.Logging;
+using Enigmatry.Blueprint.BuildingBlocks.Swagger;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
 using JetBrains.Annotations;
