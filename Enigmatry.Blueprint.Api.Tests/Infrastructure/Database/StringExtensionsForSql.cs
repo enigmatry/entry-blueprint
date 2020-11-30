@@ -9,16 +9,16 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Database
     {
         public static string[] SplitStatements(this string sql)
         {
-            var sqlBatch = string.Empty;
+            var sqlBatch = String.Empty;
             var result = new List<string>();
             sql += "\nGO"; // make sure last batch is executed.
 
-            foreach (string line in sql.Split(new[] {"\n", "\r"}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var line in sql.Split(new[] { "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (line.ToUpperInvariant().Trim() == "GO")
                 {
                     result.Add(sqlBatch);
-                    sqlBatch = string.Empty;
+                    sqlBatch = String.Empty;
                 }
                 else
                 {

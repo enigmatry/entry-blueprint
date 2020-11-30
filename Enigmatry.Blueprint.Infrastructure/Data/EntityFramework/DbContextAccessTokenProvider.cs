@@ -22,8 +22,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
         public async Task<string> GetAccessTokenAsync()
         {
-            return _settings.UseAccessToken ? 
-                await GetTokenFromAzureServiceTokenProvider() : 
+            return _settings.UseAccessToken ?
+                await GetTokenFromAzureServiceTokenProvider() :
                 await Task.FromResult(String.Empty);
         }
 

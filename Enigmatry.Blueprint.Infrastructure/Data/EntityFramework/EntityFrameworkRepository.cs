@@ -23,20 +23,13 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
         protected DbContext DbContext { get; }
 
-        public IQueryable<T> QueryAll()
-        {
-            return DbSet;
-        }
+        public IQueryable<T> QueryAll() => DbSet;
 
         public IQueryable<T> QueryAllIncluding(params Expression<Func<T, object>>[] paths)
         {
-            if (paths == null)
-            {
-                throw new ArgumentNullException(nameof(paths));
-            }
-
-            return paths.Aggregate<Expression<Func<T, object>>, IQueryable<T>>(DbSet,
-                (current, includeProperty) => current.Include(includeProperty));
+            return paths == null
+                ? throw new ArgumentNullException(nameof(paths))
+                : paths.Aggregate<Expression<Func<T, object>>, IQueryable<T>>(DbSet, (current, includeProperty) => current.Include(includeProperty));
         }
 
         public void Add(T item)
@@ -73,24 +66,12 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             }
         }
 
-        public T FindById(Guid id)
-        {
-            return DbSet.Find(id);
-        }
+        public T FindById(Guid id) => DbSet.Find(id);
 
-        public async Task<T> FindByIdAsync(Guid id)
-        {
-            return await DbSet.FindAsync(id);
-        }
+        public async Task<T> FindByIdAsync(Guid id) => await DbSet.FindAsync(id);
 
-        public T FindByIdNoCache(Guid id)
-        {
-            return DbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
-        }
+        public T FindByIdNoCache(Guid id) => DbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
 
-        public void DeleteRange(IEnumerable<T> entities)
-        {
-            DbSet.RemoveRange(entities);
-        }
+        public void DeleteRange(IEnumerable<T> entities) => DbSet.RemoveRange(entities);
     }
 }

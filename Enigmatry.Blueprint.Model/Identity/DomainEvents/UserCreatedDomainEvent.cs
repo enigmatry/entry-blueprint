@@ -11,6 +11,6 @@ namespace Enigmatry.Blueprint.Model.Identity.DomainEvents
 
         public string UserName { get; }
 
-        public override object AuditPayload => new {UserName};
+        public override object AuditPayload => new { UserName };
     }
 }

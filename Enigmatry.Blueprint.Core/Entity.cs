@@ -13,14 +13,8 @@ namespace Enigmatry.Blueprint.Core
 
         public Guid Id { get; set; }
 
-        protected void AddDomainEvent(INotification eventItem)
-        {
-            _domainEvents.Add(eventItem);
-        }
+        protected void AddDomainEvent(INotification eventItem) => _domainEvents.Add(eventItem);
 
-        public void ClearDomainEvents()
-        {
-            _domainEvents.Clear();
-        }
+        public void ClearDomainEvents() => _domainEvents.Clear();
     }
 }

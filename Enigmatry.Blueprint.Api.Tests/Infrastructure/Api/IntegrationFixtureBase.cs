@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
@@ -25,7 +24,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         private IConfiguration _configuration;
         private TestServer _server;
         private IServiceScope _testScope;
-        protected HttpClient Client;
+        protected HttpClient _client;
         protected bool _seedUsers = true;
 #pragma warning restore CS8618 //
 
@@ -43,8 +42,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 
             _server = new TestServer(webHostBuilder);
             CreateDatabase();
-            
-            Client = _server.CreateClient();
+
+            _client = _server.CreateClient();
             _testScope = CreateScope();
             SeedUsers();
         }
@@ -65,10 +64,12 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             try
             {
-                string dropAllSql = EmbeddedResource.ReadResourceContent("Enigmatry.Blueprint.Api.Tests.Infrastructure.Database.DropAllSql.sql");
+                var dropAllSql = EmbeddedResource.ReadResourceContent("Enigmatry.Blueprint.Api.Tests.Infrastructure.Database.DropAllSql.sql");
                 foreach (var statement in dropAllSql.SplitStatements())
+                {
                     // WriteLine("Executing: " + statement);
                     database.ExecuteSqlRaw(statement);
+                }
             }
             catch (SqlException ex)
             {
@@ -86,10 +87,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             }
         }
 
-        protected void DoNotSeedUsers()
-        {
-            _seedUsers = false;
-        }
+        protected void DoNotSeedUsers() => _seedUsers = false;
 
         private void SeedUsers()
         {
@@ -113,7 +111,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         public void Teardown()
         {
             _testScope.Dispose();
-            Client.Dispose();
+            _client.Dispose();
             _server.Dispose();
         }
 
@@ -133,7 +131,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             var dbContext = Resolve<DbContext>();
 
-            foreach (object entity in entities)
+            foreach (var entity in entities)
             {
                 dbContext.Add(entity);
             }
@@ -148,7 +146,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             var dbContext = Resolve<DbContext>();
 
-            foreach (object entity in entities)
+            foreach (var entity in entities)
             {
                 dbContext.Add(entity);
             }

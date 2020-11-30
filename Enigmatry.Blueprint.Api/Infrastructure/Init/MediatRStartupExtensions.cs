@@ -12,7 +12,7 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Init
             //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             //services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>));
             //services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(SamplePostRequestBehavior<,>));
-            
+
             services.AddMediatR(
                 AssemblyFinder.ApiAssembly,
                 AssemblyFinder.DomainAssembly,

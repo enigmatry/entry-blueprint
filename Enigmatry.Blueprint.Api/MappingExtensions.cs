@@ -7,12 +7,7 @@ namespace Enigmatry.Blueprint.Api
     {
         public static ActionResult<TDestination> MapToActionResult<TDestination>(this IMapper mapper, object value)
         {
-            if (value == null)
-            {
-                return new NotFoundResult();
-            }
-
-            return new OkObjectResult(mapper.Map<TDestination>(value));
+            return value == null ? new NotFoundResult() : (ActionResult<TDestination>)new OkObjectResult(mapper.Map<TDestination>(value));
         }
     }
 }

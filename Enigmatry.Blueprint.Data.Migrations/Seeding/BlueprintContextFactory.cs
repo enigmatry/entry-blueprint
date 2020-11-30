@@ -19,10 +19,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
 
         // reading Environment variables because arguments cannot be passed in
         // https://github.com/aspnet/EntityFrameworkCore/issues/8332
-        public BlueprintContext CreateDbContext(string[] args)
-        {
-            return CreateDbContext(ReadConnectionString());
-        }
+        public BlueprintContext CreateDbContext(string[] args) => CreateDbContext(ReadConnectionString());
 
         public BlueprintContext CreateDbContext(string connectionString)
         {
@@ -57,19 +54,11 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
             return connectionString;
         }
 
-        private IPrincipal CreateEmptyPrincipal()
-        {
-            return new GenericPrincipal(new GenericIdentity(""), new string[0]);
-        }
+        private IPrincipal CreateEmptyPrincipal() => new GenericPrincipal(new GenericIdentity(""), new string[0]);
 
         private class NullDbContextAccessTokenProvider : IDbContextAccessTokenProvider
         {
-            public Task<string> GetAccessTokenAsync()
-            {
-                return Task.FromResult(String.Empty);
-            }
+            public Task<string> GetAccessTokenAsync() => Task.FromResult(String.Empty);
         }
     }
-
-    
 }

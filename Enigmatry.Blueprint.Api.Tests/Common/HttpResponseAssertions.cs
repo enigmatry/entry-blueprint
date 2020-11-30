@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Enigmatry.Blueprint.Api.Tests.Common
 {
-    public class HttpResponseAssertions: ReferenceTypeAssertions<HttpResponseMessage, HttpResponseAssertions>
+    public class HttpResponseAssertions : ReferenceTypeAssertions<HttpResponseMessage, HttpResponseAssertions>
     {
         protected override string Identifier => "HttpResponse";
 
@@ -19,14 +19,12 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             Subject = value;
         }
 
-        public AndConstraint<HttpResponseAssertions> BeBadRequest(string because = "",
-            params object[] becauseArgs)
+        public AndConstraint<HttpResponseAssertions> BeBadRequest(string because = "", params object[] becauseArgs)
         {
             return HaveStatusCode(HttpStatusCode.BadRequest, because, becauseArgs);
         }
 
-        public AndConstraint<HttpResponseAssertions> BeNotFound(string because = "",
-            params object[] becauseArgs)
+        public AndConstraint<HttpResponseAssertions> BeNotFound(string because = "", params object[] becauseArgs)
         {
             return HaveStatusCode(HttpStatusCode.NotFound, because, becauseArgs);
         }
@@ -36,7 +34,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
         {
             AssertionScope assertion = Execute.Assertion;
             AssertionScope assertionScope = assertion.ForCondition(Subject.StatusCode == expected).BecauseOf(because, becauseArgs);
-            string message = "Expected response to have HttpStatusCode {0}{reason}, but found {1}. Response: {2}";
+            var message = "Expected response to have HttpStatusCode {0}{reason}, but found {1}. Response: {2}";
             object[] failArgs = {
                 expected,
                 Subject.StatusCode,
@@ -48,12 +46,12 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
 
         public AndConstraint<HttpResponseAssertions> ContainValidationError(string fieldName, string expectedValidationMessage = "", string because = "", params object[] becauseArgs)
         {
-            string responseContent = Subject.Content.ReadAsStringAsync().Result;
+            var responseContent = Subject.Content.ReadAsStringAsync().Result;
             var errorFound = false;
             try
             {
                 var json = JsonConvert.DeserializeObject<ValidationProblemDetails>(responseContent);
-                
+
                 if (json.Errors.TryGetValue(fieldName, out string[]? errorsField))
                 {
                     errorFound = String.IsNullOrEmpty(expectedValidationMessage)
@@ -72,7 +70,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Common
             if (String.IsNullOrEmpty(expectedValidationMessage))
             {
                 message = "Expected response to have validation message with key: {0}{reason}, but found {1}.";
-                failArgs =new object[]
+                failArgs = new object[]
                 {
                     fieldName,
                     responseContent

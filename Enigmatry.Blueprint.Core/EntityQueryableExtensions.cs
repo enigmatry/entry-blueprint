@@ -12,12 +12,7 @@ namespace Enigmatry.Blueprint.Core
 
         public static IQueryable<T> QueryExceptWithId<T>(this IQueryable<T> query, Guid? id) where T : Entity
         {
-            if (!id.HasValue)
-            {
-                return query;
-            }
-
-            return query.Where(e => e.Id != id);
+            return !id.HasValue ? query : query.Where(e => e.Id != id);
         }
     }
 }

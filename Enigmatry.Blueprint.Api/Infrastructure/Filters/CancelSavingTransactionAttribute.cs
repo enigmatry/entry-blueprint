@@ -5,15 +5,9 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
 {
     internal class CancelSavingTransactionAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            CancelSavingIfModelInvalid(context);
-         }
+        public override void OnActionExecuting(ActionExecutingContext context) => CancelSavingIfModelInvalid(context);
 
-        public override void OnActionExecuted(ActionExecutedContext context)
-        {
-            CancelSavingIfModelInvalid(context);
-         }
+        public override void OnActionExecuted(ActionExecutedContext context) => CancelSavingIfModelInvalid(context);
 
         private static void CancelSavingIfModelInvalid(FilterContext context)
         {

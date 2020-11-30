@@ -20,7 +20,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
         public class Response
         {
             public IEnumerable<Item> Items { get; set; } = new List<Item>();
-             
+
             [PublicAPI]
             public class Item
             {
@@ -38,9 +38,6 @@ namespace Enigmatry.Blueprint.Api.Features.Users
             }
         }
 
-        private static IQueryable<User> BuildInclude(this IQueryable<User> query)
-        {
-            return query;
-        }
+        private static IQueryable<User> BuildInclude(this IQueryable<User> query) => query;
     }
 }

@@ -9,26 +9,23 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
     {
         public static async Task<T> DeserializeAsync<T>(this HttpResponseMessage response)
         {
-            string content = await response.Content.ReadAsStringAsync();
+            var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(content);
         }
 
         public static async Task<T> DeserializeWithStatusCodeCheckAsync<T>(this HttpResponseMessage response)
         {
-            string content = await response.Content.ReadAsStringAsync();
-            if (response.IsSuccessStatusCode)
-            {
-                return JsonConvert.DeserializeObject<T>(content);
-            }
-
-            throw DisposeResponseContentAndThrowException(response, content);
+            var content = await response.Content.ReadAsStringAsync();
+            return response.IsSuccessStatusCode
+                ? JsonConvert.DeserializeObject<T>(content)
+                : throw DisposeResponseContentAndThrowException(response, content);
         }
 
         public static async Task EnsureSuccessStatusCodeAsync(this HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
             {
-                string content = await response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync();
                 DisposeResponseContentAndThrowException(response, content);
             }
         }

@@ -26,15 +26,15 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
         private static ValidationProblemDetails CreateValidationProblemDetails(HttpContext context,
             ModelStateDictionary? modelState = null)
         {
-            ValidationProblemDetails details = modelState != null ? 
-                new ValidationProblemDetails(modelState) : 
+            ValidationProblemDetails details = modelState != null ?
+                new ValidationProblemDetails(modelState) :
                 new ValidationProblemDetails
-            {
-                Instance = context.Request.Path,
-                Status = StatusCodes.Status400BadRequest,
-                Type = "https://asp.net/core",
-                Detail = "Please refer to the errors property for additional details."
-            };
+                {
+                    Instance = context.Request.Path,
+                    Status = StatusCodes.Status400BadRequest,
+                    Type = "https://asp.net/core",
+                    Detail = "Please refer to the errors property for additional details."
+                };
             return details;
         }
 
@@ -42,7 +42,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
         {
             return new BadRequestObjectResult(problemDetails)
             {
-                ContentTypes = {"application/problem+json", "application/problem+xml"}
+                ContentTypes = { "application/problem+json", "application/problem+xml" }
             };
         }
 
@@ -50,13 +50,13 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
         {
             foreach (ValidationFailure validationExceptionError in validationExceptionErrors)
             {
-                string key = validationExceptionError.PropertyName;
+                var key = validationExceptionError.PropertyName;
                 if (!problemDetails.Errors.TryGetValue(key, out string[]? messages))
                 {
                     messages = new string[] { };
                 }
-                
-                messages = messages.Concat(new[] {validationExceptionError.ErrorMessage}).ToArray();
+
+                messages = messages.Concat(new[] { validationExceptionError.ErrorMessage }).ToArray();
                 problemDetails.Errors[key] = messages;
             }
         }

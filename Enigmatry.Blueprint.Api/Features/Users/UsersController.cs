@@ -76,9 +76,6 @@ namespace Enigmatry.Blueprint.Api.Features.Users
         [HttpGet]
         [Route("secret")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public string GetSecret()
-        {
-            return _configuration.GetValue<string>("App:SampleKeyVaultSecret");
-        }
+        public string GetSecret() => _configuration.GetValue<string>("App:SampleKeyVaultSecret");
     }
 }

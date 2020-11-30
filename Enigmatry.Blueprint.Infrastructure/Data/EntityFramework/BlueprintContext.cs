@@ -65,7 +65,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             MethodInfo entityMethod = typeof(ModelBuilder).GetMethods().First(m => m.Name == "Entity" && m.IsGenericMethod);
 
             Assembly? entitiesAssembly = Assembly.GetAssembly(typeof(User));
-            var types = entitiesAssembly != null? entitiesAssembly.GetTypes(): Enumerable.Empty<Type>();
+            var types = entitiesAssembly != null ? entitiesAssembly.GetTypes() : Enumerable.Empty<Type>();
 
             IEnumerable<Type> entityTypes = types
                     .Where(x => x.IsSubclassOf(typeof(Entity)) && !x.IsAbstract);
@@ -82,7 +82,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             return task.GetAwaiter().GetResult();
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             PopulateCreatedUpdated();
 
@@ -116,7 +116,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
                 .Entries<Entity>()
                 .Where(x => (x.State == EntityState.Added || x.State == EntityState.Modified) &&
                             x.Entity is IEntityHasCreatedUpdated)
-                .Select(x => new {x.State, Entity = (IEntityHasCreatedUpdated)x.Entity}).ToList();
+                .Select(x => (x.State, Entity: (IEntityHasCreatedUpdated)x.Entity)).ToList();
 
             if (userId.HasValue)
             {

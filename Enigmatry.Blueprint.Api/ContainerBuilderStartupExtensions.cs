@@ -15,11 +15,14 @@ namespace Enigmatry.Blueprint.Api
             builder.RegisterModule<ConfigurationModule>();
             builder.Register(GetPrincipal)
                 .As<IPrincipal>().InstancePerLifetimeScope();
-            builder.RegisterModule(new ServiceModule {Assemblies = new[]
+            builder.RegisterModule(new ServiceModule
             {
-                AssemblyFinder.ApplicationServicesAssembly, 
+                Assemblies = new[]
+            {
+                AssemblyFinder.ApplicationServicesAssembly,
                 AssemblyFinder.InfrastructureAssembly
-            }});
+            }
+            });
             builder.RegisterModule<EntityFrameworkModule>();
         }
 

@@ -9,15 +9,14 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "IntegrationEventLog",
-                columns: table => new
-                {
-                    EventId = table.Column<Guid>(nullable: false),
-                    EventTypeName = table.Column<string>(nullable: false),
-                    State = table.Column<int>(nullable: false),
-                    TimesSent = table.Column<int>(nullable: false),
-                    CreationTime = table.Column<DateTime>(nullable: false),
-                    Content = table.Column<string>(nullable: false)
-                },
+                columns: table => (
+                    EventId: table.Column<Guid>(nullable: false),
+                    EventTypeName: table.Column<string>(nullable: false),
+                    State: table.Column<int>(nullable: false),
+                    TimesSent: table.Column<int>(nullable: false),
+                    CreationTime: table.Column<DateTime>(nullable: false),
+                    Content: table.Column<string>(nullable: false)
+                ),
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_IntegrationEventLog", x => x.EventId);
@@ -25,16 +24,15 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 
             migrationBuilder.CreateTable(
                 name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 200, nullable: false),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
-                    CreatedOn = table.Column<DateTimeOffset>(nullable: false),
-                    UpdatedOn = table.Column<DateTimeOffset>(nullable: false),
-                    CreatedById = table.Column<Guid>(nullable: true),
-                    UpdatedById = table.Column<Guid>(nullable: true)
-                },
+                columns: table => (
+                    Id: table.Column<Guid>(nullable: false),
+                    UserName: table.Column<string>(maxLength: 200, nullable: false),
+                    Name: table.Column<string>(maxLength: 200, nullable: false),
+                    CreatedOn: table.Column<DateTimeOffset>(nullable: false),
+                    UpdatedOn: table.Column<DateTimeOffset>(nullable: false),
+                    CreatedById: table.Column<Guid>(nullable: true),
+                    UpdatedById: table.Column<Guid>(nullable: true)
+                ),
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);

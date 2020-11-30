@@ -6,10 +6,7 @@ namespace Enigmatry.Blueprint.Infrastructure.MediatR
 {
     public class NoMediator : IMediator
     {
-        public Task Publish(object notification, CancellationToken cancellationToken = new CancellationToken())
-        {
-            return Task.CompletedTask;
-        }
+        public Task Publish(object notification, CancellationToken cancellationToken = new CancellationToken()) => Task.CompletedTask;
 
         public Task Publish<TNotification>(TNotification notification,
             CancellationToken cancellationToken = default) where TNotification : INotification

@@ -29,7 +29,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
                     .BuildInclude()
                     .ToListMappedAsync<User, Response.Item>(_mapper, cancellationToken);
 
-                return new Response {Items = items};
+                return new Response { Items = items };
             }
         }
     }

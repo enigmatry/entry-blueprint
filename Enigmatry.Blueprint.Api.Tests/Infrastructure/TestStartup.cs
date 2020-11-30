@@ -36,13 +36,10 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
             _startup.ConfigureContainer(builder);
             builder.RegisterModule<TestModule>();// this allows certain components to be overriden
             // Api does not depend on migrations assembly, test are
-            builder.RegisterModule(new EntityFrameworkModule {RegisterMigrationsAssembly = true});
+            builder.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
         }
 
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            _startup.Configure(app, env);
-        }
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) => _startup.Configure(app, env);
     }
 }

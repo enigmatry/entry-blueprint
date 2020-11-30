@@ -17,17 +17,11 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
         public Guid UserId { get; }
         public string UserName { get; }
 
-        public bool IsInRole(string role)
-        {
-            return true;
-        }
+        public bool IsInRole(string role) => true;
 
 
         public IIdentity Identity { get; }
 
-        public static TestPrincipal CreateDefault()
-        {
-            return new TestPrincipal(Guid.NewGuid(), TestUsername);
-        }
+        public static TestPrincipal CreateDefault() => new TestPrincipal(Guid.NewGuid(), TestUsername);
     }
 }

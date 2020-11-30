@@ -21,25 +21,24 @@ namespace Enigmatry.Blueprint.Data.Migrations.Runner
             try
             {
                 var factory = new BlueprintContextFactory();
-                using (var context = factory.CreateDbContext(args[0]))
-                {
-                    Console.WriteLine("Updating database...");
+                using var context = factory.CreateDbContext(args[0]);
+                Console.WriteLine("Updating database...");
 
-                    IEnumerable<string> pendingMigrations = context.Database.GetPendingMigrations().ToList();
+                IEnumerable<string> pendingMigrations = context.Database.GetPendingMigrations().ToList();
 
-                    Console.WriteLine(pendingMigrations.Any()
-                        ? $"Executing {pendingMigrations.Count()} pending migrations: {String.Join(Environment.NewLine, pendingMigrations)}"
-                        : "No pending migrations");
+                Console.WriteLine(pendingMigrations.Any()
+                    ? $"Executing {pendingMigrations.Count()} pending migrations: {String.Join(Environment.NewLine, pendingMigrations)}"
+                    : "No pending migrations");
 
-                    context.Database.Migrate();
+                context.Database.Migrate();
 
-                    // seeding is configured in BlueprintContextFactory
+                // seeding is configured in BlueprintContextFactory
 
-                    Console.WriteLine("Database is successfully updated");
+                Console.WriteLine("Database is successfully updated");
 #if DEBUG
-                    Console.ReadKey();
+                Console.ReadKey();
+
 #endif
-                }
             }
             catch (Exception e)
             {

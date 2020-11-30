@@ -40,17 +40,17 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
                 return;
             }
 
-            var jsonResult = new JsonResult(GetProblemDetails(context)) {StatusCode = (int)HttpStatusCode.InternalServerError, ContentType = "application/problem+json"};
+            var jsonResult = new JsonResult(GetProblemDetails(context)) { StatusCode = (int)HttpStatusCode.InternalServerError, ContentType = "application/problem+json" };
             context.Result = jsonResult;
         }
 
         private ProblemDetails GetProblemDetails(ExceptionContext context)
         {
-            string errorDetail = context.HttpContext.Request.IsTrusted(_useDeveloperExceptionPage)
+            var errorDetail = context.HttpContext.Request.IsTrusted(_useDeveloperExceptionPage)
                 ? context.Exception.Demystify().ToString()
                 : "The instance value should be used to identify the problem when calling customer support";
 
-            var problemDetails = new ProblemDetails {Title = "An unexpected error occurred!", Instance = context.HttpContext.Request.Path, Status = StatusCodes.Status500InternalServerError, Detail = errorDetail};
+            var problemDetails = new ProblemDetails { Title = "An unexpected error occurred!", Instance = context.HttpContext.Request.Path, Status = StatusCodes.Status500InternalServerError, Detail = errorDetail };
 
             return problemDetails;
         }

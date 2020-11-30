@@ -5,15 +5,9 @@ namespace Enigmatry.Blueprint.Core.Helpers
 {
     public static class StringExtensions
     {
-        public static bool HasContent(this string value)
-        {
-            return !String.IsNullOrEmpty(value);
-        }
+        public static bool HasContent(this string value) => !String.IsNullOrEmpty(value);
 
-        public static string? ToNullIfEmpty(this string value)
-        {
-            return String.IsNullOrEmpty(value) ? null : value;
-        }
+        public static string? ToNullIfEmpty(this string value) => String.IsNullOrEmpty(value) ? null : value;
 
         public static string ToCamelCase(this string s)
         {

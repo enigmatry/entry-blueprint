@@ -31,7 +31,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR
 
         public static async Task DispatchDomainEventsAsync(this IMediator mediator, IEnumerable<INotification> domainEvents, ILogger logger)
         {
-            Stopwatch stopWatch = Stopwatch.StartNew();
+            var stopWatch = Stopwatch.StartNew();
             // sequentially publish domain events to avoid problems with same DbContext used by different threads 
             // fixes problem "A second operation started on this context before a previous operation completed"
             // this happens when one event handler is doing DbContext saving while some other one is doing the reading
@@ -41,7 +41,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework.MediatR
                 TimeSpan ts = stopWatch.Elapsed;
 
                 // Format and display the TimeSpan value.
-                logger.LogDebug("Time to publish domain event - {DomainEvent}: {Time}s",domainEvent.GetType(), ts.TotalSeconds);
+                logger.LogDebug("Time to publish domain event - {DomainEvent}: {Time}s", domainEvent.GetType(), ts.TotalSeconds);
                 stopWatch.Restart();
             }
         }

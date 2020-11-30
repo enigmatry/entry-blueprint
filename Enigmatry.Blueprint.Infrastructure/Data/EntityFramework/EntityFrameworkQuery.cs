@@ -19,15 +19,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
             _queryable = context.Set<T>();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _queryable.GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => _queryable.GetEnumerator();
 
         public Type ElementType => _queryable.ElementType;
         public Expression Expression => _queryable.Expression;

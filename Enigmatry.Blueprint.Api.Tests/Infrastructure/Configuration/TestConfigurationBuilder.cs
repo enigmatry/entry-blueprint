@@ -66,7 +66,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
             return $"Server=.;Database={dbName};Trusted_Connection=True;MultipleActiveResultSets=true";
         }
 
-        private static void WriteLine(string message) => 
+        private static void WriteLine(string message) =>
             TestContext.WriteLine(message);
     }
 }

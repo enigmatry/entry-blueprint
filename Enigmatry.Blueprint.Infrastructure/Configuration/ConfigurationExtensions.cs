@@ -21,11 +21,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Configuration
         public static T ReadSettingsSection<T>(this IConfiguration configuration, string sectionName)
         {
             var sectionSettings = configuration.GetSection(sectionName).Get<T>();
-            if (sectionSettings == null)
-            {
-                throw new InvalidOperationException($"Section is missing from configuration. Section Name: {sectionName}");
-            }
-            return sectionSettings;
+            return sectionSettings == null
+                ? throw new InvalidOperationException($"Section is missing from configuration. Section Name: {sectionName}")
+                : sectionSettings;
         }
     }
 }

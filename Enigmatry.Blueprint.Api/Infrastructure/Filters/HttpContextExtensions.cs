@@ -5,9 +5,6 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
 {
     public static class HttpContextExtensions
     {
-        public static T Resolve<T>(this HttpContext httpContext)
-        {
-            return httpContext.RequestServices.GetService<T>();
-        }
+        public static T Resolve<T>(this HttpContext httpContext) => httpContext.RequestServices.GetService<T>();
     }
 }

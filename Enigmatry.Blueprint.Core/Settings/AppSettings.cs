@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Enigmatry.Blueprint.Core.Settings
+﻿namespace Enigmatry.Blueprint.Core.Settings
 {
     public class AppSettings
     {

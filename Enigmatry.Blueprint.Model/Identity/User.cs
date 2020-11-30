@@ -12,7 +12,6 @@ namespace Enigmatry.Blueprint.Model.Identity
         public string Name { get; private set; } = "";
         public DateTimeOffset CreatedOn { get; private set; }
         public DateTimeOffset UpdatedOn { get; private set; }
-        
         public Guid? CreatedById { get; private set; }
         public Guid? UpdatedById { get; private set; }
 
@@ -46,10 +45,7 @@ namespace Enigmatry.Blueprint.Model.Identity
             CreatedById = createdBy;
         }
 
-        public void SetCreated(DateTimeOffset createdOn)
-        {
-            CreatedOn = createdOn;
-        }
+        public void SetCreated(DateTimeOffset createdOn) => CreatedOn = createdOn;
 
         public void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy)
         {
@@ -57,9 +53,6 @@ namespace Enigmatry.Blueprint.Model.Identity
             UpdatedById = updatedBy;
         }
 
-        public void SetUpdated(DateTimeOffset updatedOn)
-        {
-            UpdatedOn = updatedOn;
-        }
+        public void SetUpdated(DateTimeOffset updatedOn) => UpdatedOn = updatedOn;
     }
 }
