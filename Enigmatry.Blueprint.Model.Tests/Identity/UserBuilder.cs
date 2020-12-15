@@ -30,10 +30,9 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
             return this;
         }
 
-        public static implicit operator User(UserBuilder builder)
-        {
-            return builder.Build();
-        }
+        public static implicit operator User(UserBuilder builder) => ToUser(builder);
+
+        public static User ToUser(UserBuilder builder) => builder.Build();
 
         public User Build()
         {

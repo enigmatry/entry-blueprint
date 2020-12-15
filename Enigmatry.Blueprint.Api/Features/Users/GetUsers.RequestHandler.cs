@@ -11,7 +11,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
     public partial class GetUsers
     {
         [UsedImplicitly]
-        public class RequestHandler : IRequestHandler<Query, Response>
+        public class RequestHandler : IRequestHandler<Request, Response>
         {
             private readonly IRepository<User> _repository;
             private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
                 _mapper = mapper;
             }
 
-            public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
                 var items = await _repository.QueryAll()
                     .QueryByKeyword(request.Keyword)

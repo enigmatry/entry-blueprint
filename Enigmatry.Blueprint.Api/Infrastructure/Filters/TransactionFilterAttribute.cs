@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
 {
-    public class TransactionFilterAttribute : ActionFilterAttribute
+    public sealed class TransactionFilterAttribute : ActionFilterAttribute
     {
         public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {

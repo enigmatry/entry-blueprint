@@ -10,7 +10,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
     // E.g. Instead of 'UserName' we get 'userName'
     public static class CamelCasePropertyNameResolver
     {
+#pragma warning disable CA1801 // Review unused parameters
         public static string ResolvePropertyName(Type type, MemberInfo memberInfo, LambdaExpression expression)
+#pragma warning restore CA1801 // Review unused parameters
         {
             var propertyName = DefaultPropertyNameResolver(memberInfo, expression);
 

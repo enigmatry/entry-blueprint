@@ -24,7 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1018A9E-9611-4FFA-8D47-1C4E5601DB86}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		Enigmatry.Blueprint.sln.DotSettings = Enigmatry.Blueprint.sln.DotSettings
 		nuget.config = nuget.config
 	EndProjectSection
 EndProject

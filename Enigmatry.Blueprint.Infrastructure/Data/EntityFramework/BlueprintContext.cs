@@ -26,7 +26,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
         private readonly ICurrentUserIdProvider _currentUserIdProvider;
         private readonly ILogger<BlueprintContext> _logger;
         private readonly IDbContextAccessTokenProvider _dbContextAccessTokenProvider;
-        public Action<ModelBuilder>? ModelBuilderConfigurator { private get; set; }
+        public Action<ModelBuilder>? ModelBuilderConfigurator { get; set; }
 
         public BlueprintContext(DbContextOptions options, IMediator mediator, ITimeProvider timeProvider, ICurrentUserIdProvider currentUserIdProvider, ILogger<BlueprintContext> logger, IDbContextAccessTokenProvider dbContextAccessTokenProvider) : base(options)
         {
@@ -72,7 +72,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
             foreach (Type type in entityTypes)
             {
-                entityMethod.MakeGenericMethod(type).Invoke(modelBuilder, new object[] { });
+                entityMethod.MakeGenericMethod(type).Invoke(modelBuilder, Array.Empty<object>());
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
@@ -18,15 +19,16 @@ using NUnit.Framework;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
 {
+#pragma warning disable CA1001 // Types that own disposable fields should be disposable
     public class IntegrationFixtureBase
+#pragma warning restore CA1001 // Types that own disposable fields should be disposable
     {
-#pragma warning disable CS8618 // Initialized in Setup
-        private IConfiguration _configuration;
-        private TestServer _server;
-        private IServiceScope _testScope;
-        protected HttpClient _client;
-        protected bool _seedUsers = true;
-#pragma warning restore CS8618 //
+        private IConfiguration _configuration = null!;
+        private TestServer _server = null!;
+        private IServiceScope _testScope = null!;
+        private bool _seedUsers = true;
+
+        protected HttpClient Client { get; private set; } = null!;
 
         [SetUp]
         protected void Setup()
@@ -43,7 +45,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
             _server = new TestServer(webHostBuilder);
             CreateDatabase();
 
-            _client = _server.CreateClient();
+            Client = _server.CreateClient();
             _testScope = CreateScope();
             SeedUsers();
         }
@@ -111,7 +113,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         public void Teardown()
         {
             _testScope.Dispose();
-            _client.Dispose();
+            Client.Dispose();
             _server.Dispose();
         }
 
@@ -164,7 +166,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         protected IQueryable<T> QueryDbSkipCache<T>() where T : class =>
             Resolve<DbContext>().Set<T>().AsNoTracking();
 
-        protected T Resolve<T>() => _testScope.Resolve<T>();
+        protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
 
         private static void WriteLine(string message) => TestContext.WriteLine(message);
     }

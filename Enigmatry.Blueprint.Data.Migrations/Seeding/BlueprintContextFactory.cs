@@ -54,7 +54,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
             return connectionString;
         }
 
-        private IPrincipal CreateEmptyPrincipal() => new GenericPrincipal(new GenericIdentity(""), new string[0]);
+        private IPrincipal CreateEmptyPrincipal() => new GenericPrincipal(new GenericIdentity(""), Array.Empty<string>());
 
         private class NullDbContextAccessTokenProvider : IDbContextAccessTokenProvider
         {

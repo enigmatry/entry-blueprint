@@ -27,9 +27,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
         public IQueryable<T> QueryAllIncluding(params Expression<Func<T, object>>[] paths)
         {
-            return paths == null
-                ? throw new ArgumentNullException(nameof(paths))
-                : paths.Aggregate<Expression<Func<T, object>>, IQueryable<T>>(DbSet, (current, includeProperty) => current.Include(includeProperty));
+            return paths.Aggregate<Expression<Func<T, object>>, IQueryable<T>>(DbSet, (current, includeProperty) => current.Include(includeProperty));
         }
 
         public void Add(T item)
@@ -68,9 +66,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.EntityFramework
 
         public T FindById(Guid id) => DbSet.Find(id);
 
-        public async Task<T> FindByIdAsync(Guid id) => await DbSet.FindAsync(id);
+        public async Task<T?> FindByIdAsync(Guid id) => await DbSet.FindAsync(id);
 
-        public T FindByIdNoCache(Guid id) => DbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
+        public T? FindByIdNoCache(Guid id) => DbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
 
         public void DeleteRange(IEnumerable<T> entities) => DbSet.RemoveRange(entities);
     }

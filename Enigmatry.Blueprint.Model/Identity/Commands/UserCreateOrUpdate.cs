@@ -29,9 +29,9 @@ namespace Enigmatry.Blueprint.Model.Identity.Commands
             public Validator(IRepository<User> userRepository)
             {
                 _userRepository = userRepository;
-                RuleFor(x => x.UserName).NotEmpty().MaximumLength(50).EmailAddress();
-                RuleFor(x => x.UserName).Must(UniqueUsername).WithMessage("Username already taken");
-                RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
+                _ = RuleFor(x => x.UserName).NotEmpty().MaximumLength(50).EmailAddress();
+                _ = RuleFor(x => x.UserName).Must(UniqueUsername).WithMessage("Username already taken");
+                _ = RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
             }
 
             private bool UniqueUsername(Command command, string name)

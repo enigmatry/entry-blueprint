@@ -12,7 +12,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
 {
-    public class HandleExceptionsFilter : ExceptionFilterAttribute
+    public sealed class HandleExceptionsFilter : ExceptionFilterAttribute
     {
         private readonly bool _useDeveloperExceptionPage;
 
