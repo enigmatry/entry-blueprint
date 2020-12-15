@@ -1,42 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net5</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <CodeAnalysisRuleSet>Enigmatry.Blueprint.Infrastructure.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>Enigmatry.Blueprint.Infrastructure.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <CodeAnalysisRuleSet>Enigmatry.Blueprint.Infrastructure.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>Enigmatry.Blueprint.Infrastructure.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <Compile Remove="Autofac\Modules\LoggingModule.cs" />
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Autofac\Modules\LoggingModule.cs" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Autofac" Version="5.2.0" />
-        <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
-        <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.5.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
-        <PackageReference Include="Serilog" Version="2.10.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Enigmatry.Blueprint.ApplicationServices\Enigmatry.Blueprint.ApplicationServices.csproj" />
-        <ProjectReference Include="..\Enigmatry.Blueprint.Core\Enigmatry.Blueprint.Core.csproj" />
-        <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Enigmatry.Blueprint.ApplicationServices\Enigmatry.Blueprint.ApplicationServices.csproj" />
+    <ProjectReference Include="..\Enigmatry.Blueprint.Core\Enigmatry.Blueprint.Core.csproj" />
+    <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Data\Conventions\" />
-    </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Conventions\" />
+  </ItemGroup>
 
 </Project>

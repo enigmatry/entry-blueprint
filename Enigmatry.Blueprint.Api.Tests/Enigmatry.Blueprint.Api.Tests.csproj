@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-	<Nullable>enable</Nullable>
+    <TargetFramework>net5</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <Content Include="..\Enigmatry.Blueprint.Api\Resources\*.json" LinkBase="Resources" />
-    </ItemGroup>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Resources\**" />
