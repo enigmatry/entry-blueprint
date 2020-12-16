@@ -219,7 +219,7 @@ dotnet_diagnostic.CA1030.severity = suggestion # CA1030: Use events where approp
 dotnet_diagnostic.CA1031.severity = silent # CA1031: Do not catch general exception types
 dotnet_diagnostic.CA1032.severity = silent # CA1032: Implement standard exception constructors
 dotnet_diagnostic.CA1033.severity = error # CA1033: Interface methods should be callable by child types
-dotnet_diagnostic.CA1034.severity = error # CA1034: Nested types should not be visible
+dotnet_diagnostic.CA1034.severity = none # CA1034: Nested types should not be visible
 dotnet_diagnostic.CA1036.severity = silent # CA1036: Override methods on comparable types
 dotnet_diagnostic.CA1040.severity = error # CA1040: Avoid empty interfaces
 dotnet_diagnostic.CA1041.severity = error # CA1041: Provide ObsoleteAttribute message
@@ -239,7 +239,7 @@ dotnet_diagnostic.CA1058.severity = error # CA1058: Types should not extend cert
 dotnet_diagnostic.CA1060.severity = error # CA1060: Move P/Invokes to NativeMethods class
 dotnet_diagnostic.CA1061.severity = error # CA1061: Do not hide base class methods
 dotnet_code_quality.CA1062.exclude_extension_method_this_parameter = true # CA1062: Validate arguments of public methods
-dotnet_diagnostic.CA1062.severity = error # CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = none # CA1062: Validate arguments of public methods
 dotnet_diagnostic.CA1063.severity = error # CA1063: Implement IDisposable correctly
 dotnet_diagnostic.CA1064.severity = error # CA1064: Exceptions should be public
 dotnet_diagnostic.CA1065.severity = error # CA1065: Do not raise exceptions in unexpected locations
@@ -565,3 +565,12 @@ dotnet_diagnostic.IDE1005.severity = error # IDE1005: Delegate invocation can be
 dotnet_diagnostic.IDE1005WithoutSuggestion.severity = error # IDE1005: Delegate invocation can be simplified
 dotnet_diagnostic.IDE1006.severity = error # IDE1006: Naming styles
 dotnet_diagnostic.IDE1006WithoutSuggestion.severity = error # IDE1006: Naming styles
+
+[*Fixture.cs]
+dotnet_diagnostic.CA1707.severity = none # CA1707: Identifiers should not contain underscores
+
+[*Test.cs]
+dotnet_diagnostic.CA1707.severity = none # CA1707: Identifiers should not contain underscores
+
+[*QueryableExtensions.cs]
+dotnet_diagnostic.CA1307.severity = none # CA1307: Specify StringComparison for clarity - suppress for EF Core queries

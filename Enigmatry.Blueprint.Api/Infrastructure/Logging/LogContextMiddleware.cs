@@ -27,11 +27,11 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Logging
             }
         }
 
-        private ILogEventEnricher[] CreateEnrichers(HttpContext context)
+        private static ILogEventEnricher[] CreateEnrichers(HttpContext context)
         {
             return new ILogEventEnricher[]
             {
-                new PropertyEnricher("User", context.User.Identity.Name ?? String.Empty),
+                new PropertyEnricher("User", context.User.Identity?.Name ?? String.Empty),
                 new PropertyEnricher("Address", context.Connection.RemoteIpAddress)
             };
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
 using FluentValidation.Results;
@@ -51,9 +52,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Validation
             foreach (ValidationFailure validationExceptionError in validationExceptionErrors)
             {
                 var key = validationExceptionError.PropertyName;
-                if (!problemDetails.Errors.TryGetValue(key, out string[]? messages))
+                if (!problemDetails.Errors.TryGetValue(key, out var messages))
                 {
-                    messages = new string[] { };
+                    messages = Array.Empty<string>();
                 }
 
                 messages = messages.Concat(new[] { validationExceptionError.ErrorMessage }).ToArray();

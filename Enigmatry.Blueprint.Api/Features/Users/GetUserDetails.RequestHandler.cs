@@ -12,7 +12,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
     public partial class GetUserDetails
     {
         [UsedImplicitly]
-        public class RequestHandler : IRequestHandler<Query, Response>
+        public class RequestHandler : IRequestHandler<Request, Response>
         {
             private readonly IRepository<User> _repository;
             private readonly IMapper _mapper;
@@ -23,11 +23,11 @@ namespace Enigmatry.Blueprint.Api.Features.Users
                 _mapper = mapper;
             }
 
-            public async Task<Response> Handle(Query query, CancellationToken cancellationToken)
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
                 var response = await _repository.QueryAll()
                     .BuildInclude()
-                    .QueryById(query.Id)
+                    .QueryById(request.Id)
                     .SingleOrDefaultMappedAsync<User, Response>(_mapper, cancellationToken: cancellationToken);
                 return response;
             }

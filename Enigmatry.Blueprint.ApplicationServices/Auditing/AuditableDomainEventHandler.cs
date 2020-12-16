@@ -9,12 +9,12 @@ using Microsoft.Extensions.Logging;
 namespace Enigmatry.Blueprint.ApplicationServices.Auditing
 {
     [UsedImplicitly]
-    public class AuditableDomainEventHandler : INotificationHandler<AuditableDomainEvent>
+    public class AuditableDomainEventNotificationHandler : INotificationHandler<AuditableDomainEvent>
     {
-        private readonly ILogger<AuditableDomainEventHandler> _log;
+        private readonly ILogger<AuditableDomainEventNotificationHandler> _log;
         private readonly ICurrentUserProvider _currentUserProvider;
 
-        public AuditableDomainEventHandler(ILogger<AuditableDomainEventHandler> log, ICurrentUserProvider currentUserProvider)
+        public AuditableDomainEventNotificationHandler(ILogger<AuditableDomainEventNotificationHandler> log, ICurrentUserProvider currentUserProvider)
         {
             _log = log;
             _currentUserProvider = currentUserProvider;

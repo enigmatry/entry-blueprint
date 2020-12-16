@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Core.Data;
 using JetBrains.Annotations;
@@ -19,10 +20,14 @@ namespace Enigmatry.Blueprint.Model.Identity.Commands
         public async Task<User> Handle(UserCreateOrUpdate.Command request,
             CancellationToken cancellationToken)
         {
-            User user;
+            User? user;
             if (request.Id.HasValue)
             {
                 user = await _userRepository.FindByIdAsync(request.Id.Value);
+                if (user == null)
+                {
+                    throw new InvalidOperationException("missing user");
+                }
                 user.Update(request);
             }
             else

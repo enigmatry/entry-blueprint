@@ -13,7 +13,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 {
     public class EntityFrameworkModule : Module
     {
-        public bool RegisterMigrationsAssembly { private get; set; }
+        public bool RegisterMigrationsAssembly { get; set; }
 
         protected override void Load(ContainerBuilder builder)
         {
@@ -33,7 +33,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 .Where(
                     type =>
                         ImplementsInterface(typeof(IRepository<>), type) ||
-                        type.Name.EndsWith("Repository")
+                        type.Name.EndsWith("Repository", StringComparison.InvariantCulture)
                 ).AsImplementedInterfaces().InstancePerLifetimeScope();
 
             builder.Register(CreateDbContextOptions).As<DbContextOptions>().SingleInstance();

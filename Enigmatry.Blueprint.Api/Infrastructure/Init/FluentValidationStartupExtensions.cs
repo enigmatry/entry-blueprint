@@ -9,10 +9,7 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Init
 {
     public static class FluentValidationStartupExtensions
     {
-        public static void AppConfigureFluentValidation(this IApplicationBuilder app)
-        {
-            ValidatorOptions.Global.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
-        }
+        public static void AppConfigureFluentValidation(this IApplicationBuilder app) => ValidatorOptions.Global.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
 
         public static void AppAddFluentValidationApiBehaviorOptions(this ApiBehaviorOptions options)
         {

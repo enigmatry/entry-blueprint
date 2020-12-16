@@ -13,9 +13,9 @@ namespace Enigmatry.Blueprint.Core.Data
         void Add(T item);
         void Delete(T item);
         void Delete(Guid id);
-        T FindById(Guid id);
-        Task<T> FindByIdAsync(Guid id);
-        T FindByIdNoCache(Guid id);
+        T? FindById(Guid id);
+        Task<T?> FindByIdAsync(Guid id);
+        T? FindByIdNoCache(Guid id);
         void DeleteRange(IEnumerable<T> entities);
     }
 }

@@ -11,7 +11,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
     public static partial class GetUsers
     {
         [PublicAPI]
-        public class Query : IRequest<Response>
+        public class Request : IRequest<Response>
         {
             public string Keyword { get; set; } = String.Empty;
         }

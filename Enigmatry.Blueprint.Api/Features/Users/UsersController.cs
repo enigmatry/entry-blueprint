@@ -35,7 +35,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
         /// <returns>List of users</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<GetUsers.Response>> Search([FromQuery] GetUsers.Query query)
+        public async Task<ActionResult<GetUsers.Response>> Search([FromQuery] GetUsers.Request query)
         {
             var response = await _mediator.Send(query);
             return response.ToActionResult();
@@ -51,7 +51,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<GetUserDetails.Response>> Get(Guid id)
         {
-            var response = await _mediator.Send(GetUserDetails.Query.ById(id));
+            var response = await _mediator.Send(GetUserDetails.Request.ById(id));
             return response.ToActionResult();
         }
 

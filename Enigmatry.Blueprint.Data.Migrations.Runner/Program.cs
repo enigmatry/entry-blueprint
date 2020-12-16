@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 namespace Enigmatry.Blueprint.Data.Migrations.Runner
 {
     [UsedImplicitly]
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
-            if (args == null || args.Length < 1)
+            if (args.Length < 1)
             {
                 Console.WriteLine("Connection string should be provided as the parameter");
                 return;

@@ -21,7 +21,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
             }
             catch (Exception exception)
             {
-                throw new Exception($"Failed to read Embedded Resource {namespaceAndFileName}", exception);
+                throw new InvalidOperationException($"Failed to read Embedded Resource {namespaceAndFileName}", exception);
             }
         }
     }
