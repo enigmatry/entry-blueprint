@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enigmatry.Blueprint.Data.Migrations.Seeding;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
@@ -52,7 +53,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
 
         private static string GetConnectionString()
         {
-            string? connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
+            var connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
             if (!String.IsNullOrEmpty(connectionString))
             {
                 var builder = new SqlConnectionStringBuilder(connectionString);
@@ -61,9 +62,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                 return connectionString;
             }
 
-            const string dbName = "TD_1.0_integration_testing";
-            WriteLine($"Integration Tests using database: {dbName}");
-            return $"Server=.;Database={dbName};Trusted_Connection=True;MultipleActiveResultSets=true";
+            return DevelopmentConnectionsStrings.IntegrationTestsConnectionString;
         }
 
         private static void WriteLine(string message) =>

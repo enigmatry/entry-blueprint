@@ -13,11 +13,10 @@ namespace Enigmatry.Blueprint.Api.Tests
     public class SequentialGuidValueGeneratorFixture : IntegrationFixtureBase
     {
         [SetUp]
-        public void SetUp()
-        {
+        public void SetUp() =>
+
             // we only want users that we created in the test
             DoNotSeedUsers();
-        }
 
         [Test]
         public void TestGeneratedGuidValuesAreInSequentialOrderAfterReadFromDb()
@@ -39,7 +38,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             var usersFromDb = userRepository.QueryAll().AsNoTracking().ToList();
 
             //assert
-            for (int i = start; i < count; i++)
+            for (var i = start; i < count; i++)
             {
                 //order is preserved
                 usersFromDb[i].UserName.Should().Be(i.ToString());

@@ -17,7 +17,7 @@ namespace Enigmatry.Blueprint.Api
 
         public static async Task<List<TDestination>> ToListMappedAsync<TSource, TDestination>(this IQueryable<TSource> query, IMapper mapper, CancellationToken cancellationToken = default)
         {
-            List<TSource> items = await query.ToListAsync(cancellationToken);
+            var items = await query.ToListAsync(cancellationToken);
             return mapper.Map<List<TDestination>>(items);
         }
     }

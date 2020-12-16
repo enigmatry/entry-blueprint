@@ -6,7 +6,7 @@ using Serilog.Context;
 using Serilog.Core;
 using Serilog.Core.Enrichers;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Logging
+namespace Enigmatry.Blueprint.Infrastructure.Api.Logging
 {
     [UsedImplicitly]
     public class LogContextMiddleware

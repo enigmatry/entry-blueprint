@@ -2,12 +2,12 @@
 using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
-using Enigmatry.Blueprint.Api.Infrastructure.Init;
+using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace Enigmatry.Blueprint.Api
+namespace Enigmatry.Blueprint.Infrastructure.Api.Startup
 {
     public static class ContainerBuilderStartupExtensions
     {

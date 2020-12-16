@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
+namespace Enigmatry.Blueprint.Infrastructure.Api.Filters
 {
     public static class HttpRequestExtensions
     {

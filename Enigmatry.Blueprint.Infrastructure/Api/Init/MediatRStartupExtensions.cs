@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class MediatRStartupExtensions
     {

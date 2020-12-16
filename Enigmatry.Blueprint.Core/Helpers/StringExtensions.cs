@@ -16,7 +16,7 @@ namespace Enigmatry.Blueprint.Core.Helpers
                 return s;
             }
 
-            char[] chars = s.ToCharArray();
+            var chars = s.ToCharArray();
 
             for (var i = 0; i < chars.Length; i++)
             {

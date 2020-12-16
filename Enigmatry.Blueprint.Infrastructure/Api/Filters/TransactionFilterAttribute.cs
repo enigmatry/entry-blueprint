@@ -2,7 +2,7 @@
 using Enigmatry.Blueprint.Core.Data;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
+namespace Enigmatry.Blueprint.Infrastructure.Api.Filters
 {
     public sealed class TransactionFilterAttribute : ActionFilterAttribute
     {

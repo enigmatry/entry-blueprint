@@ -34,7 +34,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         protected void Setup()
         {
             _configuration = new TestConfigurationBuilder()
-                .WithDbContextName("BlueprintContext")
+                .WithDbContextName(nameof(BlueprintContext))
                 .Build();
 
             IWebHostBuilder webHostBuilder = new WebHostBuilder()

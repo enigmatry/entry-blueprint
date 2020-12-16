@@ -8,7 +8,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class SerilogProgramHelper
     {

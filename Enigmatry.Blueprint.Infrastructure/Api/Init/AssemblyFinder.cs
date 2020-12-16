@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class AssemblyFinder
     {
@@ -12,9 +12,6 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Init
         public static Assembly InfrastructureAssembly => FindAssembly("Infrastructure");
 
 
-        private static Assembly FindAssembly(string projectSuffix)
-        {
-            return Assembly.Load($"{ProjectPrefix}.{projectSuffix}");
-        }
+        private static Assembly FindAssembly(string projectSuffix) => Assembly.Load($"{ProjectPrefix}.{projectSuffix}");
     }
 }

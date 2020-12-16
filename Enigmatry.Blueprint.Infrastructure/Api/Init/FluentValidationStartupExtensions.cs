@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class FluentValidationStartupExtensions
     {

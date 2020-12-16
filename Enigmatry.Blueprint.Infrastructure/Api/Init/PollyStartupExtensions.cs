@@ -5,11 +5,11 @@ using Polly;
 using Polly.Registry;
 using Polly.Timeout;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class PollyStartupExtensions
     {
-        public const string GlobalTimeoutPolicyName = "global-timeout";
+        private const string GlobalTimeoutPolicyName = "global-timeout";
 
         public static void AppAddPolly(this IServiceCollection services)
         {

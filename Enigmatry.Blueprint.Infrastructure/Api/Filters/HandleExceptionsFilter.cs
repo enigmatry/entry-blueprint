@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
+namespace Enigmatry.Blueprint.Infrastructure.Api.Filters
 {
     public sealed class HandleExceptionsFilter : ExceptionFilterAttribute
     {

@@ -1,10 +1,10 @@
-﻿using Enigmatry.Blueprint.Api.Infrastructure.Filters;
+﻿using Enigmatry.Blueprint.Infrastructure.Api.Filters;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class MvcStartupExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Blueprint.Api.Infrastructure.Init;
+using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;

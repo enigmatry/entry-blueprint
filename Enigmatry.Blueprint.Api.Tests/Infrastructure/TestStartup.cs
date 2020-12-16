@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using Enigmatry.Blueprint.Api.Infrastructure.Init;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;
+using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;

@@ -11,12 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class HealthChecksStartupExtensions
     {
-        public static void AppMapHealthCheck(this IEndpointRouteBuilder endpoints)
-        {
+        public static void AppMapHealthCheck(this IEndpointRouteBuilder endpoints) =>
             endpoints.MapHealthChecks("/healthcheck", new HealthCheckOptions()
             {
                 // Specify a custom ResponseWriter, so we can return json with additional information,
@@ -29,10 +28,9 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Init
                     await context.Response.WriteAsync(result);
                 }
             }).RequireAuthorization();
-        }
 
-        public static void AppAddHealthChecks(this IServiceCollection services, IConfiguration configuration)
-        {
+        public static void AppAddHealthChecks(this IServiceCollection services, IConfiguration configuration) =>
+
             // Here we can configure the different health checks:
             services.AddHealthChecks()
 
@@ -54,6 +52,5 @@ namespace Enigmatry.Blueprint.Api.Infrastructure.Init
                 // We can also push the results to Application Insights. This will be done every 30 seconds
                 // Can be checked from the Azure Portal under metrics, by selecting the azure.applicationinsights namespace.
                 .AddApplicationInsightsPublisher(configuration.ReadApplicationInsightsSettings().InstrumentationKey);
-        }
     }
 }

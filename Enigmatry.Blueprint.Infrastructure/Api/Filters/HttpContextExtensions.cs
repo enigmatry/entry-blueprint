@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Enigmatry.Blueprint.Api.Infrastructure.Filters
+namespace Enigmatry.Blueprint.Infrastructure.Api.Filters
 {
     public static class HttpContextExtensions
     {
