@@ -5,6 +5,17 @@
 		}
 	],
 	"settings": {
+		"eslint.options": {
+			"extensions": [
+				".ts",
+				".html"
+			]
+		},
+		"eslint.validate": [
+			"javascript",
+			"typescript",
+			"html"
+		],
 		"files.exclude": {
 			"**/_ReSharper.Caches": true,
 			"**/.vs": true,
@@ -19,7 +30,7 @@
 			"**/node_modules": true,
 			"**/bower_components": true,
 			"**/tmp": true
-		}],
+		},
 		"gitblame.isWebPathPlural": true,
 		"typescript.tsdk": "node_modules\\typescript\\lib"
 	}
