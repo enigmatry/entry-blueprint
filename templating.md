@@ -5,7 +5,7 @@
 ``dotnet pack Enigmatry.Blueprint.Template.csproj -c Release``
 
 ## Install the template locally from nupkg file
-``dotnet new -i "bin\Debug\Enigmatry.Blueprint.Template.1.0.0.nupkg"``
+``dotnet new -i "bin\Release\Enigmatry.Blueprint.Template.1.0.0.nupkg"``
 
 ## Install the template from the TeamCity nuget feed
 1. Add the Enigmatry Blueprint feed as Source:
