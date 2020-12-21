@@ -4,12 +4,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
+using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Tests.Http;
+using Enigmatry.Blueprint.BuildingBlocks.Core;
 using Enigmatry.Blueprint.Model;
 using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Model.Identity.Commands;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
-using Enigmatry.Blueprint.Api.Tests.Common;
-using Enigmatry.Blueprint.Model.Identity.Commands;
 using NUnit.Framework;
 
 namespace Enigmatry.Blueprint.Api.Tests
@@ -70,7 +71,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestCreate()
         {
-            var command = new UserCreateOrUpdate.Command { Name = "some user", UserName = "someuser@test.com" };
+            var command = new UserCreateOrUpdate.Command {Name = "some user", UserName = "someuser@test.com"};
             GetUserDetails.Response user =
                 await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
@@ -83,7 +84,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestUpdate()
         {
-            var command = new UserCreateOrUpdate.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com" };
+            var command = new UserCreateOrUpdate.Command {Id = _user.Id, Name = "some user", UserName = "someuser@test.com"};
             GetUserDetails.Response user =
                 await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
@@ -102,8 +103,8 @@ namespace Enigmatry.Blueprint.Api.Tests
             string validationField,
             string validationErrorMessage)
         {
-            var command = new UserCreateOrUpdate.Command { Name = name, UserName = userName };
-            HttpResponseMessage response = await Client.PostAsJsonAsync("users", command);
+            var command = new UserCreateOrUpdate.Command {Name = name, UserName = userName};
+            var response = await Client.PostAsJsonAsync("users", command);
 
             response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
         }

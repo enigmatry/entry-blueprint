@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Security.Principal;
-using System.Threading.Tasks;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
-using Enigmatry.Blueprint.Infrastructure;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
-using Enigmatry.Blueprint.Infrastructure.MediatR;
+using Enigmatry.Blueprint.BuildingBlocks.Infrastructure;
+using Enigmatry.Blueprint.BuildingBlocks.MediatR;
+using Enigmatry.Blueprint.BuildingBlocks.EntityFramework.Security;
+using Enigmatry.Blueprint.Infrastructure.Data;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -26,7 +26,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
                 b => b.MigrationsAssembly("Enigmatry.Blueprint.Data.Migrations"));
 
             var result =
-                new BlueprintContext(optionsBuilder.Options, new NoMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>(), new NullDbContextAccessTokenProvider()) {ModelBuilderConfigurator = DbInitializer.SeedData};
+                new BlueprintContext(optionsBuilder.Options, new NullMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>(), new NullDbContextAccessTokenProvider()) {ModelBuilderConfigurator = DbInitializer.SeedData};
             return result;
         }
 
@@ -50,10 +50,5 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
         }
 
         private IPrincipal CreateEmptyPrincipal() => new GenericPrincipal(new GenericIdentity(""), Array.Empty<string>());
-
-        private class NullDbContextAccessTokenProvider : IDbContextAccessTokenProvider
-        {
-            public Task<string> GetAccessTokenAsync() => Task.FromResult(String.Empty);
-        }
     }
 }

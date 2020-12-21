@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <Compile Remove="Data\Conventions\**" />
+    <EmbeddedResource Remove="Data\Conventions\**" />
+    <None Remove="Data\Conventions\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,7 +17,6 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.1.0" />
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="AspNetCore.HealthChecks.Publisher.ApplicationInsights" Version="3.1.1" />
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="3.1.2" />
@@ -25,8 +26,11 @@
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="3.1.2" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="BeatPulse" Version="3.0.0" />
-    <PackageReference Include="Ben.Demystifier" Version="0.1.6" />
-    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.Swagger" Version="1.0.29" />
+    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.AspNetCore" Version="1.0.50" />
+    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.Infrastructure" Version="1.0.50" />
+    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.EntityFramework" Version="1.0.50" />
+    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.MediatR" Version="1.0.50" />
+    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.Swagger" Version="1.0.50" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.16.0" />
@@ -55,10 +59,6 @@
     <ProjectReference Include="..\Enigmatry.Blueprint.ApplicationServices\Enigmatry.Blueprint.ApplicationServices.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Core\Enigmatry.Blueprint.Core.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\Conventions\" />
   </ItemGroup>
 
 </Project>

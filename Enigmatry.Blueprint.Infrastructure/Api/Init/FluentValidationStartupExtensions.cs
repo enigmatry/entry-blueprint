@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Infrastructure.Validation;
+﻿using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -11,15 +11,12 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
     {
         public static void AppConfigureFluentValidation(this IApplicationBuilder app) => ValidatorOptions.Global.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
 
-        public static void AppAddFluentValidationApiBehaviorOptions(this ApiBehaviorOptions options)
-        {
+        public static void AppAddFluentValidationApiBehaviorOptions(this ApiBehaviorOptions options) =>
             options.InvalidModelStateResponseFactory = context =>
                 context.HttpContext.CreateValidationProblemDetailsResponse(context.ModelState);
-        }
 
-        public static IMvcBuilder AppAddFluentValidation(this IMvcBuilder mvcBuilder)
-        {
-            return mvcBuilder.AddFluentValidation(fv =>
+        public static IMvcBuilder AppAddFluentValidation(this IMvcBuilder mvcBuilder) =>
+            mvcBuilder.AddFluentValidation(fv =>
             {
                 // disables standard data annotations validation
                 // https://fluentvalidation.net/aspnet.html#asp-net-core
@@ -30,7 +27,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
                     AssemblyFinder.DomainAssembly, AssemblyFinder.ApiAssembly
                 });
             });
-        }
     }
 }
 

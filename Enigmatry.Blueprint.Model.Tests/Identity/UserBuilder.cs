@@ -1,6 +1,5 @@
 ﻿using System;
-using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 
@@ -10,7 +9,7 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
     {
         private string _name = String.Empty;
         private string _userName = String.Empty;
-        private Guid _id = SequentialGuidValueGenerator.Generate();
+        private Guid _id = SequentialGuidGenerator.Generate();
 
         public UserBuilder WithUserName(string value)
         {

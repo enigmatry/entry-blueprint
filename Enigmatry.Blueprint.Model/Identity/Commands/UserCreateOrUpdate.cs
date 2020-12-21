@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
 using FluentValidation;
 using JetBrains.Annotations;
 using MediatR;
@@ -34,13 +34,11 @@ namespace Enigmatry.Blueprint.Model.Identity.Commands
                 _ = RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
             }
 
-            private bool UniqueUsername(Command command, string name)
-            {
-                return !_userRepository.QueryAll()
+            private bool UniqueUsername(Command command, string name) =>
+                !_userRepository.QueryAll()
                     .QueryExceptWithId(command.Id)
                     .QueryByUserName(name)
                     .Any();
-            }
         }
     }
 }

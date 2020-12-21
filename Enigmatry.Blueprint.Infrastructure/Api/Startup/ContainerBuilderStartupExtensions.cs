@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
@@ -22,6 +23,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Startup
             {
                 Assemblies = new[]
             {
+                AssemblyFinder.Find("Enigmatry.Blueprint.BuildingBlocks.Infrastructure"),
                 AssemblyFinder.ApplicationServicesAssembly,
                 AssemblyFinder.InfrastructureAssembly
             }

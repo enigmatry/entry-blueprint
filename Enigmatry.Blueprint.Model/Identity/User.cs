@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using Enigmatry.Blueprint.Model.Identity.DomainEvents;
 
 namespace Enigmatry.Blueprint.Model.Identity
 {
-    public class User : Entity, IEntityHasCreatedUpdated
+    public class User : Entity<Guid>, IEntityHasCreatedUpdated
     {
         public string UserName { get; private set; } = "";
         public string Name { get; private set; } = "";

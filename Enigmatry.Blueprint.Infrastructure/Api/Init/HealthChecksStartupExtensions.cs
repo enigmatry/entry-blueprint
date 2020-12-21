@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Net.Mime;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Enigmatry.Blueprint.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
 using JetBrains.Annotations;
 using MediatR;
 
@@ -10,9 +10,9 @@ namespace Enigmatry.Blueprint.Model.Identity.Commands
     [UsedImplicitly]
     public class UserCreateOrUpdateCommandHandler : IRequestHandler<UserCreateOrUpdate.Command, User>
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly IRepository<User, Guid> _userRepository;
 
-        public UserCreateOrUpdateCommandHandler(IRepository<User> userRepository)
+        public UserCreateOrUpdateCommandHandler(IRepository<User, Guid> userRepository)
         {
             _userRepository = userRepository;
         }

@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using SequentialGuidGenerator = Enigmatry.Blueprint.BuildingBlocks.Core.Entities.SequentialGuidGenerator;
 
 namespace Enigmatry.Blueprint.Api.Tests
 {
@@ -27,7 +28,7 @@ namespace Enigmatry.Blueprint.Api.Tests
             //prepare
             var users = Enumerable.Range(start, count).Select(i => new UserBuilder()
                 .WithUserName(i.ToString())
-                .WithId(SequentialGuidValueGenerator.Generate())
+                .WithId(SequentialGuidGenerator.Generate())
                 .Build()).ToArray();
 
             AddAndSaveChanges(users);

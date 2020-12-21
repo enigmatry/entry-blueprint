@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
 
 namespace Enigmatry.Blueprint.Model.Auditing
 {
-    public abstract class AuditableDomainEvent : INotification
+    public abstract record AuditableDomainEvent : DomainEvent
     {
         protected AuditableDomainEvent(string eventName)
         {

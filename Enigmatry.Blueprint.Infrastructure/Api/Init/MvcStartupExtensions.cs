@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Infrastructure.Api.Filters;
+﻿using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Filters;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -8,9 +8,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class MvcStartupExtensions
     {
-        public static IMvcBuilder AppAddMvc(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services
+        public static IMvcBuilder AppAddMvc(this IServiceCollection services, IConfiguration configuration) =>
+            services
                 // The following adds support for controllers, API-related features, and views, not pages. 
                 // Views are required for templating with RazorTemplatingEngine(e.g. emails)
                 //.AddControllersWithViews(options => options.ConfigureMvc(configuration))
@@ -18,7 +17,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson()
                 .AppAddFluentValidation();
-        }
 
         private static void ConfigureMvc(this MvcOptions options, IConfiguration configuration)
         {

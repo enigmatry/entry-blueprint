@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Infrastructure.MediatR;
+﻿using Enigmatry.Blueprint.BuildingBlocks.MediatR;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +9,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
         public static void AppAddMediatR(this IServiceCollection services)
         {
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             //services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>));
             //services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(SamplePostRequestBehavior<,>));
 

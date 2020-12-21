@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 
@@ -9,13 +10,13 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
     public class CurrentUserProvider : ICurrentUserProvider
     {
         private readonly ICurrentUserIdProvider _currentUserIdProvider;
-        private readonly IQueryable<User> _userQuery;
+        private readonly IRepository<User> _userRepository;
         private User? _user;
 
         public CurrentUserProvider(ICurrentUserIdProvider currentUserIdProvider,
-            IQueryable<User> userQuery)
+            IRepository<User> userRepository)
         {
-            _userQuery = userQuery;
+            _userRepository = userRepository;
             _currentUserIdProvider = currentUserIdProvider;
         }
 
@@ -38,7 +39,7 @@ namespace Enigmatry.Blueprint.ApplicationServices.Identity
                 }
 
                 //TODO replace with getting user from principal
-                _user = _userQuery
+                _user = _userRepository.QueryAll()
                     .First();
 
                 // e.g. 

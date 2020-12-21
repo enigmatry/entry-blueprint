@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
-using Enigmatry.Blueprint.Api.Tests.Infrastructure.Database;
-using Enigmatry.Blueprint.Core.Data;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Tests;
+using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Tests.Database;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
+using Enigmatry.Blueprint.Infrastructure.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -66,7 +66,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             try
             {
-                var dropAllSql = EmbeddedResource.ReadResourceContent("Enigmatry.Blueprint.Api.Tests.Infrastructure.Database.DropAllSql.sql");
+                var dropAllSql = EmbeddedResource.ReadResourceContent("Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Tests.Database.DropAllSql.sql");
                 foreach (var statement in dropAllSql.SplitStatements())
                 {
                     // WriteLine("Executing: " + statement);
@@ -121,7 +121,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             var dbContext = Resolve<DbContext>();
 
-            foreach (T entity in entities)
+            foreach (var entity in entities)
             {
                 dbContext.Add(entity);
             }

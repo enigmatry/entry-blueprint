@@ -11,12 +11,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
     {
         public IEnumerable<Assembly> Assemblies { get; set; } = Array.Empty<Assembly>();
 
-        protected override void Load(ContainerBuilder builder)
-        {
+        protected override void Load(ContainerBuilder builder) =>
             builder.RegisterAssemblyTypes(Assemblies.ToArray())
                 .Where(
                     type => type.Name.EndsWith("Service", StringComparison.InvariantCulture) || type.Name.EndsWith("Provider", StringComparison.InvariantCulture)
                 ).AsImplementedInterfaces().InstancePerLifetimeScope();
-        }
     }
 }

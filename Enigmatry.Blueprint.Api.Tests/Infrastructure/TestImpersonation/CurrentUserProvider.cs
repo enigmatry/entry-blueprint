@@ -1,5 +1,5 @@
 ﻿using System;
-using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 

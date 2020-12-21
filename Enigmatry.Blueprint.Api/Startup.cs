@@ -4,7 +4,7 @@ using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Enigmatry.Blueprint.Infrastructure.Data;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

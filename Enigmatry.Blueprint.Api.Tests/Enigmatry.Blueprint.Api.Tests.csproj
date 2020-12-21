@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Infrastructure\Database\DropAllSql.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="..\Enigmatry.Blueprint.Api\Resources\*.json" LinkBase="Resources" />
   </ItemGroup>
 
@@ -20,17 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Infrastructure\Database\DropAllSql.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoFixture.NUnit3" Version="4.14.0" />
+    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Tests" Version="1.0.50" />
     <PackageReference Include="FakeItEasy" Version="6.2.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.22" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
       <PrivateAssets>all</PrivateAssets>

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Autofac;
-using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.EntityFramework;
 using Enigmatry.Blueprint.Core.Settings;
-using Enigmatry.Blueprint.Infrastructure.Data.EntityFramework;
+using Enigmatry.Blueprint.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -22,12 +23,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>))
+            builder.RegisterGeneric(typeof(EntityFrameworkRepository<,>))
                 .As(typeof(IRepository<>))
+                .As(typeof(IRepository<,>))
                 .InstancePerLifetimeScope();
-
-            builder.RegisterGeneric(typeof(EntityFrameworkQuery<>))
-                .As(typeof(IQueryable<>)).InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly)
                 .Where(
@@ -37,20 +36,18 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 ).AsImplementedInterfaces().InstancePerLifetimeScope();
 
             builder.Register(CreateDbContextOptions).As<DbContextOptions>().SingleInstance();
+
             // needs to be registered both as self and as DbContext or the tests might not work as expected
             builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<DbContextUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
         }
 
-        private static bool ImplementsInterface(Type interfaceType, Type concreteType)
-        {
-            return
-                concreteType.GetInterfaces().Any(
-                    t =>
-                        (interfaceType.IsGenericTypeDefinition && t.IsGenericType
-                            ? t.GetGenericTypeDefinition()
-                            : t) == interfaceType);
-        }
+        private static bool ImplementsInterface(Type interfaceType, Type concreteType) =>
+            concreteType.GetInterfaces().Any(
+                t =>
+                    (interfaceType.IsGenericTypeDefinition && t.IsGenericType
+                        ? t.GetGenericTypeDefinition()
+                        : t) == interfaceType);
 
         private DbContextOptions CreateDbContextOptions(IComponentContext container)
         {

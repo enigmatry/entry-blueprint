@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.AspNetCore;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using MediatR;
