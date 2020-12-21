@@ -3,12 +3,15 @@ using System.Linq;
 using Autofac;
 using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.BuildingBlocks.EntityFramework;
+using Enigmatry.Blueprint.BuildingBlocks.EntityFramework.Security;
 using Enigmatry.Blueprint.Core.Settings;
+using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Module = Autofac.Module;
 
 namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 {
@@ -28,7 +31,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 .As(typeof(IRepository<,>))
                 .InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly)
+            builder.RegisterAssemblyTypes(AssemblyFinder.InfrastructureAssembly)
                 .Where(
                     type =>
                         ImplementsInterface(typeof(IRepository<>), type) ||
@@ -40,6 +43,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
             // needs to be registered both as self and as DbContext or the tests might not work as expected
             builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<DbContextUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+
+            // replace with actual implementation from the Building block
+            builder.RegisterType<NullDbContextAccessTokenProvider>().As<IDbContextAccessTokenProvider>().InstancePerLifetimeScope();
         }
 
         private static bool ImplementsInterface(Type interfaceType, Type concreteType) =>
