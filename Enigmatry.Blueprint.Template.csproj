@@ -20,10 +20,9 @@
 
   <ItemGroup>
     <Compile Remove="**\*" />
-    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj" />
-    <Compile Remove="**\*" />
-    <EmbeddedResource Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj" />
-    <None Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj" />
+    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
+    <EmbeddedResource Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
+    <None Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
   </ItemGroup>
 
 </Project>
