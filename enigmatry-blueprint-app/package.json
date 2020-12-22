@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "audit:ci": "npm audit --json|npm-audit-reporter-teamcity"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.5.4",
+    "npm-audit-reporter-teamcity": "0.3.1",
     "protractor": "~7.0.0",
     "ts-node": "~9.1.1",
     "typescript": "~4.0.3",
