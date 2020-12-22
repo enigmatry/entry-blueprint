@@ -8,7 +8,6 @@ using Enigmatry.Blueprint.Infrastructure.Data;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -76,7 +75,7 @@ namespace Enigmatry.Blueprint.Api
         public static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
         {
             services.AddCors();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddDbContext<BlueprintContext>();
             services.AddApplicationInsightsTelemetry();
 
