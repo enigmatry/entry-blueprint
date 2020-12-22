@@ -66,7 +66,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api
         {
             try
             {
-                var dropAllSql = EmbeddedResource.ReadResourceContent("Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Tests.Database.DropAllSql.sql");
+                var dropAllSql = DatabaseHelpers.DropAllSql;
                 foreach (var statement in dropAllSql.SplitStatements())
                 {
                     // WriteLine("Executing: " + statement);

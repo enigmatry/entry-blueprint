@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.Core" Version="1.0.50" />
+    <PackageReference Include="Enigmatry.Blueprint.BuildingBlocks.Core" Version="1.0.51" />
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
