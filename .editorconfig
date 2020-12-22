@@ -580,5 +580,4 @@ dotnet_diagnostic.CA1307.severity = none # CA1307: Specify StringComparison for 
 
 [*Enigmatry.Blueprint.Data.Migrations/Migrations/**.cs]
 dotnet_style_require_accessibility_modifiers = for_non_interface_members:hint
-csharp_style_unused_value_expression_statement_preference = discard_variable:none
 dotnet_diagnostic.CS8625.severity = none # CS8625: Cannot convert null literal to non-nullable reference type.
