@@ -26,15 +26,18 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.RegisterGeneric(typeof(EntityFrameworkRepository<,>))
+            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>))
                 .As(typeof(IRepository<>))
+                .InstancePerLifetimeScope();
+
+            builder.RegisterGeneric(typeof(EntityFrameworkRepository<,>))
                 .As(typeof(IRepository<,>))
                 .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(AssemblyFinder.InfrastructureAssembly)
                 .Where(
                     type =>
-                        ImplementsInterface(typeof(IRepository<>), type) ||
+                        ImplementsInterface(typeof(IEntityRepository<>), type) ||
                         type.Name.EndsWith("Repository", StringComparison.InvariantCulture)
                 ).AsImplementedInterfaces().InstancePerLifetimeScope();
 

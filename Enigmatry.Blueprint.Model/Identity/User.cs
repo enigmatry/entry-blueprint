@@ -7,7 +7,7 @@ using Enigmatry.Blueprint.Model.Identity.DomainEvents;
 
 namespace Enigmatry.Blueprint.Model.Identity
 {
-    public class User : Entity, IEntityHasCreatedUpdated
+    public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     {
         public string UserName { get; private set; } = "";
         public string Name { get; private set; } = "";
