@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "npx ng lint enigmatry-blueprint-app",
+    "lint": "npx ng lint",
     "e2e": "ng e2e",
     "audit:ci": "npm audit --json|npm-audit-reporter-teamcity"
   },
