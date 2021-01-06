@@ -580,3 +580,5 @@ dotnet_diagnostic.CA1307.severity = none # CA1307: Specify StringComparison for 
 
 [*.Data.Migrations/Migrations/**.cs]
 generated_code = true
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:none
+
