@@ -32,7 +32,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data
 
         private static EntitiesDbContextOptions CreateOptions() => new()
         {
-            ConfigurationAssembly = AssemblyFinder.InfrastructureAssembly, 
+            ConfigurationAssembly = AssemblyFinder.InfrastructureAssembly,
             EntitiesAssembly = AssemblyFinder.DomainAssembly
         };
 
