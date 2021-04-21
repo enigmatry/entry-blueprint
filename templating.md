@@ -9,7 +9,7 @@
 
 ## Install the template from the TeamCity nuget feed
 1. Add the Enigmatry Blueprint feed as Source:
-``dotnet nuget add source http://teamcity.enigmatry.local/guestAuth/app/nuget/feed/AspNetCoreAngular_EnigmatryBlueprintTemplate/Feed/v3/index.json --name "Enigmatry Blueprint Template Feed"``
+``dotnet nuget add source https://teamcity.enigmatry.com/guestAuth/app/nuget/feed/AspNetCoreAngular_EnigmatryBlueprintTemplate/Feed/v3/index.json --name "Enigmatry Blueprint Template Feed"``
 1. Install from the nuget source you just created:
 ``dotnet new -i Enigmatry.Blueprint.Template``
 

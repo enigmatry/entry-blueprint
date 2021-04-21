@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Template", "Enigmatry.Blueprint.Template.csproj", "{2218303A-AD60-4C30-BFBC-104BB877E18F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.CodeGeneration.Setup", "Enigmatry.Blueprint.CodeGeneration\Enigmatry.Blueprint.CodeGeneration.Setup.csproj", "{C117F4D2-AFCD-4E76-9BC8-5BBE9E57EA86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{2218303A-AD60-4C30-BFBC-104BB877E18F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2218303A-AD60-4C30-BFBC-104BB877E18F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2218303A-AD60-4C30-BFBC-104BB877E18F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C117F4D2-AFCD-4E76-9BC8-5BBE9E57EA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C117F4D2-AFCD-4E76-9BC8-5BBE9E57EA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C117F4D2-AFCD-4E76-9BC8-5BBE9E57EA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C117F4D2-AFCD-4E76-9BC8-5BBE9E57EA86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
