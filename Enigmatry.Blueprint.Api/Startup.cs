@@ -76,7 +76,6 @@ namespace Enigmatry.Blueprint.Api
         {
             services.AddCors();
             services.AddHttpContextAccessor();
-            services.AddDbContext<BlueprintContext>();
             services.AddApplicationInsightsTelemetry();
 
             services.AppAddSettings(configuration);
