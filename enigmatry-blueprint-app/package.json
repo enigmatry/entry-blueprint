@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "npx ng lint",
     "e2e": "ng e2e",
-    "audit:ci": "npm audit --json|npm-audit-reporter-teamcity"
+    "audit:ci": "npm audit --json|npm-audit-reporter-teamcity",
+    "nswag": "node_modules/.bin/nswag run nswag.json"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,7 @@
     "@angular/platform-browser": "~11.2.11",
     "@angular/platform-browser-dynamic": "~11.2.11",
     "@angular/router": "~11.2.11",
+    "nswag": "^13.10.9",
     "rxjs": "^6.6.7",
     "tslib": "^2.2.0",
     "zone.js": "^0.11.4"
