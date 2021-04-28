@@ -8,4 +8,8 @@
     <PackageReference Include="Enigmatry.Blueprint.CodeGeneration.Configuration" Version="1.0.13" />
   </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Enigmatry.Blueprint.Api\Enigmatry.Blueprint.Api.csproj" />
+    </ItemGroup>
+
 </Project>
