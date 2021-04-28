@@ -36,7 +36,8 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "no-underscore-dangle": "off"
       }
     },
     {
