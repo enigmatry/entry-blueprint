@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
-using MediatR;
 
 namespace Enigmatry.Blueprint.Api.Features.Users
 {
     public static partial class GetUsers
     {
         [PublicAPI]
-        public class Request : IRequest<Response>
+        public class Request : PagedRequest<Response.Item>
         {
             public string Keyword { get; set; } = String.Empty;
         }
 
         [PublicAPI]
-        public class Response
+        public static class Response
         {
-            public IEnumerable<Item> Items { get; set; } = new List<Item>();
-
             [PublicAPI]
             public class Item
             {
@@ -37,7 +33,5 @@ namespace Enigmatry.Blueprint.Api.Features.Users
                 public MappingProfile() => CreateMap<User, Item>();
             }
         }
-
-        private static IQueryable<User> BuildInclude(this IQueryable<User> query) => query;
     }
 }

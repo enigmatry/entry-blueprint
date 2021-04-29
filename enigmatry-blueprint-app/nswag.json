@@ -64,7 +64,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "src/app/api/api.ts",
+      "output": "src/app/api/api-reference.ts",
       "newLineBehavior": "Auto"
     }
   }

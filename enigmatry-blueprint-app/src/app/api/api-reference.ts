@@ -18,9 +18,13 @@ export interface IUsersClient {
     /**
      * Gets listing of all available users
      * @param keyword (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param sortBy (optional) 
+     * @param sortDirection (optional) 
      * @return List of users
      */
-    search(keyword: string | null | undefined): Observable<GetUsersResponse>;
+    search(keyword: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | null | undefined, sortDirection: string | null | undefined): Observable<PagedResponseOfGetUsersResponseItem>;
     /**
      * Creates or updates
      * @param command User data
@@ -53,12 +57,28 @@ export class UsersClient implements IUsersClient {
     /**
      * Gets listing of all available users
      * @param keyword (optional) 
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param sortBy (optional) 
+     * @param sortDirection (optional) 
      * @return List of users
      */
-    search(keyword: string | null | undefined): Observable<GetUsersResponse> {
+    search(keyword: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | null | undefined, sortDirection: string | null | undefined): Observable<PagedResponseOfGetUsersResponseItem> {
         let url_ = this.baseUrl + "/Users?";
         if (keyword !== undefined && keyword !== null)
             url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (sortBy !== undefined && sortBy !== null)
+            url_ += "SortBy=" + encodeURIComponent("" + sortBy) + "&";
+        if (sortDirection !== undefined && sortDirection !== null)
+            url_ += "SortDirection=" + encodeURIComponent("" + sortDirection) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -76,14 +96,14 @@ export class UsersClient implements IUsersClient {
                 try {
                     return this.processSearch(<any>response_);
                 } catch (e) {
-                    return <Observable<GetUsersResponse>><any>_observableThrow(e);
+                    return <Observable<PagedResponseOfGetUsersResponseItem>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<GetUsersResponse>><any>_observableThrow(response_);
+                return <Observable<PagedResponseOfGetUsersResponseItem>><any>_observableThrow(response_);
         }));
     }
 
-    protected processSearch(response: HttpResponseBase): Observable<GetUsersResponse> {
+    protected processSearch(response: HttpResponseBase): Observable<PagedResponseOfGetUsersResponseItem> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -94,7 +114,7 @@ export class UsersClient implements IUsersClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = GetUsersResponse.fromJS(resultData200);
+            result200 = PagedResponseOfGetUsersResponseItem.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -102,7 +122,7 @@ export class UsersClient implements IUsersClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<GetUsersResponse>(<any>null);
+        return _observableOf<PagedResponseOfGetUsersResponseItem>(<any>null);
     }
 
     /**
@@ -289,10 +309,16 @@ export class UsersClient implements IUsersClient {
     }
 }
 
-export class GetUsersResponse implements IGetUsersResponse {
+export class PagedResponseOfGetUsersResponseItem implements IPagedResponseOfGetUsersResponseItem {
     items?: GetUsersResponseItem[];
+    totalCount?: number;
+    pageNumber?: number;
+    pageSize?: number;
+    totalPages?: number;
+    hasNextPage?: boolean;
+    hasPreviousPage?: boolean;
 
-    constructor(data?: IGetUsersResponse) {
+    constructor(data?: IPagedResponseOfGetUsersResponseItem) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -308,12 +334,18 @@ export class GetUsersResponse implements IGetUsersResponse {
                 for (let item of _data["items"])
                     this.items!.push(GetUsersResponseItem.fromJS(item));
             }
+            this.totalCount = _data["totalCount"];
+            this.pageNumber = _data["pageNumber"];
+            this.pageSize = _data["pageSize"];
+            this.totalPages = _data["totalPages"];
+            this.hasNextPage = _data["hasNextPage"];
+            this.hasPreviousPage = _data["hasPreviousPage"];
         }
     }
 
-    static fromJS(data: any): GetUsersResponse {
+    static fromJS(data: any): PagedResponseOfGetUsersResponseItem {
         data = typeof data === 'object' ? data : {};
-        let result = new GetUsersResponse();
+        let result = new PagedResponseOfGetUsersResponseItem();
         result.init(data);
         return result;
     }
@@ -325,18 +357,30 @@ export class GetUsersResponse implements IGetUsersResponse {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
+        data["totalCount"] = this.totalCount;
+        data["pageNumber"] = this.pageNumber;
+        data["pageSize"] = this.pageSize;
+        data["totalPages"] = this.totalPages;
+        data["hasNextPage"] = this.hasNextPage;
+        data["hasPreviousPage"] = this.hasPreviousPage;
         return data; 
     }
 }
 
-export interface IGetUsersResponse {
+export interface IPagedResponseOfGetUsersResponseItem {
     items?: GetUsersResponseItem[];
+    totalCount?: number;
+    pageNumber?: number;
+    pageSize?: number;
+    totalPages?: number;
+    hasNextPage?: boolean;
+    hasPreviousPage?: boolean;
 }
 
 export class GetUsersResponseItem implements IGetUsersResponseItem {
     id?: string;
-    userName?: string | undefined;
-    name?: string | undefined;
+    userName?: string;
+    name?: string;
     createdOn?: Date;
     updatedOn?: Date;
 
@@ -379,8 +423,8 @@ export class GetUsersResponseItem implements IGetUsersResponseItem {
 
 export interface IGetUsersResponseItem {
     id?: string;
-    userName?: string | undefined;
-    name?: string | undefined;
+    userName?: string;
+    name?: string;
     createdOn?: Date;
     updatedOn?: Date;
 }

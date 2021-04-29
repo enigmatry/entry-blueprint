@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { API_BASE_URL } from './api';
+import { API_BASE_URL } from './api-reference';
 
 @NgModule({
   declarations: [],

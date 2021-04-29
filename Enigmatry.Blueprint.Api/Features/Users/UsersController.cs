@@ -3,6 +3,7 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using Enigmatry.Blueprint.BuildingBlocks.AspNetCore;
 using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using MediatR;
@@ -36,7 +37,7 @@ namespace Enigmatry.Blueprint.Api.Features.Users
         /// <returns>List of users</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<GetUsers.Response>> Search([FromQuery] GetUsers.Request query)
+        public async Task<ActionResult<PagedResponse<GetUsers.Response.Item>>> Search([FromQuery] GetUsers.Request query)
         {
             var response = await _mediator.Send(query);
             return response.ToActionResult();

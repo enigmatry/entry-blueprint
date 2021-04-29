@@ -1,18 +1,19 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.BuildingBlocks.Core.EntityFramework;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
-using MediatR;
 
 namespace Enigmatry.Blueprint.Api.Features.Users
 {
     public partial class GetUsers
     {
         [UsedImplicitly]
-        public class RequestHandler : IRequestHandler<Request, Response>
+        public class RequestHandler : IPagedRequestHandler<Request, Response.Item>
         {
             private readonly IRepository<User> _repository;
             private readonly IMapper _mapper;
@@ -23,14 +24,12 @@ namespace Enigmatry.Blueprint.Api.Features.Users
                 _mapper = mapper;
             }
 
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            public async Task<PagedResponse<Response.Item>> Handle(Request request, CancellationToken cancellationToken)
             {
-                var items = await _repository.QueryAll()
+                return await _repository.QueryAll()
                     .QueryByKeyword(request.Keyword)
-                    .BuildInclude()
-                    .ToListMappedAsync<User, Response.Item>(_mapper, cancellationToken);
-
-                return new Response { Items = items };
+                    .ProjectTo<Response.Item>(_mapper.ConfigurationProvider, cancellationToken)
+                    .ToPagedResponseAsync(request, cancellationToken);
             }
         }
     }

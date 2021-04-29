@@ -6,7 +6,7 @@ using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Tests.Http;
 using Enigmatry.Blueprint.BuildingBlocks.Core;
-using Enigmatry.Blueprint.Model;
+using Enigmatry.Blueprint.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using Enigmatry.Blueprint.Model.Tests.Identity;
@@ -37,7 +37,7 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestGetAll()
         {
-            var users = (await Client.GetAsync<GetUsers.Response>("users")).Items.ToList();
+            var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>("users")).Items.ToList();
 
             users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
