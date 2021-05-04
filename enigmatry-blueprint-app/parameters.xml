@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <parameters>
-  <parameter name="IIS Web Application Name" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="__iisProviderPath__" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="__iisProviderPath__" />
-  </parameter>
   <parameter name="API Uri" description="API Uri" defaultValue="">
     <parameterEntry kind="TextFile" scope="main.*.js" match="__apiUrl__" />
   </parameter>
