@@ -1,10 +1,10 @@
-Code generation console application is packed as .NET tool with package id enigmatry.blueprint.codegeneration.console
+Code generation console application is packed as .NET tool with package id enigmatry.codegeneration.console
 
 Commands for installing, updating and uninstalling the tool (globally):
 
-dotnet tool install enigmatry.blueprint.codegeneration.console -g
-dotnet tool update enigmatry.blueprint.codegeneration.console -g
-dotnet tool uninstall enigmatry.blueprint.codegeneration.console -g
+dotnet tool install enigmatry.codegeneration.console -g
+dotnet tool update enigmatry.codegeneration.console -g
+dotnet tool uninstall enigmatry.codegeneration.console -g
 
 Using the tool:
 
