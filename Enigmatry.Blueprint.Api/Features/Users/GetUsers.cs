@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Paging;
+using Enigmatry.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 

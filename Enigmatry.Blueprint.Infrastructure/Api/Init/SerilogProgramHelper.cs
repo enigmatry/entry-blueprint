@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Helpers;
+using Enigmatry.BuildingBlocks.Core.Helpers;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters;
-using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.ApplicationInsights;
+using Enigmatry.BuildingBlocks.AspNetCore.ApplicationInsights;
 
 namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {

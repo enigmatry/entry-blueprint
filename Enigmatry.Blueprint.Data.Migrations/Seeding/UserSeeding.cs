@@ -1,5 +1,5 @@
 ﻿using System;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
+using Enigmatry.BuildingBlocks.Core.Entities;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using Microsoft.EntityFrameworkCore;

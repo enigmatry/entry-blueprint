@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Validation;
+﻿using Enigmatry.BuildingBlocks.AspNetCore.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;

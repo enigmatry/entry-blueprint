@@ -22,7 +22,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Startup
             {
                 Assemblies = new[]
             {
-                AssemblyFinder.Find("Enigmatry.Blueprint.BuildingBlocks.Infrastructure"),
+                AssemblyFinder.Find("Enigmatry.BuildingBlocks.Infrastructure"),
                 AssemblyFinder.ApplicationServicesAssembly,
                 AssemblyFinder.InfrastructureAssembly
             }

@@ -17,11 +17,6 @@
   "sourceName": "Enigmatry.Blueprint",
   "preferNameDirectory": true,
   "symbols": {
-    "nuget": {
-      "type": "parameter",
-      "defaultValue": "Enigmatry.RemoveMeManually.Blueprint.BuildingBlock",
-      "replaces": "Enigmatry.Blueprint.BuildingBlock"
-    },
     "name": {
       "type": "parameter",
       "defaultValue": "Enigmatry.Blueprint",

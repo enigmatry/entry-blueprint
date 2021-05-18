@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.Core.Data;
 using JetBrains.Annotations;
 using MediatR;
 

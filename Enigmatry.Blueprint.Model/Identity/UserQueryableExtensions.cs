@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Helpers;
+using Enigmatry.BuildingBlocks.Core.Helpers;
 
 namespace Enigmatry.Blueprint.Model.Identity
 {

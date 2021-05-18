@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 

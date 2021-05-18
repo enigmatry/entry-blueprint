@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
-using Enigmatry.Blueprint.BuildingBlocks.Core.EntityFramework;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Paging;
+using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.Core.EntityFramework;
+using Enigmatry.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 

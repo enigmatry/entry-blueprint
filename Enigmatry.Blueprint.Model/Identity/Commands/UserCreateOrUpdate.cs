@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
+using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.Core.Entities;
 using FluentValidation;
 using JetBrains.Annotations;
 using MediatR;
