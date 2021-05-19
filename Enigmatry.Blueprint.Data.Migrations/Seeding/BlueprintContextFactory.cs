@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Security.Principal;
 using Enigmatry.Blueprint.ApplicationServices.Identity;
-using Enigmatry.Blueprint.BuildingBlocks.Infrastructure;
-using Enigmatry.Blueprint.BuildingBlocks.MediatR;
-using Enigmatry.Blueprint.BuildingBlocks.EntityFramework.Security;
+using Enigmatry.BuildingBlocks.Infrastructure;
+using Enigmatry.BuildingBlocks.MediatR;
+using Enigmatry.BuildingBlocks.EntityFramework.Security;
 using Enigmatry.Blueprint.Infrastructure.Data;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;

@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.BuildingBlocks.Core;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
-using Enigmatry.Blueprint.BuildingBlocks.EntityFramework;
-using Enigmatry.Blueprint.BuildingBlocks.EntityFramework.Security;
+using Enigmatry.BuildingBlocks.Core;
+using Enigmatry.BuildingBlocks.Core.Entities;
+using Enigmatry.BuildingBlocks.EntityFramework;
+using Enigmatry.BuildingBlocks.EntityFramework.Security;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Model.Identity;

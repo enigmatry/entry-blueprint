@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Autofac;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
-using Enigmatry.Blueprint.BuildingBlocks.EntityFramework;
-using Enigmatry.Blueprint.BuildingBlocks.EntityFramework.Security;
 using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Data;
+using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.EntityFramework;
+using Enigmatry.BuildingBlocks.EntityFramework.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;

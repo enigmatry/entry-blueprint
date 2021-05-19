@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
+﻿using Enigmatry.BuildingBlocks.Core.Entities;
 
 namespace Enigmatry.Blueprint.Model.Auditing
 {

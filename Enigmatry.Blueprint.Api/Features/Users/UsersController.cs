@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using Enigmatry.Blueprint.BuildingBlocks.AspNetCore;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Data;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
+using Enigmatry.BuildingBlocks.AspNetCore;
+using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.Core.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

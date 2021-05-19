@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.BuildingBlocks.AspNetCore.Filters;
+﻿using Enigmatry.BuildingBlocks.AspNetCore.Filters;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

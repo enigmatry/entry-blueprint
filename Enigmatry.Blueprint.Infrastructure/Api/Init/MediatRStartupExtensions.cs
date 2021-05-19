@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.BuildingBlocks.MediatR;
+﻿using Enigmatry.BuildingBlocks.MediatR;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

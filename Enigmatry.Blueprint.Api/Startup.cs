@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Enigmatry.Blueprint.BuildingBlocks.Swagger;
+using Enigmatry.BuildingBlocks.Swagger;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Blueprint.Infrastructure.Api.Startup;

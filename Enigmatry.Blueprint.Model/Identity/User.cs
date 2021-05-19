@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enigmatry.Blueprint.BuildingBlocks.Core.Entities;
+using Enigmatry.BuildingBlocks.Core.Entities;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using Enigmatry.Blueprint.Model.Identity.DomainEvents;
