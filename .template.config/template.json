@@ -1,6 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "eko.",
+  "author": "Enigmatry",
   "classifications": [
     "Blueprint",
     ".netcore",
@@ -106,6 +106,14 @@
         "format": "D"
       }
     },
+    "codeGenerationSetupProjectId": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "7B09F20C-7607-494C-9309-E539D1966F1D",
+      "parameters": {
+        "format": "D"
+      }
+    }, 
     "solutionItemsFolderProjectId": {
       "type": "generated",
       "generator": "guid",
