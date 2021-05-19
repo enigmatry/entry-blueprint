@@ -25,4 +25,8 @@
     <None Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="cleanup.cmd" />
+  </ItemGroup>
+
 </Project>
