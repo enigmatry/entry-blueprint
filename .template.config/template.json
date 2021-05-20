@@ -75,6 +75,21 @@
             "continueOnError": true
         },
         {
+            "args": {
+                "executable": "cleanup.cmd",
+                "args": "",
+                "redirectStandardOutput": "false"
+            },
+            "manualInstructions": [
+                {
+                    "text": "Run 'cleanup.cmd'"
+                }
+            ],
+            "description": "final cleanup",
+            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+            "continueOnError": true
+        },
+        {
             "condition": "(!skipGit)",
             "args": {
                 "executable": "git",
@@ -119,21 +134,6 @@
                 }
             ],
             "description": "git commit",
-            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-            "continueOnError": true
-        },
-        {
-            "args": {
-                "executable": "cleanup.cmd",
-                "args": "",
-                "redirectStandardOutput": "false"
-            },
-            "manualInstructions": [
-                {
-                    "text": "Run 'cleanup.cmd'"
-                }
-            ],
-            "description": "final cleanup",
             "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
             "continueOnError": true
         }
