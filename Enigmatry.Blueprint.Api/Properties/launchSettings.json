@@ -12,18 +12,20 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "true",
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT": "https://enigmatry-blueprint-test.vault.azure.net"
+        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "true",
+        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT": "https://enigmatry-blueprint-test.vault.azure.net",
+        "AzureServicesAuthConnectionString": "RunAs=Developer; DeveloperTool=VisualStudio"
       }
     },
     "Enigmatry.Blueprint.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "true",
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT": "https://enigmatry-blueprint-test.vault.azure.net"
+        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "true",
+        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT": "https://enigmatry-blueprint-test.vault.azure.net",
+        "AzureServicesAuthConnectionString": "RunAs=Developer; DeveloperTool=VisualStudio"
       },
       "applicationUrl": "http://localhost:5441/"
     }

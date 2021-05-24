@@ -1,0 +1,10 @@
+<Project>
+
+	<PropertyGroup>
+		<Copyright>Copyright © copyrightYear Enigmatry. All rights reserved.</Copyright>
+		<Company>Enigmatry</Company>
+		<!--Authors>TODO</Authors-->
+		<!--Product>TODO</Product-->
+	</PropertyGroup>
+
+</Project>
