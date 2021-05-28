@@ -37,8 +37,9 @@ namespace Enigmatry.Blueprint.Api.Tests
         [Test]
         public async Task TestGetAll()
         {
-            var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>("users")).Items.ToList();
+            var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>("users"))?.Items.ToList()!;
 
+            users.Should().NotBeNull();
             users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
             GetUsers.Response.Item item = users.Single(u => u.UserName == "john_doe@john.doe");
@@ -54,10 +55,10 @@ namespace Enigmatry.Blueprint.Api.Tests
 
             user.Should().NotBeNull();
 
-            user.Name.Should().Be("John Doe");
-            user.UserName.Should().Be("john_doe@john.doe");
-            user.CreatedOn.Should().Be(_createdOn);
-            user.UpdatedOn.Should().Be(_updatedOn);
+            user?.Name.Should().Be("John Doe");
+            user?.UserName.Should().Be("john_doe@john.doe");
+            user?.CreatedOn.Should().Be(_createdOn);
+            user?.UpdatedOn.Should().Be(_updatedOn);
         }
 
         [Test]
@@ -72,26 +73,26 @@ namespace Enigmatry.Blueprint.Api.Tests
         public async Task TestCreate()
         {
             var command = new UserCreateOrUpdate.Command {Name = "some user", UserName = "someuser@test.com"};
-            GetUserDetails.Response user =
+            GetUserDetails.Response? user =
                 await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
-            user.UserName.Should().Be(command.UserName);
-            user.Name.Should().Be(command.Name);
-            user.CreatedOn.Date.Should().Be(DateTime.Now.Date);
-            user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
+            user?.UserName.Should().Be(command.UserName);
+            user?.Name.Should().Be(command.Name);
+            user?.CreatedOn.Date.Should().Be(DateTime.Now.Date);
+            user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
         [Test]
         public async Task TestUpdate()
         {
             var command = new UserCreateOrUpdate.Command {Id = _user.Id, Name = "some user", UserName = "someuser@test.com"};
-            GetUserDetails.Response user =
+            GetUserDetails.Response? user =
                 await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
-            user.UserName.Should().Be("john_doe@john.doe", "username is immutable");
-            user.Name.Should().Be(command.Name);
-            user.CreatedOn.Date.Should().Be(_user.CreatedOn.Date);
-            user.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
+            user?.UserName.Should().Be("john_doe@john.doe", "username is immutable");
+            user?.Name.Should().Be(command.Name);
+            user?.CreatedOn.Date.Should().Be(_user.CreatedOn.Date);
+            user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
         }
 
         [TestCase("some user", "invalid email", "userName", "is not a valid email address.")]
