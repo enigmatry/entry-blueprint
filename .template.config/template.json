@@ -151,7 +151,7 @@
             "condition": "(!skipGit)",
             "args": {
                 "executable": "git",
-                "args": "commit -m \"Initial Commit\"",
+                "args": "commit -q -m \"Initial Commit\"",
                 "redirectStandardOutput": "false"
             },
             "manualInstructions": [
