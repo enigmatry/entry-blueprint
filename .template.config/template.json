@@ -90,16 +90,12 @@
         "B11717EB-1E91-4227-97FA-2F4A73899289",
         "5366D8D0-38E2-403F-BD61-0BE58A895283"
     ],
-    "postActions": [
+    "primaryOutputs": [
         {
-            "condition": "(!skipRestore)",
-            "description": "Restore NuGet packages required by this project.",
-            "manualInstructions": [
-                { "text": "Run 'dotnet restore'" }
-            ],
-            "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-            "continueOnError": true
-        },
+            "path": "Enigmatry.Blueprint.sln"
+        }
+    ],
+    "postActions": [
         {
             "args": {
                 "executable": "cleanup.cmd",
@@ -113,6 +109,15 @@
             ],
             "description": "final cleanup",
             "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+            "continueOnError": true
+        },
+        {
+            "condition": "(!skipRestore)",
+            "description": "Restore NuGet packages required by this project.",
+            "manualInstructions": [
+                { "text": "Run 'dotnet restore'" }
+            ],
+            "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
             "continueOnError": true
         },
         {
