@@ -14,7 +14,7 @@ import { CheckMarkPipe } from './pipes/check-mark.pipe';
   exports: [
     ReactiveFormsModule,
     MaterialModule,
-	CheckMarkPipe
+    CheckMarkPipe
   ]
 })
 export class SharedModule { }
