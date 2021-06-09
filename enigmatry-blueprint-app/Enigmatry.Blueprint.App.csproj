@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5</TargetFramework>
-    <TypeScriptToolsVersion>3.9</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>4.1</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <Nullable>enable</Nullable>
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>

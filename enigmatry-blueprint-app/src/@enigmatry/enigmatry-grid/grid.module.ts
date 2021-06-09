@@ -20,13 +20,12 @@ import { EnigmatryGridCellComponent } from './cell.component';
     MatCheckboxModule,
     MatIconModule
   ],
-  exports: [
-    EnigmatryGridComponent,
-    EnigmatryGridCellComponent
-  ],
   declarations: [
     EnigmatryGridComponent,
     EnigmatryGridCellComponent
+  ],
+  exports: [
+    EnigmatryGridComponent
   ]
 })
-export class EnigmatryGridModule {}
+export class EnigmatryGridModule { }

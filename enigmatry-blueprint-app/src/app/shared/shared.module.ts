@@ -2,19 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
-import { CheckMarkPipe } from './pipes/check-mark.pipe';
+import { EnigmatryPipesModule } from 'src/@enigmatry/pipes';
+import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
 
 @NgModule({
-  declarations: [
-    CheckMarkPipe
-  ],
   imports: [
     CommonModule
   ],
   exports: [
     ReactiveFormsModule,
     MaterialModule,
-    CheckMarkPipe
+    EnigmatryPipesModule,
+    EnigmatryGridModule
   ]
 })
 export class SharedModule { }
