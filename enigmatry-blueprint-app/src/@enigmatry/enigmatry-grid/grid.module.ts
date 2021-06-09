@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { EnigmatryGridComponent } from './grid.component';
 import { EnigmatryGridCellComponent } from './cell.component';
+import { EnigmatryPipesModule } from '../pipes';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { EnigmatryGridCellComponent } from './cell.component';
     MatSortModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    EnigmatryPipesModule
   ],
   declarations: [
     EnigmatryGridComponent,

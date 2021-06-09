@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { ColumnDef  } from './grid.interface';
+import { ColumnDef } from './grid.interface';
 
 @Component({
   selector: 'enigmatry-grid-cell',
@@ -13,10 +13,10 @@ export class EnigmatryGridCellComponent {
   @Input() colDef: ColumnDef;
 
   get colValue() {
-    return this.getCellValue(this.rowData, this.colDef) || '';
+    return this.getCellValue(this.rowData, this.colDef);
   }
 
-  getCellValue(rowData: any, colDef: ColumnDef): string {
+  getCellValue(rowData: any, colDef: ColumnDef) {
     const keyArr = colDef.field ? colDef.field.split('.') : [];
     return keyArr.reduce((obj, key) => obj && obj[key], rowData);
   }

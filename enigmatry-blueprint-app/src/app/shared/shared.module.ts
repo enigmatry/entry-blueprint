@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
-import { EnigmatryPipesModule } from 'src/@enigmatry/pipes';
 import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
 
 @NgModule({
@@ -12,7 +11,6 @@ import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
   exports: [
     ReactiveFormsModule,
     MaterialModule,
-    EnigmatryPipesModule,
     EnigmatryGridModule
   ]
 })
