@@ -1,0 +1,97 @@
+@import '~@angular/material/theming';
+
+.enigmatry-grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .mat-table-container {
+    overflow: auto;
+
+    &.mat-table-with-data {
+      flex: 1;
+    }
+  }
+
+  .mat-table {
+    min-width: 100%;
+    border-collapse: separate;
+
+    .mat-header-cell,
+    .mat-footer-cell,
+    .mat-cell {
+      &:not(.enigmatry-grid-checkbox-cell) {
+        min-width: 80px;
+      }
+    }
+  }
+
+  .mat-header-cell,
+  .mat-footer-cell,
+  .mat-cell {
+    padding: 4px 10px;
+    box-sizing: border-box;
+
+    &.enigmatry-grid-checkbox-cell {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  .mat-sort-header-icon {
+    width: 18px;
+    height: 18px;
+    margin: 0 4px;
+    font-size: 18px;
+  }
+
+  .mat-header-cell-inner {
+    display: flex;
+    align-items: center;
+  }
+
+  .mat-paginator-hidden {
+    display: none;
+  }
+}
+
+.enigmatry-grid-layout {
+  display: flex;
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.enigmatry-grid-content {
+  flex-direction: column;
+  width: 0;
+}
+
+.enigmatry-grid-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.enigmatry-grid-no-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 150px;
+}
+
+.enigmatry-grid-checkbox-cell {
+  flex: none;
+  justify-content: center;
+  width: 56px;
+  min-width: 56px;
+
+  .mat-checkbox {
+    display: flex;
+    margin: 0 10px;
+  }
+
+  .mat-checkbox-inner-container {
+    margin-left: 0;
+  }
+}
