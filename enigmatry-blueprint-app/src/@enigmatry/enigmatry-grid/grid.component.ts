@@ -28,6 +28,7 @@ import {
   CellTemplate,
   RowSelectionFormatter,
   RowClassFormatter,
+  PagedData,
 } from './grid.interface';
 
 @Component({
@@ -48,7 +49,12 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
 
   @Input() displayedColumns: string[];
   @Input() columns: ColumnDef[] = [];
-  @Input() data: T[] = [];
+
+  // Data
+
+  private _data: T[] = [];
+  private _page: PagedData<T>;
+  @Input() data: T[] | PagedData<T> = [];
   @Input() total = 0;
   @Input() loading = false;
 
@@ -62,7 +68,7 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
   @Input() pageSize = 10;
   @Input() pageSizeOptions = [10, 50, 100];
   @Input() hidePageSize = false;
-  @Output() page = new EventEmitter<PageEvent>();
+  @Output() pageChange = new EventEmitter<PageEvent>();
 
   @Input() paginationTemplate: TemplateRef<any>;
 
@@ -100,8 +106,8 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
   @Input() noResultText = 'No results found';
   @Input() noResultTemplate: TemplateRef<any> | null;
 
-  get _hasNoResult() {
-    return (!this.data || this.data.length === 0) && !this.loading;
+  get hasNoResult() {
+    return (!this.data || this._data.length === 0) && !this.loading;
   }
 
   @Input() headerTemplate: TemplateRef<any> | CellTemplate | any;
@@ -145,11 +151,25 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
       this.rowSelection = new SelectionModel<T>(this.multiSelectable, this.rowSelected);
     }
 
+    if (!this.data) {
+      this.data = [];
+    }
+
+    if (Array.isArray(this.data)) {
+      this._data = this.data as T[];
+    } else {
+      this._page = this.data as PagedData<T>;
+      this._data = this._page.items ?? [];
+      this.total = this._page.totalCount ?? 0;
+      this.pageSize = this._page.pageSize ?? this.pageSize;
+      this.pageIndex = this._page.pageNumber ? this._page.pageNumber - 1 : this.pageIndex;
+    }
+
     if (this.dataSource) {
       this.dataSource.disconnect();
     }
 
-    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource = new MatTableDataSource(this._data);
 
     this.dataSource.paginator = this.pageDatasetLocaly ? this.paginator : null;
     this.dataSource.sort = this.sortDatasetLocaly ? this.sort : null;
@@ -229,7 +249,7 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
     if (this.pageDatasetLocaly) {
       this.scrollTop(0);
     }
-    this.page.emit(e);
+    this.pageChange.emit(e);
   }
 
   scrollTop(value?: number): number | void {

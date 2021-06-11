@@ -3,7 +3,7 @@
   <!-- Table content -->
   <div class="enigmatry-grid-content enigmatry-grid-layout">
     <div #tableContainer class="mat-table-container"
-         [ngClass]="{'mat-table-with-data': !_hasNoResult}">
+         [ngClass]="{'mat-table-with-data': !hasNoResult}">
       <table mat-table 
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped}"
              [dataSource]="dataSource"
@@ -105,7 +105,7 @@
     </div>
 
     <!-- No results -->
-    <div class="enigmatry-grid-no-result" *ngIf="_hasNoResult">
+    <div class="enigmatry-grid-no-result" *ngIf="hasNoResult">
       <ng-template [ngIf]="isTemplateRef(noResultTemplate)" [ngIfElse]="defaultNoResultTpl">
         <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
       </ng-template>
@@ -121,9 +121,9 @@
       <ng-template [ngTemplateOutlet]="paginationTemplate"></ng-template>
     </ng-template>
     <ng-template #defaultPaginationTemplate>
-      <mat-paginator [class.mat-paginator-hidden]="!showPaginator || _hasNoResult"
+      <mat-paginator [class.mat-paginator-hidden]="!showPaginator || hasNoResult"
                      [showFirstLastButtons]="showFirstLastButtons"
-                     [length]="pageDatasetLocaly ? data.length : total"
+                     [length]="total"
                      [pageIndex]="pageIndex"
                      [pageSize]="pageSize"
                      [pageSizeOptions]="pageSizeOptions"
