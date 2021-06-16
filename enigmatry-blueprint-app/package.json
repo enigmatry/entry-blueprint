@@ -61,6 +61,7 @@
     "stylelint-scss": "3.19.0",
     "stylelint-declaration-block-no-ignored-properties": "2.3.0",
     "stylelint-group-selectors": "1.0.8",
+    "stylelint-max-lines": "0.1.0",
     "stylelint-selector-no-empty": "1.0.8",
     "stylelint-use-nesting": "3.0.0",
     "ts-node": "~9.1.1",
