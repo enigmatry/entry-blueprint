@@ -1,98 +1,96 @@
-@import '~@angular/material/theming';
+@use '~@angular/material/theming';
 
 .enigmatry-grid {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	width: 100%;
 
-  .mat-table-container {
-    overflow: auto;
+	.mat-table-container {
+		overflow: auto;
 
-    &.mat-table-with-data {
-      flex: 1;
-    }
-  }
+		&.mat-table-with-data {
+			flex: 1;
+		}
+	}
 
-  .mat-table {
-    min-width: 100%;
-    border-collapse: separate;
+	.mat-header-cell, .mat-footer-cell, .mat-cell {
+		box-sizing: border-box;
+		padding: 4px 10px;
 
-    .mat-header-cell,
-    .mat-footer-cell,
-    .mat-cell {
-      &:not(.enigmatry-grid-checkbox-cell) {
-        min-width: 80px;
-      }
-    }
-  }
+		&.enigmatry-grid-checkbox-cell {
+			padding: {
+				right: 10px;
+				left: 10px;
+			}
+		}
+	}
 
-  .mat-header-cell,
-  .mat-footer-cell,
-  .mat-cell {
-    padding: 4px 10px;
-    box-sizing: border-box;
+	.mat-table {
+		min-width: 100%;
+		border-collapse: separate;
 
-    &.enigmatry-grid-checkbox-cell {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  }
+		.mat-header-cell, .mat-footer-cell, .mat-cell {
+			&:not(.enigmatry-grid-checkbox-cell) {
+				min-width: 80px;
+			}
+		}
+	}
 
-  .mat-sort-header-icon {
-    width: 18px;
-    height: 18px;
-    margin: 0 4px;
-    font-size: 18px;
-  }
+	.mat-sort-header-icon {
+		width: 18px;
+		height: 18px;
+		margin: 0 4px;
+		font-size: 18px;
+	}
 
-  .mat-header-cell-inner {
-    display: flex;
-    align-items: center;
-  }
+	.mat-header-cell-inner {
+		display: flex;
+		align-items: center;
+	}
 
-  .mat-paginator-hidden {
-    display: none;
-  }
+	.mat-paginator-hidden {
+		display: none;
+	}
 }
 
 .enigmatry-grid-layout {
-  display: flex;
-  flex: 1 1 auto;
-  overflow: auto;
+	display: flex;
+	flex: 1 1 auto;
+	overflow: auto;
 }
 
 .enigmatry-grid-content {
-  flex-direction: column;
-  width: 0;
+	flex-direction: column;
+	width: 0;
 }
 
 .enigmatry-grid-footer {
-  position: relative;
-  z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 .enigmatry-grid-no-result {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  min-height: 50px;
-  font-size: 13px;
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	min-height: 50px;
 }
 
 .enigmatry-grid-checkbox-cell {
-  flex: none;
-  justify-content: center;
-  width: 56px;
-  min-width: 56px;
+	flex: none;
+	justify-content: center;
+	width: 56px;
+	min-width: 56px;
 
-  .mat-checkbox {
-    display: flex;
-    margin: 0 10px;
-  }
+	.mat-checkbox {
+		display: flex;
+		margin: 0 10px;
+	}
 
-  .mat-checkbox-inner-container {
-    margin-left: 0;
-  }
+	.mat-checkbox-inner-container {
+		margin-left: 0;
+	}
 }
