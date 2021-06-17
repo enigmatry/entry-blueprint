@@ -1,5 +1,5 @@
-
 <div class="enigmatry-grid-main enigmatry-grid-layout">
+
   <!-- Table content -->
   <div class="enigmatry-grid-content enigmatry-grid-layout">
     <div #tableContainer class="mat-table-container"
@@ -121,7 +121,7 @@
       <ng-template [ngTemplateOutlet]="paginationTemplate"></ng-template>
     </ng-template>
     <ng-template #defaultPaginationTemplate>
-      <mat-paginator [class.mat-paginator-hidden]="!showPaginator || hasNoResult"
+      <mat-paginator [class.mat-paginator-hidden]="!showPaginator"
                      [showFirstLastButtons]="showFirstLastButtons"
                      [length]="total"
                      [pageIndex]="pageIndex"

@@ -28,8 +28,8 @@ import {
   CellTemplate,
   RowSelectionFormatter,
   RowClassFormatter,
-  PagedData,
 } from './grid.interface';
+import { PagedData } from '../pagination';
 
 @Component({
   selector: 'enigmatry-grid',
@@ -54,7 +54,7 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
 
   private _data: T[] = [];
   private _page: PagedData<T>;
-  @Input() data: T[] | PagedData<T> = [];
+  @Input() data: T[] | PagedData<T> | null = [];
   @Input() total = 0;
   @Input() loading = false;
 
@@ -244,7 +244,6 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
-  // Scroll to top when turn to the next page
   handlePage(e: PageEvent) {
     if (this.pageDatasetLocaly) {
       this.scrollTop(0);

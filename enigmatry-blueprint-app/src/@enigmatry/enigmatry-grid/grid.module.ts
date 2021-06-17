@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { EnigmatryGridComponent } from './grid.component';
 import { EnigmatryGridCellComponent } from './cell.component';
 import { EnigmatryPipesModule } from '../pipes';
+
+export const DEFAULT_DATE_FORMAT: InjectionToken<string> = new InjectionToken<string>('');
 
 @NgModule({
   imports: [
@@ -28,6 +30,7 @@ import { EnigmatryPipesModule } from '../pipes';
   ],
   exports: [
     EnigmatryGridComponent
-  ]
+  ],
+  providers: [{ provide: DEFAULT_DATE_FORMAT, useValue: 'mediumDate' }]
 })
 export class EnigmatryGridModule { }

@@ -23,7 +23,8 @@ export declare type ColumnType =
   | 'currency'
   | 'percent'
   | 'date'
-  | 'link';
+  | 'link'
+  | '';
 
 export interface ColumnTypeParameter {
   currencyCode?: string;
@@ -51,14 +52,4 @@ export interface RowSelectionFormatter {
 
 export interface RowClassFormatter {
   [className: string]: (rowData: any, index?: number) => boolean;
-}
-
-export interface PagedData<T> {
-  items?: T[];
-  pageSize?: number;
-  pageNumber?: number;
-  totalCount?: number;
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
 }
