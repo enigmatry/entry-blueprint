@@ -14,7 +14,9 @@
 		}
 	}
 
-	.mat-header-cell, .mat-footer-cell, .mat-cell {
+	.mat-header-cell,
+	.mat-footer-cell,
+	.mat-cell {
 		box-sizing: border-box;
 		padding: 4px 10px;
 
@@ -30,7 +32,9 @@
 		min-width: 100%;
 		border-collapse: separate;
 
-		.mat-header-cell, .mat-footer-cell, .mat-cell {
+		.mat-header-cell,
+		.mat-footer-cell,
+		.mat-cell {
 			&:not(.enigmatry-grid-checkbox-cell) {
 				min-width: 80px;
 			}
@@ -79,7 +83,8 @@
 	min-height: 50px;
 }
 
-.enigmatry-grid-checkbox-cell {
+.enigmatry-grid-checkbox-cell,
+.enigmatry-grid-context-menu-cell {
 	flex: none;
 	justify-content: center;
 	width: 56px;
@@ -92,5 +97,9 @@
 
 	.mat-checkbox-inner-container {
 		margin-left: 0;
+	}
+
+	.mat-icon-button {
+		padding-top: 5px;
 	}
 }

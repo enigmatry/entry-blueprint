@@ -4,17 +4,14 @@ export interface ColumnDef {
   field: string;
   header?: string;
   hide?: boolean;
-  disabled?: boolean;
   pinned?: 'left' | 'right';
   width?: string;
   sortable?: boolean | string;
   sortProp?: ColumnSortProp;
   type?: ColumnType;
   typeParameter?: ColumnTypeParameter;
-  formatter?: (rowData: any, colDef?: ColumnDef) => void;
   cellTemplate?: TemplateRef<any> | null;
   class?: string;
-  i18nKey?: string;
 }
 
 export declare type ColumnType =
@@ -23,8 +20,7 @@ export declare type ColumnType =
   | 'currency'
   | 'percent'
   | 'date'
-  | 'link'
-  | '';
+  | 'link';
 
 export interface ColumnTypeParameter {
   currencyCode?: string;
@@ -46,10 +42,21 @@ export interface CellTemplate {
 }
 
 export interface RowSelectionFormatter {
-  disabled?: (rowData: any, index?: number) => boolean;
-  hideCheckbox?: (rowData: any, index?: number) => boolean;
+  disabled?: (rowData: any) => boolean;
+  hideCheckbox?: (rowData: any) => boolean;
 }
 
 export interface RowClassFormatter {
-  [className: string]: (rowData: any, index?: number) => boolean;
+  [className: string]: (rowData: any) => boolean;
+}
+
+export interface ContextMenuItem {
+  id: string;
+  name: string;
+  icon?: string;
+  disabled?: boolean;
+}
+
+export interface RowContextMenuFormatter {
+  items: (rowData: any) => ContextMenuItem[];
 }

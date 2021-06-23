@@ -28,6 +28,8 @@ import {
   CellTemplate,
   RowSelectionFormatter,
   RowClassFormatter,
+  ContextMenuItem,
+  RowContextMenuFormatter,
 } from './grid.interface';
 import { PagedData } from '../pagination';
 
@@ -86,7 +88,7 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
 
   @Input() rowHover = false;
   @Input() rowStriped = false;
-  @Output() rowClick = new EventEmitter<any>();
+  @Output() rowClick = new EventEmitter<T>();
 
   // Row selection
 
@@ -100,6 +102,13 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
   @Input() rowClassFormatter: RowClassFormatter;
   @Output() rowSelectionChange = new EventEmitter<T[]>();
 
+  // Context menu
+
+  @Input() showContextMenu = false;
+  @Input() contextMenuItems: ContextMenuItem[] = [];
+  @Input() contextMenuTemplate: TemplateRef<any> | null;
+  @Input() rowContextMenuFormatter: RowContextMenuFormatter;
+  @Output() contextMenuItemSelected = new EventEmitter<{ itemId: string; rowData: T }>();
 
   // No Result
 
@@ -131,7 +140,7 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
     };
     if (this.rowClassFormatter) {
       for (const key of Object.keys(this.rowClassFormatter)) {
-        classList[key] = this.rowClassFormatter[key](rowData, index);
+        classList[key] = this.rowClassFormatter[key](rowData);
       }
     }
     return classList;
@@ -144,7 +153,11 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
     this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
 
     if (this.rowSelectable && !this.hideRowSelectionCheckbox) {
-      this.displayedColumns.unshift('EnigmatryGridCheckboxColumnDef');
+      this.displayedColumns.unshift('CheckboxColumnDef');
+    }
+
+    if (this.showContextMenu && !this.displayedColumns.includes('ContextMenuColumnDef')) {
+      this.displayedColumns.push('ContextMenuColumnDef');
     }
 
     if (this.rowSelectable) {
@@ -203,8 +216,8 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
   selectRow(event: MouseEvent, rowData: T, index: number) {
     if (
       this.rowSelectable &&
-      !this.rowSelectionFormatter.disabled?.(rowData, index) &&
-      !this.rowSelectionFormatter.hideCheckbox?.(rowData, index)
+      !this.rowSelectionFormatter.disabled?.(rowData) &&
+      !this.rowSelectionFormatter.hideCheckbox?.(rowData)
     ) {
       if (!this.multiSelectable) {
         this.rowSelection.clear();
@@ -213,13 +226,13 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
       this.toggleCheckbox(rowData);
     }
 
-    this.rowClick.emit({ rowData, index });
+    this.rowClick.emit(rowData);
   }
 
   isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
     const numRows = this.dataSource.data.filter(
-      (row, index) => !this.rowSelectionFormatter.disabled?.(row, index)
+      (row, index) => !this.rowSelectionFormatter.disabled?.(row)
     ).length;
     return numSelected === numRows;
   }
@@ -232,7 +245,7 @@ export class EnigmatryGridComponent<T> implements OnInit, OnChanges, AfterViewIn
     }
 
     this.dataSource.data.forEach((row, index) => {
-      if (!this.rowSelectionFormatter.disabled?.(row, index)) {
+      if (!this.rowSelectionFormatter.disabled?.(row)) {
         this.rowSelection.select(row);
       }
     });

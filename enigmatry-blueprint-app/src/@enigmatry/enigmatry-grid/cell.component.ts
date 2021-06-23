@@ -9,22 +9,22 @@ import { DEFAULT_DATE_FORMAT } from './grid.module';
   styleUrls: ['./cell.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EnigmatryGridCellComponent {
-
-  @Input() rowData = {};
+export class EnigmatryGridCellComponent<T> {
+  @Input() rowData: T;
   @Input() colDef: ColumnDef;
 
   constructor(
     @Inject(DEFAULT_DATE_FORMAT) public defaultDateFormat: string,
-    @Inject(DEFAULT_CURRENCY_CODE) public defaultCurrencyCode: string) { }
+    @Inject(DEFAULT_CURRENCY_CODE) public defaultCurrencyCode: string) {
+  }
 
-  get colValue() {
+  get value(): any {
     return this.getCellValue(this.rowData, this.colDef);
   }
 
-  getCellValue(rowData: any, colDef: ColumnDef) {
-    const keyArr = colDef.field ? colDef.field.split('.') : [];
-    return keyArr.reduce((obj, key) => obj && obj[key], rowData);
+  private getCellValue(rowData: T, colDef: ColumnDef) {
+    const keys = colDef.field ? colDef.field.split('.') : [];
+    return keys.reduce((data, key) => data && (data as any)[key], rowData);
   }
 
 }
