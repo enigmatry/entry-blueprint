@@ -1,10 +1,10 @@
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { PagedData, PageEvent, SortEvent } from 'src/@enigmatry/pagination';
-import { IPageQuery } from './list-query.interface';
 import { IListComponent } from './list-component.interface';
+import { IListQuery } from './list-query.model';
 
-export class ListComponent<T, TQuery extends IPageQuery> implements IListComponent<T, TQuery> {
+export class ListComponent<T, TQuery extends IListQuery> implements IListComponent<T, TQuery> {
 
   data = new BehaviorSubject<PagedData<T> | null>(null);
   selection = new BehaviorSubject<T[]>([]);

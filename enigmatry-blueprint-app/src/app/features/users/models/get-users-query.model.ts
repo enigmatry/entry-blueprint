@@ -1,8 +1,7 @@
 import { UsersClient } from 'src/app/api/api-reference';
-import { IHasApiMethodParams } from 'src/app/shared/list-component/list-query.interface';
-import { BaseListQuery } from 'src/app/shared/list-component/list-query.model';
+import { BaseListQuery, IApiMethodParams } from 'src/app/shared/list-component/list-query.model';
 
-export class GetUsersQuery extends BaseListQuery implements IHasApiMethodParams<UsersClient['search']> {
+export class GetUsersQuery extends BaseListQuery implements IApiMethodParams<UsersClient['search']> {
 
   getApiMethodParams(): [
     keyword: string | null | undefined,

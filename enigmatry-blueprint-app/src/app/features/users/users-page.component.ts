@@ -19,6 +19,6 @@ export class UsersPageComponent extends ListComponentWithRouting<GetUsersRespons
   }
 
   ngOnInit(): void {
-    this.watchRouteQueryParams(this.router, this.activatedRoute);
+    this.watchRouteParams(this.router, this.activatedRoute);
   }
 }
