@@ -13,12 +13,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
 
 
-import { UserListComponent } from './user-list/user-list.component';
+import { UserListGeneratedComponent } from './user-list/user-list-generated.component';
 
 
 @NgModule({
-    declarations: [UserListComponent],
+    declarations: [UserListGeneratedComponent],
     imports: [ CommonModule, SharedModule, EnigmatryGridModule, MatAutocompleteModule,  ],
-    exports: [UserListComponent]
+    exports: [UserListGeneratedComponent]
 })
 export class UsersGeneratedModule { }

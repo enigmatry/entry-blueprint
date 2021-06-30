@@ -16,12 +16,12 @@ import { PagedData, PageEvent, SortEvent } from 'src/@enigmatry/pagination';
 import { GetUsersResponseItem } from 'src/app/api/api-reference';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  selector: 'app-g-user-list',
+  templateUrl: './user-list-generated.component.html',
+  styleUrls: ['./user-list-generated.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserListComponent implements OnInit {
+export class UserListGeneratedComponent implements OnInit {
 
   @Input() data: PagedData<GetUsersResponseItem> | null;
   @Input() loading: boolean;
