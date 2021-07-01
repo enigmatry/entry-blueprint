@@ -12,7 +12,9 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Startup
     public static class ContainerBuilderStartupExtensions
     {
 #pragma warning disable CA1801 // Review unused parameters
+#pragma warning disable IDE0060 // Remove unused parameter
         public static void AppRegisterModules(this ContainerBuilder builder, IConfiguration configuration)
+#pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore CA1801 // Review unused parameters
         {
             builder.RegisterModule<ConfigurationModule>();
@@ -37,7 +39,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Startup
             {
                 throw new InvalidOperationException("HttpContext is null");
             }
-            ClaimsPrincipal user = httpContextAccessor.HttpContext.User;
+            var user = httpContextAccessor.HttpContext.User;
             return user;
         }
     }
