@@ -4,10 +4,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersGeneratedModule } from './generated/users-generated.module';
-import { UsersPageComponent } from './users-page.component';
+import { UserListComponent } from './user-list.component';
 
 @NgModule({
-  declarations: [UsersPageComponent],
+  declarations: [UserListComponent],
   imports: [
     CommonModule,
     SharedModule,
