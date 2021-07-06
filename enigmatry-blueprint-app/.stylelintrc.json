@@ -70,7 +70,7 @@
     "length-zero-no-unit": true,
     "max-empty-lines": 1,
     "max-line-length": [
-      110,
+      135,
       { "ignore": [ "comments" ] }
     ],
     "max-nesting-depth": 3,
@@ -127,14 +127,17 @@
     "selector-pseudo-class-parentheses-space-inside": "never",
     "selector-pseudo-element-case": "lower",
     "selector-pseudo-element-colon-notation": "double",
-    "selector-pseudo-element-no-unknown": true,
+    "selector-pseudo-element-no-unknown": [
+      true,
+      { "ignorePseudoElements": [ "host", "ng-deep" ] }
+    ],
     "selector-type-case": "lower",
     "selector-type-no-unknown": true,
     "shorthand-property-no-redundant-values": true,
     "string-no-newline": true,
     "string-quotes": "single",
     "time-min-milliseconds": 100,
-    "unit-allowed-list": [ "px", "vh", "s", "%" ],
+    "unit-allowed-list": [ "px", "%", "em", "rem", "vw", "vh", "deg", "ms", "s" ],
     "unit-case": "lower",
     "unit-no-unknown": true,
     "value-keyword-case": "lower",
@@ -184,6 +187,6 @@
     "plugin/stylelint-group-selectors": true,
     "plugin/stylelint-selector-no-empty": true,
     "csstools/use-nesting": "always",
-    "pitcher/max-lines": 100
+    "pitcher/max-lines": 135
   }
 }
