@@ -2,7 +2,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { tap, mergeMap, finalize, map } from 'rxjs/operators';
-import { PagedData, PageEvent, SortEvent } from 'src/@enigmatry/pagination';
+import { PagedData, PageEvent, SortEvent } from '@enigmatry/pagination';
 import { IListComponent } from './list-component.interface';
 import { IListQueryWithRouting } from './list-query.model';
 

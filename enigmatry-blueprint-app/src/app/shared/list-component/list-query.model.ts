@@ -1,5 +1,5 @@
 import { Params } from '@angular/router';
-import { PageEvent, SortDirection, SortEvent } from 'src/@enigmatry/pagination';
+import { PageEvent, SortDirection, SortEvent } from '@enigmatry/pagination';
 import { OnPage, OnSort } from './list-component.interface';
 
 export const defaultPageSize = 10;
