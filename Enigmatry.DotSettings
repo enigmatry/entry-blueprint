@@ -1,4 +1,20 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=01413C014EE2184E93CB0CDECC2E24B8/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=01413C014EE2184E93CB0CDECC2E24B8/EntryName/@EntryValue">Blueprint Feature Get Multiple Request</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=01413C014EE2184E93CB0CDECC2E24B8/Position/@EntryValue">8</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=20A6C8FD4283E84DA07148CD65A28702/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=20A6C8FD4283E84DA07148CD65A28702/EntryName/@EntryValue">Blueprint Feature Controller</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=20A6C8FD4283E84DA07148CD65A28702/Position/@EntryValue">6</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=40C163D436D8ED48A6D01A0AFEFC5556/@KeyIndexDefined">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=58980F652F66A74BB39AA2344D94AE07/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=58980F652F66A74BB39AA2344D94AE07/EntryName/@EntryValue">Blueprint Entity</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=58980F652F66A74BB39AA2344D94AE07/Position/@EntryValue">5</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/EntryName/@EntryValue">Blueprint Feature Get Details Request</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Position/@EntryValue">7</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=FEB6F8FCA144744CBE7AD93520A0FF4A/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=FEB6F8FCA144744CBE7AD93520A0FF4A/EntryName/@EntryValue">Blueprint Code Generation List Configuration</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=FEB6F8FCA144744CBE7AD93520A0FF4A/Position/@EntryValue">4</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
@@ -184,8 +200,6 @@ namespace $NAMESPACE$&#xD;
 using System.Linq;&#xD;
 using System.Net.Http;&#xD;
 using System.Threading.Tasks;&#xD;
-using Edwin.Profiler.Api.Features.Users;&#xD;
-using Edwin.Profiler.Api.Tests.Infrastructure.Api;&#xD;
 using Enigmatry.BuildingBlocks.AspNetCore.Tests.Http;&#xD;
 using Enigmatry.BuildingBlocks.Core;&#xD;
 using Enigmatry.BuildingBlocks.Core.Paging;&#xD;
@@ -390,6 +404,7 @@ public static class $TypeName$EnumerableExtensions&#xD;
             return query.Where(x =&gt; x.$PropertyName$.$SELECTION$$END$ == $Predicate$);&#xD;
         }&#xD;
     }</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=40C163D436D8ED48A6D01A0AFEFC5556/@KeyIndexDefined">False</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>

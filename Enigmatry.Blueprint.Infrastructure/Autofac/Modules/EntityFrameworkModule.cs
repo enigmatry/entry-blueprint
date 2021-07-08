@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Autofac;
-using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Data;
 using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.Core.Settings;
 using Enigmatry.BuildingBlocks.EntityFramework;
 using Enigmatry.BuildingBlocks.EntityFramework.Security;
 using Microsoft.EntityFrameworkCore;
@@ -47,8 +47,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
             builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
             builder.RegisterType<DbContextUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-            // replace with actual implementation from the Building block
-            builder.RegisterType<NullDbContextAccessTokenProvider>().As<IDbContextAccessTokenProvider>().InstancePerLifetimeScope();
+            builder.RegisterType<DbContextAccessTokenProvider>().As<IDbContextAccessTokenProvider>().InstancePerLifetimeScope();
         }
 
         private static bool ImplementsInterface(Type interfaceType, Type concreteType) =>
