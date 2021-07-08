@@ -67,7 +67,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
 
             optionsBuilder
                 .UseLoggerFactory(loggerFactory)
-                .EnableSensitiveDataLogging(configuration.SensitiveDataLoggingEnabled());
+                .EnableSensitiveDataLogging(dbContextSettings.SensitiveDataLoggingEnabled);
 
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext"),
                 sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
