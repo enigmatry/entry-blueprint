@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Enigmatry.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.BuildingBlocks.Core.EntityFramework;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.Api.Features.Users
 {
-    public static partial class GetUsers
+    public static class GetUsers
     {
         [PublicAPI]
         public class Request : PagedRequest<Response.Item>
@@ -32,6 +37,25 @@ namespace Enigmatry.Blueprint.Api.Features.Users
             {
                 public MappingProfile() => CreateMap<User, Item>();
             }
+        }
+
+        [UsedImplicitly]
+        public class RequestHandler : IPagedRequestHandler<Request, Response.Item>
+        {
+            private readonly IRepository<User> _repository;
+            private readonly IMapper _mapper;
+
+            public RequestHandler(IRepository<User> repository, IMapper mapper)
+            {
+                _repository = repository;
+                _mapper = mapper;
+            }
+
+            public async Task<PagedResponse<Response.Item>> Handle(Request request, CancellationToken cancellationToken) =>
+                await _repository.QueryAll()
+                    .QueryByKeyword(request.Keyword)
+                    .ProjectTo<Response.Item>(_mapper.ConfigurationProvider, cancellationToken)
+                    .ToPagedResponseAsync(request, cancellationToken);
         }
     }
 }
