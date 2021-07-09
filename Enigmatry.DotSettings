@@ -386,7 +386,7 @@ public static class $TypeName$EnumerableExtensions&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=FileName/@EntryIndexedValue">newFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=FileName/@EntryIndexedValue">EntityName</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Description/@EntryValue">Blueprint Entity</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
@@ -595,6 +595,11 @@ namespace $NAMESPACE$.DomainEvents&#xD;
         public override object AuditPayload =&gt; new { Name };&#xD;
     }&#xD;
 }</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$DeleteMe.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/Order/@EntryValue">7</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/SectionPlain/Text/@EntryValue">// Delete me</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$QueryableExtensionsFixture.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorName/@EntryValue">manual</s:String>
