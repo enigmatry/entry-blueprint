@@ -38,11 +38,14 @@
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Reformat/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=92136CBB1E239641BC9592BA28937588/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=92136CBB1E239641BC9592BA28937588/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig File="$NAME$.RequestHandler.cs" /&gt;</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=92136CBB1E239641BC9592BA28937588/LocationSelectorName/@EntryValue">manual</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=92136CBB1E239641BC9592BA28937588/Order/@EntryValue">0</s:Int64>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=92136CBB1E239641BC9592BA28937588/SectionPlain/Text/@EntryValue">using System.Threading;&#xD;
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Text/@EntryValue">using System;&#xD;
+using System.Threading;&#xD;
 using System.Threading.Tasks;&#xD;
 using AutoMapper;&#xD;
 using AutoMapper.QueryableExtensions;&#xD;
@@ -54,39 +57,7 @@ using JetBrains.Annotations;&#xD;
 &#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
-    public static partial class $CLASS$&#xD;
-    {&#xD;
-        [UsedImplicitly]&#xD;
-        public class RequestHandler : IPagedRequestHandler&lt;Request, Response.Item&gt;&#xD;
-        {&#xD;
-            private readonly IRepository&lt;$NAME$&gt; _repository;&#xD;
-            private readonly IMapper _mapper;&#xD;
-&#xD;
-            public RequestHandler(IRepository&lt;$NAME$&gt; repository, IMapper mapper)&#xD;
-            {&#xD;
-                _repository = repository;&#xD;
-                _mapper = mapper;&#xD;
-            }&#xD;
-&#xD;
-            public async Task&lt;PagedResponse&lt;Response.Item&gt;&gt; Handle(Request request, CancellationToken cancellationToken) =&gt;&#xD;
-                await _repository.QueryAll()&#xD;
-                    .QueryByKeyword(request.Keyword)&#xD;
-                    .ProjectTo&lt;Response.Item&gt;(_mapper.ConfigurationProvider, cancellationToken)&#xD;
-                    .ToPagedResponseAsync(request, cancellationToken);&#xD;
-        }&#xD;
-    }&#xD;
-}&#xD;
-</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Text/@EntryValue">using System;&#xD;
-using AutoMapper;&#xD;
-using Enigmatry.BuildingBlocks.Core.Paging;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s;&#xD;
-using JetBrains.Annotations;&#xD;
-&#xD;
-namespace $NAMESPACE$&#xD;
-{&#xD;
-    public static partial class $CLASS$&#xD;
+    public static class $CLASS$&#xD;
     {&#xD;
         [PublicAPI]&#xD;
         public class Request : PagedRequest&lt;Response.Item&gt;&#xD;
@@ -111,6 +82,25 @@ namespace $NAMESPACE$&#xD;
             {&#xD;
                 public MappingProfile() =&gt; CreateMap&lt;$NAME$, Item&gt;();&#xD;
             }&#xD;
+        }&#xD;
+&#xD;
+		[UsedImplicitly]&#xD;
+        public class RequestHandler : IPagedRequestHandler&lt;Request, Response.Item&gt;&#xD;
+        {&#xD;
+            private readonly IRepository&lt;$NAME$&gt; _repository;&#xD;
+            private readonly IMapper _mapper;&#xD;
+&#xD;
+            public RequestHandler(IRepository&lt;$NAME$&gt; repository, IMapper mapper)&#xD;
+            {&#xD;
+                _repository = repository;&#xD;
+                _mapper = mapper;&#xD;
+            }&#xD;
+&#xD;
+            public async Task&lt;PagedResponse&lt;Response.Item&gt;&gt; Handle(Request request, CancellationToken cancellationToken) =&gt;&#xD;
+                await _repository.QueryAll()&#xD;
+                    .QueryByName(request.Keyword)&#xD;
+                    .ProjectTo&lt;Response.Item&gt;(_mapper.ConfigurationProvider, cancellationToken)&#xD;
+                    .ToPagedResponseAsync(request, cancellationToken);&#xD;
         }&#xD;
     }&#xD;
 }&#xD;
@@ -331,10 +321,6 @@ namespace $NAMESPACE$&#xD;
             _mediator = mediator;&#xD;
         }&#xD;
 &#xD;
-		/// &lt;summary&gt;&#xD;
-        ///     Gets listing of all available $NAME_LOWER$s&#xD;
-        /// &lt;/summary&gt;&#xD;
-        /// &lt;returns&gt;List of $NAME_LOWER$s&lt;/returns&gt;&#xD;
         [HttpGet]&#xD;
         [ProducesResponseType(StatusCodes.Status200OK)]&#xD;
         public async Task&lt;ActionResult&lt;PagedResponse&lt;Get$NAME$s.Response.Item&gt;&gt;&gt; Search([FromQuery] Get$NAME$s.Request query)&#xD;
@@ -343,10 +329,6 @@ namespace $NAMESPACE$&#xD;
             return response.ToActionResult();&#xD;
         }&#xD;
 &#xD;
-        /// &lt;summary&gt;&#xD;
-        ///     Get $NAME$ for given id&#xD;
-        /// &lt;/summary&gt;&#xD;
-        /// &lt;param name="id"&gt;Id&lt;/param&gt;&#xD;
         [HttpGet]&#xD;
         [Route("{id}")]&#xD;
         [ProducesResponseType(StatusCodes.Status200OK)]&#xD;
@@ -357,10 +339,6 @@ namespace $NAMESPACE$&#xD;
             return response.ToActionResult();&#xD;
         }&#xD;
 &#xD;
-        /// &lt;summary&gt;&#xD;
-        ///  Creates or updates&#xD;
-        /// &lt;/summary&gt;&#xD;
-        /// &lt;param name="command"&gt;$NAME$ data&lt;/param&gt;&#xD;
         [HttpPost]&#xD;
         [ProducesResponseType(StatusCodes.Status200OK)]&#xD;
         [ProducesResponseType(StatusCodes.Status404NotFound)]&#xD;
@@ -440,7 +418,6 @@ public static class $TypeName$EnumerableExtensions&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=0C2041DBA4676248969D222C64639793/LocationSelectorName/@EntryValue">manual</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=0C2041DBA4676248969D222C64639793/Order/@EntryValue">0</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=0C2041DBA4676248969D222C64639793/SectionPlain/Text/@EntryValue">using System;&#xD;
-using System.ComponentModel;&#xD;
 using FluentValidation;&#xD;
 using JetBrains.Annotations;&#xD;
 using MediatR;&#xD;
@@ -453,7 +430,6 @@ namespace $NAMESPACE$.Commands&#xD;
         public class Command : IRequest&lt;$NAME$&gt;&#xD;
         {&#xD;
             public Guid? Id { get; set; }&#xD;
-            [DisplayName("Name")]&#xD;
             public string Name { get; set; } = String.Empty;&#xD;
         }&#xD;
 &#xD;
@@ -478,7 +454,6 @@ using System.Threading.Tasks;&#xD;
 using Enigmatry.BuildingBlocks.Core.Data;&#xD;
 using JetBrains.Annotations;&#xD;
 using MediatR;&#xD;
-using Microsoft.EntityFrameworkCore;&#xD;
 &#xD;
 namespace $NAMESPACE$.Commands&#xD;
 {&#xD;
@@ -495,16 +470,22 @@ namespace $NAMESPACE$.Commands&#xD;
         public async Task&lt;$NAME$&gt; Handle($NAME$CreateOrUpdate.Command request,&#xD;
             CancellationToken cancellationToken)&#xD;
         {&#xD;
-            var $NAME_LOWER$ = await _$NAME_LOWER$Repository.QueryAll().QueryById(request.Id).FirstOrDefaultAsync(cancellationToken);&#xD;
-            if ($NAME_LOWER$ == null)&#xD;
+			$NAME$? $NAME_LOWER$;&#xD;
+            if (request.Id.HasValue)&#xD;
+            {&#xD;
+                $NAME_LOWER$ = await _$NAME_LOWER$Repository.FindByIdAsync(request.Id.Value);&#xD;
+                if ($NAME_LOWER$ == null)&#xD;
+                {&#xD;
+                    throw new InvalidOperationException("missing $NAME_LOWER$");&#xD;
+                }&#xD;
+                $NAME_LOWER$.Update(request);&#xD;
+            }&#xD;
+            else&#xD;
             {&#xD;
                 $NAME_LOWER$ = $NAME$.Create(request);&#xD;
                 _$NAME_LOWER$Repository.Add($NAME_LOWER$);&#xD;
             }&#xD;
-            else&#xD;
-            {&#xD;
-                $NAME_LOWER$.Update(request);&#xD;
-            }&#xD;
+&#xD;
             return $NAME_LOWER$;&#xD;
         }&#xD;
     }&#xD;
@@ -514,14 +495,13 @@ namespace $NAMESPACE$.Commands&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig File="$NAME$QueryableExtensions.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/LocationSelectorName/@EntryValue">manual</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/Order/@EntryValue">2</s:Int64>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/SectionPlain/Text/@EntryValue">using System;&#xD;
-using System.Linq;&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/SectionPlain/Text/@EntryValue">using System.Linq;&#xD;
 &#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
     public static class $NAME$QueryableExtensions&#xD;
     {&#xD;
-        public static IQueryable&lt;$NAME$&gt; QueryById(this IQueryable&lt;$NAME$&gt; query, Guid? id) =&gt; query.Where(e =&gt; e.Id == id);&#xD;
+        public static IQueryable&lt;$NAME$&gt; QueryByName(this IQueryable&lt;$NAME$&gt; query, string name) =&gt; query.Where(e =&gt; e.Name == name);&#xD;
     }&#xD;
 }&#xD;
 </s:String>
@@ -570,8 +550,7 @@ namespace $NAMESPACE$.DomainEvents&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$QueryableExtensionsFixture.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorName/@EntryValue">manual</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/Order/@EntryValue">6</s:Int64>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/SectionPlain/Text/@EntryValue">using System;&#xD;
-using System.Collections.Generic;&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/SectionPlain/Text/@EntryValue">using System.Collections.Generic;&#xD;
 using System.Linq;&#xD;
 using $NAMESPACE$;&#xD;
 using FluentAssertions;&#xD;
@@ -589,9 +568,9 @@ namespace $PROJECTNAMESPACE$.Tests.$NAME$s&#xD;
         [SetUp]&#xD;
         public void Setup()&#xD;
         {&#xD;
-            _$NAME_LOWER$ = new UserBuilder()&#xD;
+            _$NAME_LOWER$ = new $NAME$Builder()&#xD;
                 .WithName("name1");&#xD;
-            _$NAME_LOWER$2 = new UserBuilder()&#xD;
+            _$NAME_LOWER$2 = new $NAME$Builder()&#xD;
                 .WithName("name2");&#xD;
 &#xD;
             _query = new List&lt;$NAME$&gt; { _$NAME_LOWER$, _$NAME_LOWER$2 }.AsQueryable();&#xD;
@@ -600,18 +579,17 @@ namespace $PROJECTNAMESPACE$.Tests.$NAME$s&#xD;
         [Test]&#xD;
         public void TestQueryEmptyList()&#xD;
         {&#xD;
-            var result = new List&lt;$NAME$&gt;().AsQueryable().QueryById(Guid.NewGuid()).ToList();&#xD;
+            var result = new List&lt;$NAME$&gt;().AsQueryable().QueryByName("something");&#xD;
             result.Should().BeEmpty();&#xD;
         }&#xD;
 &#xD;
         [TestCase("name1", true)]&#xD;
         [TestCase("name2", true)]&#xD;
         [TestCase("xyz", false)]&#xD;
-        public void TestQueryByUserName(string name, bool expectedToFind)&#xD;
+        public void TestQueryByName(string name, bool expectedToFind)&#xD;
         {&#xD;
-			// TODO&#xD;
-            //var result = _query.QueryByUserName(userName).ToList();&#xD;
-            //result.Count.Should().Be(expectedToFind ? 1 : 0);&#xD;
+            var result = _query.QueryByName(name).ToList();&#xD;
+            result.Count.Should().Be(expectedToFind ? 1 : 0);&#xD;
         }&#xD;
     }&#xD;
 }&#xD;
@@ -811,6 +789,7 @@ public static class $TypeName$&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Description/@EntryValue">Blueprint Feature Get Details Request</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/Order/@EntryValue">3</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAME/Order/@EntryValue">1</s:Int64>
@@ -820,15 +799,20 @@ public static class $TypeName$&#xD;
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/Expression/@EntryValue">getSolutionName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/Order/@EntryValue">2</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Reformat/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=C0337FEC298F03449DD555CD2A47BF8A/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=C0337FEC298F03449DD555CD2A47BF8A/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig File="$NAME$.RequestHandler.cs" /&gt;</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=C0337FEC298F03449DD555CD2A47BF8A/LocationSelectorName/@EntryValue">manual</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=C0337FEC298F03449DD555CD2A47BF8A/Order/@EntryValue">0</s:Int64>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=C0337FEC298F03449DD555CD2A47BF8A/SectionPlain/Text/@EntryValue">using System.Threading;&#xD;
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Text/@EntryValue">using System;&#xD;
+using System.Linq;&#xD;
+using System.Threading;&#xD;
 using System.Threading.Tasks;&#xD;
 using AutoMapper;&#xD;
 using Enigmatry.BuildingBlocks.Core.Data;&#xD;
@@ -840,9 +824,31 @@ using MediatR;&#xD;
 &#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
-    public partial class $CLASS$&#xD;
+    public static class $CLASS$&#xD;
     {&#xD;
+        [PublicAPI]&#xD;
+        public class Request : IRequest&lt;Response&gt;&#xD;
+        {&#xD;
+            public Guid Id { get; set; }&#xD;
+            public static Request ById(Guid id) =&gt; new() { Id = id };&#xD;
+        }&#xD;
+&#xD;
+        [PublicAPI]&#xD;
+        public class Response&#xD;
+        {&#xD;
+            public Guid Id { get; set; }&#xD;
+            public string Name { get; set; } = String.Empty;&#xD;
+            public DateTimeOffset CreatedOn { get; set; }&#xD;
+            public DateTimeOffset UpdatedOn { get; set; }&#xD;
+        }&#xD;
+&#xD;
         [UsedImplicitly]&#xD;
+        public class MappingProfile : Profile&#xD;
+        {&#xD;
+            public MappingProfile() =&gt; CreateMap&lt;$NAME$, Response&gt;();&#xD;
+        }&#xD;
+&#xD;
+		[UsedImplicitly]&#xD;
         public class RequestHandler : IRequestHandler&lt;Request, Response&gt;&#xD;
         {&#xD;
             private readonly IRepository&lt;$NAME$&gt; _repository;&#xD;
@@ -862,43 +868,6 @@ namespace $NAMESPACE$&#xD;
                     .SingleOrDefaultMappedAsync&lt;$NAME$, Response&gt;(_mapper, cancellationToken: cancellationToken);&#xD;
                 return response;&#xD;
             }&#xD;
-        }&#xD;
-    }&#xD;
-}&#xD;
-&#xD;
-</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Text/@EntryValue">using System;&#xD;
-using System.Linq;&#xD;
-using AutoMapper;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s;&#xD;
-using JetBrains.Annotations;&#xD;
-using MediatR;&#xD;
-&#xD;
-namespace $NAMESPACE$&#xD;
-{&#xD;
-    public static partial class $CLASS$&#xD;
-    {&#xD;
-        [PublicAPI]&#xD;
-        public class Request : IRequest&lt;Response&gt;&#xD;
-        {&#xD;
-            public Guid Id { get; set; }&#xD;
-            public static Request ById(Guid id) =&gt; new Request { Id = id };&#xD;
-        }&#xD;
-&#xD;
-        [PublicAPI]&#xD;
-        public class Response&#xD;
-        {&#xD;
-            public Guid Id { get; set; }&#xD;
-            public string Name { get; set; } = String.Empty;&#xD;
-            public DateTimeOffset CreatedOn { get; set; }&#xD;
-            public DateTimeOffset UpdatedOn { get; set; }&#xD;
-        }&#xD;
-&#xD;
-        [UsedImplicitly]&#xD;
-        public class MappingProfile : Profile&#xD;
-        {&#xD;
-            public MappingProfile() =&gt; CreateMap&lt;$NAME$, Response&gt;();&#xD;
         }&#xD;
 &#xD;
         private static IQueryable&lt;$NAME$&gt; BuildInclude(this IQueryable&lt;$NAME$&gt; query) =&gt; query;&#xD;
