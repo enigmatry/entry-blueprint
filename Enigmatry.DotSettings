@@ -410,7 +410,7 @@ public static class $TypeName$EnumerableExtensions&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Field/=ROOTNAMESPACE/Expression/@EntryValue">getSolutionName()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Field/=ROOTNAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Field/=ROOTNAMESPACE/Order/@EntryValue">0</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Reformat/@EntryValue">True</s:Boolean>
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=0C2041DBA4676248969D222C64639793/@KeyIndexDefined">True</s:Boolean>
@@ -491,6 +491,50 @@ namespace $NAMESPACE$.Commands&#xD;
     }&#xD;
 }&#xD;
 </s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D8FFA5921DD284E8C49D5ABD6A06E4C/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D8FFA5921DD284E8C49D5ABD6A06E4C/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$Builder.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D8FFA5921DD284E8C49D5ABD6A06E4C/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D8FFA5921DD284E8C49D5ABD6A06E4C/Order/@EntryValue">6</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D8FFA5921DD284E8C49D5ABD6A06E4C/SectionPlain/Text/@EntryValue">using System;&#xD;
+using Enigmatry.BuildingBlocks.Core.Entities;&#xD;
+using $NAMESPACE$;&#xD;
+using $NAMESPACE$.Commands;&#xD;
+&#xD;
+namespace $PROJECTNAMESPACE$.Tests.$NAME$s&#xD;
+{&#xD;
+    public class $NAME$Builder&#xD;
+    {&#xD;
+        private string _name = String.Empty;&#xD;
+        private Guid _id = SequentialGuidGenerator.Generate();&#xD;
+&#xD;
+        public $NAME$Builder WithName(string value)&#xD;
+        {&#xD;
+            _name = value;&#xD;
+            return this;&#xD;
+        }&#xD;
+&#xD;
+        public $NAME$Builder WithId(Guid id)&#xD;
+        {&#xD;
+            _id = id;&#xD;
+            return this;&#xD;
+        }&#xD;
+&#xD;
+        public static implicit operator $NAME$($NAME$Builder builder) =&gt; To$NAME$(builder);&#xD;
+&#xD;
+        public static $NAME$ To$NAME$($NAME$Builder builder) =&gt; builder.Build();&#xD;
+&#xD;
+        public $NAME$ Build()&#xD;
+        {&#xD;
+            $NAME$ result = $NAME$.Create(new $NAME$CreateOrUpdate.Command&#xD;
+            {&#xD;
+                Name = _name&#xD;
+            }).WithId(_id);&#xD;
+&#xD;
+            return result;&#xD;
+        }&#xD;
+    }&#xD;
+}&#xD;
+</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig File="$NAME$QueryableExtensions.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=5D9CDEC74E774749B6A2CF1D22BF30B1/LocationSelectorName/@EntryValue">manual</s:String>
@@ -526,6 +570,11 @@ namespace $NAMESPACE$.DomainEvents&#xD;
     }&#xD;
 }&#xD;
 </s:String>
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=8799515D71A7B34B867A050604AFDC0B/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=8799515D71A7B34B867A050604AFDC0B/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Folder="DomainEvents" File="$NAME$UpdatedDomainEvent.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=8799515D71A7B34B867A050604AFDC0B/LocationSelectorName/@EntryValue">manual</s:String>
@@ -549,7 +598,7 @@ namespace $NAMESPACE$.DomainEvents&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$QueryableExtensionsFixture.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorName/@EntryValue">manual</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/Order/@EntryValue">6</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/Order/@EntryValue">5</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/SectionPlain/Text/@EntryValue">using System.Collections.Generic;&#xD;
 using System.Linq;&#xD;
 using $NAMESPACE$;&#xD;
@@ -594,51 +643,12 @@ namespace $PROJECTNAMESPACE$.Tests.$NAME$s&#xD;
     }&#xD;
 }&#xD;
 </s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=DB1DE688FDC25541B6D776A3FDB706E4/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=DB1DE688FDC25541B6D776A3FDB706E4/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$Builder.cs" /&gt;</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=DB1DE688FDC25541B6D776A3FDB706E4/LocationSelectorName/@EntryValue">manual</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=DB1DE688FDC25541B6D776A3FDB706E4/Order/@EntryValue">5</s:Int64>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=DB1DE688FDC25541B6D776A3FDB706E4/SectionPlain/Text/@EntryValue">using System;&#xD;
-using Enigmatry.BuildingBlocks.Core.Entities;&#xD;
-using $NAMESPACE$;&#xD;
-using $NAMESPACE$.Commands;&#xD;
-&#xD;
-namespace $PROJECTNAMESPACE$.Tests.$NAME$s&#xD;
-{&#xD;
-    public class $NAME$Builder&#xD;
-    {&#xD;
-        private string _name = String.Empty;&#xD;
-        private Guid _id = SequentialGuidGenerator.Generate();&#xD;
-&#xD;
-        public $NAME$Builder WithName(string value)&#xD;
-        {&#xD;
-            _name = value;&#xD;
-            return this;&#xD;
-        }&#xD;
-&#xD;
-        public $NAME$Builder WithId(Guid id)&#xD;
-        {&#xD;
-            _id = id;&#xD;
-            return this;&#xD;
-        }&#xD;
-&#xD;
-        public static implicit operator $NAME$($NAME$Builder builder) =&gt; To$NAME$(builder);&#xD;
-&#xD;
-        public static $NAME$ To$NAME$($NAME$Builder builder) =&gt; builder.Build();&#xD;
-&#xD;
-        public $NAME$ Build()&#xD;
-        {&#xD;
-            $NAME$ result = $NAME$.Create(new $NAME$CreateOrUpdate.Command&#xD;
-            {&#xD;
-                Name = _name&#xD;
-            }).WithId(_id);&#xD;
-&#xD;
-            return result;&#xD;
-        }&#xD;
-    }&#xD;
-}&#xD;
-</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	
+	
+	
+	
+	
+	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Text/@EntryValue">using System;&#xD;
 using Enigmatry.BuildingBlocks.Core.Entities;&#xD;
 using $ROOTNAMESPACE$.Core;&#xD;
