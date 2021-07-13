@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PagedData, PageEvent, SortEvent } from 'src/@enigmatry/pagination';
+import { PagedData, PageEvent, SortEvent } from '@enigmatry/pagination';
 
 export interface OnSort {
   sortChange(sort: SortEvent): void;
