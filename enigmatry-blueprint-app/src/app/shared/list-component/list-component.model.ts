@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { PagedData, PageEvent, SortEvent } from '@enigmatry/pagination';
+import { PagedData, PageEvent, SortEvent } from 'src/@enigmatry/pagination';
 import { IListComponent } from './list-component.interface';
 import { IListQuery } from './list-query.model';
 

@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { EnigmatryGridModule } from '@enigmatry/enigmatry-grid';
+import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
 
 
 import { UserListGeneratedComponent } from './user-list/user-list-generated.component';
