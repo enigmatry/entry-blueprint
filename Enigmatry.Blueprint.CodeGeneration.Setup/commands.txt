@@ -8,4 +8,4 @@ dotnet tool uninstall enigmatry.codegeneration.console -g
 
 Using the tool:
 
-enigmatry-codegen --source-assembly .\Enigmatry.Blueprint.CodeGeneration.Setup\bin\Debug\net5.0\Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory .\enigmatry-blueprint-app\src\app\features
+enigmatry-codegen --source-assembly .\Enigmatry.Blueprint.CodeGeneration.Setup\bin\Debug\net5\Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory .\enigmatry-blueprint-app\src\app\features
