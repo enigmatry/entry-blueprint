@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material/material.module';
-import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   exports: [
-    ReactiveFormsModule,
-    MaterialModule,
-    EnigmatryGridModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

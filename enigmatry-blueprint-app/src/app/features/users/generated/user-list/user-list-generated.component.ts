@@ -6,9 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------;
-/* eslint-disable @typescript-eslint/member-ordering */
-/* eslint-disable max-len */
-/* eslint-disable no-trailing-spaces */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { CellTemplate, ColumnDef, ContextMenuItem } from 'src/@enigmatry/enigmatry-grid';
 import { PagedData, PageEvent, SortEvent } from 'src/@enigmatry/pagination';
@@ -58,8 +55,7 @@ export class UserListGeneratedComponent implements OnInit {
 { field: 'updatedOn', header: 'Updated on', hide: false, sortable: true, type: 'date', typeParameter: undefined }
 ];
     this.contextMenuItems = [
-{ id: 'edit', name: 'Edit' },
-{ id: 'delete', name: 'Delete' }
+{ id: 'edit', name: 'Edit', icon: 'edit' }
 ];
   }
 

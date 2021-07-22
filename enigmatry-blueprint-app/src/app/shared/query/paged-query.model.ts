@@ -1,22 +1,10 @@
 import { Params } from '@angular/router';
-import { PageEvent, SortDirection, SortEvent } from 'src/@enigmatry/pagination';
-import { OnPage, OnSort } from './list-component.interface';
+import { OnPage, OnSort, PageEvent, SortDirection, SortEvent } from 'src/@enigmatry/pagination';
+import { RouteAwareQuery } from './query.interface';
 
 export const defaultPageSize = 10;
 
-export interface IListQuery extends OnPage, OnSort { }
-
-export interface IListQueryWithRouting extends IListQuery {
-  routeChanges(routeParams: Params, queryParams: Params): void;
-  getRouteQueryParams(): Params;
-}
-
-export interface IApiMethodParams<TFunction extends (...args: any) => any> {
-  getApiMethodParams(): Parameters<TFunction>;
-}
-
-export class BaseListQuery implements IListQueryWithRouting {
-
+export class PagedQuery implements OnPage, OnSort, RouteAwareQuery {
   keyword?: string;
   pageNumber = 1;
   pageSize = defaultPageSize;
@@ -36,7 +24,7 @@ export class BaseListQuery implements IListQueryWithRouting {
     this.pageSize = page.pageSize;
   }
 
-  routeChanges(routeParams: Params, queryParams: Params): void {
+  applyRouteChanges(routeParams: Params, queryParams: Params): void {
     this.keyword = queryParams.keyword;
     this.pageNumber = queryParams.pageNumber ? Number(queryParams.pageNumber) : 1;
     this.pageSize = queryParams.pageSize ? Number(queryParams.pageSize) : defaultPageSize;
@@ -46,5 +34,14 @@ export class BaseListQuery implements IListQueryWithRouting {
 
   getRouteQueryParams(): Params {
     return { ...this }; // all properties are added to query params
+  }
+
+  getPagedApiRequestParams(): [
+    keyword: string | null | undefined,
+    pageNumber: number | undefined,
+    pageSize: number | undefined,
+    sortBy: string | null | undefined,
+    sortDirection: string | null | undefined] {
+    return [this.keyword, this.pageNumber, this.pageSize, this.sortBy, this.sortDirection];
   }
 }

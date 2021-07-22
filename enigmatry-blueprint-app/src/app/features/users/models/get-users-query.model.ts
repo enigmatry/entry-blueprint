@@ -1,9 +1,10 @@
 import { UsersClient } from 'src/app/api/api-reference';
-import { BaseListQuery, IApiMethodParams } from 'src/app/shared/list-component/list-query.model';
+import { PagedQuery } from 'src/app/shared/query/paged-query.model';
+import { ApiQuery } from 'src/app/shared/query/query.interface';
 
-export class GetUsersQuery extends BaseListQuery implements IApiMethodParams<UsersClient['search']> {
+export class GetUsersQuery extends PagedQuery implements ApiQuery<UsersClient['search']> {
 
-  getApiMethodParams(): [
+  getApiRequestParams(): [
     keyword: string | null | undefined,
     pageNumber: number | undefined,
     pageSize: number | undefined,

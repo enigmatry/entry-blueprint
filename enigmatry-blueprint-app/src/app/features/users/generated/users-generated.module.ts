@@ -9,16 +9,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
-
 
 import { UserListGeneratedComponent } from './user-list/user-list-generated.component';
 
 
 @NgModule({
     declarations: [UserListGeneratedComponent],
-    imports: [ CommonModule, SharedModule, EnigmatryGridModule, MatAutocompleteModule,  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        EnigmatryGridModule,
+        
+    ],
     exports: [UserListGeneratedComponent]
 })
 export class UsersGeneratedModule { }

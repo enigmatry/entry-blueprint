@@ -47,7 +47,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users
 
             builder.Row()
                 .ShowContextMenu(true)
-                .ContextMenuItems("Edit", "Delete");
+                .ContextMenuItems(new RowContextMenuItem { Id = "edit", Name = "Edit", Icon = "edit" });
         }
     }
 }
