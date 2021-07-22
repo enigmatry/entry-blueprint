@@ -10,7 +10,10 @@
     "lint:styles": "stylelint --fix src/**/*.scss",
     "e2e": "ng e2e",
     "audit:ci": "npm audit --json|npm-audit-reporter-teamcity",
-    "nswag": "node_modules/.bin/nswag run nswag.json"
+    "nswag": "node_modules/.bin/nswag run nswag.json",
+    "codegen": "enigmatry-codegen --source-assembly ../Enigmatry.Blueprint.CodeGeneration.Setup/bin/Debug/net5/Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features",
+    "codegen:install": "dotnet tool install enigmatry.codegeneration.console -g",
+    "codegen:update": "dotnet tool update enigmatry.codegeneration.console -g"
   },
   "private": true,
   "dependencies": {
