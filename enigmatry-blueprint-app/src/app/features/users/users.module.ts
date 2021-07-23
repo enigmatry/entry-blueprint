@@ -4,10 +4,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersGeneratedModule } from './generated/users-generated.module';
-import { UserListComponent } from './user-list.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
-  declarations: [UserListComponent],
+  declarations: [
+    UserListComponent,
+    UserEditComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,

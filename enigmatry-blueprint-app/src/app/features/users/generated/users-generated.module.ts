@@ -10,18 +10,29 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 
+import { UserEditGeneratedComponent } from './user-edit/user-edit-generated.component';
 import { UserListGeneratedComponent } from './user-list/user-list-generated.component';
 
 
 @NgModule({
-    declarations: [UserListGeneratedComponent],
+    declarations: [UserEditGeneratedComponent, UserListGeneratedComponent],
     imports: [
         CommonModule,
         SharedModule,
         EnigmatryGridModule,
+        MatAutocompleteModule,
+        MatNativeDateModule,
+        FormlyModule.forChild(),
+        FormlyMaterialModule,
+        FormlyMatDatepickerModule,
         
     ],
-    exports: [UserListGeneratedComponent]
+    exports: [UserEditGeneratedComponent, UserListGeneratedComponent]
 })
 export class UsersGeneratedModule { }

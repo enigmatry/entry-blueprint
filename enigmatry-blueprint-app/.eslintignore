@@ -1,3 +1,6 @@
 # Exclude generated files
 **/generated
 *-generated.*.*
+
+# Exclude test files
+*test.ts
