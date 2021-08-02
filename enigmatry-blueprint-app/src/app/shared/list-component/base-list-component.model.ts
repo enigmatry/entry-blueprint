@@ -13,7 +13,6 @@ export interface OnSelection<T> {
  */
 export abstract class BaseListComponent<T, TQuery extends OnSort & OnPage>
   implements OnSort, OnPage, OnSelection<T> {
-
   /** BehaviorSubject that contains paged data */
   public readonly data = new BehaviorSubject<PagedData<T> | null>(null);
 
@@ -33,7 +32,9 @@ export abstract class BaseListComponent<T, TQuery extends OnSort & OnPage>
   loadList(): Subscription {
     this.loading = true;
     return this.fetchData(this.query)
-      .pipe(finalize(() => this.loading = false))
+      .pipe(finalize(() => {
+        this.loading = false;
+      }))
       .subscribe(response => this.data.next(response));
   }
 

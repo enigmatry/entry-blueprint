@@ -12,7 +12,6 @@ import { GetUsersQuery } from '../models/get-users-query.model';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent extends ListComponentWithRouting<GetUsersResponseItem, GetUsersQuery> implements OnInit {
-
   constructor(private client: UsersClient, protected router: Router, protected activatedRoute: ActivatedRoute) {
     super();
     this.query = new GetUsersQuery();
@@ -26,7 +25,7 @@ export class UserListComponent extends ListComponentWithRouting<GetUsersResponse
     this.watchRouteParams(this.router, this.activatedRoute);
   }
 
-  onContextMenuItemSelected(contextMenuItem: { itemId: string; rowData: GetUsersResponseItem }) {
+  onItemSelected(contextMenuItem: { itemId: string; rowData: GetUsersResponseItem }) {
     if (contextMenuItem.itemId === 'edit') {
       this.router.navigate(['edit', contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
     }

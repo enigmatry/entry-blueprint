@@ -14,9 +14,7 @@
 		}
 	}
 
-	.mat-header-cell,
-	.mat-footer-cell,
-	.mat-cell {
+	.mat-header-cell, .mat-footer-cell, .mat-cell {
 		box-sizing: border-box;
 		padding: 4px 10px;
 
@@ -32,9 +30,7 @@
 		min-width: 100%;
 		border-collapse: separate;
 
-		.mat-header-cell,
-		.mat-footer-cell,
-		.mat-cell {
+		.mat-header-cell, .mat-footer-cell, .mat-cell {
 			&:not(.enigmatry-grid-checkbox-cell) {
 				min-width: 80px;
 			}
@@ -79,12 +75,11 @@
 	flex: 1;
 	align-items: center;
 	justify-content: center;
-	font-size: 13px;
 	min-height: 50px;
+	font-size: 13px;
 }
 
-.enigmatry-grid-checkbox-cell,
-.enigmatry-grid-context-menu-cell {
+.enigmatry-grid-checkbox-cell, .enigmatry-grid-context-menu-cell {
 	flex: none;
 	justify-content: center;
 	width: 56px;

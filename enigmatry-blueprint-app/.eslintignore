@@ -2,5 +2,5 @@
 **/generated
 *-generated.*.*
 
-# Exclude test files
-*test.ts
+src/polyfills.ts
+src/@enigmatry/**

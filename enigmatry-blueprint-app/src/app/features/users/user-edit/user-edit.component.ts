@@ -10,7 +10,6 @@ import { IGetUserDetailsResponse, UserCreateOrUpdateCommand, UsersClient } from 
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
-
   model: IGetUserDetailsResponse = {};
 
   constructor(private client: UsersClient, protected activatedRoute: ActivatedRoute, public location: Location) { }
@@ -18,7 +17,9 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(switchMap(params => this.client.get(params.id)))
-      .subscribe(response => this.model = response);
+      .subscribe(response => {
+        this.model = response;
+       });
   }
 
   save(model: IGetUserDetailsResponse) {
@@ -29,8 +30,9 @@ export class UserEditComponent implements OnInit {
     });
     this.client.post(command)
       .subscribe(() => this.location.back());
-  };
+  }
 
-  cancel() { this.location.back(); }
-
+  cancel() {
+ this.location.back();
+}
 }

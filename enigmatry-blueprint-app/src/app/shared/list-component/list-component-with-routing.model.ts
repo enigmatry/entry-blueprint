@@ -13,7 +13,6 @@ import { BaseListComponent } from './base-list-component.model';
  */
 export abstract class ListComponentWithRouting<T, TQuery extends OnSort & OnPage & RouteAwareQuery>
   extends BaseListComponent<T, TQuery> {
-
   protected router: Router;
   protected activatedRoute: ActivatedRoute;
   _shouldWatchRouteParams: boolean;
@@ -28,7 +27,9 @@ export abstract class ListComponentWithRouting<T, TQuery extends OnSort & OnPage
         tap(params => this.query.applyRouteChanges(params[0], params[1])),
         mergeMap(() => {
           this.loading = true;
-          return this.fetchData(this.query).pipe(finalize(() => this.loading = false));
+          return this.fetchData(this.query).pipe(finalize(() => {
+            this.loading = false;
+          }));
         })
       )
       .subscribe(response => this.data.next(response));
@@ -36,16 +37,17 @@ export abstract class ListComponentWithRouting<T, TQuery extends OnSort & OnPage
 
   pageChange(page: PageEvent): void {
     this.query.pageChange(page);
-    this.updateCurrentRouteQueryString(this.query.getRouteQueryParams());
+    this.updateCurrentRoute(this.query.getRouteQueryParams());
   }
 
   sortChange(sort: SortEvent): void {
     this.query.sortChange(sort);
-    this.updateCurrentRouteQueryString(this.query.getRouteQueryParams());
+    this.updateCurrentRoute(this.query.getRouteQueryParams());
   }
 
-  protected updateCurrentRouteQueryString(queryParams: Params): void {
+  protected updateCurrentRoute(queryParams: Params): void {
     if (!this.router || !this.activatedRoute) {
+      // eslint-disable-next-line no-console
       console.warn('Call to watchRouteParams in missing! Falling back to basic behavior.');
       this.loadList();
       return;

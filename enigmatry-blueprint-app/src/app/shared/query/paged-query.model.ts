@@ -33,7 +33,8 @@ export class PagedQuery implements OnPage, OnSort, RouteAwareQuery {
   }
 
   getRouteQueryParams(): Params {
-    return { ...this }; // all properties are added to query params
+    // All properties are added to query params
+    return { ...this };
   }
 
   getPagedApiRequestParams(): [

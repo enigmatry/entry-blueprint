@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/users', pathMatch: 'full' },
   {
     path: 'users',
-    loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule)
+    loadChildren: () => import('./features/users/users.module').then(module => module.UsersModule)
   }];
 
 @NgModule({
