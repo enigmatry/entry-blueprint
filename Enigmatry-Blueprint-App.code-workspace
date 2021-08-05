@@ -33,5 +33,20 @@
 		},
 		"gitblame.isWebPathPlural": true,
 		"typescript.tsdk": "node_modules\\typescript\\lib"
+	},
+	"extensions": {
+		"recommendations": [
+			"angular.ng-template",
+			"johnpapa.angular2",
+			"wayou.vscode-todo-highlight",
+			"streetsidesoftware.code-spell-checker",
+			"mbinic.tgit-cmds",
+			"dbaeumer.vscode-eslint", 
+			"waderyan.gitblame",
+			"davidanson.vscode-markdownlint",
+			"eamodio.gitlens",
+			"ms-mssql.mssql",
+			"humao.rest-client"
+		]
 	}
 }
