@@ -9,7 +9,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { EnigmatryGridModule } from 'src/@enigmatry/enigmatry-grid';
+import { EnigmatryGridModule } from '@enigmatry/angular-building-blocks/enigmatry-grid';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatNativeDateModule } from '@angular/material/core';

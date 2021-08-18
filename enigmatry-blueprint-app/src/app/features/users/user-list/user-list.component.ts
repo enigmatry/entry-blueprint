@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PagedData } from 'src/@enigmatry/pagination';
+import { PagedData } from '@enigmatry/angular-building-blocks/pagination';
 import { GetUsersResponseItem, UsersClient } from 'src/app/api/api-reference';
 import { ListComponentWithRouting } from 'src/app/shared/list-component/list-component-with-routing.model';
 import { GetUsersQuery } from '../models/get-users-query.model';

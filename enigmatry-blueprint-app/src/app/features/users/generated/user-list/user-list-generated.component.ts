@@ -7,8 +7,8 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { CellTemplate, ColumnDef, ContextMenuItem } from 'src/@enigmatry/enigmatry-grid';
-import { PagedData, PageEvent, SortEvent } from 'src/@enigmatry/pagination';
+import { CellTemplate, ColumnDef, ContextMenuItem } from '@enigmatry/angular-building-blocks/enigmatry-grid';
+import { PagedData, PageEvent, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
 
 import { GetUsersResponseItem } from 'src/app/api/api-reference';
 
