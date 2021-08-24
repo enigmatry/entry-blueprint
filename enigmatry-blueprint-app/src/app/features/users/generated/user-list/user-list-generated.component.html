@@ -1,11 +1,11 @@
 
-<enigmatry-grid [columns]="columns" 
-                [data]="data" 
+<enigmatry-grid [columns]="columns"
+                [data]="data"
                 [showPaginator]="showPaginator"
                 [showFirstLastButtons]="showFirstLastButtons"
                 [pageSizeOptions]="pageSizeOptions"
                 [hidePageSize]="hidePageSize"
-                [multiSelectable]="multiSelectable" 
+                [multiSelectable]="multiSelectable"
                 [rowSelectable]="rowSelectable"
                 [loading]="loading"
                 [headerTemplate]="headerTemplate"
@@ -15,6 +15,7 @@
                 (pageChange)="pageChange.emit($event)"
                 (sortChange)="sortChange.emit($event)"
                 (rowSelectionChange)="selectionChange.emit($event)"
-                (contextMenuItemSelected)="contextMenuItemSelected.emit($event)">
+                (contextMenuItemSelected)="contextMenuItemSelected.emit($event)"
+                (rowClick)="rowClick.emit($event)">
 </enigmatry-grid>
 

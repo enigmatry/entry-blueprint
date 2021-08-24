@@ -16,6 +16,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users
             builder.FormControl(x => x.UserName).IsReadonly(true);
             builder.FormControl(x => x.CreatedOn).IsReadonly(true);
             builder.FormControl(x => x.UpdatedOn).IsReadonly(true);
+
+            builder.WithValidationConfiguration(new UserEditValidationConfiguration());
         }
     }
 }

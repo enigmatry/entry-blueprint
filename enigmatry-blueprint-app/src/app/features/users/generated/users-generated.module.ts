@@ -31,7 +31,6 @@ import { UserListGeneratedComponent } from './user-list/user-list-generated.comp
         FormlyModule.forChild(),
         FormlyMaterialModule,
         FormlyMatDatepickerModule,
-        
     ],
     exports: [UserEditGeneratedComponent, UserListGeneratedComponent]
 })
