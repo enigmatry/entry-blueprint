@@ -3,23 +3,28 @@ using Enigmatry.BuildingBlocks.Validation;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users
 {
-    public class UserEditValidationConfiguration : ValidationConfiguration<GetUserDetails.Response>
+    public class UserEditValidationConfiguration : AbstractValidationConfiguration<GetUserDetails.Response>
     {
         public UserEditValidationConfiguration()
         {
             RuleFor(x => x.Name)
-                .IsRequired("Name is required")
-                .HasMinLength(5, "Name min length is 5")
-                .HasMaxLength(25);
+                .IsRequired()
+                    .WithMessage("Name is required")
+                .Min(5)
+                    .WithMessage("Name min length is 5")
+                .Max(25);
 
             RuleFor(x => x.Age)
-                .IsRequired("Age is required")
-                .HasMinLength(1)
-                .HasMaxLength(100, "Max age is 100");
+                .IsRequired()
+                    .WithMessage("Age is required")
+                .Min(1)
+                .Max(100)
+                    .WithMessage("Max age is 100");
 
             RuleFor(x => x.Email)
                 .IsRequired()
-                .IsEmail("Must be in email format (e.g. john.doe@google.com)");
+                .IsEmailAddress()
+                    .WithMessage("Must be in email format (e.g. john.doe@google.com)");
         }
     }
 }
