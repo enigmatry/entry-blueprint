@@ -8,15 +8,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Configuration
     {
         public static bool AppUseDeveloperExceptionPage(this IConfiguration configuration) => configuration.GetValue("UseDeveloperExceptionPage", false);
 
-        public static AppSettings ReadAppSettings(this IConfiguration configuration)
-        {
-            return configuration.ReadSettingsSection<AppSettings>("App");
-        }
+        public static AppSettings ReadAppSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<AppSettings>("App");
 
-        public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration)
-        {
-            return configuration.ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights");
-        }
+        public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights");
+
+        public static HealthCheckSettings ReadHealthCheckSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<HealthCheckSettings>("HealthCheck");
 
         public static T ReadSettingsSection<T>(this IConfiguration configuration, string sectionName)
         {
