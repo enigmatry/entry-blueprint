@@ -39,7 +39,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
             var healthChecks = services.AddHealthChecks()
 
                 // Check the sql server connection
-                //.AddSqlServer(configuration["ConnectionStrings:YessaContext"], "SELECT 1")
+                //.AddSqlServer(configuration["ConnectionStrings:BlueprintContext"], "SELECT 1")
 
                 // Check the EF Core Context
                 .AddDbContextCheck<BlueprintContext>()
@@ -86,10 +86,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
                 writer.WriteStartObject();
                 writer.WriteString("status", result.Status.ToString());
                 writer.WriteStartObject("results");
-                foreach (var entry in result.Entries)
+                foreach (var (key, value) in result.Entries)
                 {
-                    writer.WriteStartObject(entry.Key);
-                    writer.WriteString("status", entry.Value.Status.ToString());
+                    writer.WriteStartObject(key);
+                    writer.WriteString("status", value.Status.ToString());
                     writer.WriteEndObject();
                 }
                 writer.WriteEndObject();
