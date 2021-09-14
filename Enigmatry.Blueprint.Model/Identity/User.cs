@@ -4,11 +4,14 @@ using Enigmatry.BuildingBlocks.Core.Entities;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using Enigmatry.Blueprint.Model.Identity.DomainEvents;
+using Enigmatry.Blueprint.Model.Products;
 
 namespace Enigmatry.Blueprint.Model.Identity
 {
     public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     {
+        public static readonly Guid TestUserId = new Guid("8207DB25-94D1-4F3D-BF18-90DA283221F7");
+
         public string UserName { get; private set; } = "";
         public string Name { get; private set; } = "";
         public DateTimeOffset CreatedOn { get; private set; }
@@ -21,6 +24,8 @@ namespace Enigmatry.Blueprint.Model.Identity
 
         public ICollection<User>? CreatedUsers { get; private set; }
         public ICollection<User>? UpdatedUsers { get; private set; }
+        public ICollection<Product>? CreatedProducts { get; private set; }
+        public ICollection<Product>? UpdatedProducts { get; private set; }
 
         public static User Create(UserCreateOrUpdate.Command command)
         {

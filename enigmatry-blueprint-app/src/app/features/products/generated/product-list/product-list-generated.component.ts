@@ -10,17 +10,17 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { CellTemplate, ColumnDef, ContextMenuItem } from '@enigmatry/angular-building-blocks/enigmatry-grid';
 import { PagedData, PageEvent, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
 
-import { GetUsersResponseItem } from 'src/app/api/api-reference';
+import { GetProductsResponseItem } from 'src/app/api/api-reference';
 
 @Component({
-  selector: 'app-g-user-list',
-  templateUrl: './user-list-generated.component.html',
-  styleUrls: ['./user-list-generated.component.scss'],
+  selector: 'app-g-product-list',
+  templateUrl: './product-list-generated.component.html',
+  styleUrls: ['./product-list-generated.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserListGeneratedComponent implements OnInit {
+export class ProductListGeneratedComponent implements OnInit {
 
-  @Input() data: PagedData<GetUsersResponseItem> | null;
+  @Input() data: PagedData<GetProductsResponseItem> | null;
   @Input() loading: boolean;
 
   @Input() showPaginator = true;
@@ -41,9 +41,9 @@ export class UserListGeneratedComponent implements OnInit {
 
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() sortChange = new EventEmitter<SortEvent>();
-  @Output() selectionChange = new EventEmitter<GetUsersResponseItem[]>();
-  @Output() contextMenuItemSelected = new EventEmitter<{ itemId: string; rowData: GetUsersResponseItem }>();
-  @Output() rowClick = new EventEmitter<GetUsersResponseItem>();
+  @Output() selectionChange = new EventEmitter<GetProductsResponseItem[]>();
+  @Output() contextMenuItemSelected = new EventEmitter<{ itemId: string; rowData: GetProductsResponseItem }>();
+  @Output() rowClick = new EventEmitter<GetProductsResponseItem>();
 
 
 
@@ -52,10 +52,13 @@ export class UserListGeneratedComponent implements OnInit {
   ngOnInit(): void {
     this.columns = [
 { field: 'id', header: 'Id', hide: true, sortable: true },
-{ field: 'userName', header: 'E-mail', hide: false, sortable: true },
 { field: 'name', header: 'Name', hide: false, sortable: true },
-{ field: 'createdOn', header: 'Created on', hide: false, sortable: true, type: 'date', typeParameter: undefined },
-{ field: 'updatedOn', header: 'Updated on', hide: false, sortable: true, type: 'date', typeParameter: undefined }
+{ field: 'code', header: 'Code', hide: false, sortable: true },
+{ field: 'type', header: 'Type', hide: false, sortable: true },
+{ field: 'price', header: 'Price', hide: false, sortable: true, type: 'number', typeParameter: undefined },
+{ field: 'contactEmail', header: 'Contact email', hide: false, sortable: true },
+{ field: 'contactPhone', header: 'Contact phone', hide: false, sortable: true },
+{ field: 'expiresOn', header: 'Expires on', hide: false, sortable: true }
 ];
     this.contextMenuItems = [
 { id: 'edit', name: 'Edit', icon: 'edit' }

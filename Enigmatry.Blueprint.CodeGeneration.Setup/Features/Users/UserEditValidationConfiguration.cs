@@ -3,7 +3,7 @@ using Enigmatry.BuildingBlocks.Validation;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users
 {
-    public class UserEditValidationConfiguration : AbstractValidationConfiguration<GetUserDetails.Response>
+    public class UserEditValidationConfiguration : ValidationConfiguration<GetUserDetails.Response>
     {
         public UserEditValidationConfiguration()
         {
