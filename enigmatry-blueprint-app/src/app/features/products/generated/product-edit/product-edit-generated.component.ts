@@ -21,21 +21,42 @@ import { ProductCodeUniquenessValidator, PhoneNumberValidator } from 'src/app/sh
 export class ProductEditGeneratedComponent implements OnInit {
 
   @Input() model: IGetProductDetailsResponse = {};
+  @Input() set isView(value: boolean) {
+    this._isView = value;
+    this.fields = this.initializeFields();
+  }
+  get isView() {
+    return this._isView;
+  }
 
-  @Output() save = new EventEmitter<IGetProductDetailsResponse>();
+@Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
+  _isView: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
   constructor(private lookupService: ProductEditLookupService) {
-    this.fields = [     {
+    this.fields = this.initializeFields();
+  }
+
+  ngOnInit(): void {}
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.save.emit(this.model);
+    }
+  }
+
+  initializeFields(): FormlyFieldConfig[] {
+    return [
+      {
         key: 'name',
         type: 'input',
         templateOptions: {
           label: 'Name',
           placeholder: 'Product name',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 required: true,
@@ -47,14 +68,14 @@ required: 'Name is required',
 maxLength: 'Name should have less then 200 characters'
           }
         },
-     },
-     {
+      },
+      {
         key: 'code',
         type: 'input',
         templateOptions: {
           label: 'Code',
           placeholder: 'Unique product identifier',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 required: true,
@@ -66,16 +87,16 @@ required: 'Code is required',
 pattern: 'Code must be in 4 letter 8 digits format (e.g. ABCD12345678)'
           }
         },
-asyncValidators: { code: { expression: ProductCodeUniquenessValidator, message: 'Code is not unique' } },     },
-     {
+asyncValidators: { code: { expression: ProductCodeUniquenessValidator, message: 'Code is not unique' } },      },
+      {
         key: 'type',
         type: 'select',
         templateOptions: {
           label: 'Type',
           placeholder: 'Type',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
-          options: lookupService.getType$.pipe(
+          options: this.lookupService.getType$.pipe(
             map((arr) =>
               arr.map(el => el = {value: el.value, label: el.displayName}))
             ),
@@ -87,14 +108,14 @@ required: true,
 required: 'Type is required'
           }
         },
-     },
-     {
+      },
+      {
         key: 'price',
         type: 'input',
         templateOptions: {
           label: 'Price',
           placeholder: 'Product price',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 type: 'number',
@@ -107,14 +128,14 @@ required: 'Price is required',
 min: 'Price should be more then 0'
           }
         },
-     },
-     {
+      },
+      {
         key: 'contactEmail',
         type: 'input',
         templateOptions: {
           label: 'Contact email',
           placeholder: 'Contact person email address',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 required: true,
@@ -126,14 +147,14 @@ required: 'ContactEmail is required',
 pattern: 'ContactEmail is not in correct email address format'
           }
         },
-     },
-     {
+      },
+      {
         key: 'contactPhone',
         type: 'input',
         templateOptions: {
           label: 'Contact phone',
           placeholder: 'Contact person phone number',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 required: true,
@@ -143,27 +164,18 @@ required: true,
 required: 'ContactPhone is required'
           }
         },
-validators: { contactPhone: { expression: PhoneNumberValidator, message: 'PhoneNumberValidator validator condition is not meet' } },     },
-     {
+validators: { contactPhone: { expression: PhoneNumberValidator, message: 'PhoneNumberValidator validator condition is not meet' } },      },
+      {
         key: 'expiresOn',
         type: 'datepicker',
         templateOptions: {
           label: 'Expires on',
           placeholder: 'Product expiration date if any',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
         },
-     },
-];
- }
-
-  ngOnInit(): void {
-  }
-
-  onSubmit() {
-    if (this.form.valid) {
-      this.save.emit(this.model);
-    }
+      },
+    ];
   }
 }

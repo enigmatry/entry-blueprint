@@ -2,6 +2,7 @@
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { OnPage, OnSort, PagedData, SortEvent, PageEvent } from '@enigmatry/angular-building-blocks/pagination';
+import { Params } from '@angular/router';
 
 export interface OnSelection<T> {
   selectionChange(selection: T[]): void;
@@ -27,6 +28,8 @@ export abstract class BaseListComponent<T, TQuery extends OnSort & OnPage>
 
   /** Fetch data function (needs to be implemented) */
   abstract fetchData(query: TQuery): Observable<PagedData<T>>;
+
+  abstract createQueryInstance(routeParams: Params, queryParams: Params): TQuery;
 
   /** Load list and update the data subject with the latest value */
   loadList(): Subscription {

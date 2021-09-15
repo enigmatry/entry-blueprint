@@ -19,32 +19,53 @@ import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
 export class UserEditGeneratedComponent implements OnInit {
 
   @Input() model: IGetUserDetailsResponse = {};
+  @Input() set isView(value: boolean) {
+    this._isView = value;
+    this.fields = this.initializeFields();
+  }
+  get isView() {
+    return this._isView;
+  }
 
-  @Output() save = new EventEmitter<IGetUserDetailsResponse>();
+@Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
+  _isView: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
   constructor() {
-    this.fields = [     {
+    this.fields = this.initializeFields();
+  }
+
+  ngOnInit(): void {}
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.save.emit(this.model);
+    }
+  }
+
+  initializeFields(): FormlyFieldConfig[] {
+    return [
+      {
         key: 'userName',
         type: 'input',
         templateOptions: {
           label: 'User name',
           placeholder: 'User name',
-          readonly: true,
+          disabled: this.isView || true,
           description: '',
           hidden: !true,
         },
-     },
-     {
+      },
+      {
         key: 'name',
         type: 'input',
         templateOptions: {
           label: 'Name',
           placeholder: 'Name',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 required: true,
@@ -58,14 +79,14 @@ minLength: 'Name min length is 5',
 maxLength: 'Name should have less then 25 characters'
           }
         },
-     },
-     {
+      },
+      {
         key: 'age',
         type: 'input',
         templateOptions: {
           label: 'Age',
           placeholder: 'Age',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 type: 'number',
@@ -80,14 +101,14 @@ min: 'Age should be more then 1',
 max: 'Max age is 100'
           }
         },
-     },
-     {
+      },
+      {
         key: 'email',
         type: 'input',
         templateOptions: {
           label: 'Email',
           placeholder: 'Email',
-          readonly: false,
+          disabled: this.isView || false,
           description: '',
           hidden: !true,
 required: true,
@@ -99,38 +120,29 @@ required: 'Email is required',
 pattern: 'Must be in email format (e.g. john.doe@google.com)'
           }
         },
-     },
-     {
+      },
+      {
         key: 'createdOn',
         type: 'datepicker',
         templateOptions: {
           label: 'Created on',
           placeholder: 'Created on',
-          readonly: true,
+          disabled: this.isView || true,
           description: '',
           hidden: !true,
         },
-     },
-     {
+      },
+      {
         key: 'updatedOn',
         type: 'datepicker',
         templateOptions: {
           label: 'Updated on',
           placeholder: 'Updated on',
-          readonly: true,
+          disabled: this.isView || true,
           description: '',
           hidden: !true,
         },
-     },
-];
- }
-
-  ngOnInit(): void {
-  }
-
-  onSubmit() {
-    if (this.form.valid) {
-      this.save.emit(this.model);
-    }
+      },
+    ];
   }
 }

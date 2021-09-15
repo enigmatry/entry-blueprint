@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagedData } from '@enigmatry/angular-building-blocks';
 import { Observable } from 'rxjs';
 import { GetProductsResponseItem, ProductsClient } from 'src/app/api/api-reference';
@@ -16,11 +16,16 @@ export class ProductListComponent
     implements OnInit {
     constructor(private client: ProductsClient, protected router: Router, protected activatedRoute: ActivatedRoute) {
         super();
-        this.query = new GetProductsQuery();
     }
 
     fetchData(query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> {
         return this.client.search(query.keyword, query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
+    }
+    
+    createQueryInstance(routeParams: Params, queryParams: Params): GetProductsQuery {
+        const result = new GetProductsQuery();
+        result.applyRouteChanges(routeParams, queryParams);
+        return result;
     }
 
     ngOnInit(): void {

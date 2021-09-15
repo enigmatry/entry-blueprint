@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Enigmatry.BuildingBlocks.Validation" Version="1.1.127" />
-    <PackageReference Include="Enigmatry.CodeGeneration.Configuration" Version="1.0.133" />
+    <PackageReference Include="Enigmatry.CodeGeneration.Configuration" Version="1.0.141" />
   </ItemGroup>
 
   <ItemGroup>

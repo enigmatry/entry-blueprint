@@ -3,15 +3,15 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { combineLatest, Subscription } from 'rxjs';
 import { finalize, mergeMap, tap } from 'rxjs/operators';
 import { OnPage, OnSort, PageEvent, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
-import { RouteAwareQuery } from '../query/query.interface';
 import { BaseListComponent } from './base-list-component.model';
+import { PagedQuery } from '../query/paged-query.model';
 
 /**
  * ListComponentWithRouting
  * subscribed to activatedRoute.params and activatedRoute.queryParams
  * and updates route query string on page and sort changes
  */
-export abstract class ListComponentWithRouting<T, TQuery extends OnSort & OnPage & RouteAwareQuery>
+export abstract class ListComponentWithRouting<T, TQuery extends OnSort & OnPage & PagedQuery>
   extends BaseListComponent<T, TQuery> {
   protected router: Router;
   protected activatedRoute: ActivatedRoute;
@@ -24,12 +24,10 @@ export abstract class ListComponentWithRouting<T, TQuery extends OnSort & OnPage
 
     return combineLatest([this.activatedRoute.params, this.activatedRoute.queryParams])
       .pipe(
-        tap(params => this.query.applyRouteChanges(params[0], params[1])),
+        tap(params => this.query = this.createQueryInstance(...params)),
         mergeMap(() => {
           this.loading = true;
-          return this.fetchData(this.query).pipe(finalize(() => {
-            this.loading = false;
-          }));
+          return this.fetchData(this.query).pipe(finalize(() => this.loading = false));
         })
       )
       .subscribe(response => this.data.next(response));

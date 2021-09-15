@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-    <button type="button" mat-raised-button (click)="cancel.emit()">Cancel</button>
-    <button type="submit" mat-raised-button color="primary">Save</button>
+    <button *ngIf="!isView" type="button" mat-raised-button (click)="cancel.emit()">Cancel</button>
+    <button *ngIf="!isView" type="submit" mat-raised-button color="primary">Save</button>
 </form>

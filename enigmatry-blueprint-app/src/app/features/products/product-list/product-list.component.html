@@ -1,6 +1,7 @@
 <app-g-product-list
     [data]="data | async" 
     [loading]="loading"
+    [defaultSort]="query"
     (sortChange)="sortChange($event)" 
     (pageChange)="pageChange($event)"
     (selectionChange)="selectionChange($event)"
