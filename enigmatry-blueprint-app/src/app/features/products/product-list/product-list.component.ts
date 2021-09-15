@@ -21,7 +21,7 @@ export class ProductListComponent
     fetchData(query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> {
         return this.client.search(query.keyword, query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
     }
-    
+
     createQueryInstance(routeParams: Params, queryParams: Params): GetProductsQuery {
         const result = new GetProductsQuery();
         result.applyRouteChanges(routeParams, queryParams);

@@ -24,10 +24,14 @@ export abstract class ListComponentWithRouting<T, TQuery extends OnSort & OnPage
 
     return combineLatest([this.activatedRoute.params, this.activatedRoute.queryParams])
       .pipe(
-        tap(params => this.query = this.createQueryInstance(...params)),
+        tap(params => {
+          this.query = this.createQueryInstance(...params);
+        }),
         mergeMap(() => {
           this.loading = true;
-          return this.fetchData(this.query).pipe(finalize(() => this.loading = false));
+          return this.fetchData(this.query).pipe(finalize(() => {
+            this.loading = false;
+          }));
         })
       )
       .subscribe(response => this.data.next(response));

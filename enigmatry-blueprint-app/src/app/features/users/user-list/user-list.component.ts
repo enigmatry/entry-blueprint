@@ -12,7 +12,6 @@ import { GetUsersQuery } from '../models/get-users-query.model';
     styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent extends ListComponentWithRouting<GetUsersResponseItem, GetUsersQuery> implements OnInit {
-
     constructor(private client: UsersClient, protected router: Router, protected activatedRoute: ActivatedRoute) {
         super();
         this.query = new GetUsersQuery();
