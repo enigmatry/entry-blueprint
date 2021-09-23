@@ -18,23 +18,25 @@ export class ProductListComponent
         super();
     }
 
-    fetchData(query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> {
-        return this.client.search(query.keyword, query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
-    }
-
-    createQueryInstance(routeParams: Params, queryParams: Params): GetProductsQuery {
-        const result = new GetProductsQuery();
-        result.applyRouteChanges(routeParams, queryParams);
-        return result;
-    }
-
     ngOnInit(): void {
         this.watchRouteParams(this.router, this.activatedRoute);
     }
 
-    onItemSelected(contextMenuItem: { itemId: string; rowData: GetProductsResponseItem }) {
+    fetchData = (query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> =>
+        this.client.search(query.keyword, query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
+
+    createQueryInstance = (routeParams: Params, queryParams: Params): GetProductsQuery => {
+        const query = new GetProductsQuery();
+        query.applyRouteChanges(routeParams, queryParams);
+        return query;
+    };
+
+    onContextMenuItemSelected = (contextMenuItem: { itemId: string; rowData: GetProductsResponseItem }) => {
         if (contextMenuItem.itemId === 'edit') {
             this.router.navigate(['edit', contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
+        } else if (contextMenuItem.itemId === 'delete') {
+            // eslint-disable-next-line no-alert
+            alert('I have been deleted!');
         }
-    }
+    };
 }

@@ -24,13 +24,13 @@ export class ProductListGeneratedComponent implements OnInit {
   @Input() loading: boolean;
 
   @Input() showPaginator = true;
-  @Input() showFirstLastButtons = false;
-  @Input() pageSizeOptions = [10, 50, 100];
+  @Input() showFirstLastButtons = true;
+  @Input() pageSizeOptions = [2, 5, 10, 25, 50];
   @Input() hidePageSize = !true;
 
-  @Input() defaultSort: { sortBy?: string | undefined, sortDirection?: SortDirection } = { };
+  @Input() defaultSort: { sortBy?: string | undefined; sortDirection?: SortDirection } = { };
 
-  @Input() rowSelectable = true;
+  @Input() rowSelectable = false;
   @Input() multiSelectable = false;
 
   @Input() headerTemplate: TemplateRef<any> | CellTemplate;
@@ -47,23 +47,27 @@ export class ProductListGeneratedComponent implements OnInit {
   @Output() contextMenuItemSelected = new EventEmitter<{ itemId: string; rowData: GetProductsResponseItem }>();
   @Output() rowClick = new EventEmitter<GetProductsResponseItem>();
 
-
+@ViewChild('nameTpl', { static: true }) nameTpl: TemplateRef<any>;
+@ViewChild('typeTpl', { static: true }) typeTpl: TemplateRef<any>;
 
   constructor() { }
 
   ngOnInit(): void {
     this.columns = [
-{ field: 'id', header: 'Id', hide: true, sortable: true },
-{ field: 'name', header: 'Name', hide: false, sortable: true },
-{ field: 'code', header: 'Code', hide: false, sortable: true },
-{ field: 'type', header: 'Type', hide: false, sortable: true },
-{ field: 'price', header: 'Price', hide: false, sortable: true, type: 'number', typeParameter: undefined },
-{ field: 'contactEmail', header: 'Contact email', hide: false, sortable: true },
-{ field: 'contactPhone', header: 'Contact phone', hide: false, sortable: true },
-{ field: 'expiresOn', header: 'Expires on', hide: false, sortable: true, type: 'date', typeParameter: undefined }
+{ field: 'id', header: $localize `:@@products.product-list.id:Id`, hide: true, sortable: true },
+{ field: 'name', header: $localize `:@@products.product-list.name:Product name`, hide: false, sortable: true, cellTemplate: this.nameTpl },
+{ field: 'code', header: $localize `:@@products.product-list.code:Code`, hide: false, sortable: true },
+{ field: 'type', header: $localize `:@@products.product-list.type:Type`, hide: false, sortable: true, cellTemplate: this.typeTpl },
+{ field: 'price', header: $localize `:@@products.price:Price per unit`, hide: false, sortable: true, type: 'number', typeParameter: undefined },
+{ field: 'amount', header: $localize `:@@products.amount:Units`, hide: false, sortable: true },
+{ field: 'contactEmail', header: $localize `:@@products.product-list.contact-email:Contact email`, hide: false, sortable: true },
+{ field: 'contactPhone', header: $localize `:@@products.product-list.contact-phone:Contact phone`, hide: false, sortable: true },
+{ field: 'infoLink', header: $localize `:@@products.product-list.info-link:Info link`, hide: true, sortable: true },
+{ field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: undefined }
 ];
     this.contextMenuItems = [
-{ id: 'edit', name: 'Edit', icon: 'edit' }
+{ id: 'edit', name: $localize `:@@products.product-list.context.edit:Edit`, icon: 'edit' },
+{ id: 'delete', name: $localize `:@@products.product-list.context.delete:Delete`, icon: 'delete' }
 ];
   }
 }

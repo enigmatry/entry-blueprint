@@ -58,9 +58,23 @@ namespace Enigmatry.Blueprint.Api.Features.Products
         [Route("code-unique/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<GetProductCodeUniquenes.Response>> IsCodeUnique(string code)
+        public async Task<ActionResult<GetProductCodeUniqueness.Response>> IsCodeUnique(string code)
         {
-            var response = await _mediator.Send(new GetProductCodeUniquenes.Request { Code = code });
+            var response = await _mediator.Send(new GetProductCodeUniqueness.Request { Code = code });
+            return response.ToActionResult();
+        }
+
+        /// <summary>
+        ///     Return true if product name is unique
+        /// </summary>
+        /// <param name="name">Name</param>
+        [HttpGet]
+        [Route("name-unique/{name}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<GetProductNameUniqueness.Response>> IsNameUnique(string name)
+        {
+            var response = await _mediator.Send(new GetProductNameUniqueness.Request { Name = name });
             return response.ToActionResult();
         }
 

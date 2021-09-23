@@ -27,8 +27,10 @@ namespace Enigmatry.Blueprint.Api.Features.Products
             public string Code { get; set; } = String.Empty;
             public ProductType Type { get; set; }
             public double Price { get; set; }
+            public int Amount { get; set; }
             public string ContactEmail { get; set; } = String.Empty;
             public string ContactPhone { get; set; } = String.Empty;
+            public string InfoLink { get; set; } = String.Empty;
             public DateTimeOffset? ExpiresOn { get; set; }
         }
 

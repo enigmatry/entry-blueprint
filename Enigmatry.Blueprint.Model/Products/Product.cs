@@ -9,9 +9,12 @@ namespace Enigmatry.Blueprint.Model.Products
 {
     public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
     {
-        public const int NameMaxLength = 200;
+        public const int NameMinLength = 5;
+        public const int NameMaxLength = 25;
         public const int CodeMaxLength = 12;
         public const double PriceMinValue = 0.0;
+        public const int AmountMinValue = 0;
+        public const int AmountMaxValue = 100;
         public const int ContactEmailMaxLength = 25;
         public const int ContactPhoneMaxLength = 25;
 
@@ -19,8 +22,10 @@ namespace Enigmatry.Blueprint.Model.Products
         public string Code { get; private set; } = String.Empty;
         public ProductType Type { get; private set; } = ProductType.Food;
         public double Price { get; private set; }
+        public int Amount { get; private set; }
         public string ContactEmail { get; private set; } = String.Empty;
         public string ContactPhone { get; private set; } = String.Empty;
+        public string InfoLink { get; private set; } = String.Empty;
         public DateTimeOffset? ExpiresOn { get; private set; }
 
         public DateTimeOffset CreatedOn { get; private set; }
@@ -39,8 +44,10 @@ namespace Enigmatry.Blueprint.Model.Products
                 Code = request.Code,
                 Type = request.Type,
                 Price = request.Price,
+                Amount = request.Amount,
                 ContactEmail = request.ContactEmail,
                 ContactPhone = request.ContactPhone,
+                InfoLink = request.InfoLink,
                 ExpiresOn = request.ExpiresOn
             };
             product.AddDomainEvent(new ProductCreatedDomainEvent(product));
@@ -53,8 +60,10 @@ namespace Enigmatry.Blueprint.Model.Products
             Code = request.Code;
             Type = request.Type;
             Price = request.Price;
+            Amount = request.Amount;
             ContactEmail = request.ContactEmail;
             ContactPhone = request.ContactPhone;
+            InfoLink = request.InfoLink;
             ExpiresOn = request.ExpiresOn;
             AddDomainEvent(new ProductUpdatedDomainEvent(this));
         }

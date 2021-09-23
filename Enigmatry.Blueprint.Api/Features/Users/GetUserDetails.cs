@@ -29,8 +29,6 @@ namespace Enigmatry.Blueprint.Api.Features.Users
             public Guid Id { get; set; }
             public string UserName { get; set; } = String.Empty;
             public string Name { get; set; } = String.Empty;
-            public int Age { get; set; }
-            public string Email { get; set; } = String.Empty;
             public DateTimeOffset CreatedOn { get; set; }
             public DateTimeOffset UpdatedOn { get; set; }
         }

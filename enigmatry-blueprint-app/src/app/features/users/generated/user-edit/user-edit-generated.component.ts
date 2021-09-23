@@ -19,18 +19,18 @@ import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
 export class UserEditGeneratedComponent implements OnInit {
 
   @Input() model: IGetUserDetailsResponse = {};
-  @Input() set isView(value: boolean) {
-    this._isView = value;
+  @Input() set isReadonly(value: boolean) {
+    this._isReadonly = value;
     this.fields = this.initializeFields();
   }
-  get isView() {
-    return this._isView;
+  get isReadonly() {
+    return this._isReadonly;
   }
 
 @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-  _isView: boolean;
+  _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
@@ -48,101 +48,53 @@ export class UserEditGeneratedComponent implements OnInit {
 
   initializeFields(): FormlyFieldConfig[] {
     return [
-      {
-        key: 'userName',
-        type: 'input',
-        templateOptions: {
-          label: 'User name',
-          placeholder: 'User name',
-          disabled: this.isView || true,
-          description: '',
-          hidden: !true,
-        },
-      },
-      {
-        key: 'name',
-        type: 'input',
-        templateOptions: {
-          label: 'Name',
-          placeholder: 'Name',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
+    {
+    key: 'userName',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.user-name.label:User name`,
+        placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
+        disabled: this.isReadonly || true,
+        description: '',
+        hidden: !true,
+    },
+    },
+    {
+    key: 'name',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.name.label:Name`,
+        placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
 required: true,
 minLength: 5,
 maxLength: 25,
-        },
-        validation: {
-          messages: {
-required: 'Name is required',
-minLength: 'Name min length is 5',
-maxLength: 'Name should have less then 25 characters'
-          }
-        },
-      },
-      {
-        key: 'age',
-        type: 'input',
-        templateOptions: {
-          label: 'Age',
-          placeholder: 'Age',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
-type: 'number',
-required: true,
-min: 1,
-max: 100,
-        },
-        validation: {
-          messages: {
-required: 'Age is required',
-min: 'Age should be more then 1',
-max: 'Max age is 100'
-          }
-        },
-      },
-      {
-        key: 'email',
-        type: 'input',
-        templateOptions: {
-          label: 'Email',
-          placeholder: 'Email',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
-required: true,
-pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-        },
-        validation: {
-          messages: {
-required: 'Email is required',
-pattern: 'Must be in email format (e.g. john.doe@google.com)'
-          }
-        },
-      },
-      {
-        key: 'createdOn',
-        type: 'datepicker',
-        templateOptions: {
-          label: 'Created on',
-          placeholder: 'Created on',
-          disabled: this.isView || true,
-          description: '',
-          hidden: !true,
-        },
-      },
-      {
-        key: 'updatedOn',
-        type: 'datepicker',
-        templateOptions: {
-          label: 'Updated on',
-          placeholder: 'Updated on',
-          disabled: this.isView || true,
-          description: '',
-          hidden: !true,
-        },
-      },
+    },
+    },
+    {
+    key: 'createdOn',
+    type: 'datepicker',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.created-on.label:Created on`,
+        placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
+        disabled: this.isReadonly || true,
+        description: '',
+        hidden: !true,
+    },
+    },
+    {
+    key: 'updatedOn',
+    type: 'datepicker',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
+        placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
+        disabled: this.isReadonly || true,
+        description: '',
+        hidden: !true,
+    },
+    },
     ];
   }
 }

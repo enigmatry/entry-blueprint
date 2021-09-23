@@ -1,27 +1,46 @@
-# EnigmatryBlueprintApp
+# Enigmatry Blueprint Template project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+* [Starting the app](#starting-the-app)
+  * [1. Starting the API](#1-starting-the-api)
+  * [2. Configuring the App](#2-configuring-the-app)
+  * [3. Starting the App](#3-starting-the-app)
+* [Code generation](#code-generation)
+  * [1. Installing code generator tool](#1-installing-code-generator-tool)
+  * [2. Configuring the code to be generated](#2-configuring-the-code-to-be-generated)
+  * [3. Generating code](#3-generating-code)
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Starting the app
 
-## Code scaffolding
+### 1. Starting the API
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Start the API by setting `Enigmatry.Blueprint.Api` as start up project and by starting the solution.
 
-## Build
+### 2. Configuring the App
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This should be done just the first time!
 
-## Running unit tests
+Configure Azure DevOps npm feed by executing the following commands: `npm install -g vsts-npm-auth` & `vsts-npm-auth -config .npmrc`. Authenticate, if asked, using Enigmatry account.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Execute `npm i` to install all npm packages (repeat this step if some of the packages is updated/added/removed).
 
-## Running end-to-end tests
+### 3. Starting the App
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+To start the app execute command `npm start`, which will build & run the app on <http://localhost:4200/>.
 
-## Further help
+## Code generation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 1. Installing code generator tool
+
+To install the tool run npm script `npm run codegen:install`. This will install the tool globally and it needs to be executed only once.
+
+To update the tool run `npm run codegen:update`. This npm script should be executed each time new version of the tool is out.
+
+### 2. Configuring the code to be generated
+
+All code generation configurations are located in `Enigmatry.Blueprint.CodeGeneration.Setup` project. For configurations to be visible for the tool, the project must be re-built each time there are changes in the configuration definitions.
+
+### 3. Generating code
+
+To generate the code from configurations, execute npm script `npm run codegen`. This command will run the tool which will generate configured code inside features modules.
+

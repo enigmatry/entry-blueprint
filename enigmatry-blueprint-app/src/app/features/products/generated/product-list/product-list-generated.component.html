@@ -21,3 +21,9 @@
                 (rowClick)="rowClick.emit($event)">
 </enigmatry-grid>
 
+<ng-template #nameTpl let-row let-index="index" let-col="colDef">
+    <app-product-name-with-link-cell [rowData]="row" [colDef]="col"></app-product-name-with-link-cell>
+</ng-template>
+<ng-template #typeTpl let-row let-index="index" let-col="colDef">
+    <app-product-type-cell [rowData]="row" [colDef]="col"></app-product-type-cell>
+</ng-template>

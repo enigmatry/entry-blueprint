@@ -10,7 +10,9 @@ namespace Enigmatry.Blueprint.Model.Identity
 {
     public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     {
-        public static readonly Guid TestUserId = new Guid("8207DB25-94D1-4F3D-BF18-90DA283221F7");
+        public static readonly Guid TestUserId = new("8207DB25-94D1-4F3D-BF18-90DA283221F7");
+        public const int NameMinLenght = 5;
+        public const int NameMaxLenght = 25;
 
         public string UserName { get; private set; } = "";
         public string Name { get; private set; } = "";

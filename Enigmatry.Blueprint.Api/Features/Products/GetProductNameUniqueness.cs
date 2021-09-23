@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Enigmatry.Blueprint.Api.Features.Products
 {
-    public static class GetProductCodeUniquenes
+    public static class GetProductNameUniqueness
     {
         [PublicAPI]
         public class Request : IRequest<Response>
         {
-            public string Code { get; set; } = String.Empty;
+            public string Name { get; set; } = String.Empty;
         }
 
         [PublicAPI]
@@ -36,7 +36,7 @@ namespace Enigmatry.Blueprint.Api.Features.Products
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
                 var response = await _productRepository.QueryAll()
-                    .SingleOrDefaultAsync(x => x.Code == request.Code, cancellationToken);
+                    .SingleOrDefaultAsync(x => x.Name == request.Name, cancellationToken);
                 return new Response { IsUnique = response == null };
             }
         }

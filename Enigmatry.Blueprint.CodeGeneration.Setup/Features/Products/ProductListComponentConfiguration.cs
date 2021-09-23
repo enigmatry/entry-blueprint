@@ -8,18 +8,47 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
     {
         public void Configure(ListComponentBuilder<GetProducts.Response.Item> builder)
         {
-            builder.Component()
+            // Configuring component:
+            builder
+                .Component()
                 .HasName("ProductList")
                 .BelongsToFeature("Products");
 
+            // Configuring list columns:
+            builder
+                .Column(x => x.InfoLink)
+                .IsVisible(false);
+            builder
+                .Column(x => x.Name)
+                .WithHeaderName("Product name")
+                .WithCustomComponent("app-product-name-with-link-cell");
+            builder
+                .Column(x => x.Type)
+                .WithCustomComponent("app-product-type-cell");
+            builder
+                .Column(x => x.Price)
+                .WithHeaderName("Price per unit")
+                .WithTranslationId(ProductTranslationId.Price);
+            builder
+                .Column(x => x.Amount)
+                .WithHeaderName("Units")
+                .WithTranslationId(ProductTranslationId.Amount);
 
-            builder.Row().Selection(RowSelectionType.Single);
-
-            builder.Pagination().ShowFirstLastPageButtons(false);
-
+            // Configuring list rows:
+            builder
+                .Row()
+                .Selection(RowSelectionType.None);
             builder.Row()
                 .ShowContextMenu(true)
-                .ContextMenuItems(new RowContextMenuItem { Id = "edit", Name = "Edit", Icon = "edit" });
+                .ContextMenuItems(
+                    new RowContextMenuItem { Id = "edit", Name = "Edit", Icon = "edit" },
+                    new RowContextMenuItem { Id = "delete", Name = "Delete", Icon = "delete" }
+                );
+
+            // Confiuring list pagination:
+            builder
+                .Pagination()
+                .PageSizeOptions(new[] { 2, 5, 10, 25, 50 });
         }
     }
 }

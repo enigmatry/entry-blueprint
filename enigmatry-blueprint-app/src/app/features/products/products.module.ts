@@ -5,6 +5,7 @@ import { ProductsGeneratedModule } from './generated/products-generated.module';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { GridCellsModule } from 'src/app/shared/grid-cells/grid-cells.module';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { ProductListComponent } from './product-list/product-list.component';
     imports: [
         CommonModule,
         SharedModule,
+        GridCellsModule,
         ProductsGeneratedModule,
         ProductsRoutingModule
     ]

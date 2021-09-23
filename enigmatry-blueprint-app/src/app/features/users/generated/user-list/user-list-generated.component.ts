@@ -28,7 +28,7 @@ export class UserListGeneratedComponent implements OnInit {
   @Input() pageSizeOptions = [10, 50, 100];
   @Input() hidePageSize = !true;
 
-  @Input() defaultSort: { sortBy?: string | undefined, sortDirection?: SortDirection } = { };
+  @Input() defaultSort: { sortBy?: string | undefined; sortDirection?: SortDirection } = { };
 
   @Input() rowSelectable = true;
   @Input() multiSelectable = false;
@@ -53,14 +53,14 @@ export class UserListGeneratedComponent implements OnInit {
 
   ngOnInit(): void {
     this.columns = [
-{ field: 'id', header: 'Id', hide: true, sortable: true },
-{ field: 'userName', header: 'E-mail', hide: false, sortable: true },
-{ field: 'name', header: 'Name', hide: false, sortable: true },
-{ field: 'createdOn', header: 'Created on', hide: false, sortable: true, type: 'date', typeParameter: undefined },
-{ field: 'updatedOn', header: 'Updated on', hide: false, sortable: true, type: 'date', typeParameter: undefined }
+{ field: 'id', header: $localize `:@@users.user-list.id:Id`, hide: true, sortable: true },
+{ field: 'userName', header: $localize `:@@users.user-list.user-name:E-mail`, hide: false, sortable: true },
+{ field: 'name', header: $localize `:@@users.user-list.name:Name`, hide: false, sortable: true },
+{ field: 'createdOn', header: $localize `:@@users.user-list.created-on:Created on`, hide: false, sortable: true, type: 'date', typeParameter: undefined },
+{ field: 'updatedOn', header: $localize `:@@users.user-list.updated-on:Updated on`, hide: false, sortable: true, type: 'date', typeParameter: undefined }
 ];
     this.contextMenuItems = [
-{ id: 'edit', name: 'Edit', icon: 'edit' }
+{ id: 'edit', name: $localize `:@@users.user-list.context.edit:Edit`, icon: 'edit' }
 ];
   }
 }

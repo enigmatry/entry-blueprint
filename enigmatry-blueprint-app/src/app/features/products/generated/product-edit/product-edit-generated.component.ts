@@ -10,9 +10,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
-import { map } from 'rxjs/operators';
-import { ProductEditLookupService } from '../services/product-edit-generated-lookup.service';
-import { ProductCodeUniquenessValidator, PhoneNumberValidator } from 'src/app/shared/validators/custom-validators';
+    import { map } from 'rxjs/operators';
+    import { ProductEditLookupService } from '../services/product-edit-generated-lookup.service';
+
 @Component({
   selector: 'app-g-product-edit',
   templateUrl: './product-edit-generated.component.html',
@@ -21,18 +21,18 @@ import { ProductCodeUniquenessValidator, PhoneNumberValidator } from 'src/app/sh
 export class ProductEditGeneratedComponent implements OnInit {
 
   @Input() model: IGetProductDetailsResponse = {};
-  @Input() set isView(value: boolean) {
-    this._isView = value;
+  @Input() set isReadonly(value: boolean) {
+    this._isReadonly = value;
     this.fields = this.initializeFields();
   }
-  get isView() {
-    return this._isView;
+  get isReadonly() {
+    return this._isReadonly;
   }
 
 @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-  _isView: boolean;
+  _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
@@ -50,132 +50,145 @@ export class ProductEditGeneratedComponent implements OnInit {
 
   initializeFields(): FormlyFieldConfig[] {
     return [
-      {
-        key: 'name',
-        type: 'input',
-        templateOptions: {
-          label: 'Name',
-          placeholder: 'Product name',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
+    {
+    key: 'name',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@products.product-edit.name.label:Name`,
+        placeholder: $localize `:@@products.product-edit.name.placeholder:Unique product name`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
 required: true,
-maxLength: 200,
-        },
-        validation: {
-          messages: {
-required: 'Name is required',
-maxLength: 'Name should have less then 200 characters'
-          }
-        },
-      },
-      {
-        key: 'code',
-        type: 'input',
-        templateOptions: {
-          label: 'Code',
-          placeholder: 'Unique product identifier',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
+minLength: 5,
+maxLength: 25,
+    },
+    asyncValidators: {
+        validation: [ 'productNameIsUnique' ]
+    },
+    },
+    {
+    key: 'code',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@products.product-edit.code.label:Code`,
+        placeholder: $localize `:@@products.product-edit.code.placeholder:Unique product code identifier`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
 required: true,
 pattern: /^[A-Z]{4}[1-9]{8}$/mu,
-        },
-        validation: {
-          messages: {
-required: 'Code is required',
-pattern: 'Code must be in 4 letter 8 digits format (e.g. ABCD12345678)'
-          }
-        },
-asyncValidators: { code: { expression: ProductCodeUniquenessValidator, message: 'Code is not unique' } },      },
-      {
-        key: 'type',
-        type: 'select',
-        templateOptions: {
-          label: 'Type',
-          placeholder: 'Type',
-          disabled: this.isView || false,
-          description: '',
-          options: this.lookupService.getType$.pipe(
+    },
+    validation: {
+        messages: {
+pattern: $localize `:@@products.product-edit.code.pattern:Code must be in 4 letter 8 digits format (e.g. ABCD12345678)`
+        }
+    },
+    asyncValidators: {
+        validation: [ 'productCodeIsUnique' ]
+    },
+    },
+    {
+    key: 'type',
+    type: 'select',
+    templateOptions: {
+        label: $localize `:@@products.product-edit.type.label:Type`,
+        placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
+        disabled: this.isReadonly || false,
+        description: '',
+            options: this.lookupService.getType$.pipe(
             map((arr) =>
-              arr.map(el => el = {value: el.value, label: el.displayName}))
+            arr.map(el => el = {value: el.value, label: el.displayName}))
             ),
-          hidden: !true,
+        hidden: !true,
 required: true,
-        },
-        validation: {
-          messages: {
-required: 'Type is required'
-          }
-        },
-      },
-      {
-        key: 'price',
-        type: 'input',
-        templateOptions: {
-          label: 'Price',
-          placeholder: 'Product price',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
+    },
+    },
+    {
+    key: 'price',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@products.price:Price per unit`,
+        placeholder: $localize `:@@products.price:Price per unit`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
+required: true,
 type: 'number',
+min: 1,
+    },
+    },
+    {
+    key: 'amount',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@products.amount:Units`,
+        placeholder: $localize `:@@products.amount:Units`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
 required: true,
-min: 0,
-        },
-        validation: {
-          messages: {
-required: 'Price is required',
-min: 'Price should be more then 0'
-          }
-        },
-      },
-      {
-        key: 'contactEmail',
-        type: 'input',
-        templateOptions: {
-          label: 'Contact email',
-          placeholder: 'Contact person email address',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
+type: 'number',
+min: 1,
+max: 100,
+    },
+    },
+    {
+    key: 'contactEmail',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@products.product-edit.contact-email.label:Contact email`,
+        placeholder: $localize `:@@products.product-edit.contact-email.placeholder:Contact person email address`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
 required: true,
 pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-        },
-        validation: {
-          messages: {
-required: 'ContactEmail is required',
-pattern: 'ContactEmail is not in correct email address format'
-          }
-        },
-      },
-      {
-        key: 'contactPhone',
-        type: 'input',
-        templateOptions: {
-          label: 'Contact phone',
-          placeholder: 'Contact person phone number',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
+    },
+    validation: {
+        messages: {
+pattern: $localize `:@@validators.pattern.emailAddress:Invalid email address format`
+        }
+    },
+    },
+    {
+    key: 'contactPhone',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@products.product-edit.contact-phone.label:Contact phone`,
+        placeholder: $localize `:@@products.product-edit.contact-phone.placeholder:Contact person phone number`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
 required: true,
-        },
-        validation: {
-          messages: {
-required: 'ContactPhone is required'
-          }
-        },
-validators: { contactPhone: { expression: PhoneNumberValidator, message: 'PhoneNumberValidator validator condition is not meet' } },      },
-      {
-        key: 'expiresOn',
-        type: 'datepicker',
-        templateOptions: {
-          label: 'Expires on',
-          placeholder: 'Product expiration date if any',
-          disabled: this.isView || false,
-          description: '',
-          hidden: !true,
-        },
-      },
+pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/mu,
+    },
+    },
+    {
+    key: 'infoLink',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@products.product-edit.info-link.label:Homepage`,
+        placeholder: $localize `:@@products.product-edit.info-link.placeholder:Link to product homepage`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
+    },
+    asyncValidators: {
+        validation: [ 'isLink' ]
+    },
+    },
+    {
+    key: 'expiresOn',
+    type: 'datepicker',
+    templateOptions: {
+        label: $localize `:@@products.product-edit.expires-on.label:Expires on`,
+        placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date if any`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
+    },
+    },
     ];
   }
 }

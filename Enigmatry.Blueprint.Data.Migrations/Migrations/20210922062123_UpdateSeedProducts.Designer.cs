@@ -4,14 +4,16 @@ using Enigmatry.Blueprint.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(BlueprintContext))]
-    partial class BlueprintContextModelSnapshot : ModelSnapshot
+    [Migration("20210922062123_UpdateSeedProducts")]
+    partial class UpdateSeedProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,9 +77,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(12)
@@ -138,7 +137,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         new
                         {
                             Id = new Guid("7a4ce0d5-471b-4d35-89f2-b6c7a68350c0"),
-                            Amount = 23,
                             Code = "XYZW12345678",
                             ContactEmail = "frank.herbert@gmail.com",
                             ContactPhone = "+253 56 334 4889",
@@ -153,7 +151,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         new
                         {
                             Id = new Guid("dc7047b0-0d35-4cbc-9424-d907ae5a25f4"),
-                            Amount = 100,
                             Code = "ABCD12345678",
                             ContactEmail = "info@salto.rs",
                             ContactPhone = "+381 60 399 8871",
@@ -169,7 +166,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         new
                         {
                             Id = new Guid("04c45383-1372-4312-bb38-5edfa569db66"),
-                            Amount = 1,
                             Code = "XXXX12345678",
                             ContactEmail = "info@lada.com",
                             ContactPhone = "+381 21 661 6432",
@@ -184,7 +180,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         new
                         {
                             Id = new Guid("da8eb2a9-1f8a-4c41-8df9-10a1fc59305b"),
-                            Amount = 3,
                             Code = "VWVW12345678",
                             ContactEmail = "vw_camper@vw.com",
                             ContactPhone = "+381 32 332 7689",
@@ -199,7 +194,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         new
                         {
                             Id = new Guid("1de0818e-04d7-4435-98af-114b81aff0d0"),
-                            Amount = 89,
                             Code = "FOOD12345678",
                             ContactEmail = "burek@burek.com",
                             ContactPhone = "+381 11 113 6651",
@@ -214,7 +208,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         new
                         {
                             Id = new Guid("a84132e7-cfc9-4766-8da0-b1d9e549de57"),
-                            Amount = 13,
                             Code = "ZXAB14444678",
                             ContactEmail = "sardines@ocean.com",
                             ContactPhone = "+381 11 451 8709",

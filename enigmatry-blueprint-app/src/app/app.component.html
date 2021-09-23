@@ -1,5 +1,6 @@
-<section>
-    <a mat-button routerLink="users" routerLinkActive="active">Users</a>
-    <a mat-button routerLink="products" routerLinkActive="active">Products</a>
-</section>
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
+  <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
+</mat-menu>
 <router-outlet></router-outlet>
