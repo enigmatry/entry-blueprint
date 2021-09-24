@@ -1,5 +1,6 @@
 ﻿using System;
 using Enigmatry.Blueprint.Core.Settings;
+using Enigmatry.BuildingBlocks.Core.Settings;
 using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Blueprint.Infrastructure.Configuration

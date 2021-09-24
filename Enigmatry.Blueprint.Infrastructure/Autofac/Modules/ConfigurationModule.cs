@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Enigmatry.Blueprint.Core.Settings;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.BuildingBlocks.Core.Settings;
 using Microsoft.Extensions.Configuration;
