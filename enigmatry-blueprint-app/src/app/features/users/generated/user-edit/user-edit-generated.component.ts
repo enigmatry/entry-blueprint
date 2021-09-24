@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------;
+/* eslint-disable */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -19,118 +20,82 @@ import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
 export class UserEditGeneratedComponent implements OnInit {
 
   @Input() model: IGetUserDetailsResponse = {};
+  @Input() set isReadonly(value: boolean) {
+    this._isReadonly = value;
+    this.fields = this.initializeFields();
+  }
+  get isReadonly() {
+    return this._isReadonly;
+  }
 
-  @Output() save = new EventEmitter<IGetUserDetailsResponse>();
+@Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
+  _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
   constructor() {
-    this.fields = [     {
-        key: 'userName',
-        type: 'input',
-        templateOptions: {
-          label: $localize `:@@users.user-edit.user-name.label:User name`,
-          placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
-          readonly: true,
-          description: '',
-          hidden: !true,
-        },
-     },
-     {
-        key: 'name',
-        type: 'input',
-        templateOptions: {
-          label: $localize `:@@users.user-edit.name.label:Name`,
-          placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
-          readonly: false,
-          description: '',
-          hidden: !true,
-required: true,
-minLength: 5,
-maxLength: 25,
-        },
-        validation: {
-          messages: {
-required: $localize `:@@users.user-edit.name.required:Name is required`,
-minLength: $localize `:@@users.user-edit.name.min-length:Name min length is 5`,
-maxLength: $localize `:@@users.user-edit.name.max-length:Name should have less then 25 characters`
-          }
-        },
-     },
-     {
-        key: 'age',
-        type: 'input',
-        templateOptions: {
-          label: $localize `:@@users.user-edit.age.label:Age`,
-          placeholder: $localize `:@@users.user-edit.age.placeholder:Age`,
-          readonly: false,
-          description: '',
-          hidden: !true,
-type: 'number',
-required: true,
-min: 1,
-max: 100,
-        },
-        validation: {
-          messages: {
-required: $localize `:@@users.user-edit.age.required:Age is required`,
-min: $localize `:@@users.user-edit.age.min:Age should be more then 1`,
-max: $localize `:@@users.user-edit.age.max:Max age is 100`
-          }
-        },
-     },
-     {
-        key: 'email',
-        type: 'input',
-        templateOptions: {
-          label: $localize `:@@users.user-edit.email.label:Email`,
-          placeholder: $localize `:@@users.user-edit.email.placeholder:Email`,
-          readonly: false,
-          description: '',
-          hidden: !true,
-required: true,
-pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-        },
-        validation: {
-          messages: {
-required: $localize `:@@users.user-edit.email.required:Email is required`,
-pattern: $localize `:@@users.user-edit.email.pattern:Must be in email format (e.g. john.doe@google.com)`
-          }
-        },
-     },
-     {
-        key: 'createdOn',
-        type: 'datepicker',
-        templateOptions: {
-          label: $localize `:@@users.user-edit.created-on.label:Created on`,
-          placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
-          readonly: true,
-          description: '',
-          hidden: !true,
-        },
-     },
-     {
-        key: 'updatedOn',
-        type: 'datepicker',
-        templateOptions: {
-          label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
-          placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
-          readonly: true,
-          description: '',
-          hidden: !true,
-        },
-     },
-];
- }
-
-  ngOnInit(): void {
+    this.fields = this.initializeFields();
   }
+
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.form.valid) {
       this.save.emit(this.model);
     }
+  }
+
+  initializeFields(): FormlyFieldConfig[] {
+    return [
+    {
+    key: 'userName',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.user-name.label:User name`,
+        placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
+        disabled: this.isReadonly || true,
+        description: '',
+        hidden: !true,
+    },
+    },
+    {
+    key: 'name',
+    type: 'input',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.name.label:Name`,
+        placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
+        disabled: this.isReadonly || false,
+        description: '',
+        hidden: !true,
+required: true,
+minLength: 5,
+maxLength: 25,
+    },
+    },
+    {
+    key: 'createdOn',
+    type: 'datepicker',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.created-on.label:Created on`,
+        placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
+        disabled: this.isReadonly || true,
+        description: '',
+        hidden: !true,
+    },
+    },
+    {
+    key: 'updatedOn',
+    type: 'datepicker',
+    templateOptions: {
+        label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
+        placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
+        disabled: this.isReadonly || true,
+        description: '',
+        hidden: !true,
+    },
+    },
+    ];
   }
 }

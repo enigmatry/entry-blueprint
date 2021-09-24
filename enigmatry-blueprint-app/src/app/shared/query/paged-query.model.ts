@@ -3,10 +3,11 @@ import { OnPage, OnSort, PageEvent, SortDirection, SortEvent } from '@enigmatry/
 import { RouteAwareQuery } from './query.interface';
 
 export const defaultPageSize = 10;
+export const defaultPageNumber = 1;
 
 export class PagedQuery implements OnPage, OnSort, RouteAwareQuery {
   keyword?: string;
-  pageNumber = 1;
+  pageNumber = defaultPageNumber;
   pageSize = defaultPageSize;
   sortBy?: string;
   sortDirection?: SortDirection;
@@ -15,7 +16,7 @@ export class PagedQuery implements OnPage, OnSort, RouteAwareQuery {
     if (sort.active) {
       this.sortBy = sort.active;
       this.sortDirection = sort.direction;
-      this.pageNumber = 1;
+      this.pageNumber = defaultPageNumber;
     }
   }
 
@@ -26,10 +27,10 @@ export class PagedQuery implements OnPage, OnSort, RouteAwareQuery {
 
   applyRouteChanges(routeParams: Params, queryParams: Params): void {
     this.keyword = queryParams.keyword;
-    this.pageNumber = queryParams.pageNumber ? Number(queryParams.pageNumber) : 1;
+    this.pageNumber = queryParams.pageNumber ? Number(queryParams.pageNumber) : defaultPageNumber;
     this.pageSize = queryParams.pageSize ? Number(queryParams.pageSize) : defaultPageSize;
-    this.sortBy = queryParams.sortBy;
-    this.sortDirection = queryParams.sortDirection;
+    this.sortBy = queryParams.sortBy ?? this.sortBy;
+    this.sortDirection = queryParams.sortDirection ?? this.sortDirection;
   }
 
   getRouteQueryParams(): Params {

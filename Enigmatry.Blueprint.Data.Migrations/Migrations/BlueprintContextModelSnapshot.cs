@@ -9,15 +9,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(BlueprintContext))]
-    internal partial class BlueprintContextModelSnapshot : ModelSnapshot
+    partial class BlueprintContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.9")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
                 {
@@ -69,6 +69,166 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Enigmatry.Blueprint.Model.Products.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("ContactPhone")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ExpiresOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("InfoLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("UpdatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("UpdatedById");
+
+                    b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7a4ce0d5-471b-4d35-89f2-b6c7a68350c0"),
+                            Amount = 23,
+                            Code = "XYZW12345678",
+                            ContactEmail = "frank.herbert@gmail.com",
+                            ContactPhone = "+253 56 334 4889",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            InfoLink = "https://en.wikipedia.org/wiki/Dune_(novel)",
+                            Name = "Dune I",
+                            Price = 13.699999999999999,
+                            Type = 2,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("dc7047b0-0d35-4cbc-9424-d907ae5a25f4"),
+                            Amount = 100,
+                            Code = "ABCD12345678",
+                            ContactEmail = "info@salto.rs",
+                            ContactPhone = "+381 60 399 8871",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ExpiresOn = new DateTimeOffset(new DateTime(2025, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            InfoLink = "https://www.salto.rs/#belgrade-ipa",
+                            Name = "Salto IPA",
+                            Price = 2.6000000000000001,
+                            Type = 1,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("04c45383-1372-4312-bb38-5edfa569db66"),
+                            Amount = 1,
+                            Code = "XXXX12345678",
+                            ContactEmail = "info@lada.com",
+                            ContactPhone = "+381 21 661 6432",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            InfoLink = "https://en.wikipedia.org/wiki/Lada_Niva",
+                            Name = "Lada Niva",
+                            Price = 15335.0,
+                            Type = 3,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("da8eb2a9-1f8a-4c41-8df9-10a1fc59305b"),
+                            Amount = 3,
+                            Code = "VWVW12345678",
+                            ContactEmail = "vw_camper@vw.com",
+                            ContactPhone = "+381 32 332 7689",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            InfoLink = "https://en.wikipedia.org/wiki/Volkswagen_Type_2",
+                            Name = "Volkswagen Type 2",
+                            Price = 8799.5,
+                            Type = 3,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("1de0818e-04d7-4435-98af-114b81aff0d0"),
+                            Amount = 89,
+                            Code = "FOOD12345678",
+                            ContactEmail = "burek@burek.com",
+                            ContactPhone = "+381 11 113 6651",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            InfoLink = "",
+                            Name = "Burek",
+                            Price = 2.5,
+                            Type = 0,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("a84132e7-cfc9-4766-8da0-b1d9e549de57"),
+                            Amount = 13,
+                            Code = "ZXAB14444678",
+                            ContactEmail = "sardines@ocean.com",
+                            ContactPhone = "+381 11 451 8709",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ExpiresOn = new DateTimeOffset(new DateTime(2050, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            InfoLink = "https://www.youtube.com/watch?v=WPpFjl8qeM4&ab_channel=DiscoveryUK",
+                            Name = "Sardines",
+                            Price = 7.3300000000000001,
+                            Type = 0,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        });
+                });
+
             modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
                 {
                     b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "CreatedBy")
@@ -84,9 +244,28 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                     b.Navigation("UpdatedBy");
                 });
 
+            modelBuilder.Entity("Enigmatry.Blueprint.Model.Products.Product", b =>
+                {
+                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "CreatedBy")
+                        .WithMany("CreatedProducts")
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "UpdatedBy")
+                        .WithMany("UpdatedProducts")
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("UpdatedBy");
+                });
+
             modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
                 {
+                    b.Navigation("CreatedProducts");
+
                     b.Navigation("CreatedUsers");
+
+                    b.Navigation("UpdatedProducts");
 
                     b.Navigation("UpdatedUsers");
                 });

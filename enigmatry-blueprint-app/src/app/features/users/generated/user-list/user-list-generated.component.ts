@@ -6,9 +6,10 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------;
+/* eslint-disable */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { CellTemplate, ColumnDef, ContextMenuItem } from '@enigmatry/angular-building-blocks/enigmatry-grid';
-import { PagedData, PageEvent, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
+import { PagedData, PageEvent, SortDirection, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
 
 import { GetUsersResponseItem } from 'src/app/api/api-reference';
 
@@ -27,6 +28,8 @@ export class UserListGeneratedComponent implements OnInit {
   @Input() showFirstLastButtons = false;
   @Input() pageSizeOptions = [10, 50, 100];
   @Input() hidePageSize = !true;
+
+  @Input() defaultSort: { sortBy?: string | undefined; sortDirection?: SortDirection } = { };
 
   @Input() rowSelectable = true;
   @Input() multiSelectable = false;
