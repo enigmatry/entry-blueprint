@@ -11,9 +11,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Configuration
 
         public static AppSettings ReadAppSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<AppSettings>("App");
 
-        public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights");
+        public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration) =>
+            configuration.ReadSettingsSection<ApplicationInsightsSettings>(ApplicationInsightsSettings.ApplicationInsightsSectionName);
 
-        public static HealthCheckSettings ReadHealthCheckSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<HealthCheckSettings>("HealthCheck");
+        public static HealthCheckSettings ReadHealthCheckSettings(this IConfiguration configuration) =>
+            configuration.ReadSettingsSection<HealthCheckSettings>(HealthCheckSettings.HealthChecksSectionName);
 
         public static T ReadSettingsSection<T>(this IConfiguration configuration, string sectionName)
         {

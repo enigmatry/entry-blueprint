@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Enigmatry.BuildingBlocks.HealthChecks;
+using Enigmatry.BuildingBlocks.Core.Settings;
 
 namespace Enigmatry.Blueprint.Api
 {
@@ -25,7 +27,6 @@ namespace Enigmatry.Blueprint.Api
         }
 
         [UsedImplicitly]
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -50,11 +51,12 @@ namespace Enigmatry.Blueprint.Api
 
             app.UseMiddleware<LogContextMiddleware>();
             app.UseHsts();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-                endpoints.AppMapHealthCheck();
+                endpoints.AppMapHealthCheck(_configuration.ReadHealthCheckSettings());
             });
 
             app.AppUseSwagger();
@@ -80,7 +82,7 @@ namespace Enigmatry.Blueprint.Api
             services.AppAddSettings(configuration);
             services.AppAddPolly();
             services.AppAddAutoMapper();
-            services.AppAddHealthChecks(configuration);
+            services.AppAddHealthChecks<HealthCheckSettings>(configuration, HealthChecksBuilder.BuildHealthChecks);
             services.AppAddMediatR();
             services.AppAddSwagger("Blueprint API");
 
