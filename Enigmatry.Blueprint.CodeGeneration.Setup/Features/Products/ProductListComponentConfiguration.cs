@@ -28,7 +28,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             builder
                 .Column(x => x.Price)
                 .WithHeaderName("Price per unit")
-                .WithTranslationId(ProductTranslationId.Price);
+                .WithTranslationId(ProductTranslationId.Price)
+                .WithCustomCssClass("products-price");
             builder
                 .Column(x => x.Amount)
                 .WithHeaderName("Units")
@@ -45,7 +46,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                     new RowContextMenuItem { Id = "delete", Name = "Delete", Icon = "delete" }
                 );
 
-            // Confiuring list pagination:
+            // Configuring list pagination:
             builder
                 .Pagination()
                 .PageSizeOptions(new[] { 2, 5, 10, 25, 50 });

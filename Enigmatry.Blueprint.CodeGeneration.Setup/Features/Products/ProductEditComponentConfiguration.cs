@@ -13,7 +13,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .HasName("ProductEdit")
                 .BelongsToFeature("Products");
 
-            // Fonfiguring fields:
+            // Configuring fields:
             builder.FormControl(x => x.Name)
                 .WithPlaceholder("Unique product name")
                 .WithValidator("ProductNameIsUnique");
@@ -44,6 +44,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             builder.FormControl(x => x.ExpiresOn)
                 .WithPlaceholder("Product expiration date, if any");
 
+            // Configuring built in validations
             builder.WithValidationConfiguration(new ProductEditComponentValidationConfiguration());
         }
     }

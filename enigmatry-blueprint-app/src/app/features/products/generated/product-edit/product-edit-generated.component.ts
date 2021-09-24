@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------;
+/* eslint-disable */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -64,7 +65,7 @@ minLength: 5,
 maxLength: 25,
     },
     asyncValidators: {
-        validation: [ 'productNameIsUnique' ]
+        validation: ['productNameIsUnique']
     },
     },
     {
@@ -85,7 +86,7 @@ pattern: $localize `:@@products.product-edit.code.pattern:Code must be in 4 lett
         }
     },
     asyncValidators: {
-        validation: [ 'productCodeIsUnique' ]
+        validation: ['productCodeIsUnique']
     },
     },
     {
@@ -175,7 +176,7 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         hidden: !true,
     },
     asyncValidators: {
-        validation: [ 'isLink' ]
+        validation: ['isLink']
     },
     },
     {
