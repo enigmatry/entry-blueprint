@@ -64,9 +64,8 @@ required: true,
 minLength: 5,
 maxLength: 25,
     },
-    asyncValidators: {
-        validation: ['productNameIsUnique']
-    },
+modelOptions: { updateOn: 'blur' },
+asyncValidators: { validation: [ 'productNameIsUnique' ] },
     },
     {
     key: 'code',
@@ -85,9 +84,8 @@ pattern: /^[A-Z]{4}[1-9]{8}$/mu,
 pattern: $localize `:@@products.product-edit.code.pattern:Code must be in 4 letter 8 digits format (e.g. ABCD12345678)`
         }
     },
-    asyncValidators: {
-        validation: ['productCodeIsUnique']
-    },
+modelOptions: { updateOn: 'blur' },
+asyncValidators: { validation: [ 'productCodeIsUnique' ] },
     },
     {
     key: 'type',
@@ -175,9 +173,8 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         description: '',
         hidden: !true,
     },
-    asyncValidators: {
-        validation: ['isLink']
-    },
+modelOptions: { updateOn: 'blur' },
+asyncValidators: { validation: [ 'isLink' ] },
     },
     {
     key: 'expiresOn',

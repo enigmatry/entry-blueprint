@@ -29,7 +29,7 @@ export class ProductListGeneratedComponent implements OnInit {
   @Input() pageSizeOptions = [2, 5, 10, 25, 50];
   @Input() hidePageSize = !true;
 
-  @Input() defaultSort: { sortBy?: string | undefined; sortDirection?: SortDirection } = { };
+  @Input() defaultSort: { sortBy?: string | undefined, sortDirection?: SortDirection } = { };
 
   @Input() rowSelectable = false;
   @Input() multiSelectable = false;

@@ -29,7 +29,7 @@ export class UserListGeneratedComponent implements OnInit {
   @Input() pageSizeOptions = [10, 50, 100];
   @Input() hidePageSize = !true;
 
-  @Input() defaultSort: { sortBy?: string | undefined; sortDirection?: SortDirection } = { };
+  @Input() defaultSort: { sortBy?: string | undefined, sortDirection?: SortDirection } = { };
 
   @Input() rowSelectable = true;
   @Input() multiSelectable = false;
