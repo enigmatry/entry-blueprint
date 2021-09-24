@@ -11,6 +11,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Authorization
             Token = token;
         }
 
-        public string Token { get; private set; }
+        public string Token { get; }
     }
 }
