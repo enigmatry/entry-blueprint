@@ -18,7 +18,6 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="AspNetCore.HealthChecks.Publisher.ApplicationInsights" Version="5.0.1" />
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="5.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="5.0.3" />
     <PackageReference Include="AspNetCore.HealthChecks.System" Version="5.0.1" />
