@@ -14,6 +14,7 @@
                 [cellTemplate]="cellTemplate"
                 [showContextMenu]="showContextMenu"
                 [contextMenuItems]="contextMenuItems"
+                [rowContextMenuFormatter]="rowContextMenuFormatter"
                 (pageChange)="pageChange.emit($event)"
                 (sortChange)="sortChange.emit($event)"
                 (rowSelectionChange)="selectionChange.emit($event)"

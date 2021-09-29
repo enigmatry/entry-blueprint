@@ -38,13 +38,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             // Configuring list rows:
             builder
                 .Row()
-                .Selection(RowSelectionType.None);
-            builder.Row()
-                .ShowContextMenu(true)
-                .ContextMenuItems(
-                    new RowContextMenuItem { Id = "edit", Name = "Edit", Icon = "edit" },
-                    new RowContextMenuItem { Id = "delete", Name = "Delete", Icon = "delete" }
-                );
+                .Selection(RowSelectionType.None)
+                .ShowContextMenu(true); // Context menu items will be configured on client side dynamically
 
             // Configuring list pagination:
             builder

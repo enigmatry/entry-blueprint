@@ -8,7 +8,7 @@
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { CellTemplate, ColumnDef, ContextMenuItem } from '@enigmatry/angular-building-blocks/enigmatry-grid';
+import { CellTemplate, ColumnDef, ContextMenuItem, RowContextMenuFormatter } from '@enigmatry/angular-building-blocks/enigmatry-grid';
 import { PagedData, PageEvent, SortDirection, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
 
 import { GetProductsResponseItem } from 'src/app/api/api-reference';
@@ -39,6 +39,7 @@ export class ProductListGeneratedComponent implements OnInit {
 
   @Input() showContextMenu = true;
   @Input() contextMenuItems: ContextMenuItem[] = [];
+  @Input() rowContextMenuFormatter: RowContextMenuFormatter;
 
   @Input() columns: ColumnDef[] = [];
 
@@ -66,9 +67,6 @@ export class ProductListGeneratedComponent implements OnInit {
 { field: 'infoLink', header: $localize `:@@products.product-list.info-link:Info link`, hide: true, sortable: true },
 { field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: undefined }
 ];
-    this.contextMenuItems = [
-{ id: 'edit', name: $localize `:@@products.product-list.context.edit:Edit`, icon: 'edit' },
-{ id: 'delete', name: $localize `:@@products.product-list.context.delete:Delete`, icon: 'delete' }
-];
+    this.contextMenuItems = [];
   }
 }

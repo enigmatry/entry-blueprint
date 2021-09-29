@@ -8,7 +8,7 @@
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { CellTemplate, ColumnDef, ContextMenuItem } from '@enigmatry/angular-building-blocks/enigmatry-grid';
+import { CellTemplate, ColumnDef, ContextMenuItem, RowContextMenuFormatter } from '@enigmatry/angular-building-blocks/enigmatry-grid';
 import { PagedData, PageEvent, SortDirection, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
 
 import { GetUsersResponseItem } from 'src/app/api/api-reference';
@@ -39,6 +39,7 @@ export class UserListGeneratedComponent implements OnInit {
 
   @Input() showContextMenu = true;
   @Input() contextMenuItems: ContextMenuItem[] = [];
+  @Input() rowContextMenuFormatter: RowContextMenuFormatter;
 
   @Input() columns: ColumnDef[] = [];
 

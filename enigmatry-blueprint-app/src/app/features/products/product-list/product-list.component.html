@@ -2,6 +2,7 @@
     [data]="data | async" 
     [loading]="loading"
     [defaultSort]="query"
+    [rowContextMenuFormatter]="productListRowContextMenuFormatter"
     (sortChange)="sortChange($event)" 
     (pageChange)="pageChange($event)"
     (selectionChange)="selectionChange($event)"

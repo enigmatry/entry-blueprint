@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { GetProductsResponseItem, ProductsClient } from 'src/app/api/api-reference';
 import { ListComponentWithRouting } from 'src/app/shared/list-component/list-component-with-routing.model';
 import { GetProductsQuery } from '../models/get-products-query.model';
+import { ProductListRowContextMenuFormatter } from '../models/product-list-row-context-menu-formatter.model';
 
 @Component({
     selector: 'app-product-list',
@@ -12,8 +13,9 @@ import { GetProductsQuery } from '../models/get-products-query.model';
     styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent
-    extends ListComponentWithRouting<GetProductsResponseItem, GetProductsQuery>
-    implements OnInit {
+    extends ListComponentWithRouting<GetProductsResponseItem, GetProductsQuery> implements OnInit {
+    productListRowContextMenuFormatter = new ProductListRowContextMenuFormatter();
+
     constructor(private client: ProductsClient, protected router: Router, protected activatedRoute: ActivatedRoute) {
         super();
     }
