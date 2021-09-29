@@ -15,6 +15,9 @@
     <ParameterValue Include="ApplicationInsights InstrumentationKey">
       <Value>c8f0815e-5d8f-460e-9e87-436be3bebd3e</Value>
     </ParameterValue>
+    <ParameterValue Include="HealthChecks Token">
+      <Value>d5d97ea1-5709-45e1-a414-0bac78e8aecb</Value>
+    </ParameterValue>
     <ParameterValue Include="Default Log Level">
       <Value>Information</Value>
     </ParameterValue>
