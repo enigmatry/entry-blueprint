@@ -34,6 +34,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .Column(x => x.Amount)
                 .WithHeaderName("Units")
                 .WithTranslationId(ProductTranslationId.Amount);
+            builder
+                .Column(x => x.FreeShipping);
 
             // Configuring list rows:
             builder

@@ -10,7 +10,8 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
     public static class FluentValidationStartupExtensions
     {
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void AppConfigureFluentValidation(this IApplicationBuilder app) => ValidatorOptions.Global.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
+        public static void AppConfigureFluentValidation(this IApplicationBuilder app) =>
+            ValidatorOptions.Global.PropertyNameResolver = CamelCasePropertyNameResolver.ResolvePropertyName;
 #pragma warning restore IDE0060 // Remove unused parameter
 
         public static void AppAddFluentValidationApiBehaviorOptions(this ApiBehaviorOptions options) =>

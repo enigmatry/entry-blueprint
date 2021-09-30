@@ -31,7 +31,10 @@ export class ProductEditComponent implements OnInit {
             price: model.price,
             contactEmail: model.contactEmail,
             contactPhone: model.contactPhone,
-            expiresOn: model.expiresOn
+            infoLink: model.infoLink,
+            amount: model.amount,
+            expiresOn: model.expiresOn,
+            freeShipping: model.freeShipping
         });
         this.client.post(command)
             .subscribe(() => this.location.back());

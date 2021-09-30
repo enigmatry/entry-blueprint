@@ -19,6 +19,7 @@ namespace Enigmatry.Blueprint.Model.Products.Commands
             public string ContactPhone { get; set; } = String.Empty;
             public string InfoLink { get; set; } = String.Empty;
             public DateTimeOffset? ExpiresOn { get; set; }
+            public bool FreeShipping { get; set; }
         }
 
         [PublicAPI]

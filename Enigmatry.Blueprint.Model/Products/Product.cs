@@ -10,12 +10,12 @@ namespace Enigmatry.Blueprint.Model.Products
     public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
     {
         public const int NameMinLength = 5;
-        public const int NameMaxLength = 25;
+        public const int NameMaxLength = 50;
         public const int CodeMaxLength = 12;
         public const double PriceMinValue = 0.0;
         public const int AmountMinValue = 0;
         public const int AmountMaxValue = 100;
-        public const int ContactEmailMaxLength = 25;
+        public const int ContactEmailMaxLength = 50;
         public const int ContactPhoneMaxLength = 25;
 
         public string Name { get; private set; } = String.Empty;
@@ -27,6 +27,7 @@ namespace Enigmatry.Blueprint.Model.Products
         public string ContactPhone { get; private set; } = String.Empty;
         public string InfoLink { get; private set; } = String.Empty;
         public DateTimeOffset? ExpiresOn { get; private set; }
+        public bool FreeShipping { get; private set; }
 
         public DateTimeOffset CreatedOn { get; private set; }
         public DateTimeOffset UpdatedOn { get; private set; }
@@ -48,7 +49,8 @@ namespace Enigmatry.Blueprint.Model.Products
                 ContactEmail = request.ContactEmail,
                 ContactPhone = request.ContactPhone,
                 InfoLink = request.InfoLink,
-                ExpiresOn = request.ExpiresOn
+                ExpiresOn = request.ExpiresOn,
+                FreeShipping = request.FreeShipping
             };
             product.AddDomainEvent(new ProductCreatedDomainEvent(product));
             return product;
@@ -65,6 +67,7 @@ namespace Enigmatry.Blueprint.Model.Products
             ContactPhone = request.ContactPhone;
             InfoLink = request.InfoLink;
             ExpiresOn = request.ExpiresOn;
+            FreeShipping = request.FreeShipping;
             AddDomainEvent(new ProductUpdatedDomainEvent(this));
         }
 

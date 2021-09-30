@@ -16,7 +16,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.9")
+                .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
@@ -85,8 +85,8 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 
                     b.Property<string>("ContactEmail")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ContactPhone")
                         .IsRequired()
@@ -102,14 +102,17 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                     b.Property<DateTimeOffset?>("ExpiresOn")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<bool>("FreeShipping")
+                        .HasColumnType("bit");
+
                     b.Property<string>("InfoLink")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -141,9 +144,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             Amount = 23,
                             Code = "XYZW12345678",
                             ContactEmail = "frank.herbert@gmail.com",
-                            ContactPhone = "+253 56 334 4889",
+                            ContactPhone = "+253 (056) 334 4889",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = true,
                             InfoLink = "https://en.wikipedia.org/wiki/Dune_(novel)",
                             Name = "Dune I",
                             Price = 13.699999999999999,
@@ -156,10 +160,11 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             Amount = 100,
                             Code = "ABCD12345678",
                             ContactEmail = "info@salto.rs",
-                            ContactPhone = "+381 60 399 8871",
+                            ContactPhone = "+381 (060) 399 8871",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             ExpiresOn = new DateTimeOffset(new DateTime(2025, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = false,
                             InfoLink = "https://www.salto.rs/#belgrade-ipa",
                             Name = "Salto IPA",
                             Price = 2.6000000000000001,
@@ -172,9 +177,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             Amount = 1,
                             Code = "XXXX12345678",
                             ContactEmail = "info@lada.com",
-                            ContactPhone = "+381 21 661 6432",
+                            ContactPhone = "+381 (021) 661 6432",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = true,
                             InfoLink = "https://en.wikipedia.org/wiki/Lada_Niva",
                             Name = "Lada Niva",
                             Price = 15335.0,
@@ -187,9 +193,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             Amount = 3,
                             Code = "VWVW12345678",
                             ContactEmail = "vw_camper@vw.com",
-                            ContactPhone = "+381 32 332 7689",
+                            ContactPhone = "+381 (032) 332 7689",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = true,
                             InfoLink = "https://en.wikipedia.org/wiki/Volkswagen_Type_2",
                             Name = "Volkswagen Type 2",
                             Price = 8799.5,
@@ -202,9 +209,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             Amount = 89,
                             Code = "FOOD12345678",
                             ContactEmail = "burek@burek.com",
-                            ContactPhone = "+381 11 113 6651",
+                            ContactPhone = "+381 (011) 113 6651",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = false,
                             InfoLink = "",
                             Name = "Burek",
                             Price = 2.5,
@@ -217,13 +225,62 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             Amount = 13,
                             Code = "ZXAB14444678",
                             ContactEmail = "sardines@ocean.com",
-                            ContactPhone = "+381 11 451 8709",
+                            ContactPhone = "+381 (011) 451-8709",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             ExpiresOn = new DateTimeOffset(new DateTime(2050, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = false,
                             InfoLink = "https://www.youtube.com/watch?v=WPpFjl8qeM4&ab_channel=DiscoveryUK",
                             Name = "Sardines",
                             Price = 7.3300000000000001,
+                            Type = 0,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("65fb31fa-ff40-4bd5-8fe6-755122b6428b"),
+                            Amount = 22,
+                            Code = "TKMB33774422",
+                            ContactEmail = "harper.lee@book.com",
+                            ContactPhone = "+253 (056) 331-1178",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = false,
+                            InfoLink = "https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird",
+                            Name = "To Kill a Mockingbird",
+                            Price = 9.0899999999999999,
+                            Type = 2,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("767c974c-8c07-43f5-8c6f-0cc1eef3c65a"),
+                            Amount = 68,
+                            Code = "KIBL12344321",
+                            ContactEmail = "kibbeling@nl.fast.food.com",
+                            ContactPhone = "+31 (098) 777 3379",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = false,
+                            InfoLink = "https://en.wikipedia.org/wiki/Kibbeling",
+                            Name = "Kibbeling",
+                            Price = 4.5,
+                            Type = 0,
+                            UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("67a75734-d04a-4661-95d9-24879122c901"),
+                            Amount = 54,
+                            Code = "KAPS11223344",
+                            ContactEmail = "kapsalon@nl.fast.food.com",
+                            ContactPhone = "+31 (098) 221 3489",
+                            CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            FreeShipping = false,
+                            InfoLink = "https://en.wikipedia.org/wiki/Kapsalon",
+                            Name = "Kapsalon",
+                            Price = 5.5,
                             Type = 0,
                             UpdatedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
