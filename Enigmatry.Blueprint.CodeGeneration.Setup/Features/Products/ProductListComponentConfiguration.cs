@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Products;
+using Enigmatry.CodeGeneration.Configuration.Formatters;
 using Enigmatry.CodeGeneration.Configuration.List;
 using Enigmatry.CodeGeneration.Configuration.List.Model;
 
@@ -28,6 +29,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             builder
                 .Column(x => x.Price)
                 .WithHeaderName("Price per unit")
+                .WithFormat(new CurrencyPropertyFormatter().WithCurrencyCode("EUR").WithDisplay("€"))
                 .WithTranslationId(ProductTranslationId.Price)
                 .WithCustomCssClass("products-price");
             builder
