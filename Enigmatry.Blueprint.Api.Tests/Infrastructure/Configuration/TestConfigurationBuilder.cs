@@ -34,7 +34,8 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration
                 },
                 {"App:Smtp:UsePickupDirectory", "true"},
                 {"App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation()},
-                {"ApplicationInsights:TelemetryProcessor:ExcludedTypes", String.Empty }
+                {"ApplicationInsights:TelemetryProcessor:ExcludedTypes", String.Empty },
+                {"HealthChecks:TokenAuthorizationEnabled", "false"}
             };
 
             configurationBuilder.AddInMemoryCollection(dict);
