@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Products;
+using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Model.Products;
 using Enigmatry.CodeGeneration.Configuration.Form;
 

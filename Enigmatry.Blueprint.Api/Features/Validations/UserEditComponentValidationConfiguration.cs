@@ -2,7 +2,7 @@
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.BuildingBlocks.Validation;
 
-namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users
+namespace Enigmatry.Blueprint.Api.Features.Validations
 {
     public class UserEditComponentValidationConfiguration : ValidationConfiguration<GetUserDetails.Response>
     {

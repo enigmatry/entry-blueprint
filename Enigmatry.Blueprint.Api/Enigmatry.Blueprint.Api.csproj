@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Enigmatry.BuildingBlocks.HealthChecks" Version="1.1.159" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.Validation" Version="1.1.168" />
     <PackageReference Include="Microsoft.AspNetCore.AzureKeyVault.HostingStartup" Version="2.0.4" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
   </ItemGroup>

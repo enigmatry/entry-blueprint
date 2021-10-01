@@ -12,7 +12,8 @@ namespace Enigmatry.Blueprint.Model.Products
         public const int NameMinLength = 5;
         public const int NameMaxLength = 50;
         public const int CodeMaxLength = 12;
-        public const double PriceMinValue = 0.0;
+        public const double PriceMinValue = 0.99;
+        public const double PriceMaxValue = 999.99;
         public const int AmountMinValue = 0;
         public const int AmountMaxValue = 100;
         public const int ContactEmailMaxLength = 50;

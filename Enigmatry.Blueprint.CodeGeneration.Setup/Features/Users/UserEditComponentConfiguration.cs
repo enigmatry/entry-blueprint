@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Users;
+using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.CodeGeneration.Configuration.Form;
 using JetBrains.Annotations;
 

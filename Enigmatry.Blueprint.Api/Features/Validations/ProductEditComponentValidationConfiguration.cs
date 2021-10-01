@@ -3,9 +3,9 @@ using Enigmatry.Blueprint.Model.Products;
 using Enigmatry.BuildingBlocks.Validation;
 using System.Text.RegularExpressions;
 
-namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
+namespace Enigmatry.Blueprint.Api.Features.Validations
 {
-    internal class ProductEditComponentValidationConfiguration : ValidationConfiguration<GetProductDetails.Response>
+    public class ProductEditComponentValidationConfiguration : ValidationConfiguration<GetProductDetails.Response>
     {
         public ProductEditComponentValidationConfiguration()
         {
@@ -19,7 +19,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithMessage("Code must be in 4 letter 8 digits format (e.g. ABCD12345678)");
             RuleFor(x => x.Price)
                 .IsRequired()
-                .GreaterThen((int)Product.PriceMinValue);
+                .GreaterThen(Product.PriceMinValue)
+                .LessOrEqualTo(Product.PriceMaxValue);
             RuleFor(x => x.Amount)
                 .IsRequired()
                 .GreaterThen(Product.AmountMinValue)
