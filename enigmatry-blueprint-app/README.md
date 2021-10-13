@@ -8,7 +8,8 @@
   * [1. Installing code generator tool](#1-installing-code-generator-tool)
   * [2. Configuring the code to be generated](#2-configuring-the-code-to-be-generated)
   * [3. Generating code](#3-generating-code)
-
+* [Code generator configuration](#code-generator-configuration)
+  * [Custom validators](#custom-validators)
 
 ## Starting the app
 
@@ -38,9 +39,44 @@ To update the tool run `npm run codegen:update`. This npm script should be execu
 
 ### 2. Configuring the code to be generated
 
-All code generation configurations are located in `Enigmatry.Blueprint.CodeGeneration.Setup` project. For configurations to be visible for the tool, the project must be re-built each time there are changes in the configuration definitions.
+All code generation configurations are located in `Enigmatry.Blueprint.CodeGeneration.Setup` project. For configurations to be visible for the tool, the project must be re-built each time there are changes in the configuration definitions. More details in [Code generator configuration](#code-generator-configuration)
 
 ### 3. Generating code
 
 To generate the code from configurations, execute npm script `npm run codegen`. This command will run the tool which will generate configured code inside features modules.
 
+## Code generator configuration
+
+### Custom validators
+
+Custom validator can be applied in `IFormComponentConfiguration` configurations on FormControl level. They are configured via `WithValidator()` setter that accepts validator name and optional validator trigger type (default is `OnBlur`). Validator name matches validator name on client side. Validator trigger determines form event on which validator will trigger (`OnChange` & `OnSubmit` are other supported options).
+
+Generated code expects validators to be configured in the following default location `shared/validators/custom-validators`. This location can be customized via code generator console command flag `--validators-path`.
+
+`custom-validator` file must export 2 things:
+
+* `customValidatorsFactory`, holds definitions of the validators & validation messages
+* `CustomValidatorsService`, a wrapper service used to inject other dependencies in validators
+
+`customValidatorsFactory` is function that receives `CustomValidatorsService` as input and have result in following format:
+
+```ts
+{
+  validationMessages: [
+    { name: '[VALIDATOR_NAME]', message: '[VALIDATION_MESSAGE]' },
+    // ...
+  ],
+  validators: [
+    {
+        name: '[VALIDATOR_NAME]',
+        validation: (control: FormControl, service: CustomValidatorsService)
+          : Promise<{ VALIDATOR_NAME: boolean } | null> =>
+          { /* validator logic goes here */ }
+    }
+  ]
+}
+```
+
+`[VALIDATOR_NAME]` placeholder must match configured name of the validator (in camel-case, 'isEmailUnique').
+
+`CustomValidatorsService` is a service used to inject dependencies into validators. For example, this service can expose API clients methods to be used in validators to hit the API.
