@@ -31,13 +31,6 @@ import { UserListGeneratedComponent } from './user-list/user-list-generated.comp
         MatAutocompleteModule,
         MatNativeDateModule,
         FormlyModule.forChild(
-            {
-                validationMessages: [
-{ name: 'required', message: (err, field) => $localize `:@@validators.required:${field?.templateOptions?.label}:property-name: is required` },
-{ name: 'minlength', message: (err, field) => $localize `:@@validators.minLength:${field?.templateOptions?.label}:property-name: should have at least ${field?.templateOptions?.minLength}:min-value: characters` },
-{ name: 'maxlength', message: (err, field) => $localize `:@@validators.maxLength:${field?.templateOptions?.label}:property-name: value should be less than ${field?.templateOptions?.maxLength}:max-value: characters` }
-                ]
-            }
         ),
         FormlyMaterialModule,
         FormlyMatDatepickerModule,

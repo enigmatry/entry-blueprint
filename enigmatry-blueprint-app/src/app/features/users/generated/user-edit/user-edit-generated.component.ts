@@ -12,6 +12,7 @@ import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
 
+
 @Component({
   selector: 'app-g-user-edit',
   templateUrl: './user-edit-generated.component.html',
@@ -28,7 +29,7 @@ export class UserEditGeneratedComponent implements OnInit {
     return this._isReadonly;
   }
 
-@Output() save = new EventEmitter<IGetUserDetailsResponse>();
+  @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
   _isReadonly: boolean;
@@ -49,53 +50,78 @@ export class UserEditGeneratedComponent implements OnInit {
 
   initializeFields(): FormlyFieldConfig[] {
     return [
-    {
-    key: 'userName',
-    type: 'input',
-    templateOptions: {
+        {
+        type: 'fieldset',
+        fieldGroupClassName: '',
+        templateOptions: {
+        label: $localize `:@@users.user-edit.user.label:User`,
+        placeholder: $localize `:@@users.user-edit.user.placeholder:User`,
+        disabled: this.isReadonly || false,
+        description: ''
+        },
+        fieldGroup:[
+        {
+        key: 'userName',
+        type: 'input',
+        className: '',
+        templateOptions: {
         label: $localize `:@@users.user-edit.user-name.label:User name`,
         placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
         disabled: this.isReadonly || true,
         description: '',
         hidden: !true,
-    },
-    },
-    {
-    key: 'name',
-    type: 'input',
-    templateOptions: {
+        },
+        },
+        {
+        key: 'name',
+        type: 'input',
+        className: '',
+        templateOptions: {
         label: $localize `:@@users.user-edit.name.label:Name`,
         placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-required: true,
-minLength: 5,
-maxLength: 25,
-    },
-    },
-    {
-    key: 'createdOn',
-    type: 'datepicker',
-    templateOptions: {
+        },
+        },
+        {
+        type: 'fieldset',
+        fieldGroupClassName: '',
+        templateOptions: {
+        label: $localize `:@@users.user-edit.history.label:History`,
+        placeholder: $localize `:@@users.user-edit.history.placeholder:History`,
+        disabled: this.isReadonly || false,
+        description: ''
+        },
+        fieldGroup:[
+        {
+        key: 'createdOn',
+        type: 'datepicker',
+        className: '',
+        templateOptions: {
         label: $localize `:@@users.user-edit.created-on.label:Created on`,
         placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
         disabled: this.isReadonly || true,
         description: '',
         hidden: !true,
-    },
-    },
-    {
-    key: 'updatedOn',
-    type: 'datepicker',
-    templateOptions: {
+        },
+        },
+        {
+        key: 'updatedOn',
+        type: 'datepicker',
+        className: '',
+        templateOptions: {
         label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
         placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
         disabled: this.isReadonly || true,
         description: '',
         hidden: !true,
-    },
-    },
+        },
+        },
+        ]
+        },
+        ]
+        },
     ];
   }
 }

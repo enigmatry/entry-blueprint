@@ -1,0 +1,4 @@
+<fieldset *ngIf="field.fieldGroup as fieldGroup">
+  <legend>{{ to.label }}</legend>
+  <formly-field *ngFor="let field of fieldGroup" [field]="field"></formly-field>
+</fieldset>

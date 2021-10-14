@@ -1,0 +1,10 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="false" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{to.label}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <formly-field *ngFor="let field of field.fieldGroup" [field]="field"></formly-field>
+  </mat-expansion-panel>
+</mat-accordion>
