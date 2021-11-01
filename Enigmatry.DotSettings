@@ -383,6 +383,54 @@ public static class $TypeName$EnumerableExtensions&#xD;
         }&#xD;
     }</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=40C163D436D8ED48A6D01A0AFEFC5556/@KeyIndexDefined">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/CustomProperties/=FileName/@EntryIndexedValue">ComponentValidationConfiguration</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Description/@EntryValue">Blueprint Code Generation Validation Configuration</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=FEATURENAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=FEATURENAME/InitialRange/@EntryValue">2</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=FEATURENAME/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=GETDETAILSREQUESTNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=GETDETAILSREQUESTNAME/Order/@EntryValue">4</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/Expression/@EntryValue">getSolutionName()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Text/@EntryValue">using $ROOTNAMESPACE$.Api.Features.$FEATURENAME$;&#xD;
+using Enigmatry.BuildingBlocks.Validation;&#xD;
+using System.Text.RegularExpressions;&#xD;
+&#xD;
+namespace $NAMESPACE$&#xD;
+{&#xD;
+    public class $CLASS$ : ValidationConfiguration&lt;$GETDETAILSREQUESTNAME$.Response&gt;&#xD;
+    {&#xD;
+        public $CLASS$()&#xD;
+        {&#xD;
+            RuleFor(x =&gt; x.Name)&#xD;
+                .IsRequired()&#xD;
+                .MinLength(10)&#xD;
+                .MaxLength(200)&#xD;
+				.EmailAddress()&#xD;
+                .Match(new Regex("/^[A-Z]{4}[1-9]{8}$/mu"))&#xD;
+                .WithMessage("Name must be in 4 letter 8 digits format (e.g. ABCD12345678)");&#xD;
+        }&#xD;
+    }&#xD;
+}&#xD;
+</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
@@ -1145,16 +1193,18 @@ public class $EntityName$Fixture : IntegrationFixtureBase&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/CustomProperties/=FileName/@EntryIndexedValue">ComponentConfiguration</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Description/@EntryValue">Blueprint Code Generation List Configuration</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Description/@EntryValue">Blueprint Code Generation Form Configuration</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=CLASS/Order/@EntryValue">2</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=COMPONENTNAME/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=COMPONENTNAME/Order/@EntryValue">4</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=COMPONENTNAME/Order/@EntryValue">5</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=FEATURENAME/@KeyIndexDefined">True</s:Boolean>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=FEATURENAME/InitialRange/@EntryValue">1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=FEATURENAME/Order/@EntryValue">5</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=FEATURENAME/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=GETDETAILSREQUESTNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=GETDETAILSREQUESTNAME/Order/@EntryValue">4</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
@@ -1170,55 +1220,38 @@ public class $EntityName$Fixture : IntegrationFixtureBase&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Text/@EntryValue">using $ROOTNAMESPACE$.Api.Features.$FEATURENAME$;&#xD;
-using Enigmatry.CodeGeneration.Configuration.List;&#xD;
-using Enigmatry.CodeGeneration.Configuration.List.Model;&#xD;
+using $ROOTNAMESPACE$.Api.Features.Validations;&#xD;
+using Enigmatry.CodeGeneration.Configuration.Form;&#xD;
 using JetBrains.Annotations;&#xD;
 &#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
     [UsedImplicitly]&#xD;
-    public class $CLASS$ : IListComponentConfiguration&lt;$REQUESTNAME$.Response.Item&gt;&#xD;
+    public class $CLASS$ : IFormComponentConfiguration&lt;$GETDETAILSREQUESTNAME$.Response&gt;&#xD;
     {&#xD;
-        public void Configure(ListComponentBuilder&lt;$REQUESTNAME$.Response.Item&gt; builder)&#xD;
+        public void Configure(FormComponentBuilder&lt;$GETDETAILSREQUESTNAME$.Response&gt; builder)&#xD;
         {&#xD;
-            // Configure component:&#xD;
-            // - component name and feature name:&#xD;
-&#xD;
+            // Configuring component:&#xD;
             builder.Component()&#xD;
                 .HasName("$COMPONENTNAME$")&#xD;
                 .BelongsToFeature("$FEATURENAME$");&#xD;
 &#xD;
-            // Configure columns:&#xD;
-            // - HeaderName                 &#xD;
-            // - IsVisible                  (default true except for 'Id' column)&#xD;
-            // - IsSortable                 (default true)&#xD;
-            // - TranslationId&#xD;
-            // - Formatter&#xD;
+            // Configuring fields:&#xD;
+            builder.FormControl(x =&gt; x.Name)&#xD;
+				.WithLabel("Name")&#xD;
+                .WithPlaceholder("Unique name")&#xD;
+                .WithValidator("NameIsUnique");&#xD;
+				// Optional tranlations:&#xD;
+				//.WithLabelTranslationId(ProductTranslationId.Price)&#xD;
+                //.WithPlaceholderTranslationId(ProductTranslationId.Price);&#xD;
 &#xD;
-            builder.Column(x =&gt; x.Name)&#xD;
-                .WithHeaderName("Name");&#xD;
+			// Dropdown example:&#xD;
+            //builder.FormControl(x =&gt; x.Type)&#xD;
+            //    .IsDropDownListControl()&#xD;
+            //    .WithFixedValues&lt;ProductType&gt;();&#xD;
 &#xD;
-            // Configure selection:&#xD;
-            // None, Single or Multiple     (default None)&#xD;
-&#xD;
-            builder.Row().Selection(RowSelectionType.Single);&#xD;
-&#xD;
-            // Configure pagination: &#xD;
-            // - ShowPaginator              (default true)&#xD;
-            // - PageSizeOptions            (default [10, 50, 100])&#xD;
-            // - ShowPageSize               (default true)&#xD;
-            // - ShowFirstLastPageButtons   (default true)&#xD;
-&#xD;
-            builder.Pagination().ShowFirstLastPageButtons(false);&#xD;
-&#xD;
-            // Configure context menu:&#xD;
-            // - ShowContextMenu            (default false)&#xD;
-            // - ContextMenuItems:&#xD;
-            // as string values or RowContextMenuItem values&#xD;
-&#xD;
-            builder.Row()&#xD;
-                .ShowContextMenu(true)&#xD;
-                .ContextMenuItems("Edit", "Delete");&#xD;
+            // Configuring built in validations&#xD;
+            builder.WithValidationConfiguration(new $COMPONENTNAME$ComponentValidationConfiguration());&#xD;
         }&#xD;
     }&#xD;
 }&#xD;
