@@ -332,14 +332,16 @@ export interface IProductsClient {
     get(id: string): Observable<GetProductDetailsResponse>;
     /**
      * Return true if product code is unique
-     * @param code Code
+     * @param id (optional) 
+     * @param code (optional) 
      */
-    isCodeUnique(code: string | null): Observable<GetProductCodeUniquenessResponse>;
+    isCodeUnique(id: string | undefined, code: string | null | undefined): Observable<IsProductCodeUniqueResponse>;
     /**
      * Return true if product name is unique
-     * @param name Name
+     * @param id (optional) 
+     * @param name (optional) 
      */
-    isNameUnique(name: string | null): Observable<GetProductNameUniquenessResponse>;
+    isNameUnique(id: string | undefined, name: string | null | undefined): Observable<IsProductNameUniqueResponse>;
 }
 
 @Injectable({
@@ -560,13 +562,17 @@ export class ProductsClient implements IProductsClient {
 
     /**
      * Return true if product code is unique
-     * @param code Code
+     * @param id (optional) 
+     * @param code (optional) 
      */
-    isCodeUnique(code: string | null): Observable<GetProductCodeUniquenessResponse> {
-        let url_ = this.baseUrl + "/Products/code-unique/{code}";
-        if (code === undefined || code === null)
-            throw new Error("The parameter 'code' must be defined.");
-        url_ = url_.replace("{code}", encodeURIComponent("" + code));
+    isCodeUnique(id: string | undefined, code: string | null | undefined): Observable<IsProductCodeUniqueResponse> {
+        let url_ = this.baseUrl + "/Products/code-unique?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        if (code !== undefined && code !== null)
+            url_ += "Code=" + encodeURIComponent("" + code) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -584,14 +590,14 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processIsCodeUnique(<any>response_);
                 } catch (e) {
-                    return <Observable<GetProductCodeUniquenessResponse>><any>_observableThrow(e);
+                    return <Observable<IsProductCodeUniqueResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<GetProductCodeUniquenessResponse>><any>_observableThrow(response_);
+                return <Observable<IsProductCodeUniqueResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processIsCodeUnique(response: HttpResponseBase): Observable<GetProductCodeUniquenessResponse> {
+    protected processIsCodeUnique(response: HttpResponseBase): Observable<IsProductCodeUniqueResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -602,7 +608,7 @@ export class ProductsClient implements IProductsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = GetProductCodeUniquenessResponse.fromJS(resultData200);
+            result200 = IsProductCodeUniqueResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 404) {
@@ -617,18 +623,22 @@ export class ProductsClient implements IProductsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<GetProductCodeUniquenessResponse>(<any>null);
+        return _observableOf<IsProductCodeUniqueResponse>(<any>null);
     }
 
     /**
      * Return true if product name is unique
-     * @param name Name
+     * @param id (optional) 
+     * @param name (optional) 
      */
-    isNameUnique(name: string | null): Observable<GetProductNameUniquenessResponse> {
-        let url_ = this.baseUrl + "/Products/name-unique/{name}";
-        if (name === undefined || name === null)
-            throw new Error("The parameter 'name' must be defined.");
-        url_ = url_.replace("{name}", encodeURIComponent("" + name));
+    isNameUnique(id: string | undefined, name: string | null | undefined): Observable<IsProductNameUniqueResponse> {
+        let url_ = this.baseUrl + "/Products/name-unique?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
+        if (name !== undefined && name !== null)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -646,14 +656,14 @@ export class ProductsClient implements IProductsClient {
                 try {
                     return this.processIsNameUnique(<any>response_);
                 } catch (e) {
-                    return <Observable<GetProductNameUniquenessResponse>><any>_observableThrow(e);
+                    return <Observable<IsProductNameUniqueResponse>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<GetProductNameUniquenessResponse>><any>_observableThrow(response_);
+                return <Observable<IsProductNameUniqueResponse>><any>_observableThrow(response_);
         }));
     }
 
-    protected processIsNameUnique(response: HttpResponseBase): Observable<GetProductNameUniquenessResponse> {
+    protected processIsNameUnique(response: HttpResponseBase): Observable<IsProductNameUniqueResponse> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -664,7 +674,7 @@ export class ProductsClient implements IProductsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = GetProductNameUniquenessResponse.fromJS(resultData200);
+            result200 = IsProductNameUniqueResponse.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 404) {
@@ -679,7 +689,7 @@ export class ProductsClient implements IProductsClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<GetProductNameUniquenessResponse>(<any>null);
+        return _observableOf<IsProductNameUniqueResponse>(<any>null);
     }
 }
 
@@ -1224,10 +1234,10 @@ export interface IGetProductDetailsResponse {
     freeShipping?: boolean;
 }
 
-export class GetProductCodeUniquenessResponse implements IGetProductCodeUniquenessResponse {
+export class IsProductCodeUniqueResponse implements IIsProductCodeUniqueResponse {
     isUnique?: boolean;
 
-    constructor(data?: IGetProductCodeUniquenessResponse) {
+    constructor(data?: IIsProductCodeUniqueResponse) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1242,9 +1252,9 @@ export class GetProductCodeUniquenessResponse implements IGetProductCodeUniquene
         }
     }
 
-    static fromJS(data: any): GetProductCodeUniquenessResponse {
+    static fromJS(data: any): IsProductCodeUniqueResponse {
         data = typeof data === 'object' ? data : {};
-        let result = new GetProductCodeUniquenessResponse();
+        let result = new IsProductCodeUniqueResponse();
         result.init(data);
         return result;
     }
@@ -1256,14 +1266,14 @@ export class GetProductCodeUniquenessResponse implements IGetProductCodeUniquene
     }
 }
 
-export interface IGetProductCodeUniquenessResponse {
+export interface IIsProductCodeUniqueResponse {
     isUnique?: boolean;
 }
 
-export class GetProductNameUniquenessResponse implements IGetProductNameUniquenessResponse {
+export class IsProductNameUniqueResponse implements IIsProductNameUniqueResponse {
     isUnique?: boolean;
 
-    constructor(data?: IGetProductNameUniquenessResponse) {
+    constructor(data?: IIsProductNameUniqueResponse) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1278,9 +1288,9 @@ export class GetProductNameUniquenessResponse implements IGetProductNameUniquene
         }
     }
 
-    static fromJS(data: any): GetProductNameUniquenessResponse {
+    static fromJS(data: any): IsProductNameUniqueResponse {
         data = typeof data === 'object' ? data : {};
-        let result = new GetProductNameUniquenessResponse();
+        let result = new IsProductNameUniqueResponse();
         result.init(data);
         return result;
     }
@@ -1292,7 +1302,7 @@ export class GetProductNameUniquenessResponse implements IGetProductNameUniquene
     }
 }
 
-export interface IGetProductNameUniquenessResponse {
+export interface IIsProductNameUniqueResponse {
     isUnique?: boolean;
 }
 

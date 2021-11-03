@@ -7,12 +7,10 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
-    import { map } from 'rxjs/operators';
-    import { ProductEditLookupService } from '../services/product-edit-generated-lookup.service';
 
 
 @Component({
@@ -31,6 +29,10 @@ export class ProductEditGeneratedComponent implements OnInit {
     return this._isReadonly;
   }
 
+  @Input() saveButtonText: string = 'Save';
+  @Input() cancelButtonText: string = 'Cancel';
+  @Input() formButtonsTemplate: TemplateRef<any> | null | undefined;
+
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
@@ -38,7 +40,7 @@ export class ProductEditGeneratedComponent implements OnInit {
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
-  constructor(private lookupService: ProductEditLookupService) {
+  constructor() {
     this.fields = this.initializeFields();
   }
 
@@ -52,6 +54,7 @@ export class ProductEditGeneratedComponent implements OnInit {
 
   initializeFields(): FormlyFieldConfig[] {
     return [
+        { key: 'id' },
         {
         key: 'name',
         type: 'input',
@@ -99,10 +102,9 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
         disabled: this.isReadonly || false,
         description: '',
-            options: this.lookupService.getType$.pipe(
-            map((arr) =>
-            arr.map(el => el = {value: el.value, label: el.displayName}))
-            ),
+            options: [{ value: 0, displayName: 'Food' }, { value: 1, displayName: 'Drink' }, { value: 2, displayName: 'Book' }, { value: 3, displayName: 'Car' }],
+            valueProp: 'value',
+            labelProp: 'displayName',
         hidden: !true,
 required: true,
         },
@@ -182,9 +184,8 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
+pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u,
         },
-modelOptions: { updateOn: 'blur' },
-asyncValidators: { validation: [ 'isLink' ] },
         },
         {
         key: 'expiresOn',
@@ -192,11 +193,13 @@ asyncValidators: { validation: [ 'isLink' ] },
         className: '',
         templateOptions: {
         label: $localize `:@@products.product-edit.expires-on.label:Expires on`,
-        placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date if any`,
+        placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date, if any`,
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
         },
+modelOptions: { updateOn: 'blur' },
+asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         },
         {
         key: 'freeShipping',

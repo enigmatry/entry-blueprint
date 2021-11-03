@@ -7,7 +7,7 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
@@ -28,6 +28,10 @@ export class UserEditGeneratedComponent implements OnInit {
   get isReadonly() {
     return this._isReadonly;
   }
+
+  @Input() saveButtonText: string = 'Save';
+  @Input() cancelButtonText: string = 'Cancel';
+  @Input() formButtonsTemplate: TemplateRef<any> | null | undefined;
 
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
@@ -82,6 +86,9 @@ export class UserEditGeneratedComponent implements OnInit {
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
+required: true,
+minLength: 5,
+maxLength: 25,
         },
         },
         {

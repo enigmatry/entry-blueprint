@@ -17,10 +17,10 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             // Configuring fields:
             builder.FormControl(x => x.Name)
                 .WithPlaceholder("Unique product name")
-                .WithValidator("ProductNameIsUnique");
+                .WithValidator("productNameIsUnique");
             builder.FormControl(x => x.Code)
                 .WithPlaceholder("Unique product code identifier")
-                .WithValidator("ProductCodeIsUnique");
+                .WithValidator("productCodeIsUnique");
             builder.FormControl(x => x.Type)
                 .IsDropDownListControl()
                 .WithFixedValues<ProductType>();
@@ -40,10 +40,10 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithPlaceholder("Contact person phone number");
             builder.FormControl(x => x.InfoLink)
                 .WithLabel("Homepage")
-                .WithPlaceholder("Link to product homepage")
-                .WithValidator("IsLink");
+                .WithPlaceholder("Link to product homepage");
             builder.FormControl(x => x.ExpiresOn)
-                .WithPlaceholder("Product expiration date, if any");
+                .WithPlaceholder("Product expiration date, if any")
+                .WithValidator("productExpiresOnIsRequired");
 
             // Configuring built in validations
             builder.WithValidationConfiguration(new ProductEditComponentValidationConfiguration());

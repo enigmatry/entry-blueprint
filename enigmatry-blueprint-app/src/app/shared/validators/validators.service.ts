@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-    GetProductCodeUniquenessResponse,
-    GetProductNameUniquenessResponse,
+    IsProductCodeUniqueResponse,
+    IsProductNameUniqueResponse,
     ProductsClient
 } from 'src/app/api/api-reference';
 
@@ -12,9 +12,9 @@ import {
 export class ValidatorsService {
     constructor(private productsClient: ProductsClient) { }
 
-    isCodeUnique = (code: string): Observable<GetProductCodeUniquenessResponse> =>
-        this.productsClient.isCodeUnique(code);
+    isCodeUnique = (id: string, code: string): Observable<IsProductCodeUniqueResponse> =>
+        this.productsClient.isCodeUnique(id, code);
 
-    isNameUnique = (code: string): Observable<GetProductNameUniquenessResponse> =>
-        this.productsClient.isNameUnique(code);
+    isNameUnique = (id: string, name: string): Observable<IsProductNameUniqueResponse> =>
+        this.productsClient.isNameUnique(id, name);
 }

@@ -4,17 +4,20 @@ using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Enigmatry.Blueprint.Api.Features.Products
 {
-    public static class GetProductNameUniqueness
+    public static class IsProductCodeUnique
     {
         [PublicAPI]
         public class Request : IRequest<Response>
         {
-            public string Name { get; set; } = String.Empty;
+            public Guid Id { get; set; }
+            public string Code { get; set; } = String.Empty;
         }
 
         [PublicAPI]
@@ -35,9 +38,10 @@ namespace Enigmatry.Blueprint.Api.Features.Products
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var response = await _productRepository.QueryAll()
-                    .SingleOrDefaultAsync(x => x.Name == request.Name, cancellationToken);
-                return new Response { IsUnique = response == null };
+                var isUnique = !await _productRepository.QueryAll()
+                    .Where(x => x.Id != request.Id)
+                    .AnyAsync(x => x.Code == request.Code, cancellationToken);
+                return new Response { IsUnique = isUnique };
             }
         }
     }

@@ -55,7 +55,7 @@ export class UserListGeneratedComponent implements OnInit {
 
   ngOnInit(): void {
     this.columns = [
-{ field: 'id', header: $localize `:@@users.user-list.id:Id`, hide: true, sortable: true },
+{ field: 'id', hide: true, sortable: true },
 { field: 'userName', header: $localize `:@@users.user-list.user-name:E-mail`, hide: false, sortable: true },
 { field: 'name', header: $localize `:@@users.user-list.name:Name`, hide: false, sortable: true },
 { field: 'createdOn', header: $localize `:@@users.user-list.created-on:Created on`, hide: false, sortable: true, type: 'date', typeParameter: undefined },

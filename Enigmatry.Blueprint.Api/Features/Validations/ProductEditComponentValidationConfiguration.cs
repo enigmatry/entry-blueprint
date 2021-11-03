@@ -33,6 +33,8 @@ namespace Enigmatry.Blueprint.Api.Features.Validations
             RuleFor(x => x.ContactPhone)
                 .IsRequired()
                 .Match(new Regex("/^s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$/mu"));
+            RuleFor(x => x.InfoLink)
+                .Match(new Regex(@"/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u"));
         }
     }
 }

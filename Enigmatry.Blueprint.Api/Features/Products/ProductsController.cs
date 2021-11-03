@@ -53,28 +53,28 @@ namespace Enigmatry.Blueprint.Api.Features.Products
         /// <summary>
         ///     Return true if product code is unique
         /// </summary>
-        /// <param name="code">Code</param>
+        /// <param name="request">Request</param>
         [HttpGet]
-        [Route("code-unique/{code}")]
+        [Route("code-unique")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<GetProductCodeUniqueness.Response>> IsCodeUnique(string code)
+        public async Task<ActionResult<IsProductCodeUnique.Response>> IsCodeUnique([FromQuery] IsProductCodeUnique.Request request)
         {
-            var response = await _mediator.Send(new GetProductCodeUniqueness.Request { Code = code });
+            var response = await _mediator.Send(request);
             return response.ToActionResult();
         }
 
         /// <summary>
         ///     Return true if product name is unique
         /// </summary>
-        /// <param name="name">Name</param>
+        /// <param name="request">Request</param>
         [HttpGet]
-        [Route("name-unique/{name}")]
+        [Route("name-unique")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<GetProductNameUniqueness.Response>> IsNameUnique(string name)
+        public async Task<ActionResult<IsProductNameUnique.Response>> IsNameUnique([FromQuery] IsProductNameUnique.Request request)
         {
-            var response = await _mediator.Send(new GetProductNameUniqueness.Request { Name = name });
+            var response = await _mediator.Send(request);
             return response.ToActionResult();
         }
 

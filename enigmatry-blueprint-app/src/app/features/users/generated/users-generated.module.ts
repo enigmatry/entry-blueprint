@@ -31,6 +31,11 @@ import { UserListGeneratedComponent } from './user-list/user-list-generated.comp
         MatAutocompleteModule,
         MatNativeDateModule,
         FormlyModule.forChild(
+            {
+                validationMessages: [
+
+                ]
+            }
         ),
         FormlyMaterialModule,
         FormlyMatDatepickerModule,

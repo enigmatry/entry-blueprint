@@ -1,5 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-    <button *ngIf="!isReadonly" type="button" mat-raised-button (click)="cancel.emit()">Cancel</button>
-    <button *ngIf="!isReadonly" type="submit" mat-raised-button color="primary">Save</button>
+    <ng-template [ngIf]="formButtonsTemplate" [ngIfElse]="defaultFormButtonsTpl">
+        <ng-template [ngTemplateOutlet]="formButtonsTemplate"></ng-template>
+    </ng-template>
+    <ng-template #defaultFormButtonsTpl>
+        <button *ngIf="!isReadonly" type="button" mat-raised-button (click)="cancel.emit()">{{cancelButtonText}}</button>
+        <button *ngIf="!isReadonly" type="submit" mat-raised-button color="primary">{{saveButtonText}}</button>
+    </ng-template>
 </form>
