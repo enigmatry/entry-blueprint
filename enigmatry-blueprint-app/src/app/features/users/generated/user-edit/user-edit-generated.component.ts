@@ -11,6 +11,7 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@an
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
+import { IHideExpressionDictionary } from '@enigmatry/angular-building-blocks/form';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
 })
 export class UserEditGeneratedComponent implements OnInit {
 
-  @Input() model: IGetUserDetailsResponse = {};
+  @Input() model: IGetUserDetailsResponse = {} as IGetUserDetailsResponse;
   @Input() set isReadonly(value: boolean) {
     this._isReadonly = value;
     this.fields = this.initializeFields();
@@ -33,6 +34,8 @@ export class UserEditGeneratedComponent implements OnInit {
   @Input() cancelButtonText: string = 'Cancel';
   @Input() formButtonsTemplate: TemplateRef<any> | null | undefined;
 
+  @Input() fieldsHideExpressions: IHideExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
+
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
@@ -40,11 +43,11 @@ export class UserEditGeneratedComponent implements OnInit {
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit(): void {
     this.fields = this.initializeFields();
   }
-
-  ngOnInit(): void {}
 
   onSubmit() {
     if (this.form.valid) {
@@ -68,11 +71,13 @@ export class UserEditGeneratedComponent implements OnInit {
         key: 'userName',
         type: 'input',
         className: '',
+        hideExpression: this.fieldsHideExpressions?.userName ?? false,
         templateOptions: {
         label: $localize `:@@users.user-edit.user-name.label:User name`,
         placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
         disabled: this.isReadonly || true,
         description: '',
+        appearance: 'standard',
         hidden: !true,
         },
         },
@@ -80,11 +85,13 @@ export class UserEditGeneratedComponent implements OnInit {
         key: 'name',
         type: 'input',
         className: '',
+        hideExpression: this.fieldsHideExpressions?.name ?? false,
         templateOptions: {
         label: $localize `:@@users.user-edit.name.label:Name`,
         placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
         disabled: this.isReadonly || false,
         description: '',
+        appearance: 'standard',
         hidden: !true,
 required: true,
 minLength: 5,
@@ -105,11 +112,13 @@ maxLength: 25,
         key: 'createdOn',
         type: 'datepicker',
         className: '',
+        hideExpression: this.fieldsHideExpressions?.createdOn ?? false,
         templateOptions: {
         label: $localize `:@@users.user-edit.created-on.label:Created on`,
         placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
         disabled: this.isReadonly || true,
         description: '',
+        appearance: 'standard',
         hidden: !true,
         },
         },
@@ -117,11 +126,13 @@ maxLength: 25,
         key: 'updatedOn',
         type: 'datepicker',
         className: '',
+        hideExpression: this.fieldsHideExpressions?.updatedOn ?? false,
         templateOptions: {
         label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
         placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
         disabled: this.isReadonly || true,
         description: '',
+        appearance: 'standard',
         hidden: !true,
         },
         },

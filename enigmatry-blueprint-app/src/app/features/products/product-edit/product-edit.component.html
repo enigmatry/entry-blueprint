@@ -1,1 +1,8 @@
-<app-g-product-edit [model]="model" (save)="save($event)" (cancel)="cancel()"></app-g-product-edit>
+<app-g-product-edit
+    [model]="model"
+    [fieldsHideExpressions]="fieldsHideExpressions"
+    [saveButtonText]="saveText"
+    [cancelButtonText]="cancelText"
+    (save)="save($event)"
+    (cancel)="goBack()">
+</app-g-product-edit>

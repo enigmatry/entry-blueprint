@@ -10,6 +10,7 @@
   * [3. Generating code](#3-generating-code)
 * [Code generator configuration](#code-generator-configuration)
   * [Custom validators](#custom-validators)
+  * [Form fields conditional visibility](#form-fields-conditional-visibility)
 
 ## Starting the app
 
@@ -80,3 +81,24 @@ Generated code expects validators to be configured in the following default loca
 `[VALIDATOR_NAME]` placeholder must match configured name of the validator (in camel-case, 'isEmailUnique').
 
 `CustomValidatorsService` is a service used to inject dependencies into validators. For example, this service can expose API clients methods to be used in validators to hit the API.
+
+### Form fields conditional visibility
+
+To show/hide form fields based on condition, we use `fieldsHideExpressions` form input. This input accepts configuration dictionary of type `IHideExpressionDictionary<IFromModel>`, which contains conditions for selected form fields. Example:
+
+```ts
+const hideExpressionsDictionary: IHideExpressionDictionary<IFromModel> = {};
+hideExpressionsDictionary.name = 
+  (model: IFromModel, formState: any, field: any | undefined)): boolean {
+    return model.showName === true;
+  }
+```
+
+In this example, we defined hide-expression condition for form field `name` to be visible only when from field `showName` is set to `true`. We can add expressions for other form fields.
+
+After creating the dictionary, we pass it to form `fieldsHideExpressions` input:
+
+```html
+<app-g-some-from [fieldsHideExpressions]="hideExpressionsDictionary">
+</app-g-some-from>
+```

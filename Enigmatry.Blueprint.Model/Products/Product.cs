@@ -18,6 +18,8 @@ namespace Enigmatry.Blueprint.Model.Products
         public const int AmountMaxValue = 100;
         public const int ContactEmailMaxLength = 50;
         public const int ContactPhoneMaxLength = 25;
+        public const float DiscountMinValue = 0.0F;
+        public const float DiscountMaxValue = 100.0F;
 
         public string Name { get; private set; } = String.Empty;
         public string Code { get; private set; } = String.Empty;
@@ -29,6 +31,8 @@ namespace Enigmatry.Blueprint.Model.Products
         public string InfoLink { get; private set; } = String.Empty;
         public DateTimeOffset? ExpiresOn { get; private set; }
         public bool FreeShipping { get; private set; }
+        public bool HasDiscount { get; private set; }
+        public float? Discount { get; private set; }
 
         public DateTimeOffset CreatedOn { get; private set; }
         public DateTimeOffset UpdatedOn { get; private set; }
@@ -51,7 +55,9 @@ namespace Enigmatry.Blueprint.Model.Products
                 ContactPhone = request.ContactPhone,
                 InfoLink = request.InfoLink,
                 ExpiresOn = request.ExpiresOn,
-                FreeShipping = request.FreeShipping
+                FreeShipping = request.FreeShipping,
+                HasDiscount = request.HasDiscount,
+                Discount = request.Discount
             };
             product.AddDomainEvent(new ProductCreatedDomainEvent(product));
             return product;
@@ -69,6 +75,8 @@ namespace Enigmatry.Blueprint.Model.Products
             InfoLink = request.InfoLink;
             ExpiresOn = request.ExpiresOn;
             FreeShipping = request.FreeShipping;
+            HasDiscount = request.HasDiscount;
+            Discount = HasDiscount ? request.Discount : null;
             AddDomainEvent(new ProductUpdatedDomainEvent(this));
         }
 

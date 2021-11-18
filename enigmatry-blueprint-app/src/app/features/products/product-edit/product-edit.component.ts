@@ -1,46 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { Location } from '@angular/common';
-import { IGetProductDetailsResponse, ProductCreateOrUpdateCommand, ProductsClient } from 'src/app/api/api-reference';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-vars */
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+    IGetProductDetailsResponse,
+    IProductCreateOrUpdateCommand,
+    ProductCreateOrUpdateCommand,
+    ProductsClient
+} from 'src/app/api/api-reference';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormComponent } from 'src/app/shared/form-component/form-component.model';
 
 @Component({
     selector: 'app-product-edit',
     templateUrl: './product-edit.component.html',
     styleUrls: ['./product-edit.component.scss']
 })
-export class ProductEditComponent implements OnInit {
-    model: IGetProductDetailsResponse = {};
-
-    constructor(private client: ProductsClient, protected activatedRoute: ActivatedRoute, public location: Location) { }
-
-    ngOnInit(): void {
-        this.activatedRoute.params
-            .pipe(switchMap(params => this.client.get(params.id)))
-            .subscribe(response => {
-                this.model = response;
-            });
+export class ProductEditComponent
+    extends FormComponent<IProductCreateOrUpdateCommand, IGetProductDetailsResponse> {
+    constructor(
+        protected router: Router,
+        protected activatedRoute: ActivatedRoute,
+        private client: ProductsClient) {
+        super(router, activatedRoute);
+        this.saveText = $localize`:@@common.save-product:Save product`;
+        this.initHideExpressions();
     }
 
-    save(model: IGetProductDetailsResponse) {
-        const command = new ProductCreateOrUpdateCommand({
-            id: model.id,
-            name: model.name,
-            code: model.code,
-            type: model.type,
-            price: model.price,
-            contactEmail: model.contactEmail,
-            contactPhone: model.contactPhone,
-            infoLink: model.infoLink,
-            amount: model.amount,
-            expiresOn: model.expiresOn,
-            freeShipping: model.freeShipping
+    save = (model: IProductCreateOrUpdateCommand) =>
+        this.client
+            .post(model as ProductCreateOrUpdateCommand)
+            .subscribe(this.goBack);
+
+    toCommand(response: IGetProductDetailsResponse): IProductCreateOrUpdateCommand {
+        return new ProductCreateOrUpdateCommand({
+            id: response.id,
+            name: response.name,
+            code: response.code,
+            type: response.type,
+            price: response.price,
+            contactEmail: response.contactEmail,
+            contactPhone: response.contactPhone,
+            infoLink: response.infoLink,
+            amount: response.amount,
+            expiresOn: response.expiresOn,
+            freeShipping: response.freeShipping,
+            hasDiscount: response.hasDiscount,
+            discount: response.discount
         });
-        this.client.post(command)
-            .subscribe(() => this.location.back());
     }
 
-    cancel() {
-        this.location.back();
-    }
+    private initHideExpressions = () => {
+        this.fieldsHideExpressions.discount =
+            (model: IGetProductDetailsResponse, formState: any, field: FormlyFieldConfig | undefined)
+            : boolean => model.hasDiscount === false;
+    };
 }

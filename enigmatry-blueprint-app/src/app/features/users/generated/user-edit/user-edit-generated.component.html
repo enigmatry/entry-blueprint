@@ -4,7 +4,7 @@
         <ng-template [ngTemplateOutlet]="formButtonsTemplate"></ng-template>
     </ng-template>
     <ng-template #defaultFormButtonsTpl>
-        <button *ngIf="!isReadonly" type="button" mat-raised-button (click)="cancel.emit()">{{cancelButtonText}}</button>
         <button *ngIf="!isReadonly" type="submit" mat-raised-button color="primary">{{saveButtonText}}</button>
+        <button *ngIf="!isReadonly" type="button" mat-raised-button (click)="cancel.emit()">{{cancelButtonText}}</button>
     </ng-template>
 </form>

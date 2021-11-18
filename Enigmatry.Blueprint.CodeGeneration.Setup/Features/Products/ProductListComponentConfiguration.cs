@@ -20,6 +20,12 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .Column(x => x.InfoLink)
                 .IsVisible(false);
             builder
+                .Column(x => x.Discount)
+                .IsVisible(false);
+            builder
+                .Column(x => x.HasDiscount)
+                .IsVisible(false);
+            builder
                 .Column(x => x.Name)
                 .WithHeaderName("Product name")
                 .WithCustomComponent("app-product-name-with-link-cell");

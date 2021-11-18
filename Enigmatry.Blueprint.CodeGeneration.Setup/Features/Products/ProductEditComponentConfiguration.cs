@@ -2,6 +2,7 @@
 using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Model.Products;
 using Enigmatry.CodeGeneration.Configuration.Form;
+using Enigmatry.CodeGeneration.Configuration.Form.Model;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
 {
@@ -17,7 +18,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             // Configuring fields:
             builder.FormControl(x => x.Name)
                 .WithPlaceholder("Unique product name")
-                .WithValidator("productNameIsUnique");
+                .WithValidator("productNameIsUnique")
+                .WithAppearance(FormControlAppearance.Outline);
             builder.FormControl(x => x.Code)
                 .WithPlaceholder("Unique product code identifier")
                 .WithValidator("productCodeIsUnique");

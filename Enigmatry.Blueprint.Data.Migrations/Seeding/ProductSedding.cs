@@ -22,7 +22,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
                 ContactPhone = "+253 (056) 334 4889",
                 InfoLink = "https://en.wikipedia.org/wiki/Dune_(novel)",
                 ExpiresOn = null,
-                FreeShipping = true
+                FreeShipping = true,
+                HasDiscount = true,
+                Discount = 25.0F
             });
             dune.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
             dune.WithId(new Guid("7a4ce0d5-471b-4d35-89f2-b6c7a68350c0"));
@@ -70,7 +72,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Seeding
                 ContactPhone = "+381 (032) 332 7689",
                 InfoLink = "https://en.wikipedia.org/wiki/Volkswagen_Type_2",
                 ExpiresOn = null,
-                FreeShipping = true
+                FreeShipping = true,
+                HasDiscount = true,
+                Discount = 10.0F
             });
             camper.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
             camper.WithId(new Guid("DA8EB2A9-1F8A-4C41-8DF9-10A1FC59305B"));

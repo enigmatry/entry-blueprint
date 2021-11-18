@@ -36,6 +36,8 @@ namespace Enigmatry.Blueprint.Api.Features.Products
                 public string InfoLink { get; set; } = String.Empty;
                 public DateTimeOffset? ExpiresOn { get; set; }
                 public bool FreeShipping { get; set; }
+                public bool HasDiscount { get; set; }
+                public float Discount { get; set; }
             }
 
             [UsedImplicitly]

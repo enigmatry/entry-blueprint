@@ -1,9 +1,7 @@
-﻿using Enigmatry.BuildingBlocks.Core.Helpers;
-using FluentValidation;
+﻿using FluentValidation;
 using JetBrains.Annotations;
 using MediatR;
 using System;
-using System.Text.RegularExpressions;
 
 namespace Enigmatry.Blueprint.Model.Products.Commands
 {
@@ -23,6 +21,8 @@ namespace Enigmatry.Blueprint.Model.Products.Commands
             public string InfoLink { get; set; } = String.Empty;
             public DateTimeOffset? ExpiresOn { get; set; }
             public bool FreeShipping { get; set; }
+            public bool HasDiscount { get; set; }
+            public float? Discount { get; set; }
         }
 
         [PublicAPI]
@@ -45,6 +45,12 @@ namespace Enigmatry.Blueprint.Model.Products.Commands
                 When(x => x.Type is ProductType.Food or ProductType.Drink, () =>
                 {
                     RuleFor(x => x.ExpiresOn).NotNull();
+                });
+                When(x => x.HasDiscount == true, () =>
+                {
+                    RuleFor(x => x.Discount)
+                        .GreaterThanOrEqualTo(Product.DiscountMinValue)
+                        .LessThanOrEqualTo(Product.DiscountMaxValue);
                 });
             }
         }

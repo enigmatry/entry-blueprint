@@ -66,7 +66,9 @@ export class ProductListGeneratedComponent implements OnInit {
 { field: 'contactPhone', header: $localize `:@@products.product-list.contact-phone:Contact phone`, hide: false, sortable: true },
 { field: 'infoLink', hide: true, sortable: true },
 { field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: undefined },
-{ field: 'freeShipping', header: $localize `:@@products.product-list.free-shipping:Free shipping`, hide: false, sortable: true, type: 'boolean', typeParameter: undefined }
+{ field: 'freeShipping', header: $localize `:@@products.product-list.free-shipping:Free shipping`, hide: false, sortable: true, type: 'boolean', typeParameter: undefined },
+{ field: 'hasDiscount', hide: true, sortable: true, type: 'boolean', typeParameter: undefined },
+{ field: 'discount', hide: true, sortable: true, type: 'number', typeParameter: undefined }
 ];
     this.contextMenuItems = [];
   }
