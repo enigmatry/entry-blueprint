@@ -11,7 +11,8 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@an
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
-import { IHideExpressionDictionary } from '@enigmatry/angular-building-blocks/form';
+import { IHideExpressionDictionary, SelectConfiguration } from '@enigmatry/angular-building-blocks/form';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -39,7 +40,10 @@ export class ProductEditGeneratedComponent implements OnInit {
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-  _isReadonly: boolean;
+            @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@ProductType.Food:Food` }, { value: 1, displayName: $localize `:@@ProductType.Drink:Drink` }, { value: 2, displayName: $localize `:@@ProductType.Book:Book` }, { value: 3, displayName: $localize `:@@ProductType.Car:Car` }];
+            @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName' };
+
+ _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
@@ -57,7 +61,7 @@ export class ProductEditGeneratedComponent implements OnInit {
 
   initializeFields(): FormlyFieldConfig[] {
     return [
-        { key: 'id' },
+            { key: 'id' },
         {
         key: 'name',
         type: 'input',
@@ -87,7 +91,6 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
         placeholder: $localize `:@@products.product-edit.code.placeholder:Unique product code identifier`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 required: true,
 pattern: /^[A-Z]{4}[1-9]{8}$/mu,
@@ -110,10 +113,9 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
-            options: [{ value: 0, displayName: 'Food' }, { value: 1, displayName: 'Drink' }, { value: 2, displayName: 'Book' }, { value: 3, displayName: 'Car' }],
-            valueProp: 'value',
-            labelProp: 'displayName',
+            options: this.typeOptions,
+            valueProp: this.typeOptionsConfiguration.valueProperty,
+            labelProp: this.typeOptionsConfiguration.labelProperty,
         hidden: !true,
 required: true,
         },
@@ -128,7 +130,6 @@ required: true,
         placeholder: $localize `:@@products.price:Price per unit`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 required: true,
 type: 'number',
@@ -146,7 +147,6 @@ max: 999.99,
         placeholder: $localize `:@@products.amount:Units`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 required: true,
 type: 'number',
@@ -164,7 +164,6 @@ max: 100,
         placeholder: $localize `:@@products.product-edit.contact-email.placeholder:Contact person email address`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 required: true,
 pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
@@ -185,7 +184,6 @@ pattern: $localize `:@@validators.pattern.emailAddress:Invalid email address for
         placeholder: $localize `:@@products.product-edit.contact-phone.placeholder:Contact person phone number`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 required: true,
 pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/mu,
@@ -201,7 +199,6 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         placeholder: $localize `:@@products.product-edit.info-link.placeholder:Link to product homepage`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u,
         },
@@ -216,7 +213,6 @@ pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\
         placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date, if any`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
         },
 modelOptions: { updateOn: 'blur' },
@@ -232,7 +228,6 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         placeholder: $localize `:@@products.product-edit.free-shipping.placeholder:Free shipping`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
         },
         },
@@ -246,7 +241,6 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         placeholder: $localize `:@@products.product-edit.has-discount.placeholder:Has discount`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
         },
         },
@@ -260,7 +254,6 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         placeholder: $localize `:@@products.product-edit.discount.placeholder:Discount`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 type: 'number',
 min: 0,

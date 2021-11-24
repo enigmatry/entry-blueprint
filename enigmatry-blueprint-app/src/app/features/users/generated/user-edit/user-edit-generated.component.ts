@@ -11,7 +11,8 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@an
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
-import { IHideExpressionDictionary } from '@enigmatry/angular-building-blocks/form';
+import { IHideExpressionDictionary, SelectConfiguration } from '@enigmatry/angular-building-blocks/form';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class UserEditGeneratedComponent implements OnInit {
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-  _isReadonly: boolean;
+
+ _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
@@ -77,7 +79,6 @@ export class UserEditGeneratedComponent implements OnInit {
         placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
         disabled: this.isReadonly || true,
         description: '',
-        appearance: 'standard',
         hidden: !true,
         },
         },
@@ -91,7 +92,6 @@ export class UserEditGeneratedComponent implements OnInit {
         placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
         disabled: this.isReadonly || false,
         description: '',
-        appearance: 'standard',
         hidden: !true,
 required: true,
 minLength: 5,
@@ -118,7 +118,6 @@ maxLength: 25,
         placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
         disabled: this.isReadonly || true,
         description: '',
-        appearance: 'standard',
         hidden: !true,
         },
         },
@@ -132,7 +131,6 @@ maxLength: 25,
         placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
         disabled: this.isReadonly || true,
         description: '',
-        appearance: 'standard',
         hidden: !true,
         },
         },

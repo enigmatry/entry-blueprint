@@ -24,8 +24,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithPlaceholder("Unique product code identifier")
                 .WithValidator("productCodeIsUnique");
             builder.FormControl(x => x.Type)
-                .IsDropDownListControl()
-                .WithFixedValues<ProductType>();
+                .IsDropDownListControl(options => options.WithFixedValues<ProductType>());
             builder.FormControl(x => x.Price)
                 .WithLabel("Price per unit")
                 .WithLabelTranslationId(ProductTranslationId.Price)

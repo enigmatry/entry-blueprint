@@ -8,7 +8,6 @@ import {
     ProductCreateOrUpdateCommand,
     ProductsClient
 } from 'src/app/api/api-reference';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormComponent } from 'src/app/shared/form-component/form-component.model';
 
 @Component({
@@ -52,7 +51,6 @@ export class ProductEditComponent
 
     private initHideExpressions = () => {
         this.fieldsHideExpressions.discount =
-            (model: IGetProductDetailsResponse, formState: any, field: FormlyFieldConfig | undefined)
-            : boolean => model.hasDiscount === false;
+            (model: IGetProductDetailsResponse): boolean => model.hasDiscount === false;
     };
 }

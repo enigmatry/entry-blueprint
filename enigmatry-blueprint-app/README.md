@@ -89,7 +89,7 @@ To show/hide form fields based on condition, we use `fieldsHideExpressions` form
 ```ts
 const hideExpressionsDictionary: IHideExpressionDictionary<IFromModel> = {};
 hideExpressionsDictionary.name = 
-  (model: IFromModel, formState: any, field: any | undefined)): boolean {
+  (model: IFromModel)): boolean {
     return model.showName === true;
   }
 ```
