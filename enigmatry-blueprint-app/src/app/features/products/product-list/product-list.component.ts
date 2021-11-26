@@ -36,9 +36,10 @@ export class ProductListComponent
     onContextMenuItemSelected = (contextMenuItem: { itemId: string; rowData: GetProductsResponseItem }) => {
         if (contextMenuItem.itemId === 'edit') {
             this.router.navigate(['edit', contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
-        } else if (contextMenuItem.itemId === 'delete') {
-            // eslint-disable-next-line no-alert
-            alert('I have been deleted!');
+        } else if (contextMenuItem.itemId === 'delete' && contextMenuItem.rowData.id !== undefined) {
+            this.client
+                .remove(contextMenuItem.rowData.id)
+                .subscribe(() => this.loadList());
         }
     };
 }

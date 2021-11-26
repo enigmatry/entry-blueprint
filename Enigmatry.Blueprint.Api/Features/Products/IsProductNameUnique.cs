@@ -15,7 +15,7 @@ namespace Enigmatry.Blueprint.Api.Features.Products
         [PublicAPI]
         public class Request : IRequest<Response>
         {
-            public Guid Id { get; set; }
+            public Guid? Id { get; set; }
             public string Name { get; set; } = String.Empty;
         }
 

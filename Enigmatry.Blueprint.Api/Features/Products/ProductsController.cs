@@ -92,5 +92,18 @@ namespace Enigmatry.Blueprint.Api.Features.Products
             await _unitOfWork.SaveChangesAsync();
             return result;
         }
+
+        /// <summary>
+        ///     Removes product for given id
+        /// </summary>
+        /// <param name="id">Id</param>
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task Remove(Guid id)
+        {
+            await _mediator.Send(new RemoveProduct.Command { Id = id });
+            await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

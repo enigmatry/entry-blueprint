@@ -11,7 +11,7 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@an
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
-import { IHideExpressionDictionary, SelectConfiguration } from '@enigmatry/angular-building-blocks/form';
+import { IFieldExpressionDictionary, SelectConfiguration } from '@enigmatry/angular-building-blocks/form';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -35,7 +35,8 @@ export class UserEditGeneratedComponent implements OnInit {
   @Input() cancelButtonText: string = 'Cancel';
   @Input() formButtonsTemplate: TemplateRef<any> | null | undefined;
 
-  @Input() fieldsHideExpressions: IHideExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
+  @Input() fieldsHideExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
+  @Input() fieldsDisableExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
 
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
@@ -74,6 +75,9 @@ export class UserEditGeneratedComponent implements OnInit {
         type: 'input',
         className: '',
         hideExpression: this.fieldsHideExpressions?.userName ?? false,
+        expressionProperties: {
+          'templateOptions.disabled': this.fieldsDisableExpressions?.userName ?? (() => false),
+        },
         templateOptions: {
         label: $localize `:@@users.user-edit.user-name.label:User name`,
         placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
@@ -87,6 +91,9 @@ export class UserEditGeneratedComponent implements OnInit {
         type: 'input',
         className: '',
         hideExpression: this.fieldsHideExpressions?.name ?? false,
+        expressionProperties: {
+          'templateOptions.disabled': this.fieldsDisableExpressions?.name ?? (() => false),
+        },
         templateOptions: {
         label: $localize `:@@users.user-edit.name.label:Name`,
         placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
@@ -113,6 +120,9 @@ maxLength: 25,
         type: 'datepicker',
         className: '',
         hideExpression: this.fieldsHideExpressions?.createdOn ?? false,
+        expressionProperties: {
+          'templateOptions.disabled': this.fieldsDisableExpressions?.createdOn ?? (() => false),
+        },
         templateOptions: {
         label: $localize `:@@users.user-edit.created-on.label:Created on`,
         placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
@@ -126,6 +136,9 @@ maxLength: 25,
         type: 'datepicker',
         className: '',
         hideExpression: this.fieldsHideExpressions?.updatedOn ?? false,
+        expressionProperties: {
+          'templateOptions.disabled': this.fieldsDisableExpressions?.updatedOn ?? (() => false),
+        },
         templateOptions: {
         label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
         placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,

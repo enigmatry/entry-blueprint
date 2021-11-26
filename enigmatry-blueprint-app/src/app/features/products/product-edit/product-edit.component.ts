@@ -6,8 +6,10 @@ import {
     IGetProductDetailsResponse,
     IProductCreateOrUpdateCommand,
     ProductCreateOrUpdateCommand,
-    ProductsClient
+    ProductsClient,
+    ProductType
 } from 'src/app/api/api-reference';
+import { FormAccessMode } from 'src/app/shared/form-component/form-access-mode.enum';
 import { FormComponent } from 'src/app/shared/form-component/form-component.model';
 
 @Component({
@@ -24,6 +26,7 @@ export class ProductEditComponent
         super(router, activatedRoute);
         this.saveText = $localize`:@@common.save-product:Save product`;
         this.initHideExpressions();
+        this.initDisableExpressions();
     }
 
     save = (model: IProductCreateOrUpdateCommand) =>
@@ -51,6 +54,14 @@ export class ProductEditComponent
 
     private initHideExpressions = () => {
         this.fieldsHideExpressions.discount =
-            (model: IGetProductDetailsResponse): boolean => model.hasDiscount === false;
+            (model: IGetProductDetailsResponse): boolean =>
+                model.hasDiscount === undefined || model.hasDiscount === false;
+    };
+
+    private initDisableExpressions = () => {
+        this.fieldsDisableExpressions.price =
+            (model: IGetProductDetailsResponse): boolean =>
+                model.type === undefined ||
+                model.type === ProductType.Book && this.formMode === FormAccessMode.edit;
     };
 }

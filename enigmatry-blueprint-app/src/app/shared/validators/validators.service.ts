@@ -12,9 +12,9 @@ import {
 export class ValidatorsService {
     constructor(private productsClient: ProductsClient) { }
 
-    isCodeUnique = (id: string, code: string): Observable<IsProductCodeUniqueResponse> =>
+    isCodeUnique = (id: string | undefined, code: string): Observable<IsProductCodeUniqueResponse> =>
         this.productsClient.isCodeUnique(id, code);
 
-    isNameUnique = (id: string, name: string): Observable<IsProductNameUniqueResponse> =>
+    isNameUnique = (id: string | undefined, name: string): Observable<IsProductNameUniqueResponse> =>
         this.productsClient.isNameUnique(id, name);
 }
