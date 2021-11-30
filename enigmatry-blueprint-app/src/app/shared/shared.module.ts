@@ -5,10 +5,18 @@ import { MaterialModule } from './material.module';
 import { GridCellsModule } from './grid-cells/grid-cells.module';
 import { EnigmatryGridModule, DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE } from '@enigmatry/angular-building-blocks';
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
+import { FormlyModule } from '@ngx-formly/core';
+import { TooltipWrapperComponent } from './wrappers/tooltip-wrapper.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    FormlyModule.forRoot({
+      wrappers: [
+        { name: 'tooltip', component: TooltipWrapperComponent }
+      ]
+    })
   ],
   exports: [
     FormsModule,
@@ -27,6 +35,9 @@ import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
       provide: DEFAULT_TIMEZONE,
       useFactory: () => 'GMT'
     }
+  ],
+  declarations: [
+    TooltipWrapperComponent
   ]
 })
 export class SharedModule { }

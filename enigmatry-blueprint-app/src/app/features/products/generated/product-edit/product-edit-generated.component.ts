@@ -71,6 +71,7 @@ export class ProductEditGeneratedComponent implements OnInit {
         expressionProperties: {
           'templateOptions.disabled': this.fieldsDisableExpressions?.name ?? (() => false),
         },
+        wrappers: ['form-field', 'tooltip'],
         templateOptions: {
         label: 'Name',
         placeholder: 'Unique product name',
@@ -78,6 +79,7 @@ export class ProductEditGeneratedComponent implements OnInit {
         description: '',
         appearance: 'outline',
         hidden: !true,
+        tooltipText: 'Tooltip text for name form control',
             required: true,
 minLength: 5,
 maxLength: 50,
@@ -183,12 +185,14 @@ max: 100,
         expressionProperties: {
           'templateOptions.disabled': this.fieldsDisableExpressions?.contactEmail ?? (() => false),
         },
+        wrappers: ['form-field', 'tooltip'],
         templateOptions: {
         label: 'Contact email',
         placeholder: 'Contact person email address',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
+        tooltipText: 'Tooltip text for email form control',
             required: true,
 pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 

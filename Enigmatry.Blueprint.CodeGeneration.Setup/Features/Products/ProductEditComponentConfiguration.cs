@@ -19,6 +19,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             builder.FormControl(x => x.Name)
                 .WithPlaceholder("Unique product name")
                 .WithValidator("productNameIsUnique")
+                .WithCustomWrapper("tooltip")
+                .WithTooltipText("Tooltip text for name form control")
                 .WithAppearance(FormControlAppearance.Outline);
             builder.FormControl(x => x.Code)
                 .WithPlaceholder("Unique product code identifier")
@@ -36,6 +38,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithPlaceholder("Units")
                 .WithPlaceholderTranslationId(ProductTranslationId.Amount);
             builder.FormControl(x => x.ContactEmail)
+                .WithCustomWrapper("tooltip")
+                .WithTooltipText("Tooltip text for email form control")
                 .WithPlaceholder("Contact person email address");
             builder.FormControl(x => x.ContactPhone)
                 .WithPlaceholder("Contact person phone number");
