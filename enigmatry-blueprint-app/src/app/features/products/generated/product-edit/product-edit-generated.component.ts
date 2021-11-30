@@ -41,7 +41,7 @@ export class ProductEditGeneratedComponent implements OnInit {
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-            @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
+            @Input() typeOptions: any[] = [{ value: 0, displayName: 'Food' }, { value: 1, displayName: 'Drink' }, { value: 2, displayName: 'Book' }, { value: 3, displayName: 'Car' }];
             @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName' };
 
  _isReadonly: boolean;
@@ -72,15 +72,16 @@ export class ProductEditGeneratedComponent implements OnInit {
           'templateOptions.disabled': this.fieldsDisableExpressions?.name ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.name.label:Name`,
-        placeholder: $localize `:@@products.product-edit.name.placeholder:Unique product name`,
+        label: 'Name',
+        placeholder: 'Unique product name',
         disabled: this.isReadonly || false,
         description: '',
         appearance: 'outline',
         hidden: !true,
-required: true,
+            required: true,
 minLength: 5,
 maxLength: 50,
+
         },
 modelOptions: { updateOn: 'blur' },
 asyncValidators: { validation: [ 'productNameIsUnique' ] },
@@ -94,17 +95,18 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
           'templateOptions.disabled': this.fieldsDisableExpressions?.code ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.code.label:Code`,
-        placeholder: $localize `:@@products.product-edit.code.placeholder:Unique product code identifier`,
+        label: 'Code',
+        placeholder: 'Unique product code identifier',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-required: true,
+            required: true,
 pattern: /^[A-Z]{4}[1-9]{8}$/mu,
+
         },
             validation: {
             messages: {
-pattern: $localize `:@@products.product-edit.code.pattern:Code must be in 4 letter 8 digits format (e.g. ABCD12345678)`
+pattern: 'Code must be in 4 letter 8 digits format (e.g. ABCD12345678)'
             }
             },
 modelOptions: { updateOn: 'blur' },
@@ -119,15 +121,16 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
           'templateOptions.disabled': this.fieldsDisableExpressions?.type ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.type.label:Type`,
-        placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
+        label: 'Type',
+        placeholder: 'Type',
         disabled: this.isReadonly || false,
         description: '',
             options: this.typeOptions,
             valueProp: this.typeOptionsConfiguration.valueProperty,
             labelProp: this.typeOptionsConfiguration.labelProperty,
         hidden: !true,
-required: true,
+            required: true,
+
         },
         },
         {
@@ -139,15 +142,16 @@ required: true,
           'templateOptions.disabled': this.fieldsDisableExpressions?.price ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.price:Price per unit`,
-        placeholder: $localize `:@@products.price:Price per unit`,
+        label: 'Price per unit',
+        placeholder: 'Price per unit',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-required: true,
+            required: true,
 type: 'number',
 min: 0.99 + 0.1,
 max: 999.99,
+
         },
         },
         {
@@ -159,15 +163,16 @@ max: 999.99,
           'templateOptions.disabled': this.fieldsDisableExpressions?.amount ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.amount:Units`,
-        placeholder: $localize `:@@products.amount:Units`,
+        label: 'Units',
+        placeholder: 'Units',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-required: true,
+            required: true,
 type: 'number',
 min: 0 + 1,
 max: 100,
+
         },
         },
         {
@@ -179,17 +184,18 @@ max: 100,
           'templateOptions.disabled': this.fieldsDisableExpressions?.contactEmail ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.contact-email.label:Contact email`,
-        placeholder: $localize `:@@products.product-edit.contact-email.placeholder:Contact person email address`,
+        label: 'Contact email',
+        placeholder: 'Contact person email address',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-required: true,
+            required: true,
 pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+
         },
             validation: {
             messages: {
-pattern: $localize `:@@validators.pattern.emailAddress:Invalid email address format`
+pattern: 'Invalid email address format'
             }
             },
         },
@@ -202,13 +208,14 @@ pattern: $localize `:@@validators.pattern.emailAddress:Invalid email address for
           'templateOptions.disabled': this.fieldsDisableExpressions?.contactPhone ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.contact-phone.label:Contact phone`,
-        placeholder: $localize `:@@products.product-edit.contact-phone.placeholder:Contact person phone number`,
+        label: 'Contact phone',
+        placeholder: 'Contact person phone number',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-required: true,
+            required: true,
 pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/mu,
+
         },
         },
         {
@@ -220,12 +227,13 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
           'templateOptions.disabled': this.fieldsDisableExpressions?.infoLink ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.info-link.label:Homepage`,
-        placeholder: $localize `:@@products.product-edit.info-link.placeholder:Link to product homepage`,
+        label: 'Homepage',
+        placeholder: 'Link to product homepage',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u,
+            pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u,
+
         },
         },
         {
@@ -237,8 +245,8 @@ pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\
           'templateOptions.disabled': this.fieldsDisableExpressions?.expiresOn ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.expires-on.label:Expires on`,
-        placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date, if any`,
+        label: 'Expires on',
+        placeholder: 'Product expiration date, if any',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
@@ -255,8 +263,8 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
           'templateOptions.disabled': this.fieldsDisableExpressions?.freeShipping ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
-        placeholder: $localize `:@@products.product-edit.free-shipping.placeholder:Free shipping`,
+        label: 'Free shipping',
+        placeholder: 'Free shipping',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
@@ -271,8 +279,8 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
           'templateOptions.disabled': this.fieldsDisableExpressions?.hasDiscount ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.has-discount.label:Has discount`,
-        placeholder: $localize `:@@products.product-edit.has-discount.placeholder:Has discount`,
+        label: 'Has discount',
+        placeholder: 'Has discount',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
@@ -287,14 +295,15 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
           'templateOptions.disabled': this.fieldsDisableExpressions?.discount ?? (() => false),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.discount.label:Discount`,
-        placeholder: $localize `:@@products.product-edit.discount.placeholder:Discount`,
+        label: 'Discount',
+        placeholder: 'Discount',
         disabled: this.isReadonly || false,
         description: '',
         hidden: !true,
-type: 'number',
+            type: 'number',
 min: 0,
 max: 100,
+
         },
         },
     ];
