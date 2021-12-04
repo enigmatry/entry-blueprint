@@ -57,16 +57,16 @@ export class ProductListGeneratedComponent implements OnInit {
   ngOnInit(): void {
     this.columns = [
 { field: 'id', hide: true, sortable: true },
-{ field: 'name', header: 'Product name', hide: false, sortable: true, cellTemplate: this.nameTpl },
-{ field: 'code', header: 'Code', hide: false, sortable: true },
-{ field: 'type', header: 'Type', hide: false, sortable: true, cellTemplate: this.typeTpl },
-{ field: 'price', header: 'Price per unit', hide: false, sortable: true, type: 'currency', typeParameter: { currencyCode: 'EUR', display: '€', digitsInfo: '', locale: '' }, class: 'products-price' },
-{ field: 'amount', header: 'Units', hide: false, sortable: true },
-{ field: 'contactEmail', header: 'Contact email', hide: false, sortable: true },
-{ field: 'contactPhone', header: 'Contact phone', hide: false, sortable: true },
+{ field: 'name', header: $localize `:@@products.product-list.name:Product name`, hide: false, sortable: true, cellTemplate: this.nameTpl },
+{ field: 'code', header: $localize `:@@products.product-list.code:Code`, hide: false, sortable: true },
+{ field: 'type', header: $localize `:@@products.product-list.type:Type`, hide: false, sortable: true, cellTemplate: this.typeTpl },
+{ field: 'price', header: $localize `:@@products.price:Price per unit`, hide: false, sortable: true, type: 'currency', typeParameter: { currencyCode: 'EUR', display: '€', digitsInfo: '', locale: '' }, class: 'products-price' },
+{ field: 'amount', header: $localize `:@@products.amount:Units`, hide: false, sortable: true },
+{ field: 'contactEmail', header: $localize `:@@products.product-list.contact-email:Contact email`, hide: false, sortable: true },
+{ field: 'contactPhone', header: $localize `:@@products.product-list.contact-phone:Contact phone`, hide: false, sortable: true },
 { field: 'infoLink', hide: true, sortable: true },
-{ field: 'expiresOn', header: 'Expires on', hide: false, sortable: true, type: 'date', typeParameter: undefined },
-{ field: 'freeShipping', header: 'Free shipping', hide: false, sortable: true, type: 'boolean', typeParameter: undefined },
+{ field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: undefined },
+{ field: 'freeShipping', header: $localize `:@@products.product-list.free-shipping:Free shipping`, hide: false, sortable: true, type: 'boolean', typeParameter: undefined },
 { field: 'hasDiscount', hide: true, sortable: true, type: 'boolean', typeParameter: undefined },
 { field: 'discount', hide: true, sortable: true, type: 'number', typeParameter: undefined }
 ];
