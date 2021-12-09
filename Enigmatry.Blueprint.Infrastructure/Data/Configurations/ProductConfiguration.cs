@@ -14,6 +14,7 @@ namespace Enigmatry.Blueprint.Infrastructure.Data.Configurations
             builder.Property(x => x.ContactEmail).IsRequired().HasMaxLength(Product.ContactEmailMaxLength);
             builder.Property(x => x.ContactPhone).IsRequired().HasMaxLength(Product.ContactPhoneMaxLength);
             builder.Property(x => x.CreatedOn).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(Product.DescriptionMaxLength);
 
             builder.HasIndex(x => x.Code).IsUnique();
         }

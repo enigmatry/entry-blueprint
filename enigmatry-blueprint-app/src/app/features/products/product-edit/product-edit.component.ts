@@ -40,6 +40,7 @@ export class ProductEditComponent
             name: response.name,
             code: response.code,
             type: response.type,
+            description: response.description,
             price: response.price,
             contactEmail: response.contactEmail,
             contactPhone: response.contactPhone,

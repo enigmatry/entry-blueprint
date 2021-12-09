@@ -104,7 +104,7 @@ pattern: /^[A-Z]{4}[1-9]{8}$/mu,
         },
             validation: {
             messages: {
-pattern: $localize `:@@products.product-edit.code.pattern:Code must be in 4 letter 8 digits format (e.g. ABCD12345678)`
+pattern: (err, field) => $localize `:@@products.product-edit.code.pattern:Code must be in 4 letter 8 digits format (e.g. ABCD12345678)`
             }
             },
 modelOptions: { updateOn: 'blur' },
@@ -128,6 +128,23 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         hidden: !true,
             required: true,
 
+        },
+        },
+        {
+        key: 'description',
+        type: 'textarea',
+        className: '',
+        hideExpression: this.fieldsHideExpressions?.description ?? false,
+        expressionProperties: {
+          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.description ? this.fieldsDisableExpressions.description(model) : false)),
+        },
+        templateOptions: {
+        label: $localize `:@@products.product-edit.description.label:Description`,
+        placeholder: $localize `:@@products.product-edit.description.placeholder:Description`,
+        description: '',
+            rows: 2,
+            cols: 0,
+        hidden: !true,
         },
         },
         {
@@ -189,7 +206,7 @@ pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
         },
             validation: {
             messages: {
-pattern: $localize `:@@validators.pattern.emailAddress:Invalid email address format`
+pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid email address format`
             }
             },
         },

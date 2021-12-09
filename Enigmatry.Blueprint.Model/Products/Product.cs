@@ -20,10 +20,12 @@ namespace Enigmatry.Blueprint.Model.Products
         public const int ContactPhoneMaxLength = 25;
         public const float DiscountMinValue = 0.0F;
         public const float DiscountMaxValue = 100.0F;
+        public const int DescriptionMaxLength = 1500;
 
         public string Name { get; private set; } = String.Empty;
         public string Code { get; private set; } = String.Empty;
         public ProductType Type { get; private set; } = ProductType.Food;
+        public string Description { get; set; } = String.Empty;
         public double Price { get; private set; }
         public int Amount { get; private set; }
         public string ContactEmail { get; private set; } = String.Empty;
@@ -49,6 +51,7 @@ namespace Enigmatry.Blueprint.Model.Products
                 Name = request.Name,
                 Code = request.Code,
                 Type = request.Type,
+                Description = request.Description,
                 Price = request.Price,
                 Amount = request.Amount,
                 ContactEmail = request.ContactEmail,
@@ -68,6 +71,7 @@ namespace Enigmatry.Blueprint.Model.Products
             Name = request.Name;
             Code = request.Code;
             Type = request.Type;
+            Description = request.Description;
             Price = request.Price;
             Amount = request.Amount;
             ContactEmail = request.ContactEmail;

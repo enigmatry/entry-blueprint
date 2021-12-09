@@ -26,6 +26,7 @@ namespace Enigmatry.Blueprint.Api.Features.Products
             public string Name { get; set; } = String.Empty;
             public string Code { get; set; } = String.Empty;
             public ProductType Type { get; set; }
+            public string Description { get; set; } = String.Empty;
             public double Price { get; set; }
             public int Amount { get; set; }
             public string ContactEmail { get; set; } = String.Empty;
