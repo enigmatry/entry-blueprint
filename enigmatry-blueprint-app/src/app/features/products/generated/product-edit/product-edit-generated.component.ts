@@ -7,11 +7,11 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
-import { IFieldExpressionDictionary, SelectConfiguration } from '@enigmatry/angular-building-blocks/form';
+import { IFieldExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver } from '@enigmatry/angular-building-blocks/form';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -41,14 +41,14 @@ export class ProductEditGeneratedComponent implements OnInit {
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-            @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
-            @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName' };
+                @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
+                @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName' };
 
  _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
-  constructor() { }
+  constructor(@Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
 
   ngOnInit(): void {
     this.fields = this.initializeFields();
@@ -60,22 +60,25 @@ export class ProductEditGeneratedComponent implements OnInit {
     }
   }
 
+  resolveFieldType = (type: string, isControlReadonly: boolean): string =>
+    this._fieldTypeResolver ? this._fieldTypeResolver(type, this.isReadonly || isControlReadonly) : type;
+
   initializeFields(): FormlyFieldConfig[] {
     return [
             { key: 'id' },
         {
         key: 'name',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.name.label:Name`,
         placeholder: $localize `:@@products.product-edit.name.placeholder:Unique product name`,
         description: '',
-        appearance: 'outline',
+            appearance: 'outline',
         hidden: !true,
             required: true,
 minLength: 5,
@@ -87,11 +90,11 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
         },
         {
         key: 'code',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.code ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.code ? this.fieldsDisableExpressions.code(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.code ? this.fieldsDisableExpressions.code(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.code.label:Code`,
@@ -112,11 +115,11 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         },
         {
         key: 'type',
-        type: 'select',
+        type: this.resolveFieldType('select', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.type ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.type ? this.fieldsDisableExpressions.type(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.type ? this.fieldsDisableExpressions.type(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.type.label:Type`,
@@ -132,11 +135,11 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         },
         {
         key: 'description',
-        type: 'textarea',
+        type: this.resolveFieldType('textarea', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.description ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.description ? this.fieldsDisableExpressions.description(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.description ? this.fieldsDisableExpressions.description(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.description.label:Description`,
@@ -149,11 +152,11 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         },
         {
         key: 'price',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.price ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.price ? this.fieldsDisableExpressions.price(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.price ? this.fieldsDisableExpressions.price(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.price:Price per unit`,
@@ -169,11 +172,11 @@ max: 999.99,
         },
         {
         key: 'amount',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.amount ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.amount ? this.fieldsDisableExpressions.amount(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.amount ? this.fieldsDisableExpressions.amount(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.amount:Units`,
@@ -189,11 +192,11 @@ max: 100,
         },
         {
         key: 'contactEmail',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.contactEmail ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactEmail ? this.fieldsDisableExpressions.contactEmail(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactEmail ? this.fieldsDisableExpressions.contactEmail(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.contact-email.label:Contact email`,
@@ -212,11 +215,11 @@ pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid e
         },
         {
         key: 'contactPhone',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.contactPhone ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactPhone ? this.fieldsDisableExpressions.contactPhone(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactPhone ? this.fieldsDisableExpressions.contactPhone(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.contact-phone.label:Contact phone`,
@@ -230,11 +233,11 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         },
         {
         key: 'infoLink',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.infoLink ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.infoLink ? this.fieldsDisableExpressions.infoLink(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.infoLink ? this.fieldsDisableExpressions.infoLink(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.info-link.label:Homepage`,
@@ -247,11 +250,11 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         },
         {
         key: 'expiresOn',
-        type: 'datepicker',
+        type: this.resolveFieldType('datepicker', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.expiresOn ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.expiresOn ? this.fieldsDisableExpressions.expiresOn(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.expiresOn ? this.fieldsDisableExpressions.expiresOn(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.expires-on.label:Expires on`,
@@ -264,11 +267,11 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         },
         {
         key: 'freeShipping',
-        type: this.isReadonly ? 'readonly-boolean' : 'checkbox',
+        type: this.resolveFieldType('checkbox', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.freeShipping ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.freeShipping ? this.fieldsDisableExpressions.freeShipping(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.freeShipping ? this.fieldsDisableExpressions.freeShipping(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
@@ -279,11 +282,11 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         },
         {
         key: 'hasDiscount',
-        type: this.isReadonly ? 'readonly-boolean' : 'checkbox',
+        type: this.resolveFieldType('checkbox', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.hasDiscount ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.hasDiscount ? this.fieldsDisableExpressions.hasDiscount(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.hasDiscount ? this.fieldsDisableExpressions.hasDiscount(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.has-discount.label:Has discount`,
@@ -294,11 +297,11 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         },
         {
         key: 'discount',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.discount ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.discount ? this.fieldsDisableExpressions.discount(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.discount ? this.fieldsDisableExpressions.discount(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.discount.label:Discount`,

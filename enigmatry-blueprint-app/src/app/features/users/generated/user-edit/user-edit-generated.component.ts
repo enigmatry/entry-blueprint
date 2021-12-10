@@ -7,11 +7,11 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
-import { IFieldExpressionDictionary, SelectConfiguration } from '@enigmatry/angular-building-blocks/form';
+import { IFieldExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver } from '@enigmatry/angular-building-blocks/form';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -46,7 +46,7 @@ export class UserEditGeneratedComponent implements OnInit {
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
-  constructor() { }
+  constructor(@Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
 
   ngOnInit(): void {
     this.fields = this.initializeFields();
@@ -57,6 +57,9 @@ export class UserEditGeneratedComponent implements OnInit {
       this.save.emit(this.model);
     }
   }
+
+  resolveFieldType = (type: string, isControlReadonly: boolean): string =>
+    this._fieldTypeResolver ? this._fieldTypeResolver(type, this.isReadonly || isControlReadonly) : type;
 
   initializeFields(): FormlyFieldConfig[] {
     return [
@@ -72,11 +75,11 @@ export class UserEditGeneratedComponent implements OnInit {
         fieldGroup:[
         {
         key: 'userName',
-        type: 'input',
+        type: this.resolveFieldType('input', true),
         className: '',
         hideExpression: this.fieldsHideExpressions?.userName ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userName ? this.fieldsDisableExpressions.userName(model) : true)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userName ? this.fieldsDisableExpressions.userName(model) : true)),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.user-name.label:User name`,
@@ -87,11 +90,11 @@ export class UserEditGeneratedComponent implements OnInit {
         },
         {
         key: 'name',
-        type: 'input',
+        type: this.resolveFieldType('input', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.name.label:Name`,
@@ -116,11 +119,11 @@ maxLength: 25,
         fieldGroup:[
         {
         key: 'createdOn',
-        type: 'datepicker',
+        type: this.resolveFieldType('datepicker', true),
         className: '',
         hideExpression: this.fieldsHideExpressions?.createdOn ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.createdOn ? this.fieldsDisableExpressions.createdOn(model) : true)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.createdOn ? this.fieldsDisableExpressions.createdOn(model) : true)),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.created-on.label:Created on`,
@@ -131,11 +134,11 @@ maxLength: 25,
         },
         {
         key: 'updatedOn',
-        type: 'datepicker',
+        type: this.resolveFieldType('datepicker', true),
         className: '',
         hideExpression: this.fieldsHideExpressions?.updatedOn ?? false,
         expressionProperties: {
-          'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.updatedOn ? this.fieldsDisableExpressions.updatedOn(model) : true)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.updatedOn ? this.fieldsDisableExpressions.updatedOn(model) : true)),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
