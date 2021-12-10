@@ -1,0 +1,2 @@
+<span *ngIf="isArray(); else observable">{{getLabelFromArray(formControl.value)}}</span>
+<ng-template #observable><span>{{getLabelFromObservable(formControl.value) | async}}</span></ng-template>

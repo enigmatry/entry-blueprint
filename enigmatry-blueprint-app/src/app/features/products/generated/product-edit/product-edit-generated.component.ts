@@ -267,11 +267,11 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         },
         {
         key: 'freeShipping',
-        type: this.resolveFieldType('checkbox', false),
+        type: this.resolveFieldType('checkbox', true),
         className: '',
         hideExpression: this.fieldsHideExpressions?.freeShipping ?? false,
         expressionProperties: {
-        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.freeShipping ? this.fieldsDisableExpressions.freeShipping(model) : false)),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.freeShipping ? this.fieldsDisableExpressions.freeShipping(model) : true)),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
