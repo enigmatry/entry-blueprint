@@ -3,6 +3,7 @@ using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Model.Products;
 using Enigmatry.CodeGeneration.Configuration.Form;
 using Enigmatry.CodeGeneration.Configuration.Form.Controls;
+using Enigmatry.CodeGeneration.Configuration.Formatters;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
@@ -37,7 +38,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithLabel("Price per unit")
                 .WithLabelTranslationId(ProductTranslationId.Price)
                 .WithPlaceholder("Price per unit")
-                .WithPlaceholderTranslationId(ProductTranslationId.Price);
+                .WithPlaceholderTranslationId(ProductTranslationId.Price)
+                .WithFormat(new CurrencyPropertyFormatter().WithCurrencyCode("EUR").WithDisplay("€"));
 
             builder.FormControl(x => x.Amount)
                 .WithLabel("Units")
@@ -60,6 +62,9 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithValidator("productExpiresOnIsRequired");
 
             builder.FormControl(x => x.FreeShipping).IsReadonly(true);
+
+            builder.FormControl(x => x.Discount)
+                .WithFormat(new PercentPropertyFormatter().WithDigitsInfo("1.2-2"));
 
             // Configuring built in validations
             builder.WithValidationConfiguration(new ProductEditComponentValidationConfiguration());

@@ -84,6 +84,7 @@ export class ProductEditGeneratedComponent implements OnInit {
 minLength: 5,
 maxLength: 50,
 
+            typeFormatDef: undefined
         },
 modelOptions: { updateOn: 'blur' },
 asyncValidators: { validation: [ 'productNameIsUnique' ] },
@@ -104,6 +105,7 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
             required: true,
 pattern: /^[A-Z]{4}[1-9]{8}$/mu,
 
+            typeFormatDef: undefined
         },
             validation: {
             messages: {
@@ -131,6 +133,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         hidden: !true,
             required: true,
 
+            typeFormatDef: undefined
         },
         },
         {
@@ -148,6 +151,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
             rows: 2,
             cols: 0,
         hidden: !true,
+            typeFormatDef: undefined
         },
         },
         {
@@ -168,6 +172,7 @@ type: 'number',
 min: 0.99 + 0.1,
 max: 999.99,
 
+            typeFormatDef: { name: 'currency', currencyCode: 'EUR', display: '€', digitsInfo: '', locale: '' }
         },
         },
         {
@@ -188,6 +193,7 @@ type: 'number',
 min: 0 + 1,
 max: 100,
 
+            typeFormatDef: undefined
         },
         },
         {
@@ -206,6 +212,7 @@ max: 100,
             required: true,
 pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 
+            typeFormatDef: undefined
         },
             validation: {
             messages: {
@@ -229,6 +236,7 @@ pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid e
             required: true,
 pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/mu,
 
+            typeFormatDef: undefined
         },
         },
         {
@@ -246,6 +254,7 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         hidden: !true,
             pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u,
 
+            typeFormatDef: undefined
         },
         },
         {
@@ -261,6 +270,7 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date, if any`,
         description: '',
         hidden: !true,
+            typeFormatDef: { name: 'date' }
         },
 modelOptions: { updateOn: 'blur' },
 asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
@@ -278,6 +288,7 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         placeholder: $localize `:@@products.product-edit.free-shipping.placeholder:Free shipping`,
         description: '',
         hidden: !true,
+            typeFormatDef: { name: 'boolean' }
         },
         },
         {
@@ -293,6 +304,7 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         placeholder: $localize `:@@products.product-edit.has-discount.placeholder:Has discount`,
         description: '',
         hidden: !true,
+            typeFormatDef: { name: 'boolean' }
         },
         },
         {
@@ -312,6 +324,7 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
 min: 0,
 max: 100,
 
+            typeFormatDef: { name: 'percent', digitsInfo: '1.2-2', locale: '' }
         },
         },
     ];

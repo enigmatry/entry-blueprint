@@ -86,6 +86,7 @@ export class UserEditGeneratedComponent implements OnInit {
         placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
         description: '',
         hidden: !true,
+            typeFormatDef: undefined
         },
         },
         {
@@ -105,6 +106,7 @@ export class UserEditGeneratedComponent implements OnInit {
 minLength: 5,
 maxLength: 25,
 
+            typeFormatDef: undefined
         },
         },
         {
@@ -130,6 +132,7 @@ maxLength: 25,
         placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
         description: '',
         hidden: !true,
+            typeFormatDef: { name: 'date' }
         },
         },
         {
@@ -145,6 +148,7 @@ maxLength: 25,
         placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
         description: '',
         hidden: !true,
+            typeFormatDef: { name: 'date' }
         },
         },
         ]

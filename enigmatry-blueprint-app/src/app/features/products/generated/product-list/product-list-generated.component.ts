@@ -60,15 +60,15 @@ export class ProductListGeneratedComponent implements OnInit {
 { field: 'name', header: $localize `:@@products.product-list.name:Product name`, hide: false, sortable: true, cellTemplate: this.nameTpl },
 { field: 'code', header: $localize `:@@products.product-list.code:Code`, hide: false, sortable: true },
 { field: 'type', header: $localize `:@@products.product-list.type:Type`, hide: false, sortable: true, cellTemplate: this.typeTpl },
-{ field: 'price', header: $localize `:@@products.price:Price per unit`, hide: false, sortable: true, type: 'currency', typeParameter: { currencyCode: 'EUR', display: '€', digitsInfo: '', locale: '' }, class: 'products-price' },
+{ field: 'price', header: $localize `:@@products.price:Price per unit`, hide: false, sortable: true, type: 'currency', typeParameter: { name: 'currency', currencyCode: 'EUR', display: '€', digitsInfo: '', locale: '' }, class: 'products-price' },
 { field: 'amount', header: $localize `:@@products.amount:Units`, hide: false, sortable: true },
 { field: 'contactEmail', header: $localize `:@@products.product-list.contact-email:Contact email`, hide: false, sortable: true },
 { field: 'contactPhone', header: $localize `:@@products.product-list.contact-phone:Contact phone`, hide: false, sortable: true },
 { field: 'infoLink', hide: true, sortable: true },
-{ field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: undefined },
-{ field: 'freeShipping', header: $localize `:@@products.product-list.free-shipping:Free shipping`, hide: false, sortable: true, type: 'boolean', typeParameter: undefined },
-{ field: 'hasDiscount', hide: true, sortable: true, type: 'boolean', typeParameter: undefined },
-{ field: 'discount', hide: true, sortable: true, type: 'number', typeParameter: undefined }
+{ field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } },
+{ field: 'freeShipping', header: $localize `:@@products.product-list.free-shipping:Free shipping`, hide: false, sortable: true, type: 'boolean', typeParameter: { name: 'boolean' } },
+{ field: 'hasDiscount', hide: true, sortable: true, type: 'boolean', typeParameter: { name: 'boolean' } },
+{ field: 'discount', hide: true, sortable: true, type: 'number', typeParameter: { name: 'number' } }
 ];
     this.contextMenuItems = [];
   }
