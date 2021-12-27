@@ -22,6 +22,6 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
 
         public IIdentity Identity { get; }
 
-        public static TestPrincipal CreateDefault() => new TestPrincipal(Guid.NewGuid(), TestUsername);
+        public static TestPrincipal CreateDefault() => new(Guid.NewGuid(), TestUsername);
     }
 }

@@ -47,7 +47,7 @@ namespace Enigmatry.Blueprint.Model.Products.Commands
                 {
                     RuleFor(x => x.ExpiresOn).NotNull();
                 });
-                When(x => x.HasDiscount == true, () =>
+                When(x => x.HasDiscount, () =>
                 {
                     RuleFor(x => x.Discount)
                         .GreaterThanOrEqualTo(Product.DiscountMinValue)
