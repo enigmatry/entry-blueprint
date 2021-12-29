@@ -11,6 +11,7 @@ import { FormlyFieldsetComponent } from './formly-fieldset/formly-fieldset.compo
 import { ReadonlyInputComponent } from './formly-readonly-input/formly-readonly-input.component';
 import { ReadonlyBooleanComponent } from './formly-readonly-boolean/formly-readonly-boolean.component';
 import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-radio.component';
+import { EnigmatryFormlyExtensionsModule } from '@enigmatry/formly-extensions';
 
 const defaultFormConfig: FormConfig = {
   fieldTypesConfig: {
@@ -39,6 +40,7 @@ const defaultFormConfig: FormConfig = {
     ReactiveFormsModule,
     MatExpansionModule,
     MatSelectModule,
+    EnigmatryFormlyExtensionsModule,
     FormlyModule.forChild({
       types: [
         { name: 'fieldset', component: FormlyFieldsetComponent },

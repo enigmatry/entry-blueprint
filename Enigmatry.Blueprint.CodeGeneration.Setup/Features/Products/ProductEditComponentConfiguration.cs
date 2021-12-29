@@ -28,7 +28,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithPlaceholder("Unique product code identifier")
                 .WithValidator("productCodeIsUnique");
 
-            builder.SelectFormControl(x => x.Type)
+            builder.AutocompleteFormControl(x => x.Type)
                 .WithOptions(options => options.WithFixedValues<ProductType>());
 
             builder.TextareaFormControl(x => x.Description)

@@ -117,7 +117,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         },
         {
         key: 'type',
-        type: this.resolveFieldType('select', false),
+        type: this.resolveFieldType('autocomplete', false),
         className: '',
         hideExpression: this.fieldsHideExpressions?.type ?? false,
         expressionProperties: {
