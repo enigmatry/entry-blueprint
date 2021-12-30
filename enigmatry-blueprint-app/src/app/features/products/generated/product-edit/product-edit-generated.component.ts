@@ -65,7 +65,6 @@ export class ProductEditGeneratedComponent implements OnInit {
 
   initializeFields(): FormlyFieldConfig[] {
     return [
-            { key: 'id' },
         {
         key: 'name',
         type: this.resolveFieldType('input', false),
@@ -327,6 +326,7 @@ max: 100,
             typeFormatDef: { name: 'percent', digitsInfo: '1.2-2', locale: '' }
         },
         },
+            { key: 'id' },
     ];
   }
 }

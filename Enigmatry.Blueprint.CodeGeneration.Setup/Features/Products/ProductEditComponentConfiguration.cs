@@ -1,6 +1,7 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Products;
 using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Model.Products;
+using Enigmatry.CodeGeneration.Configuration;
 using Enigmatry.CodeGeneration.Configuration.Form;
 using Enigmatry.CodeGeneration.Configuration.Form.Controls;
 using Enigmatry.CodeGeneration.Configuration.Formatters;
@@ -16,7 +17,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             // Configuring component:
             builder.Component()
                 .HasName("ProductEdit")
-                .BelongsToFeature("Products");
+                .BelongsToFeature("Products")
+                .OrderBy(OrderByType.Configuration);
 
             // Configuring fields:
             builder.FormControl(x => x.Name)
@@ -57,11 +59,15 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithLabel("Homepage")
                 .WithPlaceholder("Link to product homepage");
 
+            builder.FormControl(x => x.AdditionalInfo).Ignore();
+
             builder.FormControl(x => x.ExpiresOn)
                 .WithPlaceholder("Product expiration date, if any")
                 .WithValidator("productExpiresOnIsRequired");
 
             builder.FormControl(x => x.FreeShipping).IsReadonly(true);
+
+            builder.FormControl(x => x.HasDiscount);
 
             builder.FormControl(x => x.Discount)
                 .WithFormat(new PercentPropertyFormatter().WithDigitsInfo("1.2-2"));
