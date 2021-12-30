@@ -41,8 +41,8 @@ export class ProductEditGeneratedComponent implements OnInit {
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-                @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
-                @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName' };
+            @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
+            @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName' };
 
  _isReadonly: boolean;
   form = new FormGroup({});
@@ -77,7 +77,7 @@ export class ProductEditGeneratedComponent implements OnInit {
         label: $localize `:@@products.product-edit.name.label:Name`,
         placeholder: $localize `:@@products.product-edit.name.placeholder:Unique product name`,
         description: '',
-            appearance: 'outline',
+appearance: 'outline',
         hidden: !true,
             required: true,
 minLength: 5,

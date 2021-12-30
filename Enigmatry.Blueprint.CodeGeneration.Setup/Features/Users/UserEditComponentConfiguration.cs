@@ -12,7 +12,8 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users
         {
             builder.Component()
                 .HasName("UserEdit")
-                .BelongsToFeature("Users");
+                .BelongsToFeature("Users")
+                .IncludeUnconfiguredProperties(false);
 
             var userSection = builder.FormControlGroup("User")
                 .CreateUiSection("fieldset");
