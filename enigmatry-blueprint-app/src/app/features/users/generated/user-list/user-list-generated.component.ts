@@ -26,7 +26,7 @@ export class UserListGeneratedComponent implements OnInit {
 
   @Input() showPaginator = true;
   @Input() showFirstLastButtons = false;
-  @Input() pageSizeOptions = [10, 50, 100];
+  @Input() pageSizeOptions = [20, 50, 100];
   @Input() hidePageSize = !true;
 
   @Input() defaultSort: { sortBy?: string | undefined, sortDirection?: SortDirection } = { };

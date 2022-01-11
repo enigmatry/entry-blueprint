@@ -31,7 +31,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
                 .WithValidator("productCodeIsUnique");
 
             builder.AutocompleteFormControl(x => x.Type)
-                .WithOptions(options => options.WithFixedValues<ProductType>());
+                .WithOptions(options => options.WithFixedValues<ProductType>().WithSortKey("displayName"));
 
             builder.TextareaFormControl(x => x.Description)
                 .WithRows(2);

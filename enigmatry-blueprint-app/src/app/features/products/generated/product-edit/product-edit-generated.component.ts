@@ -7,12 +7,13 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
-import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Optional, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
-import { IFieldExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver } from '@enigmatry/angular-building-blocks/form';
-import { BehaviorSubject } from 'rxjs';
+import { IFieldExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
+import { BehaviorSubject, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -41,14 +42,16 @@ export class ProductEditGeneratedComponent implements OnInit {
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
 
-            @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
-            @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName' };
+                @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
+                @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: 'displayName' };
 
- _isReadonly: boolean;
+  _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
-  constructor(@Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
+  constructor(
+    @Inject(LOCALE_ID) private _localeId: string,
+    @Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
 
   ngOnInit(): void {
     this.fields = this.initializeFields();
@@ -126,7 +129,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         label: $localize `:@@products.product-edit.type.label:Type`,
         placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
         description: '',
-            options: this.typeOptions,
+            options: of(this.typeOptions).pipe(map(opts => sortOptions(opts, this.typeOptionsConfiguration.valueProperty, this.typeOptionsConfiguration.sortProperty, this._localeId))),
             valueProp: this.typeOptionsConfiguration.valueProperty,
             labelProp: this.typeOptionsConfiguration.labelProperty,
         hidden: !true,

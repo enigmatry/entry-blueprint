@@ -7,12 +7,13 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
-import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Optional, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
-import { IFieldExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver } from '@enigmatry/angular-building-blocks/form';
-import { BehaviorSubject } from 'rxjs';
+import { IFieldExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
+import { BehaviorSubject, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -42,11 +43,13 @@ export class UserEditGeneratedComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
 
 
- _isReadonly: boolean;
+  _isReadonly: boolean;
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
 
-  constructor(@Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
+  constructor(
+    @Inject(LOCALE_ID) private _localeId: string,
+    @Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
 
   ngOnInit(): void {
     this.fields = this.initializeFields();
