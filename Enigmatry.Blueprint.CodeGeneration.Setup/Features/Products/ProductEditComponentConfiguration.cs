@@ -1,4 +1,5 @@
-﻿using Enigmatry.Blueprint.Api.Features.Products;
+﻿using System;
+using Enigmatry.Blueprint.Api.Features.Products;
 using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Model.Products;
 using Enigmatry.CodeGeneration.Configuration;
@@ -71,6 +72,11 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
 
             builder.FormControl(x => x.Discount)
                 .WithFormat(new PercentPropertyFormatter().WithDigitsInfo("1.2-2"));
+
+            builder.ButtonFormControl("ResetFormBtn")
+                .WithLabel(String.Empty)
+                .WithText("Reset")
+                .WithHint("* This will reset form to it's initial state.");
 
             // Configuring built in validations
             builder.WithValidationConfiguration(new ProductEditComponentValidationConfiguration());

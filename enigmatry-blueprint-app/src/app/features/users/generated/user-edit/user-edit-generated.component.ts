@@ -41,6 +41,7 @@ export class UserEditGeneratedComponent implements OnInit {
 
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
+  @Output() buttonClick = new EventEmitter<string>();
 
 
   _isReadonly: boolean;

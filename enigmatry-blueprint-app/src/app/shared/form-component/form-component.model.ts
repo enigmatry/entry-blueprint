@@ -4,6 +4,7 @@ import { IFieldExpressionDictionary } from '@enigmatry/angular-building-blocks/f
 
 export abstract class FormComponent<TCommandModel, TDetailsModel> {
     model: TCommandModel = {} as TCommandModel;
+    initialModelData: TCommandModel = {} as TCommandModel;
     formMode = FormAccessMode.edit;
     fieldsHideExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
     fieldsDisableExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
@@ -15,12 +16,17 @@ export abstract class FormComponent<TCommandModel, TDetailsModel> {
 
         if (this.isEdit()) {
             this.activatedRoute.data.subscribe(data => {
-                this.model = this.toCommand(data.response);
+                this.initialModelData = this.toCommand(data.response);
+                this.resetModel();
             });
         }
     }
 
     abstract toCommand(response: TDetailsModel): TCommandModel;
+
+    resetModel(): void {
+      this.model = { ...this.initialModelData };
+    }
 
     goBack = () => this.router.navigate([this.isCreate() ? '../' : '../../'], { relativeTo: this.activatedRoute });
 

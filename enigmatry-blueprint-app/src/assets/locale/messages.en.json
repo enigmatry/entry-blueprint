@@ -31,6 +31,8 @@
     "products.product-edit.has-discount.placeholder": "Has discount",
     "products.product-edit.discount.label": "Discount",
     "products.product-edit.discount.placeholder": "Discount",
+    "products.product-edit.reset-form-btn.hint": "* This will reset form to it's initial state.",
+    "products.product-edit.reset-form-btn.text": "Reset",
     "products.product-list.name": "Product name",
     "products.product-list.code": "Code",
     "products.product-list.type": "Type",

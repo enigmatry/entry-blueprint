@@ -34,6 +34,12 @@ export class ProductEditComponent
             .post(model as ProductCreateOrUpdateCommand)
             .subscribe(this.goBack);
 
+    buttonClick = (name: string) => {
+        if (name === 'resetFormBtn') {
+          this.resetModel();
+        }
+    };
+
     toCommand(response: IGetProductDetailsResponse): IProductCreateOrUpdateCommand {
         return new ProductCreateOrUpdateCommand({
             id: response.id,
@@ -57,6 +63,9 @@ export class ProductEditComponent
         this.fieldsHideExpressions.discount =
             (model: IGetProductDetailsResponse): boolean =>
                 model.hasDiscount === undefined || model.hasDiscount === false;
+        this.fieldsHideExpressions.resetFormBtn =
+            (model: IGetProductDetailsResponse): boolean =>
+                !this.isEdit();
     };
 
     private initDisableExpressions = () => {

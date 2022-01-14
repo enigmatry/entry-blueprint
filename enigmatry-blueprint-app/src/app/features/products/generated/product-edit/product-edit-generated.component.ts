@@ -41,6 +41,7 @@ export class ProductEditGeneratedComponent implements OnInit {
 
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
+  @Output() buttonClick = new EventEmitter<string>();
 
                 @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
                 @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: 'displayName' };
@@ -327,6 +328,23 @@ min: 0,
 max: 100,
 
             typeFormatDef: { name: 'percent', digitsInfo: '1.2-2', locale: '' }
+        },
+        },
+        {
+        key: 'resetFormBtn',
+        type: this.resolveFieldType('button', false),
+        className: '',
+        hideExpression: this.fieldsHideExpressions?.resetFormBtn ?? false,
+        expressionProperties: {
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.resetFormBtn ? this.fieldsDisableExpressions.resetFormBtn(model) : false)),
+        },
+        templateOptions: {
+        label: '',
+        placeholder: '',
+        description: $localize `:@@products.product-edit.reset-form-btn.hint:* This will reset form to it's initial state.`,
+            text: $localize `:@@products.product-edit.reset-form-btn.text:Reset`,
+            onClick: ($event: any) => this.buttonClick.emit('resetFormBtn'),
+        hidden: !true,
         },
         },
             { key: 'id' },

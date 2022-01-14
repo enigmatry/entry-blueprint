@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormlyModule } from '@ngx-formly/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EnigmatryFormModule, ENIGMATRY_FORM_CONFIG, FormConfig } from '@enigmatry/angular-building-blocks/form';
 import { EnigmatryCommonModule } from '@enigmatry/angular-building-blocks/common';
@@ -12,6 +13,7 @@ import { ReadonlyInputComponent } from './formly-readonly-input/formly-readonly-
 import { ReadonlyBooleanComponent } from './formly-readonly-boolean/formly-readonly-boolean.component';
 import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-radio.component';
 import { EnigmatryFormlyExtensionsModule } from '@enigmatry/formly-extensions';
+import { FormlyButtonComponent } from './formly-button/formly-button.component';
 
 const defaultFormConfig: FormConfig = {
   fieldTypesConfig: {
@@ -33,13 +35,15 @@ const defaultFormConfig: FormConfig = {
     FormlyFieldsetComponent,
     ReadonlyInputComponent,
     ReadonlyRadioComponent,
-    ReadonlyBooleanComponent
+    ReadonlyBooleanComponent,
+    FormlyButtonComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MatExpansionModule,
     MatSelectModule,
+    MatButtonModule,
     EnigmatryFormlyExtensionsModule,
     FormlyModule.forChild({
       types: [
@@ -47,7 +51,20 @@ const defaultFormConfig: FormConfig = {
         { name: 'expansion-panel', component: FormlyExpansionPanelComponent },
         { name: 'readonly-input', component: ReadonlyInputComponent, wrappers: ['form-field'] },
         { name: 'readonly-boolean', component: ReadonlyBooleanComponent, wrappers: ['form-field'] },
-        { name: 'readonly-radio', component: ReadonlyRadioComponent, wrappers: ['form-field'] }
+        { name: 'readonly-radio', component: ReadonlyRadioComponent, wrappers: ['form-field'] },
+        {
+          name: 'button',
+          component: FormlyButtonComponent,
+          wrappers: ['form-field'],
+          defaultOptions: {
+            templateOptions: {
+              type: 'button',
+              color: 'primary',
+              floatLabel: 'always',
+              appearance: 'none'
+            }
+          }
+        }
       ]
     }),
     EnigmatryCommonModule,
