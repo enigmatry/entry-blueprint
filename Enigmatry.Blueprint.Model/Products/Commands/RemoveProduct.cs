@@ -36,7 +36,7 @@ namespace Enigmatry.Blueprint.Model.Products.Commands
 
                 _repository.Delete(product);
 
-                return Unit.Task.Result;
+                return await Unit.Task;
             }
         }
     }
