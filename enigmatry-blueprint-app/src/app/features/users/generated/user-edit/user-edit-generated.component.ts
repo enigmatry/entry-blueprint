@@ -38,6 +38,7 @@ export class UserEditGeneratedComponent implements OnInit {
 
   @Input() fieldsHideExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
   @Input() fieldsDisableExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
+  @Input() fieldsRequiredExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
 
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
@@ -84,6 +85,7 @@ export class UserEditGeneratedComponent implements OnInit {
         hideExpression: this.fieldsHideExpressions?.userName ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userName ? this.fieldsDisableExpressions.userName(model) : true)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.userName ? this.fieldsRequiredExpressions.userName(model) : false),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.user-name.label:User name`,
@@ -100,6 +102,7 @@ export class UserEditGeneratedComponent implements OnInit {
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.name ? this.fieldsRequiredExpressions.name(model) : true),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.name.label:Name`,
@@ -130,6 +133,7 @@ maxLength: 25,
         hideExpression: this.fieldsHideExpressions?.createdOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.createdOn ? this.fieldsDisableExpressions.createdOn(model) : true)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.createdOn ? this.fieldsRequiredExpressions.createdOn(model) : false),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.created-on.label:Created on`,
@@ -146,6 +150,7 @@ maxLength: 25,
         hideExpression: this.fieldsHideExpressions?.updatedOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.updatedOn ? this.fieldsDisableExpressions.updatedOn(model) : true)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.updatedOn ? this.fieldsRequiredExpressions.updatedOn(model) : false),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.updated-on.label:Updated on`,

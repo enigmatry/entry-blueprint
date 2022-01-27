@@ -8,6 +8,7 @@ export abstract class FormComponent<TCommandModel, TDetailsModel> {
     formMode = FormAccessMode.edit;
     fieldsHideExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
     fieldsDisableExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
+    fieldsRequiredExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
     cancelText = $localize`:@@common.cancel:Cancel`;
     saveText = $localize`:@@common.save:Save`;
 

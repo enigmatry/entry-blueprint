@@ -50,6 +50,7 @@ namespace Enigmatry.Blueprint.Model.Products.Commands
                 When(x => x.HasDiscount, () =>
                 {
                     RuleFor(x => x.Discount)
+                        .NotNull()
                         .GreaterThanOrEqualTo(Product.DiscountMinValue)
                         .LessThanOrEqualTo(Product.DiscountMaxValue);
                 });

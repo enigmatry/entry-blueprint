@@ -38,6 +38,7 @@ export class ProductEditGeneratedComponent implements OnInit {
 
   @Input() fieldsHideExpressions: IFieldExpressionDictionary<IGetProductDetailsResponse> | undefined = undefined;
   @Input() fieldsDisableExpressions: IFieldExpressionDictionary<IGetProductDetailsResponse> | undefined = undefined;
+  @Input() fieldsRequiredExpressions: IFieldExpressionDictionary<IGetProductDetailsResponse> | undefined = undefined;
 
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
@@ -76,6 +77,7 @@ export class ProductEditGeneratedComponent implements OnInit {
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.name ? this.fieldsRequiredExpressions.name(model) : true),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.name.label:Name`,
@@ -99,6 +101,7 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
         hideExpression: this.fieldsHideExpressions?.code ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.code ? this.fieldsDisableExpressions.code(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.code ? this.fieldsRequiredExpressions.code(model) : true),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.code.label:Code`,
@@ -125,6 +128,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         hideExpression: this.fieldsHideExpressions?.type ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.type ? this.fieldsDisableExpressions.type(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.type ? this.fieldsRequiredExpressions.type(model) : true),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.type.label:Type`,
@@ -146,6 +150,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         hideExpression: this.fieldsHideExpressions?.description ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.description ? this.fieldsDisableExpressions.description(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.description ? this.fieldsRequiredExpressions.description(model) : false),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.description.label:Description`,
@@ -164,6 +169,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         hideExpression: this.fieldsHideExpressions?.price ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.price ? this.fieldsDisableExpressions.price(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.price ? this.fieldsRequiredExpressions.price(model) : true),
         },
         templateOptions: {
         label: $localize `:@@products.price:Price per unit`,
@@ -185,6 +191,7 @@ max: 999.99,
         hideExpression: this.fieldsHideExpressions?.amount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.amount ? this.fieldsDisableExpressions.amount(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.amount ? this.fieldsRequiredExpressions.amount(model) : true),
         },
         templateOptions: {
         label: $localize `:@@products.amount:Units`,
@@ -206,6 +213,7 @@ max: 100,
         hideExpression: this.fieldsHideExpressions?.contactEmail ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactEmail ? this.fieldsDisableExpressions.contactEmail(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.contactEmail ? this.fieldsRequiredExpressions.contactEmail(model) : true),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.contact-email.label:Contact email`,
@@ -230,6 +238,7 @@ pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid e
         hideExpression: this.fieldsHideExpressions?.contactPhone ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactPhone ? this.fieldsDisableExpressions.contactPhone(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.contactPhone ? this.fieldsRequiredExpressions.contactPhone(model) : true),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.contact-phone.label:Contact phone`,
@@ -249,6 +258,7 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         hideExpression: this.fieldsHideExpressions?.infoLink ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.infoLink ? this.fieldsDisableExpressions.infoLink(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.infoLink ? this.fieldsRequiredExpressions.infoLink(model) : false),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.info-link.label:Homepage`,
@@ -267,6 +277,7 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         hideExpression: this.fieldsHideExpressions?.expiresOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.expiresOn ? this.fieldsDisableExpressions.expiresOn(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.expiresOn ? this.fieldsRequiredExpressions.expiresOn(model) : false),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.expires-on.label:Expires on`,
@@ -285,6 +296,7 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         hideExpression: this.fieldsHideExpressions?.freeShipping ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.freeShipping ? this.fieldsDisableExpressions.freeShipping(model) : true)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.freeShipping ? this.fieldsRequiredExpressions.freeShipping(model) : false),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
@@ -301,6 +313,7 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         hideExpression: this.fieldsHideExpressions?.hasDiscount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.hasDiscount ? this.fieldsDisableExpressions.hasDiscount(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.hasDiscount ? this.fieldsRequiredExpressions.hasDiscount(model) : false),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.has-discount.label:Has discount`,
@@ -317,6 +330,7 @@ asyncValidators: { validation: [ 'productExpiresOnIsRequired' ] },
         hideExpression: this.fieldsHideExpressions?.discount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.discount ? this.fieldsDisableExpressions.discount(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.discount ? this.fieldsRequiredExpressions.discount(model) : false),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.discount.label:Discount`,
@@ -337,6 +351,7 @@ max: 100,
         hideExpression: this.fieldsHideExpressions?.resetFormBtn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.resetFormBtn ? this.fieldsDisableExpressions.resetFormBtn(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.resetFormBtn ? this.fieldsRequiredExpressions.resetFormBtn(model) : false),
         },
         templateOptions: {
         label: '',

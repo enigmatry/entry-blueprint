@@ -27,6 +27,7 @@ export class ProductEditComponent
         this.saveText = $localize`:@@common.save-product:Save product`;
         this.initHideExpressions();
         this.initDisableExpressions();
+        this.initRequiredExpressions();
     }
 
     save = (model: IProductCreateOrUpdateCommand) =>
@@ -73,5 +74,10 @@ export class ProductEditComponent
             (model: IGetProductDetailsResponse): boolean =>
                 model.type === undefined ||
                 model.type === ProductType.Book && this.formMode === FormAccessMode.edit;
+    };
+
+    private initRequiredExpressions = () => {
+      this.fieldsRequiredExpressions.discount =
+          (model: IGetProductDetailsResponse): boolean => !!model.hasDiscount;
     };
 }
