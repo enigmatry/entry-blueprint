@@ -63,8 +63,7 @@ namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products
             builder.FormControl(x => x.AdditionalInfo).Ignore();
 
             builder.FormControl(x => x.ExpiresOn)
-                .WithPlaceholder("Product expiration date, if any")
-                .WithValidator("productExpiresOnIsRequired");
+                .WithPlaceholder("Product expiration date, if any");
 
             builder.FormControl(x => x.FreeShipping).IsReadonly(true);
 

@@ -11,7 +11,7 @@ import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Optional, Ou
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
-import { IFieldExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
+import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
 import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -39,6 +39,7 @@ export class UserEditGeneratedComponent implements OnInit {
   @Input() fieldsHideExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
   @Input() fieldsDisableExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
   @Input() fieldsRequiredExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
+  @Input() fieldsPropertyExpressions: IFieldPropertyExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
 
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
@@ -86,6 +87,7 @@ export class UserEditGeneratedComponent implements OnInit {
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userName ? this.fieldsDisableExpressions.userName(model) : true)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.userName ? this.fieldsRequiredExpressions.userName(model) : false),
+        'model.userName': (model) => (this.fieldsPropertyExpressions?.userName ? this.fieldsPropertyExpressions.userName(model) : model.userName),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.user-name.label:User name`,
@@ -103,6 +105,7 @@ export class UserEditGeneratedComponent implements OnInit {
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.name ? this.fieldsRequiredExpressions.name(model) : true),
+        'model.name': (model) => (this.fieldsPropertyExpressions?.name ? this.fieldsPropertyExpressions.name(model) : model.name),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.name.label:Name`,
@@ -134,6 +137,7 @@ maxLength: 25,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.createdOn ? this.fieldsDisableExpressions.createdOn(model) : true)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.createdOn ? this.fieldsRequiredExpressions.createdOn(model) : false),
+        'model.createdOn': (model) => (this.fieldsPropertyExpressions?.createdOn ? this.fieldsPropertyExpressions.createdOn(model) : model.createdOn),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.created-on.label:Created on`,
@@ -151,6 +155,7 @@ maxLength: 25,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.updatedOn ? this.fieldsDisableExpressions.updatedOn(model) : true)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.updatedOn ? this.fieldsRequiredExpressions.updatedOn(model) : false),
+        'model.updatedOn': (model) => (this.fieldsPropertyExpressions?.updatedOn ? this.fieldsPropertyExpressions.updatedOn(model) : model.updatedOn),
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.updated-on.label:Updated on`,

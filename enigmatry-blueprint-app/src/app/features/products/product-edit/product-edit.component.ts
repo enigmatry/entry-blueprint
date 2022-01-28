@@ -28,6 +28,7 @@ export class ProductEditComponent
         this.initHideExpressions();
         this.initDisableExpressions();
         this.initRequiredExpressions();
+        this.initPropertyExpressions();
     }
 
     save = (model: IProductCreateOrUpdateCommand) =>
@@ -74,10 +75,22 @@ export class ProductEditComponent
             (model: IGetProductDetailsResponse): boolean =>
                 model.type === undefined ||
                 model.type === ProductType.Book && this.formMode === FormAccessMode.edit;
+      this.fieldsDisableExpressions.expiresOn =
+          (model: IGetProductDetailsResponse): boolean =>
+            model.type === ProductType.Car || model.type === ProductType.Book;
     };
 
     private initRequiredExpressions = () => {
       this.fieldsRequiredExpressions.discount =
           (model: IGetProductDetailsResponse): boolean => !!model.hasDiscount;
+      this.fieldsRequiredExpressions.expiresOn =
+          (model: IGetProductDetailsResponse): boolean =>
+            model.type === ProductType.Drink || model.type === ProductType.Food;
+    };
+
+    private initPropertyExpressions = () => {
+      this.fieldsPropertyExpressions.expiresOn =
+          (model: IGetProductDetailsResponse): Date | undefined =>
+            model.type === ProductType.Car || model.type === ProductType.Book ? undefined : model.expiresOn;
     };
 }

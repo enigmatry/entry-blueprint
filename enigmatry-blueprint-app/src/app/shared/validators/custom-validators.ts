@@ -2,7 +2,6 @@
 /* eslint-disable no-secrets/no-secrets */
 /* eslint-disable id-length */
 import { FormControl } from '@angular/forms';
-import { ProductType } from 'src/app/api/api-reference';
 import { ValidatorsService as CustomValidatorsService } from './validators.service';
 
 export { ValidatorsService as CustomValidatorsService } from './validators.service';
@@ -27,29 +26,11 @@ const productNameIsUniqueValidator = async(control: FormControl, service: Custom
     return Promise.resolve(null);
 };
 
-const productExpiresOnIsRequiredValidator = async(control: FormControl)
-    : Promise<{ productExpiresOnIsRequired: boolean } | null> => {
-        const typeValue = control?.parent?.get('type')?.value;
-        if (typeValue === undefined || typeValue === null) {
-            return Promise.resolve(null);
-        }
-
-        const productType = typeValue as ProductType;
-        if (productType === ProductType.Drink || productType === ProductType.Food) {
-            const response = control.value
-                ? null
-                : { productExpiresOnIsRequired: true };
-            return Promise.resolve(response);
-        }
-        return Promise.resolve(null);
-};
-
 export const customValidatorsFactory = (service: CustomValidatorsService) => {
     return {
         validationMessages: [
             { name: 'productCodeIsUnique', message: $localize`:@@validators.productCodeIsUnique:Code is not unique` },
-            { name: 'productNameIsUnique', message: $localize`:@@validators.productNameIsUnique:Name is not unique` },
-            { name: 'productExpiresOnIsRequired', message: $localize`:@@validators.product-expires-on-required:Required for food & drinks` }
+            { name: 'productNameIsUnique', message: $localize`:@@validators.productNameIsUnique:Name is not unique` }
         ],
         validators: [
             {
@@ -59,10 +40,6 @@ export const customValidatorsFactory = (service: CustomValidatorsService) => {
             {
                 name: 'productNameIsUnique',
                 validation: (control: FormControl) => productNameIsUniqueValidator(control, service)
-            },
-            {
-                name: 'productExpiresOnIsRequired',
-                validation: (control: FormControl) => productExpiresOnIsRequiredValidator(control)
             }
         ]
     };

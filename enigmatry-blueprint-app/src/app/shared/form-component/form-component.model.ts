@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormAccessMode } from './form-access-mode.enum';
-import { IFieldExpressionDictionary } from '@enigmatry/angular-building-blocks/form';
+import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary }
+  from '@enigmatry/angular-building-blocks/form';
 
 export abstract class FormComponent<TCommandModel, TDetailsModel> {
     model: TCommandModel = {} as TCommandModel;
@@ -9,6 +10,7 @@ export abstract class FormComponent<TCommandModel, TDetailsModel> {
     fieldsHideExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
     fieldsDisableExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
     fieldsRequiredExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
+    fieldsPropertyExpressions: IFieldPropertyExpressionDictionary<TDetailsModel> = {};
     cancelText = $localize`:@@common.cancel:Cancel`;
     saveText = $localize`:@@common.save:Save`;
 
