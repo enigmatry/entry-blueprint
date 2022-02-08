@@ -1,0 +1,8 @@
+<ng-content></ng-content>
+
+<ng-template #defaultFormButtonsTpl>
+  <div class="buttons-container">
+    <button *ngIf="!isReadonly" type="submit" mat-raised-button color="primary">{{saveButtonText}}</button>
+    <button type="button" mat-raised-button (click)="cancel.emit()">{{cancelButtonText}}</button>
+  </div>
+</ng-template>

@@ -5,10 +5,12 @@ import { MaterialModule } from './material.module';
 import { GridCellsModule } from './grid-cells/grid-cells.module';
 import { EnigmatryGridModule, DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE } from '@enigmatry/angular-building-blocks';
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
+import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
   exports: [
     FormsModule,
@@ -16,7 +18,8 @@ import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
     MaterialModule,
     GridCellsModule,
     EnigmatryGridModule,
-    FormlyExtensionsModule
+    FormlyExtensionsModule,
+    FormWrapperComponent
   ],
   providers: [
     {
@@ -27,6 +30,9 @@ import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
       provide: DEFAULT_TIMEZONE,
       useFactory: () => 'GMT'
     }
+  ],
+  declarations: [
+    FormWrapperComponent
   ]
 })
 export class SharedModule { }

@@ -1,12 +1,12 @@
-<app-g-product-edit
-    [model]="model"
-    [fieldsHideExpressions]="fieldsHideExpressions"
-    [fieldsDisableExpressions]="fieldsDisableExpressions"
-    [fieldsRequiredExpressions]="fieldsRequiredExpressions"
-    [fieldsPropertyExpressions]="fieldsPropertyExpressions"
-    [saveButtonText]="saveText"
-    [cancelButtonText]="cancelText"
-    (save)="save($event)"
-    (cancel)="goBack()"
-    (buttonClick)="buttonClick($event)">
-</app-g-product-edit>
+<app-form-wrapper #formWrapper [saveButtonText]="saveText" (cancel)="goBack()">
+  <app-g-product-edit
+      [model]="model"
+      [fieldsHideExpressions]="fieldsHideExpressions"
+      [fieldsDisableExpressions]="fieldsDisableExpressions"
+      [fieldsRequiredExpressions]="fieldsRequiredExpressions"
+      [fieldsPropertyExpressions]="fieldsPropertyExpressions"
+      [formButtonsTemplate]="formWrapper.defaultFormButtonsTpl"
+      (save)="save($event)"
+      (buttonClick)="buttonClick($event)">
+  </app-g-product-edit>
+</app-form-wrapper>
