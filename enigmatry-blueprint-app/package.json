@@ -30,7 +30,7 @@
     "@angular/platform-browser": "^13.1.1",
     "@angular/platform-browser-dynamic": "^13.1.1",
     "@angular/router": "^13.1.1",
-    "@enigmatry/angular-building-blocks": "^1.0.102",
+    "@enigmatry/angular-building-blocks": "^1.0.103",
     "@enigmatry/formly-extensions": "^1.0.96",
     "@ngx-formly/core": "^5.10.22",
     "@ngx-formly/material": "^5.10.22",

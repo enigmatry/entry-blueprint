@@ -32,7 +32,8 @@ export class UserListGeneratedComponent implements OnInit {
   @Input() defaultSort: { sortBy?: string | undefined, sortDirection?: SortDirection } = { };
 
   @Input() rowSelectable = true;
-  @Input() multiSelectable = false;
+  @Input() multiSelectable = true;
+  @Input() showSelectAllCheckbox = false;
 
   @Input() headerTemplate: TemplateRef<any> | CellTemplate;
   @Input() cellTemplate: TemplateRef<any> | CellTemplate;

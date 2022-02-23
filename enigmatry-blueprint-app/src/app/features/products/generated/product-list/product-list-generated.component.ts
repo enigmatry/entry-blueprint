@@ -33,6 +33,7 @@ export class ProductListGeneratedComponent implements OnInit {
 
   @Input() rowSelectable = false;
   @Input() multiSelectable = false;
+  @Input() showSelectAllCheckbox = true;
 
   @Input() headerTemplate: TemplateRef<any> | CellTemplate;
   @Input() cellTemplate: TemplateRef<any> | CellTemplate;
