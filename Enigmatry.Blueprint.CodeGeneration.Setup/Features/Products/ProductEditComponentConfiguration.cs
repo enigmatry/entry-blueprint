@@ -63,8 +63,7 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
         builder.FormControl(x => x.AdditionalInfo).Ignore();
 
         builder.FormControl(x => x.ExpiresOn)
-            .WithPlaceholder("Product expiration date, if any")
-
+            .WithPlaceholder("Product expiration date, if any");
 
         builder.FormControl(x => x.FreeShipping).IsReadonly(true);
 
