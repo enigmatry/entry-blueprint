@@ -1,25 +1,22 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Registry;
 using Polly.Timeout;
 
-namespace Enigmatry.Blueprint.Infrastructure.Api.Init
+namespace Enigmatry.Blueprint.Infrastructure.Api.Init;
+
+public static class PollyStartupExtensions
 {
-    public static class PollyStartupExtensions
+    private const string GlobalTimeoutPolicyName = "global-timeout";
+
+    public static void AppAddPolly(this IServiceCollection services)
     {
-        private const string GlobalTimeoutPolicyName = "global-timeout";
+        // Add registry
+        IPolicyRegistry<string> policyRegistry = services.AddPolicyRegistry();
 
-        public static void AppAddPolly(this IServiceCollection services)
-        {
-            // Add registry
-            IPolicyRegistry<string> policyRegistry = services.AddPolicyRegistry();
-
-            // Centrally stored policies
-            AsyncTimeoutPolicy<HttpResponseMessage> timeoutPolicy =
-                Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500));
-            policyRegistry.Add(GlobalTimeoutPolicyName, timeoutPolicy);
-        }
+        // Centrally stored policies
+        AsyncTimeoutPolicy<HttpResponseMessage> timeoutPolicy =
+            Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(1500));
+        policyRegistry.Add(GlobalTimeoutPolicyName, timeoutPolicy);
     }
 }

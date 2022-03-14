@@ -1,10 +1,9 @@
-﻿namespace Enigmatry.Blueprint.Model.Products
+﻿namespace Enigmatry.Blueprint.Model.Products;
+
+public enum ProductType
 {
-    public enum ProductType
-    {
-        Food = 0,
-        Drink = 1,
-        Book = 2,
-        Car = 3,
-    }
+    Food = 0,
+    Drink = 1,
+    Book = 2,
+    Car = 3,
 }

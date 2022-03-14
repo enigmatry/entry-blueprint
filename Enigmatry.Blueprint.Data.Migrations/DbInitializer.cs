@@ -1,26 +1,24 @@
-﻿using System.Collections.Generic;
-using Enigmatry.Blueprint.Data.Migrations.Seeding;
+﻿using Enigmatry.Blueprint.Data.Migrations.Seeding;
 using Microsoft.EntityFrameworkCore;
 
-namespace Enigmatry.Blueprint.Data.Migrations
+namespace Enigmatry.Blueprint.Data.Migrations;
+
+public static class DbInitializer
 {
-    public static class DbInitializer
+    private static readonly IList<ISeeding> Seedings = new List<ISeeding>(10);
+
+    static DbInitializer()
     {
-        private static readonly IList<ISeeding> Seedings = new List<ISeeding>(10);
+        Seedings.Add(new UserSeeding());
+        Seedings.Add(new ProductSedding());
+    }
 
-        static DbInitializer()
+    // EF Core way of seeding data: https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding
+    public static void SeedData(ModelBuilder modelBuilder)
+    {
+        foreach (ISeeding seeding in Seedings)
         {
-            Seedings.Add(new UserSeeding());
-            Seedings.Add(new ProductSedding());
-        }
-
-        // EF Core way of seeding data: https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding
-        public static void SeedData(ModelBuilder modelBuilder)
-        {
-            foreach (ISeeding seeding in Seedings)
-            {
-                seeding.Seed(modelBuilder);
-            }
+            seeding.Seed(modelBuilder);
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace Enigmatry.Blueprint.Core.Settings
+﻿namespace Enigmatry.Blueprint.Core.Settings;
+
+public class AppSettings
 {
-    public class AppSettings
-    {
-    }
 }

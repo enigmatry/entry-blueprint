@@ -5,39 +5,38 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Enigmatry.Blueprint.Model.Products.Commands
+namespace Enigmatry.Blueprint.Model.Products.Commands;
+
+public static class RemoveProduct
 {
-    public static class RemoveProduct
+    [PublicAPI]
+    public class Command : IRequest
     {
-        [PublicAPI]
-        public class Command : IRequest
+        public Guid Id { get; set; }
+    }
+
+    [UsedImplicitly]
+    public class RequestHanlder : IRequestHandler<Command>
+    {
+        private readonly IRepository<Product> _repository;
+
+        public RequestHanlder(IRepository<Product> repository)
         {
-            public Guid Id { get; set; }
+            _repository = repository;
         }
 
-        [UsedImplicitly]
-        public class RequestHanlder : IRequestHandler<Command>
+        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            private readonly IRepository<Product> _repository;
+            var product = await _repository.FindByIdAsync(request.Id);
 
-            public RequestHanlder(IRepository<Product> repository)
+            if (product == null)
             {
-                _repository = repository;
+                throw new InvalidOperationException("Product could not be found");
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
-            {
-                var product = await _repository.FindByIdAsync(request.Id);
+            _repository.Delete(product);
 
-                if (product == null)
-                {
-                    throw new InvalidOperationException("Product could not be found");
-                }
-
-                _repository.Delete(product);
-
-                return await Unit.Task;
-            }
+            return await Unit.Task;
         }
     }
 }

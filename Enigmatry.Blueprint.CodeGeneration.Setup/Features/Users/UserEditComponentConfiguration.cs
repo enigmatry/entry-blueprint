@@ -3,32 +3,31 @@ using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.CodeGeneration.Configuration.Form;
 using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users
+namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users;
+
+[UsedImplicitly]
+public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUserDetails.Response>
 {
-    [UsedImplicitly]
-    public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUserDetails.Response>
+    public void Configure(FormComponentBuilder<GetUserDetails.Response> builder)
     {
-        public void Configure(FormComponentBuilder<GetUserDetails.Response> builder)
-        {
-            builder.Component()
-                .HasName("UserEdit")
-                .BelongsToFeature("Users")
-                .IncludeUnconfiguredProperties(false);
+        builder.Component()
+            .HasName("UserEdit")
+            .BelongsToFeature("Users")
+            .IncludeUnconfiguredProperties(false);
 
-            var userSection = builder.FormControlGroup("User")
-                .CreateUiSection("fieldset");
+        var userSection = builder.FormControlGroup("User")
+            .CreateUiSection("fieldset");
 
-            userSection.FormControl(x => x.UserName).IsReadonly(true);
-            userSection.FormControl(x => x.Name);
+        userSection.FormControl(x => x.UserName).IsReadonly(true);
+        userSection.FormControl(x => x.Name);
 
-            var historySection = userSection.FormControlGroup("History")
-                .CreateUiSection("fieldset");
+        var historySection = userSection.FormControlGroup("History")
+            .CreateUiSection("fieldset");
 
-            historySection.FormControl(x => x.CreatedOn).IsReadonly(true);
-            historySection.FormControl(x => x.UpdatedOn).IsReadonly(true);
+        historySection.FormControl(x => x.CreatedOn).IsReadonly(true);
+        historySection.FormControl(x => x.UpdatedOn).IsReadonly(true);
 
 
-            builder.WithValidationConfiguration(new UserEditComponentValidationConfiguration());
-        }
+        builder.WithValidationConfiguration(new UserEditComponentValidationConfiguration());
     }
 }

@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace Enigmatry.Blueprint.App
+builder.WebHost.ConfigureKestrel(options =>
 {
-    public static class Program
-    {
-        public static void Main(string[] args) => BuildWebHost(args).Run();
+  options.AddServerHeader = false;
+});
 
-        private static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .ConfigureKestrel(options => options.AddServerHeader = false)
-                .UseStartup<Startup>()
-                .Build();
-    }
-}
+builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "dist"; });
+
+var app = builder.Build();
+
+app.UseSpaStaticFiles();
+app.UseSpa(spa =>
+{
+  // To learn more about options for serving an Angular SPA from ASP.NET Core,
+  // see https://go.microsoft.com/fwlink/?linkid=864501
+  spa.Options.SourcePath = "dist";
+});
+
+app.Run();
+

@@ -1,11 +1,8 @@
-﻿using System;
+﻿namespace Enigmatry.Blueprint.Model.Identity;
 
-namespace Enigmatry.Blueprint.Model.Identity
+public interface ICurrentUserProvider
 {
-    public interface ICurrentUserProvider
-    {
-        Guid? UserId { get; }
-        User? User { get; }
-        bool IsAuthenticated { get; }
-    }
+    Guid? UserId { get; }
+    User? User { get; }
+    bool IsAuthenticated { get; }
 }

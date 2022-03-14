@@ -1,10 +1,7 @@
-﻿using System;
+﻿namespace Enigmatry.Blueprint.Core;
 
-namespace Enigmatry.Blueprint.Core
+public interface IEntityHasCreatedUpdated
 {
-    public interface IEntityHasCreatedUpdated
-    {
-        void SetCreated(DateTimeOffset createdOn, Guid createdBy);
-        void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy);
-    }
+    void SetCreated(DateTimeOffset createdOn, Guid createdBy);
+    void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy);
 }

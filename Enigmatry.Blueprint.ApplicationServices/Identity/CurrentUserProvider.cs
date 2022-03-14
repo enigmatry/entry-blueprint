@@ -1,54 +1,51 @@
-﻿using System;
-using System.Linq;
-using Enigmatry.BuildingBlocks.Core.Data;
+﻿using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.ApplicationServices.Identity
+namespace Enigmatry.Blueprint.ApplicationServices.Identity;
+
+[UsedImplicitly]
+public class CurrentUserProvider : ICurrentUserProvider
 {
-    [UsedImplicitly]
-    public class CurrentUserProvider : ICurrentUserProvider
+    private readonly ICurrentUserIdProvider _currentUserIdProvider;
+    private readonly IRepository<User> _userRepository;
+    private User? _user;
+
+    public CurrentUserProvider(ICurrentUserIdProvider currentUserIdProvider,
+        IRepository<User> userRepository)
     {
-        private readonly ICurrentUserIdProvider _currentUserIdProvider;
-        private readonly IRepository<User> _userRepository;
-        private User? _user;
+        _userRepository = userRepository;
+        _currentUserIdProvider = currentUserIdProvider;
+    }
 
-        public CurrentUserProvider(ICurrentUserIdProvider currentUserIdProvider,
-            IRepository<User> userRepository)
+    public bool IsAuthenticated => _currentUserIdProvider.IsAuthenticated;
+
+    public Guid? UserId => _currentUserIdProvider.UserId.GetValueOrDefault();
+
+    public User? User
+    {
+        get
         {
-            _userRepository = userRepository;
-            _currentUserIdProvider = currentUserIdProvider;
-        }
-
-        public bool IsAuthenticated => _currentUserIdProvider.IsAuthenticated;
-
-        public Guid? UserId => _currentUserIdProvider.UserId.GetValueOrDefault();
-
-        public User? User
-        {
-            get
+            if (_user != null)
             {
-                if (_user != null)
-                {
-                    return _user;
-                }
-
-                if (!IsAuthenticated)
-                {
-                    return null;
-                }
-
-                //TODO replace with getting user from principal
-                _user = _userRepository.QueryAll()
-                    .First();
-
-                // e.g. 
-                /*_user = _userQuery
-                    .ByUserName(Principal.Identity.Name)
-                    .SingleOrDefault();*/
-
                 return _user;
             }
+
+            if (!IsAuthenticated)
+            {
+                return null;
+            }
+
+            //TODO replace with getting user from principal
+            _user = _userRepository.QueryAll()
+                .First();
+
+            // e.g. 
+            /*_user = _userQuery
+                .ByUserName(Principal.Identity.Name)
+                .SingleOrDefault();*/
+
+            return _user;
         }
     }
 }

@@ -1,37 +1,35 @@
-﻿using System;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using Enigmatry.Blueprint.Model.Identity;
 using JetBrains.Annotations;
 
-namespace Enigmatry.Blueprint.ApplicationServices.Identity
+namespace Enigmatry.Blueprint.ApplicationServices.Identity;
+
+[UsedImplicitly]
+public class CurrentUserIdProvider : ICurrentUserIdProvider
 {
-    [UsedImplicitly]
-    public class CurrentUserIdProvider : ICurrentUserIdProvider
+    private readonly Func<IPrincipal> _principalProvider;
+
+    public CurrentUserIdProvider(Func<IPrincipal> principalProvider) => _principalProvider = principalProvider;
+
+    private IPrincipal Principal => _principalProvider();
+
+    public bool IsAuthenticated => (Principal.Identity?.IsAuthenticated).GetValueOrDefault();
+
+    public Guid? UserId
     {
-        private readonly Func<IPrincipal> _principalProvider;
-
-        public CurrentUserIdProvider(Func<IPrincipal> principalProvider) => _principalProvider = principalProvider;
-
-        private IPrincipal Principal => _principalProvider();
-
-        public bool IsAuthenticated => (Principal.Identity?.IsAuthenticated).GetValueOrDefault();
-
-        public Guid? UserId
+        get
         {
-            get
+            if (!IsAuthenticated)
             {
-                if (!IsAuthenticated)
-                {
-                    return null;
-                }
-
-                //TODO replace with getting userId from principal
                 return null;
-
-                //Guid? userId = null;
-
-                //return userId;
             }
+
+            //TODO replace with getting userId from principal
+            return null;
+
+            //Guid? userId = null;
+
+            //return userId;
         }
     }
 }

@@ -3,23 +3,22 @@ using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Enigmatry.Blueprint.Infrastructure.Data.Configurations
+namespace Enigmatry.Blueprint.Infrastructure.Data.Configurations;
+
+[UsedImplicitly]
+public class UserConfiguration : IEntityTypeConfiguration<User>
 {
-    [UsedImplicitly]
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public void Configure(EntityTypeBuilder<User> builder)
     {
-        public void Configure(EntityTypeBuilder<User> builder)
-        {
-            builder.Property(x => x.UserName).IsRequired().HasMaxLength(200);
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(200);
-            builder.Property(x => x.CreatedOn).IsRequired();
+        builder.Property(x => x.UserName).IsRequired().HasMaxLength(200);
+        builder.Property(x => x.Name).IsRequired().HasMaxLength(200);
+        builder.Property(x => x.CreatedOn).IsRequired();
 
-            builder.HasIndex(x => x.UserName).IsUnique();
+        builder.HasIndex(x => x.UserName).IsUnique();
 
-            builder.HasMany(x => x.CreatedUsers).WithOne(x => x.CreatedBy!);
-            builder.HasMany(x => x.UpdatedUsers).WithOne(x => x.UpdatedBy!);
-            builder.HasMany(x => x.CreatedProducts).WithOne(x => x.CreatedBy!);
-            builder.HasMany(x => x.UpdatedProducts).WithOne(x => x.UpdatedBy!);
-        }
+        builder.HasMany(x => x.CreatedUsers).WithOne(x => x.CreatedBy!);
+        builder.HasMany(x => x.UpdatedUsers).WithOne(x => x.UpdatedBy!);
+        builder.HasMany(x => x.CreatedProducts).WithOne(x => x.CreatedBy!);
+        builder.HasMany(x => x.UpdatedProducts).WithOne(x => x.UpdatedBy!);
     }
 }

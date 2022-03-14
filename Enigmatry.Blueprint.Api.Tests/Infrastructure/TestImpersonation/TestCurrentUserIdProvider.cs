@@ -1,16 +1,14 @@
-﻿using System;
-using Enigmatry.Blueprint.Model.Identity;
+﻿using Enigmatry.Blueprint.Model.Identity;
 
-namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation
+namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation;
+
+internal class TestCurrentUserIdProvider : ICurrentUserIdProvider
 {
-    internal class TestCurrentUserIdProvider : ICurrentUserIdProvider
-    {
-        public Guid? UserId { get; }
-        public bool IsAuthenticated => true;
+    public Guid? UserId { get; }
+    public bool IsAuthenticated => true;
 
-        public TestCurrentUserIdProvider(Guid userId)
-        {
-            UserId = userId;
-        }
+    public TestCurrentUserIdProvider(Guid userId)
+    {
+        UserId = userId;
     }
 }

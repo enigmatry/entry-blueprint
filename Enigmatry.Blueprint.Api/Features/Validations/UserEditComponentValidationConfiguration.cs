@@ -2,16 +2,15 @@
 using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.BuildingBlocks.Validation;
 
-namespace Enigmatry.Blueprint.Api.Features.Validations
+namespace Enigmatry.Blueprint.Api.Features.Validations;
+
+public class UserEditComponentValidationConfiguration : ValidationConfiguration<GetUserDetails.Response>
 {
-    public class UserEditComponentValidationConfiguration : ValidationConfiguration<GetUserDetails.Response>
+    public UserEditComponentValidationConfiguration()
     {
-        public UserEditComponentValidationConfiguration()
-        {
-            RuleFor(x => x.Name)
-                .IsRequired()
-                .MinLength(User.NameMinLenght)
-                .MaxLength(User.NameMaxLenght);
-        }
+        RuleFor(x => x.Name)
+            .IsRequired()
+            .MinLength(User.NameMinLenght)
+            .MaxLength(User.NameMaxLenght);
     }
 }

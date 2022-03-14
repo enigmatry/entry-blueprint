@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Enigmatry.Blueprint.Api.Features.Users;
+﻿using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.BuildingBlocks.AspNetCore.Tests.Http;
 using Enigmatry.BuildingBlocks.Core;
@@ -13,101 +9,100 @@ using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Enigmatry.Blueprint.Api.Tests
+namespace Enigmatry.Blueprint.Api.Tests;
+
+[Category("integration")]
+public class UsersControllerFixture : IntegrationFixtureBase
 {
-    [Category("integration")]
-    public class UsersControllerFixture : IntegrationFixtureBase
+    private DateTimeOffset _createdOn;
+    private DateTimeOffset _updatedOn;
+    private User _user = null!;
+
+    [SetUp]
+    public void SetUp()
     {
-        private DateTimeOffset _createdOn;
-        private DateTimeOffset _updatedOn;
-        private User _user = null!;
+        _createdOn = Resolve<ITimeProvider>().Now;
+        _updatedOn = _createdOn;
+        _user = new UserBuilder()
+            .WithUserName("john_doe@john.doe")
+            .WithName("John Doe");
 
-        [SetUp]
-        public void SetUp()
-        {
-            _createdOn = Resolve<ITimeProvider>().Now;
-            _updatedOn = _createdOn;
-            _user = new UserBuilder()
-                .WithUserName("john_doe@john.doe")
-                .WithName("John Doe");
+        AddAndSaveChanges(_user);
+    }
 
-            AddAndSaveChanges(_user);
-        }
+    [Test]
+    public async Task TestGetAll()
+    {
+        var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>("users"))?.Items.ToList()!;
 
-        [Test]
-        public async Task TestGetAll()
-        {
-            var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>("users"))?.Items.ToList()!;
+        users.Should().NotBeNull();
+        users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
-            users.Should().NotBeNull();
-            users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
+        var item = users.Single(u => u.UserName == "john_doe@john.doe");
+        item.Name.Should().Be("John Doe");
+        item.CreatedOn.Should().Be(_createdOn);
+        item.UpdatedOn.Should().Be(_updatedOn);
+    }
 
-            var item = users.Single(u => u.UserName == "john_doe@john.doe");
-            item.Name.Should().Be("John Doe");
-            item.CreatedOn.Should().Be(_createdOn);
-            item.UpdatedOn.Should().Be(_updatedOn);
-        }
+    [Test]
+    public async Task GivenValidUserId_GetById_ReturnsUserDetails()
+    {
+        var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
 
-        [Test]
-        public async Task GivenValidUserId_GetById_ReturnsUserDetails()
-        {
-            var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
+        user.Should().NotBeNull();
 
-            user.Should().NotBeNull();
+        user?.Name.Should().Be("John Doe");
+        user?.UserName.Should().Be("john_doe@john.doe");
+        user?.CreatedOn.Should().Be(_createdOn);
+        user?.UpdatedOn.Should().Be(_updatedOn);
+    }
 
-            user?.Name.Should().Be("John Doe");
-            user?.UserName.Should().Be("john_doe@john.doe");
-            user?.CreatedOn.Should().Be(_createdOn);
-            user?.UpdatedOn.Should().Be(_updatedOn);
-        }
+    [Test]
+    public async Task GivenNonExistingUserId_GetById_ReturnsNotFound()
+    {
+        var response = await Client.GetAsync($"users/{Guid.NewGuid()}");
 
-        [Test]
-        public async Task GivenNonExistingUserId_GetById_ReturnsNotFound()
-        {
-            var response = await Client.GetAsync($"users/{Guid.NewGuid()}");
+        response.Should().BeNotFound();
+    }
 
-            response.Should().BeNotFound();
-        }
+    [Test]
+    public async Task TestCreate()
+    {
+        var command = new UserCreateOrUpdate.Command { Name = "some user", UserName = "someuser@test.com" };
+        var user =
+            await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
-        [Test]
-        public async Task TestCreate()
-        {
-            var command = new UserCreateOrUpdate.Command { Name = "some user", UserName = "someuser@test.com" };
-            var user =
-                await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
+        user?.UserName.Should().Be(command.UserName);
+        user?.Name.Should().Be(command.Name);
+        user?.CreatedOn.Date.Should().Be(DateTime.Now.Date);
+        user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
+    }
 
-            user?.UserName.Should().Be(command.UserName);
-            user?.Name.Should().Be(command.Name);
-            user?.CreatedOn.Date.Should().Be(DateTime.Now.Date);
-            user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
-        }
+    [Test]
+    public async Task TestUpdate()
+    {
+        var command = new UserCreateOrUpdate.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com" };
+        var user =
+            await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
-        [Test]
-        public async Task TestUpdate()
-        {
-            var command = new UserCreateOrUpdate.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com" };
-            var user =
-                await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
+        user?.UserName.Should().Be("john_doe@john.doe", "username is immutable");
+        user?.Name.Should().Be(command.Name);
+        user?.CreatedOn.Date.Should().Be(_user.CreatedOn.Date);
+        user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
+    }
 
-            user?.UserName.Should().Be("john_doe@john.doe", "username is immutable");
-            user?.Name.Should().Be(command.Name);
-            user?.CreatedOn.Date.Should().Be(_user.CreatedOn.Date);
-            user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
-        }
+    [TestCase("some user", "invalid email", "userName", "is not a valid email address.")]
+    [TestCase("", "someuser@test.com", "name", "must not be empty.")]
+    [TestCase("some user", "", "userName", "must not be empty.")]
+    [TestCase("John Doe", "john_doe@john.doe", "userName", "Username already taken")]
+    public async Task TestCreateReturnsValidationErrors(string name,
+        string userName,
+        string validationField,
+        string validationErrorMessage)
+    {
+        var command = new UserCreateOrUpdate.Command { Name = name, UserName = userName };
+        var response = await Client.PostAsJsonAsync("users", command);
 
-        [TestCase("some user", "invalid email", "userName", "is not a valid email address.")]
-        [TestCase("", "someuser@test.com", "name", "must not be empty.")]
-        [TestCase("some user", "", "userName", "must not be empty.")]
-        [TestCase("John Doe", "john_doe@john.doe", "userName", "Username already taken")]
-        public async Task TestCreateReturnsValidationErrors(string name,
-            string userName,
-            string validationField,
-            string validationErrorMessage)
-        {
-            var command = new UserCreateOrUpdate.Command { Name = name, UserName = userName };
-            var response = await Client.PostAsJsonAsync("users", command);
-
-            response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
-        }
+        response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
     }
 }

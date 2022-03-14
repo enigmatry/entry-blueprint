@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Enigmatry.Blueprint.Data.Migrations.Seeding
+namespace Enigmatry.Blueprint.Data.Migrations.Seeding;
+
+internal interface ISeeding
 {
-    internal interface ISeeding
-    {
-        void Seed(ModelBuilder modelBuilder);
-    }
+    void Seed(ModelBuilder modelBuilder);
 }

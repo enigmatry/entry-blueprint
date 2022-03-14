@@ -1,16 +1,15 @@
 ﻿using Enigmatry.BuildingBlocks.Core.Entities;
 
-namespace Enigmatry.Blueprint.Model.Auditing
+namespace Enigmatry.Blueprint.Model.Auditing;
+
+public abstract record AuditableDomainEvent : DomainEvent
 {
-    public abstract record AuditableDomainEvent : DomainEvent
+    protected AuditableDomainEvent(string eventName)
     {
-        protected AuditableDomainEvent(string eventName)
-        {
-            EventName = eventName;
-        }
-
-        public string EventName { get; }
-
-        public abstract object AuditPayload { get; }
+        EventName = eventName;
     }
+
+    public string EventName { get; }
+
+    public abstract object AuditPayload { get; }
 }

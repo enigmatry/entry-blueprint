@@ -3,24 +3,23 @@ using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.BuildingBlocks.Core.Settings;
 using Microsoft.Extensions.Configuration;
 
-namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules
+namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
+
+public class ConfigurationModule : Module
 {
-    public class ConfigurationModule : Module
+    protected override void Load(ContainerBuilder builder)
     {
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.Register(c => c.Resolve<IConfiguration>().ReadAppSettings())
-                .AsSelf()
-                .SingleInstance();
+        builder.Register(c => c.Resolve<IConfiguration>().ReadAppSettings())
+            .AsSelf()
+            .SingleInstance();
 
-            builder.Register(c => c.Resolve<IConfiguration>().ReadSettingsSection<DbContextSettings>("DbContext"))
-                .AsSelf()
-                .SingleInstance();
+        builder.Register(c => c.Resolve<IConfiguration>().ReadSettingsSection<DbContextSettings>("DbContext"))
+            .AsSelf()
+            .SingleInstance();
 
-            builder.Register(c => c.Resolve<IConfiguration>()
-                    .ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights"))
-                .AsSelf()
-                .SingleInstance();
-        }
+        builder.Register(c => c.Resolve<IConfiguration>()
+                .ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights"))
+            .AsSelf()
+            .SingleInstance();
     }
 }
