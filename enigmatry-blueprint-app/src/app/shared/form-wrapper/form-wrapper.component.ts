@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '
   templateUrl: './form-wrapper.component.html',
   styleUrls: ['./form-wrapper.component.scss']
 })
-export class FormWrapperComponent{
+export class FormWrapperComponent {
   private _isReadonly: boolean;
 
   @Input() saveButtonText = $localize`:@@common.save:Save`;
@@ -14,6 +14,7 @@ export class FormWrapperComponent{
   @Input() set isReadonly(value: boolean) {
     this._isReadonly = value;
   }
+
   get isReadonly() {
     return this._isReadonly;
   }
