@@ -12,8 +12,8 @@
     "e2e": "ng e2e",
     "audit:ci": "npm audit --json|npm-audit-reporter-teamcity",
     "nswag": "node_modules/.bin/nswag run nswag.json",
-    "codegen": "enigmatry-codegen --source-assembly ../Enigmatry.Blueprint.CodeGeneration.Setup/bin/Debug/net5/Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features",
-    "codegen:i18n": "enigmatry-codegen --source-assembly ../Enigmatry.Blueprint.CodeGeneration.Setup/bin/Debug/net5/Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features --enable-i18n true",
+    "codegen": "enigmatry-codegen --source-assembly ../Enigmatry.Blueprint.CodeGeneration.Setup/bin/Debug/net6.0/Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features",
+    "codegen:i18n": "enigmatry-codegen --source-assembly ../Enigmatry.Blueprint.CodeGeneration.Setup/bin/Debug/net6.0/Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features --enable-i18n true",
     "codegen:install": "dotnet tool install enigmatry.codegeneration.console -g",
     "codegen:update": "dotnet tool update enigmatry.codegeneration.console -g",
     "i18n": "ng extract-i18n --format json --output-path src/assets/locale --out-file messages.en.json"

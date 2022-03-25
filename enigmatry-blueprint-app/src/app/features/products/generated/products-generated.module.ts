@@ -13,7 +13,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { EnigmatryGridModule } from '@enigmatry/angular-building-blocks/enigmatry-grid';
     import { FormlyModule, FORMLY_CONFIG } from '@ngx-formly/core';
     import { FormlyMaterialModule } from '@ngx-formly/material';
-    import { MatNativeDateModule } from '@angular/material/core';
     import { MatAutocompleteModule } from '@angular/material/autocomplete';
     import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 
@@ -29,7 +28,6 @@ import { CustomValidatorsService, customValidatorsFactory } from 'src/app/shared
     SharedModule,
     EnigmatryGridModule,
         MatAutocompleteModule,
-        MatNativeDateModule,
         FormlyModule.forChild(
             {
                 validationMessages: [

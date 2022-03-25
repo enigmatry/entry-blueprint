@@ -26,11 +26,11 @@
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.2" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageReference Include="BeatPulse" Version="3.0.0" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore" Version="1.1.206" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.Infrastructure" Version="1.1.206" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.EntityFramework" Version="1.1.206" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.MediatR" Version="1.1.206" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.Swagger" Version="1.1.206" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore" Version="1.1.225" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.Infrastructure" Version="1.1.225" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.EntityFramework" Version="1.1.225" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.MediatR" Version="1.1.225" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.Swagger" Version="1.1.225" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />

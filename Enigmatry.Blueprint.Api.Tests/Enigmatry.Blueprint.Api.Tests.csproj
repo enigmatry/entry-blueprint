@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoFixture.NUnit3" Version="4.17.0" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" Version="1.1.206" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" Version="1.1.225" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="NUnit" Version="3.13.2" />
