@@ -20,9 +20,12 @@
 
   <ItemGroup>
     <Compile Remove="**\*" />
-    <Content Include="**\*" Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
-    <EmbeddedResource Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
-    <None Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
+    <Content Include="**\*"
+             Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
+    <EmbeddedResource
+      Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
+    <None
+      Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
   </ItemGroup>
 
   <ItemGroup>

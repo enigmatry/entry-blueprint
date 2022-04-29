@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.App.zip</PackageFile>
@@ -11,7 +12,7 @@
     <ParameterValue Include="API Uri">
       <Value>/api</Value>
     </ParameterValue>
-	<ParameterValue Include="ApplicationInsights InstrumentationKey">
+    <ParameterValue Include="ApplicationInsights InstrumentationKey">
       <Value>c8f0815e-5d8f-460e-9e87-436be3bebd3e</Value>
     </ParameterValue>
   </ItemGroup>

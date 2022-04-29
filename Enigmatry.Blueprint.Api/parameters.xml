@@ -1,18 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <parameters>
-  <parameter name="SQLDB Connection String" description="SQLDB Connection String" defaultValue="">
-    <parameterEntry kind="TextFile" scope="appsettings.json" match="__sqlDbConnectionString__" />
-  </parameter>
-  <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey" defaultValue="">
-    <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsInstrumentationKey__" />
-  </parameter>
-  <parameter name="HealthChecks Token" description="HealthChecks Token" defaultValue="">
-    <parameterEntry kind="TextFile" scope="appsettings.json" match="__healthChecksToken__" />
-  </parameter>
-  <parameter name="Default Log Level" description="Default Log Level" defaultValue="Information">
-    <parameterEntry kind="TextFile" scope="appsettings.json" match="__defaultLogLevel__" />
-  </parameter>
-  <parameter name="Rolling Log File Path" description="Rolling Log File Path" defaultValue="">
-    <parameterEntry kind="TextFile" scope="appsettings.json" match="__rollingLogFilePath__" />
-  </parameter>
+    <parameter name="SQLDB Connection String" description="SQLDB Connection String" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__sqlDbConnectionString__" />
+    </parameter>
+    <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey"
+               defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsInstrumentationKey__" />
+    </parameter>
+    <parameter name="HealthChecks Token" description="HealthChecks Token" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__healthChecksToken__" />
+    </parameter>
+    <parameter name="Default Log Level" description="Default Log Level" defaultValue="Information">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__defaultLogLevel__" />
+    </parameter>
+    <parameter name="Rolling Log File Path" description="Rolling Log File Path" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__rollingLogFilePath__" />
+    </parameter>
 </parameters>
