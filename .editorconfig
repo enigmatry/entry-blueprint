@@ -1,12 +1,21 @@
 # To learn more about .editorconfig see https://aka.ms/editorconfigdocs
-############################### 
-# Core EditorConfig Options   # 
-############################### 
-# All files 
+###############################
+# Core EditorConfig Options   #
+###############################
 root = true
-[*] 
+# All files
+[*]
 indent_style = space
-# Code files 
+
+# XML project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 2
+
+# XML config files
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size = 2
+
+# Code files
 [*.{cs,csx,vb,vbx}]
 indent_size = 4
 tab_width = 4
@@ -156,46 +165,46 @@ dotnet_naming_style.underscore_prefix_style.required_prefix     = _
 dotnet_naming_style.interface_prefix_style.capitalization       = pascal_case
 dotnet_naming_style.interface_prefix_style.required_prefix      = I
 # Use PascalCase for types
-dotnet_naming_rule.types_should_be_pascal_case.severity         = suggestion 
+dotnet_naming_rule.types_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.types_should_be_pascal_case.symbols          = types 
-dotnet_naming_rule.types_should_be_pascal_case.style            = pascal_case_style 
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case_style
 dotnet_naming_symbols.types.applicable_kinds                    = class,struct,enum
 dotnet_naming_symbols.types.applicable_accessibilities          = * 
 # Use camelCase for parameters and local variables
-dotnet_naming_rule.locals_should_be_camel_case.severity         = suggestion 
+dotnet_naming_rule.locals_should_be_camel_case.severity = suggestion
 dotnet_naming_rule.locals_should_be_camel_case.symbols          = locals 
-dotnet_naming_rule.locals_should_be_camel_case.style            = camel_case_style 
+dotnet_naming_rule.locals_should_be_camel_case.style = camel_case_style
 dotnet_naming_symbols.locals.applicable_kinds                   = parameter
 # Use PascalCase for constant fields   
-dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = suggestion 
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fields
-dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case_style 
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case_style
 dotnet_naming_symbols.constant_fields.applicable_kinds            = field 
 dotnet_naming_symbols.constant_fields.applicable_accessibilities  = * 
 dotnet_naming_symbols.constant_fields.required_modifiers          = const
 # Use PascalCase for readonly static fields   
-dotnet_naming_rule.static_readonly_fields_should_be_pascal_case.severity = suggestion 
+dotnet_naming_rule.static_readonly_fields_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.static_readonly_fields_should_be_pascal_case.symbols  = static_readonly_fields
-dotnet_naming_rule.static_readonly_fields_should_be_pascal_case.style    = pascal_case_style 
+dotnet_naming_rule.static_readonly_fields_should_be_pascal_case.style = pascal_case_style
 dotnet_naming_symbols.static_readonly_fields.applicable_kinds            = field 
 dotnet_naming_symbols.static_readonly_fields.applicable_accessibilities  = * 
 dotnet_naming_symbols.static_readonly_fields.required_modifiers          = static,readonly
 # Use underscore prefix and camel case for (non-constant) fields
-dotnet_naming_rule.fields_should_be_prefixed_underscore.severity = suggestion 
+dotnet_naming_rule.fields_should_be_prefixed_underscore.severity = suggestion
 dotnet_naming_rule.fields_should_be_prefixed_underscore.symbols  = fields 
-dotnet_naming_rule.fields_should_be_prefixed_underscore.style    = underscore_prefix_style 
+dotnet_naming_rule.fields_should_be_prefixed_underscore.style = underscore_prefix_style
 dotnet_naming_symbols.fields.applicable_kinds                    = field 
 dotnet_naming_symbols.fields.applicable_accessibilities          = *
 # Use PascalCase for all members except fields
-dotnet_naming_rule.members_should_be_pascal_case.severity       = suggestion 
+dotnet_naming_rule.members_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.members_should_be_pascal_case.symbols        = members 
-dotnet_naming_rule.members_should_be_pascal_case.style          = pascal_case_style 
+dotnet_naming_rule.members_should_be_pascal_case.style = pascal_case_style
 dotnet_naming_symbols.members.applicable_kinds                  = property,method,event,delegate
 dotnet_naming_symbols.members.applicable_accessibilities        = *
 # Use PascalCase and I prefix for interfaces
-dotnet_naming_rule.interfaces_should_be_prefixed_with_I.severity   = suggestion 
+dotnet_naming_rule.interfaces_should_be_prefixed_with_i.severity = suggestion
 dotnet_naming_rule.interfaces_should_be_prefixed_with_I.symbols    = interfaces 
-dotnet_naming_rule.interfaces_should_be_prefixed_with_I.style      = interface_prefix_style 
+dotnet_naming_rule.interfaces_should_be_prefixed_with_i.style = interface_prefix_style
 dotnet_naming_symbols.interfaces.applicable_kinds                  = interface
 dotnet_naming_symbols.interfaces.applicable_accessibilities        = *
 ##################################
@@ -605,6 +614,7 @@ dotnet_diagnostic.IDE1005.severity = error # IDE1005: Delegate invocation can be
 dotnet_diagnostic.IDE1005WithoutSuggestion.severity = error # IDE1005: Delegate invocation can be simplified
 dotnet_diagnostic.IDE1006.severity = error # IDE1006: Naming styles
 dotnet_diagnostic.IDE1006WithoutSuggestion.severity = error # IDE1006: Naming styles
+csharp_style_namespace_declarations = block_scoped:silent
 
 [Startup.cs]
 dotnet_diagnostic.CA1724.severity = none # CA1724: Type names should not match namespaces
