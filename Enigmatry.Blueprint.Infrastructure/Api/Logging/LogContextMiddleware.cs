@@ -30,7 +30,7 @@ public class LogContextMiddleware
         return new ILogEventEnricher[]
         {
             new PropertyEnricher("User", context.User.Identity?.Name ?? String.Empty),
-            new PropertyEnricher("Address", context.Connection.RemoteIpAddress)
+            new PropertyEnricher("Address", context.Connection.RemoteIpAddress!)
         };
     }
 }

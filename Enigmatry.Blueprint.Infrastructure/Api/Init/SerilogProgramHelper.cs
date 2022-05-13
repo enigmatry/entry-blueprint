@@ -1,7 +1,7 @@
-﻿using Enigmatry.BuildingBlocks.Core.Helpers;
+﻿using System.Reflection;
+using Enigmatry.BuildingBlocks.Core.Helpers;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters;
 using Enigmatry.BuildingBlocks.AspNetCore.ApplicationInsights;
@@ -28,7 +28,7 @@ public static class SerilogProgramHelper
             .Enrich.WithProcessId()
             .Enrich.WithMachineName()
             .Enrich.With(new OperationIdEnricher())
-            .Enrich.WithProperty("AppVersion", PlatformServices.Default.Application.ApplicationVersion);
+            .Enrich.WithProperty("AppVersion", Assembly.GetEntryAssembly()!.GetName().Version!);
 
         AddAppInsightsToSerilog(config);
 
