@@ -7,7 +7,6 @@ using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Identity.Commands;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
-using NUnit.Framework;
 
 namespace Enigmatry.Blueprint.Api.Tests;
 
@@ -19,15 +18,11 @@ namespace Enigmatry.Blueprint.Api.Tests;
 // write unit tests.
 public class UsersControllerFixture : IntegrationFixtureBase
 {
-    private DateTimeOffset _createdOn;
-    private DateTimeOffset _updatedOn;
     private User _user = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _createdOn = Resolve<ITimeProvider>().Now;
-        _updatedOn = _createdOn;
         _user = new UserBuilder()
             .WithUserName("john_doe@john.doe")
             .WithName("John Doe");
@@ -43,10 +38,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
         users.Should().NotBeNull();
         users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
 
-        var item = users.Single(u => u.UserName == "john_doe@john.doe");
-        item.Name.Should().Be("John Doe");
-        item.CreatedOn.Should().Be(_createdOn);
-        item.UpdatedOn.Should().Be(_updatedOn);
+        await Verify(users);
     }
 
     [Test]
@@ -54,12 +46,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
     {
         var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
 
-        user.Should().NotBeNull();
-
-        user?.Name.Should().Be("John Doe");
-        user?.UserName.Should().Be("john_doe@john.doe");
-        user?.CreatedOn.Should().Be(_createdOn);
-        user?.UpdatedOn.Should().Be(_updatedOn);
+        await Verify(user);
     }
 
     [Test]
@@ -69,10 +56,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
         var user =
             await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
-        user?.UserName.Should().Be(command.UserName);
-        user?.Name.Should().Be(command.Name);
-        user?.CreatedOn.Date.Should().Be(DateTime.Now.Date);
-        user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
+        await Verify(user);
     }
 
     [Test]
@@ -82,9 +66,6 @@ public class UsersControllerFixture : IntegrationFixtureBase
         var user =
             await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
 
-        user?.UserName.Should().Be("john_doe@john.doe", "username is immutable");
-        user?.Name.Should().Be(command.Name);
-        user?.CreatedOn.Date.Should().Be(_user.CreatedOn.Date);
-        user?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);
+        await Verify(user);
     }
 }

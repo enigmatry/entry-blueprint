@@ -1,45 +1,45 @@
 ﻿using Enigmatry.Blueprint.Model.Identity;
 using FluentAssertions;
-using NUnit.Framework;
 
-namespace Enigmatry.Blueprint.Model.Tests.Identity;
-
-[Category("unit")]
-public class UserQueryableExtensionsFixture
+namespace Enigmatry.Blueprint.Model.Tests.Identity
 {
-    private IQueryable<User> _query = null!;
-    private User _user = null!;
-    private User _user2 = null!;
-
-    [SetUp]
-    public void Setup()
+    [Category("unit")]
+    public class UserQueryableExtensionsFixture
     {
-        _user = new UserBuilder()
-            .WithUserName("username1")
-            .WithName("name");
-        _user2 = new UserBuilder()
-            .WithUserName("username2")
-            .WithName("name2");
+        private IQueryable<User> _query = null!;
+        private User _user = null!;
+        private User _user2 = null!;
 
-        _query = new List<User> { _user, _user2 }.AsQueryable();
-    }
+        [SetUp]
+        public void Setup()
+        {
+            _user = new UserBuilder()
+                .WithUserName("username1")
+                .WithName("name");
+            _user2 = new UserBuilder()
+                .WithUserName("username2")
+                .WithName("name2");
 
-    [Test]
-    public void TestQueryEmptyList()
-    {
-        var result = new List<User>().AsQueryable().QueryByUserName("some").ToList();
-        result.Should().BeEmpty();
-    }
+            _query = new List<User> { _user, _user2 }.AsQueryable();
+        }
 
-    [TestCase("username1", true)]
-    [TestCase("username2", true)]
-    [TestCase("userName1", false)]
-    [TestCase("userName2", false)]
-    [TestCase("xyz", false)]
-    public void TestQueryByUserName(string userName, bool expectedToFind)
-    {
-        var result = _query.QueryByUserName(userName).ToList();
+        [Test]
+        public void TestQueryEmptyList()
+        {
+            var result = new List<User>().AsQueryable().QueryByUserName("some").ToList();
+            result.Should().BeEmpty();
+        }
 
-        result.Count.Should().Be(expectedToFind ? 1 : 0);
+        [TestCase("username1", TestName = "Case sensitive-should find")]
+        [TestCase("username2", TestName = "Case sensitive-should find, v2")]
+        [TestCase("userName1", TestName = "Case sensitive-should not find")]
+        [TestCase("userName2", TestName = "Case sensitive-should not find, v2")]
+        [TestCase("xyz", TestName = "Should not find")]
+        public Task TestQueryByUserName(string userName)
+        {
+            var result = _query.QueryByUserName(userName).ToList();
+
+            return Verify(result).UseParameters(userName).UseMethodName(TestContext.CurrentContext.Test.Name);
+        }
     }
 }

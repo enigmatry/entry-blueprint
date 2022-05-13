@@ -1,0 +1,22 @@
+﻿[
+  {
+    Id: Guid_1,
+    UserName: john_doe@john.doe,
+    Name: John Doe,
+    CreatedOn: DateTimeOffset_1,
+    UpdatedOn: DateTimeOffset_1
+  },
+  {
+    Id: Guid_2,
+    UserName: test_user@xyz.com,
+    Name: INTEGRATION_TEST,
+    CreatedOn: DateTimeOffset_2,
+    UpdatedOn: DateTimeOffset_2
+  },
+  {
+    Id: Guid_3,
+    UserName: Test,
+    Name: Test,
+    CreatedOn: DateTimeOffset_3
+  }
+]

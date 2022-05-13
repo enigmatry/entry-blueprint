@@ -21,11 +21,11 @@
     <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" Version="1.1.243" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-    <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Verify.NUnit" Version="16.7.1" />
   </ItemGroup>
 
   <ItemGroup>
