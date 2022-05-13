@@ -25,6 +25,7 @@
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.2" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
     <PackageReference Include="BeatPulse" Version="3.0.0" />
     <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore" Version="1.1.243" />
     <PackageReference Include="Enigmatry.BuildingBlocks.Infrastructure" Version="1.1.243" />

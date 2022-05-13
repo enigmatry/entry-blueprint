@@ -1,38 +1,50 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Blueprint.Api;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
+using JetBrains.Annotations;
 using Serilog;
 
-SerilogProgramHelper.AppConfigureSerilog();
-try
+namespace Enigmatry.Blueprint.Api
 {
-    var builder = WebApplication.CreateBuilder(args);
-
-    builder.WebHost.ConfigureKestrel(options =>
+    [UsedImplicitly]
+    public static class Program
     {
-        options.AddServerHeader = false;
-    });
+        public static void Main(string[] args)
+        {
+            SerilogProgramHelper.AppConfigureSerilog();
+            try
+            {
+                var builder = WebApplication.CreateBuilder(args);
 
-    var startup = new Startup(builder.Configuration);
-    startup.ConfigureServices(builder.Services);
+                builder.WebHost.ConfigureKestrel(options =>
+                {
+                    options.AddServerHeader = false;
+                });
 
-    builder.Host.UseSerilog();
-    builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-    builder.Host.ConfigureContainer<ContainerBuilder>(startup.ConfigureContainer);
+                var startup = new Startup(builder.Configuration);
+                startup.ConfigureServices(builder.Services);
 
-    var app = builder.Build();
+                builder.Host.UseSerilog();
+                builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+                builder.Host.ConfigureContainer<ContainerBuilder>(startup.ConfigureContainer);
 
-    startup.Configure(app, app.Environment);
+                builder.AppAddAzureKeyVault();
 
-    app.Run();
-}
-catch (Exception ex)
-{
-    Log.Fatal(ex, "Host terminated unexpectedly");
-}
-finally
-{
-    Log.Information("Stopping web host");
-    Log.CloseAndFlush();
+                var app = builder.Build();
+
+                startup.Configure(app, app.Environment);
+
+                app.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.Information("Stopping web host");
+                Log.CloseAndFlush();
+            }
+        }
+    }
 }
