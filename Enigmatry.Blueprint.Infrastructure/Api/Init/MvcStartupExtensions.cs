@@ -14,7 +14,6 @@ public static class MvcStartupExtensions
             // Views are required for templating with RazorTemplatingEngine(e.g. emails)
             //.AddControllersWithViews(options => options.ConfigureMvc(configuration))
             .AddControllers(options => options.ConfigureMvc(configuration))
-            .AddNewtonsoftJson()
             .AppAddFluentValidation();
 
     private static void ConfigureMvc(this MvcOptions options, IConfiguration configuration)

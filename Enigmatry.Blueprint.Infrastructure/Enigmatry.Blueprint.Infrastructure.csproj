@@ -32,7 +32,6 @@
     <PackageReference Include="Enigmatry.BuildingBlocks.MediatR" Version="1.1.243" />
     <PackageReference Include="Enigmatry.BuildingBlocks.Swagger" Version="1.1.243" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.1" />
