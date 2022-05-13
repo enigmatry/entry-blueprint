@@ -39,11 +39,8 @@ public class Startup
                 .AllowAnyMethod()
                 .AllowAnyHeader());
         }
-        else
-        {
-            app.UseHttpsRedirection();
-        }
 
+        app.UseHttpsRedirection();
         app.UseMiddleware<LogContextMiddleware>();
         app.UseHsts();
         app.UseAuthorization();

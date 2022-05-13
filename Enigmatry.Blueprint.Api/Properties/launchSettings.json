@@ -4,12 +4,14 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:5440/",
-      "sslPort": 0
+      "sslPort": 44394
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:44394/",
       "environmentVariables": {
         "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "false",
         "AzureServicesAuthConnectionString": "RunAs=Developer; DeveloperTool=VisualStudio",

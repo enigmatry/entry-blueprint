@@ -45,7 +45,7 @@ export class ProductEditGeneratedComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
   @Output() buttonClick = new EventEmitter<string>();
 
-                @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
+                @Input() typeOptions: any[] = [{ value: 0, displayName: 'Food' }, { value: 1, displayName: 'Drink' }, { value: 2, displayName: 'Book' }, { value: 3, displayName: 'Car' }];
                 @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: 'displayName' };
 
   _isReadonly: boolean;
@@ -82,8 +82,8 @@ export class ProductEditGeneratedComponent implements OnInit {
         'model.name': (model) => (this.fieldsPropertyExpressions?.name ? this.fieldsPropertyExpressions.name(model) : model.name),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.name.label:Name`,
-        placeholder: $localize `:@@products.product-edit.name.placeholder:Unique product name`,
+        label: 'Name',
+        placeholder: 'Unique product name',
         description: '',
 appearance: 'outline',
         hidden: !true,
@@ -107,8 +107,8 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
         'model.code': (model) => (this.fieldsPropertyExpressions?.code ? this.fieldsPropertyExpressions.code(model) : model.code),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.code.label:Code`,
-        placeholder: $localize `:@@products.product-edit.code.placeholder:Unique product code identifier`,
+        label: 'Code',
+        placeholder: 'Unique product code identifier',
         description: '',
         hidden: !true,
             required: true,
@@ -118,7 +118,7 @@ pattern: /^[A-Z]{4}[1-9]{8}$/mu,
         },
             validation: {
             messages: {
-pattern: (err, field) => $localize `:@@products.product-edit.code.pattern:Code must be in 4 letter 8 digits format (e.g. ABCD12345678)`
+pattern: 'Code must be in 4 letter 8 digits format (e.g. ABCD12345678)'
             }
             },
 modelOptions: { updateOn: 'blur' },
@@ -135,8 +135,8 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         'model.type': (model) => (this.fieldsPropertyExpressions?.type ? this.fieldsPropertyExpressions.type(model) : model.type),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.type.label:Type`,
-        placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
+        label: 'Type',
+        placeholder: 'Type',
         description: '',
             options: of(this.typeOptions).pipe(map(opts => sortOptions(opts, this.typeOptionsConfiguration.valueProperty, this.typeOptionsConfiguration.sortProperty, this._localeId))),
             valueProp: this.typeOptionsConfiguration.valueProperty,
@@ -158,11 +158,14 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         'model.description': (model) => (this.fieldsPropertyExpressions?.description ? this.fieldsPropertyExpressions.description(model) : model.description),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.description.label:Description`,
-        placeholder: $localize `:@@products.product-edit.description.placeholder:Description`,
+        label: 'Description',
+        placeholder: 'Description',
         description: '',
             rows: 2,
             cols: 0,
+            autosize: false,
+            autosizeMinRows: 0,
+            autosizeMaxRows: 0,
         hidden: !true,
             typeFormatDef: undefined
         },
@@ -178,8 +181,8 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         'model.price': (model) => (this.fieldsPropertyExpressions?.price ? this.fieldsPropertyExpressions.price(model) : model.price),
         },
         templateOptions: {
-        label: $localize `:@@products.price:Price per unit`,
-        placeholder: $localize `:@@products.price:Price per unit`,
+        label: 'Price per unit',
+        placeholder: 'Price per unit',
         description: '',
         hidden: !true,
             required: true,
@@ -201,8 +204,8 @@ max: 999.99,
         'model.amount': (model) => (this.fieldsPropertyExpressions?.amount ? this.fieldsPropertyExpressions.amount(model) : model.amount),
         },
         templateOptions: {
-        label: $localize `:@@products.amount:Units`,
-        placeholder: $localize `:@@products.amount:Units`,
+        label: 'Units',
+        placeholder: 'Units',
         description: '',
         hidden: !true,
             required: true,
@@ -224,8 +227,8 @@ max: 100,
         'model.contactEmail': (model) => (this.fieldsPropertyExpressions?.contactEmail ? this.fieldsPropertyExpressions.contactEmail(model) : model.contactEmail),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.contact-email.label:Contact email`,
-        placeholder: $localize `:@@products.product-edit.contact-email.placeholder:Contact person email address`,
+        label: 'Contact email',
+        placeholder: 'Contact person email address',
         description: '',
         hidden: !true,
             required: true,
@@ -235,7 +238,7 @@ pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
         },
             validation: {
             messages: {
-pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid email address format`
+pattern: 'Invalid email address format'
             }
             },
         },
@@ -250,8 +253,8 @@ pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid e
         'model.contactPhone': (model) => (this.fieldsPropertyExpressions?.contactPhone ? this.fieldsPropertyExpressions.contactPhone(model) : model.contactPhone),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.contact-phone.label:Contact phone`,
-        placeholder: $localize `:@@products.product-edit.contact-phone.placeholder:Contact person phone number`,
+        label: 'Contact phone',
+        placeholder: 'Contact person phone number',
         description: '',
         hidden: !true,
             required: true,
@@ -271,8 +274,8 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         'model.infoLink': (model) => (this.fieldsPropertyExpressions?.infoLink ? this.fieldsPropertyExpressions.infoLink(model) : model.infoLink),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.info-link.label:Homepage`,
-        placeholder: $localize `:@@products.product-edit.info-link.placeholder:Link to product homepage`,
+        label: 'Homepage',
+        placeholder: 'Link to product homepage',
         description: '',
         hidden: !true,
             pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u,
@@ -291,8 +294,8 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         'model.expiresOn': (model) => (this.fieldsPropertyExpressions?.expiresOn ? this.fieldsPropertyExpressions.expiresOn(model) : model.expiresOn),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.expires-on.label:Expires on`,
-        placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date, if any`,
+        label: 'Expires on',
+        placeholder: 'Product expiration date, if any',
         description: '',
         hidden: !true,
             typeFormatDef: { name: 'date' }
@@ -309,8 +312,8 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         'model.freeShipping': (model) => (this.fieldsPropertyExpressions?.freeShipping ? this.fieldsPropertyExpressions.freeShipping(model) : model.freeShipping),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
-        placeholder: $localize `:@@products.product-edit.free-shipping.placeholder:Free shipping`,
+        label: 'Free shipping',
+        placeholder: 'Free shipping',
         description: '',
         hidden: !true,
             typeFormatDef: { name: 'boolean' }
@@ -327,8 +330,8 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         'model.hasDiscount': (model) => (this.fieldsPropertyExpressions?.hasDiscount ? this.fieldsPropertyExpressions.hasDiscount(model) : model.hasDiscount),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.has-discount.label:Has discount`,
-        placeholder: $localize `:@@products.product-edit.has-discount.placeholder:Has discount`,
+        label: 'Has discount',
+        placeholder: 'Has discount',
         description: '',
         hidden: !true,
             typeFormatDef: { name: 'boolean' }
@@ -345,8 +348,8 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         'model.discount': (model) => (this.fieldsPropertyExpressions?.discount ? this.fieldsPropertyExpressions.discount(model) : model.discount),
         },
         templateOptions: {
-        label: $localize `:@@products.product-edit.discount.label:Discount`,
-        placeholder: $localize `:@@products.product-edit.discount.placeholder:Discount`,
+        label: 'Discount',
+        placeholder: 'Discount',
         description: '',
         hidden: !true,
             type: 'number',
@@ -369,8 +372,8 @@ max: 100,
         templateOptions: {
         label: '',
         placeholder: '',
-        description: $localize `:@@products.product-edit.reset-form-btn.hint:* This will reset form to it's initial state.`,
-            text: $localize `:@@products.product-edit.reset-form-btn.text:Reset`,
+        description: '* This will reset form to its initial state.',
+            text: 'Reset',
             onClick: ($event: any) => this.buttonClick.emit('resetFormBtn'),
         hidden: !true,
         },
