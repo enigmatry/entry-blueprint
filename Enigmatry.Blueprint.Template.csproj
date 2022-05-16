@@ -9,7 +9,8 @@
     <Description>Template to use when creating an asp.net core/Angular application for Enigmatry.</Description>
     <PackageTags>dotnet-new;template;enigmatry</PackageTags>
 
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
