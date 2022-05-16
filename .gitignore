@@ -222,6 +222,9 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
+#VerifyTests
+*.received.*
+
 # GhostDoc plugin setting file
 *.GhostDoc.xml
 
