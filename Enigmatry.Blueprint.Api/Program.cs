@@ -20,6 +20,7 @@ namespace Enigmatry.Blueprint.Api
                 {
                     options.AddServerHeader = false;
                 });
+                builder.AppAddAzureKeyVault();
 
                 var startup = new Startup(builder.Configuration);
                 startup.ConfigureServices(builder.Services);
@@ -28,7 +29,7 @@ namespace Enigmatry.Blueprint.Api
                 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
                 builder.Host.ConfigureContainer<ContainerBuilder>(startup.ConfigureContainer);
 
-                builder.AppAddAzureKeyVault();
+
 
                 var app = builder.Build();
 
