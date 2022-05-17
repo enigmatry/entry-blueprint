@@ -30,16 +30,17 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
             result.Should().BeEmpty();
         }
 
-        [TestCase("username1", TestName = "Case sensitive-should find")]
-        [TestCase("username2", TestName = "Case sensitive-should find, v2")]
-        [TestCase("userName1", TestName = "Case sensitive-should not find")]
-        [TestCase("userName2", TestName = "Case sensitive-should not find, v2")]
-        [TestCase("xyz", TestName = "Should not find")]
-        public Task TestQueryByUserName(string userName)
+        [TestCase("username1", 1, TestName = "Case sensitive-should find")]
+        [TestCase("username2", 1, TestName = "Case sensitive-should find, v2")]
+        [TestCase("userName1", 0, TestName = "Case sensitive-should not find")]
+        [TestCase("userName2", 0, TestName = "Case sensitive-should not find, v2")]
+        [TestCase("xyz", 0, TestName = "Should not find")]
+        public void TestQueryByUserName(string userName, int expectedCount)
         {
+            //change to use expectedCount instead of Verify
             var result = _query.QueryByUserName(userName).ToList();
 
-            return Verify(result).UseParameters(userName).UseMethodName(TestContext.CurrentContext.Test.Name);
+            result.Count.Should().Be(expectedCount);
         }
     }
 }

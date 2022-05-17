@@ -1,7 +1,0 @@
-﻿[
-  {
-    UserName: username1,
-    Name: name,
-    Id: Guid_1
-  }
-]
