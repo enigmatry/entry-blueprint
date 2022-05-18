@@ -1,25 +1,67 @@
-﻿Run this from Package Manager Console. 
+﻿# Entity framework migration commands
 
-----------------------------------------------------------------------
--- Powershell commands
-----------------------------------------------------------------------
-// add migration
-Add-Migration -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext -Name TODO
+Run these commands from Package Manager Console.
 
-// update database
+## Powershell commands
+
+### Add migration
+
+``` powershell
+Add-Migration -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext -Name MIGRATION_NAME_HERE
+```
+
+### Update database
+
+``` powershell
 Update-Database -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext
-----------------------------------------------------------------------
+```
 
+### Remove migration
 
-----------------------------------------------------------------------
--- dotnet ef commands
-----------------------------------------------------------------------
-// install global tool
+``` powershell
+Remove-Migration -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations
+```
+
+### Revert to a specific migration (discard all migrations created after the specified one)
+
+``` powershell
+Update-Database -Project Enigmatry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Blueprint.Data.Migrations -Context BlueprintContext THE-LAST-GOOD-MIGRATION-NAME
+```
+
+## Command line commands
+
+### Install global tool
+
+``` shell
 dotnet tool install --global dotnet-ef
+```
 
-// add migration
-dotnet-ef migrations add MIGRATION_NAME_HERE --project Enigmatry.Blueprint.Data.Migrations --startup-project Enigmatry.Blueprint.Data.Migrations --context BlueprintContext 
+### Update global tool to latest version
 
-// update database
+``` shell
+dotnet tool update --global dotnet-ef
+```
+
+### Add migration
+
+``` shell
+dotnet-ef migrations add MIGRATION_NAME_HERE --project Enigmatry.Blueprint.Data.Migrations --startup-project Enigmatry.Blueprint.Data.Migrations --context BlueprintContext
+```
+
+### Update database
+
+``` shell
 dotnet-ef database update --project Enigmatry.Blueprint.Data.Migrations --startup-project Enigmatry.Blueprint.Data.Migrations --context BlueprintContext
-----------------------------------------------------------------------
+```
+
+### Remove migration
+
+``` shell
+dotnet-ef migration remove --project Enigmatry.Blueprint.Data.Migrations --startup-project Enigmatry.Blueprint.Data.Migrations
+```
+
+### Revert to a specific migration (discard all migrations created after the specified one)
+
+``` shell
+dotnet-ef database update --project Enigmatry.Blueprint.Data.Migrations --startup-project Enigmatry.Blueprint.Data.Migrations THE-LAST-GOOD-MIGRATION-NAME
+```
