@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.BuildingBlocks.Core.Entities;
 using Enigmatry.BuildingBlocks.Core.EntityFramework;

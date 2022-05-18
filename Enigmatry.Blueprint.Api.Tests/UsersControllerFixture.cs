@@ -1,10 +1,10 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
+using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Identity.Commands;
 using Enigmatry.BuildingBlocks.AspNetCore.Tests.Http;
 using Enigmatry.BuildingBlocks.Core;
 using Enigmatry.BuildingBlocks.Core.Paging;
-using Enigmatry.Blueprint.Model.Identity;
-using Enigmatry.Blueprint.Model.Identity.Commands;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 
@@ -52,9 +52,9 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestCreate()
     {
-        var command = new UserCreateOrUpdate.Command { Name = "some user", UserName = "someuser@test.com" };
+        var command = new CreateOrUpdateUser.Command { Name = "some user", UserName = "someuser@test.com" };
         var user =
-            await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
+            await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
         await Verify(user);
     }
@@ -62,9 +62,9 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestUpdate()
     {
-        var command = new UserCreateOrUpdate.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com" };
+        var command = new CreateOrUpdateUser.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com" };
         var user =
-            await Client.PostAsync<UserCreateOrUpdate.Command, GetUserDetails.Response>("users", command);
+            await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
         await Verify(user);
     }

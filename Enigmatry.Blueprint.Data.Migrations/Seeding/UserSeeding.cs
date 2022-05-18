@@ -1,6 +1,6 @@
-﻿using Enigmatry.BuildingBlocks.Core.Entities;
-using Enigmatry.Blueprint.Model.Identity;
-using Enigmatry.Blueprint.Model.Identity.Commands;
+﻿using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Identity.Commands;
+using Enigmatry.BuildingBlocks.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Seeding;
@@ -9,7 +9,7 @@ public class UserSeeding : ISeeding
 {
     public void Seed(ModelBuilder modelBuilder)
     {
-        var user = User.Create(new UserCreateOrUpdate.Command
+        var user = User.Create(new CreateOrUpdateUser.Command
         {
             Name = "Test",
             UserName = "Test"

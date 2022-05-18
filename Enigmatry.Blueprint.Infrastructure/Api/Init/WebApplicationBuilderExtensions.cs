@@ -1,5 +1,5 @@
 ﻿using Azure.Identity;
-using Enigmatry.BuildingBlocks.Core.Helpers;
+using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
@@ -7,14 +7,13 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
     public static class WebApplicationBuilderExtensions
     {
-        public static void AppAddAzureKeyVault(this WebApplicationBuilder builder)
+        public static void AppAddAzureKeyVault(this WebApplicationBuilder builder, IConfiguration configuration)
         {
-            var enabled = Environment.GetEnvironmentVariable("ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED") ?? String.Empty;
-            var keyVaultName = Environment.GetEnvironmentVariable("ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT") ?? String.Empty;
+            var settings = configuration.ReadKeyVaultSettings();
 
-            if (enabled.Equals("true", StringComparison.OrdinalIgnoreCase) && keyVaultName.HasContent())
+            if (settings.Enabled)
             {
-                builder.Configuration.AddAzureKeyVault(new Uri(keyVaultName), new DefaultAzureCredential());
+                builder.Configuration.AddAzureKeyVault(new Uri($@"https://{settings.Name}.vault.azure.net"), new DefaultAzureCredential());
             }
         }
     }

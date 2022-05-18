@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Model.Products;
+﻿using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.BuildingBlocks.Core.Data;
 using JetBrains.Annotations;
 using MediatR;

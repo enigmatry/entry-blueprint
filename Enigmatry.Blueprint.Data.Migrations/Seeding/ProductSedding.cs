@@ -1,6 +1,6 @@
-﻿using Enigmatry.Blueprint.Model.Identity;
-using Enigmatry.Blueprint.Model.Products;
-using Enigmatry.Blueprint.Model.Products.Commands;
+﻿using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Products;
+using Enigmatry.Blueprint.Domain.Products.Commands;
 using Enigmatry.BuildingBlocks.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 

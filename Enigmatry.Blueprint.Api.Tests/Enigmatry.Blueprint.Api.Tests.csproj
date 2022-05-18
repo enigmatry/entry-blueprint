@@ -31,7 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Enigmatry.Blueprint.Api\Enigmatry.Blueprint.Api.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Data.Migrations\Enigmatry.Blueprint.Data.Migrations.csproj" />
-    <ProjectReference Include="..\Enigmatry.Blueprint.Model.Tests\Enigmatry.Blueprint.Model.Tests.csproj" />
+    <ProjectReference Include="..\Enigmatry.Blueprint.Domain.Tests\Enigmatry.Blueprint.Domain.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

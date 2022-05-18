@@ -1,5 +1,5 @@
-﻿using Enigmatry.BuildingBlocks.EntityFramework;
-using Enigmatry.Blueprint.Model.Identity;
+﻿using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.BuildingBlocks.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Infrastructure.Data;

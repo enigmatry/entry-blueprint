@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Enigmatry.Blueprint.Model.Products;
+using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.BuildingBlocks.Core.EntityFramework;
 using Enigmatry.BuildingBlocks.Core.Paging;
@@ -45,12 +45,12 @@ public static class GetProducts
     }
 
     [UsedImplicitly]
-    public class RequestHanlder : IPagedRequestHandler<Request, Response.Item>
+    public class RequestHandler : IPagedRequestHandler<Request, Response.Item>
     {
         private readonly IRepository<Product> _productRepository;
         private readonly IMapper _mapper;
 
-        public RequestHanlder(IRepository<Product> productRepository, IMapper mapper)
+        public RequestHandler(IRepository<Product> productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
             _mapper = mapper;

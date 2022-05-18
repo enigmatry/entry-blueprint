@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Model.Identity;
+﻿using Enigmatry.Blueprint.Domain.Identity;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation;
 

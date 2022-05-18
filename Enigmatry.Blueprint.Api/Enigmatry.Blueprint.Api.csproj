@@ -14,13 +14,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.Development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Enigmatry.BuildingBlocks.HealthChecks" Version="1.1.243" />
     <PackageReference Include="Enigmatry.BuildingBlocks.Validation" Version="1.1.243" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Enigmatry.Blueprint.Infrastructure\Enigmatry.Blueprint.Infrastructure.csproj" />
-    <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
+    <ProjectReference Include="..\Enigmatry.Blueprint.Domain\Enigmatry.Blueprint.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
+using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;

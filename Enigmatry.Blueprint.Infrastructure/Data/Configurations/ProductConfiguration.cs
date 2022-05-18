@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Model.Products;
+﻿using Enigmatry.Blueprint.Domain.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

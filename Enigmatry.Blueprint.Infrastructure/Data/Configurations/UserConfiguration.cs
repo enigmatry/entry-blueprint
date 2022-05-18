@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Model.Identity;
+﻿using Enigmatry.Blueprint.Domain.Identity;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

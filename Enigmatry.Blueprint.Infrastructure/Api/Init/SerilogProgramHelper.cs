@@ -10,19 +10,10 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init;
 
 public static class SerilogProgramHelper
 {
-    private static IConfiguration Configuration { get; } =
-        new ConfigurationBuilder() // needed because of Serilog file configuration.
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", false, true)
-            .AddJsonFile(
-                $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json",
-                true)
-            .Build();
-
-    public static void AppConfigureSerilog()
+    public static void AppConfigureSerilog(IConfiguration configuration)
     {
-        LoggerConfiguration config = new LoggerConfiguration()
-            .ReadFrom.Configuration(Configuration)
+        LoggerConfiguration loggerConfiguration = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
             .Enrich.FromLogContext()
             .Enrich.WithThreadId()
             .Enrich.WithProcessId()
@@ -30,20 +21,20 @@ public static class SerilogProgramHelper
             .Enrich.With(new OperationIdEnricher())
             .Enrich.WithProperty("AppVersion", Assembly.GetEntryAssembly()!.GetName().Version!);
 
-        AddAppInsightsToSerilog(config);
+        AddAppInsightsToSerilog(loggerConfiguration, configuration);
 
-        Log.Logger = config.CreateLogger();
+        Log.Logger = loggerConfiguration.CreateLogger();
 
         // for enabling self diagnostics see https://github.com/serilog/serilog/wiki/Debugging-and-Diagnostics
         // Serilog.Debugging.SelfLog.Enable(Console.Error);
     }
 
-    private static void AddAppInsightsToSerilog(LoggerConfiguration config)
+    private static void AddAppInsightsToSerilog(LoggerConfiguration loggerConfiguration, IConfiguration configuration)
     {
-        var settings = Configuration.ReadApplicationInsightsSettings();
+        var settings = configuration.ReadApplicationInsightsSettings();
         if (settings.InstrumentationKey.HasContent())
         {
-            config.WriteTo.ApplicationInsights(settings.InstrumentationKey, new TraceTelemetryConverter(), settings.SerilogLogsRestrictedToMinimumLevel);
+            loggerConfiguration.WriteTo.ApplicationInsights(settings.InstrumentationKey, new TraceTelemetryConverter(), settings.SerilogLogsRestrictedToMinimumLevel);
         }
     }
 }

@@ -8,7 +8,7 @@ public static class AssemblyFinder
 
     public static Assembly ApplicationServicesAssembly => FindAssembly("ApplicationServices");
     public static Assembly ApiAssembly => FindAssembly("Api");
-    public static Assembly DomainAssembly => FindAssembly("Model");
+    public static Assembly DomainAssembly => FindAssembly("Domain");
     public static Assembly InfrastructureAssembly => FindAssembly("Infrastructure");
 
 

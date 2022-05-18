@@ -1,7 +1,7 @@
 ﻿using System.Security.Principal;
 using Autofac;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation;
-using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Domain.Identity;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Autofac;

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Api", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Infrastructure", "Enigmatry.Blueprint.Infrastructure\Enigmatry.Blueprint.Infrastructure.csproj", "{A37F5D21-519B-4A5E-8238-E9F8AA7D0174}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Model", "Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj", "{98BD9F63-8C8E-4777-A12A-B53056CAA6B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Domain", "Enigmatry.Blueprint.Domain\Enigmatry.Blueprint.Domain.csproj", "{98BD9F63-8C8E-4777-A12A-B53056CAA6B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Core", "Enigmatry.Blueprint.Core\Enigmatry.Blueprint.Core.csproj", "{D3297483-ABCC-4AF7-88BA-9670DE1B638A}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Data.Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Api.Tests", "Enigmatry.Blueprint.Api.Tests\Enigmatry.Blueprint.Api.Tests.csproj", "{BDB0B879-D4AD-400F-B8C4-63E95981010B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Model.Tests", "Enigmatry.Blueprint.Model.Tests\Enigmatry.Blueprint.Model.Tests.csproj", "{1CC1BD9F-6D40-42AA-97F2-937AF2AD0B70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Domain.Tests", "Enigmatry.Blueprint.Domain.Tests\Enigmatry.Blueprint.Domain.Tests.csproj", "{1CC1BD9F-6D40-42AA-97F2-937AF2AD0B70}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.App", "enigmatry-blueprint-app\Enigmatry.Blueprint.App.csproj", "{798EB599-36B3-4855-86D6-9ADD8EE266B5}"
 EndProject

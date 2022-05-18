@@ -1,5 +1,5 @@
-﻿using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.Blueprint.Model.Identity;
+﻿using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.BuildingBlocks.Core.Data;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.ApplicationServices.Identity;

@@ -1,5 +1,5 @@
 ﻿using System.Security.Principal;
-using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Domain.Identity;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.ApplicationServices.Identity;

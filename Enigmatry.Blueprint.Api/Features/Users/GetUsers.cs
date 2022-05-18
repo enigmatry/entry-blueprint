@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.BuildingBlocks.Core.Paging;
-using Enigmatry.Blueprint.Model.Identity;
 using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.BuildingBlocks.Core.EntityFramework;
 using JetBrains.Annotations;

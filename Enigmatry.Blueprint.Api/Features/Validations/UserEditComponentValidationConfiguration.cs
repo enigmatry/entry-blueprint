@@ -1,5 +1,5 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Users;
-using Enigmatry.Blueprint.Model.Identity;
+using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.BuildingBlocks.Validation;
 
 namespace Enigmatry.Blueprint.Api.Features.Validations;

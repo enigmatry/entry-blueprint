@@ -1,6 +1,6 @@
 ﻿using System.Net.Mime;
-using Enigmatry.Blueprint.Model.Identity;
-using Enigmatry.Blueprint.Model.Identity.Commands;
+using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Identity.Commands;
 using Enigmatry.BuildingBlocks.AspNetCore;
 using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.BuildingBlocks.Core.Paging;
@@ -44,7 +44,7 @@ public class UsersController : Controller
     /// </summary>
     /// <param name="id">Id</param>
     [HttpGet]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<GetUserDetails.Response>> Get(Guid id)
@@ -61,7 +61,7 @@ public class UsersController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<GetUserDetails.Response>> Post(UserCreateOrUpdate.Command command)
+    public async Task<ActionResult<GetUserDetails.Response>> Post(CreateOrUpdateUser.Command command)
     {
         User user = await _mediator.Send(command);
         await _unitOfWork.SaveChangesAsync();

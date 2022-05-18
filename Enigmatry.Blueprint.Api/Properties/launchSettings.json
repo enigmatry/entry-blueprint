@@ -1,34 +1,27 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:5440/",
-      "sslPort": 44394
-    }
-  },
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:44394/",
-      "environmentVariables": {
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "false",
-        "AzureServicesAuthConnectionString": "RunAs=Developer; DeveloperTool=VisualStudio",
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT": "https://enigmatry-blueprint-test.vault.azure.net"
-      }
+    "iisSettings": {
+        "windowsAuthentication": false,
+        "anonymousAuthentication": true,
+        "iisExpress": {
+            "applicationUrl": "http://localhost:5440/",
+            "sslPort": 44394
+        }
     },
-    "Enigmatry.Blueprint.Api": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "false",
-        "AzureServicesAuthConnectionString": "RunAs=Developer; DeveloperTool=VisualStudio",
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT": "https://enigmatry-blueprint-test.vault.azure.net"
-      },
-      "applicationUrl": "http://localhost:5441/"
+    "profiles": {
+        "IIS Express": {
+            "commandName": "IISExpress",
+            "launchBrowser": true,
+            "applicationUrl": "https://localhost:44394/",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        "Enigmatry.Blueprint.Api": {
+            "commandName": "Project",
+            "applicationUrl": "http://localhost:5441/",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
     }
-  }
 }

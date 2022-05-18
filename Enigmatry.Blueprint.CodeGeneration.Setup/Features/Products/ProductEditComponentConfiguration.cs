@@ -1,7 +1,7 @@
 ﻿using System;
 using Enigmatry.Blueprint.Api.Features.Products;
 using Enigmatry.Blueprint.Api.Features.Validations;
-using Enigmatry.Blueprint.Model.Products;
+using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.CodeGeneration.Configuration;
 using Enigmatry.CodeGeneration.Configuration.Form;
 using Enigmatry.CodeGeneration.Configuration.Form.Controls;

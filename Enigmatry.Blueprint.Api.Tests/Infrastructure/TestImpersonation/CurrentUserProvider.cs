@@ -1,6 +1,6 @@
-﻿using Enigmatry.BuildingBlocks.Core.Entities;
-using Enigmatry.Blueprint.Model.Identity;
-using Enigmatry.Blueprint.Model.Identity.Commands;
+﻿using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Identity.Commands;
+using Enigmatry.BuildingBlocks.Core.Entities;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.TestImpersonation;
 
@@ -8,7 +8,7 @@ internal class TestCurrentUserProvider : ICurrentUserProvider
 {
     public TestCurrentUserProvider(TestPrincipal principal)
     {
-        User = User.Create(new UserCreateOrUpdate.Command
+        User = User.Create(new CreateOrUpdateUser.Command
         {
             UserName = principal.UserName,
             Name = "INTEGRATION_TEST"

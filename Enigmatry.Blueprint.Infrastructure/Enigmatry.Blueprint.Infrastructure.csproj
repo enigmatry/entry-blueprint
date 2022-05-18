@@ -50,7 +50,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Enigmatry.Blueprint.ApplicationServices\Enigmatry.Blueprint.ApplicationServices.csproj" />
     <ProjectReference Include="..\Enigmatry.Blueprint.Core\Enigmatry.Blueprint.Core.csproj" />
-    <ProjectReference Include="..\Enigmatry.Blueprint.Model\Enigmatry.Blueprint.Model.csproj" />
+    <ProjectReference Include="..\Enigmatry.Blueprint.Domain\Enigmatry.Blueprint.Domain.csproj" />
   </ItemGroup>
 
 </Project>

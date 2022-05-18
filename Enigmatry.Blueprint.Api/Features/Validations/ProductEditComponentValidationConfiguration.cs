@@ -1,7 +1,7 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Products;
-using Enigmatry.Blueprint.Model.Products;
 using Enigmatry.BuildingBlocks.Validation;
 using System.Text.RegularExpressions;
+using Enigmatry.Blueprint.Domain.Products;
 
 namespace Enigmatry.Blueprint.Api.Features.Validations;
 

@@ -1,10 +1,10 @@
-﻿using Enigmatry.Blueprint.Model.Products.Commands;
-using Enigmatry.BuildingBlocks.AspNetCore;
+﻿using Enigmatry.BuildingBlocks.AspNetCore;
 using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.BuildingBlocks.Core.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using Enigmatry.Blueprint.Domain.Products.Commands;
 
 namespace Enigmatry.Blueprint.Api.Features.Products;
 
@@ -38,7 +38,7 @@ public class ProductsController : Controller
     /// </summary>
     /// <param name="id">Id</param>
     [HttpGet]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<GetProductDetails.Response>> Get(Guid id)
@@ -95,7 +95,7 @@ public class ProductsController : Controller
     /// </summary>
     /// <param name="id">Id</param>
     [HttpDelete]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task Remove(Guid id)
     {
