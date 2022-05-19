@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Blueprint.Infrastructure.Api.Init
 {
-    public static class WebApplicationBuilderExtensions
+    public static class KeyVaultStartupExtensions
     {
         public static void AppAddAzureKeyVault(this WebApplicationBuilder builder, IConfiguration configuration)
         {
