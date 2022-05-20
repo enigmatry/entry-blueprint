@@ -73,8 +73,8 @@ export class UserEditGeneratedComponent implements OnInit {
         type: 'fieldset',
         fieldGroupClassName: '',
         templateOptions: {
-        label: 'User',
-        placeholder: 'User',
+        label: $localize `:@@users.user-edit.user.label:User`,
+        placeholder: $localize `:@@users.user-edit.user.placeholder:User`,
         disabled: this.isReadonly || false,
         description: ''
         },
@@ -90,8 +90,8 @@ export class UserEditGeneratedComponent implements OnInit {
         'model.userName': (model) => (this.fieldsPropertyExpressions?.userName ? this.fieldsPropertyExpressions.userName(model) : model.userName),
         },
         templateOptions: {
-        label: 'User name',
-        placeholder: 'User name',
+        label: $localize `:@@users.user-edit.user-name.label:User name`,
+        placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
         description: '',
         hidden: !true,
             typeFormatDef: undefined
@@ -108,8 +108,8 @@ export class UserEditGeneratedComponent implements OnInit {
         'model.name': (model) => (this.fieldsPropertyExpressions?.name ? this.fieldsPropertyExpressions.name(model) : model.name),
         },
         templateOptions: {
-        label: 'Name',
-        placeholder: 'Name',
+        label: $localize `:@@users.user-edit.name.label:Name`,
+        placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
         description: '',
         hidden: !true,
             required: true,
@@ -123,8 +123,8 @@ maxLength: 25,
         type: 'fieldset',
         fieldGroupClassName: '',
         templateOptions: {
-        label: 'History',
-        placeholder: 'History',
+        label: $localize `:@@users.user-edit.history.label:History`,
+        placeholder: $localize `:@@users.user-edit.history.placeholder:History`,
         disabled: this.isReadonly || false,
         description: ''
         },
@@ -140,8 +140,8 @@ maxLength: 25,
         'model.createdOn': (model) => (this.fieldsPropertyExpressions?.createdOn ? this.fieldsPropertyExpressions.createdOn(model) : model.createdOn),
         },
         templateOptions: {
-        label: 'Created on',
-        placeholder: 'Created on',
+        label: $localize `:@@users.user-edit.created-on.label:Created on`,
+        placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
         description: '',
         hidden: !true,
             typeFormatDef: { name: 'date' }
@@ -158,8 +158,8 @@ maxLength: 25,
         'model.updatedOn': (model) => (this.fieldsPropertyExpressions?.updatedOn ? this.fieldsPropertyExpressions.updatedOn(model) : model.updatedOn),
         },
         templateOptions: {
-        label: 'Updated on',
-        placeholder: 'Updated on',
+        label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
+        placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
         description: '',
         hidden: !true,
             typeFormatDef: { name: 'date' }
