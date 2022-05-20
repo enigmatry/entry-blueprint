@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Seeding;
 
-public class ProductSedding : ISeeding
+public class ProductSeeding : ISeeding
 {
     public void Seed(ModelBuilder modelBuilder)
     {

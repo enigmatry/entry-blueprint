@@ -10,7 +10,7 @@ public static class DbInitializer
     static DbInitializer()
     {
         Seedings.Add(new UserSeeding());
-        Seedings.Add(new ProductSedding());
+        Seedings.Add(new ProductSeeding());
     }
 
     // EF Core way of seeding data: https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding
