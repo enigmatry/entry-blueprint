@@ -17,6 +17,8 @@ public static class CreateOrUpdateUser
         public string UserName { get; set; } = "";
         [DisplayName("Name")]
         public string Name { get; set; } = "";
+        [DisplayName("DateOfBirth")]
+        public DateOnly DateOfBirth { get; set; }
     }
 
     [UsedImplicitly]

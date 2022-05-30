@@ -30,7 +30,7 @@ export interface IUsersClient {
      * Creates or updates
      * @param command User data
      */
-    post(command: UserCreateOrUpdateCommand): Observable<GetUserDetailsResponse>;
+    post(command: CreateOrUpdateUserCommand): Observable<GetUserDetailsResponse>;
     /**
      * Get user for given id
      * @param id Id
@@ -130,7 +130,7 @@ export class UsersClient implements IUsersClient {
      * Creates or updates
      * @param command User data
      */
-    post(command: UserCreateOrUpdateCommand): Observable<GetUserDetailsResponse> {
+    post(command: CreateOrUpdateUserCommand): Observable<GetUserDetailsResponse> {
         let url_ = this.baseUrl + "/Users";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -819,6 +819,7 @@ export class GetUsersResponseItem implements IGetUsersResponseItem {
     id?: string;
     userName?: string;
     name?: string;
+    dateOfBirth?: Date;
     createdOn?: Date;
     updatedOn?: Date;
 
@@ -836,6 +837,7 @@ export class GetUsersResponseItem implements IGetUsersResponseItem {
             this.id = _data["id"];
             this.userName = _data["userName"];
             this.name = _data["name"];
+            this.dateOfBirth = _data["dateOfBirth"] ? new Date(_data["dateOfBirth"].toString()) : <any>undefined;
             this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
             this.updatedOn = _data["updatedOn"] ? new Date(_data["updatedOn"].toString()) : <any>undefined;
         }
@@ -853,6 +855,7 @@ export class GetUsersResponseItem implements IGetUsersResponseItem {
         data["id"] = this.id;
         data["userName"] = this.userName;
         data["name"] = this.name;
+        data["dateOfBirth"] = this.dateOfBirth ? formatDate(this.dateOfBirth) : <any>undefined;
         data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
         data["updatedOn"] = this.updatedOn ? this.updatedOn.toISOString() : <any>undefined;
         return data;
@@ -863,6 +866,7 @@ export interface IGetUsersResponseItem {
     id?: string;
     userName?: string;
     name?: string;
+    dateOfBirth?: Date;
     createdOn?: Date;
     updatedOn?: Date;
 }
@@ -871,6 +875,7 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
     id?: string;
     userName?: string;
     name?: string;
+    dateOfBirth?: Date;
     createdOn?: Date;
     updatedOn?: Date;
 
@@ -888,6 +893,7 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
             this.id = _data["id"];
             this.userName = _data["userName"];
             this.name = _data["name"];
+            this.dateOfBirth = _data["dateOfBirth"] ? new Date(_data["dateOfBirth"].toString()) : <any>undefined;
             this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
             this.updatedOn = _data["updatedOn"] ? new Date(_data["updatedOn"].toString()) : <any>undefined;
         }
@@ -905,6 +911,7 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
         data["id"] = this.id;
         data["userName"] = this.userName;
         data["name"] = this.name;
+        data["dateOfBirth"] = this.dateOfBirth ? formatDate(this.dateOfBirth) : <any>undefined;
         data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
         data["updatedOn"] = this.updatedOn ? this.updatedOn.toISOString() : <any>undefined;
         return data;
@@ -915,6 +922,7 @@ export interface IGetUserDetailsResponse {
     id?: string;
     userName?: string;
     name?: string;
+    dateOfBirth?: Date;
     createdOn?: Date;
     updatedOn?: Date;
 }
@@ -971,12 +979,13 @@ export interface IProblemDetails {
     instance?: string | undefined;
 }
 
-export class UserCreateOrUpdateCommand implements IUserCreateOrUpdateCommand {
+export class CreateOrUpdateUserCommand implements ICreateOrUpdateUserCommand {
     id?: string | undefined;
     userName?: string;
     name?: string;
+    dateOfBirth?: Date;
 
-    constructor(data?: IUserCreateOrUpdateCommand) {
+    constructor(data?: ICreateOrUpdateUserCommand) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -990,12 +999,13 @@ export class UserCreateOrUpdateCommand implements IUserCreateOrUpdateCommand {
             this.id = _data["id"];
             this.userName = _data["userName"];
             this.name = _data["name"];
+            this.dateOfBirth = _data["dateOfBirth"] ? new Date(_data["dateOfBirth"].toString()) : <any>undefined;
         }
     }
 
-    static fromJS(data: any): UserCreateOrUpdateCommand {
+    static fromJS(data: any): CreateOrUpdateUserCommand {
         data = typeof data === 'object' ? data : {};
-        let result = new UserCreateOrUpdateCommand();
+        let result = new CreateOrUpdateUserCommand();
         result.init(data);
         return result;
     }
@@ -1005,14 +1015,16 @@ export class UserCreateOrUpdateCommand implements IUserCreateOrUpdateCommand {
         data["id"] = this.id;
         data["userName"] = this.userName;
         data["name"] = this.name;
+        data["dateOfBirth"] = this.dateOfBirth ? formatDate(this.dateOfBirth) : <any>undefined;
         return data;
     }
 }
 
-export interface IUserCreateOrUpdateCommand {
+export interface ICreateOrUpdateUserCommand {
     id?: string | undefined;
     userName?: string;
     name?: string;
+    dateOfBirth?: Date;
 }
 
 export class PagedResponseOfGetProductsResponseItem implements IPagedResponseOfGetProductsResponseItem {
@@ -1460,6 +1472,12 @@ export interface IProductCreateOrUpdateCommand {
     freeShipping?: boolean;
     hasDiscount?: boolean;
     discount?: number | undefined;
+}
+
+function formatDate(d: Date) {
+    return d.getFullYear() + '-' + 
+        (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
+        (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
 }
 
 export class ApiException extends Error {
