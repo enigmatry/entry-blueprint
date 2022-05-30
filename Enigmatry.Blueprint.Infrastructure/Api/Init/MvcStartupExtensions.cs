@@ -1,4 +1,5 @@
-﻿using Enigmatry.BuildingBlocks.AspNetCore.Filters;
+﻿using Enigmatry.Blueprint.Infrastructure.Api.Converters;
+using Enigmatry.BuildingBlocks.AspNetCore.Filters;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -10,10 +11,12 @@ public static class MvcStartupExtensions
 {
     public static IMvcBuilder AppAddMvc(this IServiceCollection services, IConfiguration configuration) =>
         services
+
             // The following adds support for controllers, API-related features, and views, not pages. 
             // Views are required for templating with RazorTemplatingEngine(e.g. emails)
             //.AddControllersWithViews(options => options.ConfigureMvc(configuration))
             .AddControllers(options => options.ConfigureMvc(configuration))
+            .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter()))
             .AppAddFluentValidation();
 
     private static void ConfigureMvc(this MvcOptions options, IConfiguration configuration)
