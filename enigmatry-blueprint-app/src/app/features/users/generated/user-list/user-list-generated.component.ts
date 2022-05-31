@@ -59,8 +59,9 @@ export class UserListGeneratedComponent implements OnInit {
 { field: 'id', hide: true, sortable: true },
 { field: 'userName', header: $localize `:@@users.user-list.user-name:E-mail`, hide: false, sortable: true },
 { field: 'name', header: $localize `:@@users.user-list.name:Name`, hide: false, sortable: true },
-{ field: 'createdOn', header: $localize `:@@users.user-list.created-on:Created on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } },
-{ field: 'updatedOn', header: $localize `:@@users.user-list.updated-on:Updated on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } }
+{ field: 'dateOfBirth', header: $localize `:@@users.user-list.date-of-birth:Date of birth`, hide: false, sortable: true },
+{ field: 'createdOn', hide: true, sortable: true, type: 'date', typeParameter: { name: 'date' } },
+{ field: 'updatedOn', hide: true, sortable: true, type: 'date', typeParameter: { name: 'date' } }
 ];
     this.contextMenuItems = [
 { id: 'edit', name: $localize `:@@users.user-list.context.edit:Edit`, icon: 'edit' }

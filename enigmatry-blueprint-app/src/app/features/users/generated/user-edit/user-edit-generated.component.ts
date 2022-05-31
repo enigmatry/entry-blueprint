@@ -120,6 +120,24 @@ maxLength: 25,
         },
         },
         {
+        key: 'dateOfBirth',
+        type: this.resolveFieldType('datepicker', false),
+        className: '',
+        hideExpression: this.fieldsHideExpressions?.dateOfBirth ?? false,
+        expressionProperties: {
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.dateOfBirth ? this.fieldsDisableExpressions.dateOfBirth(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.dateOfBirth ? this.fieldsRequiredExpressions.dateOfBirth(model) : false),
+        'model.dateOfBirth': (model) => (this.fieldsPropertyExpressions?.dateOfBirth ? this.fieldsPropertyExpressions.dateOfBirth(model) : model.dateOfBirth),
+        },
+        templateOptions: {
+        label: $localize `:@@users.user-edit.date-of-birth.label:Date of birth`,
+        placeholder: $localize `:@@users.user-edit.date-of-birth.placeholder:Date of birth`,
+        description: '',
+        hidden: !true,
+            typeFormatDef: undefined
+        },
+        },
+        {
         type: 'fieldset',
         fieldGroupClassName: '',
         templateOptions: {

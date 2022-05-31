@@ -21,6 +21,8 @@ public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUse
         userSection.FormControl(x => x.UserName).IsReadonly(true);
         userSection.FormControl(x => x.Name);
 
+        userSection.DatepickerFormControl(x => x.DateOfBirth);
+
         var historySection = userSection.FormControlGroup("History")
             .CreateUiSection("fieldset");
 

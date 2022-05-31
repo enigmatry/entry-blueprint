@@ -27,6 +27,9 @@ public class UserListComponentConfiguration : IListComponentConfiguration<GetUse
         builder.Column(x => x.UserName)
             .WithHeaderName("E-mail");
 
+        builder.Column(x => x.CreatedOn).IsVisible(false);
+        builder.Column(x => x.UpdatedOn).IsVisible(false);
+
         // Configure selection:
         // None, Single or Multiple     (default None)
 
