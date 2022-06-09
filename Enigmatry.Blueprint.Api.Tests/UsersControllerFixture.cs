@@ -7,6 +7,7 @@ using Enigmatry.BuildingBlocks.Core;
 using Enigmatry.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
+using Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson.Http;
 
 namespace Enigmatry.Blueprint.Api.Tests;
 
@@ -33,7 +34,9 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestGetAll()
     {
-        var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>("users"))?.Items.ToList()!;
+        var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>(
+                new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "UserName")))
+            ?.Items.ToList()!;
 
         users.Should().NotBeNull();
         users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");

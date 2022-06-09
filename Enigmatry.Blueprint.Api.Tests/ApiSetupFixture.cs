@@ -3,7 +3,7 @@ using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.BuildingBlocks.AspNetCore.Tests.Http;
+using Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.BuildingBlocks.Core.Paging;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
@@ -30,7 +30,9 @@ public class ApiSetupFixture : IntegrationFixtureBase
     [Test]
     public async Task TestGetAll()
     {
-        var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>("users"))?.Items.ToList()!;
+        var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>(
+                new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "UserName")))
+            ?.Items.ToList()!;
 
         await Verify(users);
     }

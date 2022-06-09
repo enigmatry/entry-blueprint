@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 #pragma warning disable CA1001 // Types that own disposable fields should be disposable

@@ -1,7 +1,6 @@
 ﻿using Enigmatry.Blueprint.Data.Migrations.Seeding;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 

@@ -4,7 +4,6 @@ using Enigmatry.BuildingBlocks.Core.Data;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
 using SequentialGuidGenerator = Enigmatry.BuildingBlocks.Core.Entities.SequentialGuidGenerator;
 
 namespace Enigmatry.Blueprint.Api.Tests;
