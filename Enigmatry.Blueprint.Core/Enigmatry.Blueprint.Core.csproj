@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enigmatry.BuildingBlocks.Core" Version="1.1.256" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.Core" Version="1.1.275" />
   </ItemGroup>
 
 </Project>
