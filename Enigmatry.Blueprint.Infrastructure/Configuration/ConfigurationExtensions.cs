@@ -17,7 +17,7 @@ public static class ConfigurationExtensions
         configuration.ReadSettingsSection<HealthCheckSettings>(HealthCheckSettings.HealthChecksSectionName);
 
     public static KeyVaultSettings ReadKeyVaultSettings(this IConfiguration configuration) =>
-        configuration.ReadSettingsSection<KeyVaultSettings>("KeyVault");
+        configuration.ReadSettingsSection<KeyVaultSettings>(KeyVaultSettings.SectionName);
 
     public static T ReadSettingsSection<T>(this IConfiguration configuration, string sectionName)
     {
