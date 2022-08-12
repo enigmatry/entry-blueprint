@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
+using Enigmatry.Blueprint.Infrastructure.Init;
 using Serilog;
 
 var configuration = ConfigurationHelper.CreateConfiguration();
@@ -14,7 +15,7 @@ try
     {
         options.AddServerHeader = false;
     });
-    builder.AppAddAzureKeyVault(configuration);
+    builder.Configuration.AppAddAzureKeyVault(configuration);
 
     var startup = new Startup(builder.Configuration);
     startup.ConfigureServices(builder.Services);
