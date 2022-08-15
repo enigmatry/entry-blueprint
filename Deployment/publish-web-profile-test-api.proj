@@ -25,5 +25,8 @@
     <ParameterValue Include="Rolling Log File Path">
       <Value>D:/home/LogFiles/api/enigmatry-blueprint-api-.log</Value>
     </ParameterValue>
+    <ParameterValue Include="Key Vault Name">
+      <Value>enigmatry-blueprint-test</Value>
+    </ParameterValue>
   </ItemGroup>
 </Project>
