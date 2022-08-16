@@ -1,6 +1,5 @@
 ﻿using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.BuildingBlocks.AspNetCore.ApplicationInsights;
-using Enigmatry.BuildingBlocks.Core.Helpers;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Sinks.ApplicationInsights.TelemetryConverters;
@@ -32,9 +31,6 @@ public static class SerilogProgramHelper
     private static void AddAppInsightsToSerilog(LoggerConfiguration loggerConfiguration, IConfiguration configuration)
     {
         var settings = configuration.ReadApplicationInsightsSettings();
-        if (settings.InstrumentationKey.HasContent())
-        {
-            loggerConfiguration.WriteTo.ApplicationInsights(settings.InstrumentationKey, new TraceTelemetryConverter(), settings.SerilogLogsRestrictedToMinimumLevel);
-        }
+        loggerConfiguration.WriteTo.ApplicationInsights(new TraceTelemetryConverter(), settings.SerilogLogsRestrictedToMinimumLevel);
     }
 }

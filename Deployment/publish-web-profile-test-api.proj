@@ -13,8 +13,8 @@
     <ParameterValue Include="SQLDB Connection String">
       <Value>Server=tcp:enigmatry-test.database.windows.net,1433;Database=enigmatry-blueprint-test;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30</Value>
     </ParameterValue>
-    <ParameterValue Include="ApplicationInsights InstrumentationKey">
-      <Value>c8f0815e-5d8f-460e-9e87-436be3bebd3e</Value>
+    <ParameterValue Include="ApplicationInsights ConnectionString">
+      <Value>InstrumentationKey=c8f0815e-5d8f-460e-9e87-436be3bebd3e;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/</Value>
     </ParameterValue>
     <ParameterValue Include="HealthChecks Token">
       <Value>d5d97ea1-5709-45e1-a414-0bac78e8aecb</Value>

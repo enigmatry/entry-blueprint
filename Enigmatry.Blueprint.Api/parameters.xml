@@ -4,9 +4,9 @@
     <parameter name="SQLDB Connection String" description="SQLDB Connection String" defaultValue="">
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__sqlDbConnectionString__" />
     </parameter>
-    <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey"
+    <parameter name="ApplicationInsights ConnectionString" description="ApplicationInsights ConnectionString"
                defaultValue="">
-        <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsInstrumentationKey__" />
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsConnectionString__" />
     </parameter>
     <parameter name="HealthChecks Token" description="HealthChecks Token" defaultValue="">
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__healthChecksToken__" />
