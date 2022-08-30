@@ -19,19 +19,14 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="6.0.4" />
-    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
-    <PackageReference Include="AspNetCore.HealthChecks.System" Version="6.0.5" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
-    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.3" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
     <PackageReference Include="BeatPulse" Version="3.0.0" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore" Version="1.1.283" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.Infrastructure" Version="1.1.283" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.EntityFramework" Version="1.1.283" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.MediatR" Version="1.1.283" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.Swagger" Version="1.1.283" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore" Version="1.1.292" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.Infrastructure" Version="1.1.292" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.EntityFramework" Version="1.1.292" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.MediatR" Version="1.1.292" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.Swagger" Version="1.1.292" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.8" />

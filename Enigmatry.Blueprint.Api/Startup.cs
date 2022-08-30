@@ -4,10 +4,10 @@ using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
+using Enigmatry.Blueprint.Infrastructure.Data;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using Enigmatry.BuildingBlocks.HealthChecks;
-using Enigmatry.BuildingBlocks.Core.Settings;
+using Enigmatry.BuildingBlocks.HealthChecks.Extensions;
 
 namespace Enigmatry.Blueprint.Api;
 
@@ -48,7 +48,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapDefaultControllerRoute();
-            endpoints.AppMapHealthCheck(_configuration.ReadHealthCheckSettings());
+            endpoints.AppMapHealthCheck(_configuration);
         });
 
         app.AppUseSwagger();
@@ -74,7 +74,8 @@ public class Startup
         services.AppAddSettings(configuration);
         services.AppAddPolly();
         services.AppAddAutoMapper();
-        services.AppAddHealthChecks<HealthCheckSettings>(configuration, HealthChecksBuilder.BuildHealthChecks);
+        services.AppAddHealthChecks(configuration)
+            .AddDbContextCheck<BlueprintContext>();
         services.AppAddMediatR();
         services.AppAddSwagger("Blueprint API");
 

@@ -18,8 +18,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoFixture.NUnit3" Version="4.17.0" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" Version="1.1.283" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson" Version="1.1.283" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" Version="1.1.292" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson" Version="1.1.292" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1">
