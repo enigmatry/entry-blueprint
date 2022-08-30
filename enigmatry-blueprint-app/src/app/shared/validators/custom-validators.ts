@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable no-secrets/no-secrets */
 /* eslint-disable id-length */
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ValidatorsService as CustomValidatorsService } from './validators.service';
 
 export { ValidatorsService as CustomValidatorsService } from './validators.service';
 
-const productCodeIsUniqueValidator = async(control: FormControl, service: CustomValidatorsService)
+const productCodeIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
     : Promise<{ productCodeIsUnique: boolean } | null> => {
     if (control.dirty) {
         const productId = control?.parent?.get('id')?.value;
@@ -16,7 +16,7 @@ const productCodeIsUniqueValidator = async(control: FormControl, service: Custom
     return Promise.resolve(null);
 };
 
-const productNameIsUniqueValidator = async(control: FormControl, service: CustomValidatorsService)
+const productNameIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
     : Promise<{ productNameIsUnique: boolean } | null> => {
     if (control.dirty) {
         const productId = control?.parent?.get('id')?.value;
@@ -35,11 +35,11 @@ export const customValidatorsFactory = (service: CustomValidatorsService) => {
         validators: [
             {
                 name: 'productCodeIsUnique',
-                validation: (control: FormControl) => productCodeIsUniqueValidator(control, service)
+                validation: (control: UntypedFormControl) => productCodeIsUniqueValidator(control, service)
             },
             {
                 name: 'productNameIsUnique',
-                validation: (control: FormControl) => productNameIsUniqueValidator(control, service)
+                validation: (control: UntypedFormControl) => productNameIsUniqueValidator(control, service)
             }
         ]
     };

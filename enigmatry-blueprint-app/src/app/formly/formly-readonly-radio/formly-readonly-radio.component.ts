@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { FieldType } from '@ngx-formly/material/form-field';
 import { BehaviorSubject, isObservable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,7 +14,7 @@ declare type SelectOption = {
   styleUrls: ['./formly-readonly-radio.component.scss']
 })
 export class ReadonlyRadioComponent extends FieldType {
-    formControl: FormControl;
+    formControl: UntypedFormControl;
     optionLabel = new BehaviorSubject<string>('');
     option$ = this.optionLabel.asObservable();
 

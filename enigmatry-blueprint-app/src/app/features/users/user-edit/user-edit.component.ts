@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
-import { IGetUserDetailsResponse, UserCreateOrUpdateCommand, UsersClient } from 'src/app/api/api-reference';
+import { CreateOrUpdateUserCommand, IGetUserDetailsResponse, UsersClient } from 'src/app/api/api-reference';
 
 @Component({
   selector: 'app-user-edit',
@@ -23,7 +23,7 @@ export class UserEditComponent implements OnInit {
   }
 
   save(model: IGetUserDetailsResponse) {
-    const command = new UserCreateOrUpdateCommand({
+    const command = new CreateOrUpdateUserCommand({
       id: model.id,
       userName: model.userName,
       name: model.name

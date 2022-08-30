@@ -8,7 +8,7 @@
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
 import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Optional, Output, TemplateRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
 import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
@@ -49,7 +49,7 @@ export class ProductEditGeneratedComponent implements OnInit {
                 @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: 'displayName' };
 
   _isReadonly: boolean;
-  form = new FormGroup({});
+  form = new UntypedFormGroup({});
   fields: FormlyFieldConfig[] = [];
 
   constructor(
