@@ -12,7 +12,8 @@ public class UserSeeding : ISeeding
         var user = User.Create(new CreateOrUpdateUser.Command
         {
             Name = "Test",
-            UserName = "Test"
+            UserName = "Test",
+            Password = "Test1234!"
         });
 
         user.SetCreated(new DateTimeOffset(2019, 5, 6, 14, 31, 0, TimeSpan.FromHours(0)));

@@ -12,5 +12,10 @@ public class UserEditComponentValidationConfiguration : ValidationConfiguration<
             .IsRequired()
             .MinLength(User.NameMinLenght)
             .MaxLength(User.NameMaxLenght);
+
+        RuleFor(x => x.Password)
+            .IsRequired()
+            .MinLength(User.PasswordMinLenght)
+            .MaxLength(User.PasswordMaxLength);
     }
 }

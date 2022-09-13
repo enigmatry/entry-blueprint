@@ -11,9 +11,12 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     public static readonly Guid TestUserId = new("8207DB25-94D1-4F3D-BF18-90DA283221F7");
     public const int NameMinLenght = 5;
     public const int NameMaxLenght = 25;
+    public const int PasswordMaxLength = 50;
+    public const int PasswordMinLenght = 8;
 
     public string UserName { get; private set; } = "";
     public string Name { get; private set; } = "";
+    public string Password { get; private set; } = "";
     public DateTimeOffset CreatedOn { get; private set; }
     public DateTimeOffset UpdatedOn { get; private set; }
     public Guid? CreatedById { get; private set; }
@@ -33,6 +36,7 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
         {
             UserName = command.UserName,
             Name = command.Name,
+            Password = command.Password,
         };
 
         result.AddDomainEvent(new UserCreatedDomainEvent(result.UserName));
@@ -42,6 +46,7 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     public void Update(CreateOrUpdateUser.Command command)
     {
         Name = command.Name;
+        Password = command.Password;
         AddDomainEvent(new UserUpdatedDomainEvent(UserName));
     }
 

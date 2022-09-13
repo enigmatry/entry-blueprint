@@ -26,7 +26,8 @@ export class UserEditComponent implements OnInit {
     const command = new CreateOrUpdateUserCommand({
       id: model.id,
       userName: model.userName,
-      name: model.name
+      name: model.name,
+      password: model.password
     });
     this.client.post(command)
       .subscribe(() => this.location.back());

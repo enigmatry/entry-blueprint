@@ -31,7 +31,7 @@
     "products.product-edit.has-discount.placeholder": "Has discount",
     "products.product-edit.discount.label": "Discount",
     "products.product-edit.discount.placeholder": "Discount",
-    "products.product-edit.reset-form-btn.hint": "* This will reset form to it's initial state.",
+    "products.product-edit.reset-form-btn.hint": "* This will reset form to initial state.",
     "products.product-edit.reset-form-btn.text": "Reset",
     "products.product-list.name": "Product name",
     "products.product-list.code": "Code",
@@ -55,6 +55,8 @@
     "users.user-edit.user-name.placeholder": "User name",
     "users.user-edit.name.label": "Name",
     "users.user-edit.name.placeholder": "Name",
+    "users.user-edit.password.label": "Password",
+    "users.user-edit.password.placeholder": "Password",
     "users.user-edit.history.label": "History",
     "users.user-edit.history.placeholder": "History",
     "users.user-edit.created-on.label": "Created on",
@@ -72,7 +74,6 @@
     "common.save": "Save",
     "common.date-format": "dd. MMM yyyy. 'at' hh:mm a",
     "validators.productCodeIsUnique": "Code is not unique",
-    "validators.productNameIsUnique": "Name is not unique",
-    "validators.product-expires-on-required": "Required for food & drinks"
+    "validators.productNameIsUnique": "Name is not unique"
   }
 }

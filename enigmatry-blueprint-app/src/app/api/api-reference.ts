@@ -871,6 +871,7 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
     id?: string;
     userName?: string;
     name?: string;
+    password?: string;
     createdOn?: Date;
     updatedOn?: Date;
 
@@ -888,6 +889,7 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
             this.id = _data["id"];
             this.userName = _data["userName"];
             this.name = _data["name"];
+            this.password = _data["password"];
             this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
             this.updatedOn = _data["updatedOn"] ? new Date(_data["updatedOn"].toString()) : <any>undefined;
         }
@@ -905,6 +907,7 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
         data["id"] = this.id;
         data["userName"] = this.userName;
         data["name"] = this.name;
+        data["password"] = this.password;
         data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
         data["updatedOn"] = this.updatedOn ? this.updatedOn.toISOString() : <any>undefined;
         return data;
@@ -915,6 +918,7 @@ export interface IGetUserDetailsResponse {
     id?: string;
     userName?: string;
     name?: string;
+    password?: string;
     createdOn?: Date;
     updatedOn?: Date;
 }
@@ -975,6 +979,7 @@ export class CreateOrUpdateUserCommand implements ICreateOrUpdateUserCommand {
     id?: string | undefined;
     userName?: string;
     name?: string;
+    password?: string;
 
     constructor(data?: ICreateOrUpdateUserCommand) {
         if (data) {
@@ -990,6 +995,7 @@ export class CreateOrUpdateUserCommand implements ICreateOrUpdateUserCommand {
             this.id = _data["id"];
             this.userName = _data["userName"];
             this.name = _data["name"];
+            this.password = _data["password"];
         }
     }
 
@@ -1005,6 +1011,7 @@ export class CreateOrUpdateUserCommand implements ICreateOrUpdateUserCommand {
         data["id"] = this.id;
         data["userName"] = this.userName;
         data["name"] = this.name;
+        data["password"] = this.password;
         return data;
     }
 }
@@ -1013,6 +1020,7 @@ export interface ICreateOrUpdateUserCommand {
     id?: string | undefined;
     userName?: string;
     name?: string;
+    password?: string;
 }
 
 export class PagedResponseOfGetProductsResponseItem implements IPagedResponseOfGetProductsResponseItem {

@@ -17,6 +17,8 @@ public static class CreateOrUpdateUser
         public string UserName { get; set; } = "";
         [DisplayName("Name")]
         public string Name { get; set; } = "";
+        [DisplayName("Password")]
+        public string Password { get; set; } = "";
     }
 
     [UsedImplicitly]
@@ -30,6 +32,7 @@ public static class CreateOrUpdateUser
             _ = RuleFor(x => x.UserName).NotEmpty().MaximumLength(50).EmailAddress();
             _ = RuleFor(x => x.UserName).Must(UniqueUsername).WithMessage("Username already taken");
             _ = RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
+            _ = RuleFor(x => x.Password).NotEmpty().MinimumLength(8).MaximumLength(50);
         }
 
         private bool UniqueUsername(Command command, string name) =>

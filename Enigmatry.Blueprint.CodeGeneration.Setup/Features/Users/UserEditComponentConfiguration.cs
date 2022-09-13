@@ -20,6 +20,7 @@ public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUse
 
         userSection.FormControl(x => x.UserName).IsReadonly(true);
         userSection.FormControl(x => x.Name);
+        userSection.PasswordFormControl(x => x.Password);
 
         var historySection = userSection.FormControlGroup("History")
             .CreateUiSection("fieldset");

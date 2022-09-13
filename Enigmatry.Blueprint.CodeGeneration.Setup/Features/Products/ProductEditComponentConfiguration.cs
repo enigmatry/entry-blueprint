@@ -75,7 +75,7 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
         builder.ButtonFormControl("ResetFormBtn")
             .WithLabel(String.Empty)
             .WithText("Reset")
-            .WithHint("* This will reset form to it's initial state.");
+            .WithHint("* This will reset form to initial state.");
 
         // Configuring built in validations
         builder.WithValidationConfiguration(new ProductEditComponentValidationConfiguration());
