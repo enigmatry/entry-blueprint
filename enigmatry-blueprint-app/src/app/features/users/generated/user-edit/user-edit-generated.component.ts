@@ -7,13 +7,13 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
-import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Optional, Output, TemplateRef } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, OnDestroy, Optional, Output, TemplateRef } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
 import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
-import { BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, of, Subject, Subscription } from 'rxjs';
+import { map, throttleTime } from 'rxjs/operators';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './user-edit-generated.component.html',
   styleUrls: ['./user-edit-generated.component.scss']
 })
-export class UserEditGeneratedComponent implements OnInit {
+export class UserEditGeneratedComponent implements OnInit, OnDestroy {
 
   @Input() model: IGetUserDetailsResponse = {} as IGetUserDetailsResponse;
   @Input() set isReadonly(value: boolean) {
@@ -34,6 +34,7 @@ export class UserEditGeneratedComponent implements OnInit {
 
   @Input() saveButtonText: string = 'Save';
   @Input() cancelButtonText: string = 'Cancel';
+  @Input() saveButtonDisabled: boolean = false;
   @Input() formButtonsTemplate: TemplateRef<any> | null | undefined;
 
   @Input() fieldsHideExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
@@ -47,8 +48,10 @@ export class UserEditGeneratedComponent implements OnInit {
 
 
   _isReadonly: boolean;
-  form = new UntypedFormGroup({});
+  form = new FormGroup({});
   fields: FormlyFieldConfig[] = [];
+  private _submitClicks = new Subject<void>();
+  private _submitClicksSubscription: Subscription;
 
   constructor(
     @Inject(LOCALE_ID) private _localeId: string,
@@ -56,11 +59,18 @@ export class UserEditGeneratedComponent implements OnInit {
 
   ngOnInit(): void {
     this.fields = this.initializeFields();
+    this._submitClicksSubscription = this._submitClicks
+        .pipe(throttleTime(500))
+        .subscribe(() => this.save.emit(this.model));
+  }
+
+  ngOnDestroy(): void {
+      this._submitClicksSubscription.unsubscribe();
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.save.emit(this.model);
+      this._submitClicks.next();
     }
   }
 
@@ -70,7 +80,7 @@ export class UserEditGeneratedComponent implements OnInit {
   initializeFields(): FormlyFieldConfig[] {
     return [
         {
-        type: 'fieldset',
+        type: this.resolveFieldType('fieldset', false),
         fieldGroupClassName: '',
         templateOptions: {
         label: $localize `:@@users.user-edit.user.label:User`,
@@ -120,7 +130,7 @@ maxLength: 25,
         },
         },
         {
-        type: 'fieldset',
+        type: this.resolveFieldType('fieldset', false),
         fieldGroupClassName: '',
         templateOptions: {
         label: $localize `:@@users.user-edit.history.label:History`,
@@ -146,6 +156,7 @@ maxLength: 25,
         hidden: !true,
             typeFormatDef: { name: 'date' }
         },
+modelOptions: { updateOn: 'blur' },
         },
         {
         key: 'updatedOn',
@@ -164,6 +175,7 @@ maxLength: 25,
         hidden: !true,
             typeFormatDef: { name: 'date' }
         },
+modelOptions: { updateOn: 'blur' },
         },
         ]
         },
