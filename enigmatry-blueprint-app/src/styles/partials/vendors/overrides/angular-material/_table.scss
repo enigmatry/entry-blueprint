@@ -1,0 +1,17 @@
+@use 'variables' as vars;
+
+.mat-table-container {
+	.mat-table {
+		margin-top: vars.$default-gap;
+	}
+
+	.mat-header-cell, .mat-cell, .mat-footer-cell {
+		&:first-of-type {
+			padding-left: 12px;
+		}
+
+		&:last-of-type {
+			padding-right: 8px;
+		}
+	}
+}

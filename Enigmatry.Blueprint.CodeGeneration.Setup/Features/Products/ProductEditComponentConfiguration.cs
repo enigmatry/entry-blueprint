@@ -1,5 +1,4 @@
-﻿using System;
-using Enigmatry.Blueprint.Api.Features.Products;
+﻿using Enigmatry.Blueprint.Api.Features.Products;
 using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.CodeGeneration.Configuration;
@@ -24,17 +23,20 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
         // Configuring fields:
         builder.FormControl(x => x.Name)
             .WithPlaceholder("Unique product name")
-            .WithValidator("productNameIsUnique")
-            .WithAppearance(FormControlAppearance.Outline);
+            .WithAppearance(FormControlAppearance.Outline)
+            .WithValidators("productNameIsUnique");
 
         builder.FormControl(x => x.Code)
             .WithPlaceholder("Unique product code identifier")
-            .WithValidator("productCodeIsUnique");
+            .WithAppearance(FormControlAppearance.Outline)
+            .WithValidators("productCodeIsUnique");
 
         builder.AutocompleteFormControl(x => x.Type)
+            .WithAppearance(FormControlAppearance.Outline)
             .WithOptions(options => options.WithFixedValues<ProductType>().WithSortKey("displayName"));
 
         builder.TextareaFormControl(x => x.Description)
+            .WithAppearance(FormControlAppearance.Outline)
             .WithRows(2);
 
         builder.FormControl(x => x.Price)
@@ -42,30 +44,36 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
             .WithLabelTranslationId(ProductTranslationId.Price)
             .WithPlaceholder("Price per unit")
             .WithPlaceholderTranslationId(ProductTranslationId.Price)
+            .WithAppearance(FormControlAppearance.Outline)
             .WithFormat(new CurrencyPropertyFormatter().WithCurrencyCode("EUR").WithDisplay("€"));
 
         builder.FormControl(x => x.Amount)
             .WithLabel("Units")
+            .WithAppearance(FormControlAppearance.Outline)
             .WithLabelTranslationId(ProductTranslationId.Amount)
             .WithPlaceholder("Units")
             .WithPlaceholderTranslationId(ProductTranslationId.Amount);
 
         builder.FormControl(x => x.ContactEmail)
+            .WithAppearance(FormControlAppearance.Outline)
             .WithPlaceholder("Contact person email address");
 
         builder.FormControl(x => x.ContactPhone)
+            .WithAppearance(FormControlAppearance.Outline)
             .WithPlaceholder("Contact person phone number");
 
         builder.FormControl(x => x.InfoLink)
+            .WithAppearance(FormControlAppearance.Outline)
             .WithLabel("Homepage")
             .WithPlaceholder("Link to product homepage");
 
         builder.FormControl(x => x.AdditionalInfo).Ignore();
 
         builder.FormControl(x => x.ExpiresOn)
+            .WithAppearance(FormControlAppearance.Outline)
             .WithPlaceholder("Product expiration date, if any");
 
-        builder.FormControl(x => x.FreeShipping).IsReadonly(true);
+        builder.FormControl(x => x.FreeShipping);
 
         builder.FormControl(x => x.HasDiscount);
 

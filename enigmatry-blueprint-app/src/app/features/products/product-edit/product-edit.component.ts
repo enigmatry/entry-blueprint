@@ -24,7 +24,6 @@ export class ProductEditComponent
         protected activatedRoute: ActivatedRoute,
         private client: ProductsClient) {
         super(router, activatedRoute);
-        this.saveText = $localize`:@@common.save-product:Save product`;
         this.initHideExpressions();
         this.initDisableExpressions();
         this.initRequiredExpressions();

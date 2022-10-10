@@ -1,6 +1,11 @@
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
-  <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
-</mat-menu>
-<router-outlet></router-outlet>
+<div class="main-menu">
+    <button class="button primary" [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
+    <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
+    </mat-menu>
+</div>
+
+<div class="page-spacing">
+    <router-outlet></router-outlet>
+</div>

@@ -15,14 +15,12 @@ public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUse
             .BelongsToFeature("Users")
             .IncludeUnconfiguredProperties(false);
 
-        var userSection = builder.FormControlGroup("User")
-            .CreateUiSection("fieldset");
+        var userSection = builder.FormControlGroup("User");
 
         userSection.FormControl(x => x.UserName).IsReadonly(true);
         userSection.FormControl(x => x.Name);
 
-        var historySection = userSection.FormControlGroup("History")
-            .CreateUiSection("fieldset");
+        var historySection = userSection.FormControlGroup("History");
 
         historySection.FormControl(x => x.CreatedOn).IsReadonly(true);
         historySection.FormControl(x => x.UpdatedOn).IsReadonly(true);

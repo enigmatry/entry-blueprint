@@ -1,26 +1,25 @@
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { GeneratedFormComponent } from '../form-component/generated-form-component.model';
 
 @Component({
   selector: 'app-form-wrapper',
   templateUrl: './form-wrapper.component.html',
   styleUrls: ['./form-wrapper.component.scss']
 })
-export class FormWrapperComponent {
-  private _isReadonly: boolean;
+export class FormWrapperComponent<T> implements OnInit {
+  @Input() formComponent: GeneratedFormComponent<T>;
 
-  @Input() saveButtonText = $localize`:@@common.save:Save`;
-  @Input() cancelButtonText = $localize`:@@common.cancel:Cancel`;
+  @ViewChild('defaultFormButtonsTpl', { static: true }) defaultFormButtonsTpl: TemplateRef<any>;
 
-  @Input() set isReadonly(value: boolean) {
-    this._isReadonly = value;
+  ngOnInit(): void {
+    if (this.formComponent) {
+      this.setDefaultFormButtonsTemplate();
+    }
   }
 
-  get isReadonly() {
-    return this._isReadonly;
+  private setDefaultFormButtonsTemplate() {
+    if (!this.formComponent.formButtonsTemplate) {
+      this.formComponent.formButtonsTemplate = this.defaultFormButtonsTpl;
+    }
   }
-
-  @Output() apply = new EventEmitter<void>();
-  @Output() cancel = new EventEmitter<void>();
-
-  @ViewChild('defaultFormButtonsTpl') defaultFormButtonsTpl: TemplateRef<any>;
 }

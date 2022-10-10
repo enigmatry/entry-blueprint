@@ -1,0 +1,38 @@
+@use 'scss-foundation/src/display/items';
+@use 'variables' as vars;
+
+.button {
+	display: inline-block;
+	position: relative;
+	padding: 10px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: transparent;
+	color: vars.$font-color-light;
+	text: {
+		align: center;
+		decoration: none;
+	}
+	cursor: pointer;
+	font: {
+		family: 'Roboto';
+		size: 15px;
+		weight: 500;
+	}
+
+	&.primary {
+		background-color: vars.$primary;
+
+		&:hover {
+			background-color: vars.$primary-hover;
+		}
+	}
+
+	&.accent {
+		background-color: vars.$accent;
+
+		&:hover {
+			background-color: vars.$accent-hover;
+		}
+	}
+}

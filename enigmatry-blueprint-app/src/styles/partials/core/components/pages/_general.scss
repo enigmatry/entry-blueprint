@@ -1,0 +1,5 @@
+@use 'variables' as vars;
+
+.page-spacing {
+	padding: vars.$default-gap;
+}

@@ -1,12 +1,12 @@
-<app-form-wrapper #formWrapper [saveButtonText]="saveText" (cancel)="goBack()">
-  <app-g-product-edit
+<app-form-wrapper [formComponent]="formComponent">
+  <app-g-product-edit #formComponent
       [model]="model"
       [fieldsHideExpressions]="fieldsHideExpressions"
       [fieldsDisableExpressions]="fieldsDisableExpressions"
       [fieldsRequiredExpressions]="fieldsRequiredExpressions"
       [fieldsPropertyExpressions]="fieldsPropertyExpressions"
-      [formButtonsTemplate]="formWrapper.defaultFormButtonsTpl"
       (save)="save($event)"
+      (cancel)="goBack()"
       (buttonClick)="buttonClick($event)">
   </app-g-product-edit>
 </app-form-wrapper>

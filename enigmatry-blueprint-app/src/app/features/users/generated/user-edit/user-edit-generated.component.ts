@@ -80,7 +80,7 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
   initializeFields(): FormlyFieldConfig[] {
     return [
         {
-        type: this.resolveFieldType('fieldset', false),
+        type: this.resolveFieldType('', false),
         fieldGroupClassName: '',
         templateOptions: {
         label: $localize `:@@users.user-edit.user.label:User`,
@@ -130,7 +130,7 @@ maxLength: 25,
         },
         },
         {
-        type: this.resolveFieldType('fieldset', false),
+        type: this.resolveFieldType('', false),
         fieldGroupClassName: '',
         templateOptions: {
         label: $localize `:@@users.user-edit.history.label:History`,

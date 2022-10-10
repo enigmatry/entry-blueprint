@@ -1,0 +1,5 @@
+@use 'variables' as vars;
+
+.main-menu {
+	padding: vars.$default-gap;
+}

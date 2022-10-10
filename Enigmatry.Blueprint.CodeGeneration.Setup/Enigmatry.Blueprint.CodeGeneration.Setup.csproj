@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enigmatry.CodeGeneration.Configuration" Version="1.0.400" />
+    <PackageReference Include="Enigmatry.CodeGeneration.Configuration" Version="1.0.406" />
   </ItemGroup>
 
   <ItemGroup>

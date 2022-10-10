@@ -1,0 +1,16 @@
+$breakpoints: ( 
+	mobile: (description: 'sm', size: 480px ), 
+	tablet: (description: 'md', size: 768px ), 
+	desktop: (description: 'lg', size: 992px), 
+	largeDesktop: (description: 'xl', size: 1200px));
+
+$primary: #484848;
+$primary-hover: #303030;
+
+$accent: #06C;
+$accent-hover: #0053C0;
+
+$font-color-light: #FFF;
+
+$default-gap: 16px;
+$large-gap: calc(#{$default-gap} * 2);

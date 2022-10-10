@@ -1,0 +1,19 @@
+@use '@angular/material/theming' as theming;
+@use 'custom-palettes' as palettes;
+
+@include theming.mat-core();
+
+$custom-primary: theming.mat-palette(palettes.$primary-palette);
+$custom-accent: theming.mat-palette(palettes.$accent-palette);
+
+$default-warn: theming.mat-palette(theming.$mat-red);
+
+$custom-theme: theming.mat-light-theme((
+	color: (
+		primary: $custom-primary,
+		accent: $custom-accent,
+		warn: $default-warn,  
+	)
+));
+
+@include theming.angular-material-theme($custom-theme);

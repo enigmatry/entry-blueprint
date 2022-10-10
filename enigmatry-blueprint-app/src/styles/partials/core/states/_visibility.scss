@@ -1,0 +1,29 @@
+@use 'breakpoints';
+
+.show-mobile-only {
+	@include breakpoints.apply-on-tablet() {
+		display: none;
+	}
+}
+
+.show-cell-tablet, .show-cell-desktop, .show-cell-large-desktop {
+	display: none;
+}
+
+.show-cell-tablet {
+	@include breakpoints.apply-on-tablet() {
+		display: table-cell;
+	}
+}
+
+.show-cell-desktop {
+	@include breakpoints.apply-on-desktop() {
+		display: table-cell;
+	}
+}
+
+.show-cell-large-desktop {
+	@include breakpoints.apply-on-large-desktop() {
+		display: table-cell;
+	}
+}

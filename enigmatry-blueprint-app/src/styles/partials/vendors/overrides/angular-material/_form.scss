@@ -1,0 +1,26 @@
+$border-color: #949494;
+
+.mat-form-field-appearance-outline {
+	.mat-form-field-wrapper {
+		.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+			border-color: $border-color;
+		}
+	}
+
+	.mat-form-field-outline-thick {
+		.mat-form-field-wrapper {
+			/* stylelint-disable-next-line selector-max-combinators, selector-max-compound-selectors */
+			.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+				border-color: #000;
+			}
+		}
+	}
+}
+
+.mat-form-field-appearance-standard {
+	&.mat-form-field-type-checkbox {
+		.mat-form-field-wrapper, .mat-form-field-flex {
+			padding: 0;
+		}
+	}
+}

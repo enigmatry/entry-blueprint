@@ -1,0 +1,16 @@
+@use 'breakpoints' as breakpoints;
+ 
+.container {
+	width: 100%;
+	margin: 0 auto;
+ 
+	@include breakpoints.apply-on-desktop() {
+		width: 750px;
+ 
+		&.container-fluid {
+			width: 100%;
+		}
+	}
+}
+
+@include breakpoints.generate();
