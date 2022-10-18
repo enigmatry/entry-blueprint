@@ -17,16 +17,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoFixture.NUnit3" Version="4.17.0" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" Version="1.1.301" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson" Version="1.1.301" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.8" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1">
+    <PackageReference Include="AutoFixture.NUnit3" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" />
+    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NUnit3TestAdapter">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Verify.NUnit" Version="17.8.1" />
+    <PackageReference Include="Verify.NUnit" />
   </ItemGroup>
 
   <ItemGroup>

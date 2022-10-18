@@ -13,9 +13,7 @@ public class SequentialGuidValueGeneratorFixture : IntegrationFixtureBase
 {
     [SetUp]
     public void SetUp() =>
-
-        // we only want users that we created in the test
-        DoNotSeedUsers();
+        DoNotSeedUsers(); // we only want users that we created in the test
 
     [Test]
     public void TestGeneratedGuidValuesAreInSequentialOrderAfterReadFromDb()

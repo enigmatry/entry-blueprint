@@ -1,0 +1,56 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Autofac" Version="6.4.0" />
+    <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageVersion Include="AutoFixture.NUnit3" Version="4.17.0" />
+    <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
+    <PackageVersion Include="BeatPulse" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.AspNetCore" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.AspNetCore.Tests" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.Core" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.EntityFramework" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.HealthChecks" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.Infrastructure" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.MediatR" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.Swagger" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.BuildingBlocks.Validation" Version="1.1.301" />
+    <PackageVersion Include="Enigmatry.CodeGeneration.Configuration" Version="1.0.410" />
+    <PackageVersion Include="FakeItEasy" Version="7.3.1" />
+    <PackageVersion Include="FluentAssertions" Version="6.7.0" />
+    <PackageVersion Include="FluentValidation" Version="10.3.6" />
+    <PackageVersion Include="JetBrains.DotMemoryUnit" Version="3.2.20220510" />
+    <PackageVersion Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.8" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.8" />
+    <PackageVersion Include="Microsoft.AspNetCore.TestHost" Version="6.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.FileProviders.Physical" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="6.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
+    <PackageVersion Include="Microsoft.Rest.ClientRuntime" Version="2.3.24" />
+    <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="4.7.4" />
+    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+    <PackageVersion Include="NUnit" Version="3.13.3" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageVersion Include="Polly" Version="7.2.3" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.2.0" />
+    <PackageVersion Include="Serilog.Enrichers.Process" Version="2.0.2" />
+    <PackageVersion Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="4.0.1" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageVersion Include="Verify.NUnit" Version="17.8.1" />
+  </ItemGroup>
+</Project>

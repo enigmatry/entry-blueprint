@@ -8,11 +8,11 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Init;
 
 public static class MvcStartupExtensions
 {
+    // The following adds support for controllers, API-related features, and views, not pages. 
+    // Views are required for templating with RazorTemplatingEngine(e.g. emails)
+    //.AddControllersWithViews(options => options.ConfigureMvc(configuration))
     public static IMvcBuilder AppAddMvc(this IServiceCollection services, IConfiguration configuration) =>
         services
-            // The following adds support for controllers, API-related features, and views, not pages. 
-            // Views are required for templating with RazorTemplatingEngine(e.g. emails)
-            //.AddControllersWithViews(options => options.ConfigureMvc(configuration))
             .AddControllers(options => options.ConfigureMvc(configuration))
             .AppAddFluentValidation();
 
