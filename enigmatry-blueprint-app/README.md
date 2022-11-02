@@ -34,6 +34,10 @@ To start the app execute command `npm start`, which will build & run the app on 
 
 ### 1. Installing code generator tool
 
+Install [Azure artifacts credential provider](https://github.com/microsoft/artifacts-credprovider#setup) 
+
+`iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) } -AddNetfx"`
+
 To install the tool run npm script `npm run codegen:install`. This will install the tool globally and it needs to be executed only once.
 
 To update the tool run `npm run codegen:update`. This npm script should be executed each time new version of the tool is out.
