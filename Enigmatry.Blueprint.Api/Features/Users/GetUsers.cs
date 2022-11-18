@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.BuildingBlocks.Core.Paging;
-using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.BuildingBlocks.Core.EntityFramework;
+using Enigmatry.Entry.Core.Paging;
+using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.EntityFramework;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.Api.Features.Users;

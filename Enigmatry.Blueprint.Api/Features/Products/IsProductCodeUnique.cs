@@ -1,5 +1,5 @@
 ﻿using Enigmatry.Blueprint.Domain.Products;
-using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

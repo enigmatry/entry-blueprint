@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
-using Enigmatry.BuildingBlocks.Core.Settings;
+using Enigmatry.Entry.Core.Settings;
 using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules;

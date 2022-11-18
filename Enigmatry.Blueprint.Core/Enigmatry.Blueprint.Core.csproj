@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enigmatry.BuildingBlocks.Core" />
+    <PackageReference Include="Enigmatry.Entry.Core" />
   </ItemGroup>
 
 </Project>

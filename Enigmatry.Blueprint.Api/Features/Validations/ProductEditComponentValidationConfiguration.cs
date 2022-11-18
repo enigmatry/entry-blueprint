@@ -1,5 +1,5 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Products;
-using Enigmatry.BuildingBlocks.Validation;
+using Enigmatry.Entry.CodeGeneration.Validation;
 using System.Text.RegularExpressions;
 using Enigmatry.Blueprint.Domain.Products;
 

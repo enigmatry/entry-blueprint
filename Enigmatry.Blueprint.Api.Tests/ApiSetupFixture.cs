@@ -3,8 +3,8 @@ using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson.Http;
-using Enigmatry.BuildingBlocks.Core.Paging;
+using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 

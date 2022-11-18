@@ -2,7 +2,7 @@
 using Enigmatry.Blueprint.Domain.Identity.Commands;
 using Enigmatry.Blueprint.Domain.Identity.DomainEvents;
 using Enigmatry.Blueprint.Domain.Products;
-using Enigmatry.BuildingBlocks.Core.Entities;
+using Enigmatry.Entry.Core.Entities;
 
 namespace Enigmatry.Blueprint.Domain.Identity;
 

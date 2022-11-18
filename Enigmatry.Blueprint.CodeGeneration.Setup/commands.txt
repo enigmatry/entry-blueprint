@@ -1,18 +1,18 @@
-Code generation console application is packed as .NET tool with package id enigmatry.codegeneration.console
+Code generation console application is packed as .NET tool with package id enigmatry.entry.codegeneration.tools
 
 Install azure artifacts provider (needed to authenticate to azure devops feed)
 https://github.com/microsoft/artifacts-credprovider
 
 Commands for installing, updating and uninstalling the tool (globally):
 
-# dotnet tool install enigmatry.codegeneration.console -g
+# dotnet tool install enigmatry.entry.codegeneration.tools -g
 
 If the installation fails with message "error NU1301: Unable to load the service index for source" try with added flags 
-# dotnet tool install enigmatry.codegeneration.console -g --verbosity minimal --interactive
+# dotnet tool install enigmatry.entry.codegeneration.tools -g --verbosity minimal --interactive
 
-# dotnet tool update enigmatry.codegeneration.console -g
-# dotnet tool uninstall enigmatry.codegeneration.console -g
+# dotnet tool update enigmatry.entry.codegeneration.tools -g
+# dotnet tool uninstall enigmatry.entry.codegeneration.tools -g
 
 Using the tool:
 
-# enigmatry-codegen --source-assembly .\Enigmatry.Blueprint.CodeGeneration.Setup\bin\Debug\net6.0\Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory .\enigmatry-blueprint-app\src\app\features
+# entry-codegen --source-assembly .\Enigmatry.Blueprint.CodeGeneration.Setup\bin\Debug\net6.0\Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory .\enigmatry-blueprint-app\src\app\features

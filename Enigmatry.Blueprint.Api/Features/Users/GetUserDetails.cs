@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.BuildingBlocks.Core.Entities;
-using Enigmatry.BuildingBlocks.Core.EntityFramework;
+using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Entities;
+using Enigmatry.Entry.Core.EntityFramework;
 using JetBrains.Annotations;
 using MediatR;
 

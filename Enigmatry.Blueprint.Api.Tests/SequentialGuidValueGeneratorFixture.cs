@@ -1,10 +1,10 @@
 ﻿using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.Entry.Core.Data;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using SequentialGuidGenerator = Enigmatry.BuildingBlocks.Core.Entities.SequentialGuidGenerator;
+using SequentialGuidGenerator = Enigmatry.Entry.Core.Entities.SequentialGuidGenerator;
 
 namespace Enigmatry.Blueprint.Api.Tests;
 

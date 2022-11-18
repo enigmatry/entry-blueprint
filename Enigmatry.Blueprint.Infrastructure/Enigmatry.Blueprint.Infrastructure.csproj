@@ -22,11 +22,11 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" />
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
     <PackageReference Include="BeatPulse" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.AspNetCore" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.Infrastructure" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.EntityFramework" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.MediatR" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.Swagger" />
+    <PackageReference Include="Enigmatry.Entry.AspNetCore" />
+    <PackageReference Include="Enigmatry.Entry.Infrastructure" />
+    <PackageReference Include="Enigmatry.Entry.EntityFramework" />
+    <PackageReference Include="Enigmatry.Entry.MediatR" />
+    <PackageReference Include="Enigmatry.Entry.Swagger" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />

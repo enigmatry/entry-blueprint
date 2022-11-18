@@ -1,6 +1,6 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Users;
-using Enigmatry.CodeGeneration.Configuration.List;
-using Enigmatry.CodeGeneration.Configuration.List.Model;
+using Enigmatry.Entry.CodeGeneration.Configuration.List;
+using Enigmatry.Entry.CodeGeneration.Configuration.List.Model;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Users;

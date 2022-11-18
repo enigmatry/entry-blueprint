@@ -1,6 +1,6 @@
-﻿using Enigmatry.BuildingBlocks.AspNetCore;
-using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.BuildingBlocks.Core.Paging;
+﻿using Enigmatry.Entry.AspNetCore;
+using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;

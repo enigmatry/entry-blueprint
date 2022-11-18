@@ -1,10 +1,10 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Products;
 using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Domain.Products;
-using Enigmatry.CodeGeneration.Configuration;
-using Enigmatry.CodeGeneration.Configuration.Form;
-using Enigmatry.CodeGeneration.Configuration.Form.Controls;
-using Enigmatry.CodeGeneration.Configuration.Formatters;
+using Enigmatry.Entry.CodeGeneration.Configuration;
+using Enigmatry.Entry.CodeGeneration.Configuration.Form;
+using Enigmatry.Entry.CodeGeneration.Configuration.Form.Controls;
+using Enigmatry.Entry.CodeGeneration.Configuration.Formatters;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products;

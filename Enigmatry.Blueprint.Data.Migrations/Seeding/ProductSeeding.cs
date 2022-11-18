@@ -1,7 +1,7 @@
 ﻿using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.Blueprint.Domain.Products.Commands;
-using Enigmatry.BuildingBlocks.Core.Entities;
+using Enigmatry.Entry.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Seeding;

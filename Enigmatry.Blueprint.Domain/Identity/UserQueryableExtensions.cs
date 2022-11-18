@@ -1,4 +1,4 @@
-﻿using Enigmatry.BuildingBlocks.Core.Helpers;
+﻿using Enigmatry.Entry.Core.Helpers;
 
 namespace Enigmatry.Blueprint.Domain.Identity;
 

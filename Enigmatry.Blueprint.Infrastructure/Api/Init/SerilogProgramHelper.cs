@@ -1,5 +1,5 @@
 ﻿using Enigmatry.Blueprint.Infrastructure.Configuration;
-using Enigmatry.BuildingBlocks.AspNetCore.ApplicationInsights;
+using Enigmatry.Entry.AspNetCore.ApplicationInsights;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Sinks.ApplicationInsights.TelemetryConverters;

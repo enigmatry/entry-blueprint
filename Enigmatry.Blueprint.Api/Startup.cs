@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Enigmatry.BuildingBlocks.Swagger;
+using Enigmatry.Entry.Swagger;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Blueprint.Infrastructure.Api.Startup;
@@ -7,7 +7,7 @@ using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
-using Enigmatry.BuildingBlocks.HealthChecks.Extensions;
+using Enigmatry.Entry.HealthChecks.Extensions;
 
 namespace Enigmatry.Blueprint.Api;
 

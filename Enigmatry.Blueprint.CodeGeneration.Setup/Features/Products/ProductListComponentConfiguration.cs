@@ -1,7 +1,7 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Products;
-using Enigmatry.CodeGeneration.Configuration.Formatters;
-using Enigmatry.CodeGeneration.Configuration.List;
-using Enigmatry.CodeGeneration.Configuration.List.Model;
+using Enigmatry.Entry.CodeGeneration.Configuration.Formatters;
+using Enigmatry.Entry.CodeGeneration.Configuration.List;
+using Enigmatry.Entry.CodeGeneration.Configuration.List.Model;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products;
 

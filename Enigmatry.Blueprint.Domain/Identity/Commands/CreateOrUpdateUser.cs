@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
-using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.BuildingBlocks.Core.Entities;
+using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Entities;
 using FluentValidation;
 using JetBrains.Annotations;
 using MediatR;

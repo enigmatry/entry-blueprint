@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Data;
-using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.BuildingBlocks.Core.Settings;
-using Enigmatry.BuildingBlocks.EntityFramework;
-using Enigmatry.BuildingBlocks.EntityFramework.Security;
+using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Settings;
+using Enigmatry.Entry.EntityFramework;
+using Enigmatry.Entry.EntityFramework.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;

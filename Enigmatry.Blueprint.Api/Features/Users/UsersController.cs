@@ -1,9 +1,9 @@
 ﻿using System.Net.Mime;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.BuildingBlocks.AspNetCore;
-using Enigmatry.BuildingBlocks.Core.Data;
-using Enigmatry.BuildingBlocks.Core.Paging;
+using Enigmatry.Entry.AspNetCore;
+using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

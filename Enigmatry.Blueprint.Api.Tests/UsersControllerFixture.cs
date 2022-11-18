@@ -2,12 +2,12 @@
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.BuildingBlocks.AspNetCore.Tests.Http;
-using Enigmatry.BuildingBlocks.Core;
-using Enigmatry.BuildingBlocks.Core.Paging;
+using Enigmatry.Entry.AspNetCore.Tests.Http;
+using Enigmatry.Entry.Core;
+using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
-using Enigmatry.BuildingBlocks.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 
 namespace Enigmatry.Blueprint.Api.Tests;
 

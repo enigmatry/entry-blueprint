@@ -1,6 +1,6 @@
 ﻿using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.BuildingBlocks.Core.Entities;
+using Enigmatry.Entry.Core.Entities;
 
 namespace Enigmatry.Blueprint.Model.Tests.Identity;
 

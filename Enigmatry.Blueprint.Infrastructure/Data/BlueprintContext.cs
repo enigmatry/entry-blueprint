@@ -1,7 +1,7 @@
-﻿using Enigmatry.BuildingBlocks.Core;
-using Enigmatry.BuildingBlocks.Core.Entities;
-using Enigmatry.BuildingBlocks.EntityFramework;
-using Enigmatry.BuildingBlocks.EntityFramework.Security;
+﻿using Enigmatry.Entry.Core;
+using Enigmatry.Entry.Core.Entities;
+using Enigmatry.Entry.EntityFramework;
+using Enigmatry.Entry.EntityFramework.Security;
 using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;

@@ -1,6 +1,6 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.BuildingBlocks.Validation;
+using Enigmatry.Entry.CodeGeneration.Validation;
 
 namespace Enigmatry.Blueprint.Api.Features.Validations;
 

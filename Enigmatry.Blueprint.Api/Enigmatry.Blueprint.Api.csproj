@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enigmatry.BuildingBlocks.HealthChecks" />
-    <PackageReference Include="Enigmatry.BuildingBlocks.Validation" />
+    <PackageReference Include="Enigmatry.Entry.HealthChecks" />
+    <PackageReference Include="Enigmatry.Entry.CodeGeneration.Validation" />
 
   </ItemGroup>
 

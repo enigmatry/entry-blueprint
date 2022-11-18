@@ -2,9 +2,9 @@
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.BuildingBlocks.AspNetCore.Tests;
-using Enigmatry.BuildingBlocks.AspNetCore.Tests.Database;
-using Enigmatry.BuildingBlocks.Core.Data;
+using Enigmatry.Entry.AspNetCore.Tests;
+using Enigmatry.Entry.AspNetCore.Tests.Database;
+using Enigmatry.Entry.Core.Data;
 using Enigmatry.Blueprint.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;

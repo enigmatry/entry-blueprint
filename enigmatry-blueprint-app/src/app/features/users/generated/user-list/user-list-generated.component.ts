@@ -34,6 +34,7 @@ export class UserListGeneratedComponent implements OnInit {
   @Input() rowSelectable = true;
   @Input() multiSelectable = true;
   @Input() showSelectAllCheckbox = false;
+  @Input() rowSelected: GetUsersResponseItem[] = [];
 
   @Input() headerTemplate: TemplateRef<any> | CellTemplate;
   @Input() cellTemplate: TemplateRef<any> | CellTemplate;

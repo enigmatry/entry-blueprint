@@ -1,4 +1,4 @@
-﻿using Enigmatry.BuildingBlocks.Core.Data;
+﻿using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
 using MediatR;
 
