@@ -7,8 +7,11 @@
         "Angular",
         "web"
     ],
-    "identity": "Enigmatry.Blueprint.Template",
     "name": "Enigmatry Blueprint Project",
+    "generatorVersions": "[1.0.0.0-*)",
+    "groupIdentity": "Enigmatry.Blueprint.Template",
+    "precedence": "100",
+    "identity": "Enigmatry.Blueprint.Template",
     "shortName": "blueprint",
     "tags": {
         "language": "C#",
