@@ -1,5 +1,8 @@
 
-<enigmatry-grid [columns]="columns"
+
+<entry-table
+                class="entry-user-list-table entry-table"
+                [columns]="columns"
                 [data]="data"
                 [showPaginator]="showPaginator"
                 [showFirstLastButtons]="showFirstLastButtons"
@@ -20,10 +23,11 @@
                 [contextMenuItems]="contextMenuItems"
                 [rowContextMenuFormatter]="rowContextMenuFormatter"
                 [rowClassFormatter]="rowClassFormatter"
+                [rowSelectionFormatter]="rowSelectionFormatter"
                 (pageChange)="pageChange.emit($event)"
                 (sortChange)="sortChange.emit($event)"
                 (rowSelectionChange)="selectionChange.emit($event)"
                 (contextMenuItemSelected)="contextMenuItemSelected.emit($event)"
                 (rowClick)="rowClick.emit($event)">
-</enigmatry-grid>
+</entry-table>
 

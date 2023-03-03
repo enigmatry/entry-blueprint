@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { PagedData } from '@enigmatry/angular-building-blocks';
+import { PagedData } from '@enigmatry/entry-table';
 import { Observable } from 'rxjs';
 import { GetProductsResponseItem, ProductsClient } from 'src/app/api/api-reference';
 import { ListComponentWithRouting } from 'src/app/shared/list-component/list-component-with-routing.model';

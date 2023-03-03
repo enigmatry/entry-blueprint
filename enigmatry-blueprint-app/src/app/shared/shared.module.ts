@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { GridCellsModule } from './grid-cells/grid-cells.module';
-import { EnigmatryGridModule, DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE } from '@enigmatry/angular-building-blocks';
+import { DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE, EntryTableModule } from '@enigmatry/entry-table';
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
+
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
     ReactiveFormsModule,
     MaterialModule,
     GridCellsModule,
-    EnigmatryGridModule,
+    EntryTableModule,
     FormlyExtensionsModule,
     FormWrapperComponent
   ],

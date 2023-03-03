@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { OnPage, OnSort, PagedData, SortEvent, PageEvent } from '@enigmatry/angular-building-blocks/pagination';
+import { OnPage, OnSort, PagedData, SortEvent, PageEvent } from '@enigmatry/entry-table';
 import { Params } from '@angular/router';
 
 export interface OnSelection<T> {

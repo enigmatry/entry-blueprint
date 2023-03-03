@@ -8,8 +8,7 @@
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { CellTemplate, ColumnDef, ContextMenuItem, RowClassFormatter, RowContextMenuFormatter } from '@enigmatry/angular-building-blocks/enigmatry-grid';
-import { PagedData, PageEvent, SortDirection, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
+import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-table';
 
 import { GetProductsResponseItem } from 'src/app/api/api-reference';
 
@@ -47,6 +46,7 @@ export class ProductListGeneratedComponent implements OnInit {
   @Input() rowContextMenuFormatter: RowContextMenuFormatter;
   
   @Input() rowClassFormatter: RowClassFormatter;
+  @Input() rowSelectionFormatter: RowSelectionFormatter = {};
 
   @Input() columns: ColumnDef[] = [];
 

@@ -3,10 +3,10 @@
 @use 'sass:map';
 @use 'variables' as vars;
 
-@forward 'scss-foundation/src/layout/grid' with (
+@forward 'scss-foundation/src/modules/layout/grid' with (
 	$breakpoints: vars.$breakpoints
 );
-@use 'scss-foundation/src/layout/grid' as breakpoints;
+@use 'scss-foundation/src/modules/layout/grid' as breakpoints;
 
 @mixin apply-on-mobile() {
 	@include breakpoints.apply-on(mobile) {

@@ -10,7 +10,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { EnigmatryGridModule } from '@enigmatry/angular-building-blocks/enigmatry-grid';
+import { EntryTableModule } from '@enigmatry/entry-table';
     import { FormlyModule, FORMLY_CONFIG } from '@ngx-formly/core';
     import { FormlyMaterialModule } from '@ngx-formly/material';
     import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -26,7 +26,7 @@ import { UserListGeneratedComponent } from './user-list/user-list-generated.comp
     imports: [
     CommonModule,
     SharedModule,
-    EnigmatryGridModule,
+    EntryTableModule,
         MatAutocompleteModule,
         FormlyModule.forChild(
             {

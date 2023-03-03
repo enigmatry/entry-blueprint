@@ -1,5 +1,5 @@
 import { Params } from '@angular/router';
-import { OnPage, OnSort, PageEvent, SortDirection, SortEvent } from '@enigmatry/angular-building-blocks/pagination';
+import { OnPage, OnSort, SortDirection, SortEvent, PageEvent } from '@enigmatry/entry-table';
 import { RouteAwareQuery } from './query.interface';
 
 export const defaultPageSize = 10;

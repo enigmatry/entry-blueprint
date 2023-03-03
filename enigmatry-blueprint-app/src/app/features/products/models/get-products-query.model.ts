@@ -1,4 +1,4 @@
-import { SortDirection } from '@enigmatry/angular-building-blocks';
+import { SortDirection } from '@enigmatry/entry-table';
 import { PagedQuery } from 'src/app/shared/query/paged-query.model';
 
 export class GetProductsQuery extends PagedQuery {

@@ -1,12 +1,18 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="enigmatry-form">
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="entry-product-edit-form entry-form">
     <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
     <ng-template [ngIf]="formButtonsTemplate" [ngIfElse]="defaultFormButtonsTpl">
         <ng-template [ngTemplateOutlet]="formButtonsTemplate"></ng-template>
     </ng-template>
     <ng-template #defaultFormButtonsTpl>
         <div class="action-buttons">
-            <button class="button" *ngIf="!isReadonly" [disabled]="saveButtonDisabled" type="submit" mat-raised-button color="primary">{{saveButtonText}}</button>
-            <button class="button" *ngIf="!isReadonly" type="button" mat-raised-button (click)="cancel.emit()">{{cancelButtonText}}</button>
+            <button class="button save-button" *ngIf="!isReadonly" [disabled]="saveButtonDisabled" type="submit">
+                {{saveButtonText}}
+            </button>
+            <button class="button cancel-button" *ngIf="!isReadonly" type="button" (click)="cancel.emit()">
+                {{cancelButtonText}}
+            </button>
         </div>
     </ng-template>
 </form>

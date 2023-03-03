@@ -1,5 +1,5 @@
 /* eslint-disable id-length */
-import { ContextMenuItem, RowContextMenuFormatter } from '@enigmatry/angular-building-blocks';
+import { ContextMenuItem, RowContextMenuFormatter } from '@enigmatry/entry-table';
 import { GetProductsResponseItem, ProductType } from 'src/app/api/api-reference';
 
 export class ProductListRowContextMenuFormatter implements RowContextMenuFormatter {

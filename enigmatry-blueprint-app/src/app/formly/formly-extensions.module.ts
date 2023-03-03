@@ -5,17 +5,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EnigmatryFormModule, ENIGMATRY_FORM_CONFIG, FormConfig } from '@enigmatry/angular-building-blocks/form';
-import { EnigmatryCommonModule } from '@enigmatry/angular-building-blocks/common';
 import { FormlyExpansionPanelComponent } from './formly-expansion-panel/formly-expansion-panel.component';
 import { FormlyFieldsetComponent } from './formly-fieldset/formly-fieldset.component';
 import { ReadonlyInputComponent } from './formly-readonly-input/formly-readonly-input.component';
 import { ReadonlyBooleanComponent } from './formly-readonly-boolean/formly-readonly-boolean.component';
 import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-radio.component';
-import { EnigmatryFormlyExtensionsModule } from '@enigmatry/formly-extensions';
 import { FormlyButtonComponent } from './formly-button/formly-button.component';
+import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
+import { EntryTableModule } from '@enigmatry/entry-table';
 
-const defaultFormConfig: FormConfig = {
+const defaultFormConfig: EntryFormConfig = {
   fieldTypesConfig: {
     // Example (readonlyDefaultPrefix: 'readonly-'); Used to determine all readonly types that are not explicitly mapped in readonlyFieldTypeMappings
     readonlyDefaultPrefix: '',
@@ -44,7 +43,8 @@ const defaultFormConfig: FormConfig = {
     MatExpansionModule,
     MatSelectModule,
     MatButtonModule,
-    EnigmatryFormlyExtensionsModule,
+    EntryFormModule,
+    EntryTableModule,
     FormlyModule.forChild({
       types: [
         { name: 'fieldset', component: FormlyFieldsetComponent },
@@ -66,12 +66,10 @@ const defaultFormConfig: FormConfig = {
           }
         }
       ]
-    }),
-    EnigmatryCommonModule,
-    EnigmatryFormModule
+    })
   ],
   providers: [{
-    provide: ENIGMATRY_FORM_CONFIG,
+    provide: ENTRY_FORM_CONFIG,
     useValue: defaultFormConfig
   }]
 })

@@ -11,7 +11,7 @@ import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, OnDestroy, O
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetUserDetailsResponse } from 'src/app/api/api-reference';
-import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
+import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENTRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/entry-form';
 import { BehaviorSubject, of, Subject, Subscription } from 'rxjs';
 import { map, throttleTime } from 'rxjs/operators';
 
@@ -55,7 +55,7 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(LOCALE_ID) private _localeId: string,
-    @Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
+    @Optional() @Inject(ENTRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
 
   ngOnInit(): void {
     this.fields = this.initializeFields();
@@ -81,7 +81,7 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
     return [
         {
         type: this.resolveFieldType('', false),
-        fieldGroupClassName: '',
+fieldGroupClassName: 'entry-field-group',
         templateOptions: {
         label: $localize `:@@users.user-edit.user.label:User`,
         placeholder: $localize `:@@users.user-edit.user.placeholder:User`,
@@ -92,7 +92,7 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
         {
         key: 'userName',
         type: this.resolveFieldType('input', true),
-        className: '',
+className: 'entry-user-name-field entry-input',
         hideExpression: this.fieldsHideExpressions?.userName ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userName ? this.fieldsDisableExpressions.userName(model) : true)),
@@ -110,7 +110,7 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
         {
         key: 'name',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-name-field entry-input',
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
@@ -131,7 +131,7 @@ maxLength: 25,
         },
         {
         type: this.resolveFieldType('', false),
-        fieldGroupClassName: '',
+fieldGroupClassName: 'entry-field-group',
         templateOptions: {
         label: $localize `:@@users.user-edit.history.label:History`,
         placeholder: $localize `:@@users.user-edit.history.placeholder:History`,
@@ -142,7 +142,7 @@ maxLength: 25,
         {
         key: 'createdOn',
         type: this.resolveFieldType('datepicker', true),
-        className: '',
+className: 'entry-created-on-field entry-datepicker',
         hideExpression: this.fieldsHideExpressions?.createdOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.createdOn ? this.fieldsDisableExpressions.createdOn(model) : true)),
@@ -161,7 +161,7 @@ modelOptions: { updateOn: 'blur' },
         {
         key: 'updatedOn',
         type: this.resolveFieldType('datepicker', true),
-        className: '',
+className: 'entry-updated-on-field entry-datepicker',
         hideExpression: this.fieldsHideExpressions?.updatedOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.updatedOn ? this.fieldsDisableExpressions.updatedOn(model) : true)),

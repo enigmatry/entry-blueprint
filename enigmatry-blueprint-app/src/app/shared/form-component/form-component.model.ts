@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormAccessMode } from './form-access-mode.enum';
 import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary }
-  from '@enigmatry/angular-building-blocks/form';
+  from '@enigmatry/entry-form';
 
 export abstract class FormComponent<TCommandModel, TDetailsModel> {
   model: TCommandModel = {} as TCommandModel;

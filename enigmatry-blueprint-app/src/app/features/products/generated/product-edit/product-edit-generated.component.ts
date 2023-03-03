@@ -11,7 +11,7 @@ import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, OnDestroy, O
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
-import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENIGMATRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/angular-building-blocks/form';
+import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENTRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/entry-form';
 import { BehaviorSubject, of, Subject, Subscription } from 'rxjs';
 import { map, throttleTime } from 'rxjs/operators';
 
@@ -57,7 +57,7 @@ export class ProductEditGeneratedComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(LOCALE_ID) private _localeId: string,
-    @Optional() @Inject(ENIGMATRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
+    @Optional() @Inject(ENTRY_FIELD_TYPE_RESOLVER) private _fieldTypeResolver: FieldTypeResolver) { }
 
   ngOnInit(): void {
     this.fields = this.initializeFields();
@@ -84,7 +84,7 @@ export class ProductEditGeneratedComponent implements OnInit, OnDestroy {
         {
         key: 'name',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-name-field entry-input',
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
@@ -108,7 +108,7 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
         {
         key: 'code',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-code-field entry-input',
         hideExpression: this.fieldsHideExpressions?.code ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.code ? this.fieldsDisableExpressions.code(model) : false)),
@@ -136,7 +136,7 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         {
         key: 'type',
         type: this.resolveFieldType('autocomplete', false),
-        className: '',
+className: 'entry-type-field entry-autocomplete',
         hideExpression: this.fieldsHideExpressions?.type ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.type ? this.fieldsDisableExpressions.type(model) : false)),
@@ -160,7 +160,7 @@ appearance: 'outline',
         {
         key: 'description',
         type: this.resolveFieldType('textarea', false),
-        className: '',
+className: 'entry-description-field entry-textarea',
         hideExpression: this.fieldsHideExpressions?.description ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.description ? this.fieldsDisableExpressions.description(model) : false)),
@@ -184,7 +184,7 @@ appearance: 'outline',
         {
         key: 'price',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-price-field entry-input',
         hideExpression: this.fieldsHideExpressions?.price ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.price ? this.fieldsDisableExpressions.price(model) : false)),
@@ -208,7 +208,7 @@ max: 999.99,
         {
         key: 'amount',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-amount-field entry-input',
         hideExpression: this.fieldsHideExpressions?.amount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.amount ? this.fieldsDisableExpressions.amount(model) : false)),
@@ -232,7 +232,7 @@ max: 100,
         {
         key: 'contactEmail',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-contact-email-field entry-input',
         hideExpression: this.fieldsHideExpressions?.contactEmail ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactEmail ? this.fieldsDisableExpressions.contactEmail(model) : false)),
@@ -259,7 +259,7 @@ pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid e
         {
         key: 'contactPhone',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-contact-phone-field entry-input',
         hideExpression: this.fieldsHideExpressions?.contactPhone ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactPhone ? this.fieldsDisableExpressions.contactPhone(model) : false)),
@@ -281,7 +281,7 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         {
         key: 'infoLink',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-info-link-field entry-input',
         hideExpression: this.fieldsHideExpressions?.infoLink ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.infoLink ? this.fieldsDisableExpressions.infoLink(model) : false)),
@@ -302,7 +302,7 @@ appearance: 'outline',
         {
         key: 'expiresOn',
         type: this.resolveFieldType('datepicker', false),
-        className: '',
+className: 'entry-expires-on-field entry-datepicker',
         hideExpression: this.fieldsHideExpressions?.expiresOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.expiresOn ? this.fieldsDisableExpressions.expiresOn(model) : false)),
@@ -322,7 +322,7 @@ modelOptions: { updateOn: 'blur' },
         {
         key: 'freeShipping',
         type: this.resolveFieldType('checkbox', false),
-        className: '',
+className: 'entry-free-shipping-field entry-checkbox',
         hideExpression: this.fieldsHideExpressions?.freeShipping ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.freeShipping ? this.fieldsDisableExpressions.freeShipping(model) : false)),
@@ -340,7 +340,7 @@ modelOptions: { updateOn: 'blur' },
         {
         key: 'hasDiscount',
         type: this.resolveFieldType('checkbox', false),
-        className: '',
+className: 'entry-has-discount-field entry-checkbox',
         hideExpression: this.fieldsHideExpressions?.hasDiscount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.hasDiscount ? this.fieldsDisableExpressions.hasDiscount(model) : false)),
@@ -358,7 +358,7 @@ modelOptions: { updateOn: 'blur' },
         {
         key: 'discount',
         type: this.resolveFieldType('input', false),
-        className: '',
+className: 'entry-discount-field entry-input',
         hideExpression: this.fieldsHideExpressions?.discount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.discount ? this.fieldsDisableExpressions.discount(model) : false)),
@@ -380,7 +380,7 @@ max: 100,
         {
         key: 'resetFormBtn',
         type: this.resolveFieldType('button', false),
-        className: '',
+className: 'entry-reset-form-btn-field entry-button',
         hideExpression: this.fieldsHideExpressions?.resetFormBtn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.resetFormBtn ? this.fieldsDisableExpressions.resetFormBtn(model) : false)),
