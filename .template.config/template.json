@@ -20,10 +20,10 @@
     "sourceName": "Enigmatry.Blueprint",
     "preferNameDirectory": true,
     "symbols": {
-        "name": {
+        "projectName": {
             "type": "parameter",
-            "defaultValue": "Enigmatry.Blueprint",
-            "replaces": "Enigmatry.Blueprint"
+            "replaces": "Enigmatry.Blueprint",
+            "FileRename": "Enigmatry.Blueprint"
         },
         "appProjectName": {
             "type": "parameter",
