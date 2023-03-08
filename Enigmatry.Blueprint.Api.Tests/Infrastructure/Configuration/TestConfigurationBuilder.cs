@@ -19,7 +19,7 @@ public class TestConfigurationBuilder
         EnsureParametersBeforeBuild();
         var configurationBuilder = new ConfigurationBuilder();
 
-        var dict = new Dictionary<string, string>
+        var dict = new Dictionary<string, string?>
         {
             {"UseDeveloperExceptionPage", "true"},
             {"DbContext:SensitiveDataLoggingEnabled", "true"},

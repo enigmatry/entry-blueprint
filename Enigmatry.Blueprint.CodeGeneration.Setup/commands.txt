@@ -15,4 +15,4 @@ If the installation fails with message "error NU1301: Unable to load the service
 
 Using the tool:
 
-# entry-codegen --source-assembly .\Enigmatry.Blueprint.CodeGeneration.Setup\bin\Debug\net6.0\Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory .\enigmatry-blueprint-app\src\app\features
+# entry-codegen --source-assembly .\Enigmatry.Blueprint.CodeGeneration.Setup\bin\Debug\net7.0\Enigmatry.Blueprint.CodeGeneration.Setup.dll --destination-directory .\enigmatry-blueprint-app\src\app\features

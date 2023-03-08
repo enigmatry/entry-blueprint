@@ -67,7 +67,7 @@ public class EntityFrameworkModule : Module
             .UseLoggerFactory(loggerFactory)
             .EnableSensitiveDataLogging(dbContextSettings.SensitiveDataLoggingEnabled);
 
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext"),
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext")!,
             sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
 
         return optionsBuilder.Options;

@@ -15,16 +15,13 @@ public class UsersController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMediator _mediator;
-    private readonly IConfiguration _configuration;
 
     public UsersController(
         IUnitOfWork unitOfWork,
-        IMediator mediator,
-        IConfiguration configuration)
+        IMediator mediator)
     {
         _unitOfWork = unitOfWork;
         _mediator = mediator;
-        _configuration = configuration;
     }
 
     /// <summary>
@@ -67,12 +64,4 @@ public class UsersController : Controller
         await _unitOfWork.SaveChangesAsync();
         return await Get(user.Id);
     }
-
-    /// <summary>
-    ///     Gets secret from Azure Key Vault
-    /// </summary>
-    [HttpGet]
-    [Route("secret")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public string GetSecret() => _configuration.GetValue<string>("App:SampleKeyVaultSecret");
 }
