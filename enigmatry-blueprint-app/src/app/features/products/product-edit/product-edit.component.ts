@@ -57,7 +57,8 @@ export class ProductEditComponent
             freeShipping: response.freeShipping,
             hasDiscount: response.hasDiscount,
             discount: response.discount,
-            discountExpiresOn: response.discountExpiresOn
+            discountExpiresOn: response.discountExpiresOn,
+            producerId: response.producerId
         });
     }
 

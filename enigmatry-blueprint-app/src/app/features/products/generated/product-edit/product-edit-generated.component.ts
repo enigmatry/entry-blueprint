@@ -49,6 +49,11 @@ export class ProductEditGeneratedComponent implements OnInit, OnDestroy {
 
                 @Input() typeOptions: any[] = [{ value: 0, displayName: 'Food' }, { value: 1, displayName: 'Drink' }, { value: 2, displayName: 'Book' }, { value: 3, displayName: 'Car' }];
                 @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: 'displayName' };
+            private producerIdOptions$ = new BehaviorSubject<any[]>([]);
+                @Input()
+                get producerIdOptions(): any[] { return this.producerIdOptions$.value; }
+                set producerIdOptions(value: any[]) { this.producerIdOptions$.next(value); }
+                @Input() producerIdOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: '' };
 
   _isReadonly: boolean;
   form = new FormGroup({});
@@ -321,6 +326,33 @@ appearance: 'outline',
         },
         },
         {
+        key: 'producerId',
+        type: this.resolveFieldType('autocomplete', false),
+className: `entry-producer-id-field entry-autocomplete`,
+        hideExpression: this.fieldsHideExpressions?.producerId ?? false,
+        expressionProperties: {
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.producerId ? this.fieldsDisableExpressions.producerId(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.producerId ? this.fieldsRequiredExpressions.producerId(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.producerId ? this.fieldsLabelExpressions.producerId(model) : 'Producer'),
+        'model.producerId': (model) => (this.fieldsPropertyExpressions?.producerId ? this.fieldsPropertyExpressions.producerId(model) : model.producerId),
+        },
+        templateOptions: {
+        label: 'Producer',
+        placeholder: 'Producer',
+        description: '',
+appearance: 'outline',
+            options: this.producerIdOptions$.pipe(map(opts => sortOptions(opts, this.producerIdOptionsConfiguration.valueProperty, this.producerIdOptionsConfiguration.sortProperty, this._localeId))),
+            valueProp: this.producerIdOptionsConfiguration.valueProperty,
+            labelProp: this.producerIdOptionsConfiguration.labelProperty,
+            attributes: {  },
+            hidden: !true,
+            required: true,
+
+            typeFormatDef: undefined
+        },
+modelOptions: { updateOn: 'change' },
+        },
+        {
         key: 'expiresOn',
         type: this.resolveFieldType('datepicker', false),
 className: `entry-expires-on-field entry-datepicker`,
@@ -415,7 +447,7 @@ defaultValue: '2022-01-01T12:00:00.0000000+00:00',
         hideExpression: this.fieldsHideExpressions?.discountExpiresOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.discountExpiresOn ? this.fieldsDisableExpressions.discountExpiresOn(model) : false)),
-        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.discountExpiresOn ? this.fieldsRequiredExpressions.discountExpiresOn(model) : false),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.discountExpiresOn ? this.fieldsRequiredExpressions.discountExpiresOn(model) : true),
         'templateOptions.label': (model) => (this.fieldsLabelExpressions?.discountExpiresOn ? this.fieldsLabelExpressions.discountExpiresOn(model) : 'Discount expires on'),
         'model.discountExpiresOn': (model) => (this.fieldsPropertyExpressions?.discountExpiresOn ? this.fieldsPropertyExpressions.discountExpiresOn(model) : model.discountExpiresOn),
         },
@@ -426,6 +458,8 @@ defaultValue: '2022-01-01T12:00:00.0000000+00:00',
 appearance: 'outline',
             attributes: {  },
             hidden: !true,
+            required: true,
+
             typeFormatDef: { name: 'date' }
         },
 modelOptions: { updateOn: 'blur' },

@@ -8,7 +8,7 @@ namespace Enigmatry.Blueprint.Domain.Identity;
 
 public class User : EntityWithGuidId, IEntityHasCreatedUpdated
 {
-    public static readonly Guid TestUserId = new("8207DB25-94D1-4F3D-BF18-90DA283221F7");
+    public static readonly Guid SystemUserId = new("8207DB25-94D1-4F3D-BF18-90DA283221F7");
     public const int NameMinLenght = 5;
     public const int NameMaxLenght = 25;
 
@@ -26,6 +26,7 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     public ICollection<User>? UpdatedUsers { get; private set; }
     public ICollection<Product>? CreatedProducts { get; private set; }
     public ICollection<Product>? UpdatedProducts { get; private set; }
+    public ICollection<Product> OwnedProducts { get; private set; } = new HashSet<Product>();
 
     public static User Create(CreateOrUpdateUser.Command command)
     {

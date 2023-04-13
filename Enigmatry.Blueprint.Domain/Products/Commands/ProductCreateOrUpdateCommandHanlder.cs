@@ -20,7 +20,7 @@ public class ProductCreateOrUpdateCommandHanlder : IRequestHandler<ProductCreate
         if (request.Id.HasValue)
         {
             result = await _productRepository.FindByIdAsync(request.Id.Value)
-                     ?? throw new InvalidOperationException("Could not find product by Id");
+                ?? throw new InvalidOperationException("Could not find product by Id");
             result.Update(request);
         }
         else

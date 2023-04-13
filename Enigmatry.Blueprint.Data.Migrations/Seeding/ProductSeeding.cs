@@ -23,9 +23,11 @@ public class ProductSeeding : ISeeding
             ExpiresOn = null,
             FreeShipping = true,
             HasDiscount = true,
-            Discount = 25.0F
+            Discount = 25.0F,
+            DiscountExpiresOn = new(2050, 12, 1, 12, 0, 0, TimeSpan.Zero),
+            ProducerId = User.SystemUserId
         });
-        dune.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        dune.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         dune.WithId(new Guid("7a4ce0d5-471b-4d35-89f2-b6c7a68350c0"));
 
         var salto = Product.Create(new ProductCreateOrUpdate.Command
@@ -39,9 +41,11 @@ public class ProductSeeding : ISeeding
             ContactPhone = "+381 (060) 399 8871",
             InfoLink = "https://www.salto.rs/#belgrade-ipa",
             ExpiresOn = new DateTimeOffset(2025, 6, 15, 0, 0, 0, TimeSpan.FromHours(0)),
-            FreeShipping = false
+            FreeShipping = false,
+            DiscountExpiresOn = Product.DefaultDiscountExpiresOn,
+            ProducerId = User.SystemUserId
         });
-        salto.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        salto.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         salto.WithId(new Guid("DC7047B0-0D35-4CBC-9424-D907AE5A25F4"));
 
         var lada = Product.Create(new ProductCreateOrUpdate.Command
@@ -55,9 +59,11 @@ public class ProductSeeding : ISeeding
             ContactPhone = "+381 (021) 661 6432",
             InfoLink = "https://en.wikipedia.org/wiki/Lada_Niva",
             ExpiresOn = null,
-            FreeShipping = true
+            FreeShipping = true,
+            DiscountExpiresOn = Product.DefaultDiscountExpiresOn,
+            ProducerId = User.SystemUserId
         });
-        lada.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        lada.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         lada.WithId(new Guid("04C45383-1372-4312-BB38-5EDFA569DB66"));
 
         var camper = Product.Create(new ProductCreateOrUpdate.Command
@@ -73,9 +79,11 @@ public class ProductSeeding : ISeeding
             ExpiresOn = null,
             FreeShipping = true,
             HasDiscount = true,
-            Discount = 10.0F
+            Discount = 10.0F,
+            DiscountExpiresOn = new(2030, 6, 1, 12, 0, 0, TimeSpan.Zero),
+            ProducerId = User.SystemUserId
         });
-        camper.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        camper.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         camper.WithId(new Guid("DA8EB2A9-1F8A-4C41-8DF9-10A1FC59305B"));
 
         var burek = Product.Create(new ProductCreateOrUpdate.Command
@@ -89,9 +97,11 @@ public class ProductSeeding : ISeeding
             ContactPhone = "+381 (011) 113 6651",
             InfoLink = "",
             ExpiresOn = null,
-            FreeShipping = false
+            FreeShipping = false,
+            DiscountExpiresOn = Product.DefaultDiscountExpiresOn,
+            ProducerId = User.SystemUserId
         });
-        burek.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        burek.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         burek.WithId(new Guid("1DE0818E-04D7-4435-98AF-114B81AFF0D0"));
 
         var sardines = Product.Create(new ProductCreateOrUpdate.Command
@@ -105,9 +115,11 @@ public class ProductSeeding : ISeeding
             ContactPhone = "+381 (011) 451-8709",
             InfoLink = "https://www.youtube.com/watch?v=WPpFjl8qeM4&ab_channel=DiscoveryUK",
             ExpiresOn = new DateTimeOffset(2050, 6, 15, 0, 0, 0, TimeSpan.FromHours(0)),
-            FreeShipping = false
+            FreeShipping = false,
+            DiscountExpiresOn = Product.DefaultDiscountExpiresOn,
+            ProducerId = User.SystemUserId
         });
-        sardines.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        sardines.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         sardines.WithId(new Guid("A84132E7-CFC9-4766-8DA0-B1D9E549DE57"));
 
         var mockingbird = Product.Create(new ProductCreateOrUpdate.Command
@@ -121,9 +133,11 @@ public class ProductSeeding : ISeeding
             ContactPhone = "+253 (056) 331-1178",
             InfoLink = "https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird",
             ExpiresOn = null,
-            FreeShipping = false
+            FreeShipping = false,
+            DiscountExpiresOn = Product.DefaultDiscountExpiresOn,
+            ProducerId = User.SystemUserId
         });
-        mockingbird.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        mockingbird.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         mockingbird.WithId(new Guid("65FB31FA-FF40-4BD5-8FE6-755122B6428B"));
 
         var kibbeling = Product.Create(new ProductCreateOrUpdate.Command
@@ -137,9 +151,11 @@ public class ProductSeeding : ISeeding
             ContactPhone = "+31 (098) 777 3379",
             InfoLink = "https://en.wikipedia.org/wiki/Kibbeling",
             ExpiresOn = null,
-            FreeShipping = false
+            FreeShipping = false,
+            DiscountExpiresOn = Product.DefaultDiscountExpiresOn,
+            ProducerId = User.SystemUserId
         });
-        kibbeling.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        kibbeling.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         kibbeling.WithId(new Guid("767C974C-8C07-43F5-8C6F-0CC1EEF3C65A"));
 
         var kapsalon = Product.Create(new ProductCreateOrUpdate.Command
@@ -153,9 +169,11 @@ public class ProductSeeding : ISeeding
             ContactPhone = "+31 (098) 221 3489",
             InfoLink = "https://en.wikipedia.org/wiki/Kapsalon",
             ExpiresOn = null,
-            FreeShipping = false
+            FreeShipping = false,
+            DiscountExpiresOn = Product.DefaultDiscountExpiresOn,
+            ProducerId = User.SystemUserId
         });
-        kapsalon.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        kapsalon.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.SystemUserId);
         kapsalon.WithId(new Guid("67A75734-D04A-4661-95D9-24879122C901"));
 
         modelBuilder.Entity<Product>().HasData(dune, salto, lada, camper, burek, sardines, mockingbird, kibbeling, kapsalon);

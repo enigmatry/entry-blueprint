@@ -1,13 +1,11 @@
-﻿using Enigmatry.Blueprint.Api.Features.Users;
+﻿using Enigmatry.Blueprint.Api.Features;
+using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.Entry.AspNetCore.Tests.Http;
-using Enigmatry.Entry.Core;
-using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Blueprint.Model.Tests.Identity;
-using FluentAssertions;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Entry.Core.Paging;
 
 namespace Enigmatry.Blueprint.Api.Tests;
 
@@ -37,18 +35,21 @@ public class UsersControllerFixture : IntegrationFixtureBase
         var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>(
                 new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "UserName")))
             ?.Items.ToList()!;
-
-        users.Should().NotBeNull();
-        users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
-
         await Verify(users);
+    }
+
+    [Test]
+    public async Task TestLookup()
+    {
+        var uri = $"users/lookup?pageSize=100";
+        var users = await Client.GetAsync<PagedResponse<LookupResponse>>(uri);
+        await Verify(users!.Items);
     }
 
     [Test]
     public async Task TestGetById()
     {
         var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
-
         await Verify(user);
     }
 

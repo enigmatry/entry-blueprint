@@ -8,6 +8,8 @@ namespace Enigmatry.Blueprint.Domain.Products;
 
 public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
 {
+    public static readonly DateTimeOffset DefaultDiscountExpiresOn = new(2022, 1, 1, 12, 0, 0, TimeSpan.Zero);
+    public const int DefaultAmount = 1;
     public const int NameMinLength = 5;
     public const int NameMaxLength = 50;
     public const int CodeMaxLength = 12;
@@ -35,12 +37,14 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
     public bool HasDiscount { get; private set; }
     public float? Discount { get; private set; }
     public DateTimeOffset DiscountExpiresOn { get; private set; }
+    public Guid ProducerId { get; private set; }
+    public User Producer { get; private set; } = null!;
 
     public DateTimeOffset CreatedOn { get; private set; }
     public DateTimeOffset UpdatedOn { get; private set; }
     public Guid? CreatedById { get; private set; }
-    public Guid? UpdatedById { get; private set; }
     public User? CreatedBy { get; private set; }
+    public Guid? UpdatedById { get; private set; }
     public User? UpdatedBy { get; private set; }
 
 
@@ -61,7 +65,8 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
             FreeShipping = request.FreeShipping,
             HasDiscount = request.HasDiscount,
             Discount = request.Discount,
-            DiscountExpiresOn = request.DiscountExpiresOn
+            DiscountExpiresOn = request.DiscountExpiresOn,
+            ProducerId = request.ProducerId
         };
         product.AddDomainEvent(new ProductCreatedDomainEvent(product));
         return product;
@@ -83,6 +88,8 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
         HasDiscount = request.HasDiscount;
         Discount = HasDiscount ? request.Discount : null;
         DiscountExpiresOn = request.DiscountExpiresOn;
+        ProducerId = request.ProducerId;
+
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
 

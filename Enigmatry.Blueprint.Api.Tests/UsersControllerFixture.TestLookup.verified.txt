@@ -1,0 +1,602 @@
+﻿[
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_0
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_1
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_2
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_3
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_4
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_5
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_6
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_7
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_8
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_9
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_10
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_11
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_12
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_13
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_14
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_15
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_16
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_17
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_18
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_19
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_20
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_21
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_22
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_23
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_24
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_25
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_26
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_27
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_28
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_29
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_30
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_31
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_32
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_33
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_34
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_35
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_36
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_37
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_38
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_39
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_40
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_41
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_42
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_43
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_44
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_45
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_46
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_47
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_48
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_49
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_50
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_51
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_52
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_53
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_54
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_55
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_56
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_57
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_58
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_59
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_60
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_61
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_62
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_63
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_64
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_65
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_66
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_67
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_68
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_69
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_70
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_71
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_72
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_73
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_74
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_75
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_76
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_77
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_78
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_79
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_80
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_81
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_82
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_83
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_84
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_85
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_86
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_87
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_88
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_89
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_90
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_91
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_92
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_93
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_94
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_95
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_96
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_97
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_98
+  },
+  {
+    Value: {
+      ValueKind: String
+    },
+    DisplayName: Test_99
+  }
+]

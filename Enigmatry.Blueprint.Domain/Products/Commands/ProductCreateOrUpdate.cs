@@ -24,6 +24,7 @@ public static class ProductCreateOrUpdate
         public bool HasDiscount { get; set; }
         public float? Discount { get; set; }
         public DateTimeOffset DiscountExpiresOn { get; set; }
+        public Guid ProducerId { get; set; }
     }
 
     [PublicAPI]
@@ -43,6 +44,7 @@ public static class ProductCreateOrUpdate
             RuleFor(x => x.Amount).GreaterThan(Product.AmountMinValue).LessThanOrEqualTo(Product.AmountMaxValue);
             RuleFor(x => x.ContactEmail).NotEmpty().EmailAddress();
             RuleFor(x => x.ContactPhone).NotEmpty();
+            RuleFor(x => x.ProducerId).NotEmpty();
             When(x => x.Type is ProductType.Food or ProductType.Drink, () =>
             {
                 RuleFor(x => x.ExpiresOn).NotNull();
@@ -53,6 +55,7 @@ public static class ProductCreateOrUpdate
                     .NotNull()
                     .GreaterThanOrEqualTo(Product.DiscountMinValue)
                     .LessThanOrEqualTo(Product.DiscountMaxValue);
+                RuleFor(x => x.DiscountExpiresOn).NotEmpty();
             });
         }
     }

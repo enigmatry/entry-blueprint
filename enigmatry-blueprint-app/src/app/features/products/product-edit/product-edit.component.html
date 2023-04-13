@@ -1,6 +1,7 @@
 <app-form-wrapper [formComponent]="formComponent">
   <app-g-product-edit #formComponent
       [model]="model"
+      [producerIdOptions]="'user' | lookup | async | notNull"
       [fieldsHideExpressions]="fieldsHideExpressions"
       [fieldsDisableExpressions]="fieldsDisableExpressions"
       [fieldsRequiredExpressions]="fieldsRequiredExpressions"

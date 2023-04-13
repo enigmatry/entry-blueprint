@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enigmatry.Entry.CodeGeneration.Configuration" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Enigmatry.Blueprint.Api\Enigmatry.Blueprint.Api.csproj" />
   </ItemGroup>
 

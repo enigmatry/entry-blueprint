@@ -1,11 +1,11 @@
-﻿using System.Net.Mime;
-using Enigmatry.Blueprint.Domain.Identity;
+﻿using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
 using Enigmatry.Entry.AspNetCore;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace Enigmatry.Blueprint.Api.Features.Users;
 
@@ -25,12 +25,24 @@ public class UsersController : Controller
     }
 
     /// <summary>
-    ///     Gets listing of all available users
+    ///     Gets listing of available users (paged)
     /// </summary>
     /// <returns>List of users</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<PagedResponse<GetUsers.Response.Item>>> Search([FromQuery] GetUsers.Request query)
+    {
+        var response = await _mediator.Send(query);
+        return response.ToActionResult();
+    }
+
+    /// <summary>
+    ///     Gets listing of all available users (paged) as lookup values
+    /// </summary>
+    /// <returns>List of users</returns>
+    [HttpGet("lookup")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<PagedResponse<LookupResponse>>> Lookup([FromQuery] GetUsersLookup.Request query)
     {
         var response = await _mediator.Send(query);
         return response.ToActionResult();

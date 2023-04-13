@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './material/material.module';
 import { GridCellsModule } from './grid-cells/grid-cells.module';
 import { DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE, EntryTableModule } from '@enigmatry/entry-table';
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
+import { LookupPipe } from './pipes/lookup.pipe';
+import { NotNullPipe } from './pipes/not-null.pipe';
 
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule
+  ],
+  declarations: [
+    FormWrapperComponent,
+    LookupPipe,
+    NotNullPipe
   ],
   exports: [
     FormsModule,
@@ -20,7 +27,9 @@ import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
     GridCellsModule,
     EntryTableModule,
     FormlyExtensionsModule,
-    FormWrapperComponent
+    FormWrapperComponent,
+    LookupPipe,
+    NotNullPipe
   ],
   providers: [
     {
@@ -31,9 +40,6 @@ import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
       provide: DEFAULT_TIMEZONE,
       useFactory: () => 'GMT'
     }
-  ],
-  declarations: [
-    FormWrapperComponent
   ]
 })
 export class SharedModule { }

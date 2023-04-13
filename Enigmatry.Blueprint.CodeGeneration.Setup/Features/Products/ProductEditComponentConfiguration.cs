@@ -1,4 +1,5 @@
-﻿using Enigmatry.Blueprint.Api.Features.Products;
+﻿using Enigmatry.Blueprint.Api.Features;
+using Enigmatry.Blueprint.Api.Features.Products;
 using Enigmatry.Blueprint.Api.Features.Validations;
 using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.Entry.CodeGeneration.Configuration;
@@ -52,7 +53,7 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
             .WithAppearance(FormControlAppearance.Outline)
             .WithLabelTranslationId(ProductTranslationId.Amount)
             .WithPlaceholder("Units")
-            .WithDefaultValue("1")
+            .WithDefaultValue(Product.DefaultAmount.ToString())
             .WithPlaceholderTranslationId(ProductTranslationId.Amount);
 
         builder.EmailFormControl(x => x.ContactEmail)
@@ -67,6 +68,16 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
             .WithAppearance(FormControlAppearance.Outline)
             .WithLabel("Homepage")
             .WithPlaceholder("Link to product homepage");
+
+        builder.AutocompleteFormControl(x => x.ProducerId)
+            .WithAppearance(FormControlAppearance.Outline)
+            .WithUpdateOn(ValueUpdateTrigger.OnChange)
+            .WithLabel("Producer")
+            .WithOptions(options => options
+                .WithDynamicValues()
+                .WithValueKey(nameof(LookupResponse.Value))
+                .WithDisplayKey(nameof(LookupResponse.DisplayName))
+            );
 
         builder.InputFormControl(x => x.AdditionalInfo).Ignore();
 
@@ -85,7 +96,7 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
 
         builder.DatepickerFormControl(x => x.DiscountExpiresOn)
             .WithAppearance(FormControlAppearance.Outline)
-            .WithDefaultValue(new DateTimeOffset(2022, 1, 1, 12, 0, 0, TimeSpan.Zero));
+            .WithDefaultValue(Product.DefaultDiscountExpiresOn);
 
         builder.ButtonFormControl("ResetFormBtn")
             .WithLabel(String.Empty)

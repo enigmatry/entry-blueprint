@@ -35,6 +35,7 @@ public static class GetProductDetails
         public float Discount { get; set; }
         public DateTimeOffset DiscountExpiresOn { get; set; }
         public bool FreeShipping { get; set; }
+        public Guid ProducerId { get; set; }
     }
 
     [UsedImplicitly]

@@ -17,7 +17,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 export interface IUsersClient {
     /**
-     * Gets listing of all available users
+     * Gets listing of available users (paged)
      * @param keyword (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
@@ -31,6 +31,15 @@ export interface IUsersClient {
      * @param command User data
      */
     post(command: CreateOrUpdateUserCommand): Observable<GetUserDetailsResponse>;
+    /**
+     * Gets listing of all available users (paged) as lookup values
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param sortBy (optional) 
+     * @param sortDirection (optional) 
+     * @return List of users
+     */
+    lookup(pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | null | undefined, sortDirection: string | null | undefined): Observable<PagedResponseOfLookupResponse>;
     /**
      * Get user for given id
      * @param id Id
@@ -52,7 +61,7 @@ export class UsersClient implements IUsersClient {
     }
 
     /**
-     * Gets listing of all available users
+     * Gets listing of available users (paged)
      * @param keyword (optional) 
      * @param pageNumber (optional) 
      * @param pageSize (optional) 
@@ -190,6 +199,74 @@ export class UsersClient implements IUsersClient {
             }));
         }
         return _observableOf<GetUserDetailsResponse>(null as any);
+    }
+
+    /**
+     * Gets listing of all available users (paged) as lookup values
+     * @param pageNumber (optional) 
+     * @param pageSize (optional) 
+     * @param sortBy (optional) 
+     * @param sortDirection (optional) 
+     * @return List of users
+     */
+    lookup(pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | null | undefined, sortDirection: string | null | undefined): Observable<PagedResponseOfLookupResponse> {
+        let url_ = this.baseUrl + "/Users/lookup?";
+        if (pageNumber === null)
+            throw new Error("The parameter 'pageNumber' cannot be null.");
+        else if (pageNumber !== undefined)
+            url_ += "PageNumber=" + encodeURIComponent("" + pageNumber) + "&";
+        if (pageSize === null)
+            throw new Error("The parameter 'pageSize' cannot be null.");
+        else if (pageSize !== undefined)
+            url_ += "PageSize=" + encodeURIComponent("" + pageSize) + "&";
+        if (sortBy !== undefined && sortBy !== null)
+            url_ += "SortBy=" + encodeURIComponent("" + sortBy) + "&";
+        if (sortDirection !== undefined && sortDirection !== null)
+            url_ += "SortDirection=" + encodeURIComponent("" + sortDirection) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLookup(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLookup(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<PagedResponseOfLookupResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<PagedResponseOfLookupResponse>;
+        }));
+    }
+
+    protected processLookup(response: HttpResponseBase): Observable<PagedResponseOfLookupResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResponseOfLookupResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResponseOfLookupResponse>(null as any);
     }
 
     /**
@@ -811,6 +888,114 @@ export interface IGetUsersResponseItem {
     updatedOn?: Date;
 }
 
+export class PagedResponseOfLookupResponse implements IPagedResponseOfLookupResponse {
+    items?: LookupResponse[];
+    totalCount?: number;
+    pageNumber?: number;
+    pageSize?: number;
+    totalPages?: number;
+    hasNextPage?: boolean;
+    hasPreviousPage?: boolean;
+
+    constructor(data?: IPagedResponseOfLookupResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(LookupResponse.fromJS(item));
+            }
+            this.totalCount = _data["totalCount"];
+            this.pageNumber = _data["pageNumber"];
+            this.pageSize = _data["pageSize"];
+            this.totalPages = _data["totalPages"];
+            this.hasNextPage = _data["hasNextPage"];
+            this.hasPreviousPage = _data["hasPreviousPage"];
+        }
+    }
+
+    static fromJS(data: any): PagedResponseOfLookupResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResponseOfLookupResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        data["totalCount"] = this.totalCount;
+        data["pageNumber"] = this.pageNumber;
+        data["pageSize"] = this.pageSize;
+        data["totalPages"] = this.totalPages;
+        data["hasNextPage"] = this.hasNextPage;
+        data["hasPreviousPage"] = this.hasPreviousPage;
+        return data;
+    }
+}
+
+export interface IPagedResponseOfLookupResponse {
+    items?: LookupResponse[];
+    totalCount?: number;
+    pageNumber?: number;
+    pageSize?: number;
+    totalPages?: number;
+    hasNextPage?: boolean;
+    hasPreviousPage?: boolean;
+}
+
+export class LookupResponse implements ILookupResponse {
+    value?: any | undefined;
+    displayName?: string;
+
+    constructor(data?: ILookupResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.value = _data["value"];
+            this.displayName = _data["displayName"];
+        }
+    }
+
+    static fromJS(data: any): LookupResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new LookupResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["value"] = this.value;
+        data["displayName"] = this.displayName;
+        return data;
+    }
+}
+
+export interface ILookupResponse {
+    value?: any | undefined;
+    displayName?: string;
+}
+
 export class GetUserDetailsResponse implements IGetUserDetailsResponse {
     id?: string;
     userName?: string;
@@ -1135,6 +1320,7 @@ export class GetProductDetailsResponse implements IGetProductDetailsResponse {
     discount?: number;
     discountExpiresOn?: Date;
     freeShipping?: boolean;
+    producerId?: string;
 
     constructor(data?: IGetProductDetailsResponse) {
         if (data) {
@@ -1163,6 +1349,7 @@ export class GetProductDetailsResponse implements IGetProductDetailsResponse {
             this.discount = _data["discount"];
             this.discountExpiresOn = _data["discountExpiresOn"] ? new Date(_data["discountExpiresOn"].toString()) : <any>undefined;
             this.freeShipping = _data["freeShipping"];
+            this.producerId = _data["producerId"];
         }
     }
 
@@ -1191,6 +1378,7 @@ export class GetProductDetailsResponse implements IGetProductDetailsResponse {
         data["discount"] = this.discount;
         data["discountExpiresOn"] = this.discountExpiresOn ? this.discountExpiresOn.toISOString() : <any>undefined;
         data["freeShipping"] = this.freeShipping;
+        data["producerId"] = this.producerId;
         return data;
     }
 }
@@ -1212,6 +1400,7 @@ export interface IGetProductDetailsResponse {
     discount?: number;
     discountExpiresOn?: Date;
     freeShipping?: boolean;
+    producerId?: string;
 }
 
 export class IsProductCodeUniqueResponse implements IIsProductCodeUniqueResponse {
@@ -1338,6 +1527,7 @@ export class ProductCreateOrUpdateCommand implements IProductCreateOrUpdateComma
     hasDiscount?: boolean;
     discount?: number | undefined;
     discountExpiresOn?: Date;
+    producerId?: string;
 
     constructor(data?: IProductCreateOrUpdateCommand) {
         if (data) {
@@ -1365,6 +1555,7 @@ export class ProductCreateOrUpdateCommand implements IProductCreateOrUpdateComma
             this.hasDiscount = _data["hasDiscount"];
             this.discount = _data["discount"];
             this.discountExpiresOn = _data["discountExpiresOn"] ? new Date(_data["discountExpiresOn"].toString()) : <any>undefined;
+            this.producerId = _data["producerId"];
         }
     }
 
@@ -1392,6 +1583,7 @@ export class ProductCreateOrUpdateCommand implements IProductCreateOrUpdateComma
         data["hasDiscount"] = this.hasDiscount;
         data["discount"] = this.discount;
         data["discountExpiresOn"] = this.discountExpiresOn ? this.discountExpiresOn.toISOString() : <any>undefined;
+        data["producerId"] = this.producerId;
         return data;
     }
 }
@@ -1412,6 +1604,7 @@ export interface IProductCreateOrUpdateCommand {
     hasDiscount?: boolean;
     discount?: number | undefined;
     discountExpiresOn?: Date;
+    producerId?: string;
 }
 
 export class ApiException extends Error {

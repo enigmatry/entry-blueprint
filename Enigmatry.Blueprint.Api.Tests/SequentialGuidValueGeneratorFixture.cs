@@ -32,7 +32,9 @@ public class SequentialGuidValueGeneratorFixture : IntegrationFixtureBase
         var userRepository = Resolve<IRepository<User>>();
 
         //act
-        var usersFromDb = userRepository.QueryAll().AsNoTracking().ToList();
+        var usersFromDb = userRepository.QueryAll().AsNoTracking()
+            .Where(user => users.Select(u => u.Id).Contains(user.Id))
+            .ToList();
 
         //assert
         for (var i = start; i < count; i++)

@@ -8,6 +8,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
+        builder.HasIndex(x => x.Code).IsUnique();
+
         builder.Property(x => x.Name).IsRequired().HasMaxLength(Product.NameMaxLength);
         builder.Property(x => x.Code).IsRequired().HasMaxLength(Product.CodeMaxLength);
         builder.Property(x => x.Price).IsRequired();
@@ -16,6 +18,9 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(x => x.CreatedOn).IsRequired();
         builder.Property(x => x.Description).HasMaxLength(Product.DescriptionMaxLength);
 
-        builder.HasIndex(x => x.Code).IsUnique();
+        builder
+            .HasOne(product => product.Producer)
+            .WithMany(user => user.OwnedProducts)
+            .HasForeignKey(product => product.ProducerId);
     }
 }
