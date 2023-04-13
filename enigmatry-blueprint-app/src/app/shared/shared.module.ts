@@ -8,12 +8,14 @@ import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
 import { LookupPipe } from './pipes/lookup.pipe';
 import { NotNullPipe } from './pipes/not-null.pipe';
+import { FormlyAutocompleteModule } from './autocomplete/formly-autocomplete.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormlyAutocompleteModule
   ],
   declarations: [
     FormWrapperComponent,
@@ -24,6 +26,7 @@ import { NotNullPipe } from './pipes/not-null.pipe';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    FormlyAutocompleteModule,
     GridCellsModule,
     EntryTableModule,
     FormlyExtensionsModule,

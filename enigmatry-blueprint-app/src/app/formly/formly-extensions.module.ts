@@ -11,8 +11,9 @@ import { ReadonlyInputComponent } from './formly-readonly-input/formly-readonly-
 import { ReadonlyBooleanComponent } from './formly-readonly-boolean/formly-readonly-boolean.component';
 import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-radio.component';
 import { FormlyButtonComponent } from './formly-button/formly-button.component';
-import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
+import { EntryFormConfig, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
 import { EntryTableModule } from '@enigmatry/entry-table';
+import { FormlyAutocompleteModule } from '../shared/autocomplete/formly-autocomplete.module';
 
 const defaultFormConfig: EntryFormConfig = {
   fieldTypesConfig: {
@@ -43,7 +44,7 @@ const defaultFormConfig: EntryFormConfig = {
     MatExpansionModule,
     MatSelectModule,
     MatButtonModule,
-    EntryFormModule,
+    FormlyAutocompleteModule,
     EntryTableModule,
     FormlyModule.forChild({
       types: [
