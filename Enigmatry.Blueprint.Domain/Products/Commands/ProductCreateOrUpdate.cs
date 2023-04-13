@@ -23,6 +23,7 @@ public static class ProductCreateOrUpdate
         public bool FreeShipping { get; set; }
         public bool HasDiscount { get; set; }
         public float? Discount { get; set; }
+        public DateTimeOffset DiscountExpiresOn { get; set; }
     }
 
     [PublicAPI]

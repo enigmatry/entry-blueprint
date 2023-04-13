@@ -56,7 +56,8 @@ export class ProductEditComponent
             expiresOn: response.expiresOn,
             freeShipping: response.freeShipping,
             hasDiscount: response.hasDiscount,
-            discount: response.discount
+            discount: response.discount,
+            discountExpiresOn: response.discountExpiresOn
         });
     }
 
@@ -64,8 +65,11 @@ export class ProductEditComponent
         this.fieldsHideExpressions.discount =
             (model: IGetProductDetailsResponse): boolean =>
                 model.hasDiscount === undefined || model.hasDiscount === false;
-        this.fieldsHideExpressions.resetFormBtn =
+        this.fieldsHideExpressions.discountExpiresOn =
             (model: IGetProductDetailsResponse): boolean =>
+                model.hasDiscount === undefined || model.hasDiscount === false;
+        this.fieldsHideExpressions.resetFormBtn =
+            (_: IGetProductDetailsResponse): boolean =>
                 !this.isEdit();
     };
 

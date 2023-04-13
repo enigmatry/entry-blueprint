@@ -17,13 +17,13 @@ public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUse
 
         var userSection = builder.FormControlGroup("User");
 
-        userSection.FormControl(x => x.UserName).IsReadonly(true);
-        userSection.FormControl(x => x.Name);
+        userSection.InputFormControl(x => x.UserName).IsReadonly(true);
+        userSection.InputFormControl(x => x.Name);
 
         var historySection = userSection.FormControlGroup("History");
 
-        historySection.FormControl(x => x.CreatedOn).IsReadonly(true);
-        historySection.FormControl(x => x.UpdatedOn).IsReadonly(true);
+        historySection.DatepickerFormControl(x => x.CreatedOn).IsReadonly(true);
+        historySection.DatepickerFormControl(x => x.UpdatedOn).IsReadonly(true);
 
 
         builder.WithValidationConfiguration(new UserEditComponentValidationConfiguration());

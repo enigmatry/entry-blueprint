@@ -34,6 +34,7 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
     public bool FreeShipping { get; private set; }
     public bool HasDiscount { get; private set; }
     public float? Discount { get; private set; }
+    public DateTimeOffset DiscountExpiresOn { get; private set; }
 
     public DateTimeOffset CreatedOn { get; private set; }
     public DateTimeOffset UpdatedOn { get; private set; }
@@ -59,7 +60,8 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
             ExpiresOn = request.ExpiresOn,
             FreeShipping = request.FreeShipping,
             HasDiscount = request.HasDiscount,
-            Discount = request.Discount
+            Discount = request.Discount,
+            DiscountExpiresOn = request.DiscountExpiresOn
         };
         product.AddDomainEvent(new ProductCreatedDomainEvent(product));
         return product;
@@ -80,6 +82,7 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
         FreeShipping = request.FreeShipping;
         HasDiscount = request.HasDiscount;
         Discount = HasDiscount ? request.Discount : null;
+        DiscountExpiresOn = request.DiscountExpiresOn;
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
 

@@ -21,12 +21,12 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
             .OrderBy(OrderByType.Configuration);
 
         // Configuring fields:
-        builder.FormControl(x => x.Name)
+        builder.InputFormControl(x => x.Name)
             .WithPlaceholder("Unique product name")
             .WithAppearance(FormControlAppearance.Outline)
             .WithValidators("productNameIsUnique");
 
-        builder.FormControl(x => x.Code)
+        builder.InputFormControl(x => x.Code)
             .WithPlaceholder("Unique product code identifier")
             .WithAppearance(FormControlAppearance.Outline)
             .WithValidators("productCodeIsUnique");
@@ -39,7 +39,7 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
             .WithAppearance(FormControlAppearance.Outline)
             .WithRows(2);
 
-        builder.FormControl(x => x.Price)
+        builder.InputFormControl(x => x.Price)
             .WithLabel("Price per unit")
             .WithLabelTranslationId(ProductTranslationId.Price)
             .WithPlaceholder("Price per unit")
@@ -47,43 +47,50 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
             .WithAppearance(FormControlAppearance.Outline)
             .WithFormat(new CurrencyPropertyFormatter().WithCurrencyCode("EUR").WithDisplay("€"));
 
-        builder.FormControl(x => x.Amount)
+        builder.InputFormControl(x => x.Amount)
             .WithLabel("Units")
             .WithAppearance(FormControlAppearance.Outline)
             .WithLabelTranslationId(ProductTranslationId.Amount)
             .WithPlaceholder("Units")
+            .WithDefaultValue("1")
             .WithPlaceholderTranslationId(ProductTranslationId.Amount);
 
-        builder.FormControl(x => x.ContactEmail)
+        builder.EmailFormControl(x => x.ContactEmail)
             .WithAppearance(FormControlAppearance.Outline)
             .WithPlaceholder("Contact person email address");
 
-        builder.FormControl(x => x.ContactPhone)
+        builder.InputFormControl(x => x.ContactPhone)
             .WithAppearance(FormControlAppearance.Outline)
             .WithPlaceholder("Contact person phone number");
 
-        builder.FormControl(x => x.InfoLink)
+        builder.InputFormControl(x => x.InfoLink)
             .WithAppearance(FormControlAppearance.Outline)
             .WithLabel("Homepage")
             .WithPlaceholder("Link to product homepage");
 
-        builder.FormControl(x => x.AdditionalInfo).Ignore();
+        builder.InputFormControl(x => x.AdditionalInfo).Ignore();
 
-        builder.FormControl(x => x.ExpiresOn)
+        builder.DatepickerFormControl(x => x.ExpiresOn)
             .WithAppearance(FormControlAppearance.Outline)
             .WithPlaceholder("Product expiration date, if any");
 
-        builder.FormControl(x => x.FreeShipping);
+        builder.CheckboxFormControl(x => x.FreeShipping)
+            .WithDefaultValue(true);
 
-        builder.FormControl(x => x.HasDiscount);
+        builder.CheckboxFormControl(x => x.HasDiscount);
 
-        builder.FormControl(x => x.Discount)
-            .WithFormat(new PercentPropertyFormatter().WithDigitsInfo("1.2-2"));
+        builder.InputFormControl(x => x.Discount)
+            .WithFormat(new PercentPropertyFormatter()
+            .WithDigitsInfo("1.2-2"));
+
+        builder.DatepickerFormControl(x => x.DiscountExpiresOn)
+            .WithAppearance(FormControlAppearance.Outline)
+            .WithDefaultValue(new DateTimeOffset(2022, 1, 1, 12, 0, 0, TimeSpan.Zero));
 
         builder.ButtonFormControl("ResetFormBtn")
             .WithLabel(String.Empty)
             .WithText("Reset")
-            .WithHint("* This will reset form to it's initial state.");
+            .WithHint("* This will reset form to it\\'s initial state.");
 
         // Configuring built in validations
         builder.WithValidationConfiguration(new ProductEditComponentValidationConfiguration());

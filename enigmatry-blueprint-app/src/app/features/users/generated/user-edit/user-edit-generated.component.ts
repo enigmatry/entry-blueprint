@@ -41,6 +41,7 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
   @Input() fieldsDisableExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
   @Input() fieldsRequiredExpressions: IFieldExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
   @Input() fieldsPropertyExpressions: IFieldPropertyExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
+  @Input() fieldsLabelExpressions: IFieldPropertyExpressionDictionary<IGetUserDetailsResponse> | undefined = undefined;
 
   @Output() save = new EventEmitter<IGetUserDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
@@ -81,10 +82,10 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
     return [
         {
         type: this.resolveFieldType('', false),
-fieldGroupClassName: 'entry-field-group',
+fieldGroupClassName: `entry-field-group`,
         templateOptions: {
-        label: $localize `:@@users.user-edit.user.label:User`,
-        placeholder: $localize `:@@users.user-edit.user.placeholder:User`,
+        label: 'User',
+        placeholder: 'User',
         disabled: this.isReadonly || false,
         description: ''
         },
@@ -92,36 +93,40 @@ fieldGroupClassName: 'entry-field-group',
         {
         key: 'userName',
         type: this.resolveFieldType('input', true),
-className: 'entry-user-name-field entry-input',
+className: `entry-user-name-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.userName ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userName ? this.fieldsDisableExpressions.userName(model) : true)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.userName ? this.fieldsRequiredExpressions.userName(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.userName ? this.fieldsLabelExpressions.userName(model) : 'User name'),
         'model.userName': (model) => (this.fieldsPropertyExpressions?.userName ? this.fieldsPropertyExpressions.userName(model) : model.userName),
         },
         templateOptions: {
-        label: $localize `:@@users.user-edit.user-name.label:User name`,
-        placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
+        label: 'User name',
+        placeholder: 'User name',
         description: '',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: undefined
         },
         },
         {
         key: 'name',
         type: this.resolveFieldType('input', false),
-className: 'entry-name-field entry-input',
+className: `entry-name-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.name ? this.fieldsRequiredExpressions.name(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.name ? this.fieldsLabelExpressions.name(model) : 'Name'),
         'model.name': (model) => (this.fieldsPropertyExpressions?.name ? this.fieldsPropertyExpressions.name(model) : model.name),
         },
         templateOptions: {
-        label: $localize `:@@users.user-edit.name.label:Name`,
-        placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
+        label: 'Name',
+        placeholder: 'Name',
         description: '',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 minLength: 5,
 maxLength: 25,
@@ -131,10 +136,10 @@ maxLength: 25,
         },
         {
         type: this.resolveFieldType('', false),
-fieldGroupClassName: 'entry-field-group',
+fieldGroupClassName: `entry-field-group`,
         templateOptions: {
-        label: $localize `:@@users.user-edit.history.label:History`,
-        placeholder: $localize `:@@users.user-edit.history.placeholder:History`,
+        label: 'History',
+        placeholder: 'History',
         disabled: this.isReadonly || false,
         description: ''
         },
@@ -142,18 +147,20 @@ fieldGroupClassName: 'entry-field-group',
         {
         key: 'createdOn',
         type: this.resolveFieldType('datepicker', true),
-className: 'entry-created-on-field entry-datepicker',
+className: `entry-created-on-field entry-datepicker`,
         hideExpression: this.fieldsHideExpressions?.createdOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.createdOn ? this.fieldsDisableExpressions.createdOn(model) : true)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.createdOn ? this.fieldsRequiredExpressions.createdOn(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.createdOn ? this.fieldsLabelExpressions.createdOn(model) : 'Created on'),
         'model.createdOn': (model) => (this.fieldsPropertyExpressions?.createdOn ? this.fieldsPropertyExpressions.createdOn(model) : model.createdOn),
         },
         templateOptions: {
-        label: $localize `:@@users.user-edit.created-on.label:Created on`,
-        placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
+        label: 'Created on',
+        placeholder: 'Created on',
         description: '',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: { name: 'date' }
         },
 modelOptions: { updateOn: 'blur' },
@@ -161,18 +168,20 @@ modelOptions: { updateOn: 'blur' },
         {
         key: 'updatedOn',
         type: this.resolveFieldType('datepicker', true),
-className: 'entry-updated-on-field entry-datepicker',
+className: `entry-updated-on-field entry-datepicker`,
         hideExpression: this.fieldsHideExpressions?.updatedOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.updatedOn ? this.fieldsDisableExpressions.updatedOn(model) : true)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.updatedOn ? this.fieldsRequiredExpressions.updatedOn(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.updatedOn ? this.fieldsLabelExpressions.updatedOn(model) : 'Updated on'),
         'model.updatedOn': (model) => (this.fieldsPropertyExpressions?.updatedOn ? this.fieldsPropertyExpressions.updatedOn(model) : model.updatedOn),
         },
         templateOptions: {
-        label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
-        placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
+        label: 'Updated on',
+        placeholder: 'Updated on',
         description: '',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: { name: 'date' }
         },
 modelOptions: { updateOn: 'blur' },
@@ -182,5 +191,10 @@ modelOptions: { updateOn: 'blur' },
         ]
         },
     ];
+}
+
+  private applyOptionally<T>(value: T, apply: boolean): T | undefined {
+    return apply ? value : undefined;
   }
+
 }
