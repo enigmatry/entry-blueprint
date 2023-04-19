@@ -24,7 +24,6 @@
   <ItemGroup>
     <PackageReference Include="Enigmatry.Entry.HealthChecks" />
     <PackageReference Include="Enigmatry.Entry.CodeGeneration.Validation" />
-
   </ItemGroup>
 
   <ItemGroup>

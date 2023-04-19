@@ -15,7 +15,6 @@ import { GetUsersResponseItem } from 'src/app/api/api-reference';
 @Component({
   selector: 'app-g-user-list',
   templateUrl: './user-list-generated.component.html',
-  styleUrls: ['./user-list-generated.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListGeneratedComponent implements OnInit {

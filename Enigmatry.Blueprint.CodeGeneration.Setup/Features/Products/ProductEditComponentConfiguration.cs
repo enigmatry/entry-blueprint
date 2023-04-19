@@ -35,9 +35,9 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
             .WithAppearance(FormControlAppearance.Outline)
             .WithOptions(options => options.WithFixedValues<ProductType>().WithSortKey("displayName"));
 
-        builder.TextareaFormControl(x => x.Description)
+        builder.RichTextInputFormControl(x => x.Description)
             .WithAppearance(FormControlAppearance.Outline)
-            .WithRows(2);
+            .WithFloatLabel(FormControlFloatLabel.Always);
 
         builder.FormControl(x => x.Price)
             .WithLabel("Price per unit")
