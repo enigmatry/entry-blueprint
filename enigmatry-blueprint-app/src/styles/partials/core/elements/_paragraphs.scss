@@ -1,0 +1,5 @@
+@use 'typography/fonts' as fonts;
+
+p {
+	@include fonts.main-font();
+}
