@@ -1,175 +1,175 @@
 {
-    "$schema": "http://json.schemastore.org/template",
-    "author": "Enigmatry",
-    "classifications": [
-        "Blueprint",
-        ".netcore",
-        "Angular",
-        "web"
-    ],
-    "name": "Enigmatry Blueprint Project",
-    "generatorVersions": "[1.0.0.0-*)",
-    "groupIdentity": "Enigmatry.Blueprint.Template",
-    "precedence": "100",
-    "identity": "Enigmatry.Blueprint.Template",
-    "shortName": "blueprint",
-    "tags": {
-        "language": "C#",
-        "type": "project"
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Enigmatry",
+  "classifications": [
+    "Blueprint",
+    ".netcore",
+    "Angular",
+    "web"
+  ],
+  "name": "Enigmatry Blueprint Project",
+  "generatorVersions": "[1.0.0.0-*)",
+  "groupIdentity": "Enigmatry.Blueprint.Template",
+  "precedence": "100",
+  "identity": "Enigmatry.Blueprint.Template",
+  "shortName": "blueprint",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Enigmatry.Blueprint",
+  "preferNameDirectory": true,
+  "symbols": {
+    "projectName": {
+      "type": "parameter",
+      "replaces": "Enigmatry.Blueprint",
+      "FileRename": "Enigmatry.Blueprint"
     },
-    "sourceName": "Enigmatry.Blueprint",
-    "preferNameDirectory": true,
-    "symbols": {
-        "projectName": {
-            "type": "parameter",
-            "replaces": "Enigmatry.Blueprint",
-            "FileRename": "Enigmatry.Blueprint"
-        },
-        "appProjectName": {
-            "type": "parameter",
-            "replaces": "enigmatry-blueprint",
-            "FileRename": "enigmatry-blueprint",
-            "description": "the kebab-cased name (i.e. enigmatry-blueprint)"
-        },
-        "contextName": {
-            "type": "parameter",
-            "replaces": "BlueprintContext",
-            "FileRename": "BlueprintContext",
-            "description": "The DbContext name, PascalCased"
-        },
-        "skipRestore": {
-            "type": "parameter",
-            "datatype": "bool",
-            "description": "If specified, skips the automatic restore of the project on create.",
-            "defaultValue": "false"
-        },
-        "skipGit": {
-            "type": "parameter",
-            "datatype": "bool",
-            "description": "If specified, skips git initialization.",
-            "defaultValue": "false"
-        },
-        "copyrightYear": {
-            "type": "generated",
-            "generator": "now",
-            "replaces": "copyrightYear",
-            "parameters": {
-                "format": "yyyy"
-            }
-        },
-        "HttpPort": {
-            "type": "parameter",
-            "datatype": "integer",
-            "description": "Port number to use for the HTTP endpoint in launchSettings.json."
-        },
-        "HttpPortGenerated": {
-            "type": "generated",
-            "generator": "port"
-        },
-        "HttpPortReplacer": {
-            "type": "generated",
-            "generator": "coalesce",
-            "parameters": {
-                "sourceVariableName": "HttpPort",
-                "fallbackVariableName": "HttpPortGenerated"
-            },
-            "replaces": "5440"
-        }
+    "appProjectName": {
+      "type": "parameter",
+      "replaces": "enigmatry-blueprint",
+      "FileRename": "enigmatry-blueprint",
+      "description": "the kebab-cased name (i.e. enigmatry-blueprint)"
     },
-    "guids": [
-        "122DBA61-9947-4EFD-B4AC-FEB39135C2DB",
-        "A37F5D21-519B-4A5E-8238-E9F8AA7D0174",
-        "98BD9F63-8C8E-4777-A12A-B53056CAA6B9",
-        "D3297483-ABCC-4AF7-88BA-9670DE1B638A",
-        "6191912D-988A-492E-A60C-07F115C201B7",
-        "BDB0B879-D4AD-400F-B8C4-63E95981010B",
-        "1CC1BD9F-6D40-42AA-97F2-937AF2AD0B70",
-        "798EB599-36B3-4855-86D6-9ADD8EE266B5",
-        "E81F6E69-85ED-4768-9DFF-10E0D94AE0F4",
-        "7B09F20C-7607-494C-9309-E539D1966F1D",
-        "39D678DB-292F-47B0-A70B-0ECB0E7F7C80",
-        "2453EC7F-F45C-4DAE-9417-A5F95519BCB2",
-        "E47E859C-6E79-4E43-97AD-DD827B86E919",
-        "B11717EB-1E91-4227-97FA-2F4A73899289",
-        "5366D8D0-38E2-403F-BD61-0BE58A895283"
-    ],
-    "primaryOutputs": [
+    "contextName": {
+      "type": "parameter",
+      "replaces": "BlueprintContext",
+      "FileRename": "BlueprintContext",
+      "description": "The DbContext name, PascalCased"
+    },
+    "skipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "If specified, skips the automatic restore of the project on create.",
+      "defaultValue": "false"
+    },
+    "skipGit": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "If specified, skips git initialization.",
+      "defaultValue": "false"
+    },
+    "copyrightYear": {
+      "type": "generated",
+      "generator": "now",
+      "replaces": "copyrightYear",
+      "parameters": {
+        "format": "yyyy"
+      }
+    },
+    "HttpPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json."
+    },
+    "HttpPortGenerated": {
+      "type": "generated",
+      "generator": "port"
+    },
+    "HttpPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpPort",
+        "fallbackVariableName": "HttpPortGenerated"
+      },
+      "replaces": "5440"
+    }
+  },
+  "guids": [
+    "122DBA61-9947-4EFD-B4AC-FEB39135C2DB",
+    "A37F5D21-519B-4A5E-8238-E9F8AA7D0174",
+    "98BD9F63-8C8E-4777-A12A-B53056CAA6B9",
+    "D3297483-ABCC-4AF7-88BA-9670DE1B638A",
+    "6191912D-988A-492E-A60C-07F115C201B7",
+    "BDB0B879-D4AD-400F-B8C4-63E95981010B",
+    "1CC1BD9F-6D40-42AA-97F2-937AF2AD0B70",
+    "798EB599-36B3-4855-86D6-9ADD8EE266B5",
+    "E81F6E69-85ED-4768-9DFF-10E0D94AE0F4",
+    "7B09F20C-7607-494C-9309-E539D1966F1D",
+    "39D678DB-292F-47B0-A70B-0ECB0E7F7C80",
+    "2453EC7F-F45C-4DAE-9417-A5F95519BCB2",
+    "E47E859C-6E79-4E43-97AD-DD827B86E919",
+    "B11717EB-1E91-4227-97FA-2F4A73899289",
+    "5366D8D0-38E2-403F-BD61-0BE58A895283"
+  ],
+  "primaryOutputs": [
+    {
+      "path": "Enigmatry.Blueprint.sln"
+    }
+  ],
+  "postActions": [
+    {
+      "args": {
+        "executable": "cleanup.cmd",
+        "args": "",
+        "redirectStandardOutput": "false"
+      },
+      "manualInstructions": [
         {
-            "path": "Enigmatry.Blueprint.sln"
+          "text": "Run 'cleanup.cmd'"
         }
-    ],
-    "postActions": [
+      ],
+      "description": "final cleanup",
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "continueOnError": true
+    },
+    {
+      "condition": "(!skipRestore)",
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore'" }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    },
+    {
+      "condition": "(!skipGit)",
+      "args": {
+        "executable": "git",
+        "args": "init",
+        "redirectStandardOutput": "false"
+      },
+      "manualInstructions": [
         {
-            "args": {
-                "executable": "cleanup.cmd",
-                "args": "",
-                "redirectStandardOutput": "false"
-            },
-            "manualInstructions": [
-                {
-                    "text": "Run 'cleanup.cmd'"
-                }
-            ],
-            "description": "final cleanup",
-            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-            "continueOnError": true
-        },
-        {
-            "condition": "(!skipRestore)",
-            "description": "Restore NuGet packages required by this project.",
-            "manualInstructions": [
-                { "text": "Run 'dotnet restore'" }
-            ],
-            "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-            "continueOnError": true
-        },
-        {
-            "condition": "(!skipGit)",
-            "args": {
-                "executable": "git",
-                "args": "init",
-                "redirectStandardOutput": "false"
-            },
-            "manualInstructions": [
-                {
-                    "text": "Run 'git init'"
-                }
-            ],
-            "description": "git init",
-            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-            "continueOnError": true
-        },
-        {
-            "condition": "(!skipGit)",
-            "args": {
-                "executable": "git",
-                "args": "add *",
-                "redirectStandardOutput": "false"
-            },
-            "manualInstructions": [
-                {
-                    "text": "Run 'git add *'"
-                }
-            ],
-            "description": "git add",
-            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-            "continueOnError": true
-        },
-        {
-            "condition": "(!skipGit)",
-            "args": {
-                "executable": "git",
-                "args": "commit -q -m \"Initial Commit\"",
-                "redirectStandardOutput": "false"
-            },
-            "manualInstructions": [
-                {
-                    "text": "Run 'git commit -m \"Initial Commit\"'"
-                }
-            ],
-            "description": "git commit",
-            "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-            "continueOnError": true
+          "text": "Run 'git init'"
         }
-    ]
+      ],
+      "description": "git init",
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "continueOnError": true
+    },
+    {
+      "condition": "(!skipGit)",
+      "args": {
+        "executable": "git",
+        "args": "add *",
+        "redirectStandardOutput": "false"
+      },
+      "manualInstructions": [
+        {
+          "text": "Run 'git add *'"
+        }
+      ],
+      "description": "git add",
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "continueOnError": true
+    },
+    {
+      "condition": "(!skipGit)",
+      "args": {
+        "executable": "git",
+        "args": "commit -q -m \"Initial Commit\"",
+        "redirectStandardOutput": "false"
+      },
+      "manualInstructions": [
+        {
+          "text": "Run 'git commit -m \"Initial Commit\"'"
+        }
+      ],
+      "description": "git commit",
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "continueOnError": true
+    }
+  ]
 }
