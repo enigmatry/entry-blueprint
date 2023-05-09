@@ -1,5 +1,5 @@
 ## Install the template locally from source (run in solution root)
-``dotnet new -i .\``
+``dotnet new install .\``
 
 ## Build the nuget package (run in solution root)
 ``dotnet pack Enigmatry.Blueprint.Template.csproj -c Release``
