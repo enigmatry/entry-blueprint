@@ -1,12 +1,12 @@
 {
-    "symbolInfo": {
-        "skipRestore": {
-            "longName": "no-restore",
-            "shortName": ""
-        },
-        "skipGit": {
-            "longName": "no-git",
-            "shortName": ""
-        }
+  "symbolInfo": {
+    "skipRestore": {
+      "longName": "no-restore",
+      "shortName": ""
+    },
+    "skipGit": {
+      "longName": "no-git",
+      "shortName": ""
     }
+  }
 }
