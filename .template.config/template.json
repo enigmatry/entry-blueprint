@@ -18,6 +18,11 @@
     "type": "project"
   },
   "sourceName": "Enigmatry.Blueprint",
+  "sources": [
+    {
+      "exclude": [ "**/Enigmatry.Blueprint.Template.csproj", "**/.angular/**", "**/.template.config/**", "**/.idea/**", "**/bin/**", "**/obj/**", "**/dist/**", "**/node_modules/**", "**/.git/**", "**/.vs/**", "**/Artifacts/**", "**/_ReSharper.Caches/**", "**/*.user", "**/*.lock.json" ]
+    }
+  ],
   "preferNameDirectory": true,
   "symbols": {
     "projectName": {
@@ -30,6 +35,15 @@
       "replaces": "enigmatry-blueprint",
       "FileRename": "enigmatry-blueprint",
       "description": "the kebab-cased name (i.e. enigmatry-blueprint)"
+    },
+    "appProjectNameUpper": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "appProjectName",
+        "toLower": true
+      },
+      "FileRename": "Enigmatry-Blueprint"
     },
     "contextName": {
       "type": "parameter",
