@@ -1,4 +1,4 @@
-@use 'typography/fonts' as fonts;
+@use 'typography/fonts';
 
 p {
 	@include fonts.main-font();
