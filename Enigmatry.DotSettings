@@ -206,28 +206,24 @@ public static class $CLASS$&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" File="$NAME$Fixture.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/LocationSelectorName/@EntryValue">manual</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/Order/@EntryValue">0</s:Int64>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/SectionPlain/Text/@EntryValue">using Enigmatry.Entry.AspNetCore.Tests.Http;&#xD;
-using Enigmatry.Entry.Core;&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/SectionPlain/Text/@EntryValue">using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;&#xD;
 using Enigmatry.Entry.Core.Paging;&#xD;
 using $ROOTNAMESPACE$.Domain.$NAME$s;&#xD;
 using $ROOTNAMESPACE$.Api.Tests.Infrastructure.Api;&#xD;
 using $ROOTNAMESPACE$.Domain.$NAME$s.Commands;&#xD;
-using $PROJECTNAMESPACE$.Tests.$NAME$s;&#xD;
+using $ROOTNAMESPACE$.Domain.Tests.$NAME$s;&#xD;
+using $ROOTNAMESPACE$.Api.Features.$NAME$s;&#xD;
 &#xD;
 namespace $PROJECTNAMESPACE$;&#xD;
 &#xD;
 [Category("integration")]&#xD;
 public class $NAME$sControllerFixture : IntegrationFixtureBase&#xD;
 {&#xD;
-    private DateTimeOffset _createdOn;&#xD;
-    private DateTimeOffset _updatedOn;&#xD;
     private $NAME$ _$NAME_LOWER$ = null!;&#xD;
 &#xD;
     [SetUp]&#xD;
     public void SetUp()&#xD;
     {&#xD;
-        _createdOn = Resolve&lt;ITimeProvider&gt;().Now;&#xD;
-        _updatedOn = _createdOn;&#xD;
         _$NAME_LOWER$ = new $NAME$Builder()&#xD;
             .WithName("Item 1");&#xD;
 &#xD;
@@ -243,9 +239,9 @@ public class $NAME$sControllerFixture : IntegrationFixtureBase&#xD;
     }&#xD;
 &#xD;
     [Test]&#xD;
-    public async Task GivenValid$NAME$Id_GetById_ReturnsUserDetails()&#xD;
+    public async Task TestGetById()&#xD;
     {&#xD;
-        var response = await Client.GetAsync&lt;GetUserDetails.Response&gt;($"$NAME_LOWER$s/{_$NAME_LOWER$.Id}");&#xD;
+        var response = await Client.GetAsync&lt;Get$NAME$.Response&gt;($"$NAME_LOWER$s/{_$NAME_LOWER$.Id}");&#xD;
 &#xD;
         await Verify(response);&#xD;
     }&#xD;
@@ -257,9 +253,7 @@ public class $NAME$sControllerFixture : IntegrationFixtureBase&#xD;
         Get$NAME$.Response? response =&#xD;
             await Client.PostAsync&lt;$NAME$CreateOrUpdate.Command, Get$NAME$.Response&gt;("$NAME_LOWER$s", command);&#xD;
 &#xD;
-        response?.Name.Should().Be(command.Name);&#xD;
-        response?.CreatedOn.Date.Should().Be(DateTime.Now.Date);&#xD;
-        response?.UpdatedOn.Date.Should().Be(DateTime.Now.Date);&#xD;
+        await Verify(response);&#xD;
     }&#xD;
 &#xD;
     [Test]&#xD;
@@ -280,7 +274,9 @@ public class $NAME$sControllerFixture : IntegrationFixtureBase&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/LocationSelectorName/@EntryValue">manual</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/Order/@EntryValue">1</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/SectionPlain/Text/@EntryValue">// delete this file&#xD;
-// without it the R# file template does not work as expected for previous file</s:String>
+// without it the R# file template does not work as expected for previous file&#xD;
+&#xD;
+.</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Text/@EntryValue">using System.Net.Mime;&#xD;
@@ -818,8 +814,8 @@ public class $CLASS$ : IEntityTypeConfiguration&lt;$NAME$&gt;&#xD;
         builder.Property(x =&gt; x.Name).IsRequired().HasMaxLength($NAME$.NameMaxLength);&#xD;
         builder.Property(x =&gt; x.CreatedOn).IsRequired();&#xD;
 &#xD;
-        builder.HasOne(x =&gt; x.CreatedBy).WithMany();&#xD;
-        builder.HasOne(x =&gt; x.UpdatedBy).WithMany();&#xD;
+        builder.HasOne(x =&gt; x.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);&#xD;
+        builder.HasOne(x =&gt; x.UpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);&#xD;
     }&#xD;
 }&#xD;
 &#xD;
