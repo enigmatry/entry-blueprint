@@ -453,7 +453,7 @@ public static class $NAME$CreateOrUpdate&#xD;
     {&#xD;
         public Validator()&#xD;
         {&#xD;
-            RuleFor(x =&gt; x.Name).NotEmpty().MaximumLength(100);&#xD;
+            RuleFor(x =&gt; x.Name).NotEmpty().MaximumLength($NAME$.NameMaxLength);&#xD;
         }&#xD;
     }&#xD;
 }&#xD;
@@ -658,14 +658,16 @@ namespace $NAMESPACE$;&#xD;
 &#xD;
 public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 {&#xD;
+	public const int NameMaxLength = 200;&#xD;
+&#xD;
 	public string Name { get; private set; } = String.Empty;&#xD;
     public DateTimeOffset CreatedOn { get; private set; }&#xD;
     public DateTimeOffset UpdatedOn { get; private set; }&#xD;
-    public Guid? CreatedById { get; private set; }&#xD;
-    public Guid? UpdatedById { get; private set; }&#xD;
+    public Guid CreatedById { get; private set; }&#xD;
+    public Guid UpdatedById { get; private set; }&#xD;
 &#xD;
-    public User? CreatedBy { get; private set; }&#xD;
-    public User? UpdatedBy { get; private set; }&#xD;
+    public User CreatedBy { get; private set; } = null!;&#xD;
+    public User UpdatedBy { get; private set; } = null!; &#xD;
 &#xD;
     public static $NAME$ Create($NAME$CreateOrUpdate.Command command)&#xD;
     {&#xD;
@@ -707,7 +709,7 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=FileName/@EntryIndexedValue">EntityConfiguration</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Description/@EntryValue">Blueprint Entity Configuration</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Description/@EntryValue">Blueprint-02-Entity Configuration</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
@@ -783,18 +785,18 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 using Microsoft.EntityFrameworkCore;&#xD;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;&#xD;
 &#xD;
-namespace $NAMESPACE$&#xD;
+namespace $NAMESPACE$;&#xD;
 &#xD;
 [UsedImplicitly]&#xD;
 public class $CLASS$ : IEntityTypeConfiguration&lt;$NAME$&gt;&#xD;
 {&#xD;
     public void Configure(EntityTypeBuilder&lt;$NAME$&gt; builder)&#xD;
     {&#xD;
-        builder.Property(x =&gt; x.Name).IsRequired().HasMaxLength(200);&#xD;
+        builder.Property(x =&gt; x.Name).IsRequired().HasMaxLength($NAME$.NameMaxLength);&#xD;
         builder.Property(x =&gt; x.CreatedOn).IsRequired();&#xD;
 &#xD;
-        builder.HasMany(x =&gt; x.Created$NAME$s).WithOne(x =&gt; x.CreatedBy!);&#xD;
-        builder.HasMany(x =&gt; x.Updated$NAME$s).WithOne(x =&gt; x.UpdatedBy!);&#xD;
+        builder.HasOne(x =&gt; x.CreatedBy).WithMany();&#xD;
+        builder.HasOne(x =&gt; x.UpdatedBy).WithMany();&#xD;
     }&#xD;
 }&#xD;
 &#xD;
