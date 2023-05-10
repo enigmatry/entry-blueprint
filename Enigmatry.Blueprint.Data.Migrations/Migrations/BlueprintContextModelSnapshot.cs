@@ -17,12 +17,12 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Products.Product", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -320,37 +320,41 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
                 {
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "CreatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "CreatedBy")
                         .WithMany("CreatedUsers")
-                        .HasForeignKey("CreatedById");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "UpdatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "UpdatedBy")
                         .WithMany("UpdatedUsers")
-                        .HasForeignKey("UpdatedById");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("CreatedBy");
 
                     b.Navigation("UpdatedBy");
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Products.Product", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
                 {
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "CreatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "CreatedBy")
                         .WithMany("CreatedProducts")
-                        .HasForeignKey("CreatedById");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "UpdatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "UpdatedBy")
                         .WithMany("UpdatedProducts")
-                        .HasForeignKey("UpdatedById");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("CreatedBy");
 
                     b.Navigation("UpdatedBy");
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
                 {
                     b.Navigation("CreatedProducts");
 
