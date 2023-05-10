@@ -596,7 +596,8 @@ public record $NAME$UpdatedDomainEvent(string Name) : AuditableDomainEvent("$NAM
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/Order/@EntryValue">7</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/SectionPlain/Text/@EntryValue">// delete this file&#xD;
 // without it the R# file template does not work as expected for previous file&#xD;
-</s:String>
+&#xD;
+.</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$QueryableExtensionsFixture.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorName/@EntryValue">manual</s:String>
@@ -667,7 +668,7 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
     public Guid UpdatedById { get; private set; }&#xD;
 &#xD;
     public User CreatedBy { get; private set; } = null!;&#xD;
-    public User UpdatedBy { get; private set; } = null!; &#xD;
+    public User UpdatedBy { get; private set; } = null!;&#xD;
 &#xD;
     public static $NAME$ Create($NAME$CreateOrUpdate.Command command)&#xD;
     {&#xD;
@@ -707,19 +708,30 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=FileName/@EntryIndexedValue">EntityConfiguration</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=FileName/@EntryIndexedValue">$NAME$EntityConfiguration</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Description/@EntryValue">Blueprint-02-Entity Configuration</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/Order/@EntryValue">2</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=ENTITY/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=ENTITY/Order/@EntryValue">1</s:Int64>
 	
 	
 	
 	
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAME/Order/@EntryValue">0</s:Int64>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -728,7 +740,7 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/Order/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
 	
 	
 	
@@ -781,6 +793,7 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 	
 	
 	
+	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Text/@EntryValue">using JetBrains.Annotations;&#xD;
 using Microsoft.EntityFrameworkCore;&#xD;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;&#xD;
@@ -788,11 +801,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;&#xD;
 namespace $NAMESPACE$;&#xD;
 &#xD;
 [UsedImplicitly]&#xD;
-public class $CLASS$ : IEntityTypeConfiguration&lt;$NAME$&gt;&#xD;
+public class $CLASS$ : IEntityTypeConfiguration&lt;$ENTITY$&gt;&#xD;
 {&#xD;
-    public void Configure(EntityTypeBuilder&lt;$NAME$&gt; builder)&#xD;
+    public void Configure(EntityTypeBuilder&lt;$ENTITY$&gt; builder)&#xD;
     {&#xD;
-        builder.Property(x =&gt; x.Name).IsRequired().HasMaxLength($NAME$.NameMaxLength);&#xD;
+        builder.Property(x =&gt; x.Name).IsRequired().HasMaxLength($ENTITY$.NameMaxLength);&#xD;
         builder.Property(x =&gt; x.CreatedOn).IsRequired();&#xD;
 &#xD;
         builder.HasOne(x =&gt; x.CreatedBy).WithMany();&#xD;
