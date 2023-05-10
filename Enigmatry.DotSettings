@@ -18,44 +18,62 @@
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/CustomProperties/=FileName/@EntryIndexedValue">$Name$</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/CustomProperties/=FileName/@EntryIndexedValue">Get$Entities$</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Description/@EntryValue">Blueprint Feature Get Multiple Request</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Description/@EntryValue">Blueprint-04-Feature Get Multiple Request</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=CLASS/Order/@EntryValue">0</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=CLASS/Order/@EntryValue">1</s:Int64>
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAME/Order/@EntryValue">2</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAME/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAME/Order/@EntryValue">3</s:Int64>
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAMESPACE/Order/@EntryValue">3</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=ROOTNAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=ROOTNAMESPACE/Expression/@EntryValue">getSolutionName()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=ROOTNAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=ROOTNAMESPACE/Order/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Field/=ROOTNAMESPACE/Order/@EntryValue">2</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Reformat/@EntryValue">True</s:Boolean>
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
-	
-	
-	
-	
-	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=BCC5C345F189F74BBD6B27B6760CDDE9/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=BCC5C345F189F74BBD6B27B6760CDDE9/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig File="$NAME$DeleteMe.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=BCC5C345F189F74BBD6B27B6760CDDE9/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=BCC5C345F189F74BBD6B27B6760CDDE9/Order/@EntryValue">0</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Section/=BCC5C345F189F74BBD6B27B6760CDDE9/SectionPlain/Text/@EntryValue">// delete this file&#xD;
+// without it the R# file template does not work as expected for previous file&#xD;
+&#xD;
+.</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Text/@EntryValue">using System;&#xD;
-using System.Threading;&#xD;
-using System.Threading.Tasks;&#xD;
-using AutoMapper;&#xD;
+	
+	
+	
+	
+	
+	
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=01413C014EE2184E93CB0CDECC2E24B8/Text/@EntryValue">using AutoMapper;&#xD;
 using AutoMapper.QueryableExtensions;&#xD;
+using $ROOTNAMESPACE$.Domain.$NAME$s;&#xD;
 using Enigmatry.Entry.Core.Data;&#xD;
 using Enigmatry.Entry.Core.EntityFramework;&#xD;
 using Enigmatry.Entry.Core.Paging;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s;&#xD;
 using JetBrains.Annotations;&#xD;
 &#xD;
-namespace $NAMESPACE$&#xD;
+namespace $NAMESPACE$;&#xD;
 &#xD;
 public static class $CLASS$&#xD;
 {&#xD;
@@ -156,11 +174,12 @@ public static class $CLASS$&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/CustomProperties/=FileName/@EntryIndexedValue">Controller</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Description/@EntryValue">Blueprint Feature Controller</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/CustomProperties/=FileName/@EntryIndexedValue">$Entity$Controller</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Description/@EntryValue">Blueprint-05-Feature Controller</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME/InitialRange/@EntryValue">2</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME/InitialRange/@EntryValue">10</s:Int64>
+	
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME/Order/@EntryValue">1</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME_005FLOWER/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME_005FLOWER/Expression/@EntryValue">decapitalize(NAME)</s:String>
@@ -179,6 +198,7 @@ public static class $CLASS$&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=ROOTNAMESPACE/Expression/@EntryValue">getSolutionName()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=ROOTNAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=ROOTNAMESPACE/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Reformat/@EntryValue">True</s:Boolean>
 	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
@@ -186,20 +206,15 @@ public static class $CLASS$&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" File="$NAME$Fixture.cs" /&gt;</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/LocationSelectorName/@EntryValue">manual</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/Order/@EntryValue">0</s:Int64>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/SectionPlain/Text/@EntryValue">using System;&#xD;
-using System.Linq;&#xD;
-using System.Net.Http;&#xD;
-using System.Threading.Tasks;&#xD;
-using Enigmatry.Entry.AspNetCore.Tests.Http;&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=52509FF1230C8F4EB70802F20826C6C4/SectionPlain/Text/@EntryValue">using Enigmatry.Entry.AspNetCore.Tests.Http;&#xD;
 using Enigmatry.Entry.Core;&#xD;
 using Enigmatry.Entry.Core.Paging;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s.Commands;&#xD;
+using $ROOTNAMESPACE$.Domain.$NAME$s;&#xD;
+using $ROOTNAMESPACE$.Api.Tests.Infrastructure.Api;&#xD;
+using $ROOTNAMESPACE$.Domain.$NAME$s.Commands;&#xD;
 using $PROJECTNAMESPACE$.Tests.$NAME$s;&#xD;
-using FluentAssertions;&#xD;
-using NUnit.Framework;&#xD;
 &#xD;
-namespace $PROJECTNAMESPACE$&#xD;
+namespace $PROJECTNAMESPACE$;&#xD;
 &#xD;
 [Category("integration")]&#xD;
 public class $NAME$sControllerFixture : IntegrationFixtureBase&#xD;
@@ -260,20 +275,24 @@ public class $NAME$sControllerFixture : IntegrationFixtureBase&#xD;
 }&#xD;
 &#xD;
 </s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" File="$NAME$DeleteMe.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/Order/@EntryValue">1</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Section/=F1E7B90E03950D48A84D32A6D3700E46/SectionPlain/Text/@EntryValue">// delete this file&#xD;
+// without it the R# file template does not work as expected for previous file</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Text/@EntryValue">using System;&#xD;
-using System.Net.Mime;&#xD;
-using System.Threading.Tasks;&#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Text/@EntryValue">using System.Net.Mime;&#xD;
 using Enigmatry.Entry.AspNetCore;&#xD;
 using Enigmatry.Entry.Core.Data;&#xD;
 using Enigmatry.Entry.Core.Paging;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s.Commands;&#xD;
+using $ROOTNAMESPACE$.Domain.$NAME$s;&#xD;
+using $ROOTNAMESPACE$.Domain.$NAME$s.Commands;&#xD;
 using MediatR;&#xD;
-using Microsoft.AspNetCore.Http;&#xD;
 using Microsoft.AspNetCore.Mvc;&#xD;
 &#xD;
-namespace $NAMESPACE$&#xD;
+namespace $NAMESPACE$;&#xD;
 &#xD;
 [Produces(MediaTypeNames.Application.Json)]&#xD;
 [Route("[controller]")]&#xD;
@@ -352,57 +371,38 @@ public static class $TypeName$EnumerableExtensions&#xD;
         }&#xD;
     }</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=40C163D436D8ED48A6D01A0AFEFC5556/@KeyIndexDefined">False</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/CustomProperties/=FileName/@EntryIndexedValue">ComponentValidationConfiguration</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Description/@EntryValue">Blueprint Code Generation Validation Configuration</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=CLASS/Order/@EntryValue">0</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=FEATURENAME/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=FEATURENAME/InitialRange/@EntryValue">2</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=FEATURENAME/Order/@EntryValue">3</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=GETDETAILSREQUESTNAME/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=GETDETAILSREQUESTNAME/Order/@EntryValue">4</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=NAMESPACE/Order/@EntryValue">1</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/Expression/@EntryValue">getSolutionName()</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Field/=ROOTNAMESPACE/Order/@EntryValue">2</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Reformat/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=464799E75D34E549858D75E13B6CA3AF/Text/@EntryValue">using $ROOTNAMESPACE$.Api.Features.$FEATURENAME$;&#xD;
-using Enigmatry.Entry.CodeGeneration.Validation;&#xD;
-using System.Text.RegularExpressions;&#xD;
-&#xD;
-namespace $NAMESPACE$&#xD;
-&#xD;
-public class $CLASS$ : ValidationConfiguration&lt;$GETDETAILSREQUESTNAME$.Response&gt;&#xD;
-{&#xD;
-    public $CLASS$()&#xD;
-    {&#xD;
-        RuleFor(x =&gt; x.Name)&#xD;
-            .IsRequired()&#xD;
-            .MinLength(10)&#xD;
-            .MaxLength(200)&#xD;
-			.EmailAddress()&#xD;
-            .Match(new Regex("/^[A-Z]{4}[1-9]{8}$/mu"))&#xD;
-            .WithMessage("Name must be in 4 letter 8 digits format (e.g. ABCD12345678)");&#xD;
-    }&#xD;
-}&#xD;
-</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=FileName/@EntryIndexedValue">EntityName</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=FileName/@EntryIndexedValue">$Entity$</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Description/@EntryValue">Blueprint-01-Entity</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
@@ -596,7 +596,6 @@ public record $NAME$UpdatedDomainEvent(string Name) : AuditableDomainEvent("$NAM
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/Order/@EntryValue">7</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=B6B43BA48520614A99CC5E040CAF12A4/SectionPlain/Text/@EntryValue">// delete this file&#xD;
 // without it the R# file template does not work as expected for previous file&#xD;
-&#xD;
 .</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Section/=D5960C6E28AE6C489092B10D9500FF61/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Project="$PROJECT$.Tests" Folder="$RELPATH$" File="$NAME$QueryableExtensionsFixture.cs" /&gt;</s:String>
@@ -708,15 +707,17 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=FileName/@EntryIndexedValue">$NAME$EntityConfiguration</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=FileName/@EntryIndexedValue">$Entity$EntityConfiguration</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Description/@EntryValue">Blueprint-02-Entity Configuration</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/Order/@EntryValue">2</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=ENTITY/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=ENTITY/Order/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=CLASS/Order/@EntryValue">1</s:Int64>
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAME/Order/@EntryValue">2</s:Int64>
 	
 	
 	
@@ -741,6 +742,7 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Reformat/@EntryValue">True</s:Boolean>
 	
 	
 	
@@ -752,6 +754,14 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
 	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Section/=B7D98E957B4D1E41873A13CCD9F284C6/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Section/=B7D98E957B4D1E41873A13CCD9F284C6/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig File="$NAME$DeleteMe.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Section/=B7D98E957B4D1E41873A13CCD9F284C6/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Section/=B7D98E957B4D1E41873A13CCD9F284C6/Order/@EntryValue">0</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/Section/=B7D98E957B4D1E41873A13CCD9F284C6/SectionPlain/Text/@EntryValue">// delete this file&#xD;
+// without it the R# file template does not work as expected for previous file&#xD;
+.</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	
 	
 	
@@ -801,11 +811,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;&#xD;
 namespace $NAMESPACE$;&#xD;
 &#xD;
 [UsedImplicitly]&#xD;
-public class $CLASS$ : IEntityTypeConfiguration&lt;$ENTITY$&gt;&#xD;
+public class $CLASS$ : IEntityTypeConfiguration&lt;$NAME$&gt;&#xD;
 {&#xD;
-    public void Configure(EntityTypeBuilder&lt;$ENTITY$&gt; builder)&#xD;
+    public void Configure(EntityTypeBuilder&lt;$NAME$&gt; builder)&#xD;
     {&#xD;
-        builder.Property(x =&gt; x.Name).IsRequired().HasMaxLength($ENTITY$.NameMaxLength);&#xD;
+        builder.Property(x =&gt; x.Name).IsRequired().HasMaxLength($NAME$.NameMaxLength);&#xD;
         builder.Property(x =&gt; x.CreatedOn).IsRequired();&#xD;
 &#xD;
         builder.HasOne(x =&gt; x.CreatedBy).WithMany();&#xD;
@@ -904,45 +914,75 @@ public static class $TypeName$&#xD;
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/CustomProperties/=FileName/@EntryIndexedValue">$Name$</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Description/@EntryValue">Blueprint Feature Get Details Request</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/CustomProperties/=FileName/@EntryIndexedValue">Get$Entity$</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Description/@EntryValue">Blueprint-03-Feature Get Details Request</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/Order/@EntryValue">3</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=CLASS/Order/@EntryValue">2</s:Int64>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAME/Order/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAME/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAME/Order/@EntryValue">3</s:Int64>
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=NAMESPACE/Order/@EntryValue">1</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/Expression/@EntryValue">getSolutionName()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/Order/@EntryValue">2</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Field/=ROOTNAMESPACE/Order/@EntryValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Reformat/@EntryValue">True</s:Boolean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
-	
-	
-	
-	
-	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=28E01DE379553D4287BCF5440C08C0CE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=28E01DE379553D4287BCF5440C08C0CE/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig File="$NAME$DeleteMe.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=28E01DE379553D4287BCF5440C08C0CE/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=28E01DE379553D4287BCF5440C08C0CE/Order/@EntryValue">0</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Section/=28E01DE379553D4287BCF5440C08C0CE/SectionPlain/Text/@EntryValue">// delete this file&#xD;
+// without it the R# file template does not work as expected for previous file&#xD;
+&#xD;
+.</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Text/@EntryValue">using System;&#xD;
-using System.Linq;&#xD;
-using System.Threading;&#xD;
-using System.Threading.Tasks;&#xD;
-using AutoMapper;&#xD;
+	
+	
+	
+	
+	
+	
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6E290DFAEE6DF24F8AAA75EE9DD26E8F/Text/@EntryValue">using AutoMapper;&#xD;
+using $ROOTNAMESPACE$.Domain.$NAME$s;&#xD;
 using Enigmatry.Entry.Core.Data;&#xD;
 using Enigmatry.Entry.Core.Entities;&#xD;
 using Enigmatry.Entry.Core.EntityFramework;&#xD;
-using $ROOTNAMESPACE$.Model.$NAME$s;&#xD;
 using JetBrains.Annotations;&#xD;
 using MediatR;&#xD;
 &#xD;
-namespace $NAMESPACE$&#xD;
+namespace $NAMESPACE$;&#xD;
 &#xD;
 public static class $CLASS$&#xD;
 {&#xD;
@@ -1150,7 +1190,7 @@ public class $EntityName$Fixture : IntegrationFixtureBase&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/CustomProperties/=FileName/@EntryIndexedValue">ComponentConfiguration</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Description/@EntryValue">Blueprint Code Generation Form Configuration</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Description/@EntryValue">Blueprint-06-Code Generation Form Configuration</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=FEB6F8FCA144744CBE7AD93520A0FF4A/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
