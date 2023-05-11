@@ -1,3 +1,12 @@
+@mixin font-face($family, $weight: normal, $stretch: normal, $style: normal) {
+	font: {
+		family: $family;
+		stretch: $stretch;
+		style: $style;
+		weight: $weight;
+	};
+}
+
 @mixin -font($family, $size) {
 	font: {
 		family: $family;

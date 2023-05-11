@@ -1,0 +1,20 @@
+@use 'typography/fonts';
+
+$src-main-normal: url('../../../../assets/fonts/OpenSans/OpenSans-Regular.eot') format('eot'), url('../../../../assets/fonts/OpenSans/OpenSans-Regular.woff') format('woff'), url('../../../../assets/fonts/OpenSans/OpenSans-Regular.woff2') format('woff2'), url('../../../../assets/fonts/OpenSans/OpenSans-Regular.ttf') format('ttf');
+$src-main-bolded: url('../../../../assets/fonts/OpenSans/OpenSans-Bold.eot') format('eot'), url('../../../../assets/fonts/OpenSans/OpenSans-Bold.woff') format('woff'), url('../../../../assets/fonts/OpenSans/OpenSans-Bold.woff2') format('woff2'), url('../../../../assets/fonts/OpenSans/OpenSans-Bold.ttf') format('ttf');
+$src-title-bolded: url('../../../../assets/fonts/Montserrat/Montserrat-Bold.eot') format('eot'), url('../../../../assets/fonts/Montserrat/Montserrat-Bold.woff') format('woff'), url('../../../../assets/fonts/Montserrat/Montserrat-Bold.woff2') format('woff2'), url('../../../../assets/fonts/Montserrat/Montserrat-Bold.ttf') format('ttf');
+
+@font-face {
+	@include fonts.font-face('OpenSans', normal, normal);
+	src: $src-main-normal;
+}
+
+@font-face {
+	@include fonts.font-face('OpenSans Bold', normal, bold);
+	src: $src-main-bolded;
+}
+
+@font-face {
+	@include fonts.font-face('Montserrat Bold', normal, bold);
+	src: $src-title-bolded;
+}
