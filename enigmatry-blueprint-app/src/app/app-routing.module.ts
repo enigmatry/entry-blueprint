@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/users', pathMatch: 'full' },
+    {
+        path: '',
+        redirectTo: '/ckeditor-demo',
+        pathMatch: 'full'
+    },
     {
         path: 'users',
         loadChildren: () => import('./features/users/users.module').then(module => module.UsersModule)
@@ -10,6 +14,11 @@ const routes: Routes = [
     {
         path: 'products',
         loadChildren: () => import('./features/products/products.module').then(module => module.ProductsModule)
+    },
+    {
+        path: 'ckeditor-demo',
+        loadChildren: () => import('./features/ckeditor-demo/ckeditor-demo.module')
+            .then(module => module.CkeditorDemoModule)
     }
 ];
 

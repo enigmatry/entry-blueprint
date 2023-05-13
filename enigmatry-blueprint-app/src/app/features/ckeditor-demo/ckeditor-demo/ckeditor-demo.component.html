@@ -1,0 +1,3 @@
+<app-form-wrapper [formComponent]="formComponent">
+  <app-g-ckeditor-demo #formComponent [model]="model" (save)="save($event)" (cancel)="location.back()"></app-g-ckeditor-demo>
+</app-form-wrapper>

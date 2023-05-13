@@ -36,10 +36,6 @@ export interface IUsersClient {
      * @param id Id
      */
     get(id: string): Observable<GetUserDetailsResponse>;
-    /**
-     * Gets secret from Azure Key Vault
-     */
-    getSecret(): Observable<string>;
 }
 
 @Injectable({
@@ -256,58 +252,6 @@ export class UsersClient implements IUsersClient {
             }));
         }
         return _observableOf<GetUserDetailsResponse>(null as any);
-    }
-
-    /**
-     * Gets secret from Azure Key Vault
-     */
-    getSecret(): Observable<string> {
-        let url_ = this.baseUrl + "/Users/secret";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetSecret(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetSecret(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<string>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<string>;
-        }));
-    }
-
-    protected processGetSecret(response: HttpResponseBase): Observable<string> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<string>(null as any);
     }
 }
 
@@ -744,6 +688,72 @@ export class ProductsClient implements IProductsClient {
             }));
         }
         return _observableOf<IsProductNameUniqueResponse>(null as any);
+    }
+}
+
+export interface ICkeditorDemoClient {
+    get(): Observable<GetDescriptionResponse>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class CkeditorDemoClient implements ICkeditorDemoClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44394";
+    }
+
+    get(): Observable<GetDescriptionResponse> {
+        let url_ = this.baseUrl + "/CkeditorDemo";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGet(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<GetDescriptionResponse>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<GetDescriptionResponse>;
+        }));
+    }
+
+    protected processGet(response: HttpResponseBase): Observable<GetDescriptionResponse> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = GetDescriptionResponse.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<GetDescriptionResponse>(null as any);
     }
 }
 
@@ -1460,6 +1470,42 @@ export interface IProductCreateOrUpdateCommand {
     freeShipping?: boolean;
     hasDiscount?: boolean;
     discount?: number | undefined;
+}
+
+export class GetDescriptionResponse implements IGetDescriptionResponse {
+    description?: string;
+
+    constructor(data?: IGetDescriptionResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.description = _data["description"];
+        }
+    }
+
+    static fromJS(data: any): GetDescriptionResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetDescriptionResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["description"] = this.description;
+        return data;
+    }
+}
+
+export interface IGetDescriptionResponse {
+    description?: string;
 }
 
 export class ApiException extends Error {
