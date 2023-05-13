@@ -8,6 +8,9 @@ import { ENTRY_CKEDITOR_OPTIONS, FormlyCkeditorModule } from '@enigmatry/entry-f
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+// Or use a custom CKEditor 5 build
+// import * as Editor from 'src/ckeditor5-build/build/ckeditor';
+
 @NgModule({
   declarations: [
     CkeditorDemoComponent

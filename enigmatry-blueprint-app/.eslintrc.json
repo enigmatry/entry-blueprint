@@ -1,3 +1,6 @@
 {
-  "extends": "@enigmatry/eslint-config"
+  "extends": "@enigmatry/eslint-config",
+  "rules": {
+    "capitalized-comments": "off"
+  }
 }
