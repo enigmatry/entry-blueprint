@@ -6,3 +6,5 @@ src/polyfills.ts
 src/@enigmatry/**
 
 **/api-reference.ts
+
+src/ckeditor5-build/**
