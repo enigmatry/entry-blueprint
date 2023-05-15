@@ -1,4 +1,12 @@
 {
+  "ignoreFiles": [
+    "src/assets/fonts/components/icomoon/**/*.css",
+    "src/assets/fonts/forms/icomoon/**/*.css",
+    "src/assets/fonts/tables/icomoon/**/*.css",
+    "src/styles/temp/forms/partials/vendors/libraries/icomoon/**/*.scss",
+    "src/styles/temp/tables/partials/vendors/libraries/icomoon/**/*.scss",
+    "src/styles/partials/vendors/libraries/icomoon/**/*.scss"
+  ],
   "extends": "@enigmatry/stylelint-config",
   "rules": {
     "value-keyword-case": [
