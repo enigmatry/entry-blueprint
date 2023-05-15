@@ -6,17 +6,6 @@ $src-main-normal: url('#{$font-path}OpenSans/OpenSans-Regular.eot') format('eot'
 $src-main-bolded: url('#{$font-path}OpenSans/OpenSans-Bold.eot') format('eot'), url('#{$font-path}OpenSans/OpenSans-Bold.woff') format('woff'), url('#{$font-path}OpenSans/OpenSans-Bold.woff2') format('woff2'), url('#{$font-path}OpenSans/OpenSans-Bold.ttf') format('ttf');
 $src-title-bolded: url('#{$font-path}Montserrat/Montserrat-Bold.eot') format('eot'), url('#{$font-path}Montserrat/Montserrat-Bold.woff') format('woff'), url('#{$font-path}Montserrat/Montserrat-Bold.woff2') format('woff2'), url('#{$font-path}Montserrat/Montserrat-Bold.ttf') format('ttf');
 
-@font-face {
-	@include fonts.font-face('OpenSans', normal, normal);
-	src: $src-main-normal;
-}
-
-@font-face {
-	@include fonts.font-face('OpenSans Bold', normal, bold);
-	src: $src-main-bolded;
-}
-
-@font-face {
-	@include fonts.font-face('Montserrat Bold', normal, bold);
-	src: $src-title-bolded;
-}
+@include fonts.font-face('OpenSans', $src-main-normal);
+@include fonts.font-face('OpenSans Bold', $src-main-bolded);
+@include fonts.font-face('Montserrat Bold', $src-title-bolded);
