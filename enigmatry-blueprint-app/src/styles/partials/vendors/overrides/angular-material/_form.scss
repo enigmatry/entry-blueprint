@@ -1,6 +1,18 @@
-$border-color: #949494;
+// TODO Replace $input-background with global once vars are merged
+// @use 'variables' as vars;
+$input-background: #FFF; 
+$border-color: transparent;
 
 .mat-form-field-appearance-outline {
+	.mat-form-field-outline {
+		background-color: $input-background;
+	}
+
+	.mat-form-field-infix {
+		padding: 14px 0;
+		border-top-width: 9px;
+	}
+	
 	.mat-form-field-wrapper {
 		.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
 			border-color: $border-color;
@@ -11,7 +23,7 @@ $border-color: #949494;
 		.mat-form-field-wrapper {
 			/* stylelint-disable-next-line selector-max-combinators, selector-max-compound-selectors */
 			.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
-				border-color: #000;
+				border-color: $border-color;
 			}
 		}
 	}
