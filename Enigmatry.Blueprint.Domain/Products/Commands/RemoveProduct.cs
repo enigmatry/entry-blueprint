@@ -13,11 +13,11 @@ public static class RemoveProduct
     }
 
     [UsedImplicitly]
-    public class RequestHanlder : IRequestHandler<Command>
+    public class RequestHandler : IRequestHandler<Command>
     {
         private readonly IRepository<Product> _repository;
 
-        public RequestHanlder(IRepository<Product> repository)
+        public RequestHandler(IRepository<Product> repository)
         {
             _repository = repository;
         }
