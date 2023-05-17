@@ -8,6 +8,10 @@ $border-color: transparent;
 		background-color: $input-background;
 	}
 
+	&.mat-form-field-should-float .mat-form-field-label {
+		top: 36px;
+	}
+
 	.mat-form-field-infix {
 		padding: 14px 0;
 		border-top-width: 9px;
@@ -35,4 +39,8 @@ $border-color: transparent;
 			padding: 0;
 		}
 	}
+}
+
+.entry-header {
+	background-color: #C5C555;
 }

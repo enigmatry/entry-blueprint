@@ -1,3 +1,24 @@
+<header class="entry-header">
+    <div class="container">
+        <div class="space-between">
+            <h1 class="header-item">Calculations</h1>
+            <div class="action-buttons header-item">
+                <button class="primary-button item first-item">Import</button>
+                <button class="accent-button item">Add new</button>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-6 col-md-4 col-lg-2">
+                <mat-form-field appearance="outline">
+                    <mat-label for="number">Number</mat-label>
+                    <input id="number" matInput>
+
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</header>
+
 <app-g-user-list
     [data]="data | async" 
     [loading]="loading"
