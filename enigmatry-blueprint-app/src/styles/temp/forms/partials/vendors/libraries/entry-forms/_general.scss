@@ -1,0 +1,41 @@
+@use 'entry-form/src/styles/modules/generator' as form-theme-generator;
+@use '../../../../modules/variables' as vars;
+
+@use 'sass:list';
+
+$theme: (
+	field: (
+		infix-padding-top: 14px,
+		infix-padding-bottom: 14px,
+		label-color: #0000008A,
+		underline-display: block,
+		outline: (
+			border: none,
+			border-hover: 1px solid #EBEBEB,
+			border-right: none,
+			border-left: none,
+			disabled-background: #F5F5F5,
+			disabled-hover: 1px solid #EBEBEB, 
+		)
+	),
+	checkbox: (
+		width: 20px,
+		height: 20px,
+		background-color: #FFF,
+		checkmark-color: #000,
+		selected-checkmark-color: #000,
+		selected-background-color: #FFF,
+		selected-border-color: #000,
+		border: 2px solid #0000008A,
+		border-hover: 2px solid #0000008A,
+		border-radius: 0,
+		label-breaking: nowrap,
+	),
+    
+	radio-button: (
+		align: flex-start,
+		white-space: nowrap,
+	),
+);
+
+@include form-theme-generator.generate($theme);
