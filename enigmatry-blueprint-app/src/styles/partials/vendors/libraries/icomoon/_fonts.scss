@@ -1,4 +1,4 @@
-$path: '../../../../../assets/fonts/components/icomoon/';
+$path: '../../../../../assets/fonts/components/icomoon';
 
 @font-face {
 	font: {
@@ -7,8 +7,11 @@ $path: '../../../../../assets/fonts/components/icomoon/';
 		style: normal;
 		display: block;
 	}
-	src: url('#{path}fonts/icomoon.eot?8bg5a9');
-	src: url('fonts/icomoon.eot?8bg5a9#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?8bg5a9') format('truetype'), url('fonts/icomoon.woff?8bg5a9') format('woff'), url('fonts/icomoon.svg?8bg5a9#icomoon') format('svg');
+	src: url('#{$path}/fonts/icomoon.eot?8bg5a9');
+	src: url('#{$path}/fonts/icomoon.eot?8bg5a9#iefix') 
+			format('embedded-opentype'), url('#{$path}/fonts/icomoon.ttf?8bg5a9') 
+			format('truetype'), url('#{$path}/fonts/icomoon.woff?8bg5a9') format('woff'), 
+			url('#{$path}/fonts/icomoon.svg?8bg5a9#icomoon') format('svg');
 }
 
 [class ^= 'icon-'], [class *= ' icon-'] {
