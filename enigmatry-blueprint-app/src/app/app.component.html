@@ -1,8 +1,14 @@
 <div class="main-menu">
     <button class="button primary" [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
-    <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
+        <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
+        <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
+    </mat-menu>
+    <button class="button primary" [matMenuTriggerFor]="dialogs" style="margin-left: 10px;">Dialogs</button>
+    <mat-menu #dialogs="matMenu">
+        <button mat-menu-item (click)="openAlertDialog()">Alert</button>
+        <button mat-menu-item (click)="openConfirmDialog()">Confirm</button>
+        <button mat-menu-item (click)="openFormDialog()">Form</button>
     </mat-menu>
 </div>
 
