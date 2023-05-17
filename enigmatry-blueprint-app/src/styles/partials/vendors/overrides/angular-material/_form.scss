@@ -1,41 +1,9 @@
-// TODO Replace $input-background with global once vars are merged
-// @use 'variables' as vars;
-$input-background: #FFF; 
-$border-color: transparent;
+@use '../../../../modules/variables' as vars;
 
 .mat-form-field-appearance-outline {
-	.mat-form-field-outline {
-		border-bottom: 1px solid;
-		background-color: $input-background;
-
-		// TODO: remove this once updated on entry forms https://jira.enigmatry.com/browse/ETL-482
-		.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
-			border-color: $border-color;
-		}
-	}
-
-	&.mat-form-field-should-float .mat-form-field-label {
-		top: 36px;
-	}
-
-	.mat-form-field-infix {
-		border-top-width: 9px;
-	}
-
-	.mat-form-field-outline-thick {
-		.mat-form-field-wrapper {
-			/* stylelint-disable-next-line selector-max-combinators, selector-max-compound-selectors */
-			.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
-				border-color: $border-color;
-			}
-		}
-	}
-}
-
-.mat-form-field-appearance-standard {
-	&.mat-form-field-type-checkbox {
-		.mat-form-field-wrapper, .mat-form-field-flex {
-			padding: 0;
+	&.mat-focused, &:hover {
+		.mat-form-field-outline {
+			border-bottom: 2px solid vars.$primary;
 		}
 	}
 }

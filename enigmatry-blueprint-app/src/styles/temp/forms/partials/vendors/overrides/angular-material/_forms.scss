@@ -1,0 +1,21 @@
+@use '../../../../modules/variables' as vars;
+$border-color: transparent;
+
+.mat-form-field-appearance-outline {
+	.mat-form-field-flex {
+		background-color: vars.$input-background;
+
+		// TODO: remove this once updated on entry forms https://jira.enigmatry.com/browse/ETL-482
+		.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+			border-color: $border-color;
+		}
+	}
+
+	&.mat-form-field-should-float .mat-form-field-label {
+		top: 36px;
+	}
+
+	.mat-form-field-infix {
+		border-top-width: 9px;
+	}
+}

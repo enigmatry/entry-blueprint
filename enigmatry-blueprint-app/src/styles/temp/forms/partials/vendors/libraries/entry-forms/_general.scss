@@ -11,11 +11,11 @@ $theme: (
 		underline-display: block,
 		outline: (
 			border: none,
-			border-hover: 1px solid #EBEBEB,
+			border-hover: none,
 			border-right: none,
 			border-left: none,
-			disabled-background: #F5F5F5,
-			disabled-hover: 1px solid #EBEBEB, 
+			disabled-background: vars.$disabled,
+			disabled-hover: none, 
 		)
 	),
 	checkbox: (

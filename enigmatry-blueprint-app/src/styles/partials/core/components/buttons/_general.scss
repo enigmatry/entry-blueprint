@@ -24,7 +24,7 @@
 		background-color: vars.$primary;
 
 		&:hover {
-			background-color: vars.$primary-hover;
+			background-color: vars.$primary-light;
 		}
 	}
 
@@ -32,7 +32,7 @@
 		background-color: vars.$accent;
 
 		&:hover {
-			background-color: vars.$accent-hover;
+			background-color: vars.$accent-light;
 		}
 	}
 }
