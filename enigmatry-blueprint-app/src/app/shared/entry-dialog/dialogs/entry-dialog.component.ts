@@ -1,8 +1,8 @@
 import { Component, HostListener, Input, TemplateRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { DEFAULT_ENTRY_DIALOG_BUTTONS_CONFIG, IEntryDialogButtonsConfig }
-from '../models/entry-dialog-buttons-config.interface';
+import { IEntryDialogButtonsConfig } from '../models/entry-dialog-buttons-config.interface';
+import { EntryDialogLocalization } from '../models/entry-dialog-localization';
 
 @Component({
     selector: 'app-entry-dialog',
@@ -11,7 +11,13 @@ from '../models/entry-dialog-buttons-config.interface';
 })
 export class EntryDialogComponent {
     @Input() title: string;
-    @Input() buttons: IEntryDialogButtonsConfig = DEFAULT_ENTRY_DIALOG_BUTTONS_CONFIG;
+    @Input() buttons = {
+        alignment: 'align-right',
+        submit: EntryDialogLocalization.confirm,
+        cancel: EntryDialogLocalization.cancel,
+        visible: true
+    } as IEntryDialogButtonsConfig;
+
     @Input() confirm: () => Observable<unknown> = () => of(true);
     @Input() cancel = () => this.close(false);
     @Input() disableConfirm = false;

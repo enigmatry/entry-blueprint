@@ -13,8 +13,8 @@ import { EntryDialogLocalization } from '../../models/entry-dialog-localization'
 export class EntryConfirmDialogComponent extends EntryDialogComponent {
   readonly buttons: IEntryDialogButtonsConfig = {
     alignment: 'align-right',
-    submit: this.data.confirmText ?? EntryDialogLocalization.confirm(),
-    cancel: this.data.cancelText ?? EntryDialogLocalization.cancel(),
+    submit: this.data.confirmText ?? EntryDialogLocalization.confirm,
+    cancel: this.data.cancelText ?? EntryDialogLocalization.cancel,
     visible: true
   };
 

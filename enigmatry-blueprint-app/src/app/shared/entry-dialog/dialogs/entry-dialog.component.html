@@ -7,6 +7,9 @@
         <button type="button" class="dialog-close-button" (click)="cancel()">
             <span class="icon-close dialog-close-icon"></span>
         </button>
+        <!-- <button mat-icon-button (click)="cancel()">
+            <mat-icon class="close-icon">close</mat-icon>
+        </button> -->
     </div>
 
     <mat-dialog-content
@@ -20,19 +23,21 @@
     </ng-template>
 
     <ng-template #defaultButtonsTemplate>
-        <div class="dialog-footer {{ buttons.alignment }}" *ngIf="buttons.visible">
+        <div *ngIf="buttons.visible" class="dialog-footer {{ buttons.alignment }}">
             <button
                 type="submit"
                 class="button button-accent dialog-footer-button"
                 cdkFocusInitial
-                (click)="onSubmit()"
-                >{{buttons.submit}}</button>
+                (click)="onSubmit()">{{buttons.submit}}</button>
             <button
                 type="button"
                 class="button button-primary dialog-footer-button"
-                *ngIf="buttons.cancel !== ''"
-                (click)="cancel()"
-                >{{buttons.cancel}}</button>
+                *ngIf="buttons.cancel"
+                (click)="cancel()">{{buttons.cancel}}</button>
         </div>
+        <!-- <div *ngIf="buttons.visible" class="dialog-footer {{ buttons.alignment }}">
+            <button mat-flat-button color="primary" (click)="onSubmit()">{{buttons.submit}}</button>
+            <button mat-flat-button (click)="cancel()">{{buttons.cancel}}</button>
+        </div> -->
     </ng-template>
 </div>

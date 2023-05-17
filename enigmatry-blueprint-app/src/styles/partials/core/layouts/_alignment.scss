@@ -1,0 +1,38 @@
+@use 'scss-foundation/src/modules/display/items';
+
+.space-between {
+	@include items.fully-align(center, space-between);
+}
+
+.space-evenly {
+	@include items.fully-align(center, space-evenly);
+}
+
+.align-center {
+	@include items.align-absolute-center();
+}
+
+.align-right {
+	@include items.fully-align(center, flex-end);
+}
+
+.align-top {
+	@include items.align(flex-start);
+}
+
+.align-vertical {
+	@include items.align(center);
+}
+
+.align-column {
+	@include items.fully-align(flex-start, flex-start, column);
+}
+
+.center-horizontal {
+	@include items.fully-align(stretch, center);
+}
+
+.no-wrap {
+	display: flex;
+	flex-wrap: nowrap;
+}

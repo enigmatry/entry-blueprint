@@ -1,0 +1,16 @@
+@use 'variables' as vars;
+
+.dialog-radio-buttons {
+	display: block;
+	padding: 10px 0;
+}
+
+.dialog-radio-button {
+	display: block;
+	margin-top: vars.$default-gap;
+	white-space: break;
+}
+
+.dialog-footer-button {
+	margin: 0 5px;
+}

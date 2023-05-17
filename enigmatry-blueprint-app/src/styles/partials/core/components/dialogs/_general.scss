@@ -1,0 +1,72 @@
+@use 'scss-foundation/src/modules/display/items';
+// @use 'typography/fonts' as fonts;
+// @use 'states/hover';
+@use 'variables' as vars;
+@use 'sass:color';
+
+// Local Variables
+$dialog-sm: 300px;
+$dialog-md: 600px;
+$dialog-lg: 900px;
+ 
+$material-default-spacing: 24px;
+$border-dark: #000;
+ 
+.dialog-container {
+	position: absolute !important;
+	top: vars.$large-gap;
+	width: 100%;
+	max: {
+		width: 700px !important;
+		height: calc(100% - 2 * vars.$large-gap) !important;
+	}
+    
+	&.wide {
+		max-width: 85% !important;
+	}
+
+	&.small {
+		width: 400px;
+	}
+}
+
+.dialog-form {
+	height: 100%;
+
+	.dialog-content {
+		// @include fonts.main-font();
+		margin: {
+			top: $material-default-spacing;
+			bottom: $material-default-spacing;
+		}
+
+		&.with-actions {
+			max-height: calc(100% - 115px) !important;
+		}
+	}
+}
+ 
+.dialog-header {
+	@include items.fully-align(center, space-between, row, nowrap);
+}
+
+.dialog-close-button {
+	margin-left: vars.$default-gap;
+	border: none;
+	background: none;
+
+	.dialog-close-icon {
+		// @include hover.default(vars.$body-font-color, vars.$accent);
+		font-size: 17px;
+	}
+}
+
+.dialog-title {
+	font-size: 24px;
+	line-height: 1.2;
+}
+
+.dialog-subtitle {
+	font-size: 18px;
+	text-transform: none;
+}
