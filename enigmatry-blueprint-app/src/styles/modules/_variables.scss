@@ -4,20 +4,13 @@ $breakpoints: (
 	desktop: (description: 'lg', size: 992px), 
 	largeDesktop: (description: 'xl', size: 1200px));
 
-$primary: #2581C4;
-$primary-hover: #EA518D;
+$primary: #484848;
+$primary-hover: #303030;
 
-$accent: #EA518D;
-$accent-hover: #2581C4;
-
-$background-dark: #323232;
+$accent: #06C;
+$accent-hover: #0053C0;
 
 $font-color-light: #FFF;
 
-$border-radius: 0;
-
-$default-gap: 12px;
-
-$default-transition: .4s;
-
-$disabled: #D9D9D9;
+$default-gap: 16px;
+$large-gap: calc(#{$default-gap} * 2);

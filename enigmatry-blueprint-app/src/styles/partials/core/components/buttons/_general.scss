@@ -1,57 +1,38 @@
 @use 'scss-foundation/src/modules/display/items';
 @use 'variables' as vars;
-@use 'typography/fonts';
-@use 'states/hover';
 
-.button, %button {
-	@include fonts.main-bolded-font(14px);
+.button {
 	display: inline-block;
 	position: relative;
-	padding: 10px 20px;
-	transition: background-color vars.$default-transition, color vars.$default-transition;
-	border: 1px solid transparent;
-	border-radius: vars.$border-radius;
+	padding: 10px 16px;
+	border: none;
+	border-radius: 4px;
 	background-color: transparent;
 	color: vars.$font-color-light;
-	line-height: 1.25;
-	cursor: pointer;
 	text: {
 		align: center;
 		decoration: none;
 	}
+	cursor: pointer;
+	font: {
+		family: 'Roboto';
+		size: 15px;
+		weight: 500;
+	}
 
-	&:disabled {
-		background-color: vars.$disabled;
-		cursor: not-allowed;
+	&.primary {
+		background-color: vars.$primary;
 
-		/* stylelint-disable-next-line selector-max-pseudo-class */
 		&:hover {
-			background-color: vars.$disabled;
+			background-color: vars.$primary-hover;
 		}
 	}
-}
 
-.button-primary {
-	@extend %button;
-	@include hover.primary-hover();
-}
+	&.accent {
+		background-color: vars.$accent;
 
-.button-accent {
-	@extend %button;
-	@include hover.accent-hover();
-}
-
-.button-dark {
-	@extend %button;
-	@include hover.background-hover(vars.$background-dark, vars.$primary);
-}
-
-.button-blank {
-	@extend %button;
-	@include fonts.main-font(14px);
-	color: vars.$primary;
-
-	&:hover {
-		color: vars.$accent;
+		&:hover {
+			background-color: vars.$accent-hover;
+		}
 	}
 }
