@@ -7,11 +7,11 @@ $path: '../../../../../../../assets/fonts/tables/icomoon/';
         style: normal;
         display: block;
     }
-    src:  url('#{path}fonts/icomoon.eot?5tnqmf');
-    src:  url('fonts/icomoon.eot?5tnqmf#iefix') format('embedded-opentype'),
-      url('fonts/icomoon.ttf?5tnqmf') format('truetype'),
-      url('fonts/icomoon.woff?5tnqmf') format('woff'),
-      url('fonts/icomoon.svg?5tnqmf#icomoon') format('svg');
+    src: url('#{$path}fonts/icomoon.eot?5tnqmf');
+    src: url('#{$path}fonts/icomoon.eot?5tnqmf#iefix') format('embedded-opentype'),
+         url('#{$path}fonts/icomoon.ttf?5tnqmf') format('truetype'),
+         url('#{$path}fonts/icomoon.woff?5tnqmf') format('woff'),
+         url('#{$path}fonts/icomoon.svg?5tnqmf#icomoon') format('svg');
   }
 
   [class^="icon-"], [class*=" icon-"] {
@@ -22,6 +22,7 @@ $path: '../../../../../../../assets/fonts/tables/icomoon/';
         weight: normal;
         variant: normal;
     }
+
     speak: never;
     text-transform: none;
     line-height: 1;
@@ -34,21 +35,27 @@ $path: '../../../../../../../assets/fonts/tables/icomoon/';
   .icon-chevron-down:before {
     content: "\e900";
   }
+
   .icon-chevron-left:before {
     content: "\e901";
   }
+
   .icon-chevron-right:before {
     content: "\e902";
   }
+
   .icon-chevron-stop-left:before {
     content: "\e903";
   }
+
   .icon-chevron-stop-right:before {
     content: "\e904";
   }
+
   .icon-chevron-up:before {
     content: "\e905";
   }
+
   .icon-context-menu:before {
     content: "\e906";
   }
