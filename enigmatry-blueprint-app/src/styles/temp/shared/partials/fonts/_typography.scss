@@ -1,0 +1,3 @@
+@use 'typography/fonts';
+
+@include fonts.generate-font-face(fonts.$font-sources);
