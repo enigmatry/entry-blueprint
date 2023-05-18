@@ -14,10 +14,10 @@ import { IEntryConfirmDialogData } from '../models/entry-confirm-dialog-data.int
 export class EntryDialogService {
   constructor(private readonly matDialog: MatDialog) { }
 
-  readonly openAlert = (data: IEntryAlertDialogData): Observable<boolean> =>
+  readonly openAlert = (data: IEntryAlertDialogData): Observable<any> =>
     this.open(EntryAlertDialogComponent, data);
 
-  readonly openConfirm = (data: IEntryConfirmDialogData): Observable<boolean> =>
+  readonly openConfirm = (data: IEntryConfirmDialogData): Observable<boolean | undefined> =>
     this.open(EntryConfirmDialogComponent, data);
 
   readonly open = (component: Type<EntryDialogComponent>, data: unknown = undefined, cssClass: string = '') => {

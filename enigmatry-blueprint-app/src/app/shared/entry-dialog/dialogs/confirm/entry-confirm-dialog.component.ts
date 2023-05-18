@@ -3,7 +3,7 @@ import { IEntryDialogButtonsConfig } from '../../models/entry-dialog-buttons-con
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EntryDialogComponent } from '../entry-dialog.component';
 import { IEntryConfirmDialogData } from '../../models/entry-confirm-dialog-data.interface';
-import { EntryDialogLocalization } from '../../models/entry-dialog-localization';
+import { ENTRY_DIALOG_CONFIG, EntryDialogConfig } from '../../models/entry-dialog-config.model';
 
 @Component({
   selector: 'app-entry-confirm-dialog',
@@ -12,15 +12,16 @@ import { EntryDialogLocalization } from '../../models/entry-dialog-localization'
 })
 export class EntryConfirmDialogComponent extends EntryDialogComponent {
   readonly buttons: IEntryDialogButtonsConfig = {
-    alignment: 'align-right',
-    submit: this.data.confirmText ?? EntryDialogLocalization.confirm,
-    cancel: this.data.cancelText ?? EntryDialogLocalization.cancel,
+    confirmButtonText: this.data.confirmText ?? this.config.confirmButtonText,
+    cancelButtonText: this.data.cancelText ?? this.config.cancelButtonText,
+    buttonsAlignment: 'align-right',
     visible: true
   };
 
   constructor(
-    protected readonly mdDialogRef: MatDialogRef<EntryConfirmDialogComponent>,
+    protected readonly mdDialogRef: MatDialogRef<EntryDialogComponent>,
+    @Inject(ENTRY_DIALOG_CONFIG) protected readonly config: EntryDialogConfig,
     @Inject(MAT_DIALOG_DATA) readonly data: IEntryConfirmDialogData) {
-    super(mdDialogRef);
+    super(mdDialogRef, config);
   }
 }

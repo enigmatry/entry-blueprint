@@ -7,6 +7,7 @@ import { DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE, EntryTableModule } from '@enigma
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
 import { EntryDialogModule } from './entry-dialog/entry-dialog.module';
+import { ENTRY_DIALOG_CONFIG, EntryDialogConfig } from './entry-dialog/models/entry-dialog-config.model';
 
 
 @NgModule({
@@ -32,6 +33,10 @@ import { EntryDialogModule } from './entry-dialog/entry-dialog.module';
     {
       provide: DEFAULT_TIMEZONE,
       useFactory: () => 'GMT'
+    },
+    {
+      provide: ENTRY_DIALOG_CONFIG,
+      useFactory: () => new EntryDialogConfig('Yes', 'No', 'align-center')
     }
   ],
   declarations: [

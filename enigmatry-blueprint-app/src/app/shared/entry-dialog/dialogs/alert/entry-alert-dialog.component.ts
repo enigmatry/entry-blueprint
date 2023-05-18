@@ -3,7 +3,7 @@ import { EntryDialogComponent } from '../entry-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IEntryAlertDialogData } from '../../models/entry-alert-dialog-data.interface';
 import { IEntryDialogButtonsConfig } from '../../models/entry-dialog-buttons-config.interface';
-import { EntryDialogLocalization } from '../../models/entry-dialog-localization';
+import { ENTRY_DIALOG_CONFIG, EntryDialogConfig } from '../../models/entry-dialog-config.model';
 
 @Component({
   selector: 'app-entry-alert-dialog',
@@ -12,15 +12,16 @@ import { EntryDialogLocalization } from '../../models/entry-dialog-localization'
 })
 export class EntryAlertDialogComponent extends EntryDialogComponent {
   readonly buttons: IEntryDialogButtonsConfig = {
-    alignment: 'align-center',
-    submit: this.data.confirmText ?? EntryDialogLocalization.confirm,
-    cancel: undefined,
+    confirmButtonText: this.data.confirmText ?? this.config.confirmButtonText,
+    cancelButtonText: '',
+    buttonsAlignment: 'align-center',
     visible: true
   };
 
   constructor(
-    protected readonly mdDialogRef: MatDialogRef<EntryAlertDialogComponent>,
+    protected readonly mdDialogRef: MatDialogRef<EntryDialogComponent>,
+    @Inject(ENTRY_DIALOG_CONFIG) protected readonly config: EntryDialogConfig,
     @Inject(MAT_DIALOG_DATA) public data: IEntryAlertDialogData) {
-    super(mdDialogRef);
+    super(mdDialogRef, config);
   }
 }

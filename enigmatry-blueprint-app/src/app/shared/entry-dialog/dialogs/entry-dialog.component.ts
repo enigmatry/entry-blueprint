@@ -1,8 +1,8 @@
-import { Component, HostListener, Input, TemplateRef } from '@angular/core';
+import { Component, HostListener, Inject, Input, TemplateRef } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { IEntryDialogButtonsConfig } from '../models/entry-dialog-buttons-config.interface';
-import { EntryDialogLocalization } from '../models/entry-dialog-localization';
+import { ENTRY_DIALOG_CONFIG, EntryDialogConfig } from '../models/entry-dialog-config.model';
 
 @Component({
     selector: 'app-entry-dialog',
@@ -12,9 +12,9 @@ import { EntryDialogLocalization } from '../models/entry-dialog-localization';
 export class EntryDialogComponent {
     @Input() title: string;
     @Input() buttons = {
-        alignment: 'align-right',
-        submit: EntryDialogLocalization.confirm,
-        cancel: EntryDialogLocalization.cancel,
+        buttonsAlignment: this.config.buttonsAlignment,
+        confirmButtonText: this.config.confirmButtonText,
+        cancelButtonText: this.config.cancelButtonText,
         visible: true
     } as IEntryDialogButtonsConfig;
 
@@ -23,7 +23,9 @@ export class EntryDialogComponent {
     @Input() disableConfirm = false;
     @Input() buttonsTemplate: TemplateRef<any> | null | undefined;
 
-    constructor(protected readonly mdDialogRef: MatDialogRef<EntryDialogComponent>) { }
+    constructor(
+        protected readonly mdDialogRef: MatDialogRef<EntryDialogComponent>,
+        @Inject(ENTRY_DIALOG_CONFIG) protected readonly config: EntryDialogConfig) { }
 
     readonly onSubmit = () => {
         this.confirm().subscribe({

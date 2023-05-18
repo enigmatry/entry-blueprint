@@ -1,6 +1,5 @@
-export interface IEntryDialogButtonsConfig {
-    alignment: 'align-right' | 'align-center' | '',
-    submit?: string,
-    cancel?: string,
+import { EntryDialogConfig } from './entry-dialog-config.model';
+
+export interface IEntryDialogButtonsConfig extends EntryDialogConfig {
     visible: boolean;
 }
