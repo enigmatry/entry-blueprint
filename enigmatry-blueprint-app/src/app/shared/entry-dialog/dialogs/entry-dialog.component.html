@@ -25,7 +25,7 @@
     <ng-template #defaultButtonsTemplate>
         <div *ngIf="buttons.visible" class="dialog-footer {{ buttons.alignment }}">
             <button
-                type="submit"
+                type="button"
                 class="button button-accent dialog-footer-button"
                 cdkFocusInitial
                 (click)="onSubmit()">{{buttons.submit}}</button>
