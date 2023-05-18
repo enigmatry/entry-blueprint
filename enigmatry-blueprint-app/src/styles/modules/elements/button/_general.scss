@@ -1,0 +1,39 @@
+@use 'variables' as vars;
+@use 'scss-foundation/src/modules/display/items';
+@use 'scss-foundation/src/modules/position/absolute';
+
+@mixin default($background-color: vars.$primary, $font-color: vars.$font-color-light, $hover-background-color: transparent) {
+	display: inline-block;
+	position: relative;
+	padding: 10px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: $background-color;
+	color: $font-color;
+	text: {
+		align: center;
+		decoration: none;
+	}
+	cursor: pointer;
+	font: {
+		family: 'Roboto';
+		size: 15px;
+		weight: 500;
+	}
+
+	&.primary {
+		background-color: vars.$primary;
+
+		&:hover {
+			background-color: vars.$primary-hover;
+		}
+	}
+
+	&.accent {
+		background-color: vars.$accent;
+
+		&:hover {
+			background-color: vars.$accent-hover;
+		}
+	}
+}

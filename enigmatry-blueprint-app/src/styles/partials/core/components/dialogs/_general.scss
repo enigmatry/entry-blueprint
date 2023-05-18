@@ -1,6 +1,5 @@
 @use 'scss-foundation/src/modules/display/items';
-// @use 'typography/fonts' as fonts;
-// @use 'states/hover';
+@use 'states/hover';
 @use 'variables' as vars;
 @use 'sass:color';
 
@@ -34,7 +33,6 @@ $border-dark: #000;
 	height: 100%;
 
 	.dialog-content {
-		// @include fonts.main-font();
 		margin: {
 			top: $material-default-spacing;
 			bottom: $material-default-spacing;
@@ -56,7 +54,7 @@ $border-dark: #000;
 	background: none;
 
 	.dialog-close-icon {
-		// @include hover.default(vars.$body-font-color, vars.$accent);
+		@include hover.default(vars.$body-font-color, vars.$accent);
 		font-size: 17px;
 	}
 }

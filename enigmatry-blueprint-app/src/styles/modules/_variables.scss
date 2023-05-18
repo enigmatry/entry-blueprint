@@ -11,6 +11,13 @@ $accent: #06C;
 $accent-hover: #0053C0;
 
 $font-color-light: #FFF;
+$font-color-dark: #000;
+
+$body-font-color: #333;
 
 $default-gap: 16px;
 $large-gap: calc(#{$default-gap} * 2);
+ 
+$default-transition: .3s;
+
+$default-radius: 4px;
