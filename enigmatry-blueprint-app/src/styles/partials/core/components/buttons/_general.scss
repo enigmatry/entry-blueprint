@@ -24,7 +24,7 @@
 		background-color: vars.$primary;
 
 		&:hover {
-			background-color: vars.$primary-hover;
+			background-color: vars.$primary-light;
 		}
 	}
 
@@ -32,7 +32,17 @@
 		background-color: vars.$accent;
 
 		&:hover {
-			background-color: vars.$accent-hover;
+			background-color: vars.$accent-light;
 		}
+	}
+}
+
+.action-buttons {
+	.item {
+		margin-left: 12px;
+	}
+
+	&:first-child {
+		margin-left: 0;
 	}
 }

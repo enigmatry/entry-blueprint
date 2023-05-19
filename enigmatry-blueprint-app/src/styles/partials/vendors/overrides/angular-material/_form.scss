@@ -1,6 +1,8 @@
 $border-color: #949494;
 
 .mat-form-field-appearance-outline {
+	width: 100%;
+
 	.mat-form-field-wrapper {
 		.mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
 			border-color: $border-color;
