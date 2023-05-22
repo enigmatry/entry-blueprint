@@ -6,8 +6,7 @@ import { GridCellsModule } from './grid-cells/grid-cells.module';
 import { DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE, EntryTableModule } from '@enigmatry/entry-table';
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
-import { EntryHeaderModule } from './entry-header/entry-header.module';
-
+import { EntryHeaderModule } from '@enigmatry/entry-components/entry-header';
 
 @NgModule({
   imports: [

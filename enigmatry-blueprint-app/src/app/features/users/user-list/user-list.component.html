@@ -1,4 +1,4 @@
-<app-entry-header [title]="'Users'">
+<entry-header [title]="'Users'">
     <div buttons class="action-buttons header-item">
         <button class="primary-button item">Action</button>
         <button class="accent-button item">Add new</button>
@@ -6,7 +6,7 @@
     <div content>
         Let's learn about content projection!
     </div>
-</app-entry-header>
+</entry-header>
 <app-g-user-list [data]="data | async" [loading]="loading" [defaultSort]="query" (sortChange)="sortChange($event)"
     (pageChange)="pageChange($event)" (selectionChange)="selectionChange($event)"
     (contextMenuItemSelected)="onItemSelected($event)">
