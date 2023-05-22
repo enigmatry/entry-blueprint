@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EntryDialogService } from './shared/entry-dialog/services/entry-dialog.service';
+import { EntryDialogService } from '@enigmatry/entry-components/entry-dialog';
 
 @Component({
   selector: 'app-root',
