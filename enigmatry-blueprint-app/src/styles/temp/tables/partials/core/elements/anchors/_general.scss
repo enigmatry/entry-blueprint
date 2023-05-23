@@ -1,0 +1,11 @@
+@use '../../../../modules/variables.scss' as vars;
+
+// TODO update this with a mixin once https://jira.enigmatry.com/browse/BP-519 is merged
+a {
+	color: vars.$primary;
+	text-decoration: none;
+
+	&:hover {
+		color: vars.$accent;
+	}
+}

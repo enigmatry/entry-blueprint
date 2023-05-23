@@ -1,2 +1,5 @@
 @use 'core';
 @use 'vendors';
+
+// TODO: remove this once temp folder is moved https://jira.enigmatry.com/browse/BP-534
+@use '../temp';

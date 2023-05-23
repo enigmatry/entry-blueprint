@@ -7,13 +7,11 @@ export class ProductListRowContextMenuFormatter implements RowContextMenuFormatt
         {
             id: 'edit',
             name: $localize`:@@products.product-list.context.edit:Edit`,
-            icon: 'edit',
             disabled: false
         },
         {
             id: 'delete',
             name: $localize`:@@products.product-list.context.delete:Delete`,
-            icon: 'delete',
             disabled: rowData.type === ProductType.Book
         }
     ];
