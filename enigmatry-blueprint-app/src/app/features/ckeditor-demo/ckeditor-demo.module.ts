@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CkeditorDemoRoutingModule } from './ckeditor-demo-routing.module';
 import { CkeditorDemoComponent } from './ckeditor-demo/ckeditor-demo.component';
 import { CkeditorDemoGeneratedModule } from './generated/ckeditor-demo-generated.module';
-import { ENTRY_CKEDITOR_OPTIONS, FormlyCkeditorModule } from '@enigmatry/entry-form';
+import { ENTRY_CKEDITOR_OPTIONS, FormlyCkeditorModule } from '@enigmatry/entry-form/ckeditor';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { SharedModule } from 'src/app/shared/shared.module';
 

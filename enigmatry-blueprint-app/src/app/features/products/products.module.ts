@@ -6,7 +6,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { GridCellsModule } from 'src/app/shared/grid-cells/grid-cells.module';
-import { ENTRY_CKEDITOR_OPTIONS, FormlyCkeditorModule } from '@enigmatry/entry-form';
+import { ENTRY_CKEDITOR_OPTIONS, FormlyCkeditorModule } from '@enigmatry/entry-form/ckeditor';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @NgModule({

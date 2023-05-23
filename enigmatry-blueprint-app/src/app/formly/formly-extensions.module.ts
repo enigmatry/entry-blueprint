@@ -13,6 +13,7 @@ import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-
 import { FormlyButtonComponent } from './formly-button/formly-button.component';
 import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
 import { EntryTableModule } from '@enigmatry/entry-table';
+import { FormlyAutocompleteModule } from '@enigmatry/entry-form/autocomplete';
 
 const defaultFormConfig: EntryFormConfig = {
   fieldTypesConfig: {
@@ -45,6 +46,7 @@ const defaultFormConfig: EntryFormConfig = {
     MatButtonModule,
     EntryFormModule,
     EntryTableModule,
+    FormlyAutocompleteModule,
     FormlyModule.forChild({
       types: [
         { name: 'fieldset', component: FormlyFieldsetComponent },
