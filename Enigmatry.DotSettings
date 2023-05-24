@@ -146,6 +146,8 @@ public static class $CLASS$&#xD;
         }&#xD;
 &#xD;
         public static implicit operator $EntityName$($EntityName$Builder builder) =&gt; builder.Build();&#xD;
+&#xD;
+		public $EntityName$ To$EntityName$() =&gt; Build();&#xD;
     }</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=14F6901EBFD9F64E8DA45ECF0F438687/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=14F6901EBFD9F64E8DA45ECF0F438687/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
@@ -178,7 +180,7 @@ public static class $CLASS$&#xD;
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Description/@EntryValue">Blueprint-05-Feature Controller</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME/InitialRange/@EntryValue">10</s:Int64>
+	
 	
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME/Order/@EntryValue">1</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=20A6C8FD4283E84DA07148CD65A28702/Field/=NAME_005FLOWER/@KeyIndexDefined">True</s:Boolean>
@@ -210,7 +212,6 @@ public static class $CLASS$&#xD;
 using Enigmatry.Entry.Core.Paging;&#xD;
 using $ROOTNAMESPACE$.Domain.$NAME$s;&#xD;
 using $ROOTNAMESPACE$.Api.Tests.Infrastructure.Api;&#xD;
-using $ROOTNAMESPACE$.Domain.$NAME$s.Commands;&#xD;
 using $ROOTNAMESPACE$.Domain.Tests.$NAME$s;&#xD;
 using $ROOTNAMESPACE$.Api.Features.$NAME$s;&#xD;
 &#xD;
@@ -284,7 +285,6 @@ using Enigmatry.Entry.AspNetCore;&#xD;
 using Enigmatry.Entry.Core.Data;&#xD;
 using Enigmatry.Entry.Core.Paging;&#xD;
 using $ROOTNAMESPACE$.Domain.$NAME$s;&#xD;
-using $ROOTNAMESPACE$.Domain.$NAME$s.Commands;&#xD;
 using MediatR;&#xD;
 using Microsoft.AspNetCore.Mvc;&#xD;
 &#xD;
@@ -363,7 +363,7 @@ public static class $TypeName$EnumerableExtensions&#xD;
     {&#xD;
         public static IEnumerable&lt;$TypeName$&gt; $Name$(this IEnumerable&lt;$TypeName$&gt; source)&#xD;
         {&#xD;
-            return query.Where(x =&gt; x.$PropertyName$.$SELECTION$$END$ == $Predicate$);&#xD;
+            return source.Where(x =&gt; x.$PropertyName$.$SELECTION$$END$ == $Predicate$);&#xD;
         }&#xD;
     }</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=40C163D436D8ED48A6D01A0AFEFC5556/@KeyIndexDefined">False</s:Boolean>
