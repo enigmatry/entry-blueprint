@@ -2,8 +2,8 @@
 
 <ng-template #defaultFormButtonsTpl>
     <div class="action-buttons">
-        <button *ngIf="!formComponent.isReadonly" class="button accent" type="submit">{{formComponent.saveButtonText}}</button>
+        <button *ngIf="!formComponent.isReadonly" class="entry-button-accent" type="submit">{{formComponent.saveButtonText}}</button>
 
-        <button type="button" class="button primary" (click)="formComponent.cancel.emit()">{{formComponent.cancelButtonText}}</button>
+        <button type="button" class="entry-button-primary" (click)="formComponent.cancel.emit()">{{formComponent.cancelButtonText}}</button>
     </div>
 </ng-template>

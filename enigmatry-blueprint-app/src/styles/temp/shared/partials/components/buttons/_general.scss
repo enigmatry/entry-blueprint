@@ -1,0 +1,32 @@
+/* stylelint-disable scss/at-extend-no-missing-placeholder */
+@use 'variables' as vars;
+@use 'typography/fonts';
+// TODO: remove all this once temp folder is moved https://jira.enigmatry.com/browse/BP-534
+@use '../../../../shared/modules/states/hover' as theming-hover;
+@use '../../../../shared/modules/elements/buttons/general';
+
+.entry-button-primary {
+	@extend %entry-button;
+	@include theming-hover.default();
+}
+
+.entry-button-accent {
+	@extend %entry-button;
+	@include theming-hover.default(vars.$accent, vars.$primary);
+}
+
+.entry-button-blank {
+	@extend %entry-button;
+	@include fonts.main-font(14px);
+	@include theming-hover.default(transparent, transparent, vars.$accent, transparent);
+	color: vars.$primary;
+
+	&:disabled {
+		color: vars.$primary;
+	}
+}
+
+.entry-button-dark {
+	@extend %entry-button;
+	@include theming-hover.default(vars.$background-dark, vars.$primary);
+}
