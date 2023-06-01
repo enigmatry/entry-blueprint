@@ -1,2 +1,2 @@
-@use 'forms/partials/main.scss';
-@use 'tables/partials/main.scss';
+@use 'tables/partials/main' as tables;
+@use 'forms/partials/main' as forms;
