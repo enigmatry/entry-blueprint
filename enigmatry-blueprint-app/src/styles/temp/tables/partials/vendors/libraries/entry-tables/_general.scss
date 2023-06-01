@@ -1,0 +1,49 @@
+@use 'entry-table/src/styles/modules/generator' as table-theme-generator;
+@use '../../../../modules/variables' as vars;
+
+@use 'sass:list';
+
+$default-cell-padding: 4px;
+$default-font-size: 14px;
+
+$theme: (
+	cell: (
+		font-size: $default-font-size,
+		color: vars.$font-color,
+		first-cell-padding-left: $default-cell-padding,
+		last-cell-padding-right: $default-cell-padding,
+		min-width: 56px
+	),
+	row: (
+		selected-background-color: #06C,
+		selected-color: #FFF,
+		odd-even-row: odd,
+		odd-even-background: vars.$background-default,
+		disabled: #F5F5F5
+	),
+	column: (
+		sorted: (
+			font-size: $default-font-size,
+			font-weight: 700,
+			color: #2C2C2C,
+			content-align: left
+		)
+	),
+	content: (
+		no-result: (
+			font-size: 13px,
+			font-weight: 500,
+			text-transform: none
+		)
+	),
+	
+	checkbox: (
+		background-color: #FFF,
+		checkmark-color: #000,
+		selected-checkmark-color: #000,
+		selected-background-color: #FFF,
+		selected-border-color: #000,
+	)
+);
+
+@include table-theme-generator.generate($theme);

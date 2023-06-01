@@ -1,5 +1,13 @@
-.mat-paginator-outer-container {
-	.mat-paginator-container {
-		align-items: baseline;
+.mat-paginator {
+	font-size: 14px;
+
+	.mat-paginator-outer-container {
+		.mat-paginator-container {
+			align-items: baseline;
+		}
+	
+		.mat-paginator-page-size {
+			display: none;
+		}
 	}
 }

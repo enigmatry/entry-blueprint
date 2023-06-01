@@ -1,0 +1,6 @@
+@use '../../../modules/variables' as vars;
+
+.entry-standout-text, %entry-standout-text {
+	color: vars.$primary;
+	font-weight: 600;
+}

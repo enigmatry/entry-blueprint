@@ -1,0 +1,51 @@
+@use '../../../../modules/variables' as vars;
+@use 'scss-foundation/src/modules/display/items';
+@use '../../states/typography';
+
+.entry-table {
+	.mat-row, .mat-header-row {
+		height: 36px;
+	}
+
+	.mat-cell, .mat-header-cell {
+		padding: 0 10px;
+		border-bottom: none;
+	}
+
+	.mat-header-cell {
+		font-size: vars.$font-size-default;
+	}
+
+	.entry-table-context-menu-cell {
+		/* stylelint-disable-next-line declaration-no-important */
+		min-width: unset !important;
+		max-width: 40px;
+	}
+
+	.mat-icon-button {
+		width: unset;
+		@include items.align-center();
+	}
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.entry-table-checkbox-cell, .entry-table-context-menu-cell {
+	.mat-icon-button {
+		padding-top: 2px;
+	}
+}
+
+.cdk-overlay-pane .mat-menu-panel {
+	min-height: 40px;
+
+	.mat-menu-content:not(:empty) {
+		padding: 0;
+	}
+
+	.context-menu-item {
+		&:hover {
+			background-color: vars.$accent;
+			color: vars.$font-color-lightest;
+		}
+	}
+}
