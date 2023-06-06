@@ -1,5 +1,5 @@
 @use 'variables' as vars;
-@use 'breakpoints';
+@use '../../../../../../../styles/modules/breakpoints';
 
 .entry-header {
 	padding: 4px vars.$default-gap vars.$default-gap;
