@@ -1,8 +1,7 @@
 @use 'typography/fonts';
 @use 'variables' as vars;
 
-// TODO: change class name to entry-title
-.header-item {
+.entry-title {
 	@include fonts.title-font(32px);
 	color: vars.$primary;
 }

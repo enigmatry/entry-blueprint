@@ -1,26 +1,14 @@
 @use 'variables' as vars;
-@use '../../../../../../../styles/modules/breakpoints';
 
 .entry-header {
-	padding: 4px vars.$default-gap vars.$default-gap;
+	padding: 24px vars.$default-gap;
 	background-color: vars.$primary-lightest;
-
-	@include breakpoints.apply-on-tablet() {
-		padding: {
-			top: vars.$default-gap;
-			bottom: vars.$large-gap;
-		};
-	}
 
 	.header-item {
 		margin-top: 20px;
 	}
 
 	.content {
-		padding-top: 20px;
-
-		@include breakpoints.apply-on-tablet() {
-			padding-top: vars.$large-gap;
-		}
+		padding-top: 24px;
 	}
 }
