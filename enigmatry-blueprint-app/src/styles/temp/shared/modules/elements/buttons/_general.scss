@@ -1,8 +1,8 @@
-@use 'variables' as vars;
-@use 'typography/fonts';
+@use '../../variables' as vars;
+@use '../../typography/fonts';
 
 %entry-button {
-	@include fonts.main-bolded-font(14px);
+	@include fonts.main-bolded-font();
 	display: inline-block;
 	padding: 10px 20px;
 	transition: vars.$default-transition;
