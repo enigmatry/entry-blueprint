@@ -42,7 +42,7 @@ $font-sources: (
 	}
 }
 
-@mixin -font($family: 'OpenSans-normal', $size: 14px) {
+@mixin -font($family, $size) {
 	font: {
 		family: $family;
 		size: $size;

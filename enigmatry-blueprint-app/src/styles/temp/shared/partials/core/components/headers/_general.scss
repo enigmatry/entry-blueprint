@@ -1,0 +1,14 @@
+@use 'variables' as vars;
+
+.entry-header {
+	padding: 24px vars.$default-gap;
+	background-color: vars.$primary-lightest;
+
+	.item {
+		margin-top: 20px;
+	}
+
+	.content {
+		padding-top: 24px;
+	}
+}
