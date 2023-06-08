@@ -1,9 +1,0 @@
-@use '../../../../modules/variables' as vars;
-
-.mat-form-field-appearance-outline {
-	&.mat-focused, &:hover {
-		.mat-form-field-outline {
-			border-bottom: 2px solid vars.$primary;
-		}
-	}
-}

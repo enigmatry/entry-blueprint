@@ -2,6 +2,12 @@
 $border-color: transparent;
 
 .mat-form-field-appearance-outline {
+	&.mat-focused, &:hover {
+		.mat-form-field-outline {
+			border-bottom: 2px solid vars.$primary;
+		}
+	}
+
 	.mat-form-field-label {
 		color: vars.$font-color;
 	}
