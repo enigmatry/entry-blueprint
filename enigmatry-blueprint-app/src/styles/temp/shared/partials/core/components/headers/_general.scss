@@ -1,4 +1,4 @@
-@use 'variables' as vars;
+@use '../../../../modules/variables' as vars;
 
 .entry-header {
 	padding: 24px vars.$default-gap;
