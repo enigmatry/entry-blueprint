@@ -7,21 +7,24 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(BlueprintContext))]
-    [Migration("20210930085506_Initial")]
+    [Migration("20230510153117_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +74,7 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Products.Product", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,10 +104,21 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<float?>("Discount")
+                        .HasColumnType("real");
+
                     b.Property<DateTimeOffset?>("ExpiresOn")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("FreeShipping")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasDiscount")
                         .HasColumnType("bit");
 
                     b.Property<string>("InfoLink")
@@ -149,7 +163,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+253 (056) 334 4889",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
+                            Discount = 25f,
                             FreeShipping = true,
+                            HasDiscount = true,
                             InfoLink = "https://en.wikipedia.org/wiki/Dune_(novel)",
                             Name = "Dune I",
                             Price = 13.699999999999999,
@@ -165,8 +182,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+381 (060) 399 8871",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
                             ExpiresOn = new DateTimeOffset(new DateTime(2025, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             FreeShipping = false,
+                            HasDiscount = false,
                             InfoLink = "https://www.salto.rs/#belgrade-ipa",
                             Name = "Salto IPA",
                             Price = 2.6000000000000001,
@@ -182,7 +201,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+381 (021) 661 6432",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
                             FreeShipping = true,
+                            HasDiscount = false,
                             InfoLink = "https://en.wikipedia.org/wiki/Lada_Niva",
                             Name = "Lada Niva",
                             Price = 15335.0,
@@ -198,7 +219,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+381 (032) 332 7689",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
+                            Discount = 10f,
                             FreeShipping = true,
+                            HasDiscount = true,
                             InfoLink = "https://en.wikipedia.org/wiki/Volkswagen_Type_2",
                             Name = "Volkswagen Type 2",
                             Price = 8799.5,
@@ -214,7 +238,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+381 (011) 113 6651",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
                             FreeShipping = false,
+                            HasDiscount = false,
                             InfoLink = "",
                             Name = "Burek",
                             Price = 2.5,
@@ -230,8 +256,10 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+381 (011) 451-8709",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
                             ExpiresOn = new DateTimeOffset(new DateTime(2050, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             FreeShipping = false,
+                            HasDiscount = false,
                             InfoLink = "https://www.youtube.com/watch?v=WPpFjl8qeM4&ab_channel=DiscoveryUK",
                             Name = "Sardines",
                             Price = 7.3300000000000001,
@@ -247,7 +275,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+253 (056) 331-1178",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
                             FreeShipping = false,
+                            HasDiscount = false,
                             InfoLink = "https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird",
                             Name = "To Kill a Mockingbird",
                             Price = 9.0899999999999999,
@@ -263,7 +293,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+31 (098) 777 3379",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
                             FreeShipping = false,
+                            HasDiscount = false,
                             InfoLink = "https://en.wikipedia.org/wiki/Kibbeling",
                             Name = "Kibbeling",
                             Price = 4.5,
@@ -279,7 +311,9 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             ContactPhone = "+31 (098) 221 3489",
                             CreatedById = new Guid("8207db25-94d1-4f3d-bf18-90da283221f7"),
                             CreatedOn = new DateTimeOffset(new DateTime(2021, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Description = "",
                             FreeShipping = false,
+                            HasDiscount = false,
                             InfoLink = "https://en.wikipedia.org/wiki/Kapsalon",
                             Name = "Kapsalon",
                             Price = 5.5,
@@ -288,37 +322,41 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
                 {
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "CreatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "CreatedBy")
                         .WithMany("CreatedUsers")
-                        .HasForeignKey("CreatedById");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "UpdatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "UpdatedBy")
                         .WithMany("UpdatedUsers")
-                        .HasForeignKey("UpdatedById");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("CreatedBy");
 
                     b.Navigation("UpdatedBy");
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Products.Product", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
                 {
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "CreatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "CreatedBy")
                         .WithMany("CreatedProducts")
-                        .HasForeignKey("CreatedById");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Enigmatry.Blueprint.Model.Identity.User", "UpdatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "UpdatedBy")
                         .WithMany("UpdatedProducts")
-                        .HasForeignKey("UpdatedById");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("CreatedBy");
 
                     b.Navigation("UpdatedBy");
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Model.Identity.User", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
                 {
                     b.Navigation("CreatedProducts");
 
