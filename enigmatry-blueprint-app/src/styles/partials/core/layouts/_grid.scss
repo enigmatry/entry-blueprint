@@ -7,8 +7,3 @@
 }
 
 @include breakpoints.generate(vars.$default-gap);
-// TODO: remove this once https://jira.enigmatry.com/browse/ETL-481 is done
-/* stylelint-disable-next-line selector-max-attribute */
-.row [class ^= 'col-'] {
-	box-sizing: border-box;
-}
