@@ -1,4 +1,5 @@
 @use '../../../../modules/variables' as vars;
+
 $border-color: transparent;
 
 .mat-form-field-appearance-outline {
@@ -30,26 +31,24 @@ $border-color: transparent;
 	}
 }
 
-.mat-radio-button {
-	// importnat is needed cause materian overrides it and there is not heigher class
-	/* stylelint-disable-next-line declaration-no-important */
-	display: flex !important;
-	align-items: center;
+.mat-radio-group {
+	.mat-radio-button {
+		display: flex;
+		align-items: center;
 
-	.mat-radio-outer-circle {
-		border-color: vars.$default-border-color;
-		background-color: vars.$input-background;
-	}
-
-	&.mat-radio-checked {
 		.mat-radio-outer-circle {
-			// importnat is needed cause materian puts class mat-accent, i think it should be research why is that happening and how to remove it
-			/* stylelint-disable-next-line declaration-no-important */
-			border-color: vars.$default-border-color !important;
+			border-color: vars.$default-border-color;
+			background-color: vars.$input-background;
 		}
 
-		.mat-radio-inner-circle {
-			background-color: vars.$primary;
+		&.mat-radio-checked {
+			.mat-radio-outer-circle {
+				border-color: vars.$default-border-color;
+			}
+
+			.mat-radio-inner-circle {
+				background-color: vars.$primary;
+			}
 		}
 	}
 }

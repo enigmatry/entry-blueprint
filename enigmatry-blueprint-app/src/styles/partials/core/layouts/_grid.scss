@@ -1,17 +1,9 @@
 @use 'breakpoints';
 @use 'variables' as vars;
- 
+
 .container {
 	width: 100%;
 	margin: 0 auto;
- 
-	@include breakpoints.apply-on-large-desktop() {
-		max-width: 1300px;
- 
-		&.container-fluid {
-			max-width: unset;
-		}
-	}
 }
 
 @include breakpoints.generate(vars.$default-gap);
