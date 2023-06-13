@@ -35,15 +35,19 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles/partials/main.scss",
+              "src/styles/temp/forms/partials/main.scss",
               "src/styles/temp/header/partials/main.scss",
-              "src/styles/temp/shared/partials/main.scss"
+              "src/styles/temp/shared/partials/main.scss",
+              "src/styles/temp/tables/partials/main.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles/modules",
+                "node_modules/@enigmatry",
+                "src/styles/temp/forms/modules",
                 "src/styles/temp/header/modules",
                 "src/styles/temp/shared/modules",
-                "node_modules/@enigmatry"
+                "src/styles/temp/tables/modules",
               ]
             },
             "scripts": [],

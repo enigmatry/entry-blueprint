@@ -10,7 +10,6 @@
     <PackageReference Include="FakeItEasy" />
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="JetBrains.DotMemoryUnit" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />

@@ -2,8 +2,6 @@
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.Entry.AspNetCore.Tests.Http;
-using Enigmatry.Entry.Core;
 using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;

@@ -1,4 +1,6 @@
-@use 'typography/fonts';
+// TODO Replace $font-size with global once vars are merged
+@use 'variables' as vars;
+ 
 
 html, body {
 	height: 100%;
@@ -6,5 +8,8 @@ html, body {
 
 body {
 	margin: 0;
-	font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+	font: {
+		family: 'Roboto', 'Helvetica Neue', sans-serif;
+		size: vars.$font-size-default;
+	}
 }
