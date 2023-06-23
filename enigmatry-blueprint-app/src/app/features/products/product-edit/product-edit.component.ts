@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable unused-imports/no-unused-vars */
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IValidationProblemDetails, setServerSideValidationErrors } from '@enigmatry/entry-components/validation';
 import {
     IGetProductDetailsResponse,
     IProductCreateOrUpdateCommand,
@@ -11,6 +12,7 @@ import {
 } from 'src/app/api/api-reference';
 import { FormAccessMode } from 'src/app/shared/form-component/form-access-mode.enum';
 import { FormComponent } from 'src/app/shared/form-component/form-component.model';
+import { ProductEditGeneratedComponent } from '../generated/product-edit/product-edit-generated.component';
 
 @Component({
     selector: 'app-product-edit',
@@ -19,6 +21,8 @@ import { FormComponent } from 'src/app/shared/form-component/form-component.mode
 })
 export class ProductEditComponent
     extends FormComponent<IProductCreateOrUpdateCommand, IGetProductDetailsResponse> {
+    @ViewChild('formComponent') formComponent: ProductEditGeneratedComponent;
+
     constructor(
         protected router: Router,
         protected activatedRoute: ActivatedRoute,
@@ -33,7 +37,11 @@ export class ProductEditComponent
     save = (model: IProductCreateOrUpdateCommand) =>
         this.client
             .post(model as ProductCreateOrUpdateCommand)
-            .subscribe(this.goBack);
+            .subscribe({
+                next: () => this.goBack(),
+                error: (error: IValidationProblemDetails) =>
+                    setServerSideValidationErrors(error, this.formComponent.form)
+            });
 
     buttonClick = (name: string) => {
         if (name === 'resetFormBtn') {

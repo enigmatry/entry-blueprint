@@ -15,7 +15,6 @@ import { GetProductsResponseItem } from 'src/app/api/api-reference';
 @Component({
   selector: 'app-g-product-list',
   templateUrl: './product-list-generated.component.html',
-  styleUrls: ['./product-list-generated.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListGeneratedComponent implements OnInit {

@@ -1,9 +1,10 @@
 <ng-content></ng-content>
 
 <ng-template #defaultFormButtonsTpl>
+    <entry-form-errors [form]="formComponent.form"></entry-form-errors>
+
     <div class="action-buttons">
         <button *ngIf="!formComponent.isReadonly" class="button accent" type="submit">{{formComponent.saveButtonText}}</button>
-
         <button type="button" class="button primary" (click)="formComponent.cancel.emit()">{{formComponent.cancelButtonText}}</button>
     </div>
 </ng-template>

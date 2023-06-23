@@ -18,8 +18,7 @@ import { map, throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-g-product-edit',
-  templateUrl: './product-edit-generated.component.html',
-  styleUrls: ['./product-edit-generated.component.scss']
+  templateUrl: './product-edit-generated.component.html'
 })
 export class ProductEditGeneratedComponent implements OnInit, OnDestroy {
 
@@ -41,13 +40,14 @@ export class ProductEditGeneratedComponent implements OnInit, OnDestroy {
   @Input() fieldsDisableExpressions: IFieldExpressionDictionary<IGetProductDetailsResponse> | undefined = undefined;
   @Input() fieldsRequiredExpressions: IFieldExpressionDictionary<IGetProductDetailsResponse> | undefined = undefined;
   @Input() fieldsPropertyExpressions: IFieldPropertyExpressionDictionary<IGetProductDetailsResponse> | undefined = undefined;
+  @Input() fieldsLabelExpressions: IFieldPropertyExpressionDictionary<IGetProductDetailsResponse> | undefined = undefined;
 
   @Output() save = new EventEmitter<IGetProductDetailsResponse>();
   @Output() cancel = new EventEmitter<void>();
   @Output() buttonClick = new EventEmitter<string>();
 
-                @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
-                @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: 'displayName' };
+            @Input() typeOptions: any[] = [{ value: 0, displayName: $localize `:@@enum.product-type.food:Food` }, { value: 1, displayName: $localize `:@@enum.product-type.drink:Drink` }, { value: 2, displayName: $localize `:@@enum.product-type.book:Book` }, { value: 3, displayName: $localize `:@@enum.product-type.car:Car` }];
+            @Input() typeOptionsConfiguration: SelectConfiguration = { valueProperty: 'value', labelProperty: 'displayName', sortProperty: 'displayName' };
 
   _isReadonly: boolean;
   form = new FormGroup({});
@@ -84,19 +84,22 @@ export class ProductEditGeneratedComponent implements OnInit, OnDestroy {
         {
         key: 'name',
         type: this.resolveFieldType('input', false),
-className: 'entry-name-field entry-input',
+        focus: false,
+className: `entry-name-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.name ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.name ? this.fieldsRequiredExpressions.name(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.name ? this.fieldsLabelExpressions.name(model) : $localize `:@@products.product-edit.name.label:Name`),
         'model.name': (model) => (this.fieldsPropertyExpressions?.name ? this.fieldsPropertyExpressions.name(model) : model.name),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.name.label:Name`,
         placeholder: $localize `:@@products.product-edit.name.placeholder:Unique product name`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 minLength: 5,
 maxLength: 50,
@@ -108,19 +111,22 @@ asyncValidators: { validation: [ 'productNameIsUnique' ] },
         {
         key: 'code',
         type: this.resolveFieldType('input', false),
-className: 'entry-code-field entry-input',
+        focus: false,
+className: `entry-code-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.code ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.code ? this.fieldsDisableExpressions.code(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.code ? this.fieldsRequiredExpressions.code(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.code ? this.fieldsLabelExpressions.code(model) : $localize `:@@products.product-edit.code.label:Code`),
         'model.code': (model) => (this.fieldsPropertyExpressions?.code ? this.fieldsPropertyExpressions.code(model) : model.code),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.code.label:Code`,
         placeholder: $localize `:@@products.product-edit.code.placeholder:Unique product code identifier`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 pattern: /^[A-Z]{4}[1-9]{8}$/mu,
 
@@ -136,22 +142,25 @@ asyncValidators: { validation: [ 'productCodeIsUnique' ] },
         {
         key: 'type',
         type: this.resolveFieldType('autocomplete', false),
-className: 'entry-type-field entry-autocomplete',
+        focus: false,
+className: `entry-type-field entry-autocomplete`,
         hideExpression: this.fieldsHideExpressions?.type ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.type ? this.fieldsDisableExpressions.type(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.type ? this.fieldsRequiredExpressions.type(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.type ? this.fieldsLabelExpressions.type(model) : $localize `:@@products.product-edit.type.label:Type`),
         'model.type': (model) => (this.fieldsPropertyExpressions?.type ? this.fieldsPropertyExpressions.type(model) : model.type),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.type.label:Type`,
         placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
-        description: '',
+        description: ``,
 appearance: 'outline',
             options: of(this.typeOptions).pipe(map(opts => sortOptions(opts, this.typeOptionsConfiguration.valueProperty, this.typeOptionsConfiguration.sortProperty, this._localeId))),
             valueProp: this.typeOptionsConfiguration.valueProperty,
             labelProp: this.typeOptionsConfiguration.labelProperty,
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 
             typeFormatDef: undefined
@@ -160,43 +169,49 @@ appearance: 'outline',
         {
         key: 'description',
         type: this.resolveFieldType('textarea', false),
-className: 'entry-description-field entry-textarea',
+        focus: false,
+className: `entry-description-field entry-textarea`,
         hideExpression: this.fieldsHideExpressions?.description ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.description ? this.fieldsDisableExpressions.description(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.description ? this.fieldsRequiredExpressions.description(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.description ? this.fieldsLabelExpressions.description(model) : $localize `:@@products.product-edit.description.label:Description`),
         'model.description': (model) => (this.fieldsPropertyExpressions?.description ? this.fieldsPropertyExpressions.description(model) : model.description),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.description.label:Description`,
         placeholder: $localize `:@@products.product-edit.description.placeholder:Description`,
-        description: '',
+        description: ``,
 appearance: 'outline',
             rows: 2,
             cols: 0,
             autosize: false,
             autosizeMinRows: 0,
             autosizeMaxRows: 0,
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: undefined
         },
         },
         {
         key: 'price',
         type: this.resolveFieldType('input', false),
-className: 'entry-price-field entry-input',
+        focus: false,
+className: `entry-price-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.price ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.price ? this.fieldsDisableExpressions.price(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.price ? this.fieldsRequiredExpressions.price(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.price ? this.fieldsLabelExpressions.price(model) : $localize `:@@products.price:Price per unit`),
         'model.price': (model) => (this.fieldsPropertyExpressions?.price ? this.fieldsPropertyExpressions.price(model) : model.price),
         },
         templateOptions: {
         label: $localize `:@@products.price:Price per unit`,
         placeholder: $localize `:@@products.price:Price per unit`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 type: 'number',
 min: 0.99 + 0.1,
@@ -208,23 +223,25 @@ max: 999.99,
         {
         key: 'amount',
         type: this.resolveFieldType('input', false),
-className: 'entry-amount-field entry-input',
+        focus: false,
+className: `entry-amount-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.amount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.amount ? this.fieldsDisableExpressions.amount(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.amount ? this.fieldsRequiredExpressions.amount(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.amount ? this.fieldsLabelExpressions.amount(model) : $localize `:@@products.amount:Units`),
         'model.amount': (model) => (this.fieldsPropertyExpressions?.amount ? this.fieldsPropertyExpressions.amount(model) : model.amount),
         },
         templateOptions: {
         label: $localize `:@@products.amount:Units`,
         placeholder: $localize `:@@products.amount:Units`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 type: 'number',
 min: 0 + 1,
-max: 100,
 
             typeFormatDef: undefined
         },
@@ -232,19 +249,22 @@ max: 100,
         {
         key: 'contactEmail',
         type: this.resolveFieldType('input', false),
-className: 'entry-contact-email-field entry-input',
+        focus: false,
+className: `entry-contact-email-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.contactEmail ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactEmail ? this.fieldsDisableExpressions.contactEmail(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.contactEmail ? this.fieldsRequiredExpressions.contactEmail(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.contactEmail ? this.fieldsLabelExpressions.contactEmail(model) : $localize `:@@products.product-edit.contact-email.label:Contact email`),
         'model.contactEmail': (model) => (this.fieldsPropertyExpressions?.contactEmail ? this.fieldsPropertyExpressions.contactEmail(model) : model.contactEmail),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.contact-email.label:Contact email`,
         placeholder: $localize `:@@products.product-edit.contact-email.placeholder:Contact person email address`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 
@@ -259,19 +279,22 @@ pattern: (err, field) => $localize `:@@validators.pattern.emailAddress:Invalid e
         {
         key: 'contactPhone',
         type: this.resolveFieldType('input', false),
-className: 'entry-contact-phone-field entry-input',
+        focus: false,
+className: `entry-contact-phone-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.contactPhone ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.contactPhone ? this.fieldsDisableExpressions.contactPhone(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.contactPhone ? this.fieldsRequiredExpressions.contactPhone(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.contactPhone ? this.fieldsLabelExpressions.contactPhone(model) : $localize `:@@products.product-edit.contact-phone.label:Contact phone`),
         'model.contactPhone': (model) => (this.fieldsPropertyExpressions?.contactPhone ? this.fieldsPropertyExpressions.contactPhone(model) : model.contactPhone),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.contact-phone.label:Contact phone`,
         placeholder: $localize `:@@products.product-edit.contact-phone.placeholder:Contact person phone number`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             required: true,
 pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/mu,
 
@@ -281,19 +304,22 @@ pattern: /^s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d
         {
         key: 'infoLink',
         type: this.resolveFieldType('input', false),
-className: 'entry-info-link-field entry-input',
+        focus: false,
+className: `entry-info-link-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.infoLink ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.infoLink ? this.fieldsDisableExpressions.infoLink(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.infoLink ? this.fieldsRequiredExpressions.infoLink(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.infoLink ? this.fieldsLabelExpressions.infoLink(model) : $localize `:@@products.product-edit.info-link.label:Homepage`),
         'model.infoLink': (model) => (this.fieldsPropertyExpressions?.infoLink ? this.fieldsPropertyExpressions.infoLink(model) : model.infoLink),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.info-link.label:Homepage`,
         placeholder: $localize `:@@products.product-edit.info-link.placeholder:Link to product homepage`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             pattern: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/u,
 
             typeFormatDef: undefined
@@ -302,19 +328,22 @@ appearance: 'outline',
         {
         key: 'expiresOn',
         type: this.resolveFieldType('datepicker', false),
-className: 'entry-expires-on-field entry-datepicker',
+        focus: false,
+className: `entry-expires-on-field entry-datepicker`,
         hideExpression: this.fieldsHideExpressions?.expiresOn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.expiresOn ? this.fieldsDisableExpressions.expiresOn(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.expiresOn ? this.fieldsRequiredExpressions.expiresOn(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.expiresOn ? this.fieldsLabelExpressions.expiresOn(model) : $localize `:@@products.product-edit.expires-on.label:Expires on`),
         'model.expiresOn': (model) => (this.fieldsPropertyExpressions?.expiresOn ? this.fieldsPropertyExpressions.expiresOn(model) : model.expiresOn),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.expires-on.label:Expires on`,
         placeholder: $localize `:@@products.product-edit.expires-on.placeholder:Product expiration date, if any`,
-        description: '',
+        description: ``,
 appearance: 'outline',
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: { name: 'date' }
         },
 modelOptions: { updateOn: 'blur' },
@@ -322,54 +351,63 @@ modelOptions: { updateOn: 'blur' },
         {
         key: 'freeShipping',
         type: this.resolveFieldType('checkbox', false),
-className: 'entry-free-shipping-field entry-checkbox',
+        focus: false,
+className: `entry-free-shipping-field entry-checkbox`,
         hideExpression: this.fieldsHideExpressions?.freeShipping ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.freeShipping ? this.fieldsDisableExpressions.freeShipping(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.freeShipping ? this.fieldsRequiredExpressions.freeShipping(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.freeShipping ? this.fieldsLabelExpressions.freeShipping(model) : $localize `:@@products.product-edit.free-shipping.label:Free shipping`),
         'model.freeShipping': (model) => (this.fieldsPropertyExpressions?.freeShipping ? this.fieldsPropertyExpressions.freeShipping(model) : model.freeShipping),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
         placeholder: $localize `:@@products.product-edit.free-shipping.placeholder:Free shipping`,
-        description: '',
-        hidden: !true,
+        description: ``,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: { name: 'boolean' }
         },
         },
         {
         key: 'hasDiscount',
         type: this.resolveFieldType('checkbox', false),
-className: 'entry-has-discount-field entry-checkbox',
+        focus: false,
+className: `entry-has-discount-field entry-checkbox`,
         hideExpression: this.fieldsHideExpressions?.hasDiscount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.hasDiscount ? this.fieldsDisableExpressions.hasDiscount(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.hasDiscount ? this.fieldsRequiredExpressions.hasDiscount(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.hasDiscount ? this.fieldsLabelExpressions.hasDiscount(model) : $localize `:@@products.product-edit.has-discount.label:Has discount`),
         'model.hasDiscount': (model) => (this.fieldsPropertyExpressions?.hasDiscount ? this.fieldsPropertyExpressions.hasDiscount(model) : model.hasDiscount),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.has-discount.label:Has discount`,
         placeholder: $localize `:@@products.product-edit.has-discount.placeholder:Has discount`,
-        description: '',
-        hidden: !true,
+        description: ``,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: { name: 'boolean' }
         },
         },
         {
         key: 'discount',
         type: this.resolveFieldType('input', false),
-className: 'entry-discount-field entry-input',
+        focus: false,
+className: `entry-discount-field entry-input`,
         hideExpression: this.fieldsHideExpressions?.discount ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.discount ? this.fieldsDisableExpressions.discount(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.discount ? this.fieldsRequiredExpressions.discount(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.discount ? this.fieldsLabelExpressions.discount(model) : $localize `:@@products.product-edit.discount.label:Discount`),
         'model.discount': (model) => (this.fieldsPropertyExpressions?.discount ? this.fieldsPropertyExpressions.discount(model) : model.discount),
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.discount.label:Discount`,
         placeholder: $localize `:@@products.product-edit.discount.placeholder:Discount`,
-        description: '',
-        hidden: !true,
+        description: ``,
+            attributes: {  },
+            hidden: !true,
             type: 'number',
 min: 0,
 max: 100,
@@ -380,23 +418,31 @@ max: 100,
         {
         key: 'resetFormBtn',
         type: this.resolveFieldType('button', false),
-className: 'entry-reset-form-btn-field entry-button',
+        focus: false,
+className: `entry-reset-form-btn-field entry-button`,
         hideExpression: this.fieldsHideExpressions?.resetFormBtn ?? false,
         expressionProperties: {
         'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.resetFormBtn ? this.fieldsDisableExpressions.resetFormBtn(model) : false)),
         'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.resetFormBtn ? this.fieldsRequiredExpressions.resetFormBtn(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.resetFormBtn ? this.fieldsLabelExpressions.resetFormBtn(model) : ``),
         'model.resetFormBtn': (model) => (this.fieldsPropertyExpressions?.resetFormBtn ? this.fieldsPropertyExpressions.resetFormBtn(model) : model.resetFormBtn),
         },
         templateOptions: {
-        label: '',
-        placeholder: '',
+        label: ``,
+        placeholder: ``,
         description: $localize `:@@products.product-edit.reset-form-btn.hint:* This will reset form to it's initial state.`,
             text: $localize `:@@products.product-edit.reset-form-btn.text:Reset`,
             onClick: ($event: any) => this.buttonClick.emit('resetFormBtn'),
-        hidden: !true,
+            attributes: {  },
+            hidden: !true,
         },
         },
             { key: 'id' },
     ];
+}
+
+  private applyOptionally<T>(value: T, apply: boolean): T | undefined {
+    return apply ? value : undefined;
   }
+
 }

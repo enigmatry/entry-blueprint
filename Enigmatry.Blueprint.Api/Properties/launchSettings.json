@@ -1,27 +1,28 @@
 {
-    "iisSettings": {
-        "windowsAuthentication": false,
-        "anonymousAuthentication": true,
-        "iisExpress": {
-            "applicationUrl": "http://localhost:5440/",
-            "sslPort": 44394
-        }
-    },
-    "profiles": {
-        "IIS Express": {
-            "commandName": "IISExpress",
-            "launchBrowser": true,
-            "applicationUrl": "https://localhost:44394/",
-            "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            }
-        },
-        "Enigmatry.Blueprint.Api": {
-            "commandName": "Project",
-            "applicationUrl": "http://localhost:5441/",
-            "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            }
-        }
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:5440/",
+      "sslPort": 44394
     }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:44394/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Enigmatry.Blueprint.Api": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5441/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
 }

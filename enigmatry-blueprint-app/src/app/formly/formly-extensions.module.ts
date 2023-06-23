@@ -13,6 +13,7 @@ import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-
 import { FormlyButtonComponent } from './formly-button/formly-button.component';
 import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
 import { EntryTableModule } from '@enigmatry/entry-table';
+import { FORM_FIELD_ERROR_KEY } from '@enigmatry/entry-components/validation';
 
 const defaultFormConfig: EntryFormConfig = {
   fieldTypesConfig: {
@@ -65,6 +66,10 @@ const defaultFormConfig: EntryFormConfig = {
             }
           }
         }
+      ],
+      validationMessages: [
+        { name: FORM_FIELD_ERROR_KEY, message: (error, _) => error },
+        { name: 'required', message: 'Required field.' }
       ]
     })
   ],

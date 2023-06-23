@@ -36,10 +36,6 @@ export interface IUsersClient {
      * @param id Id
      */
     get(id: string): Observable<GetUserDetailsResponse>;
-    /**
-     * Gets secret from Azure Key Vault
-     */
-    getSecret(): Observable<string>;
 }
 
 @Injectable({
@@ -257,58 +253,6 @@ export class UsersClient implements IUsersClient {
         }
         return _observableOf<GetUserDetailsResponse>(null as any);
     }
-
-    /**
-     * Gets secret from Azure Key Vault
-     */
-    getSecret(): Observable<string> {
-        let url_ = this.baseUrl + "/Users/secret";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetSecret(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetSecret(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<string>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<string>;
-        }));
-    }
-
-    protected processGetSecret(response: HttpResponseBase): Observable<string> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<string>(null as any);
-    }
 }
 
 export interface IProductsClient {
@@ -494,7 +438,7 @@ export class ProductsClient implements IProductsClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ProblemDetails.fromJS(resultData400);
+            result400 = ValidationProblemDetails.fromJS(resultData400);
             return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1372,6 +1316,96 @@ export class ProductCreateOrUpdateResult implements IProductCreateOrUpdateResult
 
 export interface IProductCreateOrUpdateResult {
     id?: string;
+}
+
+export class HttpValidationProblemDetails extends ProblemDetails implements IHttpValidationProblemDetails {
+    errors?: { [key: string]: string[]; };
+
+    constructor(data?: IHttpValidationProblemDetails) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (_data["errors"]) {
+                this.errors = {} as any;
+                for (let key in _data["errors"]) {
+                    if (_data["errors"].hasOwnProperty(key))
+                        (<any>this.errors)![key] = _data["errors"][key] !== undefined ? _data["errors"][key] : [];
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): HttpValidationProblemDetails {
+        data = typeof data === 'object' ? data : {};
+        let result = new HttpValidationProblemDetails();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.errors) {
+            data["errors"] = {};
+            for (let key in this.errors) {
+                if (this.errors.hasOwnProperty(key))
+                    (<any>data["errors"])[key] = (<any>this.errors)[key];
+            }
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IHttpValidationProblemDetails extends IProblemDetails {
+    errors?: { [key: string]: string[]; };
+}
+
+export class ValidationProblemDetails extends HttpValidationProblemDetails implements IValidationProblemDetails {
+    errors?: { [key: string]: string[]; };
+
+    constructor(data?: IValidationProblemDetails) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (_data["errors"]) {
+                this.errors = {} as any;
+                for (let key in _data["errors"]) {
+                    if (_data["errors"].hasOwnProperty(key))
+                        (<any>this.errors)![key] = _data["errors"][key] !== undefined ? _data["errors"][key] : [];
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): ValidationProblemDetails {
+        data = typeof data === 'object' ? data : {};
+        let result = new ValidationProblemDetails();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.errors) {
+            data["errors"] = {};
+            for (let key in this.errors) {
+                if (this.errors.hasOwnProperty(key))
+                    (<any>data["errors"])[key] = (<any>this.errors)[key];
+            }
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IValidationProblemDetails extends IHttpValidationProblemDetails {
+    errors?: { [key: string]: string[]; };
 }
 
 export class ProductCreateOrUpdateCommand implements IProductCreateOrUpdateCommand {

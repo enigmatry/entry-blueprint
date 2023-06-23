@@ -14,7 +14,6 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
     public const double PriceMinValue = 0.99;
     public const double PriceMaxValue = 999.99;
     public const int AmountMinValue = 0;
-    public const int AmountMaxValue = 100;
     public const int ContactEmailMaxLength = 50;
     public const int ContactPhoneMaxLength = 25;
     public const float DiscountMinValue = 0.0F;

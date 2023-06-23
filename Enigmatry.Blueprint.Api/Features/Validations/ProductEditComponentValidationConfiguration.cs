@@ -23,8 +23,7 @@ public class ProductEditComponentValidationConfiguration : ValidationConfigurati
             .LessOrEqualTo(Product.PriceMaxValue);
         RuleFor(x => x.Amount)
             .IsRequired()
-            .GreaterThen(Product.AmountMinValue)
-            .LessOrEqualTo(Product.AmountMaxValue);
+            .GreaterThen(Product.AmountMinValue);
         RuleFor(x => x.Type)
             .IsRequired();
         RuleFor(x => x.ContactEmail)
