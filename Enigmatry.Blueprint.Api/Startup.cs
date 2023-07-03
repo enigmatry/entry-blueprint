@@ -2,6 +2,7 @@
 using Enigmatry.Entry.Swagger;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
+using Enigmatry.Blueprint.Infrastructure.Api.Security;
 using Enigmatry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data;
@@ -43,6 +44,8 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseMiddleware<LogContextMiddleware>();
         app.UseHsts();
+
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
@@ -77,6 +80,9 @@ public class Startup
         services.AppAddHealthChecks(configuration)
             .AddDbContextCheck<BlueprintContext>();
         services.AppAddMediatR();
+
+        services.AppAddAuthentication(configuration);
+
         services.AppAddSwagger("Blueprint API");
 
         // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858

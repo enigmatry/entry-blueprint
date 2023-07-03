@@ -4,7 +4,15 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44394'
+  apiUrl: 'https://localhost:44394',
+  azureAdB2C: {
+    clientId: 'a8793ce9-86dc-4d7e-aa70-361a3c5a5150',
+    instance: 'https://enigmatryb2cdev.b2clogin.com',
+    domain: 'enigmatryb2cdev.onmicrosoft.com',
+    signUpSignInPolicyId: 'B2C_1_entry_demo_sign_in',
+    // eslint-disable-next-line no-secrets/no-secrets
+    scopes: ['https://enigmatryb2cdev.onmicrosoft.com/a8793ce9-86dc-4d7e-aa70-361a3c5a5150/api']
+  }
 };
 
 /*

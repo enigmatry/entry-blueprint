@@ -1,26 +1,31 @@
 ﻿using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
+using System.Security.Principal;
 
 namespace Enigmatry.Blueprint.ApplicationServices.Identity;
 
 [UsedImplicitly]
 public class CurrentUserProvider : ICurrentUserProvider
 {
-    private readonly ICurrentUserIdProvider _currentUserIdProvider;
+    private readonly Func<IPrincipal> _principalProvider;
     private readonly IRepository<User> _userRepository;
     private User? _user;
 
-    public CurrentUserProvider(ICurrentUserIdProvider currentUserIdProvider,
+    public CurrentUserProvider(Func<IPrincipal> principalProvider,
         IRepository<User> userRepository)
     {
+        _principalProvider = principalProvider;
         _userRepository = userRepository;
-        _currentUserIdProvider = currentUserIdProvider;
     }
 
-    public bool IsAuthenticated => _currentUserIdProvider.IsAuthenticated;
+    private IPrincipal Principal => _principalProvider();
 
-    public Guid? UserId => _currentUserIdProvider.UserId.GetValueOrDefault();
+    private string? Email => IsAuthenticated ? Principal.Identity!.Name : null;
+
+    public bool IsAuthenticated => (Principal.Identity?.IsAuthenticated).GetValueOrDefault();
+
+    public Guid? UserId => User?.Id;
 
     public User? User
     {
@@ -31,19 +36,15 @@ public class CurrentUserProvider : ICurrentUserProvider
                 return _user;
             }
 
-            if (!IsAuthenticated)
+            if (!IsAuthenticated || String.IsNullOrEmpty(Email))
             {
                 return null;
             }
 
-            //TODO replace with getting user from principal
-            _user = _userRepository.QueryAll()
-                .First();
-
-            // e.g. 
-            /*_user = _userQuery
-                .ByUserName(Principal.Identity.Name)
-                .SingleOrDefault();*/
+            _user = _userRepository
+                .QueryAll()
+                .QueryByUserName(Email)
+                .SingleOrDefault();
 
             return _user;
         }
