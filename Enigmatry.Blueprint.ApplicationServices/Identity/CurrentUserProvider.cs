@@ -1,6 +1,7 @@
 ﻿using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
 
 namespace Enigmatry.Blueprint.ApplicationServices.Identity;
@@ -44,6 +45,9 @@ public class CurrentUserProvider : ICurrentUserProvider
             _user = _userRepository
                 .QueryAll()
                 .QueryByUserName(Email)
+                .Include(u => u.Role)
+                .ThenInclude(r => r!.Permissions)
+                .AsNoTracking().AsSplitQuery()
                 .SingleOrDefault();
 
             return _user;

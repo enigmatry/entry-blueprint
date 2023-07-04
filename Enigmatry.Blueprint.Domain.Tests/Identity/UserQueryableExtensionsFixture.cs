@@ -1,4 +1,5 @@
-﻿using Enigmatry.Blueprint.Domain.Identity;
+﻿using Enigmatry.Blueprint.Domain.Authorization;
+using Enigmatry.Blueprint.Domain.Identity;
 using FluentAssertions;
 
 namespace Enigmatry.Blueprint.Model.Tests.Identity
@@ -15,10 +16,12 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity
         {
             _user = new UserBuilder()
                 .WithUserName("username1")
-                .WithName("name");
+                .WithName("name")
+                .WithRoleId(Role.SystemAdminRoleId);
             _user2 = new UserBuilder()
                 .WithUserName("username2")
-                .WithName("name2");
+                .WithName("name2")
+                .WithRoleId(Role.SystemAdminRoleId);
 
             _query = new List<User> { _user, _user2 }.AsQueryable();
         }

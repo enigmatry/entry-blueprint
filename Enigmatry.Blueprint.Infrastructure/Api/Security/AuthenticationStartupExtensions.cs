@@ -10,7 +10,13 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Security
         private const string ConfigurationSection = "App:AzureAdB2C";
         private const string UsernameClaim = "emails";
 
-        public static void AppAddAuthentication(this IServiceCollection services, IConfiguration configuration) =>
+        public static void AppAddAuthentication(this IServiceCollection services, IConfiguration configuration, bool isEnabled)
+        {
+            if (!isEnabled)
+            {
+                return;
+            }
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(options =>
                     {
@@ -18,5 +24,6 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Security
                         options.TokenValidationParameters.NameClaimType = UsernameClaim;
                     },
                     options => { configuration.Bind(ConfigurationSection, options); });
+        }
     }
 }

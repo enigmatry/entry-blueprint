@@ -1,5 +1,4 @@
-﻿using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.Blueprint.Domain.Products;
+﻿using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.Blueprint.Domain.Products.Commands;
 using Enigmatry.Entry.Core.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +24,7 @@ public class ProductSeeding : ISeeding
             HasDiscount = true,
             Discount = 25.0F
         });
-        dune.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        dune.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         dune.WithId(new Guid("7a4ce0d5-471b-4d35-89f2-b6c7a68350c0"));
 
         var salto = Product.Create(new ProductCreateOrUpdate.Command
@@ -41,7 +40,7 @@ public class ProductSeeding : ISeeding
             ExpiresOn = new DateTimeOffset(2025, 6, 15, 0, 0, 0, TimeSpan.FromHours(0)),
             FreeShipping = false
         });
-        salto.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        salto.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         salto.WithId(new Guid("DC7047B0-0D35-4CBC-9424-D907AE5A25F4"));
 
         var lada = Product.Create(new ProductCreateOrUpdate.Command
@@ -57,7 +56,7 @@ public class ProductSeeding : ISeeding
             ExpiresOn = null,
             FreeShipping = true
         });
-        lada.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        lada.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         lada.WithId(new Guid("04C45383-1372-4312-BB38-5EDFA569DB66"));
 
         var camper = Product.Create(new ProductCreateOrUpdate.Command
@@ -75,7 +74,7 @@ public class ProductSeeding : ISeeding
             HasDiscount = true,
             Discount = 10.0F
         });
-        camper.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        camper.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         camper.WithId(new Guid("DA8EB2A9-1F8A-4C41-8DF9-10A1FC59305B"));
 
         var burek = Product.Create(new ProductCreateOrUpdate.Command
@@ -91,7 +90,7 @@ public class ProductSeeding : ISeeding
             ExpiresOn = null,
             FreeShipping = false
         });
-        burek.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        burek.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         burek.WithId(new Guid("1DE0818E-04D7-4435-98AF-114B81AFF0D0"));
 
         var sardines = Product.Create(new ProductCreateOrUpdate.Command
@@ -107,7 +106,7 @@ public class ProductSeeding : ISeeding
             ExpiresOn = new DateTimeOffset(2050, 6, 15, 0, 0, 0, TimeSpan.FromHours(0)),
             FreeShipping = false
         });
-        sardines.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        sardines.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         sardines.WithId(new Guid("A84132E7-CFC9-4766-8DA0-B1D9E549DE57"));
 
         var mockingbird = Product.Create(new ProductCreateOrUpdate.Command
@@ -123,7 +122,7 @@ public class ProductSeeding : ISeeding
             ExpiresOn = null,
             FreeShipping = false
         });
-        mockingbird.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        mockingbird.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         mockingbird.WithId(new Guid("65FB31FA-FF40-4BD5-8FE6-755122B6428B"));
 
         var kibbeling = Product.Create(new ProductCreateOrUpdate.Command
@@ -139,7 +138,7 @@ public class ProductSeeding : ISeeding
             ExpiresOn = null,
             FreeShipping = false
         });
-        kibbeling.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        kibbeling.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         kibbeling.WithId(new Guid("767C974C-8C07-43F5-8C6F-0CC1EEF3C65A"));
 
         var kapsalon = Product.Create(new ProductCreateOrUpdate.Command
@@ -155,7 +154,7 @@ public class ProductSeeding : ISeeding
             ExpiresOn = null,
             FreeShipping = false
         });
-        kapsalon.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)), User.TestUserId);
+        kapsalon.SetCreated(new DateTimeOffset(2021, 1, 1, 12, 0, 0, TimeSpan.FromHours(0)));
         kapsalon.WithId(new Guid("67A75734-D04A-4661-95D9-24879122C901"));
 
         modelBuilder.Entity<Product>().HasData(dune, salto, lada, camper, burek, sardines, mockingbird, kibbeling, kapsalon);

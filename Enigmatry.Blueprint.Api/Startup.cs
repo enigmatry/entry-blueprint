@@ -6,6 +6,8 @@ using Enigmatry.Blueprint.Infrastructure.Api.Security;
 using Enigmatry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Infrastructure.Data;
+using Enigmatry.Entry.AspNetCore.Authorization;
+using Enigmatry.Entry.AspNetCore.Exceptions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Enigmatry.Entry.HealthChecks.Extensions;
@@ -15,6 +17,8 @@ namespace Enigmatry.Blueprint.Api;
 [UsedImplicitly]
 public class Startup
 {
+    public static bool IsAuthEnabled { get; set; } = true;
+
     private readonly IConfiguration _configuration;
 
     public Startup(IConfiguration configuration)
@@ -42,11 +46,14 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        app.UseMiddleware<LogContextMiddleware>();
         app.UseHsts();
+
+        app.AppUseExceptionHandler();
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseMiddleware<LogContextMiddleware>();
 
         app.UseEndpoints(endpoints =>
         {
@@ -64,7 +71,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         ConfigureServicesExceptMvc(services, _configuration);
-        services.AppAddMvc(_configuration);
+        services.AppAddMvc();
     }
 
     // this also called by tests. Mvc is configured slightly differently in integration tests
@@ -81,9 +88,11 @@ public class Startup
             .AddDbContextCheck<BlueprintContext>();
         services.AppAddMediatR();
 
-        services.AppAddAuthentication(configuration);
+        services.AppAddAuthentication(configuration, IsAuthEnabled);
 
         services.AppAddSwagger("Blueprint API");
+
+        services.AppAddAuthorization(IsAuthEnabled);
 
         // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
         services.PostConfigure<ApiBehaviorOptions>(options => options.AppAddFluentValidationApiBehaviorOptions());

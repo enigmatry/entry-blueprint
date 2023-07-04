@@ -6,6 +6,7 @@ using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Blueprint.Domain.Authorization;
 
 namespace Enigmatry.Blueprint.Api.Tests;
 
@@ -24,7 +25,8 @@ public class UsersControllerFixture : IntegrationFixtureBase
     {
         _user = new UserBuilder()
             .WithUserName("john_doe@john.doe")
-            .WithName("John Doe");
+            .WithName("John Doe")
+            .WithRoleId(Role.SystemAdminRoleId);
 
         AddAndSaveChanges(_user);
     }
@@ -37,7 +39,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
             ?.Items.ToList()!;
 
         users.Should().NotBeNull();
-        users.Count.Should().Be(3, "we have three users in the db, one added, one seeded and one created by current user provider");
+        users.Count.Should().Be(2, "we have three users in the db, one added, one seeded and one created by current user provider");
 
         await Verify(users);
     }
@@ -53,7 +55,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestCreate()
     {
-        var command = new CreateOrUpdateUser.Command { Name = "some user", UserName = "someuser@test.com" };
+        var command = new CreateOrUpdateUser.Command { Name = "some user", UserName = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
@@ -63,7 +65,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestUpdate()
     {
-        var command = new CreateOrUpdateUser.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com" };
+        var command = new CreateOrUpdateUser.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 

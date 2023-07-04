@@ -43,7 +43,7 @@ public class EntityFrameworkModule : Module
 
         // needs to be registered both as self and as DbContext or the tests might not work as expected
         builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
-        builder.RegisterType<DbContextUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+        builder.RegisterType<EntityFrameworkUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
         builder.RegisterType<DbContextAccessTokenProvider>().As<IDbContextAccessTokenProvider>().InstancePerLifetimeScope();
     }

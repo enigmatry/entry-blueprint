@@ -8,15 +8,9 @@
   },
   {
     Id: Guid_2,
-    UserName: Test,
-    Name: Test,
-    CreatedOn: DateTimeOffset_2
-  },
-  {
-    Id: Guid_3,
     UserName: test_user@xyz.com,
     Name: INTEGRATION_TEST,
-    CreatedOn: DateTimeOffset_3,
-    UpdatedOn: DateTimeOffset_3
+    CreatedOn: DateTimeOffset_2,
+    UpdatedOn: DateTimeOffset_2
   }
 ]

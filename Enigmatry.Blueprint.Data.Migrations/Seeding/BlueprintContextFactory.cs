@@ -23,7 +23,7 @@ public class BlueprintContextFactory : IDesignTimeDbContextFactory<BlueprintCont
             b => b.MigrationsAssembly(typeof(BlueprintContextFactory).Assembly.FullName));
 
         var result =
-            new BlueprintContext(optionsBuilder.Options, new NullMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullLogger<BlueprintContext>(), new NullDbContextAccessTokenProvider()) { ModelBuilderConfigurator = DbInitializer.SeedData };
+            new BlueprintContext(optionsBuilder.Options, new NullMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullDbContextAccessTokenProvider(), new NullLogger<BlueprintContext>()) { ModelBuilderConfigurator = DbInitializer.SeedData };
         return result;
     }
 

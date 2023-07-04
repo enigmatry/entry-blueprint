@@ -9,7 +9,7 @@ public static class DbInitializer
 
     static DbInitializer()
     {
-        Seedings.Add(new UserSeeding());
+        Seedings.Add(new RoleSeeding());
         Seedings.Add(new ProductSeeding());
     }
 

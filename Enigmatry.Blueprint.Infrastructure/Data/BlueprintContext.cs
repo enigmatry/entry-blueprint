@@ -6,21 +6,25 @@ using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using JetBrains.Annotations;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Enigmatry.Entry.EntityFramework.MediatR;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Infrastructure.Data;
 
 [UsedImplicitly]
-public class BlueprintContext : EntitiesDbContext
+public class BlueprintContext : MediatRDbContext
 {
     private readonly ITimeProvider _timeProvider;
     private readonly ICurrentUserIdProvider _currentUserIdProvider;
 
-    public BlueprintContext(DbContextOptions options, IMediator mediator,
-        ITimeProvider timeProvider, ICurrentUserIdProvider currentUserIdProvider,
-        ILogger<BlueprintContext> logger, IDbContextAccessTokenProvider dbContextAccessTokenProvider) :
+    public BlueprintContext(DbContextOptions options,
+        IMediator mediator,
+        ITimeProvider timeProvider,
+        ICurrentUserIdProvider currentUserIdProvider,
+        IDbContextAccessTokenProvider dbContextAccessTokenProvider,
+        ILogger<BlueprintContext> logger) :
         base(CreateOptions(), options, mediator, logger, dbContextAccessTokenProvider)
     {
         _timeProvider = timeProvider;
@@ -62,15 +66,16 @@ public class BlueprintContext : EntitiesDbContext
         {
             foreach (var (state, entity) in changedEntities)
             {
+                var currentDateTime = _timeProvider.FixedUtcNow;
                 if (state == EntityState.Added)
                 {
-                    entity.SetCreated(_timeProvider.Now, userId.Value);
-                    entity.SetUpdated(_timeProvider.Now, userId.Value);
+                    entity.SetCreated(currentDateTime, userId.Value);
+                    entity.SetUpdated(currentDateTime, userId.Value);
                 }
 
                 if (state == EntityState.Modified)
                 {
-                    entity.SetUpdated(_timeProvider.Now, userId.Value);
+                    entity.SetUpdated(currentDateTime, userId.Value);
                 }
             }
         }

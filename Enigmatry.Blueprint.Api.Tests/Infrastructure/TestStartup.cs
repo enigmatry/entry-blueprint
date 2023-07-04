@@ -20,12 +20,13 @@ public class TestStartup
     {
         _configuration = configuration;
         _startup = new Startup(configuration);
+        Startup.IsAuthEnabled = false;
     }
 
     [UsedImplicitly]
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AppAddMvc(_configuration)
+        services.AppAddMvc()
             .AddApplicationPart(AssemblyFinder.ApiAssembly); // needed only because of tests
         Startup.ConfigureServicesExceptMvc(services, _configuration);
     }

@@ -12,13 +12,14 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<User>
     {
         builder.Property(x => x.UserName).IsRequired().HasMaxLength(200);
         builder.Property(x => x.Name).IsRequired().HasMaxLength(200);
+        builder.Property(x => x.RoleId).IsRequired();
         builder.Property(x => x.CreatedOn).IsRequired();
 
         builder.HasIndex(x => x.UserName).IsUnique();
 
-        builder.HasMany(x => x.CreatedUsers).WithOne(x => x.CreatedBy!).OnDelete(DeleteBehavior.NoAction);
-        builder.HasMany(x => x.UpdatedUsers).WithOne(x => x.UpdatedBy!).OnDelete(DeleteBehavior.NoAction);
-        builder.HasMany(x => x.CreatedProducts).WithOne(x => x.CreatedBy!).OnDelete(DeleteBehavior.NoAction);
-        builder.HasMany(x => x.UpdatedProducts).WithOne(x => x.UpdatedBy!).OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(u => u.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(u => u.UpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasOne(x => x.Role).WithMany(x => x.Users!).OnDelete(DeleteBehavior.NoAction);
     }
 }

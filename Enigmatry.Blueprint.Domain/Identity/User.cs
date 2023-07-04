@@ -1,16 +1,15 @@
 ﻿using Enigmatry.Blueprint.Core;
+using Enigmatry.Blueprint.Domain.Authorization;
 using Enigmatry.Blueprint.Domain.Identity.Commands;
 using Enigmatry.Blueprint.Domain.Identity.DomainEvents;
-using Enigmatry.Blueprint.Domain.Products;
 using Enigmatry.Entry.Core.Entities;
 
 namespace Enigmatry.Blueprint.Domain.Identity;
 
 public class User : EntityWithGuidId, IEntityHasCreatedUpdated
 {
-    public static readonly Guid TestUserId = new("8207DB25-94D1-4F3D-BF18-90DA283221F7");
-    public const int NameMinLenght = 5;
-    public const int NameMaxLenght = 25;
+    public const int NameMinLength = 5;
+    public const int NameMaxLength = 25;
 
     public string UserName { get; private set; } = "";
     public string Name { get; private set; } = "";
@@ -22,10 +21,8 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     public User? CreatedBy { get; private set; }
     public User? UpdatedBy { get; private set; }
 
-    public ICollection<User>? CreatedUsers { get; private set; }
-    public ICollection<User>? UpdatedUsers { get; private set; }
-    public ICollection<Product>? CreatedProducts { get; private set; }
-    public ICollection<Product>? UpdatedProducts { get; private set; }
+    public Guid RoleId { get; private set; }
+    public Role Role { get; private set; } = null!;
 
     public static User Create(CreateOrUpdateUser.Command command)
     {
@@ -33,6 +30,7 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
         {
             UserName = command.UserName,
             Name = command.Name,
+            RoleId = command.RoleId
         };
 
         result.AddDomainEvent(new UserCreatedDomainEvent(result.UserName));
@@ -42,6 +40,7 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     public void Update(CreateOrUpdateUser.Command command)
     {
         Name = command.Name;
+        RoleId = command.RoleId;
         AddDomainEvent(new UserUpdatedDomainEvent(UserName));
     }
 

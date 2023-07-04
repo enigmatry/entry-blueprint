@@ -1,15 +1,15 @@
-﻿using Microsoft.Data.SqlClient;
-using Autofac.Extensions.DependencyInjection;
+﻿using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.Entry.AspNetCore.Tests;
-using Enigmatry.Entry.AspNetCore.Tests.Database;
-using Enigmatry.Entry.Core.Data;
 using Enigmatry.Blueprint.Infrastructure.Data;
+using Enigmatry.Entry.AspNetCore.Tests.Utilities.Database;
+using Enigmatry.Entry.AspNetCore.Tests.Utilities;
+using Enigmatry.Entry.Core.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -148,10 +148,10 @@ public class IntegrationFixtureBase
         }
     }
 
-    protected void SaveChanges()
+    protected async Task SaveChanges()
     {
         var unitOfWork = _testScope.Resolve<IUnitOfWork>();
-        unitOfWork.SaveChanges();
+        await unitOfWork.SaveChangesAsync();
     }
 
     protected IQueryable<T> QueryDb<T>() where T : class =>

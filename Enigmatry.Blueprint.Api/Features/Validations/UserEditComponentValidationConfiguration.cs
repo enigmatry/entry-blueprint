@@ -10,7 +10,7 @@ public class UserEditComponentValidationConfiguration : ValidationConfiguration<
     {
         RuleFor(x => x.Name)
             .IsRequired()
-            .MinLength(User.NameMinLenght)
-            .MaxLength(User.NameMaxLenght);
+            .MinLength(User.NameMinLength)
+            .MaxLength(User.NameMaxLength);
     }
 }

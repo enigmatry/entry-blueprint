@@ -27,6 +27,7 @@ public static class ContainerBuilderStartupExtensions
             }
         });
         builder.RegisterModule<EntityFrameworkModule>();
+        builder.RegisterModule<AuthorizationModule>();
     }
 
     private static ClaimsPrincipal GetPrincipal(IComponentContext c)

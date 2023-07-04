@@ -7,6 +7,7 @@ namespace Enigmatry.Blueprint.Model.Tests.Identity;
 public class UserBuilder
 {
     private string _name = String.Empty;
+    private Guid _roleId = Guid.Empty;
     private string _userName = String.Empty;
     private Guid _id = SequentialGuidGenerator.Generate();
 
@@ -19,6 +20,12 @@ public class UserBuilder
     public UserBuilder WithName(string value)
     {
         _name = value;
+        return this;
+    }
+
+    public UserBuilder WithRoleId(Guid value)
+    {
+        _roleId = value;
         return this;
     }
 
@@ -37,7 +44,8 @@ public class UserBuilder
         User result = User.Create(new CreateOrUpdateUser.Command
         {
             Name = _name,
-            UserName = _userName
+            UserName = _userName,
+            RoleId = _roleId
         }).WithId(_id);
 
         return result;
