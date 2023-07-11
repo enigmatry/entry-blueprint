@@ -1,25 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormlyModule } from '@ngx-formly/core';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormlyExpansionPanelComponent } from './formly-expansion-panel/formly-expansion-panel.component';
-import { FormlyFieldsetComponent } from './formly-fieldset/formly-fieldset.component';
-import { ReadonlyInputComponent } from './formly-readonly-input/formly-readonly-input.component';
-import { ReadonlyBooleanComponent } from './formly-readonly-boolean/formly-readonly-boolean.component';
-import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-radio.component';
-import { FormlyButtonComponent } from './formly-button/formly-button.component';
+import { FORM_FIELD_ERROR_KEY } from '@enigmatry/entry-components/validation';
 import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
 import { EntryTableModule } from '@enigmatry/entry-table';
-import { FORM_FIELD_ERROR_KEY } from '@enigmatry/entry-components/validation';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyButtonComponent } from './formly-button/formly-button.component';
+import { FormlyExpansionPanelComponent } from './formly-expansion-panel/formly-expansion-panel.component';
+import { FormlyFieldsetComponent } from './formly-fieldset/formly-fieldset.component';
+import { ReadonlyBooleanComponent } from './formly-readonly-boolean/formly-readonly-boolean.component';
+import { ReadonlyInputComponent } from './formly-readonly-input/formly-readonly-input.component';
+import { ReadonlyRadioComponent } from './formly-readonly-radio/formly-readonly-radio.component';
 
 const defaultFormConfig: EntryFormConfig = {
   fieldTypesConfig: {
     // Example (readonlyDefaultPrefix: 'readonly-'); Used to determine all readonly types that are not explicitly mapped in readonlyFieldTypeMappings
     readonlyDefaultPrefix: '',
-    // eslint-disable-next-line id-length
     readonlyFieldTypeMappings: {
       input: 'readonly-input',
       checkbox: 'readonly-boolean',

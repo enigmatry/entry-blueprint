@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
-import { GridCellsModule } from './grid-cells/grid-cells.module';
+import { EntryValidationModule } from '@enigmatry/entry-components/validation';
 import { DEFAULT_DATE_FORMAT, DEFAULT_TIMEZONE, EntryTableModule } from '@enigmatry/entry-table';
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
-import { EntryValidationModule } from '@enigmatry/entry-components/validation';
+import { GridCellsModule } from './grid-cells/grid-cells.module';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   imports: [

@@ -1,15 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ApiModule } from './api/api.module';
+import { AppInitService, initFactory } from './app-init.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApiModule } from './api/api.module';
-import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './core/auth/auth.module';
-import { AppInitService, initFactory } from './app-init.service';
 import { LoginComponent } from './features/login/login.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [

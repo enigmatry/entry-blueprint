@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormAccessMode } from './form-access-mode.enum';
 import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary }
   from '@enigmatry/entry-form';
+import { FormAccessMode } from './form-access-mode.enum';
 
 export abstract class FormComponent<TCommandModel, TDetailsModel> {
   model: TCommandModel = {} as TCommandModel;
@@ -35,7 +35,6 @@ export abstract class FormComponent<TCommandModel, TDetailsModel> {
 
   isEdit = (): boolean => this.formMode === FormAccessMode.edit;
 
-  // eslint-disable-next-line no-confusing-arrow
   private readonly getFormAccessMode = (url: string): FormAccessMode =>
     url.endsWith(`/create`)
       ? FormAccessMode.create

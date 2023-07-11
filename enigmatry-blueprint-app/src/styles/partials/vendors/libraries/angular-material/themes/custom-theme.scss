@@ -1,14 +1,15 @@
-@use '@angular/material/theming' as theming;
+@use '@angular/material' as theming;
 @use 'custom-palettes' as palettes;
 
-@include theming.mat-core();
+@include theming.core();
 
-$custom-primary: theming.mat-palette(palettes.$primary-palette);
-$custom-accent: theming.mat-palette(palettes.$accent-palette);
+$custom-primary: theming.define-palette(palettes.$primary-palette);
+$custom-accent: theming.define-palette(palettes.$accent-palette);
 
-$default-warn: theming.mat-palette(theming.$mat-red);
+$default-warn: theming.define-palette(theming.$red-palette);
 
-$custom-theme: theming.mat-light-theme((
+/* stylelint-disable-next-line scss/function-no-unknown */
+$custom-theme: theming.define-light-theme((
 	color: (
 		primary: $custom-primary,
 		accent: $custom-accent,
@@ -16,4 +17,4 @@ $custom-theme: theming.mat-light-theme((
 	)
 ));
 
-@include theming.angular-material-theme($custom-theme);
+@include theming.all-component-themes($custom-theme);

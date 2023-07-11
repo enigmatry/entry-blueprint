@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { OnSort, OnPage, PageEvent, SortEvent } from '@enigmatry/entry-table';
 import { combineLatest, Subscription } from 'rxjs';
 import { finalize, mergeMap, tap } from 'rxjs/operators';
-import { OnSort, OnPage, PageEvent, SortEvent } from '@enigmatry/entry-table';
-import { BaseListComponent } from './base-list-component.model';
 import { PagedQuery } from '../query/paged-query.model';
+import { BaseListComponent } from './base-list-component.model';
 
 /**
  * ListComponentWithRouting

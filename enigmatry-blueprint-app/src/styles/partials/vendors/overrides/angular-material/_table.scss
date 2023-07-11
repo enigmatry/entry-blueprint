@@ -1,11 +1,11 @@
 @use 'variables' as vars;
 
-.mat-table-container {
-	.mat-table {
+.mat-mdc-table-container {
+	.mat-mdc-table {
 		margin-top: vars.$default-gap;
 	}
 
-	.mat-header-cell, .mat-cell, .mat-footer-cell {
+	.mat-mdc-header-cell, .mat-mdc-cell, .mat-mdc-footer-cell {
 		&:first-of-type {
 			padding-left: 12px;
 		}

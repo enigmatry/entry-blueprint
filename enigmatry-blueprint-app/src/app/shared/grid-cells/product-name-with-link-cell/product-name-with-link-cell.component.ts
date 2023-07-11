@@ -6,7 +6,6 @@ import { GetProductsResponseItem } from 'src/app/api/api-reference';
     templateUrl: './product-name-with-link-cell.component.html',
     styleUrls: ['./product-name-with-link-cell.component.scss']
 })
-// eslint-disable-next-line id-length
 export class ProductNameWithLinkCellComponent {
     @Input() rowData: GetProductsResponseItem;
     @Input() colDef: any;

@@ -1,6 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { CreateOrUpdateUserCommand, IGetUserDetailsResponse, UsersClient } from 'src/app/api/api-reference';
 

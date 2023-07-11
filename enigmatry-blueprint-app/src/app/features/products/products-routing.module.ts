@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
+import { ProductsClient } from 'src/app/api/api-reference';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductListComponent } from './product-list/product-list.component';
-import { ProductResolverService } from './services/product-resolver.service';
 
 const routes: Routes = [
 	{
@@ -16,7 +16,9 @@ const routes: Routes = [
 	{
 		path: 'edit/:id',
 		component: ProductEditComponent,
-		resolve: { response: ProductResolverService }
+		resolve: {
+			response: (route: ActivatedRouteSnapshot) => inject(ProductsClient).get(route.params.id)
+		}
 	}
 ];
 

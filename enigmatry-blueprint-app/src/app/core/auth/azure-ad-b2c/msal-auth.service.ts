@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { from, Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { extraQueryParameters, MSAL_CONFIG } from './msal-config';
 import {
   AccountInfo, AuthenticationResult, Configuration, PublicClientApplication, RedirectRequest
 } from '@azure/msal-browser';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { extraQueryParameters, MSAL_CONFIG } from './msal-config';
 
 @Injectable({
   providedIn: 'root'
