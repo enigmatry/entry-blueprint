@@ -10,30 +10,14 @@ public static class GetUserProfile
 {
     public class Request : IRequest<Response>
     {
-
     }
 
     [PublicAPI]
     public class Response
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; } = String.Empty;
-        public RoleProfile Role { get; set; } = null!;
-
-        [PublicAPI]
-        public class RoleProfile
-        {
-            public Guid Id { get; set; }
-            public string Name { get; set; } = String.Empty;
-            public ICollection<PermissionProfile> Permissions { get; set; } = Enumerable.Empty<PermissionProfile>().ToList();
-        }
-
-        [PublicAPI]
-        public class PermissionProfile
-        {
-            public Guid Id { get; set; }
-            public string Name { get; set; } = String.Empty;
-        }
+        public Guid Id { get; init; }
+        public string Name { get; init; } = String.Empty;
+        public IEnumerable<PermissionId> Permissions { get; init; } = Enumerable.Empty<PermissionId>();
     }
 
     [UsedImplicitly]
@@ -41,9 +25,8 @@ public static class GetUserProfile
     {
         public MappingProfile()
         {
-            CreateMap<User, Response>();
-            CreateMap<Role, Response.RoleProfile>();
-            CreateMap<Permission, Response.PermissionProfile>();
+            CreateMap<User, Response>()
+                .ForMember(dest => dest.Permissions, opt => opt.MapFrom(user => user.GetPermissionIds()));
         }
     }
 
@@ -53,20 +36,12 @@ public static class GetUserProfile
         private readonly IMapper _mapper;
         private readonly ICurrentUserProvider _currentUserProvider;
 
-        public RequestHandler(IMapper mapper, ICurrentUserProvider currentUserIdProvider)
+        public RequestHandler(IMapper mapper, ICurrentUserProvider currentUserProvider)
         {
             _mapper = mapper;
-            _currentUserProvider = currentUserIdProvider;
+            _currentUserProvider = currentUserProvider;
         }
         public Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var user = _currentUserProvider.User;
-            if (user == null)
-            {
-                throw new InvalidOperationException("Can't load current user");
-            }
-
-            return Task.FromResult(_mapper.Map<Response>(user));
-        }
+            => Task.FromResult(_mapper.Map<Response>(_currentUserProvider.User));
     }
 }

@@ -1,23 +1,24 @@
-﻿#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
-using Enigmatry.Entry.Core.Entities;
+﻿using Enigmatry.Entry.Core.Entities;
+using JetBrains.Annotations;
+#pragma warning disable CA1711
 
 namespace Enigmatry.Blueprint.Domain.Authorization;
 
-public class Permission : EntityWithGuidId
+public class Permission : EntityWithTypedId<PermissionId>
 {
     public const int NameMaxLength = 100;
 
-    public string Name { get; private set; } = String.Empty;
+    private readonly IList<Role> _roles = new List<Role>();
 
-    public ICollection<Role>? Roles { get; private set; }
+    public string Name { get; private init; } = String.Empty;
+    public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
 
-    public static Permission Create(string name)
+    [UsedImplicitly]
+    private Permission() { }
+
+    public Permission(PermissionId permissionId)
     {
-        var result = new Permission
-        {
-            Name = name
-        };
-
-        return result;
+        Id = permissionId;
+        Name = permissionId.ToString();
     }
 }

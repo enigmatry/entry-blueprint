@@ -13,6 +13,7 @@
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
     <PackageReference Include="BeatPulse" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore" />
+    <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization" />
     <PackageReference Include="Enigmatry.Entry.Infrastructure" />
     <PackageReference Include="Enigmatry.Entry.EntityFramework" />
     <PackageReference Include="Enigmatry.Entry.MediatR" />

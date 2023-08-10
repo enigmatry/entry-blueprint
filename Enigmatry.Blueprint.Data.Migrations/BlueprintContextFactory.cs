@@ -1,6 +1,5 @@
-﻿using System.Security.Principal;
-using Enigmatry.Blueprint.ApplicationServices.Identity;
-using Enigmatry.Blueprint.Infrastructure.Data;
+﻿using Enigmatry.Blueprint.Infrastructure.Data;
+using Enigmatry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.EntityFramework.Security;
 using Enigmatry.Entry.Infrastructure;
 using Enigmatry.Entry.MediatR;
@@ -9,25 +8,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Enigmatry.Blueprint.Data.Migrations.Seeding;
+namespace Enigmatry.Blueprint.Data.Migrations;
 
 [UsedImplicitly]
 public class BlueprintContextFactory : IDesignTimeDbContextFactory<BlueprintContext>
 {
     public BlueprintContext CreateDbContext(string[] args) => CreateDbContext(ReadConnectionString(args));
 
-    private BlueprintContext CreateDbContext(string connectionString)
+    private static BlueprintContext CreateDbContext(string connectionString)
     {
         var optionsBuilder = new DbContextOptionsBuilder<BlueprintContext>();
         optionsBuilder.UseSqlServer(connectionString,
             b => b.MigrationsAssembly(typeof(BlueprintContextFactory).Assembly.FullName));
 
         var result =
-            new BlueprintContext(optionsBuilder.Options, new NullMediator(), new TimeProvider(), new CurrentUserIdProvider(CreateEmptyPrincipal), new NullDbContextAccessTokenProvider(), new NullLogger<BlueprintContext>()) { ModelBuilderConfigurator = DbInitializer.SeedData };
+            new BlueprintContext(optionsBuilder.Options,
+                new NullMediator(), new TimeProvider(), () => new NullCurrentUserProvider(),
+                new NullDbContextAccessTokenProvider(), new NullLogger<BlueprintContext>())
+            {
+                ModelBuilderConfigurator = DbInitializer.SeedData
+            };
         return result;
     }
-
-    private IPrincipal CreateEmptyPrincipal() => new GenericPrincipal(new GenericIdentity(""), Array.Empty<string>());
 
     private static string ReadConnectionString(string[] args)
     {

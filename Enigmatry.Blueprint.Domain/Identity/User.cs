@@ -44,6 +44,8 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
         AddDomainEvent(new UserUpdatedDomainEvent(UserName));
     }
 
+    public IEnumerable<PermissionId> GetPermissionIds() => Role.Permissions.Select(p => p.Id);
+
     public void SetCreated(DateTimeOffset createdOn, Guid createdBy)
     {
         SetCreated(createdOn);
@@ -59,4 +61,6 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     }
 
     public void SetUpdated(DateTimeOffset updatedOn) => UpdatedOn = updatedOn;
+
+    public bool HasAnyPermission(IEnumerable<PermissionId> permissionIds) => GetPermissionIds().Intersect(permissionIds).Any();
 }

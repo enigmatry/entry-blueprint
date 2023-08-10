@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Enigmatry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Swagger;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
@@ -17,8 +18,6 @@ namespace Enigmatry.Blueprint.Api;
 [UsedImplicitly]
 public class Startup
 {
-    public static bool IsAuthEnabled { get; set; } = true;
-
     private readonly IConfiguration _configuration;
 
     public Startup(IConfiguration configuration)
@@ -57,7 +56,7 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapDefaultControllerRoute();
+            endpoints.MapControllers().RequireAuthorization();
             endpoints.AppMapHealthCheck(_configuration);
         });
 
@@ -88,11 +87,10 @@ public class Startup
             .AddDbContextCheck<BlueprintContext>();
         services.AppAddMediatR();
 
-        services.AppAddAuthentication(configuration, IsAuthEnabled);
+        services.AppAddAuthentication(configuration);
+        services.AppAddAuthorization<PermissionId>();
 
         services.AppAddSwagger("Blueprint API");
-
-        services.AppAddAuthorization(IsAuthEnabled);
 
         // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
         services.PostConfigure<ApiBehaviorOptions>(options => options.AppAddFluentValidationApiBehaviorOptions());

@@ -16,10 +16,6 @@ public class ProfileController : Controller
         _mediator = mediator;
     }
 
-    /// <summary>
-    ///     Get user profile for logged user
-    /// </summary>
-    /// <returns>User details of <see cref="GetUserProfile.Response"/> type</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

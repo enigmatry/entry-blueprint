@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization" />
     <PackageReference Include="Enigmatry.Entry.HealthChecks" />
     <PackageReference Include="Enigmatry.Entry.CodeGeneration.Validation" />
-    <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization" />
 
   </ItemGroup>
 

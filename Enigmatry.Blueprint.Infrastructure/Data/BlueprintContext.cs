@@ -17,18 +17,19 @@ namespace Enigmatry.Blueprint.Infrastructure.Data;
 public class BlueprintContext : MediatRDbContext
 {
     private readonly ITimeProvider _timeProvider;
-    private readonly ICurrentUserIdProvider _currentUserIdProvider;
+    // Injecting Func to avoid a circular dependency with DI between BlueprintContext and CurrentUserProvider.
+    private readonly Func<ICurrentUserProvider> _currentUserProvider;
 
     public BlueprintContext(DbContextOptions options,
         IMediator mediator,
         ITimeProvider timeProvider,
-        ICurrentUserIdProvider currentUserIdProvider,
+        Func<ICurrentUserProvider> currentUserProvider,
         IDbContextAccessTokenProvider dbContextAccessTokenProvider,
         ILogger<BlueprintContext> logger) :
         base(CreateOptions(), options, mediator, logger, dbContextAccessTokenProvider)
     {
         _timeProvider = timeProvider;
-        _currentUserIdProvider = currentUserIdProvider;
+        _currentUserProvider = currentUserProvider;
     }
 
     private static EntitiesDbContextOptions CreateOptions() => new()
@@ -52,8 +53,10 @@ public class BlueprintContext : MediatRDbContext
 
     private void PopulateCreatedUpdated()
     {
-        var userId = _currentUserIdProvider.IsAuthenticated
-            ? _currentUserIdProvider.UserId
+        var currentUserProvider = _currentUserProvider();
+
+        var userId = currentUserProvider.IsAuthenticated
+            ? currentUserProvider.User?.Id
             : null;
 
         var changedEntities = ChangeTracker

@@ -8,22 +8,15 @@ namespace Enigmatry.Blueprint.Infrastructure.Api.Security
     public static class AuthenticationStartupExtensions
     {
         private const string ConfigurationSection = "App:AzureAdB2C";
-        private const string UsernameClaim = "emails";
+        private const string EmailsClaim = "emails";
 
-        public static void AppAddAuthentication(this IServiceCollection services, IConfiguration configuration, bool isEnabled)
-        {
-            if (!isEnabled)
-            {
-                return;
-            }
-
+        public static void AppAddAuthentication(this IServiceCollection services, IConfiguration configuration) =>
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(options =>
                     {
                         configuration.Bind(ConfigurationSection, options);
-                        options.TokenValidationParameters.NameClaimType = UsernameClaim;
+                        options.TokenValidationParameters.NameClaimType = EmailsClaim; // Mapping AzureAd 'emails' claim to Principal.Identity.Name
                     },
                     options => { configuration.Bind(ConfigurationSection, options); });
-        }
     }
 }

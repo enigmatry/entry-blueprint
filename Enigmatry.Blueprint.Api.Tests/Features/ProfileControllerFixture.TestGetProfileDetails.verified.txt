@@ -1,0 +1,11 @@
+﻿{
+  Id: Guid_1,
+  Name: INTEGRATION_TEST,
+  Permissions: [
+    UsersRead,
+    UsersWrite,
+    ProductsRead,
+    ProductsWrite,
+    ProductsDelete
+  ]
+}

@@ -1,15 +1,18 @@
 ﻿using Enigmatry.Blueprint.Domain.Authorization;
-using Enigmatry.Entry.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Blueprint.Data.Migrations.Seeding;
 
 public class RoleSeeding : ISeeding
 {
-    public void Seed(ModelBuilder modelBuilder)
+    private readonly IList<Role> _roles = new List<Role>
     {
-        var role = Role.Create("SystemAdmin", Enumerable.Empty<Permission>().ToList());
+        new()
+        {
+            Id = Role.SystemAdminRoleId,
+            Name = "SystemAdmin"
+        }
+    };
 
-        modelBuilder.Entity<Role>().HasData(role.WithId(Role.SystemAdminRoleId));
-    }
+    public void Seed(ModelBuilder modelBuilder) => modelBuilder.Entity<Role>().HasData(_roles);
 }

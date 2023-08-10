@@ -4,7 +4,9 @@ using Enigmatry.Entry.Core.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using Enigmatry.Blueprint.Domain.Authorization;
 using Enigmatry.Blueprint.Domain.Products.Commands;
+using Enigmatry.Blueprint.Infrastructure.Authorization;
 
 namespace Enigmatry.Blueprint.Api.Features.Products;
 
@@ -21,68 +23,53 @@ public class ProductsController : Controller
         _mediator = mediator;
     }
 
-    /// <summary>
-    ///     Gets listing of all available users
-    /// </summary>
-    /// <returns>List of products</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<PagedResponse<GetProducts.Response.Item>>> Search([FromQuery] GetProducts.Request query)
     {
         var response = await _mediator.Send(query);
         return response.ToActionResult();
     }
 
-    /// <summary>
-    ///     Get product for given id
-    /// </summary>
-    /// <param name="id">Id</param>
     [HttpGet]
     [Route("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<GetProductDetails.Response>> Get(Guid id)
     {
         var response = await _mediator.Send(new GetProductDetails.Request { Id = id });
         return response.ToActionResult();
     }
 
-    /// <summary>
-    ///     Return true if product code is unique
-    /// </summary>
-    /// <param name="request">Request</param>
     [HttpGet]
     [Route("code-unique")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<IsProductCodeUnique.Response>> IsCodeUnique([FromQuery] IsProductCodeUnique.Request request)
     {
         var response = await _mediator.Send(request);
         return response.ToActionResult();
     }
 
-    /// <summary>
-    ///     Return true if product name is unique
-    /// </summary>
-    /// <param name="request">Request</param>
     [HttpGet]
     [Route("name-unique")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<IsProductNameUnique.Response>> IsNameUnique([FromQuery] IsProductNameUnique.Request request)
     {
         var response = await _mediator.Send(request);
         return response.ToActionResult();
     }
 
-    /// <summary>
-    ///  Creates or updates
-    /// </summary>
-    /// <param name="command">Product data</param>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    [UserHasPermission(PermissionId.ProductsWrite)]
     public async Task<ActionResult<ProductCreateOrUpdate.Result>> Post(ProductCreateOrUpdate.Command command)
     {
         var result = await _mediator.Send(command);
@@ -90,13 +77,10 @@ public class ProductsController : Controller
         return result;
     }
 
-    /// <summary>
-    ///     Removes product for given id
-    /// </summary>
-    /// <param name="id">Id</param>
     [HttpDelete]
     [Route("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [UserHasPermission(PermissionId.ProductsDelete)]
     public async Task Remove(Guid id)
     {
         await _mediator.Send(new RemoveProduct.Command { Id = id });

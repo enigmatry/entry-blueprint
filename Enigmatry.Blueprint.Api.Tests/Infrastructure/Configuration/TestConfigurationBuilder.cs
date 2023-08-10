@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Data.Migrations.Seeding;
+﻿using Enigmatry.Blueprint.Data.Migrations;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 

@@ -1,6 +1,6 @@
 ﻿using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
-using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities.Database;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities;
@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
+
 #pragma warning disable CA1001 // Types that own disposable fields should be disposable
 public class IntegrationFixtureBase
 #pragma warning restore CA1001 // Types that own disposable fields should be disposable
@@ -22,6 +23,7 @@ public class IntegrationFixtureBase
     private TestServer _server = null!;
     private IServiceScope _testScope = null!;
     private bool _seedUsers = true;
+    private bool _isUserAuthenticated = true;
 
     protected HttpClient Client { get; private set; } = null!;
 
@@ -35,7 +37,7 @@ public class IntegrationFixtureBase
         var webHostBuilder = new WebHostBuilder()
             .ConfigureServices(services => services.AddAutofac())
             .UseConfiguration(_configuration)
-            .UseStartup<TestStartup>();
+            .UseStartup(_ => new TestStartup(_configuration, _isUserAuthenticated));
 
         _server = new TestServer(webHostBuilder);
         CreateDatabase();
@@ -86,6 +88,8 @@ public class IntegrationFixtureBase
 
     protected void DoNotSeedUsers() => _seedUsers = false;
 
+    protected void DisableUserAuthentication() => _isUserAuthenticated = false;
+
     private void SeedUsers()
     {
         if (_seedUsers)
@@ -97,9 +101,8 @@ public class IntegrationFixtureBase
     private void AddCurrentUserToDb()
     {
         using IServiceScope scope = CreateScope();
-        var currentUserProvider = scope.Resolve<ICurrentUserProvider>();
         var dbContext = scope.Resolve<DbContext>();
-        dbContext.Add(currentUserProvider.User!);
+        dbContext.Add(TestUserData.CreateTestUser());
         dbContext.SaveChanges();
     }
 

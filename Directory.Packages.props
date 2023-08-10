@@ -9,15 +9,15 @@
     <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
     <PackageVersion Include="BeatPulse" Version="3.0.0" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="1.1.447" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="1.1.477" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="1.1.477" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.Core" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="1.1.447" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="1.1.477" />
+    <PackageVersion Include="Enigmatry.Entry.Core" Version="1.1.477" />
+    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="1.1.477" />
+    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="1.1.477" />
+    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="1.1.477" />
+    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="1.1.477" />
     <PackageVersion Include="Enigmatry.Entry.Swagger" Version="1.1.447" />
     <PackageVersion Include="Enigmatry.Entry.Validation" Version="1.1.447" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="1.1.539" />

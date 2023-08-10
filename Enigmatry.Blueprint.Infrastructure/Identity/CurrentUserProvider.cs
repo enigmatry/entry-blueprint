@@ -1,10 +1,10 @@
-﻿using Enigmatry.Blueprint.Domain.Identity;
+﻿using System.Security.Principal;
+using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 
-namespace Enigmatry.Blueprint.ApplicationServices.Identity;
+namespace Enigmatry.Blueprint.Infrastructure.Identity;
 
 [UsedImplicitly]
 public class CurrentUserProvider : ICurrentUserProvider
@@ -26,8 +26,6 @@ public class CurrentUserProvider : ICurrentUserProvider
 
     public bool IsAuthenticated => (Principal.Identity?.IsAuthenticated).GetValueOrDefault();
 
-    public Guid? UserId => User?.Id;
-
     public User? User
     {
         get
@@ -46,7 +44,7 @@ public class CurrentUserProvider : ICurrentUserProvider
                 .QueryAll()
                 .QueryByUserName(Email)
                 .Include(u => u.Role)
-                .ThenInclude(r => r!.Permissions)
+                .ThenInclude(r => r.Permissions)
                 .AsNoTracking().AsSplitQuery()
                 .SingleOrDefault();
 

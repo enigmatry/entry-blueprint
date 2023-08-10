@@ -14,9 +14,11 @@ public static class ContainerBuilderStartupExtensions
     public static void AppRegisterModules(this ContainerBuilder builder, IConfiguration configuration)
 #pragma warning restore IDE0060 // Remove unused parameter
     {
-        builder.RegisterModule<ConfigurationModule>();
         builder.Register(GetPrincipal)
             .As<IPrincipal>().InstancePerLifetimeScope();
+
+        builder.RegisterAssemblyModules(AssemblyFinder.InfrastructureAssembly);
+
         builder.RegisterModule(new ServiceModule
         {
             Assemblies = new[]
@@ -26,8 +28,6 @@ public static class ContainerBuilderStartupExtensions
                 AssemblyFinder.InfrastructureAssembly
             }
         });
-        builder.RegisterModule<EntityFrameworkModule>();
-        builder.RegisterModule<AuthorizationModule>();
     }
 
     private static ClaimsPrincipal GetPrincipal(IComponentContext c)

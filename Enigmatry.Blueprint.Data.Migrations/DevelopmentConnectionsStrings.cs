@@ -1,4 +1,4 @@
-﻿namespace Enigmatry.Blueprint.Data.Migrations.Seeding;
+﻿namespace Enigmatry.Blueprint.Data.Migrations;
 
 public static class DevelopmentConnectionsStrings
 {

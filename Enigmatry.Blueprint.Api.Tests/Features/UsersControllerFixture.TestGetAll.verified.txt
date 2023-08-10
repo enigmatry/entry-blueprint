@@ -9,8 +9,6 @@
   {
     Id: Guid_2,
     UserName: test_user@xyz.com,
-    Name: INTEGRATION_TEST,
-    CreatedOn: DateTimeOffset_2,
-    UpdatedOn: DateTimeOffset_2
+    Name: INTEGRATION_TEST
   }
 ]

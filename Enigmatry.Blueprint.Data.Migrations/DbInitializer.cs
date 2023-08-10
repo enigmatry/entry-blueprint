@@ -5,20 +5,13 @@ namespace Enigmatry.Blueprint.Data.Migrations;
 
 public static class DbInitializer
 {
-    private static readonly IList<ISeeding> Seedings = new List<ISeeding>(10);
-
-    static DbInitializer()
+    private static readonly List<ISeeding> Seeding = new()
     {
-        Seedings.Add(new RoleSeeding());
-        Seedings.Add(new ProductSeeding());
-    }
+        new PermissionSeeding(),
+        new RoleSeeding(),
+        new RolePermissionSeeding()
+    };
 
     // EF Core way of seeding data: https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding
-    public static void SeedData(ModelBuilder modelBuilder)
-    {
-        foreach (ISeeding seeding in Seedings)
-        {
-            seeding.Seed(modelBuilder);
-        }
-    }
+    public static void SeedData(ModelBuilder modelBuilder) => Seeding.ForEach(seeding => seeding.Seed(modelBuilder));
 }
