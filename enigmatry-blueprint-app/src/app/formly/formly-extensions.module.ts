@@ -8,6 +8,7 @@ import { FORM_FIELD_ERROR_KEY } from '@enigmatry/entry-components/validation';
 import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
 import { EntryTableModule } from '@enigmatry/entry-table';
 import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyButtonComponent } from './formly-button/formly-button.component';
 import { FormlyExpansionPanelComponent } from './formly-expansion-panel/formly-expansion-panel.component';
 import { FormlyFieldsetComponent } from './formly-fieldset/formly-fieldset.component';
@@ -45,6 +46,7 @@ const defaultFormConfig: EntryFormConfig = {
     MatButtonModule,
     EntryFormModule,
     EntryTableModule,
+    FormlyMaterialModule,
     FormlyModule.forChild({
       types: [
         { name: 'fieldset', component: FormlyFieldsetComponent },
@@ -55,15 +57,17 @@ const defaultFormConfig: EntryFormConfig = {
         {
           name: 'button',
           component: FormlyButtonComponent,
-          wrappers: ['form-field'],
+          wrappers: [],
           defaultOptions: {
             templateOptions: {
               type: 'button',
-              color: 'primary',
-              floatLabel: 'always',
-              appearance: 'none'
+              color: 'primary'
             }
           }
+        },
+        {
+          name: 'checkbox',
+          wrappers: []
         }
       ],
       validationMessages: [
