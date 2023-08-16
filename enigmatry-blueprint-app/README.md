@@ -48,7 +48,7 @@ All code generation configurations are located in `Enigmatry.Blueprint.CodeGener
 
 ### 3. Generating code
 
-To generate the code from configurations, execute npm script `npm run codegen`. This command will run the tool which will generate configured code inside features modules.
+To generate the code from configurations, execute npm script `npm run codegen:run`. This command will run the tool which will generate configured code inside features modules.
 
 ## Code generator configuration
 
