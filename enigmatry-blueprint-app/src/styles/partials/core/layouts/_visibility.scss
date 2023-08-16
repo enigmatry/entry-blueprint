@@ -1,0 +1,17 @@
+@use 'breakpoints' as breakpoints;
+
+.hide-on-mobile {
+	display: none;
+
+	@include breakpoints.apply-on-tablet() {
+		display: table-cell;
+	}
+}
+
+.hide-on-tablet {
+	display: none;
+
+	@include breakpoints.apply-on-desktop() {
+		display: table-cell;
+	}
+}

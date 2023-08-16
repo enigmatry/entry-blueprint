@@ -1,15 +1,27 @@
-@use 'breakpoints' as breakpoints;
+@use 'breakpoints';
+@use 'layouts';
+@use 'variables' as vars;
  
-.container {
-	width: 100%;
-	margin: 0 auto;
+.main-container {
+	box-sizing: border-box;
+	@include layouts.grow-centrally();
+	padding: 2 * vars.$default-gap vars.$default-gap;
  
+	@include breakpoints.apply-on-large-desktop() {
+		width: 1180px;
+	}
+}
+
+.form-container {
+	display: block;
+	@include layouts.grow-centrally();
+ 
+	@include breakpoints.apply-on-tablet() {
+		width: 500px;
+	}
+
 	@include breakpoints.apply-on-desktop() {
-		width: 750px;
- 
-		&.container-fluid {
-			width: 100%;
-		}
+		width: 700px;
 	}
 }
 

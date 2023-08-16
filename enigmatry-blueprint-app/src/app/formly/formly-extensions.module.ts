@@ -67,7 +67,12 @@ const defaultFormConfig: EntryFormConfig = {
         },
         {
           name: 'checkbox',
-          wrappers: []
+          wrappers: [],
+          defaultOptions: {
+            templateOptions: {
+              indeterminate: false
+            }
+          }
         }
       ],
       validationMessages: [

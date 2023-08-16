@@ -3,8 +3,12 @@
 <ng-template #defaultFormButtonsTpl>
     <entry-form-errors [form]="formComponent.form"></entry-form-errors>
 
-    <div class="action-buttons">
-        <button *ngIf="!formComponent.isReadonly" class="button accent" type="submit">{{formComponent.saveButtonText}}</button>
-        <button type="button" class="button primary" (click)="formComponent.cancel.emit()">{{formComponent.cancelButtonText}}</button>
+    <div class="action-buttons align-center">
+        <button mat-button entry-submit-button *ngIf="!formComponent.isReadonly" [disabled]="!formComponent.form.valid" type="submit">
+            {{formComponent.saveButtonText}}
+        </button>
+        <button mat-button entry-cancel-button *ngIf="!formComponent.isReadonly" type="button" (click)="formComponent.cancel.emit()">
+            {{formComponent.cancelButtonText}}
+        </button>
     </div>
 </ng-template>

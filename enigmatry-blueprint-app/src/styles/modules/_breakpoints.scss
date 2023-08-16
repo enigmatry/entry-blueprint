@@ -31,7 +31,3 @@
 		@content;
 	}
 }
-
-@mixin set-up() {
-	@include breakpoints.set-up();
-}

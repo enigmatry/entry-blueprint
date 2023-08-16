@@ -1,17 +1,14 @@
-<mat-toolbar>
-  <span class="main-menu">
-    <button class="button primary" [matMenuTriggerFor]="menu">Menu</button>
+<mat-toolbar class="main-menu">
+  <nav>
+    <button mat-button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
       <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
     </mat-menu>
-  </span>
-  <span class="spacer"></span>
-  <span>
-    <app-login></app-login>
-  </span>
+  </nav>
+  <app-login></app-login>
 </mat-toolbar>
 
-<div class="page-spacing">
+<main class="main-container">
   <router-outlet></router-outlet>
-</div>
+</main>

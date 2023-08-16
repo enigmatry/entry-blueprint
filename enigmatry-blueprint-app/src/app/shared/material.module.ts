@@ -52,7 +52,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule
   ],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'auto' } }
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', floatLabel: 'auto' } }
   ]
 })
 export class MaterialModule { }

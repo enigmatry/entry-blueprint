@@ -2,6 +2,7 @@
 using Enigmatry.Entry.CodeGeneration.Configuration.Formatters;
 using Enigmatry.Entry.CodeGeneration.Configuration.List;
 using Enigmatry.Entry.CodeGeneration.Configuration.List.Model;
+using System.Linq.Expressions;
 
 namespace Enigmatry.Blueprint.CodeGeneration.Setup.Features.Products;
 
@@ -45,6 +46,12 @@ public class ProductListComponentConfiguration : IListComponentConfiguration<Get
         builder
             .Column(x => x.FreeShipping);
 
+        DefineToggleColumn(builder, x => x.ContactEmail);
+        DefineToggleColumn(builder, x => x.ContactPhone);
+        DefineToggleColumn(builder, x => x.Code);
+        DefineToggleColumn(builder, x => x.ExpiresOn, "hide-on-tablet");
+        DefineToggleColumn(builder, x => x.FreeShipping);
+
         // Configuring list rows:
         builder
             .Row()
@@ -56,4 +63,10 @@ public class ProductListComponentConfiguration : IListComponentConfiguration<Get
             .Pagination()
             .PageSizeOptions(new[] { 2, 5, 10, 25, 50 });
     }
+
+    private static void DefineToggleColumn<T>(ListComponentBuilder<GetProducts.Response.Item> builder,
+        Expression<Func<GetProducts.Response.Item, T>> definition, string className = "") =>
+        builder
+            .Column(definition)
+            .WithCustomCssClass($"hide-on-mobile {className}");
 }

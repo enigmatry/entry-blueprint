@@ -1,2 +1,4 @@
-@use 'entry-table/src/styles/modules/generator' as table-theme-generator;
-@use 'entry-form/styles/modules/generator' as form-theme-generator;
+@use 'entry-components/styles/partials/theming';
+@use 'entry-components/styles/generator';
+
+@include generator.generate-from();
