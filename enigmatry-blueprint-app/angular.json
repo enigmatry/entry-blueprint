@@ -30,7 +30,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@enigmatry/entry-components/assets/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "src/styles/partials/main.scss"
@@ -112,7 +117,12 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@enigmatry/entry-components/assets/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "src/styles/partials/main.scss"
