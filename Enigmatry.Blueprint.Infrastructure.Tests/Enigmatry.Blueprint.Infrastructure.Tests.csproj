@@ -9,11 +9,7 @@
     <PackageReference Include="AutoFixture.NUnit3" />
     <PackageReference Include="FakeItEasy" />
     <PackageReference Include="FluentAssertions" />
-    <PackageReference Include="JetBrains.DotMemoryUnit" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" />
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit3TestAdapter">
       <PrivateAssets>all</PrivateAssets>

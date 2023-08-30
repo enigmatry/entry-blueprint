@@ -11,7 +11,6 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" />
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
-    <PackageReference Include="BeatPulse" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization" />
     <PackageReference Include="Enigmatry.Entry.Infrastructure" />

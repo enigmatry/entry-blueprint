@@ -8,7 +8,6 @@
     <PackageVersion Include="AutoFixture.NUnit3" Version="4.17.0" />
     <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
-    <PackageVersion Include="BeatPulse" Version="3.0.0" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="1.1.477" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="1.1.477" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests" Version="1.1.447" />
@@ -25,7 +24,6 @@
     <PackageVersion Include="FakeItEasy" Version="7.3.1" />
     <PackageVersion Include="FluentAssertions" Version="6.7.0" />
     <PackageVersion Include="FluentValidation" Version="10.3.6" />
-    <PackageVersion Include="JetBrains.DotMemoryUnit" Version="3.2.20220510" />
     <PackageVersion Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.8" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.8" />
@@ -41,7 +39,6 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="1.26.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
-    <PackageVersion Include="Microsoft.Rest.ClientRuntime" Version="2.3.24" />
     <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="4.7.4" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
     <PackageVersion Include="NUnit" Version="3.13.3" />
