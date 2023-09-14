@@ -1,14 +1,14 @@
 ﻿[
   {
     Id: Guid_1,
-    UserName: john_doe@john.doe,
-    Name: John Doe,
+    EmailAddress: john_doe@john.doe,
+    FullName: John Doe,
     CreatedOn: DateTimeOffset_1,
     UpdatedOn: DateTimeOffset_1
   },
   {
     Id: Guid_2,
-    UserName: test_user@xyz.com,
-    Name: INTEGRATION_TEST
+    EmailAddress: test_user@xyz.com,
+    FullName: INTEGRATION_TEST
   }
 ]

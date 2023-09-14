@@ -1,10 +1,12 @@
 ﻿using Autofac;
 using Enigmatry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Core.Settings;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Blueprint.Infrastructure.Autofac.Modules;
 
+[UsedImplicitly]
 public class ConfigurationModule : Module
 {
     protected override void Load(ContainerBuilder builder)

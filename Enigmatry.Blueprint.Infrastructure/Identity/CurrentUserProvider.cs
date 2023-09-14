@@ -1,5 +1,6 @@
 ﻿using System.Security.Principal;
 using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,7 @@ public class CurrentUserProvider : ICurrentUserProvider
 
             _user = _userRepository
                 .QueryAll()
-                .QueryByUserName(Email)
+                .QueryByEmailAddress(Email)
                 .Include(u => u.Role)
                 .ThenInclude(r => r.Permissions)
                 .AsNoTracking().AsSplitQuery()

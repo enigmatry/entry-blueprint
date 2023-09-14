@@ -1,0 +1,15 @@
+<mat-toolbar class="main-menu">
+  <nav>
+    <button data-testId="username-button" mat-button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
+      <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
+    </mat-menu>
+  </nav>
+  <div>
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="login_menu">{{ ($currentUser | async)?.fullName }}</button>
+    <mat-menu #login_menu="matMenu">
+      <button mat-menu-item (click)='onLogout()'>Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

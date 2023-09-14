@@ -1,39 +1,38 @@
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { MsalAuthService } from './azure-ad-b2c/msal-auth.service';
-
-export const isApiUrl = (url: string): boolean => url.startsWith(environment.apiUrl);
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: MsalAuthService) {}
+  constructor(private authService: AuthService) { }
 
   intercept = (req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> => {
-    if (!isApiUrl(req.url) || !this.authService.isAuthenticated()) {
+    if (!req.url.startsWith(environment.apiUrl)) {
       return next.handle(req);
     }
-
-    return this.authService.getAccessToken().pipe(
-      switchMap((accessToken: string) => {
-        let request: HttpRequest<any>;
-        if (accessToken) {
-          request = req.clone({
-            setHeaders: { Authorization: `Bearer ${accessToken}` }
-          });
-        } else {
-          request = req;
-        }
-
-        return next.handle(request);
-      })
-    );
+    return this.authService
+      .getAccessToken()
+      .pipe(
+        switchMap(accessToken => next.handle(this.addAuthorizationHeader(req, accessToken))),
+        catchError(error => this.handle401Response(error))
+      );
   };
+
+  private addAuthorizationHeader = (req: HttpRequest<any>, accessToken: string): HttpRequest<any> =>
+    req.clone({ setHeaders: { Authorization: `Bearer ${accessToken}` } });
+
+    private handle401Response = (err: any): Observable<any> =>
+    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+    err instanceof HttpErrorResponse && err.status === 401
+      ? of(this.authService.loginRedirect())
+      : throwError(() => err);
 }

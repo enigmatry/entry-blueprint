@@ -2,11 +2,11 @@
 using System.Net;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Blueprint.Domain.Authorization;
-using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.Blueprint.Domain.Identity.Commands;
 using FluentAssertions;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using System.Net.Http.Json;
+using Enigmatry.Blueprint.Domain.Users;
+using Enigmatry.Blueprint.Domain.Users.Commands;
 
 namespace Enigmatry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -39,8 +39,8 @@ public class AuthorizationFixture : IntegrationFixtureBase
     {
         var command = new CreateOrUpdateUser.Command
         {
-            Name = "some user",
-            UserName = "someuser@test.com",
+            FullName = "some user",
+            EmailAddress = "someuser@test.com",
             RoleId = Role.SystemAdminRoleId
         };
         var response = await Client.PostAsJsonAsync("users", command, HttpSerializationOptions.Options);

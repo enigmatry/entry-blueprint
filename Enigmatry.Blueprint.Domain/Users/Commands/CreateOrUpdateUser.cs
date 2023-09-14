@@ -1,11 +1,10 @@
-﻿using System.ComponentModel;
-using Enigmatry.Entry.Core.Data;
+﻿using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
 using FluentValidation;
 using JetBrains.Annotations;
 using MediatR;
 
-namespace Enigmatry.Blueprint.Domain.Identity.Commands;
+namespace Enigmatry.Blueprint.Domain.Users.Commands;
 
 public static class CreateOrUpdateUser
 {
@@ -13,10 +12,8 @@ public static class CreateOrUpdateUser
     public class Command : IRequest<User>
     {
         public Guid? Id { get; set; }
-        [DisplayName("Username")]
-        public string UserName { get; set; } = "";
-        [DisplayName("Name")]
-        public string Name { get; set; } = "";
+        public string EmailAddress { get; set; } = String.Empty;
+        public string FullName { get; set; } = String.Empty;
         public Guid RoleId { get; set; }
     }
 
@@ -28,16 +25,16 @@ public static class CreateOrUpdateUser
         public Validator(IRepository<User> userRepository)
         {
             _userRepository = userRepository;
-            _ = RuleFor(x => x.UserName).NotEmpty().MaximumLength(50).EmailAddress();
-            _ = RuleFor(x => x.UserName).Must(UniqueUsername).WithMessage("Username already taken");
-            _ = RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
+            _ = RuleFor(x => x.EmailAddress).NotEmpty().MaximumLength(User.EmailAddressMaxLength).EmailAddress();
+            _ = RuleFor(x => x.EmailAddress).Must(UniqueEmailAddress).WithMessage("EmailAddress is already taken");
+            _ = RuleFor(x => x.FullName).NotEmpty().MaximumLength(User.NameMaxLength);
             _ = RuleFor(x => x.RoleId).NotEmpty();
         }
 
-        private bool UniqueUsername(Command command, string name) =>
+        private bool UniqueEmailAddress(Command command, string name) =>
             !_userRepository.QueryAll()
                 .QueryExceptWithId(command.Id)
-                .QueryByUserName(name)
+                .QueryByEmailAddress(name)
                 .Any();
     }
 }

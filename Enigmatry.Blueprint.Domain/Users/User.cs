@@ -1,18 +1,18 @@
 ﻿using Enigmatry.Blueprint.Core;
 using Enigmatry.Blueprint.Domain.Authorization;
-using Enigmatry.Blueprint.Domain.Identity.Commands;
-using Enigmatry.Blueprint.Domain.Identity.DomainEvents;
+using Enigmatry.Blueprint.Domain.Users.Commands;
+using Enigmatry.Blueprint.Domain.Users.DomainEvents;
 using Enigmatry.Entry.Core.Entities;
 
-namespace Enigmatry.Blueprint.Domain.Identity;
+namespace Enigmatry.Blueprint.Domain.Users;
 
 public class User : EntityWithGuidId, IEntityHasCreatedUpdated
 {
-    public const int NameMinLength = 5;
-    public const int NameMaxLength = 25;
+    public const int NameMaxLength = 200;
+    public const int EmailAddressMaxLength = 200;
 
-    public string UserName { get; private set; } = "";
-    public string Name { get; private set; } = "";
+    public string EmailAddress { get; private set; } = String.Empty;
+    public string FullName { get; private set; } = String.Empty;
     public DateTimeOffset CreatedOn { get; private set; }
     public DateTimeOffset UpdatedOn { get; private set; }
     public Guid? CreatedById { get; private set; }
@@ -28,20 +28,20 @@ public class User : EntityWithGuidId, IEntityHasCreatedUpdated
     {
         var result = new User
         {
-            UserName = command.UserName,
-            Name = command.Name,
+            EmailAddress = command.EmailAddress,
+            FullName = command.FullName,
             RoleId = command.RoleId
         };
 
-        result.AddDomainEvent(new UserCreatedDomainEvent(result.UserName));
+        result.AddDomainEvent(new UserCreatedDomainEvent(result.EmailAddress));
         return result;
     }
 
     public void Update(CreateOrUpdateUser.Command command)
     {
-        Name = command.Name;
+        FullName = command.FullName;
         RoleId = command.RoleId;
-        AddDomainEvent(new UserUpdatedDomainEvent(UserName));
+        AddDomainEvent(new UserUpdatedDomainEvent(EmailAddress));
     }
 
     public IEnumerable<PermissionId> GetPermissionIds() => Role.Permissions.Select(p => p.Id);

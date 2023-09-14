@@ -1,7 +1,7 @@
 ﻿using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Products.Commands;
 using Enigmatry.Blueprint.Domain.Products.DomainEvents;
+using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Entities;
 
 namespace Enigmatry.Blueprint.Domain.Products;

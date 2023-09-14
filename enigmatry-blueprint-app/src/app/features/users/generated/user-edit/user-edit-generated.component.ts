@@ -46,6 +46,11 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
   @Output() cancel = new EventEmitter<void>();
   @Output() buttonClick = new EventEmitter<string>();
 
+            private roleIdOptions$ = new BehaviorSubject<any[]>([]);
+            @Input()
+            get roleIdOptions(): any[] { return this.roleIdOptions$.value; }
+            set roleIdOptions(value: any[]) { this.roleIdOptions$.next(value); }
+            @Input() roleIdOptionsConfiguration: SelectConfiguration = {};
 
   _isReadonly: boolean;
   form = new FormGroup({});
@@ -90,20 +95,20 @@ fieldGroupClassName: `entry-field-group`,
         },
         fieldGroup:[
         {
-        key: 'userName',
+        key: 'emailAddress',
         type: this.resolveFieldType('input', true),
         focus: false,
-className: `entry-user-name-field entry-input`,
-        hideExpression: this.fieldsHideExpressions?.userName ?? false,
+className: `entry-email-address-field entry-input`,
+        hideExpression: this.fieldsHideExpressions?.emailAddress ?? false,
         expressionProperties: {
-        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userName ? this.fieldsDisableExpressions.userName(model) : true)),
-        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.userName ? this.fieldsRequiredExpressions.userName(model) : false),
-        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.userName ? this.fieldsLabelExpressions.userName(model) : $localize `:@@users.user-edit.user-name.label:User name`),
-        'model.userName': (model) => (this.fieldsPropertyExpressions?.userName ? this.fieldsPropertyExpressions.userName(model) : model.userName),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.emailAddress ? this.fieldsDisableExpressions.emailAddress(model) : true)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.emailAddress ? this.fieldsRequiredExpressions.emailAddress(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.emailAddress ? this.fieldsLabelExpressions.emailAddress(model) : $localize `:@@users.user-edit.email-address.label:Email address`),
+        'model.emailAddress': (model) => (this.fieldsPropertyExpressions?.emailAddress ? this.fieldsPropertyExpressions.emailAddress(model) : model.emailAddress),
         },
         templateOptions: {
-        label: $localize `:@@users.user-edit.user-name.label:User name`,
-        placeholder: $localize `:@@users.user-edit.user-name.placeholder:User name`,
+        label: $localize `:@@users.user-edit.email-address.label:Email address`,
+        placeholder: $localize `:@@users.user-edit.email-address.placeholder:Email address`,
         description: ``,
             attributes: {  },
             hidden: !true,
@@ -111,27 +116,50 @@ className: `entry-user-name-field entry-input`,
         },
         },
         {
-        key: 'name',
+        key: 'fullName',
         type: this.resolveFieldType('input', false),
         focus: false,
-className: `entry-name-field entry-input`,
-        hideExpression: this.fieldsHideExpressions?.name ?? false,
+className: `entry-full-name-field entry-input`,
+        hideExpression: this.fieldsHideExpressions?.fullName ?? false,
         expressionProperties: {
-        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.name ? this.fieldsDisableExpressions.name(model) : false)),
-        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.name ? this.fieldsRequiredExpressions.name(model) : true),
-        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.name ? this.fieldsLabelExpressions.name(model) : $localize `:@@users.user-edit.name.label:Name`),
-        'model.name': (model) => (this.fieldsPropertyExpressions?.name ? this.fieldsPropertyExpressions.name(model) : model.name),
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.fullName ? this.fieldsDisableExpressions.fullName(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.fullName ? this.fieldsRequiredExpressions.fullName(model) : true),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.fullName ? this.fieldsLabelExpressions.fullName(model) : $localize `:@@users.user-edit.full-name.label:Full name`),
+        'model.fullName': (model) => (this.fieldsPropertyExpressions?.fullName ? this.fieldsPropertyExpressions.fullName(model) : model.fullName),
         },
         templateOptions: {
-        label: $localize `:@@users.user-edit.name.label:Name`,
-        placeholder: $localize `:@@users.user-edit.name.placeholder:Name`,
+        label: $localize `:@@users.user-edit.full-name.label:Full name`,
+        placeholder: $localize `:@@users.user-edit.full-name.placeholder:Full name`,
         description: ``,
             attributes: {  },
             hidden: !true,
             required: true,
-minLength: 5,
-maxLength: 25,
+maxLength: 200,
 
+            typeFormatDef: undefined
+        },
+        },
+        {
+        key: 'roleId',
+        type: this.resolveFieldType('select', false),
+        focus: false,
+className: `entry-role-id-field entry-select`,
+        hideExpression: this.fieldsHideExpressions?.roleId ?? false,
+        expressionProperties: {
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.roleId ? this.fieldsDisableExpressions.roleId(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.roleId ? this.fieldsRequiredExpressions.roleId(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.roleId ? this.fieldsLabelExpressions.roleId(model) : $localize `:@@users.user-edit.role-id.label:Role`),
+        'model.roleId': (model) => (this.fieldsPropertyExpressions?.roleId ? this.fieldsPropertyExpressions.roleId(model) : model.roleId),
+        },
+        templateOptions: {
+        label: $localize `:@@users.user-edit.role-id.label:Role`,
+        placeholder: $localize `:@@users.user-edit.role-id.placeholder:Role`,
+        description: ``,
+            options: this.roleIdOptions$.pipe(map(opts => sortOptions(opts, this.roleIdOptionsConfiguration.valueProperty, this.roleIdOptionsConfiguration.sortProperty, this._localeId))),
+            valueProp: this.roleIdOptionsConfiguration.valueProperty,
+            labelProp: this.roleIdOptionsConfiguration.labelProperty,
+            attributes: {  },
+            hidden: !true,
             typeFormatDef: undefined
         },
         },

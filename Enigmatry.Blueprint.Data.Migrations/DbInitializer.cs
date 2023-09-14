@@ -7,8 +7,6 @@ public static class DbInitializer
 {
     private static readonly List<ISeeding> Seeding = new()
     {
-        new PermissionSeeding(),
-        new RoleSeeding(),
         new RolePermissionSeeding()
     };
 

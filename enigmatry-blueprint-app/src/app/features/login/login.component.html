@@ -1,9 +1,0 @@
-<div *ngIf="isAuthenticated">
-  <button data-testId="username-button" mat-raised-button color="primary" [matMenuTriggerFor]="login_menu">{{ username }}</button>
-  <mat-menu #login_menu="matMenu">
-    <button mat-menu-item (click)='onLogout()'>Logout</button>
-  </mat-menu>
-</div>
-<div *ngIf="!isAuthenticated">
-  <button data-testId="login-button" mat-raised-button color="primary" (click)='onLogin()'>Login</button>
-</div>

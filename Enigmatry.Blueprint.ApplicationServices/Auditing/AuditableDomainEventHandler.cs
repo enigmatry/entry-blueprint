@@ -21,7 +21,7 @@ public class AuditableDomainEventNotificationHandler : INotificationHandler<Audi
     public Task Handle(AuditableDomainEvent notification, CancellationToken cancellationToken)
     {
         // here you can enter record in Audit table, 
-        _log.LogDebug("Event name: {EventName}, Payload: {@Payload}, initiated by: {UserName}", notification.EventName, notification.AuditPayload, _currentUserProvider.User?.UserName);
+        _log.LogDebug("Event name: {EventName}, Payload: {@Payload}, initiated by: {EmailAddress}", notification.EventName, notification.AuditPayload, _currentUserProvider.User?.EmailAddress);
         return Task.CompletedTask;
     }
 }

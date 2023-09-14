@@ -1,11 +1,11 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.Blueprint.Domain.Identity.Commands;
 using Enigmatry.Entry.Core.Paging;
-using Enigmatry.Blueprint.Model.Tests.Identity;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Blueprint.Domain.Authorization;
+using Enigmatry.Blueprint.Domain.Tests.Users;
+using Enigmatry.Blueprint.Domain.Users;
+using Enigmatry.Blueprint.Domain.Users.Commands;
 
 namespace Enigmatry.Blueprint.Api.Tests.Features;
 
@@ -23,8 +23,8 @@ public class UsersControllerFixture : IntegrationFixtureBase
     public void SetUp()
     {
         _user = new UserBuilder()
-            .WithUserName("john_doe@john.doe")
-            .WithName("John Doe")
+            .WithEmailAddress("john_doe@john.doe")
+            .WithFullName("John Doe")
             .WithRoleId(Role.SystemAdminRoleId);
 
         AddAndSaveChanges(_user);
@@ -34,7 +34,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
     public async Task TestGetAll()
     {
         var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>(
-                new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "UserName")))
+                new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "EmailAddress")))
             ?.Items.ToList()!;
 
         await Verify(users);
@@ -51,7 +51,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestCreate()
     {
-        var command = new CreateOrUpdateUser.Command { Name = "some user", UserName = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command { FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
@@ -61,7 +61,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestUpdate()
     {
-        var command = new CreateOrUpdateUser.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command { Id = _user.Id, FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 

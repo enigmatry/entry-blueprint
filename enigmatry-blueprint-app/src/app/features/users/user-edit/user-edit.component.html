@@ -1,4 +1,8 @@
 <app-form-wrapper [formComponent]="formComponent">
-    <app-g-user-edit #formComponent [model]="model" (save)="save($event)" (cancel)="cancel()"></app-g-user-edit>
+    <app-g-user-edit #formComponent 
+    [model]="model" 
+    (save)="save($event)"
+    (cancel)="cancel()"
+    [roleIdOptions]="$roleLookup | async | notNull"></app-g-user-edit>
 </app-form-wrapper>
 

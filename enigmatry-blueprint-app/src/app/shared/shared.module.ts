@@ -6,6 +6,7 @@ import { EntryComponentsModule } from './entry-components.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
 import { GridCellsModule } from './grid-cells/grid-cells.module';
 import { MaterialModule } from './material.module';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { MaterialModule } from './material.module';
     GridCellsModule,
     FormlyExtensionsModule,
     EntryComponentsModule,
-    FormWrapperComponent
+    FormWrapperComponent,
+    PipesModule
   ],
   declarations: [
     FormWrapperComponent

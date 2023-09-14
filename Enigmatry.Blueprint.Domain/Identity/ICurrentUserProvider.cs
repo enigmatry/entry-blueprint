@@ -1,4 +1,6 @@
-﻿namespace Enigmatry.Blueprint.Domain.Identity;
+﻿using Enigmatry.Blueprint.Domain.Users;
+
+namespace Enigmatry.Blueprint.Domain.Identity;
 
 public interface ICurrentUserProvider
 {

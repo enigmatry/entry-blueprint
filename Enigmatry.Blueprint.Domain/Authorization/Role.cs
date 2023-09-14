@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Domain.Identity;
+﻿using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Entities;
 
 namespace Enigmatry.Blueprint.Domain.Authorization;
@@ -18,4 +18,14 @@ public class Role : EntityWithGuidId
     public IReadOnlyCollection<User> Users => _users.AsReadOnly();
 
     public void SetPermissions(IEnumerable<Permission> permissions) => _permissions = permissions.ToList();
+
+    public static IEnumerable<Role> CreateAll()
+    {
+        yield return new Role { Id = SystemAdminRoleId, Name = "SystemAdmin" };
+    }
+
+    public static IEnumerable<(Guid RoleId, PermissionId[] Permissions)> GetAllRolePermissions()
+    {
+        yield return new(SystemAdminRoleId, Enum.GetValues<PermissionId>().Except(new[] { PermissionId.None }).ToArray()); // all permissions
+    }
 }

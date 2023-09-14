@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.EntityFramework;
@@ -23,8 +23,8 @@ public static class GetUsers
         public class Item
         {
             public Guid Id { get; set; }
-            public string UserName { get; set; } = String.Empty;
-            public string Name { get; set; } = String.Empty;
+            public string EmailAddress { get; set; } = String.Empty;
+            public string FullName { get; set; } = String.Empty;
             public DateTimeOffset CreatedOn { get; set; }
             public DateTimeOffset UpdatedOn { get; set; }
         }

@@ -3,13 +3,13 @@ using Enigmatry.Entry.Core.Entities;
 using Enigmatry.Entry.EntityFramework;
 using Enigmatry.Entry.EntityFramework.Security;
 using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Enigmatry.Entry.EntityFramework.MediatR;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Enigmatry.Blueprint.Domain.Identity;
 
 namespace Enigmatry.Blueprint.Infrastructure.Data;
 

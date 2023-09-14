@@ -1,13 +1,13 @@
 ﻿using System.Net.Http.Json;
 using Enigmatry.Blueprint.Api.Features.Users;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.Blueprint.Domain.Identity.Commands;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.Core.Paging;
-using Enigmatry.Blueprint.Model.Tests.Identity;
 using FluentAssertions;
 using Enigmatry.Blueprint.Domain.Authorization;
+using Enigmatry.Blueprint.Domain.Tests.Users;
+using Enigmatry.Blueprint.Domain.Users;
+using Enigmatry.Blueprint.Domain.Users.Commands;
 
 namespace Enigmatry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -22,8 +22,8 @@ public class ApiSetupFixture : IntegrationFixtureBase
     public void SetUp()
     {
         _user = new UserBuilder()
-            .WithUserName("john_doe@john.doe")
-            .WithName("John Doe")
+            .WithEmailAddress("john_doe@john.doe")
+            .WithFullName("John Doe")
             .WithRoleId(Role.SystemAdminRoleId);
 
         AddAndSaveChanges(_user);
@@ -33,7 +33,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     public async Task TestGetAll()
     {
         var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>(
-                new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "UserName")))
+                new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "EmailAddress")))
             ?.Items.ToList()!;
 
         await Verify(users);
@@ -58,7 +58,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     [Test]
     public async Task TestCreate()
     {
-        var command = new CreateOrUpdateUser.Command { Name = "some user", UserName = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command { FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
@@ -68,23 +68,23 @@ public class ApiSetupFixture : IntegrationFixtureBase
     [Test]
     public async Task TestUpdate()
     {
-        var command = new CreateOrUpdateUser.Command { Id = _user.Id, Name = "some user", UserName = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command { Id = _user.Id, FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
         await Verify(user);
     }
 
-    [TestCase("some user", "invalid email", "userName", "is not a valid email address.")]
-    [TestCase("", "someuser@test.com", "name", "must not be empty.")]
-    [TestCase("some user", "", "userName", "must not be empty.")]
-    [TestCase("John Doe", "john_doe@john.doe", "userName", "Username already taken")]
+    [TestCase("some user", "invalid email", "emailAddress", "is not a valid email address.")]
+    [TestCase("", "someuser@test.com", "fullName", "must not be empty.")]
+    [TestCase("some user", "", "emailAddress", "must not be empty.")]
+    [TestCase("John Doe", "john_doe@john.doe", "emailAddress", "EmailAddress is already taken")]
     public async Task TestCreateReturnsValidationErrors(string name,
-        string userName,
+        string emailAddress,
         string validationField,
         string validationErrorMessage)
     {
-        var command = new CreateOrUpdateUser.Command { Name = name, UserName = userName };
+        var command = new CreateOrUpdateUser.Command { FullName = name, EmailAddress = emailAddress };
         var response = await Client.PostAsJsonAsync("users", command);
 
         response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);

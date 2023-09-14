@@ -1,25 +1,25 @@
-﻿using Enigmatry.Blueprint.Domain.Identity;
-using Enigmatry.Blueprint.Domain.Identity.Commands;
+﻿using Enigmatry.Blueprint.Domain.Users;
+using Enigmatry.Blueprint.Domain.Users.Commands;
 using Enigmatry.Entry.Core.Entities;
 
-namespace Enigmatry.Blueprint.Model.Tests.Identity;
+namespace Enigmatry.Blueprint.Domain.Tests.Users;
 
 public class UserBuilder
 {
-    private string _name = String.Empty;
+    private string _fullName = String.Empty;
     private Guid _roleId = Guid.Empty;
-    private string _userName = String.Empty;
+    private string _emailAddress = String.Empty;
     private Guid _id = SequentialGuidGenerator.Generate();
 
-    public UserBuilder WithUserName(string value)
+    public UserBuilder WithEmailAddress(string value)
     {
-        _userName = value;
+        _emailAddress = value;
         return this;
     }
 
-    public UserBuilder WithName(string value)
+    public UserBuilder WithFullName(string value)
     {
-        _name = value;
+        _fullName = value;
         return this;
     }
 
@@ -43,8 +43,8 @@ public class UserBuilder
     {
         User result = User.Create(new CreateOrUpdateUser.Command
         {
-            Name = _name,
-            UserName = _userName,
+            FullName = _fullName,
+            EmailAddress = _emailAddress,
             RoleId = _roleId
         }).WithId(_id);
 

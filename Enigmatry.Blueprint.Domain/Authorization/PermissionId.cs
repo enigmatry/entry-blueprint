@@ -2,8 +2,10 @@
 {
     public enum PermissionId
     {
-        UsersRead = 0,
-        UsersWrite = 1,
+        None = 0,
+
+        UsersRead = 1,
+        UsersWrite = 2,
 
         ProductsRead = 10,
         ProductsWrite = 11,

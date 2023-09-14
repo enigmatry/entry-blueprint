@@ -2,14 +2,7 @@
 
 namespace Enigmatry.Blueprint.Domain.Auditing;
 
-public abstract record AuditableDomainEvent : DomainEvent
+public abstract record AuditableDomainEvent(string EventName) : DomainEvent
 {
-    protected AuditableDomainEvent(string eventName)
-    {
-        EventName = eventName;
-    }
-
-    public string EventName { get; }
-
     public abstract object AuditPayload { get; }
 }

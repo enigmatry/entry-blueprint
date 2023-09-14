@@ -61,8 +61,8 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedById = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -132,8 +132,8 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 0, "UsersRead" },
-                    { 1, "UsersWrite" },
+                    { 1, "UsersRead" },
+                    { 2, "UsersWrite" },
                     { 10, "ProductsRead" },
                     { 11, "ProductsWrite" },
                     { 12, "ProductsDelete" }
@@ -149,8 +149,8 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                 columns: new[] { "PermissionId", "RoleId" },
                 values: new object[,]
                 {
-                    { 0, new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0") },
                     { 1, new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0") },
+                    { 2, new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0") },
                     { 10, new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0") },
                     { 11, new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0") },
                     { 12, new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0") }
@@ -195,6 +195,12 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                 column: "CreatedById");
 
             migrationBuilder.CreateIndex(
+                name: "IX_User_EmailAddress",
+                table: "User",
+                column: "EmailAddress",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_RoleId",
                 table: "User",
                 column: "RoleId");
@@ -203,12 +209,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                 name: "IX_User_UpdatedById",
                 table: "User",
                 column: "UpdatedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_UserName",
-                table: "User",
-                column: "UserName",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

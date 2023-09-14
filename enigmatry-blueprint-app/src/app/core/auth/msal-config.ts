@@ -8,6 +8,13 @@ export const MSAL_CONFIG = new InjectionToken<string>('MSAL_CONFIG');
 // eslint-disable-next-line camelcase
 export const extraQueryParameters = { ui_locales: 'nl' };
 
+export function msalLoggerCallback(_: LogLevel, message: string) {
+  if (!environment.production) {
+    // eslint-disable-next-line no-console
+    console.log(message);
+  }
+}
+
 function isIEOrEdge(): boolean {
   const ua = window.navigator.userAgent;
   const msie = ua.indexOf('MSIE ');
@@ -16,13 +23,6 @@ function isIEOrEdge(): boolean {
   const isIE = msie > 0 || msie11 > 0;
   const isEdge = msedge > 0;
   return isIE || isEdge;
-}
-
-export function msalLoggerCallback(_: LogLevel, message: string) {
-  if (!environment.production) {
-    // eslint-disable-next-line no-console
-    console.log(message);
-  }
 }
 
 export function msalConfigFactory(): Configuration {

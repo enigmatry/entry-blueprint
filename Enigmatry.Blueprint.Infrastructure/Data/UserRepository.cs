@@ -1,4 +1,4 @@
-﻿using Enigmatry.Blueprint.Domain.Identity;
+﻿using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 

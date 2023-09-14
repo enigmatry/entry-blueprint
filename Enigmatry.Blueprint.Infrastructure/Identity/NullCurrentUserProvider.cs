@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Users;
 
 namespace Enigmatry.Blueprint.Infrastructure.Identity;
 

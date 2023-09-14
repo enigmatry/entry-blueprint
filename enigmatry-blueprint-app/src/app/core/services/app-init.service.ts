@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MsalAuthService } from './core/auth/azure-ad-b2c/msal-auth.service';
+import { AuthService } from '../auth/auth.service';
 
 export const initFactory = (config: AppInitService) => () => config.init();
 
@@ -7,7 +7,7 @@ export const initFactory = (config: AppInitService) => () => config.init();
     providedIn: 'root'
 })
 export class AppInitService {
-    constructor(private authService: MsalAuthService) { }
+    constructor(private authService: AuthService) { }
 
     init = async(): Promise<void> => {
         await this.authService.handleAuthCallback();

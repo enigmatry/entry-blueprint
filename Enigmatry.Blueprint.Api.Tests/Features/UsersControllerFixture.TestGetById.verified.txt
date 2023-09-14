@@ -1,7 +1,7 @@
 ﻿{
   Id: Guid_1,
-  UserName: john_doe@john.doe,
-  Name: John Doe,
+  EmailAddress: john_doe@john.doe,
+  FullName: John Doe,
   CreatedOn: DateTimeOffset_1,
   UpdatedOn: DateTimeOffset_1
 }

@@ -42,12 +42,12 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 0,
+                            Id = 1,
                             Name = "UsersRead"
                         },
                         new
                         {
-                            Id = 1,
+                            Id = 2,
                             Name = "UsersWrite"
                         },
                         new
@@ -91,93 +91,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                             Id = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0"),
                             Name = "SystemAdmin"
                         });
-                });
-
-            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Authorization.RolePermission", b =>
-                {
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PermissionId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("RolePermission");
-
-                    b.HasData(
-                        new
-                        {
-                            PermissionId = 0,
-                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
-                        },
-                        new
-                        {
-                            PermissionId = 1,
-                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
-                        },
-                        new
-                        {
-                            PermissionId = 10,
-                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
-                        },
-                        new
-                        {
-                            PermissionId = 11,
-                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
-                        },
-                        new
-                        {
-                            PermissionId = 12,
-                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
-                        });
-                });
-
-            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedById")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset>("CreatedOn")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UpdatedById")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset>("UpdatedOn")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.HasIndex("UserName")
-                        .IsUnique();
-
-                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
@@ -260,7 +173,134 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Authorization.RolePermission", b =>
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Users.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UpdatedById")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("UpdatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("EmailAddress")
+                        .IsUnique();
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UpdatedById");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Enigmatry.Blueprint.Infrastructure.Data.Configurations.RolePermission", b =>
+                {
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PermissionId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RolePermission");
+
+                    b.HasData(
+                        new
+                        {
+                            PermissionId = 1,
+                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
+                        },
+                        new
+                        {
+                            PermissionId = 2,
+                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
+                        },
+                        new
+                        {
+                            PermissionId = 10,
+                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
+                        },
+                        new
+                        {
+                            PermissionId = 11,
+                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
+                        },
+                        new
+                        {
+                            PermissionId = 12,
+                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0")
+                        });
+                });
+
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
+                {
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Users.User", b =>
+                {
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Enigmatry.Blueprint.Domain.Authorization.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("Role");
+
+                    b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("Enigmatry.Blueprint.Infrastructure.Data.Configurations.RolePermission", b =>
                 {
                     b.HasOne("Enigmatry.Blueprint.Domain.Authorization.Permission", null)
                         .WithMany()
@@ -273,46 +313,6 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Identity.User", b =>
-                {
-                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("Enigmatry.Blueprint.Domain.Authorization.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
-                {
-                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Enigmatry.Blueprint.Domain.Identity.User", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("Enigmatry.Blueprint.Domain.Authorization.Role", b =>

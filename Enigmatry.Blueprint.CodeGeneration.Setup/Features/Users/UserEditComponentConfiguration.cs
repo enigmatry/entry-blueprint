@@ -17,8 +17,12 @@ public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUse
 
         var userSection = builder.FormControlGroup("User");
 
-        userSection.FormControl(x => x.UserName).IsReadonly(true);
-        userSection.FormControl(x => x.Name);
+        userSection.FormControl(x => x.EmailAddress).IsReadonly(true);
+        userSection.FormControl(x => x.FullName);
+
+        userSection.SelectFormControl(x => x.RoleId)
+            .WithOptions(options => options.WithDynamicValues())
+            .WithLabel("Role");
 
         var historySection = userSection.FormControlGroup("History");
 

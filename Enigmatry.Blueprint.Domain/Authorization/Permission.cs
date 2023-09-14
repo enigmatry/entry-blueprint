@@ -21,4 +21,9 @@ public class Permission : EntityWithTypedId<PermissionId>
         Id = permissionId;
         Name = permissionId.ToString();
     }
+
+    public static IEnumerable<Permission> CreateAll() =>
+        Enum.GetValues<PermissionId>()
+            .Except(new[] { PermissionId.None })
+            .Select(permissionId => new Permission(permissionId));
 }

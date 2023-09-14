@@ -24,7 +24,7 @@ public class UserListComponentConfiguration : IListComponentConfiguration<GetUse
         // - TranslationId
         // - Formatter
 
-        builder.Column(x => x.UserName)
+        builder.Column(x => x.EmailAddress)
             .WithHeaderName("E-mail");
 
         // Configure selection:

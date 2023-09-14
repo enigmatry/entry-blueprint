@@ -1,7 +1,7 @@
 ﻿{
   Id: Guid_1,
-  UserName: someuser@test.com,
-  Name: some user,
+  EmailAddress: someuser@test.com,
+  FullName: some user,
   CreatedOn: DateTimeOffset_1,
   UpdatedOn: DateTimeOffset_1
 }

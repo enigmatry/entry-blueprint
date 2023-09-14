@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
 using Enigmatry.Entry.Core.EntityFramework;
@@ -14,8 +14,6 @@ public static class GetUserDetails
     public class Request : IRequest<Response>
     {
         public Guid Id { get; set; }
-        public int? OrganizationId { get; set; }
-
         public static Request ById(Guid id) => new() { Id = id };
     }
 
@@ -23,8 +21,9 @@ public static class GetUserDetails
     public class Response
     {
         public Guid Id { get; set; }
-        public string UserName { get; set; } = String.Empty;
-        public string Name { get; set; } = String.Empty;
+        public string EmailAddress { get; set; } = String.Empty;
+        public string FullName { get; set; } = String.Empty;
+        public Guid RoleId { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
         public DateTimeOffset UpdatedOn { get; set; }
     }

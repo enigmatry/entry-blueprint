@@ -11,7 +11,7 @@ import { extraQueryParameters, MSAL_CONFIG } from './msal-config';
 @Injectable({
   providedIn: 'root'
 })
-export class MsalAuthService {
+export class AuthService {
   private msalInstance: PublicClientApplication;
 
   constructor(@Inject(MSAL_CONFIG) msalConfig: Configuration) {
@@ -19,16 +19,21 @@ export class MsalAuthService {
   }
 
   handleAuthCallback(): Promise<AuthenticationResult | null> {
-    return this.msalInstance.handleRedirectPromise();
+    return this.msalInstance.handleRedirectPromise()
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.warn(error);
+      return null;
+    });
   }
 
-  loginRedirect(email?: string): void {
+  loginRedirect(email?: string): Promise<void> {
     const loginRequest: RedirectRequest = {
       scopes: environment.azureAdB2C.scopes,
       loginHint: email,
       extraQueryParameters
     };
-    this.msalInstance.loginRedirect(loginRequest);
+    return this.msalInstance.loginRedirect(loginRequest);
   }
 
   isAuthenticated(): boolean {

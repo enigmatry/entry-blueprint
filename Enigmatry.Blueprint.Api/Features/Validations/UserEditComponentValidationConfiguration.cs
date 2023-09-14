@@ -1,5 +1,5 @@
 ﻿using Enigmatry.Blueprint.Api.Features.Users;
-using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.CodeGeneration.Validation;
 
 namespace Enigmatry.Blueprint.Api.Features.Validations;
@@ -8,9 +8,8 @@ public class UserEditComponentValidationConfiguration : ValidationConfiguration<
 {
     public UserEditComponentValidationConfiguration()
     {
-        RuleFor(x => x.Name)
+        RuleFor(x => x.FullName)
             .IsRequired()
-            .MinLength(User.NameMinLength)
             .MaxLength(User.NameMaxLength);
     }
 }

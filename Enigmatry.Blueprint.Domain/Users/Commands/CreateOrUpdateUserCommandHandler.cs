@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using MediatR;
 
-namespace Enigmatry.Blueprint.Domain.Identity.Commands;
+namespace Enigmatry.Blueprint.Domain.Users.Commands;
 
 [UsedImplicitly]
 public class CreateOrUpdateUserCommandHandler : IRequestHandler<CreateOrUpdateUser.Command, User>

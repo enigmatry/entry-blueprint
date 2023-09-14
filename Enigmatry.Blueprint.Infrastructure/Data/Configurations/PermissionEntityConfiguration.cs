@@ -10,8 +10,7 @@ public class PermissionEntityConfiguration : IEntityTypeConfiguration<Permission
 {
     public void Configure(EntityTypeBuilder<Permission> builder)
     {
-        builder.Property(x => x.Name).IsRequired().HasMaxLength(Permission.NameMaxLength);
-
-        builder.HasIndex(x => x.Name).IsUnique();
+        builder.Property(permission => permission.Name).IsRequired().HasMaxLength(Permission.NameMaxLength);
+        builder.HasIndex(permission => permission.Name).IsUnique();
     }
 }

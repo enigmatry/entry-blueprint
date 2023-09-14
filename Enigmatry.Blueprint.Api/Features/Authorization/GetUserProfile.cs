@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Enigmatry.Blueprint.Domain.Authorization;
 using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Blueprint.Domain.Users;
 using JetBrains.Annotations;
 using MediatR;
 
@@ -16,7 +17,8 @@ public static class GetUserProfile
     public class Response
     {
         public Guid Id { get; init; }
-        public string Name { get; init; } = String.Empty;
+        public string FullName { get; init; } = String.Empty;
+        public string EmailAddress { get; init; } = String.Empty;
         public IEnumerable<PermissionId> Permissions { get; init; } = Enumerable.Empty<PermissionId>();
     }
 
