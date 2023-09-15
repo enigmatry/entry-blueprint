@@ -2,6 +2,7 @@
   Id: Guid_1,
   EmailAddress: someuser@test.com,
   FullName: some user,
+  RoleId: Guid_2,
   CreatedOn: DateTimeOffset_1,
   UpdatedOn: DateTimeOffset_1
 }

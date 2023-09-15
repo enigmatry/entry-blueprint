@@ -2,6 +2,7 @@
   Id: Guid_1,
   EmailAddress: john_doe@john.doe,
   FullName: John Doe,
+  RoleId: Guid_2,
   CreatedOn: DateTimeOffset_1,
   UpdatedOn: DateTimeOffset_1
 }
