@@ -8,30 +8,31 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { extraQueryParameters, MSAL_CONFIG } from './msal-config';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private msalInstance: PublicClientApplication;
 
-  constructor(@Inject(MSAL_CONFIG) msalConfig: Configuration) {
-    this.msalInstance = new PublicClientApplication(msalConfig);
+  constructor(@Inject(MSAL_CONFIG) private msalConfig: Configuration) {
   }
 
-  handleAuthCallback(): Promise<AuthenticationResult | null> {
-    return this.msalInstance.handleRedirectPromise()
-    .catch(error => {
+  async initialize(): Promise<void> {
+    if (!this.msalInstance) {
+      this.msalInstance = new PublicClientApplication(this.msalConfig);
+      await this.msalInstance.initialize();
+    }
+    await this.msalInstance.handleRedirectPromise()
       // eslint-disable-next-line no-console
-      console.warn(error);
-      return null;
-    });
+      .catch(error => console.warn(error));
   }
 
-  loginRedirect(email?: string): Promise<void> {
+  loginRedirect(request?: Partial<RedirectRequest>): Promise<void> {
     const loginRequest: RedirectRequest = {
       scopes: environment.azureAdB2C.scopes,
-      loginHint: email,
-      extraQueryParameters
+      extraQueryParameters,
+      ...request
     };
     return this.msalInstance.loginRedirect(loginRequest);
   }
@@ -63,7 +64,7 @@ export class AuthService {
           return of(result);
         }),
         catchError(() => this.acquireTokenRedirect()),
-        map((result: AuthenticationResult | void) => result instanceof Object ? result.accessToken : '')
+        map((result: AuthenticationResult | void) => result?.accessToken ?? '')
       );
   }
 

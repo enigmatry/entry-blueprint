@@ -15,16 +15,6 @@ export function msalLoggerCallback(_: LogLevel, message: string) {
   }
 }
 
-function isIEOrEdge(): boolean {
-  const ua = window.navigator.userAgent;
-  const msie = ua.indexOf('MSIE ');
-  const msie11 = ua.indexOf('Trident/');
-  const msedge = ua.indexOf('Edge/');
-  const isIE = msie > 0 || msie11 > 0;
-  const isEdge = msedge > 0;
-  return isIE || isEdge;
-}
-
 export function msalConfigFactory(): Configuration {
   return {
     auth: {
@@ -36,8 +26,7 @@ export function msalConfigFactory(): Configuration {
       navigateToLoginRequestUrl: true
     },
     cache: {
-      cacheLocation: 'sessionStorage',
-      storeAuthStateInCookie: isIEOrEdge()
+      cacheLocation: 'sessionStorage'
     },
     system: {
       loggerOptions: {

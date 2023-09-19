@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
-import { map, tap } from 'rxjs';
+import { from, map, tap } from 'rxjs';
 import { CurrentUserService } from '../services/current-user.service';
 import { AuthService } from './auth.service';
 
@@ -13,8 +13,10 @@ export const authGuard: CanActivateFn = (
 
   const isAuthenticated = authService.isAuthenticated();
   if (!isAuthenticated) {
-    authService.loginRedirect();
-    return false;
+    return from(authService.loginRedirect({
+      redirectStartPage: _state.url
+    }))
+    .pipe(map(_ => false));
   }
 
   return currentUserService.getUser()

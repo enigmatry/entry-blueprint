@@ -10,6 +10,6 @@ export class AppInitService {
     constructor(private authService: AuthService) { }
 
     init = async(): Promise<void> => {
-        await this.authService.handleAuthCallback();
+        await this.authService.initialize();
     };
 }
