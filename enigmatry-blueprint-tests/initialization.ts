@@ -9,7 +9,8 @@ export const initEnvironment = () => {
     dotenvExpand.expand(myEnv);
     return {
         baseUrl: process.env.BASE_URL,
-        loginUsername: process.env.LOGIN_USERNAME,
+        loginEmail: process.env.LOGIN_EMAIL,
         loginPassword: process.env.LOGIN_PASSWORD,
+        loginUsername: process.env.LOGIN_USERNAME
     } as TestData
 }

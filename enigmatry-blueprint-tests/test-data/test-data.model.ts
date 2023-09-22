@@ -1,5 +1,6 @@
 export type TestData = {
     baseUrl: string;
-    loginUsername: string;
+    loginEmail: string;
     loginPassword: string;
+    loginUsername: string;
 }
