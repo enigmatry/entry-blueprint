@@ -43,6 +43,7 @@ public static class GetUserProfile
             _mapper = mapper;
             _currentUserProvider = currentUserProvider;
         }
+
         public Task<Response> Handle(Request request, CancellationToken cancellationToken)
             => Task.FromResult(_mapper.Map<Response>(_currentUserProvider.User));
     }

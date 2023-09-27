@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ENTRY_BUTTON_CONFIG, EntryButtonConfig, EntryButtonModule } from '@enigmatry/entry-components/button';
+import { EntryPermissionModule, EntryPermissionService } from '@enigmatry/entry-components/permissions';
 import { EntryValidationModule } from '@enigmatry/entry-components/validation';
 import { EntryTableModule } from '@enigmatry/entry-table';
+import { PermissionService } from '../core/auth/permissions.service';
 
 @NgModule({
   declarations: [],
   exports: [
     EntryButtonModule,
     EntryTableModule,
-    EntryValidationModule
+    EntryValidationModule,
+    EntryPermissionModule
   ],
   providers: [
     {
@@ -20,4 +23,16 @@ import { EntryTableModule } from '@enigmatry/entry-table';
     }
   ]
 })
-export class EntryComponentsModule { }
+export class EntryComponentsModule {
+  static forRoot(): ModuleWithProviders<EntryComponentsModule> {
+    return {
+      ngModule: EntryComponentsModule,
+      providers: [
+        {
+          provide: EntryPermissionService,
+          useClass: PermissionService
+        }
+      ]
+    };
+  }
+}

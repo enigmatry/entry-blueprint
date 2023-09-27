@@ -2,12 +2,12 @@
   <nav>
     <button mat-button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="users" routerLinkActive="active">Users</button>
-      <button mat-menu-item routerLink="products" routerLinkActive="active">Products</button>
+      <button mat-menu-item *entryPermissionsOnly="[PermissionId.UsersRead]" routerLink="users" routerLinkActive="active">Users</button>
+      <button mat-menu-item *entryPermissionsOnly="[PermissionId.ProductsRead]" routerLink="products" routerLinkActive="active">Products</button>
     </mat-menu>
   </nav>
   <div>
-    <button data-testId="username-button" mat-raised-button color="primary" [matMenuTriggerFor]="login_menu">{{ ($currentUser | async)?.fullName }}</button>
+    <button data-testId="username-button" mat-raised-button color="primary" [matMenuTriggerFor]="login_menu">{{ currentUser?.fullName }}</button>
     <mat-menu #login_menu="matMenu">
       <button mat-menu-item (click)='onLogout()'>Logout</button>
     </mat-menu>

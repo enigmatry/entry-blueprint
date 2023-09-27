@@ -1,11 +1,12 @@
-<a mat-raised-button class="create-product-action" color="accent" routerLink="./create">Create</a>
+<a *entryPermissionsOnly="[PermissionId.ProductsWrite]" mat-raised-button class="create-product-action" color="accent" routerLink="./create">Create</a>
 <app-g-product-list
     [data]="data | async" 
     [loading]="loading"
     [defaultSort]="query"
-    [rowContextMenuFormatter]="productListRowContextMenuFormatter"
+    [contextMenuItems]="contextMenuItems"
     (sortChange)="sortChange($event)" 
     (pageChange)="pageChange($event)"
     (selectionChange)="selectionChange($event)"
+    (rowClick)="onRowSelected($event)"
     (contextMenuItemSelected)="onContextMenuItemSelected($event)">
 </app-g-product-list>

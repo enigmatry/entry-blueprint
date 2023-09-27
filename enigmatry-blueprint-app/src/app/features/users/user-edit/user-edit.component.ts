@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {
   CreateOrUpdateUserCommand, IGetUserDetailsResponse,
-  LookupResponseOfGuid, UsersClient
+  LookupResponseOfGuid, PermissionId, UsersClient
 } from 'src/app/api/api-reference';
 
 @Component({
@@ -16,8 +16,11 @@ import {
 export class UserEditComponent implements OnInit {
   model: IGetUserDetailsResponse = {};
   $roleLookup: Observable<LookupResponseOfGuid[]>;
+  PermissionId = PermissionId;
 
-  constructor(private client: UsersClient, protected activatedRoute: ActivatedRoute, public location: Location) { }
+  constructor(private client: UsersClient,
+    protected activatedRoute: ActivatedRoute,
+    public location: Location) { }
 
   ngOnInit(): void {
     this.activatedRoute.params

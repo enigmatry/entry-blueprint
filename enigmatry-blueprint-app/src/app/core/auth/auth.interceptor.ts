@@ -3,7 +3,8 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpRequest
+  HttpRequest,
+  HttpStatusCode
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
@@ -30,9 +31,8 @@ export class AuthInterceptor implements HttpInterceptor {
   private addAuthorizationHeader = (req: HttpRequest<any>, accessToken: string): HttpRequest<any> =>
     req.clone({ setHeaders: { Authorization: `Bearer ${accessToken}` } });
 
-    private handle401Response = (err: any): Observable<any> =>
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    err instanceof HttpErrorResponse && err.status === 401
+  private handle401Response = (err: any): Observable<any> =>
+    err instanceof HttpErrorResponse && err.status === HttpStatusCode.Unauthorized
       ? of(this.authService.loginRedirect())
       : throwError(() => err);
 }

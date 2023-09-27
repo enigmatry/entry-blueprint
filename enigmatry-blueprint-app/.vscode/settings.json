@@ -1,5 +1,8 @@
 {
-    "cSpell.words": [
-        "MSAL"
-    ]
+  "cSpell.words": [
+    "MSAL"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

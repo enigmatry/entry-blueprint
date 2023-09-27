@@ -47,7 +47,6 @@ public class UserListComponentConfiguration : IListComponentConfiguration<GetUse
 
         builder.Row()
             .Selection(RowSelectionType.Multiple, false)
-            .ShowContextMenu(true)
-            .ContextMenuItems(new RowContextMenuItem { Id = "edit", Name = "Edit", Icon = "edit" });
+            .ShowContextMenu(true); // Context menu items will be configured on the frontend
     }
 }

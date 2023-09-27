@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GetUserProfileResponse } from 'src/app/api/api-reference';
+import { Component } from '@angular/core';
+import { PermissionId } from 'src/app/api/api-reference';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { CurrentUserService } from 'src/app/core/services/current-user.service';
 
@@ -9,15 +8,11 @@ import { CurrentUserService } from 'src/app/core/services/current-user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  $currentUser: Observable<GetUserProfileResponse | null>;
+export class HeaderComponent {
+  PermissionId = PermissionId;
+  currentUser = this.currentUserService.currentUser;
 
-  constructor(private currentUserService: CurrentUserService, private authService: AuthService) {
-  }
-
-  ngOnInit(): void {
-    this.$currentUser = this.currentUserService.getUser();
-  }
+  constructor(private currentUserService: CurrentUserService, private authService: AuthService) {}
 
   onLogout() {
     this.authService.logout();

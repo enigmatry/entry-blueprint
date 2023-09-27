@@ -4,100 +4,102 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IValidationProblemDetails, setServerSideValidationErrors } from '@enigmatry/entry-components/validation';
 import {
-    IGetProductDetailsResponse,
-    IProductCreateOrUpdateCommand,
-    ProductCreateOrUpdateCommand,
-    ProductsClient,
-    ProductType
+  IGetProductDetailsResponse,
+  IProductCreateOrUpdateCommand,
+  PermissionId,
+  ProductCreateOrUpdateCommand,
+  ProductsClient,
+  ProductType
 } from 'src/app/api/api-reference';
 import { FormAccessMode } from 'src/app/shared/form-component/form-access-mode.enum';
 import { FormComponent } from 'src/app/shared/form-component/form-component.model';
 import { ProductEditGeneratedComponent } from '../generated/product-edit/product-edit-generated.component';
 
 @Component({
-    selector: 'app-product-edit',
-    templateUrl: './product-edit.component.html',
-    styleUrls: ['./product-edit.component.scss']
+  selector: 'app-product-edit',
+  templateUrl: './product-edit.component.html',
+  styleUrls: ['./product-edit.component.scss']
 })
 export class ProductEditComponent
-    extends FormComponent<IProductCreateOrUpdateCommand, IGetProductDetailsResponse> {
-    @ViewChild('formComponent') formComponent: ProductEditGeneratedComponent;
+  extends FormComponent<IProductCreateOrUpdateCommand, IGetProductDetailsResponse> {
+  @ViewChild('formComponent') formComponent: ProductEditGeneratedComponent;
+  PermissionId = PermissionId;
 
-    constructor(
-        protected router: Router,
-        protected activatedRoute: ActivatedRoute,
-        private client: ProductsClient) {
-        super(router, activatedRoute);
-        this.initHideExpressions();
-        this.initDisableExpressions();
-        this.initRequiredExpressions();
-        this.initPropertyExpressions();
+  constructor(
+    protected router: Router,
+    protected activatedRoute: ActivatedRoute,
+    private client: ProductsClient) {
+    super(router, activatedRoute);
+    this.initHideExpressions();
+    this.initDisableExpressions();
+    this.initRequiredExpressions();
+    this.initPropertyExpressions();
+  }
+
+  save = (model: IProductCreateOrUpdateCommand) =>
+    this.client
+      .post(model as ProductCreateOrUpdateCommand)
+      .subscribe({
+        next: () => this.goBack(),
+        error: (error: IValidationProblemDetails) =>
+          setServerSideValidationErrors(error, this.formComponent.form)
+      });
+
+  buttonClick = (name: string) => {
+    if (name === 'resetFormBtn') {
+      this.resetModel();
     }
+  };
 
-    save = (model: IProductCreateOrUpdateCommand) =>
-        this.client
-            .post(model as ProductCreateOrUpdateCommand)
-            .subscribe({
-                next: () => this.goBack(),
-                error: (error: IValidationProblemDetails) =>
-                    setServerSideValidationErrors(error, this.formComponent.form)
-            });
+  toCommand(response: IGetProductDetailsResponse): IProductCreateOrUpdateCommand {
+    return new ProductCreateOrUpdateCommand({
+      id: response.id,
+      name: response.name,
+      code: response.code,
+      type: response.type,
+      description: response.description,
+      price: response.price,
+      contactEmail: response.contactEmail,
+      contactPhone: response.contactPhone,
+      infoLink: response.infoLink,
+      amount: response.amount,
+      expiresOn: response.expiresOn,
+      freeShipping: response.freeShipping,
+      hasDiscount: response.hasDiscount,
+      discount: response.discount
+    });
+  }
 
-    buttonClick = (name: string) => {
-        if (name === 'resetFormBtn') {
-          this.resetModel();
-        }
-    };
+  private initHideExpressions = () => {
+    this.fieldsHideExpressions.discount =
+      (model: IGetProductDetailsResponse): boolean =>
+        model.hasDiscount === undefined || model.hasDiscount === false;
+    this.fieldsHideExpressions.resetFormBtn =
+      (model: IGetProductDetailsResponse): boolean =>
+        !this.isEdit();
+  };
 
-    toCommand(response: IGetProductDetailsResponse): IProductCreateOrUpdateCommand {
-        return new ProductCreateOrUpdateCommand({
-            id: response.id,
-            name: response.name,
-            code: response.code,
-            type: response.type,
-            description: response.description,
-            price: response.price,
-            contactEmail: response.contactEmail,
-            contactPhone: response.contactPhone,
-            infoLink: response.infoLink,
-            amount: response.amount,
-            expiresOn: response.expiresOn,
-            freeShipping: response.freeShipping,
-            hasDiscount: response.hasDiscount,
-            discount: response.discount
-        });
-    }
+  private initDisableExpressions = () => {
+    this.fieldsDisableExpressions.price =
+      (model: IGetProductDetailsResponse): boolean =>
+        model.type === undefined ||
+        model.type === ProductType.Book && this.formMode === FormAccessMode.edit;
+    this.fieldsDisableExpressions.expiresOn =
+      (model: IGetProductDetailsResponse): boolean =>
+        model.type === ProductType.Car || model.type === ProductType.Book;
+  };
 
-    private initHideExpressions = () => {
-        this.fieldsHideExpressions.discount =
-            (model: IGetProductDetailsResponse): boolean =>
-                model.hasDiscount === undefined || model.hasDiscount === false;
-        this.fieldsHideExpressions.resetFormBtn =
-            (model: IGetProductDetailsResponse): boolean =>
-                !this.isEdit();
-    };
+  private initRequiredExpressions = () => {
+    this.fieldsRequiredExpressions.discount =
+      (model: IGetProductDetailsResponse): boolean => !!model.hasDiscount;
+    this.fieldsRequiredExpressions.expiresOn =
+      (model: IGetProductDetailsResponse): boolean =>
+        model.type === ProductType.Drink || model.type === ProductType.Food;
+  };
 
-    private initDisableExpressions = () => {
-        this.fieldsDisableExpressions.price =
-            (model: IGetProductDetailsResponse): boolean =>
-                model.type === undefined ||
-                model.type === ProductType.Book && this.formMode === FormAccessMode.edit;
-      this.fieldsDisableExpressions.expiresOn =
-          (model: IGetProductDetailsResponse): boolean =>
-            model.type === ProductType.Car || model.type === ProductType.Book;
-    };
-
-    private initRequiredExpressions = () => {
-      this.fieldsRequiredExpressions.discount =
-          (model: IGetProductDetailsResponse): boolean => !!model.hasDiscount;
-      this.fieldsRequiredExpressions.expiresOn =
-          (model: IGetProductDetailsResponse): boolean =>
-            model.type === ProductType.Drink || model.type === ProductType.Food;
-    };
-
-    private initPropertyExpressions = () => {
-      this.fieldsPropertyExpressions.expiresOn =
-          (model: IGetProductDetailsResponse): Date | undefined =>
-            model.type === ProductType.Car || model.type === ProductType.Book ? undefined : model.expiresOn;
-    };
+  private initPropertyExpressions = () => {
+    this.fieldsPropertyExpressions.expiresOn =
+      (model: IGetProductDetailsResponse): Date | undefined =>
+        model.type === ProductType.Car || model.type === ProductType.Book ? undefined : model.expiresOn;
+  };
 }

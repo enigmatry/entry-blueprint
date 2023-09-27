@@ -61,7 +61,7 @@ export class ProductListGeneratedComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.columns = [
+   this.columns = [
 { field: 'id', hide: true, sortable: true },
 { field: 'name', header: $localize `:@@products.product-list.name:Product name`, hide: false, sortable: true, cellTemplate: this.nameTpl },
 { field: 'code', header: $localize `:@@products.product-list.code:Code`, hide: false, sortable: true, class: 'hide-on-mobile ' },
@@ -76,6 +76,5 @@ export class ProductListGeneratedComponent implements OnInit {
 { field: 'hasDiscount', hide: true, sortable: true, type: 'boolean', typeParameter: { name: 'boolean' } },
 { field: 'discount', hide: true, sortable: true, type: 'number', typeParameter: { name: 'number' } }
 ];
-    this.contextMenuItems = [];
   }
 }

@@ -5,6 +5,7 @@
       [fieldsDisableExpressions]="fieldsDisableExpressions"
       [fieldsRequiredExpressions]="fieldsRequiredExpressions"
       [fieldsPropertyExpressions]="fieldsPropertyExpressions"
+      [isReadonly]="!([PermissionId.ProductsWrite] | entryHasPermissions)"
       (save)="save($event)"
       (cancel)="goBack()"
       (buttonClick)="buttonClick($event)">

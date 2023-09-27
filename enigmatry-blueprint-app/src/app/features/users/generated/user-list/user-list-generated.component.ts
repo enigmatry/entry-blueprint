@@ -60,15 +60,12 @@ export class UserListGeneratedComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.columns = [
+   this.columns = [
 { field: 'id', hide: true, sortable: true },
 { field: 'emailAddress', header: $localize `:@@users.user-list.email-address:E-mail`, hide: false, sortable: true },
 { field: 'fullName', header: $localize `:@@users.user-list.full-name:Full name`, hide: false, sortable: true },
 { field: 'createdOn', header: $localize `:@@users.user-list.created-on:Created on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } },
 { field: 'updatedOn', header: $localize `:@@users.user-list.updated-on:Updated on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } }
-];
-    this.contextMenuItems = [
-{ id: 'edit', name: $localize `:@@users.user-list.context.edit:Edit`, icon: 'edit' }
 ];
   }
 }

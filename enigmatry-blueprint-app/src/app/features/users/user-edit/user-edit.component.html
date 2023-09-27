@@ -3,6 +3,7 @@
     [model]="model" 
     (save)="save($event)"
     (cancel)="cancel()"
+    [isReadonly]="!([PermissionId.UsersWrite] | entryHasPermissions)"
     [roleIdOptions]="$roleLookup | async | notNull"></app-g-user-edit>
 </app-form-wrapper>
 
