@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using Enigmatry.Blueprint.Domain.Identity;
+using Enigmatry.Entry.AspNetCore.Filters;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Serilog.Context;
 using Serilog.Core;
@@ -25,18 +27,11 @@ public class LogContextMiddleware
         }
     }
 
-    private static ILogEventEnricher[] CreateEnrichers(HttpContext context)
-    {
-        return new ILogEventEnricher[]
-        {
-            new PropertyEnricher("User", GetCurrentUserId(context)!),
-            new PropertyEnricher("Address", context.Connection.RemoteIpAddress!)
-        };
-    }
-    
+    private static ILogEventEnricher[] CreateEnrichers(HttpContext context) => new ILogEventEnricher[] { new PropertyEnricher("User", GetCurrentUserId(context)!), new PropertyEnricher("Address", context.Connection.RemoteIpAddress!) };
+
     private static Guid? GetCurrentUserId(HttpContext context)
     {
-        var userId = context.Resolve<ICurrentUserProvider>().UserId;
+        var userId = context.Resolve<ICurrentUserProvider>().User?.Id;
         return userId;
     }
 }
