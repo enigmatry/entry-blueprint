@@ -29,8 +29,14 @@ public class LogContextMiddleware
     {
         return new ILogEventEnricher[]
         {
-            new PropertyEnricher("User", context.User.Identity?.Name ?? String.Empty),
+            new PropertyEnricher("User", GetCurrentUserId(context)!),
             new PropertyEnricher("Address", context.Connection.RemoteIpAddress!)
         };
+    }
+    
+    private static Guid? GetCurrentUserId(HttpContext context)
+    {
+        var userId = context.Resolve<ICurrentUserProvider>().UserId;
+        return userId;
     }
 }
