@@ -1,12 +1,9 @@
-﻿using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
+﻿using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities.Database;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities;
 using Enigmatry.Entry.Core.Data;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -15,13 +12,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 
-#pragma warning disable CA1001 // Types that own disposable fields should be disposable
 public class IntegrationFixtureBase
-#pragma warning restore CA1001 // Types that own disposable fields should be disposable
 {
     private IConfiguration _configuration = null!;
-    private TestServer _server = null!;
     private IServiceScope _testScope = null!;
+    private static BlueprintWebApplicationFactory _factory = null!;
     private bool _seedUsers = true;
     private bool _isUserAuthenticated = true;
 
@@ -34,25 +29,19 @@ public class IntegrationFixtureBase
             .WithDbContextName(nameof(BlueprintContext))
             .Build();
 
-        var webHostBuilder = new WebHostBuilder()
-            .ConfigureServices(services => services.AddAutofac())
-            .UseConfiguration(_configuration)
-            .UseStartup(_ => new TestStartup(_configuration, _isUserAuthenticated));
+        _factory = new BlueprintWebApplicationFactory(_configuration, _isUserAuthenticated);
 
-        _server = new TestServer(webHostBuilder);
+        var scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
+        _testScope = scopeFactory.CreateScope();
+        Client = _factory.CreateClient();
+
         CreateDatabase();
-
-        Client = _server.CreateClient();
-        _testScope = CreateScope();
         SeedUsers();
     }
 
-    private IServiceScope CreateScope() => _server.Host.Services.CreateScope();
-
     private void CreateDatabase()
     {
-        using IServiceScope scope = CreateScope();
-        var dbContext = scope.Resolve<BlueprintContext>();
+        var dbContext = _testScope.Resolve<BlueprintContext>();
         // On Azure we cannot drop db, we can only delete all tables
         DropAllDbObjects(dbContext.Database);
         // In case that we want to delete db call: dbContext.Database.EnsureDeleted()
@@ -100,8 +89,7 @@ public class IntegrationFixtureBase
 
     private void AddCurrentUserToDb()
     {
-        using IServiceScope scope = CreateScope();
-        var dbContext = scope.Resolve<DbContext>();
+        var dbContext = _testScope.Resolve<DbContext>();
         dbContext.Add(TestUserData.CreateTestUser());
         dbContext.SaveChanges();
     }
@@ -109,9 +97,9 @@ public class IntegrationFixtureBase
     [TearDown]
     public void Teardown()
     {
+        _factory.Dispose();
         _testScope.Dispose();
         Client.Dispose();
-        _server.Dispose();
     }
 
     protected void AddAndSaveChanges<T>(params T[] entities)

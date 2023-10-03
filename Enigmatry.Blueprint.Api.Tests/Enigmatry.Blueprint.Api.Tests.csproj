@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="AutoFixture.NUnit3" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NUnit3TestAdapter">
       <PrivateAssets>all</PrivateAssets>

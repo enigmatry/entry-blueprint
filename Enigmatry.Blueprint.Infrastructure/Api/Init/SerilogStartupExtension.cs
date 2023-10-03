@@ -4,15 +4,16 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Sinks.ApplicationInsights.TelemetryConverters;
 using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 
 namespace Enigmatry.Blueprint.Infrastructure.Api.Init;
 
-public static class SerilogProgramHelper
+public static class SerilogStartupExtension
 {
-    public static void AppConfigureSerilog(IConfiguration configuration)
+    public static void AppConfigureSerilog(this WebApplicationBuilder builder)
     {
         LoggerConfiguration loggerConfiguration = new LoggerConfiguration()
-            .ReadFrom.Configuration(configuration)
+            .ReadFrom.Configuration(builder.Configuration)
             .Enrich.FromLogContext()
             .Enrich.WithThreadId()
             .Enrich.WithProcessId()
@@ -20,7 +21,7 @@ public static class SerilogProgramHelper
             .Enrich.With(new OperationIdEnricher())
             .Enrich.WithProperty("AppVersion", Assembly.GetEntryAssembly()!.GetName().Version!);
 
-        AddAppInsightsToSerilog(loggerConfiguration, configuration);
+        AddAppInsightsToSerilog(loggerConfiguration, builder.Configuration);
 
         Log.Logger = loggerConfiguration.CreateLogger();
 
