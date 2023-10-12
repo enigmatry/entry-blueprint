@@ -1,59 +1,37 @@
-import { Params } from '@angular/router';
-import { OnPage, OnSort, PagedData, SortEvent, PageEvent } from '@enigmatry/entry-table';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SearchFilterParams } from '@enigmatry/entry-components/search-filter';
+import { PageEvent, SortEvent } from '@enigmatry/entry-table';
+import { SearchFilterPagedQuery } from './search-filter-paged-query';
 
-export interface OnSelection<T> {
-  selectionChange(selection: T[]): void;
-}
+export abstract class BaseListComponent {
+  query: SearchFilterPagedQuery;
 
-/**
- * BaseListComponent
- * loads list data when page or sort changes
- */
-export abstract class BaseListComponent<T, TQuery extends OnSort & OnPage>
-  implements OnSort, OnPage, OnSelection<T> {
-  /** BehaviorSubject that contains paged data */
-  public readonly data = new BehaviorSubject<PagedData<T> | null>(null);
+  constructor(protected router: Router, protected activatedRoute: ActivatedRoute) { }
 
-  /** BehaviorSubject that contains current selection */
-  public readonly selection = new BehaviorSubject<T[]>([]);
-
-  /** Query model */
-  public query: TQuery;
-
-  /** Whether data is being fetched */
-  public loading: boolean;
-
-  /** Fetch data function (needs to be implemented) */
-  abstract fetchData(query: TQuery): Observable<PagedData<T>>;
-
-  abstract createQueryInstance(routeParams: Params, queryParams: Params): TQuery;
-
-  /** Load list and update the data subject with the latest value */
-  loadList(): Subscription {
-    this.loading = true;
-    return this.fetchData(this.query)
-      .pipe(finalize(() => {
-        this.loading = false;
-      }))
-      .subscribe(response => this.data.next(response));
+  // Handle search filters change
+  searchFilterChange(searchParams: SearchFilterParams) {
+    this.query.searchFilterChange(searchParams);
+    this.updateRouteQueryString(this.query.getRouteQueryParams());
   }
 
-  /** Handle sort change event */
-  sortChange(sort: SortEvent): void {
-    this.query.sortChange(sort);
-    this.loadList();
-  }
-
-  /** Handle page change event */
+  // Handle page change
   pageChange(page: PageEvent): void {
     this.query.pageChange(page);
-    this.loadList();
+    this.updateRouteQueryString(this.query.getRouteQueryParams());
   }
 
-  /** Handle selection change event */
-  selectionChange(selection: T[]): void {
-    this.selection.next(selection);
+  // Handle sort change
+  sortChange(sort: SortEvent): void {
+    this.query.sortChange(sort);
+    this.updateRouteQueryString(this.query.getRouteQueryParams());
+  }
+
+  // Appends new query params to the current route
+  private updateRouteQueryString(queryParams: Params): void {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams,
+      queryParamsHandling: 'merge'
+    });
   }
 }

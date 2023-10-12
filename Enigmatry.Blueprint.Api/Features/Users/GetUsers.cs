@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Entry.Core.Data;
@@ -13,7 +14,8 @@ public static class GetUsers
     [PublicAPI]
     public class Request : PagedRequest<Response.Item>
     {
-        public string Keyword { get; set; } = String.Empty;
+        public string? Name { get; set; }
+        public string? Email { get; set; }
     }
 
     [PublicAPI]
@@ -50,7 +52,8 @@ public static class GetUsers
 
         public async Task<PagedResponse<Response.Item>> Handle(Request request, CancellationToken cancellationToken) =>
             await _repository.QueryAll()
-                .QueryByKeyword(request.Keyword)
+                .QueryByName(request.Name)
+                .QueryByEmail(request.Email)
                 .ProjectTo<Response.Item>(_mapper.ConfigurationProvider, cancellationToken)
                 .ToPagedResponseAsync(request, cancellationToken);
     }

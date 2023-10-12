@@ -13,7 +13,9 @@ public static class GetProducts
     [PublicAPI]
     public class Request : PagedRequest<Response.Item>
     {
-        public string Keyword { get; set; } = String.Empty;
+        public string? Name { get; set; }
+        public string? Code { get; set; }
+        public string? ContactEmail { get; set; }
     }
 
     [PublicAPI]
@@ -58,6 +60,9 @@ public static class GetProducts
 
         public async Task<PagedResponse<Response.Item>> Handle(Request request, CancellationToken cancellationToken) =>
             await _productRepository.QueryAll()
+                .QueryByCode(request.Code)
+                .QueryByName(request.Name)
+                .QueryByContactEmail(request.ContactEmail)
                 .ProjectTo<Response.Item>(_mapper.ConfigurationProvider, cancellationToken)
                 .ToPagedResponseAsync(request, cancellationToken);
     }

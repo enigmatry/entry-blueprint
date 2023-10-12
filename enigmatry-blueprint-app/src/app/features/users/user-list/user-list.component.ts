@@ -1,40 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-table';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { GetUsersResponseItem, PermissionId, UsersClient } from 'src/app/api/api-reference';
 import { PermissionService } from 'src/app/core/auth/permissions.service';
-import { ListComponentWithRouting } from 'src/app/shared/list-component/list-component-with-routing.model';
+import { BaseListComponent } from 'src/app/shared/list-component/base-list-component.model';
+import { SearchFilterPagedQuery } from 'src/app/shared/list-component/search-filter-paged-query';
 import { RouteSegments } from 'src/app/shared/model/route-segments';
-import { GetUsersQuery } from '../models/get-users-query.model';
+import { GetUsersQuery } from '../models/qet-users-query.model';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent extends ListComponentWithRouting<GetUsersResponseItem, GetUsersQuery> implements OnInit {
+export class UserListComponent extends BaseListComponent implements OnInit {
   contextMenuItems: ContextMenuItem[] = [];
+  data: PagedData<GetUsersResponseItem>;
+  query = new GetUsersQuery();
 
   constructor(private client: UsersClient, private permissionService: PermissionService,
     protected router: Router, protected activatedRoute: ActivatedRoute
   ) {
-    super();
-    this.query = new GetUsersQuery();
-  }
-
-  fetchData(query: GetUsersQuery): Observable<PagedData<GetUsersResponseItem>> {
-    return this.client.search(query.keyword, query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
-  }
-
-  createQueryInstance(routeParams: Params, queryParams: Params): GetUsersQuery {
-    const result = new GetUsersQuery();
-    result.applyRouteChanges(routeParams, queryParams);
-    return result;
+    super(router, activatedRoute);
   }
 
   ngOnInit(): void {
-    this.watchRouteParams(this.router, this.activatedRoute);
+    this.watchQueryParamsAndGetUsers();
     this.initContextMenuItems();
   }
 
@@ -55,5 +47,20 @@ export class UserListComponent extends ListComponentWithRouting<GetUsersResponse
     if (contextMenuItem.itemId === RouteSegments.edit) {
       this.router.navigate([RouteSegments.edit, contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
     }
+  }
+
+  private getUsers(query: SearchFilterPagedQuery): Observable<PagedData<GetUsersResponseItem>> {
+    return this.client.search(this.query.name.value, this.query.email.value,
+      query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
+  }
+
+  // Subscribe to activated route and load list when query params change
+  private watchQueryParamsAndGetUsers(): Subscription {
+    return this.activatedRoute.queryParams
+      .pipe(
+        tap(params => this.query.applyRouteChanges(params)),
+        switchMap(() => this.getUsers(this.query))
+      )
+      .subscribe(response => this.data = response);
   }
 }

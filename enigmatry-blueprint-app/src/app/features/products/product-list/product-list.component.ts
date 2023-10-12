@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-table';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { GetProductsResponseItem, PermissionId, ProductsClient } from 'src/app/api/api-reference';
 import { PermissionService } from 'src/app/core/auth/permissions.service';
-import { ListComponentWithRouting } from 'src/app/shared/list-component/list-component-with-routing.model';
+import { BaseListComponent } from 'src/app/shared/list-component/base-list-component.model';
 import { RouteSegments } from 'src/app/shared/model/route-segments';
 import { GetProductsQuery } from '../models/get-products-query.model';
 
@@ -13,8 +13,9 @@ import { GetProductsQuery } from '../models/get-products-query.model';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent
-  extends ListComponentWithRouting<GetProductsResponseItem, GetProductsQuery> implements OnInit {
+export class ProductListComponent extends BaseListComponent implements OnInit {
+  data: PagedData<GetProductsResponseItem>;
+  query = new GetProductsQuery();
   PermissionId = PermissionId;
   contextMenuItems: ContextMenuItem[] = [];
 
@@ -22,22 +23,14 @@ export class ProductListComponent
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
     private permissionService: PermissionService) {
-    super();
+    super(router, activatedRoute);
   }
 
   ngOnInit(): void {
-    this.watchRouteParams(this.router, this.activatedRoute);
+    this.watchQueryParamsAndGetProducts();
     this.initContextMenuItems();
   }
 
-  fetchData = (query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> =>
-    this.client.search(query.keyword, query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
-
-  createQueryInstance = (routeParams: Params, queryParams: Params): GetProductsQuery => {
-    const query = new GetProductsQuery();
-    query.applyRouteChanges(routeParams, queryParams);
-    return query;
-  };
 
   onRowSelected(rowData: GetProductsResponseItem) {
     this.router.navigate([RouteSegments.edit, rowData.id], { relativeTo: this.activatedRoute });
@@ -49,7 +42,7 @@ export class ProductListComponent
     } else if (contextMenuItem.itemId === 'delete' && contextMenuItem.rowData.id !== undefined) {
       this.client
         .remove(contextMenuItem.rowData.id)
-        .subscribe(() => this.loadList());
+        .subscribe(() => this.getProducts(this.query));
     }
   };
 
@@ -67,4 +60,17 @@ export class ProductListComponent
       disabled: !this.permissionService.hasPermissions([PermissionId.ProductsDelete])
     }];
   }
+
+  private watchQueryParamsAndGetProducts(): Subscription {
+    return this.activatedRoute.queryParams
+      .pipe(
+        tap(params => this.query.applyRouteChanges(params)),
+        switchMap(() => this.getProducts(this.query))
+      )
+      .subscribe(response => this.data = response);
+  }
+
+  private getProducts = (query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> =>
+    this.client.search(query.name.value, query.code.value, query.contactEmail.value,
+      query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
 }
