@@ -13,18 +13,20 @@ namespace Enigmatry.Blueprint.Api.Tests.CoreFeatures;
 [Category("integration")]
 public class AuthorizationFixture : IntegrationFixtureBase
 {
+    private Role? _testRole;
+
     [SetUp]
     public void SetUp()
     {
-        var testRole = new Role { Name = "TestRole" };
-        testRole.SetPermissions(QueryDb<Permission>().Where(p => p.Id == PermissionId.UsersRead));
+        _testRole = new Role { Name = "TestRole" };
+        _testRole.SetPermissions(QueryDb<Permission>().Where(p => p.Id == PermissionId.UsersRead));
 
         var currentUser = QueryCurrentUser();
         currentUser.Update(new CreateOrUpdateUser.Command
         {
-            RoleId = testRole.Id
+            RoleId = _testRole.Id
         });
-        AddAndSaveChanges(testRole);
+        AddAndSaveChanges(_testRole);
     }
 
     [Test]
@@ -52,6 +54,21 @@ public class AuthorizationFixture : IntegrationFixtureBase
     {
         var response = await Client.GetAsync("profile");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
+
+    [TearDown]
+    public async Task TearDown()
+    {
+        var currentUser = QueryCurrentUser();
+        currentUser.Update(new CreateOrUpdateUser.Command
+        {
+            RoleId = Role.SystemAdminRoleId
+        });
+
+        if (_testRole != null)
+        {
+            await DeleteByIdsAndSaveChanges<Role, Guid>(_testRole.Id);
+        }
     }
 
     private User QueryCurrentUser() => QueryDb<User>().First(u => u.Id == TestUserData.TestUserId);

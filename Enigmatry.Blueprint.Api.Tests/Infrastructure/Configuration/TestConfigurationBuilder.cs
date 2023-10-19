@@ -1,16 +1,21 @@
-﻿using Enigmatry.Blueprint.Data.Migrations;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
 
 public class TestConfigurationBuilder
 {
     private string _dbContextName = String.Empty;
+    private string _connectionString = String.Empty;
 
     public TestConfigurationBuilder WithDbContextName(string contextName)
     {
         _dbContextName = contextName;
+        return this;
+    }
+
+    public TestConfigurationBuilder WithConnectionString(string connectionString)
+    {
+        _connectionString = connectionString;
         return this;
     }
 
@@ -23,11 +28,11 @@ public class TestConfigurationBuilder
         {
             {"UseDeveloperExceptionPage", "true"},
             {"DbContext:SensitiveDataLoggingEnabled", "true"},
+            {"DbContext:UseAccessToken", "false"},
             {"DbContext:ConnectionResiliencyMaxRetryCount", "10"},
             {"DbContext:ConnectionResiliencyMaxRetryDelay", "0.00:00:30"},
             {
-                $"ConnectionStrings:{_dbContextName}",
-                GetConnectionString()
+                $"ConnectionStrings:{_dbContextName}", _connectionString
             },
             {"App:Smtp:UsePickupDirectory", "true"},
             {"App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation()},
@@ -48,21 +53,4 @@ public class TestConfigurationBuilder
             throw new InvalidOperationException("Missing db context name");
         }
     }
-
-    private static string GetConnectionString()
-    {
-        var connectionString = Environment.GetEnvironmentVariable("IntegrationTestsConnectionString");
-        if (!String.IsNullOrEmpty(connectionString))
-        {
-            var builder = new SqlConnectionStringBuilder(connectionString);
-            WriteLine("Connection string read from environment variable.");
-            WriteLine($"Integration Tests using database: {builder.DataSource}");
-            return connectionString;
-        }
-
-        return DevelopmentConnectionsStrings.IntegrationTestsConnectionString;
-    }
-
-    private static void WriteLine(string message) =>
-        TestContext.WriteLine(message);
 }

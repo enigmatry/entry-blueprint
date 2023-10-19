@@ -1,11 +1,9 @@
 ﻿using Enigmatry.Blueprint.Api.Tests.Infrastructure.Configuration;
+using Enigmatry.Blueprint.Api.Tests.Infrastructure.Database;
 using Enigmatry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Blueprint.Infrastructure.Data;
-using Enigmatry.Entry.AspNetCore.Tests.Utilities.Database;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities;
 using Enigmatry.Entry.Core.Data;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +13,7 @@ namespace Enigmatry.Blueprint.Api.Tests.Infrastructure.Api;
 public class IntegrationFixtureBase
 {
     private IConfiguration _configuration = null!;
+    private TestDatabase _testDatabase = null!;
     private IServiceScope _testScope = null!;
     private static BlueprintWebApplicationFactory _factory = null!;
     private bool _seedUsers = true;
@@ -23,10 +22,13 @@ public class IntegrationFixtureBase
     protected HttpClient Client { get; private set; } = null!;
 
     [SetUp]
-    protected void Setup()
+    protected async Task Setup()
     {
+        _testDatabase = new TestDatabase();
+
         _configuration = new TestConfigurationBuilder()
             .WithDbContextName(nameof(BlueprintContext))
+            .WithConnectionString(_testDatabase.ConnectionString)
             .Build();
 
         _factory = new BlueprintWebApplicationFactory(_configuration, _isUserAuthenticated);
@@ -35,44 +37,10 @@ public class IntegrationFixtureBase
         _testScope = scopeFactory.CreateScope();
         Client = _factory.CreateClient();
 
-        CreateDatabase();
+        var dbContext = Resolve<DbContext>();
+        await TestDatabase.ResetAsync(dbContext);
+
         SeedUsers();
-    }
-
-    private void CreateDatabase()
-    {
-        var dbContext = _testScope.Resolve<BlueprintContext>();
-        // On Azure we cannot drop db, we can only delete all tables
-        DropAllDbObjects(dbContext.Database);
-        // In case that we want to delete db call: dbContext.Database.EnsureDeleted()
-        dbContext.Database.Migrate();
-    }
-
-    private static void DropAllDbObjects(DatabaseFacade database)
-    {
-        try
-        {
-            var dropAllSql = DatabaseHelpers.DropAllSql;
-            foreach (var statement in dropAllSql.SplitStatements())
-            {
-                // WriteLine("Executing: " + statement);
-                database.ExecuteSqlRaw(statement);
-            }
-        }
-        catch (SqlException ex)
-        {
-            const int cannotOpenDatabaseErrorNumber = 4060;
-            if (ex.Number == cannotOpenDatabaseErrorNumber)
-            {
-                WriteLine("Error while trying to drop all objects from database. Maybe database does not exist.");
-                WriteLine("Continuing...");
-                WriteLine(ex.ToString());
-            }
-            else
-            {
-                throw;
-            }
-        }
     }
 
     protected void DoNotSeedUsers() => _seedUsers = false;
@@ -89,7 +57,7 @@ public class IntegrationFixtureBase
 
     private void AddCurrentUserToDb()
     {
-        var dbContext = _testScope.Resolve<DbContext>();
+        var dbContext = Resolve<DbContext>();
         dbContext.Add(TestUserData.CreateTestUser());
         dbContext.SaveChanges();
     }
@@ -141,7 +109,7 @@ public class IntegrationFixtureBase
 
     protected async Task SaveChanges()
     {
-        var unitOfWork = _testScope.Resolve<IUnitOfWork>();
+        var unitOfWork = Resolve<IUnitOfWork>();
         await unitOfWork.SaveChangesAsync();
     }
 
@@ -151,7 +119,26 @@ public class IntegrationFixtureBase
     protected IQueryable<T> QueryDbSkipCache<T>() where T : class =>
         Resolve<DbContext>().Set<T>().AsNoTracking();
 
+    protected async Task DeleteByIdsAndSaveChanges<T, TId>(params TId[] ids) where T : class
+    {
+        foreach (var id in ids)
+        {
+            DeleteById<T, TId>(id);
+        }
+
+        await SaveChanges();
+    }
+
     protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
 
-    private static void WriteLine(string message) => TestContext.WriteLine(message);
+    private void DeleteById<T, TId>(TId id) where T : class
+    {
+        var dbSet = Resolve<DbContext>().Set<T>();
+        var entity = dbSet.Find(id);
+        if (entity != null)
+        {
+            dbSet.Remove(entity);
+        }
+    }
+
 }

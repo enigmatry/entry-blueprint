@@ -11,49 +11,48 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Enigmatry.Blueprint.Api.Tests.Infrastructure
+namespace Enigmatry.Blueprint.Api.Tests.Infrastructure;
+
+public class BlueprintWebApplicationFactory : WebApplicationFactory<Startup>
 {
-    public class BlueprintWebApplicationFactory : WebApplicationFactory<Startup>
+    private readonly IConfiguration _configuration;
+    private readonly bool _isUserAuthenticated;
+
+    public BlueprintWebApplicationFactory(IConfiguration configuration, bool isUserAuthenticated = true)
     {
-        private readonly IConfiguration _configuration;
-        private readonly bool _isUserAuthenticated;
+        _configuration = configuration;
+        _isUserAuthenticated = isUserAuthenticated;
+    }
 
-        public BlueprintWebApplicationFactory(IConfiguration configuration, bool isUserAuthenticated = true)
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureTestServices(services =>
         {
-            _configuration = configuration;
-            _isUserAuthenticated = isUserAuthenticated;
-        }
+            services.AddAuthentication(TestUserAuthenticationHandler.AuthenticationScheme)
+                .AddScheme<TestAuthenticationOptions, TestUserAuthenticationHandler>(
+                    TestUserAuthenticationHandler.AuthenticationScheme,
+                    options => options.TestPrincipalFactory = () => _isUserAuthenticated ? TestUserData.CreateClaimsPrincipal() : null);
+        });
 
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        builder.ConfigureAppConfiguration((_, configBuilder) =>
         {
-            builder.ConfigureTestServices(services =>
-            {
-                services.AddAuthentication(TestUserAuthenticationHandler.AuthenticationScheme)
-                    .AddScheme<TestAuthenticationOptions, TestUserAuthenticationHandler>(
-                        TestUserAuthenticationHandler.AuthenticationScheme,
-                        options => options.TestPrincipalFactory = () => _isUserAuthenticated ? TestUserData.CreateClaimsPrincipal() : null);
-            });
+            configBuilder.AddConfiguration(_configuration);
+        });
+    }
 
-            builder.ConfigureAppConfiguration((context, configBuilder) =>
-            {
-                configBuilder.AddConfiguration(_configuration);
-            });
-        }
+    protected override IHost CreateHost(IHostBuilder builder)
+    {
+        builder.ConfigureContainer<ContainerBuilder>(ConfigureContainer);
+        return base.CreateHost(builder);
+    }
 
-        protected override IHost CreateHost(IHostBuilder builder)
-        {
-            builder.ConfigureContainer<ContainerBuilder>(ConfigureContainer);
-            return base.CreateHost(builder);
-        }
+    private void ConfigureContainer(ContainerBuilder builder)
+    {
+        builder.AppRegisterModules(_configuration);
 
-        private void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.AppRegisterModules(_configuration);
+        builder.RegisterModule<TestModule>(); // this allows certain components to be overriden
 
-            builder.RegisterModule<TestModule>(); // this allows certain components to be overriden
-
-            // Api does not depend on migrations assembly, test are
-            builder.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
-        }
+        // Api does not depend on migrations assembly, test are
+        builder.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
     }
 }
