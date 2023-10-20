@@ -1,0 +1,27 @@
+@use 'variables' as vars;
+
+.side-menu {
+	width: 50%;
+	min-width: 300px;
+	background-color: vars.$menu-background;
+
+	.header, .icon, .description {
+		color: vars.$primary;
+	}
+
+	.user-item {
+		border-top: 2px vars.$primary solid;
+	}
+}
+
+.navigation-container {
+	.side-menu {
+		.header {
+			background: inherit;
+		}
+
+		.item {
+			height: 64px;
+		}
+	}
+}

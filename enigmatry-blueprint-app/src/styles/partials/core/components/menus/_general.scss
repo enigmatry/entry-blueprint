@@ -1,7 +1,29 @@
 @use 'variables' as vars;
 
-.main-menu {
-	display: flex;
-	justify-content: space-between;
-	background-color: transparent;
+.navigation-container {
+	height: 100%;
+
+	.navigation-content {
+		overflow: hidden;
+	}
+
+	.navigation-list {
+		padding-top: 0;
+
+		.icon {
+			position: absolute;
+		}
+
+		.description {
+			padding-left: 2 * vars.$default-gap;
+		}
+	}
+
+	.item {
+		&.router-link-active {
+			.icon, .description {
+				color: vars.$accent;
+			}
+		}
+	}
 }

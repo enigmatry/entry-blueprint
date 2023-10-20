@@ -1,0 +1,46 @@
+@use 'variables' as vars;
+
+.main-menu {
+	position: sticky;
+	z-index: 2;
+	top: 0;
+	justify-content: space-between;
+	border-bottom: 2px solid #F0F0F0;
+	background-color: vars.$menu-background;
+
+	.content {
+		display: flex;
+		width: 100%;
+	}
+
+	.item {
+		margin-right: 30px;
+	}
+
+	.user-item {
+		display: flex;
+		flex-direction: row-reverse;
+		margin-left: auto;
+
+		.icon {
+			margin: 0 0 0 4px;
+		}
+	}
+
+	.logo {
+		padding: 2px vars.$default-gap;
+		border-radius: 5px;
+	}
+
+	.logo-image {
+		height: 32px;
+		vertical-align: middle;
+	}
+}
+
+.main-user-actions .action {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+	padding: 10px 20px;
+}

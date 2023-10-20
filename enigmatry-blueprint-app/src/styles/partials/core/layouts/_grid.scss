@@ -1,12 +1,16 @@
 @use 'breakpoints';
 @use 'layouts';
 @use 'variables' as vars;
- 
+
 .main-container {
+	position: relative;
+	z-index: 1;
 	box-sizing: border-box;
-	@include layouts.grow-centrally();
+	height: calc(100% - 4 * vars.$default-gap);
 	padding: 2 * vars.$default-gap vars.$default-gap;
- 
+	overflow: auto;
+	@include layouts.grow-centrally();
+
 	@include breakpoints.apply-on-large-desktop() {
 		width: 1180px;
 	}
@@ -15,7 +19,7 @@
 .form-container {
 	display: block;
 	@include layouts.grow-centrally();
- 
+
 	@include breakpoints.apply-on-tablet() {
 		width: 500px;
 	}

@@ -1,0 +1,10 @@
+<mat-sidenav-container class="navigation-container" [hasBackdrop]="true" color="primary">
+  <mat-sidenav #drawer class="side-menu" fixedInViewport (click)="toggleDrawer()" [attr.role]="menuRole"
+    mode="over">
+    <app-side-menu [currentUser]="currentUser" [menuItems]="menuItems" [show]="show" [onLogout]="onLogout"></app-side-menu>
+  </mat-sidenav>
+  <mat-sidenav-content class="navigation-content">
+    <app-main-menu [currentUser]="currentUser" [menuItems]="menuItems" [show]="show" [onLogout]="onLogout" [onHamburgerClick]="toggleDrawer"></app-main-menu>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

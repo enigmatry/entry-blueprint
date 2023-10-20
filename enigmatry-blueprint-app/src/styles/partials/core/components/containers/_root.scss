@@ -1,0 +1,5 @@
+@use 'breakpoints';
+
+.root-container::before {
+	@include breakpoints.set-up();
+}

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyExtensionsModule } from '../formly/formly-extensions.module';
+import { NavigationComponentsModule } from './components/navigation/navigation.module';
 import { EntryComponentsModule } from './entry-components.module';
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
 import { GridCellsModule } from './grid-cells/grid-cells.module';
@@ -22,6 +23,7 @@ import { PipesModule } from './pipes/pipes.module';
     FormlyExtensionsModule,
     EntryComponentsModule,
     FormWrapperComponent,
+    NavigationComponentsModule,
     PipesModule
   ],
   declarations: [
