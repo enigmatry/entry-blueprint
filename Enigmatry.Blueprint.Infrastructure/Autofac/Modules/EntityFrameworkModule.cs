@@ -39,11 +39,15 @@ public class EntityFrameworkModule : Module
                     type.Name.EndsWith("Repository", StringComparison.InvariantCulture)
             ).AsImplementedInterfaces().InstancePerLifetimeScope();
 
-        builder.Register(CreateDbContextOptions).As<DbContextOptions>().SingleInstance();
+        // Registering interceptors as self because we want to resolve them individually to add them to the DbContextOptions in the correct order
+        builder.RegisterType<PopulateCreatedUpdatedInterceptor>().AsSelf().InstancePerLifetimeScope();
 
-        // needs to be registered both as self and as DbContext or the tests might not work as expected
+        builder.Register(CreateDbContextOptions).As<DbContextOptions>().InstancePerLifetimeScope();
+
+        // Needs to be registered both as self and as DbContext or the tests might not work as expected
         builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
         builder.RegisterType<EntityFrameworkUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+
 
         builder.RegisterType<DbContextAccessTokenProvider>().As<IDbContextAccessTokenProvider>().InstancePerLifetimeScope();
     }
@@ -70,13 +74,17 @@ public class EntityFrameworkModule : Module
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext")!,
             sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
 
+        // Interceptors will be executed in the order they are added
+        optionsBuilder.AddInterceptors(
+            container.Resolve<PopulateCreatedUpdatedInterceptor>());
+
         return optionsBuilder.Options;
     }
 
     private SqlServerDbContextOptionsBuilder SetupSqlOptions(SqlServerDbContextOptionsBuilder sqlOptions,
         DbContextSettings dbContextSettings)
     {
-        //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
+        // Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
         sqlOptions = sqlOptions.EnableRetryOnFailure(
             dbContextSettings.ConnectionResiliencyMaxRetryCount,
             dbContextSettings.ConnectionResiliencyMaxRetryDelay,

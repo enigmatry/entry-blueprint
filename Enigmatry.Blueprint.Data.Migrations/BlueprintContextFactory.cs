@@ -1,7 +1,5 @@
 ﻿using Enigmatry.Blueprint.Infrastructure.Data;
-using Enigmatry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.EntityFramework.Security;
-using Enigmatry.Entry.Infrastructure;
 using Enigmatry.Entry.MediatR;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +20,7 @@ public class BlueprintContextFactory : IDesignTimeDbContextFactory<BlueprintCont
             b => b.MigrationsAssembly(typeof(BlueprintContextFactory).Assembly.FullName));
 
         var result =
-            new BlueprintContext(optionsBuilder.Options,
-                new NullMediator(), new TimeProvider(), () => new NullCurrentUserProvider(),
+            new BlueprintContext(optionsBuilder.Options, new NullMediator(),
                 new NullDbContextAccessTokenProvider(), new NullLogger<BlueprintContext>())
             {
                 ModelBuilderConfigurator = DbInitializer.SeedData
