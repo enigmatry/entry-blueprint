@@ -262,22 +262,20 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
 
             modelBuilder.Entity("Enigmatry.Blueprint.Domain.Products.Product", b =>
                 {
-                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "CreatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", null)
                         .WithMany()
-                        .HasForeignKey("CreatedById");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "UpdatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", null)
                         .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Enigmatry.Blueprint.Domain.Users.User", b =>
                 {
-                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "CreatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", null)
                         .WithMany()
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -288,16 +286,12 @@ namespace Enigmatry.Blueprint.Data.Migrations.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", "UpdatedBy")
+                    b.HasOne("Enigmatry.Blueprint.Domain.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UpdatedById")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("CreatedBy");
-
                     b.Navigation("Role");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("Enigmatry.Blueprint.Infrastructure.Data.Configurations.RolePermission", b =>

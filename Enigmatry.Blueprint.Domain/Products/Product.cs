@@ -1,12 +1,9 @@
-﻿using Enigmatry.Blueprint.Core;
-using Enigmatry.Blueprint.Domain.Products.Commands;
+﻿using Enigmatry.Blueprint.Domain.Products.Commands;
 using Enigmatry.Blueprint.Domain.Products.DomainEvents;
-using Enigmatry.Blueprint.Domain.Users;
-using Enigmatry.Entry.Core.Entities;
 
 namespace Enigmatry.Blueprint.Domain.Products;
 
-public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
+public class Product : EntityWithCreatedUpdated
 {
     public const int NameMinLength = 5;
     public const int NameMaxLength = 50;
@@ -33,14 +30,6 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
     public bool FreeShipping { get; private set; }
     public bool HasDiscount { get; private set; }
     public float? Discount { get; private set; }
-
-    public DateTimeOffset CreatedOn { get; private set; }
-    public DateTimeOffset UpdatedOn { get; private set; }
-    public Guid? CreatedById { get; private set; }
-    public Guid? UpdatedById { get; private set; }
-    public User? CreatedBy { get; private set; }
-    public User? UpdatedBy { get; private set; }
-
 
     public static Product Create(ProductCreateOrUpdate.Command request)
     {
@@ -81,20 +70,4 @@ public class Product : EntityWithGuidId, IEntityHasCreatedUpdated
         Discount = HasDiscount ? request.Discount : null;
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
-
-    public void SetCreated(DateTimeOffset createdOn, Guid createdBy)
-    {
-        SetCreated(createdOn);
-        CreatedById = createdBy;
-    }
-
-    public void SetCreated(DateTimeOffset createdOn) => CreatedOn = createdOn;
-
-    public void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy)
-    {
-        SetUpdated(updatedOn);
-        UpdatedById = updatedBy;
-    }
-
-    public void SetUpdated(DateTimeOffset updatedOn) => UpdatedOn = updatedOn;
 }

@@ -687,25 +687,16 @@ public class $NAME$QueryableExtensionsFixture&#xD;
 	
 	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=58980F652F66A74BB39AA2344D94AE07/Text/@EntryValue">using Enigmatry.Entry.Core.Entities;&#xD;
-using $ROOTNAMESPACE$.Core;&#xD;
-using $PROJECTNAMESPACE$.Identity;&#xD;
 using $NAMESPACE$.Commands;&#xD;
 using $NAMESPACE$.DomainEvents;&#xD;
 &#xD;
 namespace $NAMESPACE$;&#xD;
 &#xD;
-public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
+public class $NAME$ : EntityWithCreatedUpdated&#xD;
 {&#xD;
 	public const int NameMaxLength = 200;&#xD;
 &#xD;
 	public string Name { get; private set; } = String.Empty;&#xD;
-    public DateTimeOffset CreatedOn { get; private set; }&#xD;
-    public DateTimeOffset UpdatedOn { get; private set; }&#xD;
-    public Guid CreatedById { get; private set; }&#xD;
-    public Guid UpdatedById { get; private set; }&#xD;
-&#xD;
-    public User CreatedBy { get; private set; } = null!;&#xD;
-    public User UpdatedBy { get; private set; } = null!;&#xD;
 &#xD;
     public static $NAME$ Create($NAME$CreateOrUpdate.Command command)&#xD;
     {&#xD;
@@ -723,23 +714,7 @@ public class $NAME$ : EntityWithGuidId, IEntityHasCreatedUpdated&#xD;
         Name = command.Name;&#xD;
         AddDomainEvent(new $NAME$UpdatedDomainEvent(Name));&#xD;
     }&#xD;
-&#xD;
-    public void SetCreated(DateTimeOffset createdOn, Guid createdBy)&#xD;
-    {&#xD;
-        SetCreated(createdOn);&#xD;
-        CreatedById = createdBy;&#xD;
-    }&#xD;
-&#xD;
-    public void SetCreated(DateTimeOffset createdOn) =&gt; CreatedOn = createdOn;&#xD;
-&#xD;
-    public void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy)&#xD;
-    {&#xD;
-        SetUpdated(updatedOn);&#xD;
-        UpdatedById = updatedBy;&#xD;
-    }&#xD;
-&#xD;
-    public void SetUpdated(DateTimeOffset updatedOn) =&gt; UpdatedOn = updatedOn;&#xD;
-}&#xD;
+}
 &#xD;
 </s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6095DF74FA34FD4691565C82C350C135/@KeyIndexDefined">True</s:Boolean>

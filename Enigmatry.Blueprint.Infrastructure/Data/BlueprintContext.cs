@@ -62,8 +62,8 @@ public class BlueprintContext : MediatRDbContext
         var changedEntities = ChangeTracker
             .Entries<Entity>()
             .Where(x => (x.State == EntityState.Added || x.State == EntityState.Modified) &&
-                        x.Entity is IEntityHasCreatedUpdated)
-            .Select(x => (x.State, Entity: (IEntityHasCreatedUpdated)x.Entity)).ToList();
+                        x.Entity is IEntityWithCreatedUpdated)
+            .Select(x => (x.State, Entity: (IEntityWithCreatedUpdated)x.Entity)).ToList();
 
         if (userId.HasValue)
         {

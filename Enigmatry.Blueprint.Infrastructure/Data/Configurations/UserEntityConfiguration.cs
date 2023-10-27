@@ -17,9 +17,7 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasIndex(u => u.EmailAddress).IsUnique();
 
-        builder.HasOne(u => u.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
-        builder.HasOne(u => u.UpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
-
         builder.HasOne(u => u.Role).WithMany(x => x.Users).OnDelete(DeleteBehavior.NoAction);
+        builder.HasCreatedByAndUpdatedBy();
     }
 }
