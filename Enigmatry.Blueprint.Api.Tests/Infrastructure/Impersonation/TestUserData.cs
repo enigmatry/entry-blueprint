@@ -15,7 +15,7 @@ public static class TestUserData
     public static ClaimsPrincipal CreateClaimsPrincipal() =>
         new(new ClaimsIdentity(new[]
         {
-            new Claim(ClaimTypes.Name, value: TestEmailAddress)
+            new Claim(ClaimTypes.Upn, value: TestEmailAddress)
         }, "TestAuth"));
 
     public static User CreateTestUser() =>

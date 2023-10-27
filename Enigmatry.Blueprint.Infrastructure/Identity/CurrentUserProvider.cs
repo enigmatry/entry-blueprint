@@ -1,31 +1,28 @@
-﻿using System.Security.Principal;
-using Enigmatry.Blueprint.Domain.Identity;
+﻿using Enigmatry.Blueprint.Domain.Identity;
 using Enigmatry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
-using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Blueprint.Infrastructure.Identity;
 
-[UsedImplicitly]
 public class CurrentUserProvider : ICurrentUserProvider
 {
-    private readonly Func<IPrincipal> _principalProvider;
+    private readonly IClaimsProvider _claimsProvider;
     private readonly IRepository<User> _userRepository;
+    private readonly ILogger<CurrentUserProvider> _logger;
     private User? _user;
 
-    public CurrentUserProvider(Func<IPrincipal> principalProvider,
-        IRepository<User> userRepository)
+    public CurrentUserProvider(IClaimsProvider claimsProvider,
+        IRepository<User> userRepository,
+        ILogger<CurrentUserProvider> logger)
     {
-        _principalProvider = principalProvider;
+        _claimsProvider = claimsProvider;
         _userRepository = userRepository;
+        _logger = logger;
     }
 
-    private IPrincipal Principal => _principalProvider();
-
-    private string? Email => IsAuthenticated ? Principal.Identity!.Name : null;
-
-    public bool IsAuthenticated => (Principal.Identity?.IsAuthenticated).GetValueOrDefault();
+    public bool IsAuthenticated => _claimsProvider.IsAuthenticated;
 
     public User? User
     {
@@ -36,14 +33,21 @@ public class CurrentUserProvider : ICurrentUserProvider
                 return _user;
             }
 
-            if (!IsAuthenticated || String.IsNullOrEmpty(Email))
+            if (!IsAuthenticated)
             {
+                _logger.LogWarning("User is not authenticated");
+                return null;
+            }
+
+            if (String.IsNullOrEmpty(_claimsProvider.Email))
+            {
+                _logger.LogWarning("User's email was not found in the claims");
                 return null;
             }
 
             _user = _userRepository
                 .QueryAll()
-                .QueryByEmailAddress(Email)
+                .QueryByEmailAddress(_claimsProvider.Email)
                 .Include(u => u.Role)
                 .ThenInclude(r => r.Permissions)
                 .AsNoTracking().AsSplitQuery()

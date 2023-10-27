@@ -12,6 +12,7 @@ using Enigmatry.Entry.AspNetCore.Exceptions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Enigmatry.Entry.HealthChecks.Extensions;
+using Microsoft.IdentityModel.Logging;
 
 namespace Enigmatry.Blueprint.Api;
 
@@ -42,6 +43,7 @@ public class Startup
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+            IdentityModelEventSource.ShowPII = true;
         }
 
         app.UseHttpsRedirection();

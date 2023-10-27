@@ -6,4 +6,13 @@
   <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey" defaultValue="">
     <parameterEntry kind="TextFile" scope="main.*.js" match="__appInsightsKey__" />
   </parameter>
+  <parameter name="Azure AD ClientId" description="Azure AD ClientId" defaultValue="">
+    <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdClientId__" />
+  </parameter>
+  <parameter name="Azure AD Authority" description="Azure AD Authority" defaultValue="">
+    <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdAuthority__" />
+  </parameter>
+  <parameter name="Azure AD Scopes" description="Azure AD Scopes" defaultValue="">
+    <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdScopes__" />
+  </parameter>  
 </parameters>

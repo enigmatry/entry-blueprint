@@ -28,5 +28,17 @@
     <ParameterValue Include="Key Vault Name">
       <Value>enigmatry-blueprint-test</Value>
     </ParameterValue>
+    <ParameterValue Include="Azure AD Instance">
+      <Value>https://enigmatryb2ctest.b2clogin.com</Value>
+    </ParameterValue>
+    <ParameterValue Include="Azure AD ClientId">
+      <Value>462923fc-3dcd-4b81-943d-590b9cb45ec4</Value>
+    </ParameterValue>
+    <ParameterValue Include="Azure AD Domain">
+      <Value>enigmatryb2ctest.onmicrosoft.com</Value>
+    </ParameterValue>
+    <ParameterValue Include="Azure AD SignUpSignInPolicyId">
+      <Value>B2C_1_entry_blueprint_sign_in</Value>
+    </ParameterValue>
   </ItemGroup>
 </Project>

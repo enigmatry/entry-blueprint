@@ -16,12 +16,12 @@ export function msalLoggerCallback(_: LogLevel, message: string) {
 }
 
 export function msalConfigFactory(): Configuration {
+  const authorityDomain = new URL(environment.azureAd.authority).hostname;
   return {
     auth: {
-      clientId: environment.azureAdB2C.clientId,
-      // eslint-disable-next-line max-len
-      authority: `${environment.azureAdB2C.instance}/${environment.azureAdB2C.domain}/${environment.azureAdB2C.signUpSignInPolicyId}`,
-      knownAuthorities: [environment.azureAdB2C.instance],
+      clientId: environment.azureAd.clientId,
+      authority: environment.azureAd.authority,
+      knownAuthorities: [authorityDomain],
       redirectUri: `${location.protocol}//${location.host}`,
       navigateToLoginRequestUrl: true
     },

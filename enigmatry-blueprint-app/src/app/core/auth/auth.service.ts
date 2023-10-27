@@ -30,7 +30,7 @@ export class AuthService {
 
   loginRedirect(request?: Partial<RedirectRequest>): Promise<void> {
     const loginRequest: RedirectRequest = {
-      scopes: environment.azureAdB2C.scopes,
+      scopes: environment.azureAd.scopes,
       extraQueryParameters,
       ...request
     };
@@ -71,14 +71,14 @@ export class AuthService {
   private acquireTokenSilent(accountInfo: AccountInfo): Observable<AuthenticationResult> {
     const silentRequest = {
       account: accountInfo,
-      scopes: environment.azureAdB2C.scopes
+      scopes: environment.azureAd.scopes
     };
     return from(this.msalInstance.acquireTokenSilent(silentRequest));
   }
 
   private acquireTokenRedirect(): Observable<void> {
     const interactiveRequest = {
-      scopes: environment.azureAdB2C.scopes,
+      scopes: environment.azureAd.scopes,
       extraQueryParameters
     };
     return from(this.msalInstance.acquireTokenRedirect(interactiveRequest));

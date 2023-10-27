@@ -20,4 +20,16 @@
     <parameter name="Key Vault Name" description="Key Vault Name" defaultValue="">
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__keyVaultName__" />
     </parameter>
+    <parameter name="Azure AD Instance" description="Azure AD Instance" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__azureAdInstance__" />
+    </parameter>  
+    <parameter name="Azure AD ClientId" description="Azure AD ClientId" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__azureAdClientId__" />
+    </parameter>
+    <parameter name="Azure AD Domain" description="Azure AD Domain" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__azureAdDomain__" />
+    </parameter>
+    <parameter name="Azure AD SignUpSignInPolicyId" description="Azure AD SignUpSignInPolicyId" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__azureAdSignUpSignInPolicyId__" />
+    </parameter>
 </parameters>
