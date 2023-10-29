@@ -7,6 +7,7 @@
     <!--Product>TODO</Product-->
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <NoWarn>EnableGenerateDocumentationFile</NoWarn>
   </PropertyGroup>
 
 </Project>

@@ -22,18 +22,11 @@ public static class RemoveProduct
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+        public async Task Handle(Command request, CancellationToken cancellationToken)
         {
-            var product = await _repository.FindByIdAsync(request.Id);
-
-            if (product == null)
-            {
-                throw new InvalidOperationException("Product could not be found");
-            }
+            var product = await _repository.FindByIdAsync(request.Id) ?? throw new InvalidOperationException("Product could not be found");
 
             _repository.Delete(product);
-
-            return await Unit.Task;
         }
     }
 }

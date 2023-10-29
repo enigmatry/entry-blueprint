@@ -1,6 +1,5 @@
 ﻿using Enigmatry.Entry.AspNetCore.Validation;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,16 +17,17 @@ public static class FluentValidationStartupExtensions
         options.InvalidModelStateResponseFactory = context =>
             context.HttpContext.CreateValidationProblemDetailsResponse(context.ModelState);
 
-    public static IMvcBuilder AppAddFluentValidation(this IMvcBuilder mvcBuilder) =>
-        mvcBuilder.AddFluentValidation(fv =>
-        {
-            // disables standard data annotations validation
-            // https://fluentvalidation.net/aspnet.html#asp-net-core
-            fv.DisableDataAnnotationsValidation = false;
-            fv.ImplicitlyValidateChildProperties = true;
-            fv.RegisterValidatorsFromAssemblies(new[]
-            {
-                AssemblyFinder.DomainAssembly, AssemblyFinder.ApiAssembly
-            });
-        });
+    public static IMvcBuilder AppAddFluentValidation(this IMvcBuilder mvcBuilder) => mvcBuilder;
+    // TODO: this can be removed. We are now exclusively doing validation in the MediatR pipeline
+    //mvcBuilder.AddFluentValidation(fv =>
+    //{
+    //    // disables standard data annotations validation
+    //    // https://fluentvalidation.net/aspnet.html#asp-net-core
+    //    fv.DisableDataAnnotationsValidation = false;
+    //    fv.ImplicitlyValidateChildProperties = true;
+    //    fv.RegisterValidatorsFromAssemblies(new[]
+    //    {
+    //        AssemblyFinder.DomainAssembly, AssemblyFinder.ApiAssembly
+    //    });
+    //});
 }
