@@ -10,7 +10,6 @@ using Enigmatry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.AspNetCore.Authorization;
 using Enigmatry.Entry.AspNetCore.Exceptions;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc;
 using Enigmatry.Entry.HealthChecks.Extensions;
 using Microsoft.IdentityModel.Logging;
 
@@ -94,9 +93,6 @@ public class Startup
         services.AppAddAuthorization<PermissionId>();
 
         services.AppAddSwagger("Blueprint API");
-
-        // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
-        services.PostConfigure<ApiBehaviorOptions>(options => options.AppAddFluentValidationApiBehaviorOptions());
     }
 
     [UsedImplicitly]
@@ -104,8 +100,5 @@ public class Startup
     // ConfigureContainer is where you can register things directly
     // with Autofac. This runs after ConfigureServices so the things
     // here will override registrations made in ConfigureServices.
-    public void ConfigureContainer(ContainerBuilder builder)
-    {
-        builder.AppRegisterModules(_configuration);
-    }
+    public void ConfigureContainer(ContainerBuilder builder) => builder.AppRegisterModules(_configuration);
 }
