@@ -17,6 +17,7 @@
     <PackageReference Include="Enigmatry.Entry.EntityFramework" />
     <PackageReference Include="Enigmatry.Entry.MediatR" />
     <PackageReference Include="Enigmatry.Entry.Swagger" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" />

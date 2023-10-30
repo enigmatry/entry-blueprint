@@ -76,7 +76,7 @@ public class Startup
     }
 
     // this also called by tests. Mvc is configured slightly differently in integration tests
-    public static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
+    private static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
     {
         services.AddCors();
         services.AddHttpContextAccessor();
@@ -88,6 +88,7 @@ public class Startup
         services.AppAddHealthChecks(configuration)
             .AddDbContextCheck<BlueprintContext>();
         services.AppAddMediatR();
+        services.AppAddFluentValidation();
 
         services.AppAddAuthentication(configuration);
         services.AppAddAuthorization<PermissionId>();
