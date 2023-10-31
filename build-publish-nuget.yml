@@ -58,7 +58,23 @@ stages:
       artifactName: $(artifactName)
       displayName: 'Build .net API'
       projectNamePrefix: $(projectNamePrefix)
-
+  - job: nuget_pack
+    displayName: Nuget Pack
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Pack the NuGet packages
+      inputs:
+        command: 'pack'
+        packagesToPack: '**/*.csproj'
+        configuration: '$(buildConfiguration)'
+        versioningScheme: 'byEnvVar'
+        versionEnvVar: 'BUILD_BUILDNUMBER'
+    - task: PublishBuildArtifacts@1
+      displayName: Publish artifacts
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: $(artifactName)-$(Build.BuildNumber)
+        publishLocation: 'Container'
   - template: build-report-job.yml@templates
     parameters:
       artifactName: $(artifactName)
