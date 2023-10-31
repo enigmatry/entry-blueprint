@@ -10,12 +10,15 @@ public static class MediatRStartupExtensions
     {
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
         //services.AddScoped(typeof(IRequestPreProcessor<>), typeof(SamplePreRequestBehavior<>));
         //services.AddScoped(typeof(IRequestPostProcessor<,>), typeof(SamplePostRequestBehavior<,>));
 
-        services.AddMediatR(
-            AssemblyFinder.ApiAssembly,
-            AssemblyFinder.DomainAssembly,
-            AssemblyFinder.ApplicationServicesAssembly);
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssemblies(AssemblyFinder.ApiAssembly,
+                AssemblyFinder.DomainAssembly,
+                AssemblyFinder.ApplicationServicesAssembly);
+        });
     }
 }

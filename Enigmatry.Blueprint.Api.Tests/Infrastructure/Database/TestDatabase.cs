@@ -16,6 +16,7 @@ internal class TestDatabase
 
         if (!String.IsNullOrEmpty(connectionString))
         {
+            // do not write ConnectionString to the console since it might contain username/password 
             ConnectionString = connectionString;
         }
         else
@@ -27,9 +28,11 @@ internal class TestDatabase
 
             _container!.StartAsync().Wait();
             ConnectionString = _container.GetConnectionString();
+            WriteLine($"Docker SQL connection string: {ConnectionString}");
         }
     }
 
-    public static async Task ResetAsync(DbContext dbContext) =>
-        await DatabaseInitializer.RecreateDatabaseAsync(dbContext, new[] { "__EFMigrationsHistory", "Role", "RolePermission", "Permission" });
+    public static async Task ResetAsync(DbContext dbContext) => await DatabaseInitializer.RecreateDatabaseAsync(dbContext, new[] { "__EFMigrationsHistory", "Role", "RolePermission", "Permission" });
+
+    private static void WriteLine(string value) => TestContext.WriteLine(value);
 }

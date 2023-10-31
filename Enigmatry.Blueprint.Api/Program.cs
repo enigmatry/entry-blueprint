@@ -5,7 +5,6 @@ using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Init;
 using Serilog;
 
-
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();
@@ -25,7 +24,6 @@ try
 
     var startup = new Startup(builder.Configuration);
     startup.ConfigureServices(builder.Services);
-
 
     builder.Host.UseSerilog();
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());

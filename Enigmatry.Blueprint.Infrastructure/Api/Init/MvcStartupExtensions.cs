@@ -11,8 +11,7 @@ public static class MvcStartupExtensions
     //.AddControllersWithViews(options => options.ConfigureMvc(configuration))
     public static IMvcBuilder AppAddMvc(this IServiceCollection services) =>
         services
-            .AddControllers(options => options.ConfigureMvc())
-            .AppAddFluentValidation();
+            .AddControllers(options => options.ConfigureMvc());
 
     private static void ConfigureMvc(this MvcOptions options) => options.Filters.Add(new CancelSavingTransactionAttribute());
 }

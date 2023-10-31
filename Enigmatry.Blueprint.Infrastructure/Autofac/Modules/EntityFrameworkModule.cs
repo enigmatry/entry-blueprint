@@ -4,7 +4,6 @@ using Enigmatry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Settings;
 using Enigmatry.Entry.EntityFramework;
-using Enigmatry.Entry.EntityFramework.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -41,15 +40,13 @@ public class EntityFrameworkModule : Module
 
         // Registering interceptors as self because we want to resolve them individually to add them to the DbContextOptions in the correct order
         builder.RegisterType<PopulateCreatedUpdatedInterceptor>().AsSelf().InstancePerLifetimeScope();
+        builder.RegisterType<PublishDomainEventsInterceptor>().AsSelf().InstancePerLifetimeScope();
 
         builder.Register(CreateDbContextOptions).As<DbContextOptions>().InstancePerLifetimeScope();
 
         // Needs to be registered both as self and as DbContext or the tests might not work as expected
         builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
         builder.RegisterType<EntityFrameworkUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-
-
-        builder.RegisterType<DbContextAccessTokenProvider>().As<IDbContextAccessTokenProvider>().InstancePerLifetimeScope();
     }
 
     private static bool ImplementsInterface(Type interfaceType, Type concreteType) =>
@@ -77,6 +74,8 @@ public class EntityFrameworkModule : Module
         // Interceptors will be executed in the order they are added
         optionsBuilder.AddInterceptors(
             container.Resolve<PopulateCreatedUpdatedInterceptor>());
+        optionsBuilder.AddInterceptors(
+            container.Resolve<PublishDomainEventsInterceptor>());
 
         return optionsBuilder.Options;
     }

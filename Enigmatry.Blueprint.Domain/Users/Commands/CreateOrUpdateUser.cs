@@ -25,10 +25,11 @@ public static class CreateOrUpdateUser
         public Validator(IRepository<User> userRepository)
         {
             _userRepository = userRepository;
-            _ = RuleFor(x => x.EmailAddress).NotEmpty().MaximumLength(User.EmailAddressMaxLength).EmailAddress();
-            _ = RuleFor(x => x.EmailAddress).Must(UniqueEmailAddress).WithMessage("EmailAddress is already taken");
-            _ = RuleFor(x => x.FullName).NotEmpty().MaximumLength(User.NameMaxLength);
-            _ = RuleFor(x => x.RoleId).NotEmpty();
+
+            RuleFor(x => x.EmailAddress).NotEmpty().MaximumLength(User.EmailAddressMaxLength).EmailAddress();
+            RuleFor(x => x.EmailAddress).Must(UniqueEmailAddress).WithMessage("EmailAddress is already taken");
+            RuleFor(x => x.FullName).NotEmpty().MaximumLength(User.NameMaxLength);
+            RuleFor(x => x.RoleId).NotEmpty();
         }
 
         private bool UniqueEmailAddress(Command command, string name) =>

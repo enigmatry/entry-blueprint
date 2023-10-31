@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Enigmatry.Blueprint.Domain.Authorization;
-using Enigmatry.Entry.Swagger;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Blueprint.Infrastructure.Api.Security;
@@ -10,7 +9,6 @@ using Enigmatry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.AspNetCore.Authorization;
 using Enigmatry.Entry.AspNetCore.Exceptions;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc;
 using Enigmatry.Entry.HealthChecks.Extensions;
 using Microsoft.IdentityModel.Logging;
 
@@ -62,7 +60,10 @@ public class Startup
             endpoints.AppMapHealthCheck(_configuration);
         });
 
-        app.AppUseSwagger();
+        if (env.IsDevelopment())
+        {
+            app.AppUseSwaggerWithAzureAdAuth(_configuration);
+        }
         app.AppConfigureFluentValidation();
     }
 
@@ -76,7 +77,7 @@ public class Startup
     }
 
     // this also called by tests. Mvc is configured slightly differently in integration tests
-    public static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
+    private static void ConfigureServicesExceptMvc(IServiceCollection services, IConfiguration configuration)
     {
         services.AddCors();
         services.AddHttpContextAccessor();
@@ -88,14 +89,12 @@ public class Startup
         services.AppAddHealthChecks(configuration)
             .AddDbContextCheck<BlueprintContext>();
         services.AppAddMediatR();
+        services.AppAddFluentValidation();
 
         services.AppAddAuthentication(configuration);
         services.AppAddAuthorization<PermissionId>();
 
-        services.AppAddSwagger("Blueprint API");
-
-        // must be PostConfigure due to: https://github.com/aspnet/Mvc/issues/7858
-        services.PostConfigure<ApiBehaviorOptions>(options => options.AppAddFluentValidationApiBehaviorOptions());
+        services.AppAddSwaggerWithAzureAdAuth(configuration, "Blueprint API");
     }
 
     [UsedImplicitly]
@@ -103,8 +102,5 @@ public class Startup
     // ConfigureContainer is where you can register things directly
     // with Autofac. This runs after ConfigureServices so the things
     // here will override registrations made in ConfigureServices.
-    public void ConfigureContainer(ContainerBuilder builder)
-    {
-        builder.AppRegisterModules(_configuration);
-    }
+    public void ConfigureContainer(ContainerBuilder builder) => builder.AppRegisterModules(_configuration);
 }
