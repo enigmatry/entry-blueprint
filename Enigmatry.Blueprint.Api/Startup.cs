@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Enigmatry.Blueprint.Domain.Authorization;
-using Enigmatry.Entry.Swagger;
 using Enigmatry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Blueprint.Infrastructure.Api.Security;
@@ -61,7 +60,10 @@ public class Startup
             endpoints.AppMapHealthCheck(_configuration);
         });
 
-        app.AppUseSwagger();
+        if (env.IsDevelopment())
+        {
+            app.AppUseSwaggerWithAzureAdAuth(_configuration);
+        }
         app.AppConfigureFluentValidation();
     }
 
@@ -92,7 +94,7 @@ public class Startup
         services.AppAddAuthentication(configuration);
         services.AppAddAuthorization<PermissionId>();
 
-        services.AppAddSwagger("Blueprint API");
+        services.AppAddSwaggerWithAzureAdAuth(configuration, "Blueprint API");
     }
 
     [UsedImplicitly]
