@@ -1,7 +1,8 @@
+<entry-form-errors [form]="formComponent.form"></entry-form-errors>
+
 <ng-content></ng-content>
 
 <ng-template #defaultFormButtonsTpl>
-    <entry-form-errors [form]="formComponent.form"></entry-form-errors>
 
     <div class="action-buttons align-center">
         <button mat-button entry-submit-button *ngIf="!formComponent.isReadonly" type="submit">
