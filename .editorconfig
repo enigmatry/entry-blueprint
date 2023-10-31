@@ -66,6 +66,7 @@ dotnet_style_prefer_simplified_boolean_expressions = true:warning
 dotnet_style_prefer_simplified_interpolation = true:warning
 # Parameter preferences
 dotnet_diagnostic_unused_parameters = all:warning
+dotnet_style_namespace_match_folder = true:suggestion
 ############################### 
 # C# Coding Conventions       # 
 ############################### 
@@ -555,8 +556,8 @@ dotnet_diagnostic.IDE0041WithoutSuggestion.severity = error # IDE0041: Use 'is n
 dotnet_diagnostic.IDE0042.severity = silent # IDE0042: Deconstruct variable declaration
 dotnet_diagnostic.IDE0042WithoutSuggestion.severity = silent # IDE0042: Deconstruct variable declaration
 dotnet_diagnostic.IDE0043.severity = error # IDE0043: Invalid format string
-dotnet_diagnostic.IDE0044.severity = warning # IDE0044: Add readonly modifier
-dotnet_diagnostic.IDE0044WithoutSuggestion.severity = warning # IDE0044: Add readonly modifier
+dotnet_diagnostic.IDE0044.severity = suggestion # IDE0044: Add readonly modifier
+dotnet_diagnostic.IDE0044WithoutSuggestion.severity = suggestion # IDE0044: Add readonly modifier
 dotnet_diagnostic.IDE0045.severity = silent # IDE0045: Convert to conditional expression
 dotnet_diagnostic.IDE0045WithoutSuggestion.severity = warning # IDE0045: Convert to conditional expression
 dotnet_diagnostic.IDE0046.severity = none # IDE0046: Convert to conditional expression
@@ -618,6 +619,8 @@ dotnet_diagnostic.IDE1006WithoutSuggestion.severity = error # IDE1006: Naming st
 csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_prefer_top_level_statements = true:silent
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_style_prefer_null_check_over_type_check = true:suggestion
 
 [Startup.cs]
 dotnet_diagnostic.CA1724.severity = none # CA1724: Type names should not match namespaces
