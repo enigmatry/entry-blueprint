@@ -8,16 +8,16 @@
     <PackageVersion Include="AutoFixture.NUnit3" Version="4.18.0" />
     <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="2.0.0-preview" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="2.0.0-preview" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="2.0.0-preview.3" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="2.0.0-preview.3" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests" Version="1.1.447" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="2.0.0-preview" />
-    <PackageVersion Include="Enigmatry.Entry.Core" Version="2.0.0-preview" />
-    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="2.0.0-preview" />
-    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="2.0.0-preview" />
-    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="2.0.0-preview" />
-    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="2.0.0-preview" />
-    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="2.0.0-preview" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="2.0.0-preview.3" />
+    <PackageVersion Include="Enigmatry.Entry.Core" Version="2.0.0-preview.3" />
+    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="2.0.0-preview.3" />
+    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="2.0.0-preview.3" />
+    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="2.0.0-preview.3" />
+    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="2.0.0-preview.3" />
+    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="2.0.0-preview.3" />
     <PackageVersion Include="Enigmatry.Entry.Validation" Version="1.1.447" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="1.1.552" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="1.1.552" />
