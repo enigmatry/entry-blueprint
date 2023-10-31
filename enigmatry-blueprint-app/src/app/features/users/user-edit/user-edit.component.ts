@@ -1,12 +1,15 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { setServerSideValidationErrors } from '@enigmatry/entry-components';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {
   CreateOrUpdateUserCommand, IGetUserDetailsResponse,
+  IValidationProblemDetails,
   LookupResponseOfGuid, PermissionId, UsersClient
 } from 'src/app/api/api-reference';
+import { UserEditGeneratedComponent } from '../generated/user-edit/user-edit-generated.component';
 
 @Component({
   selector: 'app-user-edit',
@@ -14,6 +17,8 @@ import {
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
+  @ViewChild('formComponent') formComponent: UserEditGeneratedComponent;
+
   model: IGetUserDetailsResponse = {};
   $roleLookup: Observable<LookupResponseOfGuid[]>;
   PermissionId = PermissionId;
@@ -40,7 +45,12 @@ export class UserEditComponent implements OnInit {
       fullName: model.fullName
     });
     this.client.post(command)
-      .subscribe(() => this.location.back());
+      .subscribe({
+        next: () => this.location.back(),
+        error: (error: IValidationProblemDetails) => {
+          setServerSideValidationErrors(error, this.formComponent.form);
+        }
+      });
   }
 
   cancel() {

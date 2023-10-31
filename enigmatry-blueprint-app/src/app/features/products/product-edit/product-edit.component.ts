@@ -23,6 +23,7 @@ import { ProductEditGeneratedComponent } from '../generated/product-edit/product
 export class ProductEditComponent
   extends FormComponent<IProductCreateOrUpdateCommand, IGetProductDetailsResponse> {
   @ViewChild('formComponent') formComponent: ProductEditGeneratedComponent;
+
   PermissionId = PermissionId;
 
   constructor(
