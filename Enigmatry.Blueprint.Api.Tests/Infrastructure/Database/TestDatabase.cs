@@ -21,18 +21,33 @@ internal class TestDatabase
         }
         else
         {
-            _container ??= new MsSqlBuilder()
-                .WithAutoRemove(true)
-                .WithCleanUp(true)
-                .Build();
+            try
+            {
+                // These cannot be changed (it is hardcoded in MsSqlBuilder and changing any of them breaks starting of the container
+                // default database: master
+                // default username: sa
+                // default password: yourStrong(!)Password
 
-            _container!.StartAsync().Wait();
-            ConnectionString = _container.GetConnectionString();
-            WriteLine($"Docker SQL connection string: {ConnectionString}");
+                _container ??= new MsSqlBuilder()
+                    .WithAutoRemove(true)
+                    .WithCleanUp(true)
+                    .Build();
+
+                _container!.StartAsync().Wait();
+                ConnectionString = _container.GetConnectionString();
+                WriteLine($"Docker SQL connection string: {ConnectionString}");
+}
+            catch (Exception e)
+            {
+                WriteLine($"Failed to start docker container: {e.Message}");
+                throw;
+            }
         }
     }
 
-    public static async Task ResetAsync(DbContext dbContext) => await DatabaseInitializer.RecreateDatabaseAsync(dbContext, new[] { "__EFMigrationsHistory", "Role", "RolePermission", "Permission" });
+    public static async Task ResetAsync(DbContext dbContext) =>
+        await DatabaseInitializer.RecreateDatabaseAsync(dbContext,
+            new[] { "__EFMigrationsHistory", "Role", "RolePermission", "Permission" });
 
     private static void WriteLine(string value) => TestContext.WriteLine(value);
 }
