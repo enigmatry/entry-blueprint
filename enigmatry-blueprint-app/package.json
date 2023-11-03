@@ -30,7 +30,7 @@
     "@angular/platform-browser": "^15.2.9",
     "@angular/platform-browser-dynamic": "^15.2.9",
     "@angular/router": "^15.2.9",
-    "@azure/msal-browser": "^3.2.0",
+    "@azure/msal-browser": "3.2.0",
     "@enigmatry/entry-components": "15.0.0-preview.1",
     "@enigmatry/entry-form": "15.0.0-preview.1",
     "@ngx-formly/core": "6.1.7",
@@ -58,7 +58,6 @@
     "karma-jasmine-html-reporter": "^1.7.0",
     "npm-audit-reporter-teamcity": "0.3.1",
     "nswag": "^13.16.1",
-    "protractor": "~7.0.0",
     "ts-node": "~10.4.0",
     "typescript": "4.9.5"
   }

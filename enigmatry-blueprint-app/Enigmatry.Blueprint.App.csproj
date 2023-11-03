@@ -62,10 +62,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="protractor.conf.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild">
       <PrivateAssets>all</PrivateAssets>
