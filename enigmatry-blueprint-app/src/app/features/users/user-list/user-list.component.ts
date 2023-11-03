@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ContextMenuItem, PagedData } from '@enigmatry/entry-table';
+import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
 import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { GetUsersResponseItem, PermissionId, UsersClient } from 'src/app/api/api-reference';
 import { PermissionService } from 'src/app/core/auth/permissions.service';

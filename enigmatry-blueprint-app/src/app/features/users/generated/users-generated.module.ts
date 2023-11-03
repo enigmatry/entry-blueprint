@@ -10,7 +10,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { EntryTableModule } from '@enigmatry/entry-table';
+import { EntryTableModule } from '@enigmatry/entry-components/table';
     import { FormlyModule, FORMLY_CONFIG } from '@ngx-formly/core';
     import { FormlyMaterialModule } from '@ngx-formly/material';
     import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -32,7 +32,7 @@ import { UserListGeneratedComponent } from './user-list/user-list-generated.comp
             {
                 validationMessages: [
 { name: 'required', message: (err, field) => $localize `:@@validators.required:${field?.templateOptions?.label}:property-name: is required` },
-{ name: 'maxlength', message: (err, field) => $localize `:@@validators.maxLength:${field?.templateOptions?.label}:property-name: value should be less than ${field?.templateOptions?.maxLength}:max-value: characters` }
+{ name: 'maxLength', message: (err, field) => $localize `:@@validators.maxLength:${field?.templateOptions?.label}:property-name: value should be less than ${field?.templateOptions?.maxLength}:max-value: characters` }
                 ]
             }
         ),

@@ -8,7 +8,7 @@
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-table';
+import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-components/table';
 
 import { GetProductsResponseItem } from 'src/app/api/api-reference';
 
@@ -24,7 +24,7 @@ export class ProductListGeneratedComponent implements OnInit {
 
   @Input() showPaginator = true;
   @Input() showFirstLastButtons = true;
-  @Input() pageSizeOptions = [2, 5, 10, 25, 50];
+  @Input() pageSizeOptions = [20, 50, 100];
   @Input() hidePageSize = !true;
 
   @Input() defaultSort: { sortBy?: string | undefined, sortDirection?: SortDirection } = { };

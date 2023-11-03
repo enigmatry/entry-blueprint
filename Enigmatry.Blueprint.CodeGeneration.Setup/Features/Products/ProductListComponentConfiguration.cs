@@ -57,11 +57,6 @@ public class ProductListComponentConfiguration : IListComponentConfiguration<Get
             .Row()
             .Selection(RowSelectionType.None)
             .ShowContextMenu(true); // Context menu items will be configured on client side dynamically
-
-        // Configuring list pagination:
-        builder
-            .Pagination()
-            .PageSizeOptions(new[] { 2, 5, 10, 25, 50 });
     }
 
     private static void DefineToggleColumn<T>(ListComponentBuilder<GetProducts.Response.Item> builder,

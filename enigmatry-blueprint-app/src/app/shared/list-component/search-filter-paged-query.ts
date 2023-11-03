@@ -1,6 +1,6 @@
 import { Params } from '@angular/router';
 import { SearchFilterBase, SearchFilterParams } from '@enigmatry/entry-components/search-filter';
-import { PagedQuery } from '@enigmatry/entry-table';
+import { PagedQuery } from '@enigmatry/entry-components/table';
 
 export class SearchFilterPagedQuery extends PagedQuery {
   constructor(public filters: SearchFilterBase<any>[] = []) {

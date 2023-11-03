@@ -1,6 +1,6 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SearchFilterParams } from '@enigmatry/entry-components/search-filter';
-import { PageEvent, SortEvent } from '@enigmatry/entry-table';
+import { PageEvent, SortEvent } from '@enigmatry/entry-components/table';
 import { SearchFilterPagedQuery } from './search-filter-paged-query';
 
 export abstract class BaseListComponent {

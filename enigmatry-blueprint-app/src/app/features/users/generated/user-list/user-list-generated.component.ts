@@ -8,7 +8,7 @@
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-table';
+import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-components/table';
 
 import { GetUsersResponseItem } from 'src/app/api/api-reference';
 

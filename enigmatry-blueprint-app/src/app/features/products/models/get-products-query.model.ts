@@ -1,5 +1,5 @@
 import { TextSearchFilter } from '@enigmatry/entry-components/search-filter';
-import { SortDirection } from '@enigmatry/entry-table';
+import { SortDirection } from '@enigmatry/entry-components/table';
 import { SearchFilterPagedQuery } from 'src/app/shared/list-component/search-filter-paged-query';
 
 export class GetProductsQuery extends SearchFilterPagedQuery {
