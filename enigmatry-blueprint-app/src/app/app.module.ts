@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EntryCommonModule } from '@enigmatry/entry-components';
 import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     HomeModule,
     AuthModule.forRoot(),
+    EntryCommonModule.forRoot(),
     EntryComponentsModule.forRoot()
   ],
   providers: [

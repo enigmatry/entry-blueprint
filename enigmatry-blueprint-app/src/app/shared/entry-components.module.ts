@@ -1,10 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import {
-  ENTRY_SEARCH_FILTER_CONFIG, EntryDialogModule, EntryFileInputModule, EntrySearchFilterConfig,
-  EntrySearchFilterModule
-} from '@enigmatry/entry-components';
-import { ENTRY_BUTTON_CONFIG, EntryButtonConfig, EntryButtonModule } from '@enigmatry/entry-components/button';
+import { EntryButtonModule, provideEntryButtonConfig } from '@enigmatry/entry-components/button';
+import { EntryCommonModule } from '@enigmatry/entry-components/common';
+import { EntryDialogModule } from '@enigmatry/entry-components/dialog';
+import { EntryFileInputModule } from '@enigmatry/entry-components/file-input';
 import { EntryPermissionModule, EntryPermissionService } from '@enigmatry/entry-components/permissions';
+import { EntrySearchFilterModule, provideEntrySearchFilterConfig } from '@enigmatry/entry-components/search-filter';
 import { EntryTableModule } from '@enigmatry/entry-components/table';
 import { EntryValidationModule } from '@enigmatry/entry-components/validation';
 import { PermissionService } from '../core/auth/permissions.service';
@@ -13,6 +13,7 @@ import { PermissionService } from '../core/auth/permissions.service';
   declarations: [],
   exports: [
     EntryButtonModule,
+    EntryCommonModule,
     EntryDialogModule,
     EntryFileInputModule,
     EntryValidationModule,
@@ -21,19 +22,13 @@ import { PermissionService } from '../core/auth/permissions.service';
     EntryTableModule
   ],
   providers: [
-    {
-      provide: ENTRY_BUTTON_CONFIG,
-      useValue: new EntryButtonConfig({
-        submit: { type: 'raised', color: 'primary' },
-        cancel: { type: 'basic' }
-      })
-    },
-    {
-      provide: ENTRY_SEARCH_FILTER_CONFIG,
-      useFactory: () => new EntrySearchFilterConfig({
-        applyButtonText: 'Search'
-      })
-    }
+    provideEntryButtonConfig({
+      submit: { type: 'raised', color: 'primary' },
+      cancel: { type: 'basic' }
+    }),
+    provideEntrySearchFilterConfig({
+      applyButtonText: 'Search'
+    })
   ]
 })
 export class EntryComponentsModule {
