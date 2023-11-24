@@ -1,0 +1,34 @@
+trigger: none
+
+schedules:
+- cron: '0 0 * * *'
+  displayName: Daily midnight build
+  branches:
+    include:
+    - master
+  always: false
+
+variables:
+  artifactName: 'enigmatry-blueprint-template'
+  projectNameAngularApp: enigmatry-blueprint-app
+  projectNamePrefix: Enigmatry.Blueprint
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
+
+jobs:
+- template: code-analysis.yml@templates
+  parameters:
+    projectName: 'Enigmatry Blueprint Template'
+    sonarProjectKey: 'AspNetCoreAngular_EnigmatryBlueprintTemplate'
+    displayName: 'Code Analysis'
+
+- template: build-report-job.yml@templates
+  parameters:
+    artifactName: $(artifactName)
+    displayName: 'Generate Reports'
+    projectNameAngularApp: $(projectNameAngularApp)
+    projectNamePrefix: $(projectNamePrefix)

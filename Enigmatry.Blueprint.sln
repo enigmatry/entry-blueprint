@@ -41,6 +41,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.Templat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Blueprint.CodeGeneration.Setup", "Enigmatry.Blueprint.CodeGeneration.Setup\Enigmatry.Blueprint.CodeGeneration.Setup.csproj", "{7B09F20C-7607-494C-9309-E539D1966F1D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{435A8FD0-27D1-4695-9E52-E3AF75C4E8A9}"
+	ProjectSection(SolutionItems) = preProject
+		Pipelines\azure-pipelines.yml = Pipelines\azure-pipelines.yml
+		Pipelines\build-publish-nuget.yml = Pipelines\build-publish-nuget.yml
+		Pipelines\code-analysis.yml = Pipelines\code-analysis.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <PackageReference Include="AutoFixture.NUnit3" />
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />

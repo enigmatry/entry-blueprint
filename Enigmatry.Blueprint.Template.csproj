@@ -22,7 +22,7 @@
   <ItemGroup>
     <Compile Remove="**\*" />
     <Content Include="**\*"
-             Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
+             Exclude="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user;build-publish-nuget.yml" />
     <EmbeddedResource
       Remove="**\bin\**;**\obj\**;**\dist\**;**\node_modules\**;.git\**;**\.vs\**;**\Artifacts\**;Enigmatry.Blueprint.Template.csproj;**\_ReSharper.Caches\**;**\*.user" />
     <None

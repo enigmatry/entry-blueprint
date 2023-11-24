@@ -8,10 +8,11 @@
 ``dotnet new -i "bin\Release\Enigmatry.Blueprint.Template.1.0.0.nupkg"``
 
 ## Install the template from the TeamCity nuget feed
-``dotnet new install Enigmatry.Blueprint.Template --add-source https://teamcity.enigmatry.com/guestAuth/app/nuget/feed/AspNetCoreAngular_EnigmatryBlueprintTemplate/Feed/v3/index.json``
+``dotnet new install Enigmatry.Blueprint.Template --add-source https://pkgs.dev.azure.com/enigmatry/b3d80552-b808-495c-9332-82888c12c1bf/_packaging/enigmatry-blueprint-template-feed/nuget/v3/index.json``
+If you are not authenticated automatically, add the --interactive argument.
 
 ## Install specific version of the template from the TeamCity nuget feed
-``dotnet new install Enigmatry.Blueprint.Template::VERSION --add-source https://teamcity.enigmatry.com/guestAuth/app/nuget/feed/AspNetCoreAngular_EnigmatryBlueprintTemplate/Feed/v3/index.json``
+``dotnet new install Enigmatry.Blueprint.Template::VERSION --add-source https://pkgs.dev.azure.com/enigmatry/b3d80552-b808-495c-9332-82888c12c1bf/_packaging/enigmatry-blueprint-template-feed/nuget/v3/index.json``
 
 where VERSION should be replaced with the specific version you want to install, e.g. 1.0.50
 

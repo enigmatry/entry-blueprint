@@ -1,0 +1,83 @@
+trigger:
+- master
+
+variables:
+  artifactName: 'enigmatry-blueprint-template'
+  buildConfiguration: 'Release'
+  nodeVersion: '16.20.2'
+  projectNameAngularApp: enigmatry-blueprint-app
+  projectNamePrefix: Enigmatry.Blueprint
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
+
+stages:
+- stage: 'ci_build'
+  displayName: 'Build the web application'
+  jobs: 
+  - job: build_prerequisites
+    displayName: Get the version for the build
+    steps:
+    - checkout: self
+      fetchDepth: 0
+    - task: DotNetCoreCLI@2
+      displayName: Add Manifest for tool installation
+      inputs:
+        command: 'custom'
+        custom: 'new '
+        arguments: tool-manifest
+    - task: DotNetCoreCLI@2
+      displayName: Install minver
+      inputs:
+        command: 'custom'
+        custom: 'tool '
+        arguments: install minver-cli
+    - task: PowerShell@2
+      displayName: 'Set MinVer Version'
+      inputs:
+        targetType: inline
+        script: |
+          $version = dotnet minver -p preview
+          echo "##vso[build.updatebuildnumber]$version"
+          Write-Host "Setting MinVer to '$version'"
+  
+  - job: 'Build_Package'
+    displayName: Build Package
+    dependsOn: build_prerequisites
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Pack the NuGet packages
+      inputs:
+        command: 'pack'
+        packagesToPack: '**/Enigmatry.Blueprint.Template.csproj'
+        configuration: '$(buildConfiguration)'
+        versioningScheme: 'byEnvVar'
+        versionEnvVar: 'BUILD_BUILDNUMBER'
+    - task: PublishBuildArtifacts@1
+      displayName: Publish artifacts
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: $(artifactName)-$(Build.BuildNumber)
+        publishLocation: 'Container'
+
+- stage: publish_nuget
+  displayName: publish packages to NuGet
+  dependsOn: ci_build
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')))
+  jobs:
+  - deployment: Publish
+    environment: nuget
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetCommand@2
+            inputs:
+              command: 'push'
+              packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
+              nuGetFeedType: 'internal'
+              publishVstsFeed: 'b3d80552-b808-495c-9332-82888c12c1bf/f22a4b99-bf94-4196-922f-3f8a670008e9'
+

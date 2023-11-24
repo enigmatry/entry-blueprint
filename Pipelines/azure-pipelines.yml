@@ -1,0 +1,178 @@
+trigger:
+- '*'
+
+variables:
+  artifactName: 'enigmatry-blueprint-template'
+  dbContextName: 'BlueprintContext'
+  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
+  majorMinorVersion: 1.0
+  nodeVersion: '16.20.2'
+  projectNameAngularApp: enigmatry-blueprint-app
+  projectNamePrefix: Enigmatry.Blueprint
+
+# This determines the build number
+name: $(majorMinorVersion)$(Rev:.r)
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
+
+stages:
+- stage: 'ci_build'
+  displayName: 'Build the web application'
+  jobs: 
+  - job: build_prerequisites
+    displayName: Get the prerequisites for the build
+    steps:
+    - bash: |
+        HASH=$(git rev-parse --short $BUILD_SOURCEVERSION)
+        VERSION=$BUILD_BUILDNUMBER-$HASH
+      
+        echo "Hash: $HASH. Setting build number to: $VERSION"
+        echo '##vso[build.updatebuildnumber]'$VERSION
+      displayName: 'Set Build number'
+
+  - template: build-angular-app-job.yml@templates
+    parameters:
+      displayName: 'Build Angular App'
+      nodeVersion: $(nodeVersion)
+      projectNameAngularApp: $(projectNameAngularApp)
+  
+  - template: build-dotnet-api-job.yml@templates
+    parameters:
+      artifactName: $(artifactName)
+      displayName: 'Build .net API'
+      projectNamePrefix: $(projectNamePrefix)
+
+- stage: 'Deploy_Test'
+  displayName: 'Deploy to the test environment'
+  dependsOn: ci_build
+  variables:
+    serviceConnection: 'Enigmatry - Entry Template (Test)'
+    webAppName: enigmatry-blueprint-test-001
+    webJobWebAppName: enigmatry-blueprint-scheduler-test-001
+    environment: test
+  jobs:
+  - template: take-angular-app-offline.yml@templates
+    parameters:
+      displayName: 'Take Angular App offline'
+      environment: ${{ variables.environment }}
+      subscription: ${{ variables.serviceConnection }}
+      webAppName: $(webAppName)
+
+  - template: take-api-offline.yml@templates
+    parameters:
+      displayName: 'Take API offline'
+      environment: ${{ variables.environment }}
+      subscription: ${{ variables.serviceConnection }}
+      webAppName: $(webAppName)
+
+  - template: take-webjob-offline.yml@templates
+    parameters:
+      displayName: 'Take WebJob offline'
+      environment: ${{ variables.environment }}
+      subscription: ${{ variables.serviceConnection }}
+      webAppName: $(webJobWebAppName)
+
+  - template: update-database-job.yml@templates
+    parameters:
+      dbContextName: $(dbContextName)
+      displayName: 'Update the Test database'
+      dependsOn:
+      - take_app_offline
+      - take_api_offline
+      - take_webjob_offline
+      environment: ${{ variables.environment }}
+      migrationConnectionString: $(MigrationConnectionString)
+      projectNamePrefix: $(projectNamePrefix)
+
+  - template: deploy-angular-app-job.yml@templates
+    parameters:
+      artifactName: $(artifactName)
+      displayName: Deploy the Angular web app
+      environment: ${{ variables.environment }}
+      packageName: $(projectNamePrefix).App
+      subscription: ${{ variables.serviceConnection }}
+      webAppName: $(webAppName)
+         
+  - template: deploy-api-job.yml@templates
+    parameters:
+      artifactName: $(artifactName)
+      displayName: Deploy the BackEnd API
+      environment: ${{ variables.environment }}
+      packageName: $(projectNamePrefix).Api
+      subscription: ${{ variables.serviceConnection }}
+      webAppName: $(webAppName)
+  
+  - template: deploy-webjob-job.yml@templates
+    parameters:
+      artifactName: $(artifactName)
+      displayName: Deploy the Scheduler Web Job
+      environment: ${{ variables.environment }}
+      packageName: $(projectNamePrefix).Scheduler
+      subscription: ${{ variables.serviceConnection }}
+      webAppName: $(webJobWebAppName)
+
+  - job: git_tag
+    displayName: Create Git tag
+    dependsOn:
+    - deploy_web_app
+    - deploy_api
+    - deploy_webjob
+    steps:
+      - checkout: self
+        displayName: 'Checkout current repo'
+        persistCredentials: true
+      - task: Bash@3
+        displayName: Create Git tag
+        inputs:
+          targetType: 'inline'
+          script: |
+            git tag $(environment)-$(Build.SourceBranchName)-$(Build.BuildNumber)
+            git push origin $(environment)-$(Build.SourceBranchName)-$(Build.BuildNumber)
+
+- stage: 'Deploy_Acceptance'
+  displayName: 'Deploy to the acceptance environment'
+  dependsOn: ci_build
+  condition: and(succeeded(), eq(variables.isRelease, true))
+  jobs:
+  - deployment: Deploy
+    environment: acceptance
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: 'Checkout current repo'
+          - download: current
+            artifact: $(ArtifactName)-$(Build.BuildNumber)
+            displayName: 'Download build artifacts'
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo 'Replace this step with deployment steps for Acceptance'
+
+- stage: 'Deploy_Production'
+  displayName: 'Deploy to the production environment'
+  dependsOn: Deploy_Acceptance
+  condition: and(succeeded(), eq(variables.isRelease, true))
+  jobs:
+  - deployment: Deploy
+    environment: production
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: 'Checkout current repo'
+          - download: current
+            artifact: $(ArtifactName)-$(Build.BuildNumber)
+            displayName: 'Download build artifacts'
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo 'Replace this step with deployment steps for Production'
