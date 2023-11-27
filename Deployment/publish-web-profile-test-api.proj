@@ -2,7 +2,7 @@
 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.Api.zip</PackageFile>
+    <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Entry.Blueprint.Api.zip</PackageFile>
     <IisApplicationName>enigmatry-blueprint-test</IisApplicationName>
     <IisWebApplicationName>enigmatry-blueprint-test/api</IisWebApplicationName>
   </PropertyGroup>

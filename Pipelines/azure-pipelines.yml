@@ -2,13 +2,13 @@ trigger:
 - '*'
 
 variables:
-  artifactName: 'enigmatry-blueprint-template'
+  artifactName: 'enigmatry-entry-blueprint-template'
   dbContextName: 'BlueprintContext'
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   majorMinorVersion: 1.0
   nodeVersion: '16.20.2'
-  projectNameAngularApp: enigmatry-blueprint-app
-  projectNamePrefix: Enigmatry.Blueprint
+  projectNameAngularApp: enigmatry-entry-blueprint-app
+  projectNamePrefix: Enigmatry.Entry.Blueprint
 
 # This determines the build number
 name: $(majorMinorVersion)$(Rev:.r)

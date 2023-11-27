@@ -1,0 +1,14 @@
+@use 'entry-components/styles/partials/theming';
+@use 'entry-components/styles/generator';
+@use 'variables' as vars;
+
+$custom-theme: (
+	general: (
+		colors: (
+			primary: vars.$primary,
+			accent: vars.$accent
+		)
+	)
+);
+
+@include generator.generate-from($custom-theme);

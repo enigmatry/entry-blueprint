@@ -2,11 +2,11 @@ trigger:
 - master
 
 variables:
-  artifactName: 'enigmatry-blueprint-template'
+  artifactName: 'enigmatry-entry-blueprint-template'
   buildConfiguration: 'Release'
   nodeVersion: '16.20.2'
-  projectNameAngularApp: enigmatry-blueprint-app
-  projectNamePrefix: Enigmatry.Blueprint
+  projectNameAngularApp: enigmatry-entry-blueprint-app
+  projectNamePrefix: Enigmatry.Entry.Blueprint
 
 resources:
   repositories:
@@ -52,7 +52,7 @@ stages:
       displayName: Pack the NuGet packages
       inputs:
         command: 'pack'
-        packagesToPack: '**/Enigmatry.Blueprint.Template.csproj'
+        packagesToPack: '**/Enigmatry.Entry.Blueprint.Template.csproj'
         configuration: '$(buildConfiguration)'
         versioningScheme: 'byEnvVar'
         versionEnvVar: 'BUILD_BUILDNUMBER'

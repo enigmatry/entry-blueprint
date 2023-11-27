@@ -2,7 +2,7 @@
 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Blueprint.App.zip</PackageFile>
+    <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Entry.Blueprint.App.zip</PackageFile>
     <IisApplicationName>enigmatry-blueprint-test</IisApplicationName>
     <EnableRobotsTxtDeploy>true</EnableRobotsTxtDeploy>
     <AllowSearchEngines>false</AllowSearchEngines>

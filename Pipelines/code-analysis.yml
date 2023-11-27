@@ -9,9 +9,9 @@ schedules:
   always: false
 
 variables:
-  artifactName: 'enigmatry-blueprint-template'
-  projectNameAngularApp: enigmatry-blueprint-app
-  projectNamePrefix: Enigmatry.Blueprint
+  artifactName: 'enigmatry-entry-blueprint-template'
+  projectNameAngularApp: enigmatry-entry-blueprint-app
+  projectNamePrefix: Enigmatry.Entry.Blueprint
 
 resources:
   repositories:

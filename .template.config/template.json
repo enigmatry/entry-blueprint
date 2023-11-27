@@ -2,39 +2,40 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Enigmatry",
   "classifications": [
+    "Entry", 
     "Blueprint",
     ".netcore",
     "Angular",
     "web"
   ],
-  "name": "Enigmatry Blueprint Project",
+  "name": "Enigmatry Entry Blueprint Project",
   "generatorVersions": "[1.0.0.0-*)",
-  "groupIdentity": "Enigmatry.Blueprint.Template",
+  "groupIdentity": "Enigmatry.Entry.Blueprint.Template",
   "precedence": "100",
-  "identity": "Enigmatry.Blueprint.Template",
+  "identity": "Enigmatry.Entry.Blueprint.Template",
   "shortName": "blueprint",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "Enigmatry.Blueprint",
+  "sourceName": "Enigmatry.Entry.Blueprint",
   "sources": [
     {
-      "exclude": [ "**/Enigmatry.Blueprint.Template.csproj", "**/.angular/**", "**/.template.config/**", "**/.idea/**", "**/bin/**", "**/obj/**", "**/dist/**", "**/node_modules/**", "**/.git/**", "**/.vs/**", "**/Artifacts/**", "**/_ReSharper.Caches/**", "**/*.user", "**/*.lock.json" ]
+      "exclude": [ "**/Enigmatry.Entry.Blueprint.Template.csproj", "**/.angular/**", "**/.template.config/**", "**/.idea/**", "**/bin/**", "**/obj/**", "**/dist/**", "**/node_modules/**", "**/.git/**", "**/.vs/**", "**/Artifacts/**", "**/_ReSharper.Caches/**", "**/*.user", "**/*.lock.json" ]
     }
   ],
   "preferNameDirectory": true,
   "symbols": {
     "projectName": {
       "type": "parameter",
-      "replaces": "Enigmatry.Blueprint",
-      "FileRename": "Enigmatry.Blueprint"
+      "replaces": "Enigmatry.Entry.Blueprint",
+      "FileRename": "Enigmatry.Entry.Blueprint"
     },
     "appProjectName": {
       "type": "parameter",
-      "replaces": "enigmatry-blueprint",
-      "FileRename": "enigmatry-blueprint",
-      "description": "the kebab-cased name (i.e. enigmatry-blueprint)"
+      "replaces": "enigmatry-entry-blueprint",
+      "FileRename": "enigmatry-entry-blueprint",
+      "description": "the kebab-cased name (i.e. enigmatry-entry-blueprint)"
     },
     "appProjectNameUpper": {
       "type": "generated",
@@ -43,7 +44,7 @@
         "source": "appProjectName",
         "toLower": true
       },
-      "FileRename": "Enigmatry-Blueprint"
+      "FileRename": "Enigmatry-Entry-Blueprint"
     },
     "contextName": {
       "type": "parameter",
@@ -109,7 +110,7 @@
   ],
   "primaryOutputs": [
     {
-      "path": "Enigmatry.Blueprint.sln"
+      "path": "Enigmatry.Entry.Blueprint.sln"
     }
   ],
   "postActions": [
