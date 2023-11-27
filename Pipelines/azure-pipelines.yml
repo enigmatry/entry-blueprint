@@ -49,89 +49,14 @@ stages:
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
-  variables:
-    serviceConnection: 'Enigmatry - Entry Template (Test)'
-    webAppName: enigmatry-blueprint-test-001
-    webJobWebAppName: enigmatry-blueprint-scheduler-test-001
-    environment: test
   jobs:
-  - template: take-angular-app-offline.yml@templates
+  - template: deploy-to-stage.yml
     parameters:
-      displayName: 'Take Angular App offline'
-      environment: ${{ variables.environment }}
-      subscription: ${{ variables.serviceConnection }}
-      webAppName: $(webAppName)
-
-  - template: take-api-offline.yml@templates
-    parameters:
-      displayName: 'Take API offline'
-      environment: ${{ variables.environment }}
-      subscription: ${{ variables.serviceConnection }}
-      webAppName: $(webAppName)
-
-  - template: take-webjob-offline.yml@templates
-    parameters:
-      displayName: 'Take WebJob offline'
-      environment: ${{ variables.environment }}
-      subscription: ${{ variables.serviceConnection }}
-      webAppName: $(webJobWebAppName)
-
-  - template: update-database-job.yml@templates
-    parameters:
-      dbContextName: $(dbContextName)
-      displayName: 'Update the Test database'
-      dependsOn:
-      - take_app_offline
-      - take_api_offline
-      - take_webjob_offline
-      environment: ${{ variables.environment }}
-      migrationConnectionString: $(MigrationConnectionString)
-      projectNamePrefix: $(projectNamePrefix)
-
-  - template: deploy-angular-app-job.yml@templates
-    parameters:
-      artifactName: $(artifactName)
-      displayName: Deploy the Angular web app
-      environment: ${{ variables.environment }}
-      packageName: $(projectNamePrefix).App
-      subscription: ${{ variables.serviceConnection }}
-      webAppName: $(webAppName)
-         
-  - template: deploy-api-job.yml@templates
-    parameters:
-      artifactName: $(artifactName)
-      displayName: Deploy the BackEnd API
-      environment: ${{ variables.environment }}
-      packageName: $(projectNamePrefix).Api
-      subscription: ${{ variables.serviceConnection }}
-      webAppName: $(webAppName)
-  
-  - template: deploy-webjob-job.yml@templates
-    parameters:
-      artifactName: $(artifactName)
-      displayName: Deploy the Scheduler Web Job
-      environment: ${{ variables.environment }}
-      packageName: $(projectNamePrefix).Scheduler
-      subscription: ${{ variables.serviceConnection }}
-      webAppName: $(webJobWebAppName)
-
-  - job: git_tag
-    displayName: Create Git tag
-    dependsOn:
-    - deploy_web_app
-    - deploy_api
-    - deploy_webjob
-    steps:
-      - checkout: self
-        displayName: 'Checkout current repo'
-        persistCredentials: true
-      - task: Bash@3
-        displayName: Create Git tag
-        inputs:
-          targetType: 'inline'
-          script: |
-            git tag $(environment)-$(Build.SourceBranchName)-$(Build.BuildNumber)
-            git push origin $(environment)-$(Build.SourceBranchName)-$(Build.BuildNumber)
+      environment: test
+      migrationConnectionString: $(MigrationConnectionString_Test)
+      serviceConnection: 'Enigmatry - Entry Template (Test)'
+      webAppName: enigmatry-blueprint-test-001
+      webJobWebAppName: enigmatry-blueprint-scheduler-test-001
 
 - stage: 'Deploy_Acceptance'
   displayName: 'Deploy to the acceptance environment'

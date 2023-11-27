@@ -1,0 +1,85 @@
+parameters:
+- name: environment
+- name: migrationConnectionString
+- name: serviceConnection
+- name: webAppName
+- name: webJobWebAppName
+  
+jobs:
+- template: take-angular-app-offline.yml@templates
+  parameters:
+    displayName: 'Take Angular App offline'
+    environment: ${{ parameters.environment }}
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: ${{ parameters.webAppName }}
+
+- template: take-api-offline.yml@templates
+  parameters:
+    displayName: 'Take API offline'
+    environment: ${{ parameters.environment }}
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: ${{ parameters.webAppName }}
+
+- template: take-webjob-offline.yml@templates
+  parameters:
+    displayName: 'Take WebJob offline'
+    environment: ${{ parameters.environment }}
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: ${{ parameters.webJobWebAppName }}
+
+- template: update-database-job.yml@templates
+  parameters:
+    dbContextName: $(dbContextName)
+    displayName: 'Update the Test database'
+    dependsOn:
+    - take_app_offline
+    - take_api_offline
+    - take_webjob_offline
+    environment: ${{ parameters.environment }}
+    migrationConnectionString: ${{ parameters.migrationConnectionString }}
+    projectNamePrefix: $(projectNamePrefix)
+
+- template: deploy-angular-app-job.yml@templates
+  parameters:
+    artifactName: $(artifactName)
+    displayName: Deploy the Angular web app
+    environment: ${{ parameters.environment }}
+    packageName: $(projectNamePrefix).App
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: ${{ parameters.webAppName }}
+        
+- template: deploy-api-job.yml@templates
+  parameters:
+    artifactName: $(artifactName)
+    displayName: Deploy the BackEnd API
+    environment: ${{ parameters.environment }}
+    packageName: $(projectNamePrefix).Api
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: ${{ parameters.webAppName }}
+
+- template: deploy-webjob-job.yml@templates
+  parameters:
+    artifactName: $(artifactName)
+    displayName: Deploy the Scheduler Web Job
+    environment: ${{ parameters.environment }}
+    packageName: $(projectNamePrefix).Scheduler
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: ${{ parameters.webJobWebAppName }}
+
+- job: git_tag
+  displayName: Create Git tag
+  dependsOn:
+  - deploy_web_app
+  - deploy_api
+  - deploy_webjob
+  steps:
+    - checkout: self
+      displayName: 'Checkout current repo'
+      persistCredentials: true
+    - task: Bash@3
+      displayName: Create Git tag
+      inputs:
+        targetType: 'inline'
+        script: |
+          git tag ${{ parameters.environment }}-$(Build.SourceBranchName)-$(Build.BuildNumber)
+          git push origin ${{ parameters.environment }}-$(Build.SourceBranchName)-$(Build.BuildNumber)
