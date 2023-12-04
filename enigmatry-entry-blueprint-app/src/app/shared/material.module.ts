@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -21,6 +20,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDateFnsModule } from '@angular/material-date-fns-adapter';
+import { provideMatDateFormats, provideMatDateLocale } from '../core/i18n/localization';
 
 @NgModule({
   declarations: [],
@@ -48,10 +49,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatRadioModule,
     MatCardModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    MatDateFnsModule,
     MatMenuModule
   ],
   providers: [
+    provideMatDateLocale(),
+    provideMatDateFormats(),
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', floatLabel: 'auto' } }
   ]
 })

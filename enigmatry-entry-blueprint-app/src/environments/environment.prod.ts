@@ -1,4 +1,3 @@
-/* eslint-disable no-secrets/no-secrets */
 export const environment = {
   production: true,
   apiUrl: '__apiUrl__',
@@ -6,5 +5,6 @@ export const environment = {
     clientId: '__azureAdClientId__',
     authority: '__azureAdAuthority__',
     scopes: ['__azureAdScopes__']
-  }
+  },
+  defaultLanguage: 'nl'
 };
