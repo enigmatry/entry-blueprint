@@ -1,5 +1,7 @@
-import { TextSearchFilter } from '@enigmatry/entry-components/search-filter';
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+import { SelectFilterOption, SelectSearchFilter, TextSearchFilter } from '@enigmatry/entry-components/search-filter';
 import { SortDirection } from '@enigmatry/entry-components/table';
+import { addMonths } from 'date-fns';
 import { SearchFilterPagedQuery } from 'src/app/shared/list-component/search-filter-paged-query';
 
 export class GetProductsQuery extends SearchFilterPagedQuery {
@@ -16,17 +18,27 @@ export class GetProductsQuery extends SearchFilterPagedQuery {
     placeholder: 'Product code'
   });
 
-  contactEmail = new TextSearchFilter({
-    key: 'contactEmail',
-    label: 'Contact E-mail',
-    placeholder: 'user@example.com',
-    type: 'email'
+  expiresInMonths = new SelectSearchFilter({
+    key: 'expiresInMonths',
+    label: 'Expires in',
+    placeholder: 'Expires in',
+    options: [
+      new SelectFilterOption(1, '1 month'),
+      new SelectFilterOption(3, '3 months'),
+      new SelectFilterOption(6, '6 months')
+    ]
   });
 
   constructor(sortBy: string = 'price', sortDirection: SortDirection = 'asc') {
     super();
     this.sortBy = sortBy;
     this.sortDirection = sortDirection;
-    this.filters = [this.name, this.code, this.contactEmail];
+    this.filters = [this.name, this.code, this.expiresInMonths];
+  }
+
+  get expiresBeforeDate(): Date | undefined {
+    const expiresInMonths = this.expiresInMonths.value;
+    const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    return expiresInMonths ? addMonths(today, expiresInMonths) : undefined;
   }
 }

@@ -26,7 +26,7 @@ public class Product : EntityWithCreatedUpdated
     public string ContactEmail { get; private set; } = String.Empty;
     public string ContactPhone { get; private set; } = String.Empty;
     public string InfoLink { get; private set; } = String.Empty;
-    public DateTimeOffset? ExpiresOn { get; private set; }
+    public DateOnly? ExpiresOn { get; private set; }
     public bool FreeShipping { get; private set; }
     public bool HasDiscount { get; private set; }
     public float? Discount { get; private set; }

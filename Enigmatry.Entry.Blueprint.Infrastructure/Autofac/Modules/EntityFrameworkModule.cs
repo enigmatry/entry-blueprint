@@ -94,6 +94,9 @@ public class EntityFrameworkModule : Module
             sqlOptions = sqlOptions.MigrationsAssembly("Enigmatry.Entry.Blueprint.Data.Migrations");
         }
 
+        // Using DateOnly and TimeOnly with EF Core 6 or 7
+        sqlOptions = sqlOptions.UseDateOnlyTimeOnly();
+
         return sqlOptions;
     }
 }

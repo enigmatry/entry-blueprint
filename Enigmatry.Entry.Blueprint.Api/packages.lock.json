@@ -1738,6 +1738,7 @@
           "Enigmatry.Entry.Infrastructure": "[2.0.0, )",
           "Enigmatry.Entry.MediatR": "[2.0.0, )",
           "Enigmatry.Entry.Swagger": "[2.0.0, )",
+          "ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly": "[7.0.5, )",
           "FluentValidation.DependencyInjectionExtensions": "[11.8.0, )",
           "Microsoft.Extensions.DependencyInjection": "[7.0.0, )",
           "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "[7.0.13, )",
@@ -1869,6 +1870,16 @@
           "Microsoft.SourceLink.GitHub": "1.1.1",
           "NJsonSchema": "10.9.0",
           "NSwag.AspNetCore": "13.20.0"
+        }
+      },
+      "ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly": {
+        "type": "CentralTransitive",
+        "requested": "[7.0.5, )",
+        "resolved": "7.0.5",
+        "contentHash": "kGXyIHaCwFrQLaRQ+iPmSuuiV9OFXa3Ykq8LC8JM7zAxTitJXJJNTGOb6jqeQzuNQwb+8KTyi6iVQgeEgf1XlA==",
+        "dependencies": {
+          "Microsoft.Data.SqlClient": "5.1.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0"
         }
       },
       "FluentValidation": {

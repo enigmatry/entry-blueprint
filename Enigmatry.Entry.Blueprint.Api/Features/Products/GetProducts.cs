@@ -15,7 +15,7 @@ public static class GetProducts
     {
         public string? Name { get; set; }
         public string? Code { get; set; }
-        public string? ContactEmail { get; set; }
+        public DateOnly? ExpiresBefore { get; set; }
     }
 
     [PublicAPI]
@@ -33,7 +33,7 @@ public static class GetProducts
             public string ContactEmail { get; set; } = String.Empty;
             public string ContactPhone { get; set; } = String.Empty;
             public string InfoLink { get; set; } = String.Empty;
-            public DateTimeOffset? ExpiresOn { get; set; }
+            public DateOnly? ExpiresOn { get; set; }
             public bool FreeShipping { get; set; }
             public bool HasDiscount { get; set; }
             public float Discount { get; set; }
@@ -62,7 +62,7 @@ public static class GetProducts
             await _productRepository.QueryAll()
                 .QueryByCode(request.Code)
                 .QueryByName(request.Name)
-                .QueryByContactEmail(request.ContactEmail)
+                .QueryExpiresBefore(request.ExpiresBefore)
                 .ProjectTo<Response.Item>(_mapper.ConfigurationProvider, cancellationToken)
                 .ToPagedResponseAsync(request, cancellationToken);
     }

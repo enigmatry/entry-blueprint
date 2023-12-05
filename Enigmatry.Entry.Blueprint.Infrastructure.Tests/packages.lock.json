@@ -2540,7 +2540,7 @@
         "resolved": "11.2.1",
         "contentHash": "tBt8K+korVfrjH9wyDEhiLKxbs8qoLCLIFwvYgkSUuMC9//w3z0cFQ8LQAI/5MCKq+BMil0cfRTRvPeE7eXhQw=="
       },
-      "Enigmatry.Entry.Blueprint.applicationservices": {
+      "enigmatry.entry.blueprint.applicationservices": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Domain": "[1.0.0, )",
@@ -2549,35 +2549,36 @@
           "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )"
         }
       },
-      "Enigmatry.Entry.Blueprint.core": {
+      "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Core": "[2.0.0, )"
         }
       },
-      "Enigmatry.Entry.Blueprint.domain": {
+      "enigmatry.entry.blueprint.domain": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",
           "FluentValidation": "[11.8.0, )"
         }
       },
-      "Enigmatry.Entry.Blueprint.infrastructure": {
+      "enigmatry.entry.blueprint.infrastructure": {
         "type": "Project",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "[12.0.1, )",
           "Autofac": "[7.1.0, )",
           "Autofac.Extensions.DependencyInjection": "[8.0.0, )",
           "Azure.Extensions.AspNetCore.Configuration.Secrets": "[1.2.2, )",
+          "Enigmatry.Entry.AspNetCore": "[2.0.0, )",
+          "Enigmatry.Entry.AspNetCore.Authorization": "[2.0.0, )",
           "Enigmatry.Entry.Blueprint.ApplicationServices": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.Domain": "[1.0.0, )",
-          "Enigmatry.Entry.AspNetCore": "[2.0.0, )",
-          "Enigmatry.Entry.AspNetCore.Authorization": "[2.0.0, )",
           "Enigmatry.Entry.EntityFramework": "[2.0.0, )",
           "Enigmatry.Entry.Infrastructure": "[2.0.0, )",
           "Enigmatry.Entry.MediatR": "[2.0.0, )",
           "Enigmatry.Entry.Swagger": "[2.0.0, )",
+          "ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly": "[7.0.5, )",
           "FluentValidation.DependencyInjectionExtensions": "[11.8.0, )",
           "Microsoft.Extensions.DependencyInjection": "[7.0.0, )",
           "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "[7.0.13, )",
@@ -2718,6 +2719,16 @@
           "Microsoft.SourceLink.GitHub": "1.1.1",
           "NJsonSchema": "10.9.0",
           "NSwag.AspNetCore": "13.20.0"
+        }
+      },
+      "ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly": {
+        "type": "CentralTransitive",
+        "requested": "[7.0.5, )",
+        "resolved": "7.0.5",
+        "contentHash": "kGXyIHaCwFrQLaRQ+iPmSuuiV9OFXa3Ykq8LC8JM7zAxTitJXJJNTGOb6jqeQzuNQwb+8KTyi6iVQgeEgf1XlA==",
+        "dependencies": {
+          "Microsoft.Data.SqlClient": "5.1.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0"
         }
       },
       "FluentValidation": {

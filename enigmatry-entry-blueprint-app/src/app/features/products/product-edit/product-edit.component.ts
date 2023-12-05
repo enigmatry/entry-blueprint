@@ -37,9 +37,9 @@ export class ProductEditComponent
     this.initPropertyExpressions();
   }
 
-  save = (model: IProductCreateOrUpdateCommand) =>
+  save = (model: IGetProductDetailsResponse) =>
     this.client
-      .post(model as ProductCreateOrUpdateCommand)
+      .post(this.toCommand(model))
       .subscribe({
         next: () => this.goBack(),
         error: (error: IValidationProblemDetails) =>
@@ -52,7 +52,7 @@ export class ProductEditComponent
     }
   };
 
-  toCommand(response: IGetProductDetailsResponse): IProductCreateOrUpdateCommand {
+  toCommand(response: IGetProductDetailsResponse): ProductCreateOrUpdateCommand {
     return new ProductCreateOrUpdateCommand({
       id: response.id,
       name: response.name,

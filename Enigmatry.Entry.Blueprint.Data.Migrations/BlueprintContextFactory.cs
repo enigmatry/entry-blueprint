@@ -14,7 +14,11 @@ public class BlueprintContextFactory : IDesignTimeDbContextFactory<BlueprintCont
     {
         var optionsBuilder = new DbContextOptionsBuilder<BlueprintContext>();
         optionsBuilder.UseSqlServer(connectionString,
-            b => b.MigrationsAssembly(typeof(BlueprintContextFactory).Assembly.FullName));
+            b =>
+            {
+                b.MigrationsAssembly(typeof(BlueprintContextFactory).Assembly.FullName);
+                b.UseDateOnlyTimeOnly();
+            });
 
         var result =
             new BlueprintContext(optionsBuilder.Options)

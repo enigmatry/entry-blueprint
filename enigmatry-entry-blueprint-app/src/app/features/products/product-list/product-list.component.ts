@@ -71,6 +71,6 @@ export class ProductListComponent extends BaseListComponent implements OnInit {
   }
 
   private getProducts = (query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> =>
-    this.client.search(query.name.value, query.code.value, query.contactEmail.value,
+    this.client.search(query.name.value, query.code.value, query.expiresBeforeDate,
       query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
 }

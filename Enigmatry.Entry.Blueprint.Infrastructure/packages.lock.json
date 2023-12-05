@@ -114,6 +114,16 @@
           "NSwag.AspNetCore": "13.20.0"
         }
       },
+      "ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly": {
+        "type": "Direct",
+        "requested": "[7.0.5, )",
+        "resolved": "7.0.5",
+        "contentHash": "kGXyIHaCwFrQLaRQ+iPmSuuiV9OFXa3Ykq8LC8JM7zAxTitJXJJNTGOb6jqeQzuNQwb+8KTyi6iVQgeEgf1XlA==",
+        "dependencies": {
+          "Microsoft.Data.SqlClient": "5.1.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0"
+        }
+      },
       "FluentValidation.DependencyInjectionExtensions": {
         "type": "Direct",
         "requested": "[11.8.0, )",
@@ -1905,7 +1915,7 @@
         "resolved": "11.2.1",
         "contentHash": "tBt8K+korVfrjH9wyDEhiLKxbs8qoLCLIFwvYgkSUuMC9//w3z0cFQ8LQAI/5MCKq+BMil0cfRTRvPeE7eXhQw=="
       },
-      "Enigmatry.Entry.Blueprint.applicationservices": {
+      "enigmatry.entry.blueprint.applicationservices": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Domain": "[1.0.0, )",
@@ -1914,13 +1924,13 @@
           "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )"
         }
       },
-      "Enigmatry.Entry.Blueprint.core": {
+      "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Core": "[2.0.0, )"
         }
       },
-      "Enigmatry.Entry.Blueprint.domain": {
+      "enigmatry.entry.blueprint.domain": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",

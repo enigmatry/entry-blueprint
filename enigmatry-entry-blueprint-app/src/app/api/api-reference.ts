@@ -284,7 +284,7 @@ export class UsersClient implements IUsersClient {
 }
 
 export interface IProductsClient {
-    search(name: string | null | undefined, code: string | null | undefined, contactEmail: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | undefined, sortDirection: string | undefined): Observable<PagedResponseOfGetProductsResponseItem>;
+    search(name: string | null | undefined, code: string | null | undefined, expiresBefore: Date | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | undefined, sortDirection: string | undefined): Observable<PagedResponseOfGetProductsResponseItem>;
     post(command: ProductCreateOrUpdateCommand): Observable<ProductCreateOrUpdateResult>;
     get(id: string): Observable<GetProductDetailsResponse>;
     remove(id: string): Observable<void>;
@@ -305,14 +305,14 @@ export class ProductsClient implements IProductsClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44394";
     }
 
-    search(name: string | null | undefined, code: string | null | undefined, contactEmail: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | undefined, sortDirection: string | undefined): Observable<PagedResponseOfGetProductsResponseItem> {
+    search(name: string | null | undefined, code: string | null | undefined, expiresBefore: Date | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | undefined, sortDirection: string | undefined): Observable<PagedResponseOfGetProductsResponseItem> {
         let url_ = this.baseUrl + "/Products?";
         if (name !== undefined && name !== null)
             url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (code !== undefined && code !== null)
             url_ += "Code=" + encodeURIComponent("" + code) + "&";
-        if (contactEmail !== undefined && contactEmail !== null)
-            url_ += "ContactEmail=" + encodeURIComponent("" + contactEmail) + "&";
+        if (expiresBefore !== undefined && expiresBefore !== null)
+            url_ += "ExpiresBefore=" + encodeURIComponent(expiresBefore ? "" + expiresBefore.toISOString() : "") + "&";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -1198,7 +1198,7 @@ export class GetProductsResponseItem implements IGetProductsResponseItem {
         data["contactEmail"] = this.contactEmail;
         data["contactPhone"] = this.contactPhone;
         data["infoLink"] = this.infoLink;
-        data["expiresOn"] = this.expiresOn ? this.expiresOn.toISOString() : <any>undefined;
+        data["expiresOn"] = this.expiresOn ? formatDate(this.expiresOn) : <any>undefined;
         data["freeShipping"] = this.freeShipping;
         data["hasDiscount"] = this.hasDiscount;
         data["discount"] = this.discount;
@@ -1295,7 +1295,7 @@ export class GetProductDetailsResponse implements IGetProductDetailsResponse {
         data["contactPhone"] = this.contactPhone;
         data["infoLink"] = this.infoLink;
         data["additionalInfo"] = this.additionalInfo;
-        data["expiresOn"] = this.expiresOn ? this.expiresOn.toISOString() : <any>undefined;
+        data["expiresOn"] = this.expiresOn ? formatDate(this.expiresOn) : <any>undefined;
         data["hasDiscount"] = this.hasDiscount;
         data["discount"] = this.discount;
         data["freeShipping"] = this.freeShipping;
@@ -1606,7 +1606,7 @@ export class ProductCreateOrUpdateCommand implements IProductCreateOrUpdateComma
         data["contactEmail"] = this.contactEmail;
         data["contactPhone"] = this.contactPhone;
         data["infoLink"] = this.infoLink;
-        data["expiresOn"] = this.expiresOn ? this.expiresOn.toISOString() : <any>undefined;
+        data["expiresOn"] = this.expiresOn ? formatDate(this.expiresOn) : <any>undefined;
         data["freeShipping"] = this.freeShipping;
         data["hasDiscount"] = this.hasDiscount;
         data["discount"] = this.discount;
@@ -1694,6 +1694,12 @@ export enum PermissionId {
     ProductsRead = 10,
     ProductsWrite = 11,
     ProductsDelete = 12,
+}
+
+function formatDate(d: Date) {
+    return d.getFullYear() + '-' + 
+        (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
+        (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
 }
 
 export class ApiException extends Error {
