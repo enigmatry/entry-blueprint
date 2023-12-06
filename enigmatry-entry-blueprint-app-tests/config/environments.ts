@@ -1,8 +1,8 @@
 export const environments: IEnvInfo[] = [
-  { name: 'local', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },
-  { name: 'devci', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },
-  { name: 'uat1', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },
-  { name: 'prod', url: 'https://enigmatry-blueprint-test.azurewebsites.net' },
+  { name: 'local', url: 'https://enigmatry-entry-blueprint-test.azurewebsites.net' },
+  { name: 'devci', url: 'https://enigmatry-entry-blueprint-test.azurewebsites.net' },
+  { name: 'uat1', url: 'https://enigmatry-entry-blueprint-test.azurewebsites.net' },
+  { name: 'prod', url: 'https://enigmatry-entry-blueprint-test.azurewebsites.net' },
 ];
 
 const envNames: string[] = environments.map((e) => e.name);

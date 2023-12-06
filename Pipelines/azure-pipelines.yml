@@ -1,5 +1,8 @@
 trigger:
-- '*'
+  batch: true
+  branches:
+    include:
+    - '*'
 
 variables:
   artifactName: 'enigmatry-entry-blueprint-template'
@@ -55,8 +58,8 @@ stages:
       environment: test
       migrationConnectionString: $(MigrationConnectionString_Test)
       serviceConnection: 'Enigmatry - Entry Template (Test)'
-      webAppName: enigmatry-blueprint-test-001
-      webJobWebAppName: enigmatry-blueprint-scheduler-test-001
+      webAppName: enigmatry-entry-blueprint-test-001
+      webJobWebAppName: enigmatry-entry-blueprint-scheduler-test-001
 
 - stage: 'Deploy_Acceptance'
   displayName: 'Deploy to the acceptance environment'

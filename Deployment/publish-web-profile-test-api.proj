@@ -3,12 +3,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PackageFile>$(MSBuildProjectDirectory)\Artifacts\Enigmatry.Entry.Blueprint.Api.zip</PackageFile>
-    <IisApplicationName>enigmatry-blueprint-test</IisApplicationName>
-    <IisWebApplicationName>enigmatry-blueprint-test/api</IisWebApplicationName>
+    <IisApplicationName>enigmatry-entry-blueprint-test</IisApplicationName>
+    <IisWebApplicationName>enigmatry-entry-blueprint-test/api</IisWebApplicationName>
   </PropertyGroup>
   <ItemGroup>
     <ParameterValue Include="SQLDB Connection String">
-      <Value>Server=tcp:enigmatry-test.database.windows.net,1433;Database=enigmatry-blueprint-test;Authentication=Active Directory Default;Connection Timeout=30</Value>
+      <Value>Server=tcp:enigmatry-test.database.windows.net,1433;Database=enigmatry-entry-blueprint-test;Authentication=Active Directory Default;Connection Timeout=30</Value>
     </ParameterValue>
     <ParameterValue Include="ApplicationInsights ConnectionString">
       <Value>InstrumentationKey=c8f0815e-5d8f-460e-9e87-436be3bebd3e;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/</Value>
@@ -20,10 +20,10 @@
       <Value>Information</Value>
     </ParameterValue>
     <ParameterValue Include="Rolling Log File Path">
-      <Value>D:/home/LogFiles/api/enigmatry-blueprint-api-.log</Value>
+      <Value>D:/home/LogFiles/api/enigmatry-entry-blueprint-api-.log</Value>
     </ParameterValue>
     <ParameterValue Include="Key Vault Name">
-      <Value>enigmatry-blueprint-test</Value>
+      <Value>enigmatry-entry-blueprint-test</Value>
     </ParameterValue>
     <ParameterValue Include="Azure AD Instance">
       <Value>https://enigmatryb2ctest.b2clogin.com</Value>

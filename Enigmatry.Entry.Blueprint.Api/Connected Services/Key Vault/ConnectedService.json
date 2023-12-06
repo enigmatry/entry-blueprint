@@ -7,7 +7,7 @@
   "ExtendedData": {
     "PublishEnvironmentProperties": {
       "KeyVaultName": [
-        "enigmatry-blueprint-test"
+        "enigmatry-entry-blueprint-test"
       ]
     }
   }
