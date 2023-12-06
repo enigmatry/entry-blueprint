@@ -6,9 +6,13 @@ if ({{ parameter.VariableName }} === undefined || {{ parameter.VariableName }} =
 {%    else -%}
 if ({{ parameter.VariableName }} !== null && {{ parameter.VariableName }} !== undefined)
 {%    endif -%}
-{%    if parameter.IsDateOrDateTimeArray -%}
+{%    if parameter.IsDateArray -%}
+url_ = url_.replace("{{ "{" }}{{ parameter.Name }}}", encodeURIComponent({{ parameter.VariableName }}.map(s_ => s_ ? formatDate(s_) : "null").join()));
+{%    elsif parameter.IsDateTimeArray -%}
 url_ = url_.replace("{{ "{" }}{{ parameter.Name }}}", encodeURIComponent({{ parameter.VariableName }}.map(s_ => s_ ? s_.{{ parameter.GetDateTimeToString }} : "null").join()));
-{%    elsif parameter.IsDateOrDateTime -%}
+{%    elsif parameter.IsDate -%}
+url_ = url_.replace("{{ "{" }}{{ parameter.Name }}}", encodeURIComponent({{ parameter.VariableName }} ? "" + formatDate({{ parameter.VariableName }}) : "null"));
+{%    elsif parameter.IsDateTime -%}
 url_ = url_.replace("{{ "{" }}{{ parameter.Name }}}", encodeURIComponent({{ parameter.VariableName }} ? "" + {{ parameter.VariableName }}.{{ parameter.GetDateTimeToString }} : "null"));
 {%    elsif parameter.IsArray -%}
 url_ = url_.replace("{{ "{" }}{{ parameter.Name }}}", encodeURIComponent({{ parameter.VariableName }}.join()));
@@ -40,7 +44,9 @@ if ({{ parameter.VariableName }} === null)
 else if ({{ parameter.VariableName }} !== undefined)
 {%        endif -%}
 {%    endif -%}
-{%    if parameter.IsDateOrDateTimeArray -%}
+{%    if parameter.IsDateArray -%}
+    {{ parameter.VariableName }} && {{ parameter.VariableName }}.forEach(item_ => { url_ += "{{ parameter.Name }}=" + encodeURIComponent(item_ ? "" + formatDate(item_) : "null") + "&"; });
+{%    elsif parameter.IsDateTimeArray -%}
     {{ parameter.VariableName }} && {{ parameter.VariableName }}.forEach(item_ => { url_ += "{{ parameter.Name }}=" + encodeURIComponent(item_ ? "" + item_.{{ parameter.GetDateTimeToString }} : "null") + "&"; });
 {%    elsif parameter.IsObjectArray -%}
     {{ parameter.VariableName }} && {{ parameter.VariableName }}.forEach((item, index) => {
@@ -49,7 +55,9 @@ else if ({{ parameter.VariableName }} !== undefined)
 				url_ += "{{ parameter.Name }}[" + index + "]." + attr + "=" + encodeURIComponent("" + (item as any)[attr]) + "&";
 			}
     });
-{%    elsif parameter.IsDateOrDateTime -%}
+{%    elsif parameter.IsDate -%}
+    url_ += "{{ parameter.Name }}=" + encodeURIComponent({{ parameter.VariableName }} ? "" + formatDate({{ parameter.VariableName }}) : "{{ QueryNullValue }}") + "&";
+{%    elsif parameter.IsDateTime -%}
     url_ += "{{ parameter.Name }}=" + encodeURIComponent({{ parameter.VariableName }} ? "" + {{ parameter.VariableName }}.{{ parameter.GetDateTimeToString }} : "{{ QueryNullValue }}") + "&";
 {%    elsif parameter.IsArray -%}
     {{ parameter.VariableName }} && {{ parameter.VariableName }}.forEach(item => { url_ += "{{ parameter.Name }}=" + encodeURIComponent("" + item) + "&"; });

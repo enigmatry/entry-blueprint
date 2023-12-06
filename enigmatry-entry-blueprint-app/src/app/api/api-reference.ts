@@ -312,7 +312,7 @@ export class ProductsClient implements IProductsClient {
         if (code !== undefined && code !== null)
             url_ += "Code=" + encodeURIComponent("" + code) + "&";
         if (expiresBefore !== undefined && expiresBefore !== null)
-            url_ += "ExpiresBefore=" + encodeURIComponent(expiresBefore ? "" + expiresBefore.toISOString() : "") + "&";
+            url_ += "ExpiresBefore=" + encodeURIComponent(expiresBefore ? "" + formatDate(expiresBefore) : "") + "&";
         if (pageNumber === null)
             throw new Error("The parameter 'pageNumber' cannot be null.");
         else if (pageNumber !== undefined)
@@ -1173,7 +1173,7 @@ export class GetProductsResponseItem implements IGetProductsResponseItem {
             this.contactEmail = _data["contactEmail"];
             this.contactPhone = _data["contactPhone"];
             this.infoLink = _data["infoLink"];
-            this.expiresOn = _data["expiresOn"] ? new Date(_data["expiresOn"].toString()) : <any>undefined;
+            this.expiresOn = _data["expiresOn"] ? parseDateOnly(_data["expiresOn"].toString()) : <any>undefined;
             this.freeShipping = _data["freeShipping"];
             this.hasDiscount = _data["hasDiscount"];
             this.discount = _data["discount"];
@@ -1268,7 +1268,7 @@ export class GetProductDetailsResponse implements IGetProductDetailsResponse {
             this.contactPhone = _data["contactPhone"];
             this.infoLink = _data["infoLink"];
             this.additionalInfo = _data["additionalInfo"];
-            this.expiresOn = _data["expiresOn"] ? new Date(_data["expiresOn"].toString()) : <any>undefined;
+            this.expiresOn = _data["expiresOn"] ? parseDateOnly(_data["expiresOn"].toString()) : <any>undefined;
             this.hasDiscount = _data["hasDiscount"];
             this.discount = _data["discount"];
             this.freeShipping = _data["freeShipping"];
@@ -1580,7 +1580,7 @@ export class ProductCreateOrUpdateCommand implements IProductCreateOrUpdateComma
             this.contactEmail = _data["contactEmail"];
             this.contactPhone = _data["contactPhone"];
             this.infoLink = _data["infoLink"];
-            this.expiresOn = _data["expiresOn"] ? new Date(_data["expiresOn"].toString()) : <any>undefined;
+            this.expiresOn = _data["expiresOn"] ? parseDateOnly(_data["expiresOn"].toString()) : <any>undefined;
             this.freeShipping = _data["freeShipping"];
             this.hasDiscount = _data["hasDiscount"];
             this.discount = _data["discount"];
@@ -1700,6 +1700,12 @@ function formatDate(d: Date) {
     return d.getFullYear() + '-' + 
         (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
         (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
+}
+
+function parseDateOnly(s: string) {
+    const date = new Date(s);
+    return new Date(date.getTime() + 
+        date.getTimezoneOffset() * 60000);
 }
 
 export class ApiException extends Error {

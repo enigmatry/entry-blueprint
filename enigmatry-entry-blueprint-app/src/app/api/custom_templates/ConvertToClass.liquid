@@ -12,7 +12,7 @@ if (Array.isArray({{ Value }})) {
         {{ Variable }}{% if RequiresStrictPropertyInitialization %}!{% endif %}.push({{ ArrayItemType }}.fromJS(item{% if HandleReferences %}, _mappings{% endif %}));
 {%   else -%}
 {%     if IsArrayItemDate -%}
-        {{ Variable }}{% if RequiresStrictPropertyInitialization %}!{% endif %}.push({{ StringToDateOnlyCode }}(item));
+        {{ Variable }}{% if RequiresStrictPropertyInitialization %}!{% endif %}.push({{ "parseDateOnly" }}(item));
 {%     elsif IsArrayItemDateTime -%}
         {{ Variable }}{% if RequiresStrictPropertyInitialization %}!{% endif %}.push({{ StringToDateCode }}(item));
 {%     else -%}
@@ -34,7 +34,7 @@ if ({{ Value }}) {
 {%     elsif IsDictionaryValueNewableArray -%}
             (<any>{{ Variable }}){% if RequiresStrictPropertyInitialization %}!{% endif %}[key] = {{ Value }}[key] ? {{ Value }}[key].map((i: any) => {{ DictionaryValueArrayItemType }}.fromJS(i{% if HandleReferences %}, _mappings{% endif %})) : {% if HasDictionaryValueDefaultValue %}{{ DictionaryValueDefaultValue }}{% else %}<any>{{ NullValue }}{% endif %};
 {%     elsif IsDictionaryValueDate -%}
-            (<any>{{ Variable }}){% if RequiresStrictPropertyInitialization %}!{% endif %}[key] = {{ Value }}[key] ? {{ StringToDateOnlyCode }}({{ Value }}[key].toString()) : {% if HasDictionaryValueDefaultValue %}{{ DictionaryValueDefaultValue }}{% else %}<any>{{ NullValue }}{% endif %};
+            (<any>{{ Variable }}){% if RequiresStrictPropertyInitialization %}!{% endif %}[key] = {{ Value }}[key] ? {{ "parseDateOnly" }}({{ Value }}[key].toString()) : {% if HasDictionaryValueDefaultValue %}{{ DictionaryValueDefaultValue }}{% else %}<any>{{ NullValue }}{% endif %};
 {%     elsif IsDictionaryValueDateTime -%}
             (<any>{{ Variable }}){% if RequiresStrictPropertyInitialization %}!{% endif %}[key] = {{ Value }}[key] ? {{ StringToDateCode }}({{ Value }}[key].toString()) : {% if HasDictionaryValueDefaultValue %}{{ DictionaryValueDefaultValue }}{% else %}<any>{{ NullValue }}{% endif %};
 {%     else -%}
@@ -52,7 +52,7 @@ if ({{ Value }}) {
 {% endif -%}
 {% else -%}
     {% if IsDate -%}
-{{ Variable }} = {{ Value }} ? {{ StringToDateOnlyCode }}({{ Value }}.toString()) : {% if HasDefaultValue %}{{ StringToDateOnlyCode }}({{ DefaultValue }}){% else %}<any>{{ NullValue }}{% endif %};
+{{ Variable }} = {{ Value }} ? {{ "parseDateOnly" }}({{ Value }}.toString()) : {% if HasDefaultValue %}{{ "parseDateOnly" }}({{ DefaultValue }}){% else %}<any>{{ NullValue }}{% endif %};
     {% elsif IsDateTime -%}
 {{ Variable }} = {{ Value }} ? {{ StringToDateCode }}({{ Value }}.toString()) : {% if HasDefaultValue %}{{ StringToDateCode }}({{ DefaultValue }}){% else %}<any>{{ NullValue }}{% endif %};
     {% else -%}
