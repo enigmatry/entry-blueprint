@@ -58,7 +58,7 @@
       "queryNullValue": "",
       "inlineNamedDictionaries": false,
       "inlineNamedAny": false,
-      "templateDirectory": null,
+      "templateDirectory": "src/app/api/custom_templates_v13",
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
       "enumNameGeneratorType": null,
