@@ -43,4 +43,11 @@
     <None Remove="cleanup.cmd" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\icon-192x192.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
 </Project>
