@@ -1,22 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageType>Template</PackageType>
-    <PackageVersion>1.0</PackageVersion>
-    <PackageId>Enigmatry.Entry.Blueprint.Template</PackageId>
-    <Title>Enigmatry Blueprint Template</Title>
+
     <Authors>Enigmatry</Authors>
-    <Description>Template to use when creating an asp.net core/Angular application for Enigmatry.</Description>
-    <PackageTags>dotnet-new;template;enigmatry</PackageTags>
+    <Copyright>Copyright © 2023 Enigmatry. All rights reserved.</Copyright>
+    <Company>Enigmatry</Company>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Description>Template to use when creating an asp.net core/Angular application with Entry.</Description>
+    <EmbedUntrackedSources>false</EmbedUntrackedSources>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>icon-192x192.png</PackageIcon>
+    <PackageId>Enigmatry.Entry.Blueprint.Template</PackageId>
+    <PackageProjectUrl>https://github.com/enigmatry/entry-blueprint</PackageProjectUrl>
+    <PackageTags>Enigmatry;Entry;dotnet-new;template</PackageTags>
+    <PackageType>Template</PackageType>
+    <PackageVersion>2.0</PackageVersion>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryUrl>https://github.com/enigmatry/entry-blueprint</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <Title>Entry Blueprint Template</Title>
 
     <TargetFramework>net7.0</TargetFramework>
-    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 
-    <IncludeContentInPack>true</IncludeContentInPack>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <ContentTargetFolders>content</ContentTargetFolders>
-    <NoDefaultExcludes>true</NoDefaultExcludes>
-    <Company>Enigmatry</Company>
   </PropertyGroup>
 
   <ItemGroup>
