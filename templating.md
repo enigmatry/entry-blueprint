@@ -7,14 +7,14 @@
 ## Install the template locally from nupkg file
 ``dotnet new -i "bin\Release\Enigmatry.Entry.Blueprint.Template.1.0.0.nupkg"``
 
-## Install the template from the Azure DevOps nuget feed
-``dotnet new install Enigmatry.Entry.Blueprint.Template --add-source https://pkgs.dev.azure.com/enigmatry/b3d80552-b808-495c-9332-82888c12c1bf/_packaging/enigmatry-blueprint-template-feed/nuget/v3/index.json``
+## Install the template from NuGet.org
+``dotnet new install Enigmatry.Entry.Blueprint.Template``
 If you are not authenticated automatically, add the --interactive argument.
 
-## Install specific version of the template from the Azure DevOps nuget feed
-``dotnet new install Enigmatry.Entry.Blueprint.Template::VERSION --add-source https://pkgs.dev.azure.com/enigmatry/b3d80552-b808-495c-9332-82888c12c1bf/_packaging/enigmatry-blueprint-template-feed/nuget/v3/index.json``
+## Install specific version of the template from NuGet.org
+``dotnet new install Enigmatry.Entry.Blueprint.Template::VERSION``
 
-where VERSION should be replaced with the specific version you want to install, e.g. 1.0.50
+where VERSION should be replaced with the specific version you want to install, e.g. 2.0.1
 
 ## Deploy a new solution based on the template:
 ``dotnet new blueprint --name Customer.Project --projectName Customer.Project --appProjectName customer-project --contextName ProjectContext --allow-scripts yes``
