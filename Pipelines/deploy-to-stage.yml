@@ -6,22 +6,26 @@ parameters:
 - name: webJobWebAppName
   
 jobs:
-- template: take-angular-app-offline.yml@templates
+- template: take-web-app-offline.yml@templates
   parameters:
+    jobName: 'take_web_app_offline'
     displayName: 'Take Angular App offline'
     environment: ${{ parameters.environment }}
     subscription: ${{ parameters.serviceConnection }}
     webAppName: ${{ parameters.webAppName }}
 
-- template: take-api-offline.yml@templates
+- template: take-web-app-offline.yml@templates
   parameters:
+    jobName: 'take_api_offline'
     displayName: 'Take API offline'
     environment: ${{ parameters.environment }}
     subscription: ${{ parameters.serviceConnection }}
     webAppName: ${{ parameters.webAppName }}
+    virtualApplication: 'api'
 
-- template: take-webjob-offline.yml@templates
+- template: take-web-app-offline.yml@templates
   parameters:
+    jobName: 'take_webjob_offline'
     displayName: 'Take WebJob offline'
     environment: ${{ parameters.environment }}
     subscription: ${{ parameters.serviceConnection }}
@@ -32,44 +36,52 @@ jobs:
     dbContextName: $(dbContextName)
     displayName: 'Update the Test database'
     dependsOn:
-    - take_app_offline
+    - take_web_app_offline
     - take_api_offline
     - take_webjob_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: ${{ parameters.migrationConnectionString }}
     projectNamePrefix: $(projectNamePrefix)
 
-- template: deploy-angular-app-job.yml@templates
+- template: deploy-web-app.yml@templates
   parameters:
+    jobName: 'deploy_angular_app'
     artifactName: $(artifactName)
     displayName: Deploy the Angular web app
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).App
     subscription: ${{ parameters.serviceConnection }}
     webAppName: ${{ parameters.webAppName }}
+    publishProfilePostfix: app
         
-- template: deploy-api-job.yml@templates
+- template: deploy-web-app.yml@templates
   parameters:
+    jobName: 'deploy_api'
     artifactName: $(artifactName)
     displayName: Deploy the BackEnd API
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).Api
     subscription: ${{ parameters.serviceConnection }}
     webAppName: ${{ parameters.webAppName }}
+    publishProfilePostfix: api
+    virtualApplication: api
 
-- template: deploy-webjob-job.yml@templates
+- template: deploy-web-app.yml@templates
   parameters:
+    jobName: 'deploy_webjob'
     artifactName: $(artifactName)
     displayName: Deploy the Scheduler Web Job
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).Scheduler
     subscription: ${{ parameters.serviceConnection }}
     webAppName: ${{ parameters.webJobWebAppName }}
+    publishProfilePostfix: scheduler
+    excludeFilesFromAppDataFlag: false
 
 - job: git_tag
   displayName: Create Git tag
   dependsOn:
-  - deploy_web_app
+  - deploy_angular_app
   - deploy_api
   - deploy_webjob
   steps:
