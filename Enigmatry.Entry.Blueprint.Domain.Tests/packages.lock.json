@@ -226,7 +226,7 @@
       "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
-          "Enigmatry.Entry.Core": "[3.0.0-preview, )"
+          "Enigmatry.Entry.Core": "[3.0.0-preview.2, )"
         }
       },
       "enigmatry.entry.blueprint.domain": {
@@ -238,9 +238,9 @@
       },
       "Enigmatry.Entry.Core": {
         "type": "CentralTransitive",
-        "requested": "[3.0.0-preview, )",
-        "resolved": "3.0.0-preview",
-        "contentHash": "6fQpKg+c+WLlzJJQKyKE3JNFh20gT6fW1hyl9J4wfS08+GwPY38q4YdXkds20KV0C+X0aoPP3pSPto/F+rTlcw==",
+        "requested": "[3.0.0-preview.2, )",
+        "resolved": "3.0.0-preview.2",
+        "contentHash": "773+BEh2wzsGxZXPZ6pxPw4a5j1ScSqHNqC4Ei+FVByzaM8O32fmbDLjxyn0Vq9m6gnV1TB1akt0swaNKDz+6w==",
         "dependencies": {
           "JetBrains.Annotations": "2023.3.0",
           "MediatR": "12.2.0",
