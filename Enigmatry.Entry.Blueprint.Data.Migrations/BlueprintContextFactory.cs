@@ -17,7 +17,6 @@ public class BlueprintContextFactory : IDesignTimeDbContextFactory<BlueprintCont
             b =>
             {
                 b.MigrationsAssembly(typeof(BlueprintContextFactory).Assembly.FullName);
-                b.UseDateOnlyTimeOnly();
             });
 
         var result =

@@ -1,11 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Autofac" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
@@ -17,7 +11,6 @@
     <PackageReference Include="Enigmatry.Entry.EntityFramework" />
     <PackageReference Include="Enigmatry.Entry.MediatR" />
     <PackageReference Include="Enigmatry.Entry.Swagger" />
-    <PackageReference Include="ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
