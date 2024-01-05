@@ -11,6 +11,7 @@
 * [Code generator configuration](#code-generator-configuration)
   * [Custom validators](#custom-validators)
   * [Form fields conditional visibility](#form-fields-conditional-visibility)
+* [Theming Setup](#theming-setup)
 
 ## Starting the app
 
@@ -34,7 +35,7 @@ To start the app execute command `npm start`, which will build & run the app on 
 
 ### 1. Installing code generator tool
 
-Install [Azure artifacts credential provider](https://github.com/microsoft/artifacts-credprovider#setup) 
+Install [Azure artifacts credential provider](https://github.com/microsoft/artifacts-credprovider#setup)
 
 `iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) } -AddNetfx"`
 
@@ -92,7 +93,7 @@ To show/hide form fields based on condition, we use `fieldsHideExpressions` form
 
 ```ts
 const hideExpressionsDictionary: IHideExpressionDictionary<IFromModel> = {};
-hideExpressionsDictionary.name = 
+hideExpressionsDictionary.name =
   (model: IFromModel)): boolean {
     return model.showName === true;
   }
@@ -106,3 +107,7 @@ After creating the dictionary, we pass it to form `fieldsHideExpressions` input:
 <app-g-some-from [fieldsHideExpressions]="hideExpressionsDictionary">
 </app-g-some-from>
 ```
+
+## Theming Setup
+For detailed instructions to set up theming refer to the
+[Theming Setup](theming-setup.md)
