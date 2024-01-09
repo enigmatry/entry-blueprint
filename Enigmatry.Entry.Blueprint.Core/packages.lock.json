@@ -4,9 +4,9 @@
     "net8.0": {
       "Enigmatry.Entry.Core": {
         "type": "Direct",
-        "requested": "[3.0.0-preview.12, )",
-        "resolved": "3.0.0-preview.12",
-        "contentHash": "w7FTr4MbdOvtAW7qFrG9F0DRji6J1sXklx4UxLGio90XW2rvRp7CxO7g35njn8sabhZKtanfCLOHh3+JCkqF1g==",
+        "requested": "[3.0.0-preview.14, )",
+        "resolved": "3.0.0-preview.14",
+        "contentHash": "CSrbfkyLUKZpMfnr/1RP2Pxa4XAzJDb5C1TuuDV82Ur650TyxDnD0H/PWW51ueZscS6rZdIU3Dc5EWninCUVZQ==",
         "dependencies": {
           "JetBrains.Annotations": "2023.3.0",
           "MediatR": "12.2.0",
