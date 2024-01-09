@@ -94,7 +94,7 @@ public class Startup
         services.AppAddAuthentication(configuration);
         services.AddEntryAuthorization<PermissionId>();
 
-        services.AppAddSwaggerWithAzureAdAuth(configuration, "Blueprint API");
+        services.AppAddSwaggerWithAzureAdAuth(configuration, "Enigmatry Blueprint Api");
     }
 
     [UsedImplicitly]

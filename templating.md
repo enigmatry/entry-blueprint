@@ -17,7 +17,7 @@ If you are not authenticated automatically, add the --interactive argument.
 where VERSION should be replaced with the specific version you want to install, e.g. 2.0.1
 
 ## Deploy a new solution based on the template:
-``dotnet new blueprint --name Customer.Project --projectName Customer.Project --appProjectName customer-project --contextName ProjectContext --allow-scripts yes``
+``dotnet new blueprint --name Customer.Project --projectName Customer.Project --appProjectName customer-project --friendlyName "Customer Project" --allow-scripts yes``
 
 ## Uninstall the template (when installed from nupkg)
 ``dotnet new -u Enigmatry.Entry.Blueprint.Template``

@@ -15,7 +15,7 @@ public class IntegrationFixtureBase
     private IConfiguration _configuration = null!;
     private TestDatabase _testDatabase = null!;
     private IServiceScope _testScope = null!;
-    private static BlueprintWebApplicationFactory _factory = null!;
+    private static ApiWebApplicationFactory _factory = null!;
     private bool _seedUsers = true;
     private bool _isUserAuthenticated = true;
 
@@ -31,7 +31,7 @@ public class IntegrationFixtureBase
             .WithConnectionString(_testDatabase.ConnectionString)
             .Build();
 
-        _factory = new BlueprintWebApplicationFactory(_configuration, _isUserAuthenticated);
+        _factory = new ApiWebApplicationFactory(_configuration, _isUserAuthenticated);
 
         var scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
         _testScope = scopeFactory.CreateScope();
