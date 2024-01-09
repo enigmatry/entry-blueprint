@@ -13,6 +13,10 @@ public class AppDbContext : BaseDbContext
     {
     }
 
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) =>
+        configurationBuilder.Properties<string>()
+            .HaveMaxLength(255);
+
     private static EntitiesDbContextOptions CreateOptions() =>
         new() { ConfigurationAssembly = AssemblyFinder.InfrastructureAssembly, EntitiesAssembly = AssemblyFinder.DomainAssembly };
 }
