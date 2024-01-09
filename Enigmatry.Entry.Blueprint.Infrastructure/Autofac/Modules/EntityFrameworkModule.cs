@@ -45,7 +45,7 @@ public class EntityFrameworkModule : Module
         builder.Register(CreateDbContextOptions).As<DbContextOptions>().InstancePerLifetimeScope();
 
         // Needs to be registered both as self and as DbContext or the tests might not work as expected
-        builder.RegisterType<BlueprintContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
+        builder.RegisterType<AppDbContext>().AsSelf().As<DbContext>().InstancePerLifetimeScope();
         builder.RegisterType<EntityFrameworkUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
     }
 
@@ -68,7 +68,7 @@ public class EntityFrameworkModule : Module
             .UseLoggerFactory(loggerFactory)
             .EnableSensitiveDataLogging(dbContextSettings.SensitiveDataLoggingEnabled);
 
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext")!,
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("AppDbContext")!,
             sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
 
         optionsBuilder.AddInterceptors();

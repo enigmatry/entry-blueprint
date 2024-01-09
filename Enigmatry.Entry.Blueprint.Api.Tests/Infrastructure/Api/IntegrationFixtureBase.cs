@@ -27,7 +27,7 @@ public class IntegrationFixtureBase
         _testDatabase = new TestDatabase();
 
         _configuration = new TestConfigurationBuilder()
-            .WithDbContextName(nameof(BlueprintContext))
+            .WithDbContextName(nameof(AppDbContext))
             .WithConnectionString(_testDatabase.ConnectionString)
             .Build();
 

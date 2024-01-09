@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Data;
 
 [UsedImplicitly]
-public class BlueprintContext : BaseDbContext
+public class AppDbContext : BaseDbContext
 {
-    public BlueprintContext(DbContextOptions options) :
+    public AppDbContext(DbContextOptions options) :
         base(CreateOptions(), options)
     {
     }

@@ -87,7 +87,7 @@ public class Startup
         services.AppAddPolly();
         services.AppAddAutoMapper();
         services.AddEntryHealthChecks(configuration)
-            .AddDbContextCheck<BlueprintContext>();
+            .AddDbContextCheck<AppDbContext>();
         services.AppAddMediatR();
         services.AppAddFluentValidation();
 

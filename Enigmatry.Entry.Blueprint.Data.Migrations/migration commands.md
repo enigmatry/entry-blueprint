@@ -7,13 +7,13 @@ Run these commands from Package Manager Console.
 ### Add migration
 
 ``` powershell
-Add-Migration -Project Enigmatry.Entry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Entry.Blueprint.Data.Migrations -Context BlueprintContext -Name MIGRATION_NAME_HERE
+Add-Migration -Project Enigmatry.Entry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Entry.Blueprint.Data.Migrations -Context AppDbContext -Name MIGRATION_NAME_HERE
 ```
 
 ### Update database
 
 ``` powershell
-Update-Database -Project Enigmatry.Entry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Entry.Blueprint.Data.Migrations -Context BlueprintContext
+Update-Database -Project Enigmatry.Entry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Entry.Blueprint.Data.Migrations -Context AppDbContext
 ```
 
 ### Remove migration
@@ -25,7 +25,7 @@ Remove-Migration -Project Enigmatry.Entry.Blueprint.Data.Migrations -StartUpProj
 ### Revert to a specific migration (discard all migrations created after the specified one)
 
 ``` powershell
-Update-Database -Project Enigmatry.Entry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Entry.Blueprint.Data.Migrations -Context BlueprintContext THE-LAST-GOOD-MIGRATION-NAME
+Update-Database -Project Enigmatry.Entry.Blueprint.Data.Migrations -StartUpProject Enigmatry.Entry.Blueprint.Data.Migrations -Context AppDbContext THE-LAST-GOOD-MIGRATION-NAME
 ```
 
 ## Command line commands
@@ -45,13 +45,13 @@ dotnet tool update --global dotnet-ef
 ### Add migration
 
 ``` shell
-dotnet-ef migrations add MIGRATION_NAME_HERE --project Enigmatry.Entry.Blueprint.Data.Migrations --startup-project Enigmatry.Entry.Blueprint.Data.Migrations --context BlueprintContext
+dotnet-ef migrations add MIGRATION_NAME_HERE --project Enigmatry.Entry.Blueprint.Data.Migrations --startup-project Enigmatry.Entry.Blueprint.Data.Migrations --context AppDbContext
 ```
 
 ### Update database
 
 ``` shell
-dotnet-ef database update --project Enigmatry.Entry.Blueprint.Data.Migrations --startup-project Enigmatry.Entry.Blueprint.Data.Migrations --context BlueprintContext
+dotnet-ef database update --project Enigmatry.Entry.Blueprint.Data.Migrations --startup-project Enigmatry.Entry.Blueprint.Data.Migrations --context AppDbContext
 ```
 
 ### Remove migration

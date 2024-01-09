@@ -6,7 +6,7 @@ trigger:
 
 variables:
   artifactName: 'enigmatry-entry-blueprint-template'
-  dbContextName: 'BlueprintContext'
+  dbContextName: 'AppDbContext'
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   majorMinorVersion: 1.0
   nodeVersion: '16.20.2'
