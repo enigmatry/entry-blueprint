@@ -11,7 +11,7 @@ public static class SwaggerAuthenticationStartupExtensions
     public static void AppUseSwaggerWithAzureAdAuth(this IApplicationBuilder app, IConfiguration configuration)
     {
         var aadOptions = configuration.GetSection(AuthenticationStartupExtensions.AzureAdSection).Get<MicrosoftIdentityOptions>()!;
-        app.AppUseSwaggerWithOAuth2Client(aadOptions.ClientId!);
+        app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!);
     }
 
     public static void AppAddSwaggerWithAzureAdAuth(this IServiceCollection services, IConfiguration configuration, string appTitle)
@@ -26,7 +26,7 @@ public static class SwaggerAuthenticationStartupExtensions
 
         var scopesDictionary = aadOptions.Scope.ToDictionary(scope => scope, _ => "");
 
-        services.AppAddSwaggerWithAuthorizationCode(
+        services.AddEntrySwaggerWithAuthorizationCode(
             appTitle,
             $"{authorityUrl}/oauth2/v2.0/authorize",
             $"{authorityUrl}/oauth2/v2.0/token",

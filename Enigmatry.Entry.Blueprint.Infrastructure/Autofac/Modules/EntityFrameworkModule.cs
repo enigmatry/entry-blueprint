@@ -71,6 +71,8 @@ public class EntityFrameworkModule : Module
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("BlueprintContext")!,
             sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
 
+        optionsBuilder.AddInterceptors();
+
         // Interceptors will be executed in the order they are added
         optionsBuilder.AddInterceptors(
             container.Resolve<PopulateCreatedUpdatedInterceptor>());
