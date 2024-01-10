@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240109190320_Initial")]
+    [Migration("20240110110915_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
