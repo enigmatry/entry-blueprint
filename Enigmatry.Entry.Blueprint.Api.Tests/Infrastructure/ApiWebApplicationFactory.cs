@@ -3,7 +3,6 @@ using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
-using Enigmatry.Entry.AspNetCore.Tests.Infrastructure.TestImpersonation;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
