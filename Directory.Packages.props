@@ -8,15 +8,15 @@
     <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.Core" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="3.0.0-preview.14" />
-    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="3.0.0-preview.14" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.Core" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="3.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="3.0.0" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="15.1.0" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="15.1.0" />
     <PackageVersion Include="FakeItEasy" Version="8.1.0" />
