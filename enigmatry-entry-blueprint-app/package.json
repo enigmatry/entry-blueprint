@@ -34,6 +34,8 @@
     "@azure/msal-browser": "3.2.0",
     "@enigmatry/entry-components": "15.0.1-preview.6",
     "@enigmatry/entry-form": "15.0.1-preview.6",
+    "@microsoft/applicationinsights-angularplugin-js": "^15.0.1",
+    "@microsoft/applicationinsights-web": "^3.0.7",
     "@ngx-formly/core": "6.1.7",
     "@ngx-formly/material": "6.1.7",
     "date-fns": "^2.30.0",

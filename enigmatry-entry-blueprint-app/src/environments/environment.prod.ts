@@ -6,5 +6,8 @@ export const environment = {
     authority: '__azureAdAuthority__',
     scopes: ['__azureAdScopes__']
   },
-  defaultLanguage: 'nl'
+  defaultLanguage: 'nl',
+  applicationInsights: {
+    connectionString: '__applicationInsightsConnectionString__'
+  }
 };
