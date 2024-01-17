@@ -9,6 +9,8 @@
   {
     Id: Guid_2,
     EmailAddress: test_user@xyz.com,
-    FullName: INTEGRATION_TEST
+    FullName: INTEGRATION_TEST,
+    CreatedOn: DateTimeOffset_2,
+    UpdatedOn: DateTimeOffset_2
   }
 ]

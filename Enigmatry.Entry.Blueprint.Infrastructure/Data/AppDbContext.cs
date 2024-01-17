@@ -6,12 +6,16 @@ using Microsoft.EntityFrameworkCore;
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Data;
 
 [UsedImplicitly]
-public class BlueprintContext : BaseDbContext
+public class AppDbContext : BaseDbContext
 {
-    public BlueprintContext(DbContextOptions options) :
+    public AppDbContext(DbContextOptions options) :
         base(CreateOptions(), options)
     {
     }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder) =>
+        configurationBuilder.Properties<string>()
+            .HaveMaxLength(255);
 
     private static EntitiesDbContextOptions CreateOptions() =>
         new() { ConfigurationAssembly = AssemblyFinder.InfrastructureAssembly, EntitiesAssembly = AssemblyFinder.DomainAssembly };

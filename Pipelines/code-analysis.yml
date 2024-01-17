@@ -23,7 +23,7 @@ jobs:
 - template: code-analysis.yml@templates
   parameters:
     projectName: 'Enigmatry Blueprint Template'
-    sonarProjectKey: 'AspNetCoreAngular_EnigmatryBlueprintTemplate'
+    sonarProjectKey: 'AspNetCoreAngular_EnigmatryEntryBlueprint'
     displayName: 'Code Analysis'
 
 - template: build-report-job.yml@templates

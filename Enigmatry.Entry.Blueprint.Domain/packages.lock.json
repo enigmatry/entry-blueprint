@@ -2,6 +2,19 @@
   "version": 2,
   "dependencies": {
     "net8.0": {
+      "Enigmatry.Entry.Core": {
+        "type": "Direct",
+        "requested": "[3.0.0, )",
+        "resolved": "3.0.0",
+        "contentHash": "N8KBjxbil6pT0Ud2aBsWR2zCExYvOZKZ4nVVUPYbg8fkVL9YLE+shWdkH1+70ablV3nd/OYLvolhg1vKyeI5rg==",
+        "dependencies": {
+          "JetBrains.Annotations": "2023.3.0",
+          "MediatR": "12.2.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Serilog": "3.1.1",
+          "System.ComponentModel.Annotations": "5.0.0"
+        }
+      },
       "FluentValidation": {
         "type": "Direct",
         "requested": "[11.9.0, )",
@@ -45,20 +58,7 @@
       "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
-          "Enigmatry.Entry.Core": "[3.0.0-preview.2, )"
-        }
-      },
-      "Enigmatry.Entry.Core": {
-        "type": "CentralTransitive",
-        "requested": "[3.0.0-preview.2, )",
-        "resolved": "3.0.0-preview.2",
-        "contentHash": "773+BEh2wzsGxZXPZ6pxPw4a5j1ScSqHNqC4Ei+FVByzaM8O32fmbDLjxyn0Vq9m6gnV1TB1akt0swaNKDz+6w==",
-        "dependencies": {
-          "JetBrains.Annotations": "2023.3.0",
-          "MediatR": "12.2.0",
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
-          "Serilog": "3.1.1",
-          "System.ComponentModel.Annotations": "5.0.0"
+          "Enigmatry.Entry.Core": "[3.0.0, )"
         }
       },
       "Microsoft.Extensions.Logging.Abstractions": {
