@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { AcceptLanguageInterceptor } from '@enigmatry/entry-components';
 import { AuthModule } from './auth/auth.module';
-import { GlobalErrorHandler } from './error-handling/global-error-handler';
+import { GlobalErrorHandler } from './global-error-handler';
 import { provideCurrencyCode, provideDatePipeOptions } from './i18n/localization';
 
 @NgModule({

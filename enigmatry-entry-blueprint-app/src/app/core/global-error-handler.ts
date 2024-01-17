@@ -1,5 +1,5 @@
 import { Injectable, ErrorHandler } from '@angular/core';
-import { ApplicationInsightsService } from '../services/application-insights.service';
+import { ApplicationInsightsService } from './services/application-insights.service';
 
 /**
  * Extend the default error handling to report errors to an external service - e.g Azure Application Insights.
@@ -11,7 +11,7 @@ export class GlobalErrorHandler extends ErrorHandler {
   }
 
   override handleError(error: any) {
-    // Default error handler that prints error messages to the console
+    // Default error handler prints error messages to the console
     super.handleError(error);
 
     // Log error to application insights
