@@ -11,10 +11,10 @@ export const environment = {
     authority: 'https://enigmatryb2cdev.b2clogin.com/enigmatryb2cdev.onmicrosoft.com/B2C_1_entry_blueprint_sign_in',
     scopes: ['https://enigmatryb2cdev.onmicrosoft.com/a8793ce9-86dc-4d7e-aa70-361a3c5a5150/api']
   },
-  defaultLanguage: 'nl',
   applicationInsights: {
     connectionString: ''
-  }
+  },
+  defaultLanguage: 'nl'
 };
 
 /*

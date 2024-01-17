@@ -1,4 +1,4 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
 /**
  * Provides Azure Application Insights integration
  *
- * References:
  * - https://github.com/microsoft/applicationinsights-angularplugin-js
  * - https://timdeschryver.dev/blog/configuring-azure-application-insights-in-an-angular-application
  */
@@ -15,23 +14,25 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApplicationInsightsService {
-  private angularPlugin = new AngularPlugin();
+  private appInsights: ApplicationInsights | undefined;
 
-  private appInsights = new ApplicationInsights({
-    config: {
-      connectionString: environment.applicationInsights.connectionString,
-      extensions: [this.angularPlugin],
-      extensionConfig: {
-        [this.angularPlugin.identifier]: {
-          router: this.router,
-          errorServices: [new ErrorHandler()]
-        }
-      }
+  constructor(private router: Router) { }
+
+  /**
+   * Performs initialization logic
+   */
+  initialize(): void {
+    if (!environment.applicationInsights.connectionString) {
+      // Skip initialization when connection string is not set
+      return;
     }
-  });
-
-  constructor(private router: Router) {
-    this.appInsights.loadAppInsights();
+    try {
+      this.appInsights = this.createApplicationInsights();
+      this.appInsights.loadAppInsights();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`Error loading AppInsights: ${error}`);
+    }
   }
 
   /**
@@ -78,5 +79,26 @@ export class ApplicationInsightsService {
    */
   trackTrace(message: string, properties?: { [key: string]: any }) {
     this.appInsights?.trackTrace({ message }, properties);
+  }
+
+  /**
+   * Set up an instance of ApplicationInsights with AngularPlugin and Router
+   * @returns {ApplicationInsights}
+   */
+  private createApplicationInsights(): ApplicationInsights {
+    const angularPlugin = new AngularPlugin();
+
+    return new ApplicationInsights({
+      config: {
+        connectionString: environment.applicationInsights.connectionString,
+        extensions: [angularPlugin],
+        extensionConfig: {
+          [angularPlugin.identifier]: {
+            // Router for enabling page view tracking
+            router: this.router
+          }
+        }
+      }
+    });
   }
 }
