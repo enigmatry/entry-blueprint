@@ -102,6 +102,7 @@ The table below outlines the default values for various configuration properties
 |                  | typography                      | null                                |
 |                  | fonts/family                    | ''                                  |
 |                  | fonts/size                      | 0                                   |
+|                  | fonts/letter-spacing            | null                                |
 |                  | spacing/default                 | 15px                                |
 |                  | inputs/background               | null                                |
 |                  | buttons/icon-size               | 48px                                |
