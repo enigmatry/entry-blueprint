@@ -109,5 +109,4 @@ After creating the dictionary, we pass it to form `fieldsHideExpressions` input:
 ```
 
 ## Theming Customization
-Blueprint comes with a pre-configured theme. If you need to customize or alter theme, please refer to detailed documentation on 
-[Theming Customization](theming-setup.md).
+Blueprint comes with a pre-configured theme. If you need to customize or alter theme, please refer to detailed documentation [here](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md).
