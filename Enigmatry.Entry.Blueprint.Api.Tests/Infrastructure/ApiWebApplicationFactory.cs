@@ -3,7 +3,6 @@ using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
-using Enigmatry.Entry.AspNetCore.Tests.Infrastructure.TestImpersonation;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -13,12 +12,12 @@ using Microsoft.Extensions.Hosting;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure;
 
-public class BlueprintWebApplicationFactory : WebApplicationFactory<Startup>
+public class ApiWebApplicationFactory : WebApplicationFactory<Startup>
 {
     private readonly IConfiguration _configuration;
     private readonly bool _isUserAuthenticated;
 
-    public BlueprintWebApplicationFactory(IConfiguration configuration, bool isUserAuthenticated = true)
+    public ApiWebApplicationFactory(IConfiguration configuration, bool isUserAuthenticated = true)
     {
         _configuration = configuration;
         _isUserAuthenticated = isUserAuthenticated;

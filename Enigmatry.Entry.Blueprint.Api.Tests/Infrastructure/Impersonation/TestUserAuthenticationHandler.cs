@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Enigmatry.Entry.AspNetCore.Tests.Infrastructure.TestImpersonation;
+namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 
 public class TestUserAuthenticationHandler : AuthenticationHandler<TestAuthenticationOptions>
 {

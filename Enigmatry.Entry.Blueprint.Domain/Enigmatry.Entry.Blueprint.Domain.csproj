@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Enigmatry.Entry.Core" />
     <PackageReference Include="FluentValidation" />
   </ItemGroup>
 
