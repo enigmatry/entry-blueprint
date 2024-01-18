@@ -11,7 +11,7 @@
 * [Code generator configuration](#code-generator-configuration)
   * [Custom validators](#custom-validators)
   * [Form fields conditional visibility](#form-fields-conditional-visibility)
-* [Theming Setup](#theming-setup)
+* [Theming Customization](#theming-customization)
 
 ## Starting the app
 
@@ -108,6 +108,6 @@ After creating the dictionary, we pass it to form `fieldsHideExpressions` input:
 </app-g-some-from>
 ```
 
-## Theming Setup
-For detailed instructions to set up theming refer to the
-[Theming Setup](theming-setup.md).
+## Theming Customization
+Blueprint comes with a pre-configured theme. If you need to customize or alter theme, please refer to detailed documentation on 
+[Theming Customization](theming-setup.md).
