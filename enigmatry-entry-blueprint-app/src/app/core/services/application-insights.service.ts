@@ -28,6 +28,7 @@ export class ApplicationInsightsService {
       this.appInsights = this.createApplicationInsights();
       this.appInsights.loadAppInsights();
 
+      this.appInsights.context.application.ver = environment.appVersion;
       this.setAuthenticatedUserContext();
     } catch (error) {
       // eslint-disable-next-line no-console

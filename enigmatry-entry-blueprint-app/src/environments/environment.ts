@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  appVersion: '0.0.0',
   apiUrl: 'https://localhost:44394',
   azureAd: {
     clientId: 'a8793ce9-86dc-4d7e-aa70-361a3c5a5150',
