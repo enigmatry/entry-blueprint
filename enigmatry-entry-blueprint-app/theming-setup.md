@@ -1,6 +1,8 @@
 # Theming Setup
 
 - [Overview](#overview)
+- [First steps](#first-steps)
+- [Required Enigmatry packages](#required-enigmatry-packages)
 - [Theme](#theme)
   - [Define custom theme](#define-custom-theme)
   - [Fonts](#fonts)
@@ -10,7 +12,65 @@
 
 ## Overview
 
-The Entry theme works hand-in-hand with Angular Material. It allows you to configure only certain things for simplicity and quick setup. How to set up the theme in your project, can be found in further sections.
+The Entry theme works hand-in-hand with [Angular Material](https://material.angular.io/). It allows you to configure only certain things for simplicity and quick setup. How to set up the theme in your project, can be found in further sections.
+
+## First steps
+
+Make sure to address the following prerequisites:
+
+1. Ensure that the latest version of the following @enigmatry packages are installed, more info [`here`](#enigmatry-packages)
+2. Prepare custom fonts if customers require them, more info [`here`](#2-preparing-custom-fonts)
+3. Create file in project structure for theme-related setup and [`configuration`](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md)
+4. Create custom theme
+5. Configure custom theme & choose [`configuration approach`](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md#theme-configuration-approaches)
+
+- For a deeper understanding of theming concepts and customisation options, refer to the [Angular Material documentation](#angular-material-documentation)
+
+## Required Enigmatry packages
+
+- [`entry-components`](https://github.com/enigmatry/entry-angular-building-blocks/tree/master/libs/entry-components)
+- [`entry-form`](https://github.com/enigmatry/entry-angular-building-blocks/tree/master/libs/entry-form)
+
+### @enigmatry/entry-components
+Reusable Entry components for Angular material. It come with default Roboto font. There are plenty of components that this library includes: button, dialog, file-input, search-filter, spinner, table, and many more. <br>
+Visit components demo app to check what is currently supported [here](https://entry-demo.enigmatry.com/)
+
+#### Installation
+
+```ts
+npm install @enigmatry/entry-components
+```
+
+#### Usage
+
+Call generator file in dedicated scss file for theming, recommended structure is [here](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md#project-structure) This package contains generator file. 
+
+```scss
+@use 'entry-components/styles/generator';
+```
+
+In summary, the generator:
+
+- Includes multiple generator files for supported entry components (dialog, table, button, form...)
+- Generates [Angular Material](https://material.angular.io/guide/theming) for customisation of colour palettes, typography, and density settings
+- Sets up  default, boilerplate theme with predefined values
+- Combines default theme and custom theme styles
+
+
+### @enigmatry/entry-form
+Form components and helper methods used by entry-code-generation.
+
+#### Installation
+
+```ts
+npm install @enigmatry/entry-form
+```
+
+Import the `EntryFormModule` in your `feature.module` or `shared.module`
+
+```typescript
+import { EntryFormModule } from '@enigmatry/entry-form';
+```
 
 ## Theme
 
@@ -19,8 +79,7 @@ The theme scss file needs to contain imports for generator files for configuring
 ### Define custom theme
 
 Inside the `$custom-theme` map, you can define custom styles to suit specific preferences and needs.
-If a specific value is not defined in your project's custom theme, the value from the default theme will be applied.
-
+If a specific value is not defined in your project's custom theme, the value from the [default theme](#default-values-table) will be applied.
 `$custom-theme` map includes 3 main sections:
 
 1) **general**
