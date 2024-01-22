@@ -11,7 +11,7 @@
 * [Code generator configuration](#code-generator-configuration)
   * [Custom validators](#custom-validators)
   * [Form fields conditional visibility](#form-fields-conditional-visibility)
-* [Theming Customization](#theming-customization)
+* [Theming Setup](#theming-setup)
 
 ## Starting the app
 
@@ -108,5 +108,5 @@ After creating the dictionary, we pass it to form `fieldsHideExpressions` input:
 </app-g-some-from>
 ```
 
-## Theming Customization
-Blueprint comes with a pre-configured theme. If you need to customize or alter theme, please refer to detailed documentation [here](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md).
+## Theming Setup
+For detailed instructions to set up theming refer to the [Theming Setup](./theming-setup.md).
