@@ -7,18 +7,21 @@ import { ProductListComponent } from './product-list/product-list.component';
 const routes: Routes = [
 	{
 		path: '',
-		component: ProductListComponent
+		component: ProductListComponent,
+		title: 'Products'
 	},
 	{
 		path: `create`,
-		component: ProductEditComponent
+		component: ProductEditComponent,
+		title: 'New product'
 	},
 	{
 		path: 'edit/:id',
 		component: ProductEditComponent,
 		resolve: {
 			response: (route: ActivatedRouteSnapshot) => inject(ProductsClient).get(route.params.id)
-		}
+		},
+		title: 'Edit product'
 	}
 ];
 

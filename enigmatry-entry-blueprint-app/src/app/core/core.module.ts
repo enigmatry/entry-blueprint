@@ -1,9 +1,11 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { TitleStrategy } from '@angular/router';
 import { AcceptLanguageInterceptor } from '@enigmatry/entry-components';
 import { AuthModule } from './auth/auth.module';
-import { GlobalErrorHandler } from './global-error-handler';
 import { provideCurrencyCode, provideDatePipeOptions } from './i18n/localization';
+import { GlobalErrorHandler } from './services/global-error-handler';
+import { PageTitleStrategy } from './services/page-title-strategy';
 
 @NgModule({
   imports: [
@@ -13,6 +15,10 @@ import { provideCurrencyCode, provideDatePipeOptions } from './i18n/localization
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler
+    },
+    {
+      provide: TitleStrategy,
+      useClass: PageTitleStrategy
     },
     {
       provide: HTTP_INTERCEPTORS,

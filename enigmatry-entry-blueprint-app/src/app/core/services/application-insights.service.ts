@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
+import { NavigationEnd, Router, TitleStrategy } from '@angular/router';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { filter, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CurrentUserService } from './current-user.service';
 
 /**
- * Provides Azure Application Insights integration
- *
- * - https://github.com/microsoft/applicationinsights-angularplugin-js
- * - https://timdeschryver.dev/blog/configuring-azure-application-insights-in-an-angular-application
+ * Provides integration with Azure Application Insights
+ * - https://github.com/microsoft/ApplicationInsights-JS
  */
 @Injectable({
   providedIn: 'root'
@@ -17,23 +15,22 @@ import { CurrentUserService } from './current-user.service';
 export class ApplicationInsightsService {
   private appInsights: ApplicationInsights | undefined;
 
-  constructor(private router: Router, private currentUserService: CurrentUserService) { }
+  constructor(private router: Router, private titleStrategy: TitleStrategy,
+    private currentUserService: CurrentUserService) { }
 
   initialize(): void {
     if (!environment.applicationInsights.connectionString) {
       // Skip initialization when connection string is not set
       return;
     }
-    try {
-      this.appInsights = this.createApplicationInsights();
-      this.appInsights.loadAppInsights();
 
-      this.appInsights.context.application.ver = environment.appVersion;
-      this.setAuthenticatedUserContext();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error loading AppInsights:', error);
-    }
+    this.appInsights = this.createApplicationInsights();
+    this.appInsights.loadAppInsights();
+
+    this.appInsights.context.application.ver = environment.appVersion;
+    this.setAuthenticatedUserContext();
+
+    this.trackPageViewsOnRouterNavigation();
   }
 
   trackEvent(name: string, properties?: { [key: string]: any }) {
@@ -49,20 +46,23 @@ export class ApplicationInsightsService {
   }
 
   private createApplicationInsights(): ApplicationInsights {
-    const angularPlugin = new AngularPlugin();
-
     return new ApplicationInsights({
       config: {
-        connectionString: environment.applicationInsights.connectionString,
-        extensions: [angularPlugin],
-        extensionConfig: {
-          [angularPlugin.identifier]: {
-            // Set router to enable page view tracking
-            router: this.router
-          }
-        }
+        connectionString: environment.applicationInsights.connectionString
       }
     });
+  }
+
+  private trackPageViewsOnRouterNavigation() {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(event => event as NavigationEnd)
+      )
+      .subscribe(event => {
+        const title = this.titleStrategy.buildTitle(this.router.routerState.snapshot);
+        this.appInsights?.trackPageView({ name: title, uri: event.url });
+      });
   }
 
   private setAuthenticatedUserContext(): void {
@@ -70,7 +70,9 @@ export class ApplicationInsightsService {
       .subscribe(currentUser => {
         const userId = currentUser?.id;
         if (userId) {
-          this.appInsights?.setAuthenticatedUserContext(userId, userId, false);
+          this.appInsights?.setAuthenticatedUserContext(userId);
+        } else {
+          this.appInsights?.clearAuthenticatedUserContext();
         }
       });
   }
