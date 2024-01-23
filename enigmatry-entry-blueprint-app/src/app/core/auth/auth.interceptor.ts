@@ -7,7 +7,7 @@ import {
   HttpStatusCode
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
@@ -24,15 +24,16 @@ export class AuthInterceptor implements HttpInterceptor {
       .getAccessToken()
       .pipe(
         switchMap(accessToken => next.handle(this.addAuthorizationHeader(req, accessToken))),
-        catchError(error => this.handle401Response(error))
+        catchError(async error => {
+          if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Unauthorized) {
+            await this.authService.loginRedirect();
+          }
+
+          throw error;
+        })
       );
   };
 
   private addAuthorizationHeader = (req: HttpRequest<any>, accessToken: string): HttpRequest<any> =>
     req.clone({ setHeaders: { Authorization: `Bearer ${accessToken}` } });
-
-  private handle401Response = (err: any): Observable<any> =>
-    err instanceof HttpErrorResponse && err.status === HttpStatusCode.Unauthorized
-      ? of(this.authService.loginRedirect())
-      : throwError(() => err);
 }
