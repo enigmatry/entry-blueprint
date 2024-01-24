@@ -39,7 +39,6 @@ export class ApplicationInsightsService implements OnDestroy {
     this.destroy$.complete();
   }
 
-
   trackEvent(name: string, properties?: { [key: string]: any }) {
     this.appInsights?.trackEvent({ name }, properties);
   }
