@@ -16,7 +16,7 @@
     "codegen:run-i18n": "entry-codegen --source-assembly ../Enigmatry.Entry.Blueprint.CodeGeneration.Setup/bin/Debug/net8.0/Enigmatry.Entry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features --enable-i18n true",
     "codegen:install": "dotnet tool install enigmatry.entry.codegeneration.tools -g",
     "codegen:update": "dotnet tool update enigmatry.entry.codegeneration.tools -g",
-    "i18n": "ng extract-i18n --format json --output-path src/i18n --out-file messages.en.json"
+    "i18n": "ng extract-i18n --format json --output-path src/i18n --out-file messages.en.json & sortjson src/i18n"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +34,7 @@
     "@azure/msal-browser": "3.2.0",
     "@enigmatry/entry-components": "15.1.0-preview",
     "@enigmatry/entry-form": "15.1.0-preview",
+    "@microsoft/applicationinsights-web": "^3.0.7",
     "@ngx-formly/core": "6.1.7",
     "@ngx-formly/material": "6.1.7",
     "date-fns": "^2.30.0",
@@ -53,6 +54,7 @@
     "@types/node": "^16.4.3",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~7.0.0",
+    "json-sort-cli": "^4.0.0",
     "karma": "~6.3.4",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "^2.1.0",

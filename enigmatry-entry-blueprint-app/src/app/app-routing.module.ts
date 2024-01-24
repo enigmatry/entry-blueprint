@@ -10,7 +10,8 @@ const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
-        canActivate: [authGuard]
+        canActivate: [authGuard],
+        title: $localize`:@@route.home:Home`
     },
     {
         path: 'users',

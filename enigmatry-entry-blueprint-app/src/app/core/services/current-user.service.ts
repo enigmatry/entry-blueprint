@@ -10,6 +10,10 @@ import { UserProfile } from '../auth/user-profile';
 export class CurrentUserService {
 	private currentUserSubject = new BehaviorSubject<UserProfile | null>(null);
 
+	public get currentUser$(): Observable<UserProfile | null> {
+		return this.currentUserSubject.asObservable();
+	}
+
 	public get currentUser(): UserProfile | null {
 		return this.currentUserSubject.value;
 	}
