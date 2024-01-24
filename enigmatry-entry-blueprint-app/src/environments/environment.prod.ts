@@ -8,7 +8,8 @@ export const environment = {
     scopes: ['__azureAdScopes__']
   },
   applicationInsights: {
-    connectionString: '__applicationInsightsConnectionString__'
+    connectionString: '__applicationInsightsConnectionString__',
+    enableCorsCorrelation: false // When 'true' correlation header is added to CORS requests as well
   },
   defaultLanguage: 'nl'
 };

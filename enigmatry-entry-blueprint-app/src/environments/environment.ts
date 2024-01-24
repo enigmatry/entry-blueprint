@@ -13,7 +13,8 @@ export const environment = {
     scopes: ['https://enigmatryb2cdev.onmicrosoft.com/a8793ce9-86dc-4d7e-aa70-361a3c5a5150/api']
   },
   applicationInsights: {
-    connectionString: ''
+    connectionString: '',
+    enableCorsCorrelation: true
   },
   defaultLanguage: 'nl'
 };

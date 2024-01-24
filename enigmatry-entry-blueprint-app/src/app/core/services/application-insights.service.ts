@@ -55,7 +55,7 @@ export class ApplicationInsightsService implements OnDestroy {
     return new ApplicationInsights({
       config: {
         connectionString: environment.applicationInsights.connectionString,
-        enableCorsCorrelation: true
+        enableCorsCorrelation: environment.applicationInsights.enableCorsCorrelation
       }
     });
   }
