@@ -20,6 +20,13 @@ module.exports = {
         "<rootDir>/src/app/shared/validators/**/*.ts",
         "<rootDir>/src/app/*.ts"
     ],
+    "coveragePathIgnorePatterns": [
+        "enum.ts",
+        ".component.ts",
+        "<rootDir>/.*locale.ts$",
+        ".module.ts",
+        ".spec.data.ts"
+      ],
     "testMatch": [
         "<rootDir>/src/app/**/*.spec.ts"
     ],

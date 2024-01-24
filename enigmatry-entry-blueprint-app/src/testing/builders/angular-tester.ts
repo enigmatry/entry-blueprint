@@ -3,9 +3,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 export class AngularTester {
-    private readonly testEndpoint = '/test';
+    private readonly testEndpoint = `${environment.apiUrl}/test`;
     private httpMock: HttpTestingController;
     private httpClient: HttpClient;
     location: Location;
@@ -25,11 +26,10 @@ export class AngularTester {
     readonly requestFailure = (statusCode: number | undefined, statusText: string,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         done: jest.DoneCallback, expectedResults: (error: HttpErrorResponse) => void = () => { },
-        url: string | undefined = this.testEndpoint, skipCheck: boolean = false) => {
-        this.httpClient.get<object>(url).subscribe({
+        skipCheck: boolean = false) => {
+        this.httpClient.get<object>(this.testEndpoint).subscribe({
             next: () => fail(`should have failed with the ${statusCode} error`),
             error: (error: HttpErrorResponse) => {
-                // Expect(error).toEqual({});
                 expect(error.status).toEqual(skipCheck ? undefined : statusCode);
                 expectedResults(error);
                 done();
@@ -38,15 +38,15 @@ export class AngularTester {
         });
 
         if (skipCheck) {
-            this.httpMock.expectNone(url);
+            this.httpMock.expectNone(this.testEndpoint);
         } else {
-            const request = this.httpMock.expectOne(url);
+            const request = this.httpMock.expectOne(this.testEndpoint);
             request?.flush({}, { status: statusCode, statusText });
         }
     };
 
     readonly requestSuccess = (done: jest.DoneCallback, expectedResults: (result: any) => void,
-        url: string | undefined = this.testEndpoint) => {
+    url: string | undefined = this.testEndpoint) => {
         let request: TestRequest | null = null;
             this.httpClient.get<object>(url).subscribe({
             next: () => {
