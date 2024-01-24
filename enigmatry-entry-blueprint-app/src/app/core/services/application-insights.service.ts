@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router, TitleStrategy } from '@angular/router';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
-import { filter, map } from 'rxjs';
+import { Subject, filter, map, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CurrentUserService } from './current-user.service';
 
@@ -12,8 +12,9 @@ import { CurrentUserService } from './current-user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ApplicationInsightsService {
+export class ApplicationInsightsService implements OnDestroy {
   private appInsights: ApplicationInsights | undefined;
+  private destroy$ = new Subject<void>();
 
   constructor(private router: Router, private titleStrategy: TitleStrategy,
     private currentUserService: CurrentUserService) { }
@@ -33,6 +34,12 @@ export class ApplicationInsightsService {
     this.trackPageViewsOnRouterNavigation();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+
   trackEvent(name: string, properties?: { [key: string]: any }) {
     this.appInsights?.trackEvent({ name }, properties);
   }
@@ -48,7 +55,8 @@ export class ApplicationInsightsService {
   private createApplicationInsights(): ApplicationInsights {
     return new ApplicationInsights({
       config: {
-        connectionString: environment.applicationInsights.connectionString
+        connectionString: environment.applicationInsights.connectionString,
+        enableCorsCorrelation: true
       }
     });
   }
@@ -57,7 +65,8 @@ export class ApplicationInsightsService {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        map(event => event as NavigationEnd)
+        map(event => event as NavigationEnd),
+        takeUntil(this.destroy$)
       )
       .subscribe(event => {
         const title = this.titleStrategy.buildTitle(this.router.routerState.snapshot);
@@ -67,6 +76,9 @@ export class ApplicationInsightsService {
 
   private setAuthenticatedUserContext(): void {
     this.currentUserService.currentUser$
+      .pipe(
+        takeUntil(this.destroy$)
+      )
       .subscribe(currentUser => {
         const userId = currentUser?.id;
         if (userId) {
