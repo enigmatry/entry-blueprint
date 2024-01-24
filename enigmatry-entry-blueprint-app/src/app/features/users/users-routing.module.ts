@@ -8,12 +8,12 @@ const routes: Routes = [
   {
     path: '',
     component: UserListComponent,
-    title: 'Users'
+    title: $localize`:@@route.users:Users`
   },
   {
     path: `${RouteSegments.edit}/:id`,
     component: UserEditComponent,
-    title: 'Edit user'
+    title: $localize`:@@route.users.edit:Update user`
   }
 ];
 
