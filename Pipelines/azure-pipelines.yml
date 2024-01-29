@@ -36,27 +36,23 @@ stages:
         echo "Hash: $HASH. Setting build number to: $VERSION"
         echo '##vso[build.updatebuildnumber]'$VERSION
       displayName: 'Set Build number'
-
-  - template: build-angular-app-job.yml@templates
-    parameters:
-      displayName: 'Build Angular App'
-      nodeVersion: $(nodeVersion)
-      projectNameAngularApp: $(projectNameAngularApp)
-  
-  - template: build-dotnet-api-job.yml@templates
+ 
+  - template: build-angular-app-and-dotnet-api.yml@templates
     parameters:
       artifactName: $(artifactName)
-      displayName: 'Build .net API'
+      displayName: 'Build Angular App and .net API'
+      nodeVersion: $(nodeVersion)
+      projectNameAngularApp: $(projectNameAngularApp)
       projectNamePrefix: $(projectNamePrefix)
 
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
+  variables:
+  - template: variables/variables.test.yml
   jobs:
   - template: deploy-to-stage.yml
     parameters:
       environment: test
-      migrationConnectionString: $(MigrationConnectionString_Test)
       serviceConnection: 'Enigmatry - Entry Template (Test)'
-      webAppName: enigmatry-entry-blueprint-test-001
-      webJobWebAppName: enigmatry-entry-blueprint-scheduler-test-001
+      

@@ -1,9 +1,6 @@
 parameters:
 - name: environment
-- name: migrationConnectionString
 - name: serviceConnection
-- name: webAppName
-- name: webJobWebAppName
   
 jobs:
 - template: take-web-app-offline.yml@templates
@@ -12,7 +9,7 @@ jobs:
     displayName: 'Take Angular App offline'
     environment: ${{ parameters.environment }}
     subscription: ${{ parameters.serviceConnection }}
-    webAppName: ${{ parameters.webAppName }}
+    webAppName: $(webAppName)
 
 - template: take-web-app-offline.yml@templates
   parameters:
@@ -20,7 +17,7 @@ jobs:
     displayName: 'Take API offline'
     environment: ${{ parameters.environment }}
     subscription: ${{ parameters.serviceConnection }}
-    webAppName: ${{ parameters.webAppName }}
+    webAppName: $(webAppName)
     virtualApplication: 'api'
 
 - template: take-web-app-offline.yml@templates
@@ -29,18 +26,19 @@ jobs:
     displayName: 'Take WebJob offline'
     environment: ${{ parameters.environment }}
     subscription: ${{ parameters.serviceConnection }}
-    webAppName: ${{ parameters.webJobWebAppName }}
+    webAppName: $(webJobWebAppName)
 
 - template: update-database-job.yml@templates
   parameters:
+    dotnetVersion: '8.x'
     dbContextName: $(dbContextName)
-    displayName: 'Update the Test database'
+    displayName: 'Update the database'
     dependsOn:
     - take_web_app_offline
     - take_api_offline
     - take_webjob_offline
     environment: ${{ parameters.environment }}
-    migrationConnectionString: ${{ parameters.migrationConnectionString }}
+    migrationConnectionString: $(migrationConnectionString)
     projectNamePrefix: $(projectNamePrefix)
 
 - template: deploy-web-app.yml@templates
@@ -51,9 +49,9 @@ jobs:
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).App
     subscription: ${{ parameters.serviceConnection }}
-    webAppName: ${{ parameters.webAppName }}
+    webAppName: $(webAppName)
     publishProfilePostfix: app
-        
+
 - template: deploy-web-app.yml@templates
   parameters:
     jobName: 'deploy_api'
@@ -62,7 +60,7 @@ jobs:
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).Api
     subscription: ${{ parameters.serviceConnection }}
-    webAppName: ${{ parameters.webAppName }}
+    webAppName: $(webAppName)
     publishProfilePostfix: api
     virtualApplication: api
 
@@ -74,7 +72,7 @@ jobs:
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).Scheduler
     subscription: ${{ parameters.serviceConnection }}
-    webAppName: ${{ parameters.webJobWebAppName }}
+    webAppName: $(webJobWebAppName)
     publishProfilePostfix: scheduler
     excludeFilesFromAppDataFlag: false
 
