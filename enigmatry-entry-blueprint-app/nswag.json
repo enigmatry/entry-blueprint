@@ -58,7 +58,7 @@
       "queryNullValue": "",
       "inlineNamedDictionaries": false,
       "inlineNamedAny": false,
-      "templateDirectory": "src/app/api/custom_templates_v13",
+      "templateDirectory": "src/app/api/nswag_templates",
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
       "enumNameGeneratorType": null,
