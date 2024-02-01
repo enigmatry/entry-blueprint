@@ -1,8 +1,20 @@
 {
+  "workbench.tree.indent": 25,
   "cSpell.words": [
     "MSAL"
   ],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": [
+    "css",
+    "scss"
+  ],
+  "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  }
+    "source.fixAll.stylelint": true,
+    "source.fixAll.eslint": true
+  },
+  "files.autoSaveDelay": 500
 }
