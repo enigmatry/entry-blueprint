@@ -1,38 +1,28 @@
-﻿using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Entry.Blueprint.Api;
+﻿using Enigmatry.Entry.Blueprint.Api;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
 using Serilog;
 
+var boostrapConfiguration = ConfigurationHelper.CreateConfiguration(args);
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
+    .AppConfigureSerilog(boostrapConfiguration)
     .CreateBootstrapLogger();
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-    builder.AppConfigureSerilog();
 
     builder.WebHost.ConfigureKestrel(options =>
     {
         options.AddServerHeader = false;
     });
 
-    var configuration = ConfigurationHelper.CreateConfiguration();
-    builder.Configuration.AppAddAzureKeyVault(configuration);
-
-    var startup = new Startup(builder.Configuration);
-    startup.ConfigureServices(builder.Services);
-
-    builder.Host.UseSerilog();
-    builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-    builder.Host.ConfigureContainer<ContainerBuilder>(startup.ConfigureContainer);
+    builder.Configuration.AppAddAzureKeyVault(boostrapConfiguration);
+    builder.Services.AppAddServices(builder.Configuration);
+    builder.Host.AppConfigureHost(builder.Configuration);
 
     var app = builder.Build();
-
-    startup.Configure(app, app.Environment);
-
+    app.AppConfigureWebApplication();
     app.Run();
 }
 catch (Exception ex)

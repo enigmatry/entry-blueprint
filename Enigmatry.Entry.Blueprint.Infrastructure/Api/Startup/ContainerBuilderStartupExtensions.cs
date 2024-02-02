@@ -10,9 +10,7 @@ namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 
 public static class ContainerBuilderStartupExtensions
 {
-#pragma warning disable IDE0060 // Remove unused parameter
-    public static void AppRegisterModules(this ContainerBuilder builder, IConfiguration configuration)
-#pragma warning restore IDE0060 // Remove unused parameter
+    public static void AppRegisterModules(this ContainerBuilder builder)
     {
         builder.Register(GetPrincipal)
             .As<IPrincipal>().InstancePerLifetimeScope();

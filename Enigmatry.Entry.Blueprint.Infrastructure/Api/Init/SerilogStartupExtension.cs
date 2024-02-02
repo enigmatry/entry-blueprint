@@ -4,16 +4,18 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Sinks.ApplicationInsights.TelemetryConverters;
 using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+using Enigmatry.Entry.Core.Helpers;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 
 public static class SerilogStartupExtension
 {
-    public static void AppConfigureSerilog(this WebApplicationBuilder builder)
+    public static LoggerConfiguration AppConfigureSerilog(this LoggerConfiguration loggerConfiguration, IConfiguration configuration)
     {
-        LoggerConfiguration loggerConfiguration = new LoggerConfiguration()
-            .ReadFrom.Configuration(builder.Configuration)
+        loggerConfiguration
+            .ReadFrom.Configuration(configuration)
             .Enrich.FromLogContext()
             .Enrich.WithThreadId()
             .Enrich.WithProcessId()
@@ -21,17 +23,21 @@ public static class SerilogStartupExtension
             .Enrich.With(new OperationIdEnricher())
             .Enrich.WithProperty("AppVersion", Assembly.GetEntryAssembly()!.GetName().Version!);
 
-        AddAppInsightsToSerilog(loggerConfiguration, builder.Configuration);
-
-        Log.Logger = loggerConfiguration.CreateLogger();
-
         // for enabling self diagnostics see https://github.com/serilog/serilog/wiki/Debugging-and-Diagnostics
         // Serilog.Debugging.SelfLog.Enable(Console.Error);
+
+        return loggerConfiguration;
     }
 
-    private static void AddAppInsightsToSerilog(LoggerConfiguration loggerConfiguration, IConfiguration configuration)
+    public static void AddAppInsightsToSerilog(this LoggerConfiguration loggerConfiguration, IConfiguration configuration, IServiceProvider serviceProvider)
     {
         var settings = configuration.ReadApplicationInsightsSettings();
-        loggerConfiguration.WriteTo.ApplicationInsights(new TraceTelemetryConverter(), settings.SerilogLogsRestrictedToMinimumLevel);
+        if (settings == null || !settings.ConnectionString.HasContent())
+        {
+            return;
+        }
+
+        var telemetryConfiguration = serviceProvider.GetRequiredService<TelemetryConfiguration>();
+        loggerConfiguration.WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces);
     }
 }
