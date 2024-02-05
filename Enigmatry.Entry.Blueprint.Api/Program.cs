@@ -3,9 +3,9 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
 using Serilog;
 
-var boostrapConfiguration = ConfigurationHelper.CreateConfiguration(args);
+var bootstrapConfiguration = ConfigurationHelper.CreateConfiguration(args);
 Log.Logger = new LoggerConfiguration()
-    .AppConfigureSerilog(boostrapConfiguration)
+    .AppConfigureSerilog(bootstrapConfiguration)
     .CreateBootstrapLogger();
 
 try
@@ -17,7 +17,7 @@ try
         options.AddServerHeader = false;
     });
 
-    builder.Configuration.AppAddAzureKeyVault(boostrapConfiguration);
+    builder.Configuration.AppAddAzureKeyVault(bootstrapConfiguration);
     builder.Services.AppAddServices(builder.Configuration);
     builder.Host.AppConfigureHost(builder.Configuration);
 

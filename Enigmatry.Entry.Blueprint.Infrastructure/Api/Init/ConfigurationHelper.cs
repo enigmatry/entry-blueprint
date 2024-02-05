@@ -8,7 +8,7 @@ public static class ConfigurationHelper
     // Later new configuration is built again.
     public static IConfiguration CreateConfiguration(IEnumerable<string> args, string environmentParameterPrefix = "ASPNETCORE_")
     {
-        if (args.Any(a => a.Contains("IsTest", StringComparison.InvariantCultureIgnoreCase)))
+        if (args.Any(a => a.Contains("environment=test", StringComparison.InvariantCultureIgnoreCase)))
         {
             return new ConfigurationBuilder().Build();
         }

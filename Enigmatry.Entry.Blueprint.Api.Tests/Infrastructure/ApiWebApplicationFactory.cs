@@ -32,7 +32,7 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
     {
         // this setting is needed to pass information to the Program.cs args.
         // There is no other way, since ConfigureAppConfiguration is called later
-        builder.UseSetting("IsTest", "true");
+        builder.UseSetting("environment", "test");
         builder.ConfigureTestServices(services =>
         {
             services.AddAuthentication(TestUserAuthenticationHandler.AuthenticationScheme)
