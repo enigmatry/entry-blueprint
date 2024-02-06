@@ -4,6 +4,16 @@ import { ValidatorsService as CustomValidatorsService } from './validators.servi
 
 export { ValidatorsService as CustomValidatorsService } from './validators.service';
 
+const productCodeIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
+    : Promise<{ productCodeIsUnique: boolean } | null> =>
+    // eslint-disable-next-line @typescript-eslint/return-await
+    await validate(control, service.isCodeUnique, { productCodeIsUnique: true });
+
+const productNameIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
+    : Promise<{ productNameIsUnique: boolean } | null> =>
+    // eslint-disable-next-line @typescript-eslint/return-await
+    await validate(control, service.isNameUnique, { productNameIsUnique: true });
+
 const validate = async<T>(control: UntypedFormControl,
     callback: (productId: string, value: string) => Observable<{ isUnique?: boolean | undefined }>,
     expectedResult: T) => {
@@ -14,16 +24,6 @@ const validate = async<T>(control: UntypedFormControl,
     }
     return Promise.resolve(null);
 };
-
-const productCodeIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
-    : Promise<{ productCodeIsUnique: boolean } | null> =>
-    // eslint-disable-next-line @typescript-eslint/return-await
-    await validate(control, service.isCodeUnique, { productCodeIsUnique: true });
-
-const productNameIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
-    : Promise<{ productNameIsUnique: boolean } | null> =>
-    // eslint-disable-next-line @typescript-eslint/return-await
-    await validate(control, service.isNameUnique, { productNameIsUnique: true });
 
 export const customValidatorsFactory = (service: CustomValidatorsService) => {
     return {
