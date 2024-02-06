@@ -6,12 +6,12 @@ export { ValidatorsService as CustomValidatorsService } from './validators.servi
 
 const productCodeIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
     : Promise<{ productCodeIsUnique: boolean } | null> =>
-    // eslint-disable-next-line @typescript-eslint/return-await
+    // eslint-disable-next-line @typescript-eslint/return-await, @typescript-eslint/no-use-before-define
     await validate(control, service.isCodeUnique, { productCodeIsUnique: true });
 
 const productNameIsUniqueValidator = async(control: UntypedFormControl, service: CustomValidatorsService)
     : Promise<{ productNameIsUnique: boolean } | null> =>
-    // eslint-disable-next-line @typescript-eslint/return-await
+    // eslint-disable-next-line @typescript-eslint/return-await, @typescript-eslint/no-use-before-define
     await validate(control, service.isNameUnique, { productNameIsUnique: true });
 
 const validate = async<T>(control: UntypedFormControl,
