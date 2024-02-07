@@ -1,8 +1,38 @@
 {
+  "workbench.tree.indent": 25,
   "cSpell.words": [
     "MSAL"
   ],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": [
+    "css",
+    "scss"
+  ],
+  "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  }
+    "source.fixAll.stylelint": "always",
+    "source.fixAll.eslint": "always"
+  },
+  "files.autoSaveDelay": 500,
+  "files.exclude": {
+    "**/_ReSharper.Caches": true,
+    "**/.vs": true,
+    "**/*.user": true,
+    "**/*.csproj": true,
+    "**/web.config": true,
+    "**/Properties": true,
+    "**/bin": true,
+    "**/dist": true,
+    "**/obj": true,
+    "**/.git": true,
+    "**/.angular": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/tmp": true,
+    "coverage": true
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
