@@ -9,7 +9,6 @@
         "davidanson.vscode-markdownlint",
         "humao.rest-client",
         "wayou.vscode-todo-highlight",
-        "mbinic.tgit-cmds",
         "ms-mssql.mssql"
     ]
 }
