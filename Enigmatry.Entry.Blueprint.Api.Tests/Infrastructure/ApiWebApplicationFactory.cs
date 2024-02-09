@@ -52,6 +52,12 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
 
     protected override IHost CreateHost(IHostBuilder builder)
     {
+        // https://github.com/dotnet/aspnetcore/issues/37680
+        builder.ConfigureHostConfiguration(configBuilder =>
+        {
+            //configBuilder.Sources.Clear();
+            configBuilder.AddConfiguration(_configuration);
+        });
         builder.ConfigureContainer<ContainerBuilder>(ConfigureContainer);
         builder.UseSerilog((context, services, configuration) =>
         {

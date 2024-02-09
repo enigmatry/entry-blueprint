@@ -2,7 +2,6 @@
 using Enigmatry.Entry.AspNetCore.ApplicationInsights;
 using Microsoft.Extensions.Configuration;
 using Serilog;
-using Serilog.Sinks.ApplicationInsights.TelemetryConverters;
 using System.Reflection;
 using Enigmatry.Entry.Core.Helpers;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -14,6 +13,12 @@ public static class SerilogStartupExtension
 {
     public static LoggerConfiguration AppConfigureSerilog(this LoggerConfiguration loggerConfiguration, IConfiguration configuration)
     {
+        var loggerSectionExists = configuration.GetSection("Serilog").Exists();
+        var logLevel = configuration.GetSection("Serilog:MinimumLevel:Default").Value ?? String.Empty;
+        if (!loggerSectionExists || logLevel == "__defaultLogLevel__")
+        {
+            return loggerConfiguration;
+        }
         loggerConfiguration
             .ReadFrom.Configuration(configuration)
             .Enrich.FromLogContext()

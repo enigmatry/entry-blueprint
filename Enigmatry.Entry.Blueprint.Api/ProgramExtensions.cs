@@ -15,7 +15,7 @@ using Serilog;
 
 namespace Enigmatry.Entry.Blueprint.Api;
 
-public static class ProgramStartupExtensions
+public static class ProgramExtensions
 {
     public static void AppAddServices(this IServiceCollection services, IConfiguration configuration)
     {

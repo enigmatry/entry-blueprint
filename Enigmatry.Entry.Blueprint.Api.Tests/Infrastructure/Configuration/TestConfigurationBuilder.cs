@@ -36,7 +36,10 @@ public class TestConfigurationBuilder
             },
             {"App:Smtp:UsePickupDirectory", "true"},
             {"App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation()},
-            {"ApplicationInsights:TelemetryProcessor:ExcludedTypes", String.Empty },
+            {"App:AzureAd:Instance", "https://enigmatryb2cdev.b2clogin.com"},
+            {"App:AzureAd:ClientId", "a8793ce9-86dc-4d7e-aa70-361a3c5a5150"},
+            {"App:AzureAd:Domain", "enigmatryb2cdev.onmicrosoft.com"},
+            {"App:AzureAd:SignUpSignInPolicyId", "B2C_1_entry_blueprint_sign_in"},
             {"HealthChecks:TokenAuthorizationEnabled", "false"}
         };
 
