@@ -1,0 +1,6 @@
+variables:
+  - group: test
+  - name: webAppName
+    value: enigmatry-entry-blueprint-test-001
+  - name: webJobWebAppName
+    value: enigmatry-entry-blueprint-scheduler-test-001

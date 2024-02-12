@@ -5,8 +5,16 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
-  { path: '', component: UserListComponent },
-  { path: `${RouteSegments.edit}/:id`, component: UserEditComponent }
+  {
+    path: '',
+    component: UserListComponent,
+    title: $localize`:@@route.users:Users`
+  },
+  {
+    path: `${RouteSegments.edit}/:id`,
+    component: UserEditComponent,
+    title: $localize`:@@route.users.edit:Update user`
+  }
 ];
 
 @NgModule({

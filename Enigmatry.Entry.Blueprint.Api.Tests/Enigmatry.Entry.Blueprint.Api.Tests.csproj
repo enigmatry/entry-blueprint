@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoFixture.NUnit3" />
     <PackageReference Include="coverlet.collector">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

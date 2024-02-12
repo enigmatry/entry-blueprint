@@ -4,12 +4,17 @@
 
 export const environment = {
   production: false,
+  appVersion: '0.0.0',
   apiUrl: 'https://localhost:44394',
   azureAd: {
     clientId: 'a8793ce9-86dc-4d7e-aa70-361a3c5a5150',
     /* eslint-disable no-secrets/no-secrets */
     authority: 'https://enigmatryb2cdev.b2clogin.com/enigmatryb2cdev.onmicrosoft.com/B2C_1_entry_blueprint_sign_in',
     scopes: ['https://enigmatryb2cdev.onmicrosoft.com/a8793ce9-86dc-4d7e-aa70-361a3c5a5150/api']
+  },
+  applicationInsights: {
+    connectionString: '',
+    enableCorsCorrelation: true
   },
   defaultLanguage: 'nl'
 };

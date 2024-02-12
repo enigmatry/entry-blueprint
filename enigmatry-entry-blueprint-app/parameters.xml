@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <parameters>
+  <parameter name="App Version" description="App Version" defaultValue="">
+    <parameterEntry kind="TextFile" scope="main.*.js" match="__appVersion__" />
+  </parameter>
   <parameter name="API Uri" description="API Uri" defaultValue="">
     <parameterEntry kind="TextFile" scope="main.*.js" match="__apiUrl__" />
   </parameter>
-  <parameter name="ApplicationInsights InstrumentationKey" description="ApplicationInsights InstrumentationKey" defaultValue="">
-    <parameterEntry kind="TextFile" scope="main.*.js" match="__appInsightsKey__" />
+  <parameter name="ApplicationInsights ConnectionString" description="ApplicationInsights ConnectionString" defaultValue="">
+    <parameterEntry kind="TextFile" scope="main.*.js" match="__applicationInsightsConnectionString__" />
   </parameter>
   <parameter name="Azure AD ClientId" description="Azure AD ClientId" defaultValue="">
     <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdClientId__" />

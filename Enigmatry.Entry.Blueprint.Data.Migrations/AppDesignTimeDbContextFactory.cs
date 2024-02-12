@@ -6,21 +6,21 @@ using Microsoft.EntityFrameworkCore.Design;
 namespace Enigmatry.Entry.Blueprint.Data.Migrations;
 
 [UsedImplicitly]
-public class BlueprintContextFactory : IDesignTimeDbContextFactory<BlueprintContext>
+public class AppDesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
 {
-    public BlueprintContext CreateDbContext(string[] args) => CreateDbContext(ReadConnectionString(args));
+    public AppDbContext CreateDbContext(string[] args) => CreateDbContext(ReadConnectionString(args));
 
-    private static BlueprintContext CreateDbContext(string connectionString)
+    private static AppDbContext CreateDbContext(string connectionString)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<BlueprintContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
         optionsBuilder.UseSqlServer(connectionString,
             b =>
             {
-                b.MigrationsAssembly(typeof(BlueprintContextFactory).Assembly.FullName);
+                b.MigrationsAssembly(typeof(AppDesignTimeDbContextFactory).Assembly.FullName);
             });
 
         var result =
-            new BlueprintContext(optionsBuilder.Options)
+            new AppDbContext(optionsBuilder.Options)
             {
                 ModelBuilderConfigurator = DbInitializer.SeedData
             };

@@ -47,7 +47,7 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseHsts();
 
-        app.AppUseExceptionHandler();
+        app.UseEntryExceptionHandler();
 
         app.UseAuthentication();
         app.UseAuthorization();
@@ -57,7 +57,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers().RequireAuthorization();
-            endpoints.AppMapHealthCheck(_configuration);
+            endpoints.MapEntryHealthCheck(_configuration);
         });
 
         if (env.IsDevelopment())
@@ -86,15 +86,15 @@ public class Startup
         services.AppAddSettings(configuration);
         services.AppAddPolly();
         services.AppAddAutoMapper();
-        services.AppAddHealthChecks(configuration)
-            .AddDbContextCheck<BlueprintContext>();
+        services.AddEntryHealthChecks(configuration)
+            .AddDbContextCheck<AppDbContext>();
         services.AppAddMediatR();
         services.AppAddFluentValidation();
 
         services.AppAddAuthentication(configuration);
-        services.AppAddAuthorization<PermissionId>();
+        services.AddEntryAuthorization<PermissionId>();
 
-        services.AppAddSwaggerWithAzureAdAuth(configuration, "Blueprint API");
+        services.AppAddSwaggerWithAzureAdAuth(configuration, "Enigmatry Blueprint Api");
     }
 
     [UsedImplicitly]

@@ -35,7 +35,7 @@ public static class ProductCreateOrUpdate
     [UsedImplicitly]
     public class Validator : AbstractValidator<Command>
     {
-        private const string DynamicMessagesID = "[MESSAGE_TEMPLATE]";
+        private const string DynamicMessagesId = "[MESSAGE_TEMPLATE]";
         private readonly IRepository<Product> _productRepository;
 
         public Validator(IRepository<Product> productRepository)
@@ -46,7 +46,7 @@ public static class ProductCreateOrUpdate
             RuleFor(x => x.Code).NotEmpty();
             RuleFor(x => x.Code)
                 .Must((command, code, context) => HaveValidCodePrefix(code, command, context))
-                .WithMessage($"{{{DynamicMessagesID}}}");
+                .WithMessage($"{{{DynamicMessagesId}}}");
             RuleFor(x => x.Price).GreaterThan(Product.PriceMinValue).LessThanOrEqualTo(Product.PriceMaxValue);
             RuleFor(x => x.Amount).GreaterThan(Product.AmountMinValue);
             RuleFor(x => x.ContactEmail).NotEmpty().EmailAddress();
@@ -71,22 +71,22 @@ public static class ProductCreateOrUpdate
         {
             if (command.Type == ProductType.Food && !code.StartsWith("FDXX", StringComparison.InvariantCulture))
             {
-                context.MessageFormatter.AppendArgument(DynamicMessagesID, $"{command.Type} products code must begin with 'FDXX' prefix.");
+                context.MessageFormatter.AppendArgument(DynamicMessagesId, $"{command.Type} products code must begin with 'FDXX' prefix.");
                 return false;
             }
             else if (command.Type == ProductType.Drink! && code.StartsWith("DKXX", StringComparison.InvariantCulture))
             {
-                context.MessageFormatter.AppendArgument(DynamicMessagesID, $"{command.Type} products code must begin with 'DKXX' prefix.");
+                context.MessageFormatter.AppendArgument(DynamicMessagesId, $"{command.Type} products code must begin with 'DKXX' prefix.");
                 return false;
             }
             else if (command.Type == ProductType.Book && !code.StartsWith("BKXX", StringComparison.InvariantCulture))
             {
-                context.MessageFormatter.AppendArgument(DynamicMessagesID, $"{command.Type} products code must begin with 'BKXX' prefix.");
+                context.MessageFormatter.AppendArgument(DynamicMessagesId, $"{command.Type} products code must begin with 'BKXX' prefix.");
                 return false;
             }
             else if (command.Type == ProductType.Car && !code.StartsWith("CRXX", StringComparison.InvariantCulture))
             {
-                context.MessageFormatter.AppendArgument(DynamicMessagesID, $"{command.Type} products code must begin with 'CRXX' prefix.");
+                context.MessageFormatter.AppendArgument(DynamicMessagesId, $"{command.Type} products code must begin with 'CRXX' prefix.");
                 return false;
             }
             return true;
@@ -94,17 +94,17 @@ public static class ProductCreateOrUpdate
 
         private bool HaveFreeSpaceInStorageRoom(Command command)
         {
-            var productTotalAmmount = _productRepository.QueryAllSkipCache()
+            var productTotalAmount = _productRepository.QueryAllSkipCache()
                 .Where(x => x.Type == command.Type)
                 .Sum(x => x.Amount);
-            var newTotalAmmount = command.Amount + productTotalAmmount;
+            var newTotalAmount = command.Amount + productTotalAmount;
             return command.Type == ProductType.Book
-                ? newTotalAmmount <= 10000
+                ? newTotalAmount <= 10000
                 : command.Type == ProductType.Car
-                    ? newTotalAmmount <= 25
+                    ? newTotalAmount <= 25
                     : command.Type == ProductType.Food
-                        ? newTotalAmmount <= 5500
-                        : newTotalAmmount <= 7000;
+                        ? newTotalAmount <= 5500
+                        : newTotalAmount <= 7000;
         }
 
     }

@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "stylelint.vscode-stylelint",
+        "dbaeumer.vscode-eslint",
+        "angular.ng-template",
+        "streetsidesoftware.code-spell-checker",
+        "waderyan.gitblame",
+        "eamodio.gitlens",
+        "davidanson.vscode-markdownlint",
+        "humao.rest-client",
+        "wayou.vscode-todo-highlight",
+        "ms-mssql.mssql"
+    ]
+}

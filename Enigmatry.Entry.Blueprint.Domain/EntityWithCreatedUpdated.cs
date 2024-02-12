@@ -5,8 +5,8 @@ namespace Enigmatry.Entry.Blueprint.Domain;
 
 public abstract class EntityWithCreatedUpdated : EntityWithGuidId, IEntityWithCreatedUpdated
 {
-    public Guid? CreatedById { get; private set; }
-    public Guid? UpdatedById { get; private set; }
+    public Guid CreatedById { get; private set; }
+    public Guid UpdatedById { get; private set; }
     public DateTimeOffset CreatedOn { get; private set; }
     public DateTimeOffset UpdatedOn { get; private set; }
 
