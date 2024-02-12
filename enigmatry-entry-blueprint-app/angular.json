@@ -108,34 +108,6 @@
             "browserTarget": "enigmatry-entry-blueprint-app:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@enigmatry/entry-components/assets/",
-                "output": "/assets/"
-              }
-            ],
-            "styles": [
-              "src/styles/partials/main.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles/modules",
-                "node_modules/@enigmatry"
-              ]
-            },
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {

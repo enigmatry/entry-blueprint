@@ -1,3 +1,13 @@
 {
-  "extends": "@enigmatry/eslint-config"
+  "extends": "@enigmatry/eslint-config",
+  "overrides": [
+    {
+      "files": [
+        "**/*.spec.ts"
+      ],
+      "rules": {
+        "import/unambiguous": "off"
+      }
+    }
+  ]
 }
