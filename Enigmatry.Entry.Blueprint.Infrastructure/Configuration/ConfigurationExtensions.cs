@@ -1,7 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Core.Settings;
-using Enigmatry.Entry.Core.Settings;
 using Microsoft.Extensions.Configuration;
-using Serilog.Events;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 
@@ -11,11 +9,11 @@ public static class ConfigurationExtensions
 
     public static AppSettings ReadAppSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<AppSettings>("App");
 
-    public static ApplicationInsightsSettings? ReadApplicationInsightsSettings(this IConfiguration configuration) =>
-        configuration.FindSettingsSection<ApplicationInsightsSettings>(Entry.Core.Settings.ApplicationInsightsSettings.ApplicationInsightsSectionName);
+    public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration) =>
+        configuration.ReadSettingsSection<ApplicationInsightsSettings>(Entry.Core.Settings.ApplicationInsightsSettings.ApplicationInsightsSectionName);
 
-    public static KeyVaultSettings? ReadKeyVaultSettings(this IConfiguration configuration) =>
-        configuration.FindSettingsSection<KeyVaultSettings>(KeyVaultSettings.SectionName);
+    public static KeyVaultSettings ReadKeyVaultSettings(this IConfiguration configuration) =>
+        configuration.ReadSettingsSection<KeyVaultSettings>(KeyVaultSettings.SectionName);
 
     public static T ReadSettingsSection<T>(this IConfiguration configuration, string sectionName)
     {
@@ -23,11 +21,5 @@ public static class ConfigurationExtensions
         return sectionSettings == null
             ? throw new InvalidOperationException($"Section is missing from configuration. Section Name: {sectionName}")
             : sectionSettings;
-    }
-
-    private static T? FindSettingsSection<T>(this IConfiguration configuration, string sectionName)
-    {
-        var sectionSettings = configuration.GetSection(sectionName).Get<T>();
-        return sectionSettings;
     }
 }

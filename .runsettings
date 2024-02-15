@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <IntegrationTestsConnectionString>Server=.;Database=enigmatry-entry-blueprint-integration-testing;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True</IntegrationTestsConnectionString>
+    </EnvironmentVariables>
+  </RunConfiguration>
+</RunSettings>

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Enigmatry.Entry.Blueprint.Domain.Authorization;
+using Enigmatry.Entry.Blueprint.Infrastructure.Data.Configurations;
+using Microsoft.EntityFrameworkCore;
 using Testcontainers.MsSql;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
@@ -47,7 +49,7 @@ internal class TestDatabase
 
     public static async Task ResetAsync(DbContext dbContext) =>
         await DatabaseInitializer.RecreateDatabaseAsync(dbContext,
-            new[] { "__EFMigrationsHistory", "Role", "RolePermission", "Permission" });
+            new[] { "__EFMigrationsHistory", nameof(Role), nameof(RolePermission), nameof(Permission) });
 
     private static void WriteLine(string value) => TestContext.WriteLine(value);
 }

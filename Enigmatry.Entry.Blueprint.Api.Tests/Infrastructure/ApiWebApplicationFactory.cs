@@ -2,8 +2,8 @@
 using Autofac;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
-using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
+using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -11,42 +11,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Core;
 using Serilog.Events;
-using Serilog.Formatting.Compact;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure;
 
-internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
+internal class ApiWebApplicationFactory(IConfiguration configuration, bool isUserAuthenticated = true) : WebApplicationFactory<Program>
 {
-    private readonly IConfiguration _configuration;
-    private readonly bool _isUserAuthenticated;
-
-    public ApiWebApplicationFactory(IConfiguration configuration, bool isUserAuthenticated = true)
-    {
-        _configuration = configuration;
-        _isUserAuthenticated = isUserAuthenticated;
-    }
-
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        // this setting is needed to pass information to the Program.cs args.
-        // There is no other way, since ConfigureAppConfiguration is called later
-        builder.UseSetting("environment", "test");
         builder.ConfigureTestServices(services =>
         {
             services.AddAuthentication(TestUserAuthenticationHandler.AuthenticationScheme)
                 .AddScheme<TestAuthenticationOptions, TestUserAuthenticationHandler>(
                     TestUserAuthenticationHandler.AuthenticationScheme,
-                    options => options.TestPrincipalFactory = () => _isUserAuthenticated ? TestUserData.CreateClaimsPrincipal() : null);
-        });
-
-        builder.ConfigureAppConfiguration((_, configBuilder) =>
-        {
-            // if the appSettings.json and appSettings.Development.json are messing too much with tests
-            // un-comment out the next line.
-            // configBuilder.Sources.Clear();
-            configBuilder.AddConfiguration(_configuration);
+                    options => options.TestPrincipalFactory = () => isUserAuthenticated ? TestUserData.CreateClaimsPrincipal() : null);
         });
     }
 
@@ -55,15 +33,18 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
         // https://github.com/dotnet/aspnetcore/issues/37680
         builder.ConfigureHostConfiguration(configBuilder =>
         {
-            //configBuilder.Sources.Clear();
-            configBuilder.AddConfiguration(_configuration);
+            TestConfiguration.Create(b =>
+            {
+                b.Sources.Clear();
+                b.AddConfiguration(configuration);
+            });
         });
         builder.ConfigureContainer<ContainerBuilder>(ConfigureContainer);
-        builder.UseSerilog((context, services, configuration) =>
+        builder.UseSerilog((context, services, loggerConfiguration) =>
         {
             // this allows serilog log statements to appear in the test console runner
             // e.g. database sql queries (issued by DbContext) can be observed this way in the test
-            configuration.WriteTo.Console(
+            loggerConfiguration.WriteTo.Console(
                 restrictedToMinimumLevel: LogEventLevel.Debug,
                 formatProvider: CultureInfo.InvariantCulture,
                 outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}");

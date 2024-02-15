@@ -33,4 +33,9 @@
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Domain\Enigmatry.Entry.Blueprint.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api"/>
+    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests"/>
+  </ItemGroup>
+
 </Project>

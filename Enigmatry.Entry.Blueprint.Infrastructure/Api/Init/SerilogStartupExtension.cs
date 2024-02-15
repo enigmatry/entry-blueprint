@@ -14,9 +14,9 @@ public static class SerilogStartupExtension
     public static LoggerConfiguration AppConfigureSerilog(this LoggerConfiguration loggerConfiguration, IConfiguration configuration)
     {
         var loggerSectionExists = configuration.GetSection("Serilog").Exists();
-        var logLevel = configuration.GetSection("Serilog:MinimumLevel:Default").Value ?? String.Empty;
-        if (!loggerSectionExists || logLevel == "__defaultLogLevel__")
+        if (!loggerSectionExists)
         {
+            // we might not have logger section in the tests only
             return loggerConfiguration;
         }
         loggerConfiguration
