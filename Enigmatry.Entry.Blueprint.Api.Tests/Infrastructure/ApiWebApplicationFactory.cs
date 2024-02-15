@@ -45,7 +45,7 @@ internal class ApiWebApplicationFactory(IConfiguration configuration, bool isUse
             // this allows serilog log statements to appear in the test console runner
             // e.g. database sql queries (issued by DbContext) can be observed this way in the test
             loggerConfiguration.WriteTo.Console(
-                restrictedToMinimumLevel: LogEventLevel.Debug,
+                restrictedToMinimumLevel: LogEventLevel.Warning,
                 formatProvider: CultureInfo.InvariantCulture,
                 outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}");
         });
