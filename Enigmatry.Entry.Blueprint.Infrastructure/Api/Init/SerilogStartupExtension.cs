@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using System.Reflection;
 using Enigmatry.Entry.Core.Helpers;
+using Enigmatry.Entry.Core.Settings;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,8 +37,8 @@ public static class SerilogStartupExtension
 
     public static void AddAppInsightsToSerilog(this LoggerConfiguration loggerConfiguration, IConfiguration configuration, IServiceProvider serviceProvider)
     {
-        var settings = configuration.ReadApplicationInsightsSettings();
-        if (settings == null || !settings.ConnectionString.HasContent())
+        var settings = configuration.GetSection(ApplicationInsightsSettings.ApplicationInsightsSectionName).Get<ApplicationInsightsSettings>()!;
+        if (!settings.ConnectionString.HasContent())
         {
             return;
         }

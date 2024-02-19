@@ -9,9 +9,6 @@ public static class ConfigurationExtensions
 
     public static AppSettings ReadAppSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<AppSettings>("App");
 
-    public static ApplicationInsightsSettings ReadApplicationInsightsSettings(this IConfiguration configuration) =>
-        configuration.ReadSettingsSection<ApplicationInsightsSettings>(Entry.Core.Settings.ApplicationInsightsSettings.ApplicationInsightsSectionName);
-
     public static KeyVaultSettings ReadKeyVaultSettings(this IConfiguration configuration) =>
         configuration.ReadSettingsSection<KeyVaultSettings>(KeyVaultSettings.SectionName);
 

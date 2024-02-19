@@ -186,22 +186,22 @@
       "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
-          "Enigmatry.Entry.Core": "[3.0.0, )"
+          "Enigmatry.Entry.Core": "[3.1.0-preview.2, )"
         }
       },
       "enigmatry.entry.blueprint.domain": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",
-          "Enigmatry.Entry.Core": "[3.0.0, )",
+          "Enigmatry.Entry.Core": "[3.1.0-preview.2, )",
           "FluentValidation": "[11.9.0, )"
         }
       },
       "Enigmatry.Entry.Core": {
         "type": "CentralTransitive",
-        "requested": "[3.0.0, )",
-        "resolved": "3.0.0",
-        "contentHash": "N8KBjxbil6pT0Ud2aBsWR2zCExYvOZKZ4nVVUPYbg8fkVL9YLE+shWdkH1+70ablV3nd/OYLvolhg1vKyeI5rg==",
+        "requested": "[3.1.0-preview.2, )",
+        "resolved": "3.1.0-preview.2",
+        "contentHash": "Uiedry3prsygM7Yb/qTTcm3sFduRDbj96FrLBjKc0iQ9MtetZp0zOpzgES4HFH2e6Uz3RvQypqTCQcC5qDTeYA==",
         "dependencies": {
           "JetBrains.Annotations": "2023.3.0",
           "MediatR": "12.2.0",

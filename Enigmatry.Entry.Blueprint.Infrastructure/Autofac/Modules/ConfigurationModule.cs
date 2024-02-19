@@ -3,7 +3,6 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Core.Settings;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
-using ApplicationInsightsSettings = Enigmatry.Entry.Blueprint.Infrastructure.Configuration.ApplicationInsightsSettings;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 
