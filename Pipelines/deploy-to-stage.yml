@@ -21,7 +21,7 @@ jobs:
     virtualApplication: 'api'
 
 - template: take-web-app-offline.yml@templates
-  condition: false
+  enabled: false
   parameters:
     jobName: 'take_webjob_offline'
     displayName: 'Take WebJob offline'
@@ -67,7 +67,7 @@ jobs:
     virtualApplication: api
 
 - template: deploy-web-app.yml@templates
-  condition: false
+  enabled: false
   parameters:
     jobName: 'deploy_webjob'
     artifactName: $(artifactName)
