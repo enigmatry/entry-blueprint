@@ -21,6 +21,7 @@ jobs:
     virtualApplication: 'api'
 
 - template: take-web-app-offline.yml@templates
+  condition: false
   parameters:
     jobName: 'take_webjob_offline'
     displayName: 'Take WebJob offline'
@@ -31,6 +32,7 @@ jobs:
 - template: update-database-job.yml@templates
   parameters:
     dotnetVersion: '8.x'
+    dotnetEfToolVersion: '8.0.2'
     dbContextName: $(dbContextName)
     displayName: 'Update the database'
     dependsOn:
@@ -65,6 +67,7 @@ jobs:
     virtualApplication: api
 
 - template: deploy-web-app.yml@templates
+  condition: false
   parameters:
     jobName: 'deploy_webjob'
     artifactName: $(artifactName)
