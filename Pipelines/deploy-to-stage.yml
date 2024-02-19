@@ -37,7 +37,7 @@ jobs:
     dependsOn:
     - take_web_app_offline
     - take_api_offline
-    - take_webjob_offline
+    #- take_webjob_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
     projectNamePrefix: $(projectNamePrefix)
@@ -82,7 +82,7 @@ jobs:
   dependsOn:
   - deploy_angular_app
   - deploy_api
-  - deploy_webjob
+  #- deploy_webjob
   steps:
     - checkout: self
       displayName: 'Checkout current repo'
