@@ -1,13 +1,12 @@
 ﻿using JetBrains.Annotations;
 
-namespace Enigmatry.Entry.Blueprint.Core.Settings
-{
-    [UsedImplicitly]
-    public class KeyVaultSettings
-    {
-        public const string SectionName = "KeyVault";
+namespace Enigmatry.Entry.Blueprint.Core.Settings;
 
-        public bool Enabled { get; set; }
-        public string Name { get; set; } = String.Empty;
-    }
+[UsedImplicitly]
+public class KeyVaultSettings
+{
+    public const string SectionName = "KeyVault";
+
+    public bool Enabled { get; set; }
+    public string Name { get; set; } = String.Empty;
 }
