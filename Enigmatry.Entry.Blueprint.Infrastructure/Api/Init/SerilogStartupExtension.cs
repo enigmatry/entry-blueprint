@@ -7,6 +7,7 @@ using Enigmatry.Entry.Core.Helpers;
 using Enigmatry.Entry.Core.Settings;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog.Events;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 
@@ -44,6 +45,6 @@ public static class SerilogStartupExtension
         }
 
         var telemetryConfiguration = serviceProvider.GetRequiredService<TelemetryConfiguration>();
-        loggerConfiguration.WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces);
+        loggerConfiguration.WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces, LogEventLevel.Information);
     }
 }
