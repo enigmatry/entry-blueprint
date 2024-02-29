@@ -37,7 +37,7 @@ describe.each([
     });
 
     it(`should return null when ${testCase.propertyName} is not unique and parent is null`, async() => {
-        const control = defaultControl() as { parent: {} | undefined };
+        const control = defaultControl() as { parent: unknown };
         control.parent = undefined;
 
         const result = await act(testCase.propertyName, control as UntypedFormControl, false, false);
