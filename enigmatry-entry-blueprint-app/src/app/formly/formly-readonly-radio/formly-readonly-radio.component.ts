@@ -4,10 +4,10 @@ import { FieldType } from '@ngx-formly/material/form-field';
 import { BehaviorSubject, isObservable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-declare type SelectOption = {
+declare interface SelectOption {
   value: any;
   displayName: string;
-};
+}
 
 @Component({
   templateUrl: './formly-readonly-radio.component.html',
