@@ -19,11 +19,9 @@
 		}
 	}
 
-	.item {
-		&.router-link-active {
-			.icon, .description {
-				color: vars.$accent;
-			}
+	.item.router-link-active {
+		.icon, .description {
+			color: vars.$accent;
 		}
 	}
 }
