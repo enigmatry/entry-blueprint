@@ -20,23 +20,24 @@ jobs:
     webAppName: $(webAppName)
     virtualApplication: 'api'
 
-- template: take-web-app-offline.yml@templates
-  parameters:
-    jobName: 'take_webjob_offline'
-    displayName: 'Take WebJob offline'
-    environment: ${{ parameters.environment }}
-    subscription: ${{ parameters.serviceConnection }}
-    webAppName: $(webJobWebAppName)
+#- template: take-web-app-offline.yml@templates
+#  parameters:
+#    jobName: 'take_webjob_offline'
+#    displayName: 'Take WebJob offline'
+#    environment: ${{ parameters.environment }}
+#    subscription: ${{ parameters.serviceConnection }}
+#    webAppName: $(webJobWebAppName)
 
 - template: update-database-job.yml@templates
   parameters:
     dotnetVersion: '8.x'
+    dotnetEfToolVersion: '8.0.2'
     dbContextName: $(dbContextName)
     displayName: 'Update the database'
     dependsOn:
     - take_web_app_offline
     - take_api_offline
-    - take_webjob_offline
+    #- take_webjob_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
     projectNamePrefix: $(projectNamePrefix)
@@ -64,24 +65,24 @@ jobs:
     publishProfilePostfix: api
     virtualApplication: api
 
-- template: deploy-web-app.yml@templates
-  parameters:
-    jobName: 'deploy_webjob'
-    artifactName: $(artifactName)
-    displayName: Deploy the Scheduler Web Job
-    environment: ${{ parameters.environment }}
-    packageName: $(projectNamePrefix).Scheduler
-    subscription: ${{ parameters.serviceConnection }}
-    webAppName: $(webJobWebAppName)
-    publishProfilePostfix: scheduler
-    excludeFilesFromAppDataFlag: false
+#- template: deploy-web-app.yml@templates
+#  parameters:
+#    jobName: 'deploy_webjob'
+#    artifactName: $(artifactName)
+#    displayName: Deploy the Scheduler Web Job
+#    environment: ${{ parameters.environment }}
+#    packageName: $(projectNamePrefix).Scheduler
+#    subscription: ${{ parameters.serviceConnection }}
+#    webAppName: $(webJobWebAppName)
+#    publishProfilePostfix: scheduler
+#    excludeFilesFromAppDataFlag: false
 
 - job: git_tag
   displayName: Create Git tag
   dependsOn:
   - deploy_angular_app
   - deploy_api
-  - deploy_webjob
+  #- deploy_webjob
   steps:
     - checkout: self
       displayName: 'Checkout current repo'

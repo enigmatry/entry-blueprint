@@ -17,5 +17,8 @@
   </parameter>
   <parameter name="Azure AD Scopes" description="Azure AD Scopes" defaultValue="">
     <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdScopes__" />
-  </parameter>  
+  </parameter>
+  <parameter name="Content Security Policy">
+    <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/location/system.webServer/httpProtocol/customHeaders/add[@name='Content-Security-Policy']/@value" />
+  </parameter>
 </parameters>

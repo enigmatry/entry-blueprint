@@ -1,14 +1,13 @@
-﻿namespace Enigmatry.Entry.Blueprint.Domain.Authorization
+﻿namespace Enigmatry.Entry.Blueprint.Domain.Authorization;
+
+public enum PermissionId
 {
-    public enum PermissionId
-    {
-        None = 0,
+    None = 0,
 
-        UsersRead = 1,
-        UsersWrite = 2,
+    UsersRead = 1,
+    UsersWrite = 2,
 
-        ProductsRead = 10,
-        ProductsWrite = 11,
-        ProductsDelete = 12
-    }
+    ProductsRead = 10,
+    ProductsWrite = 11,
+    ProductsDelete = 12
 }

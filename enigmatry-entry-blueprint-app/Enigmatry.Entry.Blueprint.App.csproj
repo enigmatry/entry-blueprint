@@ -13,7 +13,6 @@
     <Content Remove="wwwroot\**" />
     <None Remove=".eslintignore" />
     <None Remove=".gitignore" />
-    <None Remove="karma.conf.js" />
     <Content Remove=".stylelintrc.json" />
     <Content Remove="tsconfig.json" />
     <Content Remove=".eslintrc.json" />
@@ -26,7 +25,7 @@
     <Content Remove="tsconfig.spec.json" />
     <Content Remove="tslint.json" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <_CustomFiles Include="$(MSBuildProjectDirectory)/dist/**/*" />
     <DotnetPublishFiles Include="@(_CustomFiles)">
