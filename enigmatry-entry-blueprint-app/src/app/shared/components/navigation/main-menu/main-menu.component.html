@@ -8,17 +8,17 @@
   </a>
   <nav class="content" *ngIf="!showSideMenu">
     <div *ngFor="let menuItem of menuItems">
-      <a mat-button color="primary" class="item" [routerLink]="[menuItem.url]" routerLinkActive="router-link-active"
-        type="button" *ngIf="show(menuItem)">
+      <button mat-button color="primary" class="item" [routerLink]="[menuItem.url]"
+        routerLinkActive="router-link-active" type="button" *ngIf="show(menuItem)">
         <mat-icon class="icon" aria-hidden="false" [ariaLabel]="menuItem.aria" [fontIcon]="menuItem.icon"></mat-icon>
         <span class="description">{{ menuItem.description }}</span>
-      </a>
+      </button>
     </div>
-    <a mat-button data-testId="username-button" color="primary" class="user-item" [matMenuTriggerFor]="login_menu"
+    <button mat-button data-testId="username-button" color="primary" class="user-item" [matMenuTriggerFor]="login_menu"
       href="javascript:void(0);">
       <span>{{ currentUser!.fullName }}</span>
       <mat-icon class="icon" aria-hidden="false" aria-label="Toggle icon" fontIcon="keyboard_arrow_down"></mat-icon>
-    </a>
+    </button>
     <mat-menu class="main-user-actions" #login_menu="matMenu" [overlapTrigger]="false">
       <button class="action" type="button" mat-button color="primary" (click)='onLogout()'>
         <span>Logout</span>
