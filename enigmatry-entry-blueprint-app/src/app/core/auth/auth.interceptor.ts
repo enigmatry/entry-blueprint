@@ -25,6 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
       .pipe(
         switchMap(accessToken => next.handle(this.addAuthorizationHeader(req, accessToken))),
         catchError(async error => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
           if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Unauthorized) {
             await this.authService.loginRedirect();
           }
