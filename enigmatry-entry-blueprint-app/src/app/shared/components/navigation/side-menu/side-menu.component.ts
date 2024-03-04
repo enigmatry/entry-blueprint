@@ -10,7 +10,7 @@ import { UserProfile } from 'src/app/core/auth/user-profile';
 export class SideMenuComponent {
   showUserActions = false;
   @Input() show: (menuItem: { permission: PermissionId }) => void;
-  @Input() menuItems: { description: string, icon: string, aria: string, url: string, permission: PermissionId }[];
+  @Input() menuItems: { description: string; icon: string; aria: string; url: string; permission: PermissionId }[];
   @Input() onLogout: () => void;
   @Input() currentUser: UserProfile | null;
 

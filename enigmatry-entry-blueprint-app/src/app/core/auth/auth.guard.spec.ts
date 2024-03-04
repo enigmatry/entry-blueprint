@@ -42,8 +42,8 @@ describe.each(userCases)('Testing authentication guard...', userCase => {
             const result = await act();
 
             expect(result).toBe(userCase.allowedAccess);
-            expect(loginRedirectMock).toBeCalledTimes(userCase.redirectedToLogin ? 1 : 0);
-            expect(logoutMock).toBeCalledTimes(userCase.logout ? 1 : 0);
+            expect(loginRedirectMock).toHaveBeenCalledTimes(userCase.redirectedToLogin ? 1 : 0);
+            expect(logoutMock).toHaveBeenCalledTimes(userCase.logout ? 1 : 0);
         });
     });
 });

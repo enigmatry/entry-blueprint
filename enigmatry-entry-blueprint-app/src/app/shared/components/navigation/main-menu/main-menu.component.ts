@@ -10,7 +10,7 @@ import { SizeService } from 'src/app/core/services/size.service';
   styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent {
-  @Input() menuItems: { description: string, icon: string, aria: string, url: string, permission: PermissionId }[];
+  @Input() menuItems: { description: string; icon: string; aria: string; url: string; permission: PermissionId }[];
   @Input() onHamburgerClick: () => void;
   @Input() onLogout: () => void;
   @Input() show: (menuItem: { permission: PermissionId }) => void;

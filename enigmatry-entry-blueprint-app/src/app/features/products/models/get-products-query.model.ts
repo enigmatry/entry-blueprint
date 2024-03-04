@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import { SelectFilterOption, SelectSearchFilter, TextSearchFilter } from '@enigmatry/entry-components/search-filter';
+import { SelectOption, SelectSearchFilter, TextSearchFilter } from '@enigmatry/entry-components/search-filter';
 import { SortDirection } from '@enigmatry/entry-components/table';
 import { addMonths } from 'date-fns';
 import { SearchFilterPagedQuery } from 'src/app/shared/list-component/search-filter-paged-query';
@@ -23,9 +23,9 @@ export class GetProductsQuery extends SearchFilterPagedQuery {
     label: 'Expires in',
     placeholder: 'Expires in',
     options: [
-      new SelectFilterOption(1, '1 month'),
-      new SelectFilterOption(3, '3 months'),
-      new SelectFilterOption(6, '6 months')
+      new SelectOption(1, '1 month'),
+      new SelectOption(3, '3 months'),
+      new SelectOption(6, '6 months')
     ]
   });
 
