@@ -1490,7 +1490,7 @@
           "Enigmatry.Entry.AspNetCore.Authorization": "[3.1.0-preview.2, )",
           "Enigmatry.Entry.Blueprint.Domain": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
-          "Enigmatry.Entry.CodeGeneration.Validation": "[15.1.0, )",
+          "Enigmatry.Entry.CodeGeneration.Validation": "[16.0.0, )",
           "Enigmatry.Entry.HealthChecks": "[3.1.0-preview.2, )",
           "Microsoft.ApplicationInsights.AspNetCore": "[2.22.0, )"
         }
@@ -1629,9 +1629,9 @@
       },
       "Enigmatry.Entry.CodeGeneration.Validation": {
         "type": "CentralTransitive",
-        "requested": "[15.1.0, )",
-        "resolved": "15.1.0",
-        "contentHash": "fzUV4bWlNl3kc9l0h8FpdWdcxriOve7QSdtq5ZemPiGdbWkpM5Vl0jD3+idgklqBHvoZxjlyN+PDRaHbdeT58w==",
+        "requested": "[16.0.0, )",
+        "resolved": "16.0.0",
+        "contentHash": "LqKP4OsgUuQLTPeIKrs3LfgXLRSgsh8OQKUKVi92OOztjL+MCLDtOeLO3Vdr7lZjC67xeBmH1lyNKp6uOr6oMw==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.SourceLink.GitHub": "1.1.1"
