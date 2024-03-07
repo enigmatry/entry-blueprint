@@ -9,10 +9,13 @@
 	height: calc(100% - 4 * vars.$default-gap);
 	padding: 2 * vars.$default-gap vars.$default-gap;
 	overflow: auto;
-	@include layouts.grow-centrally();
 
-	@include breakpoints.apply-on-large-desktop() {
-		width: 1180px;
+	.main-content {
+		@include breakpoints.apply-on-large-desktop() {
+			width: 1180px;
+		}
+
+		@include layouts.grow-centrally();
 	}
 }
 
