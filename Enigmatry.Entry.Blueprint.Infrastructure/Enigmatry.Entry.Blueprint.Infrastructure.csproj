@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization" />
@@ -34,8 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api"/>
-    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests"/>
+    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api" />
+    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests" />
   </ItemGroup>
 
 </Project>
