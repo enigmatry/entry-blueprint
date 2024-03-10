@@ -1,14 +1,14 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { setServerSideValidationErrors } from '@enigmatry/entry-components';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import {
   CreateOrUpdateUserCommand, IGetUserDetailsResponse,
   IValidationProblemDetails,
   LookupResponseOfGuid, PermissionId, UsersClient
-} from 'src/app/api/api-reference';
+} from '@api';
+import { setServerSideValidationErrors } from '@enigmatry/entry-components';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { UserEditGeneratedComponent } from '../generated/user-edit/user-edit-generated.component';
 
 @Component({

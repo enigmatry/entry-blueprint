@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { PermissionId } from 'src/app/api/api-reference';
-import { mockClass } from 'src/testing/mocks/class-mocker';
+import { PermissionId } from '@api';
+import { mockClass } from '@test/mocks/class-mocker';
 import { CurrentUserService } from '../services/current-user.service';
 import { PermissionService } from './permissions.service';
 import { UserProfile } from './user-profile';

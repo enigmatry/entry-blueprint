@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { PermissionId } from 'src/app/api/api-reference';
-import { AuthService } from 'src/app/core/auth/auth.service';
-import { PermissionService } from 'src/app/core/auth/permissions.service';
-import { CurrentUserService } from 'src/app/core/services/current-user.service';
-import { SizeService } from 'src/app/core/services/size.service';
+import { PermissionId } from '@api';
+import { AuthService } from '@app/auth/auth.service';
+import { PermissionService } from '@app/auth/permissions.service';
+import { CurrentUserService } from '@app/services/current-user.service';
+import { SizeService } from '@app/services/size.service';
 
 @Component({
   selector: 'app-menu',

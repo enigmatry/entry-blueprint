@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env';
 
 export class AngularTester {
     private readonly testEndpoint = `${environment.apiUrl}/test`;

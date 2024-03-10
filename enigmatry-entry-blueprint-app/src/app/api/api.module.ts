@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env';
 import { API_BASE_URL } from './api-reference';
 
 @NgModule({

@@ -7,9 +7,9 @@ import {
   HttpStatusCode
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env';
 import { Observable } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable()

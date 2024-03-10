@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { PermissionId } from 'src/app/api/api-reference';
-import { PermissionService } from 'src/app/core/auth/permissions.service';
-import { UserProfile } from 'src/app/core/auth/user-profile';
-import { SizeService } from 'src/app/core/services/size.service';
+import { PermissionId } from '@api';
+import { PermissionService } from '@app/auth/permissions.service';
+import { UserProfile } from '@app/auth/user-profile';
+import { SizeService } from '@app/services/size.service';
 
 @Component({
   selector: 'app-main-menu',

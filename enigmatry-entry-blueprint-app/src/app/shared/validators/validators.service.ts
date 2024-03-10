@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import {
     IsProductCodeUniqueResponse,
     IsProductNameUniqueResponse,
     ProductsClient
-} from 'src/app/api/api-reference';
+} from '@api';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'

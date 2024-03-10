@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router, TitleStrategy } from '@angular/router';
+import { environment } from '@env';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { Subject, filter, map, takeUntil } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { CurrentUserService } from './current-user.service';
 
 /**

@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { HttpClientTestingModule, TestRequest } from '@angular/common/http/testing';
+import { AngularTesterBuilder, AngularTester } from '@test/builders/angular-tester-builder';
 import { of, throwError } from 'rxjs';
-import { AngularTesterBuilder, AngularTester } from 'src/testing/builders/angular-tester-builder';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 

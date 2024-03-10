@@ -1,7 +1,7 @@
 /* eslint-disable func-style */
 import { InjectionToken } from '@angular/core';
 import { Configuration, LogLevel } from '@azure/msal-browser';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env';
 import { getCurrentLanguage } from 'src/i18n/language';
 
 export const MSAL_CONFIG = new InjectionToken<string>('MSAL_CONFIG');

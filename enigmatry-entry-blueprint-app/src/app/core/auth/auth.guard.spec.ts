@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterStateSnapshot } from '@angular/router';
+import { mockClass } from '@test/mocks/class-mocker';
 import { Observable, lastValueFrom, of } from 'rxjs';
-import { mockClass } from 'src/testing/mocks/class-mocker';
 import { CurrentUserService } from '../services/current-user.service';
 import { authGuard } from './auth.guard';
 import { userCases } from './auth.guard.spec.data';
