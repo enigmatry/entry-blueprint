@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PermissionId } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
 import { UserProfile } from '@app/auth/user-profile';
-import { SizeService } from '@app/services/size.service';
+import { SizeService } from '@services/size.service';
 
 @Component({
   selector: 'app-main-menu',

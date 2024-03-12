@@ -28,6 +28,7 @@
       "@api": ["src/app/api/api-reference"],
       "@env": ["src/environments/environment"],
       "@app/*": ["src/app/core/*"],
+      "@services/*": ["src/app/core/services/*"],
       "@features/*": ["src/app/features/*"],
       "@shared/*": ["src/app/shared/*"],
       "@components/*": ["src/app/shared/components/*"],

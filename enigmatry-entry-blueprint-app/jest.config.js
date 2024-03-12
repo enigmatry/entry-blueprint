@@ -31,6 +31,7 @@ module.exports = {
     "^@api$": "<rootDir>/src/app/api/api-reference",
     "^@env$": "<rootDir>/src/environments/environment",
     "^@app/(.*)$": "<rootDir>/src/app/core/$1",
+    "^@services/(.*)$": "<rootDir>/src/app/core/services/$1",
     "^@features/(.*)$": "<rootDir>/src/app/features/$1",
     "^@shared/(.*)$": "<rootDir>/src/app/shared/$1",
     "^@components/(.*)$": "<rootDir>/src/app/shared/components/$1",

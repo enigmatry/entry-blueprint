@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { PermissionService } from '@app/auth/permissions.service';
 import { EntryButtonModule, provideEntryButtonConfig } from '@enigmatry/entry-components/button';
 import { EntryCommonModule } from '@enigmatry/entry-components/common';
 import { EntryDialogModule } from '@enigmatry/entry-components/dialog';
@@ -7,7 +8,6 @@ import { EntryPermissionModule, EntryPermissionService } from '@enigmatry/entry-
 import { EntrySearchFilterModule, provideEntrySearchFilterConfig } from '@enigmatry/entry-components/search-filter';
 import { EntryTableModule } from '@enigmatry/entry-components/table';
 import { EntryValidationModule } from '@enigmatry/entry-components/validation';
-import { PermissionService } from '../core/auth/permissions.service';
 
 @NgModule({
   declarations: [],

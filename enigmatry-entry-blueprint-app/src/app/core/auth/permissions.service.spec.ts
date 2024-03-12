@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { PermissionId } from '@api';
+import { PermissionService } from '@app/auth/permissions.service';
 import { mockClass } from '@test/mocks/class-mocker';
 import { CurrentUserService } from '../services/current-user.service';
-import { PermissionService } from './permissions.service';
 import { UserProfile } from './user-profile';
 
 jest.mock('../services/current-user.service');

@@ -3,8 +3,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { PermissionId } from '@api';
 import { AuthService } from '@app/auth/auth.service';
 import { PermissionService } from '@app/auth/permissions.service';
-import { CurrentUserService } from '@app/services/current-user.service';
-import { SizeService } from '@app/services/size.service';
+import { CurrentUserService } from '@services/current-user.service';
+import { SizeService } from '@services/size.service';
 
 @Component({
   selector: 'app-menu',

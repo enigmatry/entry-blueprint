@@ -1,8 +1,8 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { ScreenSizeFactory } from '@app/models/screen-sizes/factory';
+import { Size } from '@app/models/screen-sizes/size';
 import { Observable, Subject, fromEvent } from 'rxjs';
 import { distinctUntilKeyChanged } from 'rxjs/operators';
-import { ScreenSizeFactory } from '../models/screen-sizes/factory';
-import { Size } from '../models/screen-sizes/size';
 
 @Injectable({
     providedIn: 'root'
