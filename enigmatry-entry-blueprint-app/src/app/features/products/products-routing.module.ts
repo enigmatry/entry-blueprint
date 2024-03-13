@@ -1,7 +1,7 @@
 import { NgModule, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
-import { ProductsClient } from 'src/app/api/api-reference';
-import { RouteSegments } from 'src/app/shared/model/route-segments';
+import { ProductsClient } from '@api';
+import { RouteSegments } from '@shared/model/route-segments';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductListComponent } from './product-list/product-list.component';
 

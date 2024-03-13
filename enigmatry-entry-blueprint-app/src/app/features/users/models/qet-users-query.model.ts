@@ -1,5 +1,5 @@
 import { TextSearchFilter } from '@enigmatry/entry-components/search-filter';
-import { SearchFilterPagedQuery } from 'src/app/shared/list-component/search-filter-paged-query';
+import { SearchFilterPagedQuery } from '@shared/list-component/search-filter-paged-query';
 
 export class GetUsersQuery extends SearchFilterPagedQuery {
   name = new TextSearchFilter({

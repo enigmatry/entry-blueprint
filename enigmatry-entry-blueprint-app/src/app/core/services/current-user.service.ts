@@ -1,8 +1,8 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProfileClient } from '@api';
+import { UserProfile } from '@app/auth/user-profile';
 import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } from 'rxjs';
-import { ProfileClient } from 'src/app/api/api-reference';
-import { UserProfile } from '../auth/user-profile';
 
 @Injectable({
 	providedIn: 'root'

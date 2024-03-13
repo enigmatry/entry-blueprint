@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GetProductsResponseItem, PermissionId, ProductsClient } from '@api';
+import { PermissionService } from '@app/auth/permissions.service';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
+import { BaseListComponent } from '@shared/list-component/base-list-component.model';
+import { RouteSegments } from '@shared/model/route-segments';
 import { Observable, Subscription, switchMap, tap } from 'rxjs';
-import { GetProductsResponseItem, PermissionId, ProductsClient } from 'src/app/api/api-reference';
-import { PermissionService } from 'src/app/core/auth/permissions.service';
-import { BaseListComponent } from 'src/app/shared/list-component/base-list-component.model';
-import { RouteSegments } from 'src/app/shared/model/route-segments';
 import { GetProductsQuery } from '../models/get-products-query.model';
 
 @Component({

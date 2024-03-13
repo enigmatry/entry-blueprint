@@ -2,7 +2,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IValidationProblemDetails, setServerSideValidationErrors } from '@enigmatry/entry-components/validation';
 import {
   IGetProductDetailsResponse,
   IProductCreateOrUpdateCommand,
@@ -10,9 +9,10 @@ import {
   ProductCreateOrUpdateCommand,
   ProductsClient,
   ProductType
-} from 'src/app/api/api-reference';
-import { FormAccessMode } from 'src/app/shared/form-component/form-access-mode.enum';
-import { FormComponent } from 'src/app/shared/form-component/form-component.model';
+} from '@api';
+import { IValidationProblemDetails, setServerSideValidationErrors } from '@enigmatry/entry-components/validation';
+import { FormAccessMode } from '@shared/form-component/form-access-mode.enum';
+import { FormComponent } from '@shared/form-component/form-component.model';
 import { ProductEditGeneratedComponent } from '../generated/product-edit/product-edit-generated.component';
 
 @Component({

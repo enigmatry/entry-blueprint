@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GetProductsResponseItem } from 'src/app/api/api-reference';
+import { GetProductsResponseItem } from '@api';
 
 @Component({
     selector: 'app-product-name-with-link-cell',

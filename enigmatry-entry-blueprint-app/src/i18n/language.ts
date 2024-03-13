@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '@env';
 
 export const localizations = {
   en: () => import('./en'),

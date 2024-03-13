@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GetUsersResponseItem, PermissionId, UsersClient } from '@api';
+import { PermissionService } from '@app/auth/permissions.service';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
+import { BaseListComponent } from '@shared/list-component/base-list-component.model';
+import { SearchFilterPagedQuery } from '@shared/list-component/search-filter-paged-query';
+import { RouteSegments } from '@shared/model/route-segments';
 import { Observable, Subscription, switchMap, tap } from 'rxjs';
-import { GetUsersResponseItem, PermissionId, UsersClient } from 'src/app/api/api-reference';
-import { PermissionService } from 'src/app/core/auth/permissions.service';
-import { BaseListComponent } from 'src/app/shared/list-component/base-list-component.model';
-import { SearchFilterPagedQuery } from 'src/app/shared/list-component/search-filter-paged-query';
-import { RouteSegments } from 'src/app/shared/model/route-segments';
 import { GetUsersQuery } from '../models/qet-users-query.model';
 
 @Component({

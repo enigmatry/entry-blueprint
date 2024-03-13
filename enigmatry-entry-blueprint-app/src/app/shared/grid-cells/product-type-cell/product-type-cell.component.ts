@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GetProductsResponseItem, ProductType } from 'src/app/api/api-reference';
+import { GetProductsResponseItem, ProductType } from '@api';
 
 @Component({
     selector: 'app-product-type-cell',

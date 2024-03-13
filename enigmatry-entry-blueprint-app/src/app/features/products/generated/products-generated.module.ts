@@ -9,7 +9,7 @@
 /* eslint-disable */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { EntryTableModule } from '@enigmatry/entry-components/table';
     import { FormlyModule, FORMLY_CONFIG } from '@ngx-formly/core';
     import { FormlyMaterialModule } from '@ngx-formly/material';
@@ -19,7 +19,7 @@ import { EntryTableModule } from '@enigmatry/entry-components/table';
 import { ProductEditGeneratedComponent } from './product-edit/product-edit-generated.component';
 import { ProductListGeneratedComponent } from './product-list/product-list-generated.component';
 
-import { CustomValidatorsService, customValidatorsFactory } from 'src/app/shared/validators/custom-validators';
+import { CustomValidatorsService, customValidatorsFactory } from '@shared/validators/custom-validators';
 
 @NgModule({
     declarations: [ProductEditGeneratedComponent, ProductListGeneratedComponent],

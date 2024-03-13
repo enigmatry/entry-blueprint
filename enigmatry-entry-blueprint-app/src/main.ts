@@ -2,9 +2,8 @@ import { registerLocaleData } from '@angular/common';
 import { LOCALE_ID, enableProdMode } from '@angular/core';
 import { loadTranslations } from '@angular/localize';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import { environment } from '@env';
 import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
 import { getCurrentLanguage, localizations } from './i18n/language';
 
 if (environment.production) {

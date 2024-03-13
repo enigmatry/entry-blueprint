@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { SelectOption, SelectSearchFilter, TextSearchFilter } from '@enigmatry/entry-components/search-filter';
 import { SortDirection } from '@enigmatry/entry-components/table';
+import { SearchFilterPagedQuery } from '@shared/list-component/search-filter-paged-query';
 import { addMonths } from 'date-fns';
-import { SearchFilterPagedQuery } from 'src/app/shared/list-component/search-filter-paged-query';
 
 export class GetProductsQuery extends SearchFilterPagedQuery {
   name = new TextSearchFilter({

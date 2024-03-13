@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home.component';
+import { HomeComponent } from '@features/home/home.component';
 
 @NgModule({
   declarations: [

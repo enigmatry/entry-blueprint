@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
-import { ApplicationInsightsService } from './application-insights.service';
+import { AuthService } from '@app/auth/auth.service';
+import { ApplicationInsightsService } from '@services/application-insights.service';
 
 export const initFactory = (service: AppInitService) => () => service.init();
 

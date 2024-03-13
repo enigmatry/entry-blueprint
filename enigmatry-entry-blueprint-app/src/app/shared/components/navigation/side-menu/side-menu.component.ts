@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { PermissionId } from 'src/app/api/api-reference';
-import { UserProfile } from 'src/app/core/auth/user-profile';
+import { PermissionId } from '@api';
+import { UserProfile } from '@app/auth/user-profile';
 
 @Component({
   selector: 'app-side-menu',

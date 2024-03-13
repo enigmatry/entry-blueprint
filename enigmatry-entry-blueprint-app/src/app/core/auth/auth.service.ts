@@ -3,9 +3,9 @@ import { Inject, Injectable } from '@angular/core';
 import {
   AccountInfo, AuthenticationResult, Configuration, PublicClientApplication, RedirectRequest
 } from '@azure/msal-browser';
+import { environment } from '@env';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { extraQueryParameters, MSAL_CONFIG } from './msal-config';
 
 

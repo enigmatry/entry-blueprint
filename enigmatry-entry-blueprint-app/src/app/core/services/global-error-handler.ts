@@ -1,5 +1,5 @@
 import { Injectable, ErrorHandler, inject } from '@angular/core';
-import { ApplicationInsightsService } from './application-insights.service';
+import { ApplicationInsightsService } from '@services/application-insights.service';
 
 /**
  * Extends default error handling to report errors to an external service - Azure Application Insights.

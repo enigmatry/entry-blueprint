@@ -10,7 +10,7 @@
 import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, OnDestroy, Optional, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { IGetProductDetailsResponse } from 'src/app/api/api-reference';
+import { IGetProductDetailsResponse } from '@api';
 import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary, SelectConfiguration, ENTRY_FIELD_TYPE_RESOLVER, FieldTypeResolver, sortOptions } from '@enigmatry/entry-form';
 import { BehaviorSubject, of, Subject, Subscription } from 'rxjs';
 import { map, throttleTime } from 'rxjs/operators';

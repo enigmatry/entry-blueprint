@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { PermissionId } from '@api';
 import { EntryPermissionService } from '@enigmatry/entry-components/permissions';
-import { PermissionId } from 'src/app/api/api-reference';
-import { CurrentUserService } from '../services/current-user.service';
+import { CurrentUserService } from '@services/current-user.service';
 
 @Injectable({
   providedIn: 'root'

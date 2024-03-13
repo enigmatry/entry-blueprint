@@ -1,4 +1,4 @@
-import { GetUserProfileResponse, IGetUserProfileResponse, PermissionId } from 'src/app/api/api-reference';
+import { GetUserProfileResponse, IGetUserProfileResponse, PermissionId } from '@api';
 
 export class UserProfile extends GetUserProfileResponse {
   hasPermission(permission: PermissionId): boolean {
