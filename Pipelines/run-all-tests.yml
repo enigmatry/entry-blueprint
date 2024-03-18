@@ -1,0 +1,12 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
+
+jobs:
+- template: run-all-dotnet-tests.yml@templates
+  parameters:
+    displayName: 'Run all tests'
