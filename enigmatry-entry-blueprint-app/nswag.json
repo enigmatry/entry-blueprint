@@ -58,7 +58,7 @@
       "queryNullValue": "",
       "inlineNamedDictionaries": false,
       "inlineNamedAny": false,
-      "templateDirectory": "src/app/api/nswag_templates",
+      "templateDirectory": "node_modules/@enigmatry/entry-components/assets/nswag_templates",
       "typeNameGeneratorType": null,
       "propertyNameGeneratorType": null,
       "enumNameGeneratorType": null,
