@@ -33,7 +33,7 @@
     "@angular/platform-browser-dynamic": "^16.2.12",
     "@angular/router": "^16.2.12",
     "@azure/msal-browser": "3.2.0",
-    "@enigmatry/entry-components": "16.0.0",
+    "@enigmatry/entry-components": "16.0.1-preview.5",
     "@enigmatry/entry-form": "16.0.0",
     "@microsoft/applicationinsights-web": "3.1.0",
     "@ngx-formly/core": "6.3.0",
