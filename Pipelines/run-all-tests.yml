@@ -32,7 +32,7 @@ jobs:
 
   - task: PublishTestResults@2
     displayName: 'supply npm test results to pipelines'
-    # condition: succeededOrFailed() # because otherwise we won't know what tests failed
+    condition: succeededOrFailed() # because otherwise we won't know what tests failed
     inputs:
       testResultsFiles: 'enigmatry-entry-blueprint-app/junit.xml'
       # mergeTestResults: true
