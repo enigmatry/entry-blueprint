@@ -7,6 +7,37 @@ resources:
       name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
 
 jobs:
-- template: run-all-dotnet-tests.yml@templates
-  parameters:
-    displayName: 'Run all tests'
+- job: run_angular_test
+  steps:
+  - task: Cache@2
+    displayName: 'Cache npm Dependencies'
+    inputs:
+      key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/package-lock.json'
+      path: '$(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/node_modules'
+      cacheHitVar: 'NPM_CACHE_RESTORED'
+
+  - task: Npm@1
+    displayName: 'Install node modules'
+    inputs:
+      command: 'ci'
+      workingDir: 'enigmatry-entry-blueprint-app'
+    condition: ne(variables.NPM_CACHE_RESTORED, true)
+
+  - task: Npm@1
+    displayName: npm run test
+    inputs:
+      command: 'custom'
+      workingDir: 'enigmatry-entry-blueprint-app'
+      customCommand: 'run test:ci'
+
+  - task: PublishTestResults@2
+    displayName: 'supply npm test results to pipelines'
+    # condition: succeededOrFailed() # because otherwise we won't know what tests failed
+    inputs:
+      testResultsFiles: 'enigmatry-entry-blueprint-app/junit.xml'
+      # mergeTestResults: true
+
+# - template: run-all-dotnet-tests.yml@templates
+#   parameters:
+#     displayName: 'Run all tests'
+        
