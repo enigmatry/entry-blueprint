@@ -37,7 +37,7 @@ jobs:
       testResultsFiles: 'enigmatry-entry-blueprint-app/junit.xml'
       # mergeTestResults: true
 
-# - template: run-all-dotnet-tests.yml@templates
-#   parameters:
-#     displayName: 'Run all tests'
+- template: run-all-dotnet-tests.yml@templates
+  parameters:
+    displayName: 'Run all tests'
         
