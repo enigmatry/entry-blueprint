@@ -16,6 +16,7 @@
     <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="3.1.0" />
     <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="3.1.0" />
     <PackageVersion Include="Enigmatry.Entry.MediatR" Version="3.1.0" />
+    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="3.1.0" />
     <PackageVersion Include="Enigmatry.Entry.Swagger" Version="3.1.0" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="16.0.0" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="16.0.0" />
@@ -47,6 +48,7 @@
     <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.3.0" />
     <PackageVersion Include="Serilog.Enrichers.Process" Version="2.0.2" />
     <PackageVersion Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageVersion Include="Serilog.Settings.Configuration" Version="8.0.0" />
     <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1" />

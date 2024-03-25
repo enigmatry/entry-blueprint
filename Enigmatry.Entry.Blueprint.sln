@@ -36,6 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", 
 	ProjectSection(SolutionItems) = preProject
 		Deployment\publish-web-profile-test-api.proj = Deployment\publish-web-profile-test-api.proj
 		Deployment\publish-web-profile-test-app.proj = Deployment\publish-web-profile-test-app.proj
+		Deployment\publish-web-profile-test-scheduler.proj = Deployment\publish-web-profile-test-scheduler.proj
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Entry.Blueprint.Template", "Enigmatry.Entry.Blueprint.Template.csproj", "{2218303A-AD60-4C30-BFBC-104BB877E18F}"
@@ -54,6 +55,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Variables", "Variables", "{
 	ProjectSection(SolutionItems) = preProject
 		Pipelines\variables\variables.test.yml = Pipelines\variables\variables.test.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Entry.Blueprint.Scheduler", "Enigmatry.Entry.Blueprint.Scheduler\Enigmatry.Entry.Blueprint.Scheduler.csproj", "{6FCB0658-D0D1-4520-AD3D-BB39DB932CEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +112,10 @@ Global
 		{7B09F20C-7607-494C-9309-E539D1966F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B09F20C-7607-494C-9309-E539D1966F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B09F20C-7607-494C-9309-E539D1966F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FCB0658-D0D1-4520-AD3D-BB39DB932CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FCB0658-D0D1-4520-AD3D-BB39DB932CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FCB0658-D0D1-4520-AD3D-BB39DB932CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FCB0658-D0D1-4520-AD3D-BB39DB932CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
