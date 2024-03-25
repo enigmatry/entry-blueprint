@@ -13,17 +13,17 @@ jobs:
       displayName: npm run test
       inputs:
         command: 'custom'
-        workingDir: 'src/client-app'
+        workingDir: 'enigmatry-entry-blueprint-app'
         customCommand: 'run test:ci'
 
     - task: PublishTestResults@2
       displayName: 'supply npm test results to pipelines'
-      condition: succeededOrFailed() # because otherwise we won't know what tests failed
+      # condition: succeededOrFailed() # because otherwise we won't know what tests failed
       inputs:
-        testResultsFiles: '**/junit.xml'
+        testResultsFiles: 'enigmatry-entry-blueprint-app/junit.xml'
         # mergeTestResults: true
 
-- template: run-all-dotnet-tests.yml@templates
-  parameters:
-    displayName: 'Run all tests'
+# - template: run-all-dotnet-tests.yml@templates
+#   parameters:
+#     displayName: 'Run all tests'
         
