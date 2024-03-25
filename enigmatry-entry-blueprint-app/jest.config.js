@@ -49,5 +49,6 @@ module.exports = {
     "js",
     "json",
     "node"
-  ]
+  ],
+  "reporters": ["default", "jest-junit"]
 };
