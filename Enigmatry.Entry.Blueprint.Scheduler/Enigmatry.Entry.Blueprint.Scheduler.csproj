@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Enigmatry.Entry.Scheduler" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" />
         <PackageReference Include="Serilog.AspNetCore" />
         <PackageReference Include="Serilog.Enrichers.Thread" />
         <PackageReference Include="Serilog.Extensions.Logging" />
