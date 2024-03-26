@@ -7,25 +7,27 @@ using Serilog;
 using Serilog.Extensions.Logging;
 using System.Reflection;
 
-var builder = Host.CreateDefaultBuilder(args);
+internal class Program
+{
+    public static void Main() =>
+        CreateHostBuilder()
+            .Build()
+            .Run();
 
-builder.UseSerilog((context, services, configuration) =>
-    configuration
-        .ReadFrom.Configuration(context.Configuration)
-        .ReadFrom.Services(services));
-
-builder
-    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.AppRegisterModulesExceptIPrincipal())
-    .ConfigureServices((context, services) =>
-    {
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyFinder.DomainAssembly));
-        using var factory = new SerilogLoggerFactory();
-        services.AddEntryQuartz(context.Configuration, Assembly.GetExecutingAssembly(), factory.CreateLogger<Program>(),
-            quartz => quartz.AddEntryApplicationInsights());
-        services.AddApplicationInsightsTelemetryWorkerService();
-    });
-
-var host = builder.Build();
-
-host.Run();
+    internal static IHostBuilder CreateHostBuilder() =>
+        Host.CreateDefaultBuilder()
+            .UseSerilog((context, services, configuration) =>
+                configuration
+                    .ReadFrom.Configuration(context.Configuration)
+                    .ReadFrom.Services(services))
+            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.AppRegisterModulesExceptIPrincipal())
+            .ConfigureServices((context, services) =>
+            {
+                services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyFinder.DomainAssembly));
+                using var factory = new SerilogLoggerFactory();
+                services.AddEntryQuartz(context.Configuration, Assembly.GetExecutingAssembly(), factory.CreateLogger<Program>(),
+                    quartz => quartz.AddEntryApplicationInsights());
+                services.AddApplicationInsightsTelemetryWorkerService();
+            });
+}

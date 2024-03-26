@@ -18,4 +18,8 @@
     <ItemGroup>
       <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure\Enigmatry.Entry.Blueprint.Infrastructure.csproj" />
     </ItemGroup>
+  
+    <ItemGroup>
+      <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Scheduler.Tests" />
+    </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
+using NUnit.Framework;
 using Testcontainers.MsSql;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;

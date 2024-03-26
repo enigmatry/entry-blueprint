@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure.Tests\Enigmatry.Entry.Blueprint.Infrastructure.Tests.csproj" />
       <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Scheduler\Enigmatry.Entry.Blueprint.Scheduler.csproj" />
     </ItemGroup>
 
