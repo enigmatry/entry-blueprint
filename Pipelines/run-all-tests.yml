@@ -10,6 +10,7 @@ jobs:
 - template: run-all-angular-tests.yml
   parameters:
     displayName: 'Run all Angular tests'
+    projectNameAngularApp: 'enigmatry-entry-blueprint-app'
 
 - template: run-all-dotnet-tests.yml@templates
   parameters:
