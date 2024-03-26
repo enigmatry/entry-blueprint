@@ -7,7 +7,7 @@ resources:
       name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
 
 jobs:
-- template: run-all-angular-tests.yml
+- template: run-all-angular-tests.yml@templates
   parameters:
     displayName: 'Run all Angular tests'
     projectNameAngularApp: 'enigmatry-entry-blueprint-app'
