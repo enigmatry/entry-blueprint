@@ -5,6 +5,7 @@ using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Entry.Blueprint.Domain.Users;
+using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Scheduler;
 using Microsoft.Extensions.Configuration;
@@ -51,12 +52,18 @@ public abstract class SchedulerFixtureBase
 
                 container.RegisterAssemblyTypes(typeof(Program).Assembly)
                     .Where(t => t.Name.EndsWith("Job", StringComparison.InvariantCulture)).AsSelf();
+
+                container.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
             });
 
     private void SeedTestUser()
     {
         var dbContext = Resolve<AppDbContext>();
         var testUser = TestUserData.CreateSchedulerUser();
+        if (dbContext.Set<User>().SingleOrDefault(x => x.Id == testUser.Id) != null)
+        {
+            return;
+        }
         dbContext.Set<User>().Add(testUser);
         dbContext.SaveChanges();
     }

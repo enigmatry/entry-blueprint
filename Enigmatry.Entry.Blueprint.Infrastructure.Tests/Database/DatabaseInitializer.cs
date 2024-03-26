@@ -27,7 +27,8 @@ internal static class DatabaseInitializer
         try
         {
             var dbDoesNotExist = !dbContext.Database.CanConnect(); // this will throw SqlException if connection to server can not be made, and true / false depending if db exists
-            return dbDoesNotExist || dbContext.Database.GetPendingMigrations().Any();
+            var pendingMigrations = dbContext.Database.GetPendingMigrations().ToList();
+            return dbDoesNotExist || pendingMigrations.Any();
         }
         catch (SqlException ex)
         {

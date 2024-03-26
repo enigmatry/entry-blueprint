@@ -9,14 +9,11 @@ namespace Enigmatry.Entry.Blueprint.Scheduler.Tests;
 
 public class UpdateProductAmountJobFixtureBase : SchedulerFixtureBase
 {
-    private AppDbContext _dbContext = null!;
-
-    [SetUp]
-    public void SetUp() => _dbContext = Resolve<AppDbContext>();
 
     [Test]
     public async Task TestUpdateProductAmountJob()
     {
+        var dbContext = Resolve<AppDbContext>();
         var product = Product.Create(new ProductCreateOrUpdate.Command
         {
             Amount = 100,
@@ -26,13 +23,13 @@ public class UpdateProductAmountJobFixtureBase : SchedulerFixtureBase
             Price = 100,
             Type = ProductType.Book
         });
-        _dbContext.Set<Product>().Add(product);
-        await _dbContext.SaveChangesAsync();
-        _dbContext.ChangeTracker.Clear();
+        dbContext.Set<Product>().Add(product);
+        await dbContext.SaveChangesAsync();
+        dbContext.ChangeTracker.Clear();
 
         await ExecuteJob<UpdateProductAmountJob, EmptyJobRequest>(new EmptyJobRequest());
 
-        var updatedProducts = await _dbContext.Set<Product>().ToListAsync();
+        var updatedProducts = await dbContext.Set<Product>().ToListAsync();
 
         await Verify(updatedProducts);
     }
