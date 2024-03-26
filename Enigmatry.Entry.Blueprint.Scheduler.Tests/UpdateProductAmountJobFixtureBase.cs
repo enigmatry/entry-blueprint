@@ -30,11 +30,10 @@ public class UpdateProductAmountJobFixtureBase : SchedulerFixtureBase
         await _dbContext.SaveChangesAsync();
         _dbContext.ChangeTracker.Clear();
 
-        await ExecuteJob<UpdateProductAmountJob, UpdateProductAmountJobRequest>(
-            new UpdateProductAmountJobRequest { ProductId = product.Id });
+        await ExecuteJob<UpdateProductAmountJob, EmptyJobRequest>(new EmptyJobRequest());
 
-        var updatedProduct = await _dbContext.Set<Product>().SingleAsync(x => x.Id == product.Id);
+        var updatedProducts = await _dbContext.Set<Product>().ToListAsync();
 
-        await Verify(updatedProduct);
+        await Verify(updatedProducts);
     }
 }

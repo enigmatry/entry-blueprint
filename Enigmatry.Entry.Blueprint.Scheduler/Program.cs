@@ -1,7 +1,9 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
+using Enigmatry.Entry.Blueprint.Scheduler;
 using Enigmatry.Entry.Scheduler;
 using Serilog;
 using Serilog.Extensions.Logging;
@@ -21,7 +23,13 @@ internal class Program
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services))
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.AppRegisterModulesExceptIPrincipal())
+            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
+            {
+                containerBuilder.AppRegisterModulesExceptIPrincipal();
+
+                containerBuilder.RegisterType<SchedulerUserProvider>()
+                    .As<ICurrentUserProvider>().InstancePerLifetimeScope();
+            })
             .ConfigureServices((context, services) =>
             {
                 services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyFinder.DomainAssembly));

@@ -56,7 +56,7 @@ public abstract class SchedulerFixtureBase
     private void SeedTestUser()
     {
         var dbContext = Resolve<AppDbContext>();
-        var testUser = TestUserData.CreateTestUser();
+        var testUser = TestUserData.CreateSchedulerUser();
         dbContext.Set<User>().Add(testUser);
         dbContext.SaveChanges();
     }

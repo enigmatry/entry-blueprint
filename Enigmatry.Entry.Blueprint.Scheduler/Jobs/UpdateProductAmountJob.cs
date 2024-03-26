@@ -9,7 +9,7 @@ using MediatR;
 namespace Enigmatry.Entry.Blueprint.Scheduler.Jobs;
 
 [UsedImplicitly]
-public class UpdateProductAmountJob : EntryJob<UpdateProductAmountJobRequest>
+public class UpdateProductAmountJob : EntryJob<EmptyJobRequest>
 {
     private readonly IMediator _mediator;
     private readonly ILogger<UpdateProductAmountJob> _logger;
@@ -25,10 +25,10 @@ public class UpdateProductAmountJob : EntryJob<UpdateProductAmountJobRequest>
         _unitOfWork = unitOfWork;
     }
 
-    public override async Task Execute(UpdateProductAmountJobRequest request)
+    public override async Task Execute(EmptyJobRequest request)
     {
         _logger.LogInformation("Scheduled job executed at {Now}", DateTimeOffset.Now);
-        await _mediator.Send(new ProductUpdateAmount.Command { Id = request.ProductId });
+        await _mediator.Send(new ProductUpdateAmount.Command());
         await _unitOfWork.SaveChangesAsync();
     }
 }
