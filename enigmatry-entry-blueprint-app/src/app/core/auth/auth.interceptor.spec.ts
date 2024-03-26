@@ -71,8 +71,8 @@ describe('Testing auth interceptor...', () => {
   it(`should redirect to login screen when response status 401`, (done: jest.DoneCallback) => {
     throwCustomError = false;
     tester.requestFailure(HttpStatusCode.Unauthorized, HttpStatusCode.Unauthorized.toString(), done, () => {
-        expect(tokenMock).toHaveBeenCalledTimes(10);
-        expect(loginMock).toHaveBeenCalledTimes(10);
+        expect(tokenMock).toHaveBeenCalledTimes(1);
+        expect(loginMock).toHaveBeenCalledTimes(1);
       });
   });
 });
