@@ -14,6 +14,11 @@ public static class ContainerBuilderStartupExtensions
         builder.Register(GetPrincipal)
             .As<IPrincipal>().InstancePerLifetimeScope();
 
+        builder.AppRegisterModulesExceptIPrincipal();
+    }
+
+    public static void AppRegisterModulesExceptIPrincipal(this ContainerBuilder builder)
+    {
         builder.RegisterAssemblyModules(AssemblyFinder.InfrastructureAssembly);
 
         builder.RegisterModule(new ServiceModule

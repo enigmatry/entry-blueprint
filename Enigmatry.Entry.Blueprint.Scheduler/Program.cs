@@ -1,10 +1,7 @@
-#pragma warning disable CA1506
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
-using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
-using Enigmatry.Entry.Blueprint.Scheduler;
+using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Scheduler;
 using Serilog;
 using Serilog.Extensions.Logging;
@@ -19,24 +16,7 @@ builder.UseSerilog((context, services, configuration) =>
 
 builder
     .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-    .ConfigureContainer<ContainerBuilder>(containerBuilder =>
-    {
-
-        containerBuilder.RegisterAssemblyModules(AssemblyFinder.InfrastructureAssembly);
-
-        containerBuilder.RegisterModule(new ServiceModule
-        {
-            Assemblies = new[]
-            {
-                AssemblyFinder.Find("Enigmatry.Entry.Infrastructure"),
-                AssemblyFinder.ApplicationServicesAssembly,
-                AssemblyFinder.InfrastructureAssembly
-            }
-        });
-
-        containerBuilder.RegisterType<SchedulerUserProvider>()
-            .As<ICurrentUserProvider>().InstancePerLifetimeScope();
-    })
+    .ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.AppRegisterModulesExceptIPrincipal())
     .ConfigureServices((context, services) =>
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyFinder.DomainAssembly));
@@ -49,4 +29,3 @@ builder
 var host = builder.Build();
 
 host.Run();
-#pragma warning restore CA1506
