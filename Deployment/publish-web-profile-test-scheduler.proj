@@ -3,7 +3,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ParameterValue Include="ApplicationInsights ConnectionString">
-      <Value>InstrumentationKey=todo</Value>
+      <Value>InstrumentationKey=477b870b-733d-4a69-a780-9bc363f075c7;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/</Value>
     </ParameterValue>
     <ParameterValue Include="Entry Blueprint Example Job Cron Expression">
       <Value>0 0 0 * * ?</Value>

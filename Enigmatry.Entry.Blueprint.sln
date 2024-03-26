@@ -49,6 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{
 		Pipelines\build-publish-nuget.yml = Pipelines\build-publish-nuget.yml
 		Pipelines\code-analysis.yml = Pipelines\code-analysis.yml
 		Pipelines\run-all-tests.yml = Pipelines\run-all-tests.yml
+		Pipelines\deploy-to-stage.yml = Pipelines\deploy-to-stage.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Variables", "Variables", "{DAB90BB5-1BB4-4012-9D4E-34525412DF0A}"

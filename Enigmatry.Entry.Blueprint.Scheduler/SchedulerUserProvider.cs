@@ -13,6 +13,6 @@ public class SchedulerUserProvider : ICurrentUserProvider
         _userRepository = userRepository;
     }
 
-    public User? User => _userRepository.FindById(User.SchedulerUserId) ?? null;
+    public User? User => _userRepository.FindById(User.SchedulerUserId);
     public bool IsAuthenticated => true;
 }
