@@ -2,65 +2,52 @@
   "version": 2,
   "dependencies": {
     "net8.0": {
-      "Enigmatry.Entry.Scheduler": {
+      "FakeItEasy": {
         "type": "Direct",
-        "requested": "[3.1.0, )",
-        "resolved": "3.1.0",
-        "contentHash": "gwR/NB5VA5r9ewEfZFvXizNi40pNKWKFrnZDC+rCFHG05C6c9ylhLZ8DDRg6Mf1N+C7n4baK8/54S4IpSSmfOg==",
+        "requested": "[8.1.0, )",
+        "resolved": "8.1.0",
+        "contentHash": "KYNUq1hyfCE9LsMg4UGlX9zuCKd6pZNNKImjU+CaGCLU0Uf7EDr4WklOMgmsv4aGjqGtXh0WKCiklsUDCuTGqQ==",
         "dependencies": {
-          "Enigmatry.Entry.Core": "3.1.0",
-          "Microsoft.ApplicationInsights.WorkerService": "2.22.0",
-          "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0",
-          "Quartz": "3.8.0",
-          "Quartz.Extensions.DependencyInjection": "3.8.0",
-          "Quartz.Extensions.Hosting": "3.8.0"
+          "Castle.Core": "5.1.1"
         }
       },
-      "Serilog.AspNetCore": {
+      "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
-        "requested": "[8.0.1, )",
-        "resolved": "8.0.1",
-        "contentHash": "B/X+wAfS7yWLVOTD83B+Ip9yl4MkhioaXj90JSoWi1Ayi8XHepEnsBdrkojg08eodCnmOKmShFUN2GgEc6c0CQ==",
+        "requested": "[17.9.0, )",
+        "resolved": "17.9.0",
+        "contentHash": "7GUNAUbJYn644jzwLm5BD3a2p9C1dmP8Hr6fDPDxgItQk9hBs1Svdxzz07KQ/UphMSmgza9AbijBJGmw5D658A==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "8.0.0",
-          "Microsoft.Extensions.Logging": "8.0.0",
-          "Serilog": "3.1.1",
-          "Serilog.Extensions.Hosting": "8.0.0",
-          "Serilog.Extensions.Logging": "8.0.0",
-          "Serilog.Formatting.Compact": "2.0.0",
-          "Serilog.Settings.Configuration": "8.0.0",
-          "Serilog.Sinks.Console": "5.0.0",
-          "Serilog.Sinks.Debug": "2.0.0",
-          "Serilog.Sinks.File": "5.0.0"
+          "Microsoft.CodeCoverage": "17.9.0",
+          "Microsoft.TestPlatform.TestHost": "17.9.0"
         }
       },
-      "Serilog.Enrichers.Thread": {
+      "NUnit": {
         "type": "Direct",
-        "requested": "[3.1.0, )",
-        "resolved": "3.1.0",
-        "contentHash": "85lWsGRJpRxvKT6j/H67no55SUBsBIvp556TKuBTGhjtoPeq+L7j/sDWbgAtvT0p7u7/phJyX6j35PQ4Vtqw0g==",
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "MT/DpAhjtiytzhTgTqIhBuWx4y26PKfDepYUHUM+5uv4TsryHC2jwFo5e6NhWkApCm/G6kZ80dRjdJFuAxq3rg=="
+      },
+      "NUnit3TestAdapter": {
+        "type": "Direct",
+        "requested": "[4.5.0, )",
+        "resolved": "4.5.0",
+        "contentHash": "s8JpqTe9bI2f49Pfr3dFRfoVSuFQyraTj68c3XXjIS/MRGvvkLnrg6RLqnTjdShX+AdFUCCU/4Xex58AdUfs6A=="
+      },
+      "Verify.NUnit": {
+        "type": "Direct",
+        "requested": "[23.3.0, )",
+        "resolved": "23.3.0",
+        "contentHash": "ucodE/RyRvsVvJ0OpTZdCpP5XreF/eaGcuwQyJokso9jpt7zps/BDrKLWkbfV2Ip8q3aoB39s6QqKprB3G9lMg==",
         "dependencies": {
-          "Serilog": "2.3.0"
+          "EmptyFiles": "8.1.1",
+          "NUnit": "4.1.0",
+          "Verify": "23.3.0"
         }
       },
-      "Serilog.Extensions.Logging": {
-        "type": "Direct",
-        "requested": "[8.0.0, )",
-        "resolved": "8.0.0",
-        "contentHash": "YEAMWu1UnWgf1c1KP85l1SgXGfiVo0Rz6x08pCiPOIBt2Qe18tcZLvdBUuV5o1QHvrs8FAry9wTIhgBRtjIlEg==",
-        "dependencies": {
-          "Microsoft.Extensions.Logging": "8.0.0",
-          "Serilog": "3.1.1"
-        }
-      },
-      "Serilog.Sinks.Console": {
-        "type": "Direct",
-        "requested": "[5.0.1, )",
-        "resolved": "5.0.1",
-        "contentHash": "6Jt8jl9y2ey8VV7nVEUAyjjyxjAQuvd5+qj4XYAT9CwcsvR70HHULGBeD+K2WCALFXf7CFsNQT4lON6qXcu2AA==",
-        "dependencies": {
-          "Serilog": "3.1.1"
-        }
+      "Argon": {
+        "type": "Transitive",
+        "resolved": "0.17.0",
+        "contentHash": "TC/5P8sb2AKeC6dLAEx7ex1sr2IiQOI0tZ8yV6J3QT8qp7bUfP/blmwrgZ/zIab84XQ+XScT1zUeok96iZ7ReQ=="
       },
       "AutoMapper": {
         "type": "Transitive",
@@ -127,6 +114,28 @@
         "dependencies": {
           "System.Reflection.Metadata": "5.0.0"
         }
+      },
+      "Castle.Core": {
+        "type": "Transitive",
+        "resolved": "5.1.1",
+        "contentHash": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.0"
+        }
+      },
+      "DiffEngine": {
+        "type": "Transitive",
+        "resolved": "15.2.2",
+        "contentHash": "KmufE1clNo6sfcKaceNiV6/rgBYun0lccodhkhvX2tB1+f69QlFAsw/mXFcTsf/8vyGj5KEerxQasWjZ3fXGCA==",
+        "dependencies": {
+          "EmptyFiles": "8.1.1",
+          "System.Management": "6.0.2"
+        }
+      },
+      "EmptyFiles": {
+        "type": "Transitive",
+        "resolved": "8.1.1",
+        "contentHash": "s3FvzcRB4sE9yo+WNEZmPjQzuEktLY8hqAkpUbJuFemb749sWiiGL5Onfmuidc32MH+YCRCUHlRSJOujuULUiQ=="
       },
       "JetBrains.Annotations": {
         "type": "Transitive",
@@ -262,6 +271,11 @@
         "type": "Transitive",
         "resolved": "1.1.1",
         "contentHash": "yuvf07qFWFqtK3P/MRkEKLhn5r2UbSpVueRziSqj0yJQIKFwG1pq9mOayK3zE5qZCTs0CbrwL9M6R8VwqyGy2w=="
+      },
+      "Microsoft.CodeCoverage": {
+        "type": "Transitive",
+        "resolved": "17.9.0",
+        "contentHash": "RGD37ZSrratfScYXm7M0HjvxMxZyWZL4jm+XgMZbkIY1UPgjUpbNA/t+WTGj/rC/0Hm9A3IrH3ywbKZkOCnoZA=="
       },
       "Microsoft.CSharp": {
         "type": "Transitive",
@@ -646,6 +660,23 @@
         "resolved": "1.0.0",
         "contentHash": "N4KeF3cpcm1PUHym1RmakkzfkEv3GRMyofVv40uXsQhCQeglr2OHNcUk2WOG51AKpGO8ynGpo9M/kFXSzghwug=="
       },
+      "Microsoft.TestPlatform.ObjectModel": {
+        "type": "Transitive",
+        "resolved": "17.9.0",
+        "contentHash": "1ilw/8vgmjLyKU+2SKXKXaOqpYFJCQfGqGz+x0cosl981VzjrY74Sv6qAJv+neZMZ9ZMxF3ArN6kotaQ4uvEBw==",
+        "dependencies": {
+          "System.Reflection.Metadata": "1.6.0"
+        }
+      },
+      "Microsoft.TestPlatform.TestHost": {
+        "type": "Transitive",
+        "resolved": "17.9.0",
+        "contentHash": "Spmg7Wx49Ya3SxBjyeAR+nQpjMTKZwTwpZ7KyeOTIqI/WHNPnBU4HUvl5kuHPQAwGWqMy4FGZja1HvEwvoaDiA==",
+        "dependencies": {
+          "Microsoft.TestPlatform.ObjectModel": "17.9.0",
+          "Newtonsoft.Json": "13.0.1"
+        }
+      },
       "Microsoft.Win32.SystemEvents": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -827,6 +858,16 @@
           "Serilog": "2.10.0"
         }
       },
+      "SimpleInfoName": {
+        "type": "Transitive",
+        "resolved": "2.2.0",
+        "contentHash": "jZwJajqdF56n0HcwvM8wqrwhr8tBqp7E3dWVoa5XWMC4tqSXP4+rIfYipeVIavRUI5MSj5vYPCdwtF3h4RJvxA=="
+      },
+      "System.CodeDom": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "CPc6tWO1LAer3IzfZufDBRL+UZQcj5uS207NHALQzP84Vp/z6wF0Aa0YZImOQY8iStY0A2zI/e3ihKNPfUm8XA=="
+      },
       "System.ComponentModel.Annotations": {
         "type": "Transitive",
         "resolved": "5.0.0",
@@ -845,6 +886,11 @@
         "type": "Transitive",
         "resolved": "8.0.0",
         "contentHash": "c9xLpVz6PL9lp/djOWtk5KPDZq3cSYpmXoJQY524EOtuFl5z9ZtsotpsyrDW40U1DRnQSYvcPKEUV0X//u6gkQ=="
+      },
+      "System.Diagnostics.EventLog": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "lcyUiXTsETK2ALsZrX+nWuHSIQeazhqPphLfaRxzdGaG93+0kELqpgEHtwWOlQe7+jSFnKwaCAgL4kjeZCQJnw=="
       },
       "System.Diagnostics.PerformanceCounter": {
         "type": "Transitive",
@@ -885,10 +931,23 @@
           "System.Security.Principal.Windows": "5.0.0"
         }
       },
+      "System.IO.Hashing": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "ne1843evDugl0md7Fjzy6QjJrzsjh46ZKbhf8GwBXb5f/gw97J4bxMs0NQKifDuThh/f0bZ0e62NPl1jzTuRqA=="
+      },
       "System.Linq.Dynamic.Core": {
         "type": "Transitive",
         "resolved": "1.3.7",
         "contentHash": "7J9oS95JCcyOtnKCr0tYUOMAj67Ee3WKal6li20vEeuQFdD7C4XuAABysp3H5dx+wmHkXuUNoxW3+U+OEsx+JQ=="
+      },
+      "System.Management": {
+        "type": "Transitive",
+        "resolved": "6.0.2",
+        "contentHash": "s6c9x2Kghd+ncEDnT6ApYVOacDXr/Y57oSUSx6wjegMOfKxhtrXn3PdASPNU59y3kB9OJ1yb3l5k6uKr3bhqew==",
+        "dependencies": {
+          "System.CodeDom": "6.0.0"
+        }
       },
       "System.Memory": {
         "type": "Transitive",
@@ -1009,6 +1068,18 @@
           "System.Drawing.Common": "6.0.0"
         }
       },
+      "Verify": {
+        "type": "Transitive",
+        "resolved": "23.3.0",
+        "contentHash": "SScF/w8BYP94O+FFoThFr/g9RggbIEtc2kOgJvqIceBqeM5L9n8FNYmLznmguglV9k7hwS5OKAHXWdaluYDgyA==",
+        "dependencies": {
+          "Argon": "0.17.0",
+          "DiffEngine": "15.2.2",
+          "EmptyFiles": "8.1.1",
+          "SimpleInfoName": "2.2.0",
+          "System.IO.Hashing": "8.0.0"
+        }
+      },
       "YamlDotNet": {
         "type": "Transitive",
         "resolved": "13.7.1",
@@ -1068,6 +1139,17 @@
           "Serilog.Sinks.ApplicationInsights": "[4.0.0, )",
           "Serilog.Sinks.Console": "[5.0.1, )",
           "Serilog.Sinks.File": "[5.0.0, )"
+        }
+      },
+      "enigmatry.entry.blueprint.scheduler": {
+        "type": "Project",
+        "dependencies": {
+          "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
+          "Enigmatry.Entry.Scheduler": "[3.1.0, )",
+          "Serilog.AspNetCore": "[8.0.1, )",
+          "Serilog.Enrichers.Thread": "[3.1.0, )",
+          "Serilog.Extensions.Logging": "[8.0.0, )",
+          "Serilog.Sinks.Console": "[5.0.1, )"
         }
       },
       "Autofac": {
@@ -1187,6 +1269,20 @@
           "MediatR": "12.2.0",
           "Microsoft.Extensions.Logging": "8.0.0",
           "Serilog": "3.1.1"
+        }
+      },
+      "Enigmatry.Entry.Scheduler": {
+        "type": "CentralTransitive",
+        "requested": "[3.1.0, )",
+        "resolved": "3.1.0",
+        "contentHash": "gwR/NB5VA5r9ewEfZFvXizNi40pNKWKFrnZDC+rCFHG05C6c9ylhLZ8DDRg6Mf1N+C7n4baK8/54S4IpSSmfOg==",
+        "dependencies": {
+          "Enigmatry.Entry.Core": "3.1.0",
+          "Microsoft.ApplicationInsights.WorkerService": "2.22.0",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0",
+          "Quartz": "3.8.0",
+          "Quartz.Extensions.DependencyInjection": "3.8.0",
+          "Quartz.Extensions.Hosting": "3.8.0"
         }
       },
       "Enigmatry.Entry.Swagger": {
@@ -1314,6 +1410,24 @@
           "Polly.Core": "8.2.1"
         }
       },
+      "Serilog.AspNetCore": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.1, )",
+        "resolved": "8.0.1",
+        "contentHash": "B/X+wAfS7yWLVOTD83B+Ip9yl4MkhioaXj90JSoWi1Ayi8XHepEnsBdrkojg08eodCnmOKmShFUN2GgEc6c0CQ==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "Serilog": "3.1.1",
+          "Serilog.Extensions.Hosting": "8.0.0",
+          "Serilog.Extensions.Logging": "8.0.0",
+          "Serilog.Formatting.Compact": "2.0.0",
+          "Serilog.Settings.Configuration": "8.0.0",
+          "Serilog.Sinks.Console": "5.0.0",
+          "Serilog.Sinks.Debug": "2.0.0",
+          "Serilog.Sinks.File": "5.0.0"
+        }
+      },
       "Serilog.Enrichers.Environment": {
         "type": "CentralTransitive",
         "requested": "[2.3.0, )",
@@ -1330,6 +1444,25 @@
         "contentHash": "T9EjKKLsL6qC/3eOLUAKEPBLEqPDmt5BLXaQdPMaxJzuex+MeXA8DuAiPboUaftp3kbnCN4ZgZpDvs+Fa7OHuw==",
         "dependencies": {
           "Serilog": "2.3.0"
+        }
+      },
+      "Serilog.Enrichers.Thread": {
+        "type": "CentralTransitive",
+        "requested": "[3.1.0, )",
+        "resolved": "3.1.0",
+        "contentHash": "85lWsGRJpRxvKT6j/H67no55SUBsBIvp556TKuBTGhjtoPeq+L7j/sDWbgAtvT0p7u7/phJyX6j35PQ4Vtqw0g==",
+        "dependencies": {
+          "Serilog": "2.3.0"
+        }
+      },
+      "Serilog.Extensions.Logging": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "YEAMWu1UnWgf1c1KP85l1SgXGfiVo0Rz6x08pCiPOIBt2Qe18tcZLvdBUuV5o1QHvrs8FAry9wTIhgBRtjIlEg==",
+        "dependencies": {
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "Serilog": "3.1.1"
         }
       },
       "Serilog.Settings.Configuration": {
@@ -1351,6 +1484,15 @@
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.20.0",
           "Serilog": "2.11.0"
+        }
+      },
+      "Serilog.Sinks.Console": {
+        "type": "CentralTransitive",
+        "requested": "[5.0.1, )",
+        "resolved": "5.0.1",
+        "contentHash": "6Jt8jl9y2ey8VV7nVEUAyjjyxjAQuvd5+qj4XYAT9CwcsvR70HHULGBeD+K2WCALFXf7CFsNQT4lON6qXcu2AA==",
+        "dependencies": {
+          "Serilog": "3.1.1"
         }
       },
       "Serilog.Sinks.File": {

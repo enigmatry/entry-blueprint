@@ -14,4 +14,8 @@
         <PackageReference Include="Serilog.Extensions.Logging" />
         <PackageReference Include="Serilog.Sinks.Console" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure\Enigmatry.Entry.Blueprint.Infrastructure.csproj" />
+    </ItemGroup>
 </Project>

@@ -324,17 +324,6 @@
           "System.Reflection.Metadata": "5.0.0"
         }
       },
-      "Enigmatry.Entry.Core.EntityFramework": {
-        "type": "Transitive",
-        "resolved": "3.1.0",
-        "contentHash": "6zfu9idHwjhyrKp03Su2avjo3rHIdPvD1AnDyj7NLPEk4PXplZFnxKtouPErPw6ispsB6GkF+Pcpglt7u+quIQ==",
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "Enigmatry.Entry.Core": "3.1.0",
-          "Microsoft.EntityFrameworkCore": "8.0.1",
-          "System.Linq.Dynamic.Core": "1.3.7"
-        }
-      },
       "JetBrains.Annotations": {
         "type": "Transitive",
         "resolved": "2023.3.0",
@@ -1132,6 +1121,7 @@
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",
           "Enigmatry.Entry.Core": "[3.1.0, )",
+          "Enigmatry.Entry.Core.EntityFramework": "[3.1.0, )",
           "FluentValidation": "[11.9.0, )"
         }
       },
@@ -1146,6 +1136,18 @@
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
           "Serilog": "3.1.1",
           "System.ComponentModel.Annotations": "5.0.0"
+        }
+      },
+      "Enigmatry.Entry.Core.EntityFramework": {
+        "type": "CentralTransitive",
+        "requested": "[3.1.0, )",
+        "resolved": "3.1.0",
+        "contentHash": "6zfu9idHwjhyrKp03Su2avjo3rHIdPvD1AnDyj7NLPEk4PXplZFnxKtouPErPw6ispsB6GkF+Pcpglt7u+quIQ==",
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "Enigmatry.Entry.Core": "3.1.0",
+          "Microsoft.EntityFrameworkCore": "8.0.1",
+          "System.Linq.Dynamic.Core": "1.3.7"
         }
       },
       "FluentValidation": {
