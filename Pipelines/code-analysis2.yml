@@ -3,6 +3,7 @@ parameters:
 - name: sonarProjectKey
 - name: displayName
 - name: projectNameAngularApp
+  default: ''
 
 jobs:
 - job: 'code_analysis'
