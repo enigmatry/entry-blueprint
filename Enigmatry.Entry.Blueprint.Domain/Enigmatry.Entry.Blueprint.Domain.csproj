@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="Enigmatry.Entry.Core" />
+    <PackageReference Include="Enigmatry.Entry.Core.EntityFramework" />
     <PackageReference Include="FluentValidation" />
   </ItemGroup>
 

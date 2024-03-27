@@ -1,5 +1,4 @@
-﻿using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
-using Enigmatry.Entry.AspNetCore.ApplicationInsights;
+﻿using Enigmatry.Entry.AspNetCore.ApplicationInsights;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using System.Reflection;

@@ -14,15 +14,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NUnit3TestAdapter">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Respawn" />
-    <PackageReference Include="Testcontainers.MsSql" />
     <PackageReference Include="Verify.NUnit" />
   </ItemGroup>
 
@@ -30,6 +27,7 @@
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Api\Enigmatry.Entry.Blueprint.Api.csproj" />
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Data.Migrations\Enigmatry.Entry.Blueprint.Data.Migrations.csproj" />
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Domain.Tests\Enigmatry.Entry.Blueprint.Domain.Tests.csproj" />
+    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure.Tests\Enigmatry.Entry.Blueprint.Infrastructure.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

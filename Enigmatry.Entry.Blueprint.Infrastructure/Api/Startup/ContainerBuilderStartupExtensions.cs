@@ -4,7 +4,6 @@ using Autofac;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 
@@ -15,6 +14,11 @@ public static class ContainerBuilderStartupExtensions
         builder.Register(GetPrincipal)
             .As<IPrincipal>().InstancePerLifetimeScope();
 
+        builder.AppRegisterModulesExceptIPrincipal();
+    }
+
+    public static void AppRegisterModulesExceptIPrincipal(this ContainerBuilder builder)
+    {
         builder.RegisterAssemblyModules(AssemblyFinder.InfrastructureAssembly);
 
         builder.RegisterModule(new ServiceModule

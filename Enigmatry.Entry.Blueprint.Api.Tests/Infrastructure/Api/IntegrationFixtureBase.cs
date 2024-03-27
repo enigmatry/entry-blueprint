@@ -1,8 +1,8 @@
 ﻿using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities;
+using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
 using Enigmatry.Entry.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

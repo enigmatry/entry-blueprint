@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<parameters>
+    <parameter name="ApplicationInsights ConnectionString" description="ApplicationInsights ConnectionString"
+               defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsConnectionString__" />
+    </parameter>
+    <parameter name="Entry Blueprint Example Job Cron Expression" description="Entry Blueprint Example Job Cron Expression">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__entryBlueprintExampleJobCronExpression__" />
+    </parameter>
+</parameters>

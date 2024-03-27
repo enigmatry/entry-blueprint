@@ -8,6 +8,15 @@
         "resolved": "6.0.1",
         "contentHash": "q/8r0muHlF7TbhMUTBAk43KteZYG2ECV96pbzkToQwgjp3BvbS766svUcO6va+cohWOkigeBWmHs0Vu5vQnESA=="
       },
+      "Enigmatry.Entry.AspNetCore.Tests.SystemTextJson": {
+        "type": "Direct",
+        "requested": "[3.1.0, )",
+        "resolved": "3.1.0",
+        "contentHash": "7kAI8MWdUGrVF7qBoc2lcqoIy7CtPI3+nEPsUcaaLJIyXT/EFhVn78mklpuNchLTvIdY9M4yAm9JUhVEaHkdpg==",
+        "dependencies": {
+          "Enigmatry.Entry.AspNetCore.Tests.Utilities": "3.1.0"
+        }
+      },
       "FakeItEasy": {
         "type": "Direct",
         "requested": "[8.1.0, )",
@@ -57,6 +66,24 @@
         "requested": "[4.5.0, )",
         "resolved": "4.5.0",
         "contentHash": "s8JpqTe9bI2f49Pfr3dFRfoVSuFQyraTj68c3XXjIS/MRGvvkLnrg6RLqnTjdShX+AdFUCCU/4Xex58AdUfs6A=="
+      },
+      "Respawn": {
+        "type": "Direct",
+        "requested": "[6.2.1, )",
+        "resolved": "6.2.1",
+        "contentHash": "b8v9a1+08FKiDtqi6KllaJEeJiB1cmkD3kmOXDNIR+U85gEaZitwl6Gxq6RU5NL34OLmdQ5dB+QE0rhVCX+lEA==",
+        "dependencies": {
+          "Microsoft.Data.SqlClient": "4.0.5"
+        }
+      },
+      "Testcontainers.MsSql": {
+        "type": "Direct",
+        "requested": "[3.7.0, )",
+        "resolved": "3.7.0",
+        "contentHash": "4VtcNvd1FdQTaOTqOv+5NtuSmpyahzFeUdR1rnnw8bJPEkfnQkTUNVe5/ZuygSsFh7bM+hCApce4WGVdpm+Xdw==",
+        "dependencies": {
+          "Testcontainers": "3.7.0"
+        }
       },
       "AutoMapper": {
         "type": "Transitive",
@@ -124,6 +151,11 @@
           "System.Reflection.Metadata": "5.0.0"
         }
       },
+      "BouncyCastle.Cryptography": {
+        "type": "Transitive",
+        "resolved": "2.2.1",
+        "contentHash": "A6Zr52zVqJKt18ZBsTnX0qhG0kwIQftVAjLmszmkiR/trSp8H+xj1gUOzk7XHwaKgyREMSV1v9XaKrBUeIOdvQ=="
+      },
       "Castle.Core": {
         "type": "Transitive",
         "resolved": "5.1.1",
@@ -132,15 +164,33 @@
           "System.Diagnostics.EventLog": "6.0.0"
         }
       },
-      "Enigmatry.Entry.Core.EntityFramework": {
+      "Docker.DotNet": {
+        "type": "Transitive",
+        "resolved": "3.125.15",
+        "contentHash": "XN8FKxVv8Mjmwu104/Hl9lM61pLY675s70gzwSj8KR5pwblo8HfWLcCuinh9kYsqujBkMH4HVRCEcRuU6al4BQ==",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "System.Buffers": "4.5.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
+      },
+      "Docker.DotNet.X509": {
+        "type": "Transitive",
+        "resolved": "3.125.15",
+        "contentHash": "ONQN7ImrL3tHStUUCCPHwrFFQVpIpE+7L6jaDAMwSF+yTEmeWBmRARQZDRuvfj/+WtB8RR0oTW0tT3qQMSyHOw==",
+        "dependencies": {
+          "Docker.DotNet": "3.125.15"
+        }
+      },
+      "Enigmatry.Entry.AspNetCore.Tests.Utilities": {
         "type": "Transitive",
         "resolved": "3.1.0",
-        "contentHash": "6zfu9idHwjhyrKp03Su2avjo3rHIdPvD1AnDyj7NLPEk4PXplZFnxKtouPErPw6ispsB6GkF+Pcpglt7u+quIQ==",
+        "contentHash": "9lgQ/PClw1fublbZ+RLHUQKHs78L9FikizahHvoecJSd9twHuOyOtGAzD2hYAL08UwuVVGhDLIWfXg+16OafzQ==",
         "dependencies": {
-          "AutoMapper": "12.0.1",
           "Enigmatry.Entry.Core": "3.1.0",
-          "Microsoft.EntityFrameworkCore": "8.0.1",
-          "System.Linq.Dynamic.Core": "1.3.7"
+          "FluentAssertions": "6.12.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "System.Net.Http.Json": "8.0.0"
         }
       },
       "Humanizer": {
@@ -1492,15 +1542,6 @@
           "Serilog.Extensions.Logging": "8.0.0"
         }
       },
-      "Serilog.Extensions.Logging": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "YEAMWu1UnWgf1c1KP85l1SgXGfiVo0Rz6x08pCiPOIBt2Qe18tcZLvdBUuV5o1QHvrs8FAry9wTIhgBRtjIlEg==",
-        "dependencies": {
-          "Microsoft.Extensions.Logging": "8.0.0",
-          "Serilog": "3.1.1"
-        }
-      },
       "Serilog.Formatting.Compact": {
         "type": "Transitive",
         "resolved": "2.0.0",
@@ -1516,6 +1557,29 @@
         "dependencies": {
           "Serilog": "2.10.0"
         }
+      },
+      "SharpZipLib": {
+        "type": "Transitive",
+        "resolved": "1.4.2",
+        "contentHash": "yjj+3zgz8zgXpiiC3ZdF/iyTBbz2fFvMxZFEBPUcwZjIvXOf37Ylm+K58hqMfIBt5JgU/Z2uoUS67JmTLe973A=="
+      },
+      "SSH.NET": {
+        "type": "Transitive",
+        "resolved": "2023.0.0",
+        "contentHash": "g+3VDUrYhm0sqSxmlQFgRFrmBxhQvVh4pfn4pqjkX7WXE3tTjt1tIsOtjuz3mz/5s8gFFQVRydwCJ7Ohs54sJA==",
+        "dependencies": {
+          "SshNet.Security.Cryptography": "[1.3.0]"
+        }
+      },
+      "SshNet.Security.Cryptography": {
+        "type": "Transitive",
+        "resolved": "1.3.0",
+        "contentHash": "5pBIXRjcSO/amY8WztpmNOhaaCNHY/B6CcYDI7FSTgqSyo/ZUojlLiKcsl+YGbxQuLX439qIkMfP0PHqxqJi/Q=="
+      },
+      "System.Buffers": {
+        "type": "Transitive",
+        "resolved": "4.5.1",
+        "contentHash": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg=="
       },
       "System.CodeDom": {
         "type": "Transitive",
@@ -1660,6 +1724,14 @@
           "System.Text.Json": "4.6.0"
         }
       },
+      "System.Net.Http.Json": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "48Bxrd6zcGeQzS4GMEDVjuqCcAw/9wcEWnIu48FQJ5IzfKPiMR1nGtz9LrvGzU4+3TLbx/9FDlGmCUeLin1Eqg==",
+        "dependencies": {
+          "System.Text.Json": "8.0.0"
+        }
+      },
       "System.Numerics.Vectors": {
         "type": "Transitive",
         "resolved": "4.5.0",
@@ -1790,6 +1862,21 @@
           "System.Drawing.Common": "7.0.0"
         }
       },
+      "Testcontainers": {
+        "type": "Transitive",
+        "resolved": "3.7.0",
+        "contentHash": "Nn9/mVOiYEC1mdE0Kr2xQfVAV9mssLedalC6OnC59kHOudx2IhVgenHc983LIdMIhsYF9ywVnyW7HrJE7qVuJg==",
+        "dependencies": {
+          "BouncyCastle.Cryptography": "2.2.1",
+          "Docker.DotNet": "3.125.15",
+          "Docker.DotNet.X509": "3.125.15",
+          "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.4",
+          "SSH.NET": "2023.0.0",
+          "SharpZipLib": "1.4.2",
+          "System.Text.Json": "6.0.9"
+        }
+      },
       "YamlDotNet": {
         "type": "Transitive",
         "resolved": "13.7.1",
@@ -1815,6 +1902,7 @@
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",
           "Enigmatry.Entry.Core": "[3.1.0, )",
+          "Enigmatry.Entry.Core.EntityFramework": "[3.1.0, )",
           "FluentValidation": "[11.9.0, )"
         }
       },
@@ -1922,6 +2010,18 @@
           "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
           "Serilog": "3.1.1",
           "System.ComponentModel.Annotations": "5.0.0"
+        }
+      },
+      "Enigmatry.Entry.Core.EntityFramework": {
+        "type": "CentralTransitive",
+        "requested": "[3.1.0, )",
+        "resolved": "3.1.0",
+        "contentHash": "6zfu9idHwjhyrKp03Su2avjo3rHIdPvD1AnDyj7NLPEk4PXplZFnxKtouPErPw6ispsB6GkF+Pcpglt7u+quIQ==",
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "Enigmatry.Entry.Core": "3.1.0",
+          "Microsoft.EntityFrameworkCore": "8.0.1",
+          "System.Linq.Dynamic.Core": "1.3.7"
         }
       },
       "Enigmatry.Entry.EntityFramework": {
@@ -2125,6 +2225,16 @@
         "contentHash": "85lWsGRJpRxvKT6j/H67no55SUBsBIvp556TKuBTGhjtoPeq+L7j/sDWbgAtvT0p7u7/phJyX6j35PQ4Vtqw0g==",
         "dependencies": {
           "Serilog": "2.3.0"
+        }
+      },
+      "Serilog.Extensions.Logging": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "YEAMWu1UnWgf1c1KP85l1SgXGfiVo0Rz6x08pCiPOIBt2Qe18tcZLvdBUuV5o1QHvrs8FAry9wTIhgBRtjIlEg==",
+        "dependencies": {
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "Serilog": "3.1.1"
         }
       },
       "Serilog.Settings.Configuration": {
