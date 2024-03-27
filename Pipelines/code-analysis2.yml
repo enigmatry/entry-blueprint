@@ -43,36 +43,36 @@ jobs:
       projects: '**/*.Tests.csproj'
       arguments: '--no-build --collect "XPlat Code Coverage"' 
 
-  # --- new ---
-  - ${{ if ne(parameters.projectNameAngularApp, '') }}:
-    - task: Cache@2
-      displayName: 'Cache npm Dependencies'
-      inputs:
-        key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/package-lock.json'
-        path: '$(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/node_modules'
-        cacheHitVar: 'NPM_CACHE_RESTORED'
+  # # --- new ---
+  # - ${{ if ne(parameters.projectNameAngularApp, '') }}:
+  #   - task: Cache@2
+  #     displayName: 'Cache npm Dependencies'
+  #     inputs:
+  #       key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/package-lock.json'
+  #       path: '$(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/node_modules'
+  #       cacheHitVar: 'NPM_CACHE_RESTORED'
 
-    - task: Npm@1
-      displayName: 'Install node modules'
-      inputs:
-        command: 'ci'
-        workingDir: 'enigmatry-entry-blueprint-app'
-      condition: ne(variables.NPM_CACHE_RESTORED, true)
+  #   - task: Npm@1
+  #     displayName: 'Install node modules'
+  #     inputs:
+  #       command: 'ci'
+  #       workingDir: 'enigmatry-entry-blueprint-app'
+  #     condition: ne(variables.NPM_CACHE_RESTORED, true)
 
-    - task: Npm@1
-      displayName: npm run test
-      inputs:
-        command: 'custom'
-        workingDir: 'enigmatry-entry-blueprint-app'
-        customCommand: 'run test:ci'
+  #   - task: Npm@1
+  #     displayName: npm run test
+  #     inputs:
+  #       command: 'custom'
+  #       workingDir: 'enigmatry-entry-blueprint-app'
+  #       customCommand: 'run test:ci'
 
-    - task: PublishTestResults@2
-      displayName: 'supply npm test results to pipelines'
-      condition: succeededOrFailed() # because otherwise we won't know what tests failed
-      inputs:
-        testResultsFiles: 'enigmatry-entry-blueprint-app/junit.xml'
+  #   - task: PublishTestResults@2
+  #     displayName: 'supply npm test results to pipelines'
+  #     condition: succeededOrFailed() # because otherwise we won't know what tests failed
+  #     inputs:
+  #       testResultsFiles: 'enigmatry-entry-blueprint-app/junit.xml'
 
-  # --- end new ---
+  # # --- end new ---
 
   - task: reportgenerator@5
     displayName: Generate Coverage reports
@@ -81,7 +81,7 @@ jobs:
       targetdir: 'coveragereport'
       reporttypes: 'HtmlInline_AzurePipelines;Cobertura;SonarQube'
 
-  - task: PublishCodeCoverageResults@1
+  - task: PublishCodeCoverageResults@2
     inputs:
       codeCoverageTool: 'Cobertura'
       summaryFileLocation: 'coveragereport/Cobertura.xml'
@@ -101,3 +101,9 @@ jobs:
     inputs:
       cwd: '$(System.DefaultWorkingDirectory)'
       projectName: ${{ parameters.projectName }}
+
+- ${{ if ne(parameters.projectNameAngularApp, '') }}:
+  - template: run-all-angular-tests.yml@templates
+    parameters:
+      displayName: 'Run all Angular tests'
+      projectNameAngularApp: 'enigmatry-entry-blueprint-app'
