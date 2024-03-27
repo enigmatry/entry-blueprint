@@ -20,7 +20,7 @@ resources:
       name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
 
 jobs:
-- template: code-analysis.yml@templates
+- template: code-analysis2.yml
   parameters:
     projectName: 'Enigmatry Blueprint Template'
     sonarProjectKey: 'AspNetCoreAngular_EnigmatryEntryBlueprint'

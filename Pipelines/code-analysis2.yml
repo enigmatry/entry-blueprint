@@ -1,0 +1,102 @@
+parameters:
+- name: projectName
+- name: sonarProjectKey
+- name: displayName
+- name: projectNameAngularApp
+
+jobs:
+- job: 'code_analysis'
+  displayName: ${{ parameters.displayName }}
+  timeoutInMinutes: 0
+  pool:
+    vmImage: 'ubuntu-latest'
+  variables:
+    buildConfiguration: 'Release'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Restore Packages
+    inputs:
+      command: 'restore'
+      projects: '**/*.sln'
+
+  - task: SonarQubePrepare@5
+    displayName: Prepare SonarQube analysis
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    inputs:
+      SonarQube: 'Enigmatry SonarQube'
+      scannerMode: 'MSBuild'
+      projectKey: ${{ parameters.sonarProjectKey }}
+      projectName: ${{ parameters.projectName }}
+      extraProperties: 'sonar.coverageReportPaths=$(Build.SourcesDirectory)/coveragereport/SonarQube.xml'
+
+  - task: DotNetCoreCLI@2
+    displayName: Build solution
+    inputs:
+      command: 'build'
+      projects: '**/*.sln'
+
+  - task: DotNetCoreCLI@2
+    displayName: Run all .net tests
+    inputs:
+      command: 'test'
+      projects: '**/*.Tests.csproj'
+      arguments: '--no-build --collect "XPlat Code Coverage"' 
+
+  # --- new ---
+  - ${{ if ne(parameters.projectNameAngularApp, '') }}:
+    - task: Cache@2
+      displayName: 'Cache npm Dependencies'
+      inputs:
+        key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/package-lock.json'
+        path: '$(Build.SourcesDirectory)/enigmatry-entry-blueprint-app/node_modules'
+        cacheHitVar: 'NPM_CACHE_RESTORED'
+
+    - task: Npm@1
+      displayName: 'Install node modules'
+      inputs:
+        command: 'ci'
+        workingDir: 'enigmatry-entry-blueprint-app'
+      condition: ne(variables.NPM_CACHE_RESTORED, true)
+
+    - task: Npm@1
+      displayName: npm run test
+      inputs:
+        command: 'custom'
+        workingDir: 'enigmatry-entry-blueprint-app'
+        customCommand: 'run test:ci'
+
+    - task: PublishTestResults@2
+      displayName: 'supply npm test results to pipelines'
+      condition: succeededOrFailed() # because otherwise we won't know what tests failed
+      inputs:
+        testResultsFiles: 'enigmatry-entry-blueprint-app/junit.xml'
+
+  # --- end new ---
+
+  - task: reportgenerator@5
+    displayName: Generate Coverage reports
+    inputs:
+      reports: 'tests/**/coverage.cobertura.xml;$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+      targetdir: 'coveragereport'
+      reporttypes: 'HtmlInline_AzurePipelines;Cobertura;SonarQube'
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: 'coveragereport/Cobertura.xml'
+
+  - task: SonarQubeAnalyze@5
+    displayName: Run SonarQube analysis
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+
+  - task: SonarQubePublish@5
+    displayName: Publish SonarQube analysis
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    inputs:
+      pollingTimeoutSec: '300'
+
+  - task: WhiteSource@21
+    displayName: Run Mend Bolt analysis
+    inputs:
+      cwd: '$(System.DefaultWorkingDirectory)'
+      projectName: ${{ parameters.projectName }}
