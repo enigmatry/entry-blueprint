@@ -78,6 +78,7 @@ jobs:
       projects: ${{ parameters.projectNamePrefix }}**/*.Tests.csproj
       arguments: '--filter TestCategory=unit|TestCategory=smoke --configuration $(buildConfiguration) --no-build'
 
+
 # --- NEW ---
 
   # - task: UseDotNet@2
@@ -104,7 +105,7 @@ jobs:
     inputs:
       command: custom
       custom: ef
-      arguments: 'migrations script   --idempotent  --output migrations.sql --project ${{ parameters.projectNamePrefix }}.Data.Migrations\${{ parameters.projectNamePrefix }}.Data.Migrations.csproj'
+      arguments: 'migrations script   --idempotent  --output migrations.sql --startup-project ${{ parameters.projectNamePrefix }}.Data.Migrations --project ${{ parameters.projectNamePrefix }}.Data.Migrations'
 
 # --- end NEW ---
   
