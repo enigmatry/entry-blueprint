@@ -35,12 +35,12 @@ jobs:
 
   - ${{ parameters.preBuildSteps }}
 
-  - template: build-angular-app-job.yml
+  - template: build-angular-app-job.yml@templates
     parameters:
       projectNameAngularApp: ${{ parameters.projectNameAngularApp }}
   
   - ${{ if ne(parameters.projectNameSecondAngularApp, '') }}:
-    - template: build-angular-app-job.yml
+    - template: build-angular-app-job.yml@templates
       parameters:
         projectNameAngularApp: ${{ parameters.projectNameSecondAngularApp }}
         appName: ${{ parameters.projectNameSecondAngularApp }}
