@@ -105,7 +105,7 @@ jobs:
     inputs:
       command: custom
       custom: ef
-      arguments: 'migrations script --idempotent --no-build --output Migrations\migrations.sql --startup-project ${{ parameters.projectNamePrefix }}.Data.Migrations --project ${{ parameters.projectNamePrefix }}.Data.Migrations'
+      arguments: 'migrations script --idempotent --output Migrations\migrations.sql --startup-project ${{ parameters.projectNamePrefix }}.Data.Migrations --project ${{ parameters.projectNamePrefix }}.Data.Migrations'
   
   - task: PublishBuildArtifacts@1
     displayName: Publish migrations
