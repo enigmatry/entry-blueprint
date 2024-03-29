@@ -26,14 +26,21 @@ jobs:
   ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
     pool: 'enigmatry-hosted-windows-agents-production'
   steps:
+    - task: PowerShell@2
+      displayName: Install Sql Server PS Module
+      inputs:
+        targetType: 'inline'
+        script: 'Install-Module SQLServer -Scope CurrentUser'
 
     - task: DownloadPipelineArtifact@2
+      displayName: Download migrations artifact
       inputs:
         buildType: 'current'
         artifactName: '${{ parameters.artifactName }}-migrations-$(Build.BuildNumber)'
         targetPath: '$(Pipeline.Workspace)'
 
     - task: SqlAzureDacpacDeployment@1
+      displayName: Execute migration scripts
       inputs:
         azureSubscription: ${{ parameters.subscription }}
         AuthenticationType: 'connectionString'
