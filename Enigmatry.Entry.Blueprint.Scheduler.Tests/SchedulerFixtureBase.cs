@@ -3,11 +3,12 @@ using Enigmatry.Entry.AspNetCore.Tests.Utilities;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Autofac;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
-using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests;
+using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
 using Enigmatry.Entry.Scheduler;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,7 +37,7 @@ public abstract class SchedulerFixtureBase
 
         await TestDatabase.ResetAsync(_testScope.Resolve<AppDbContext>());
 
-        SeedTestUser();
+        SeedTestUsers();
     }
 
     private static IHostBuilder CreateHostBuilder(IConfiguration configuration) =>
@@ -55,20 +56,12 @@ public abstract class SchedulerFixtureBase
 
                 container.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
             });
-
-    private void SeedTestUser()
+    
+    private void SeedTestUsers()
     {
-        var dbContext = Resolve<AppDbContext>();
-        var testUser = TestUserData.CreateSchedulerUser();
-        if (dbContext.Set<User>().SingleOrDefault(x => x.Id == testUser.Id) != null)
-        {
-            return;
-        }
-        dbContext.Set<User>().Add(testUser);
-        dbContext.SaveChanges();
+        var dbContext = Resolve<DbContext>();
+        new TestUserDataSeeding(dbContext).Seed();
     }
-
-    protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
 
     protected async Task ExecuteJob<TJob, TOptions>(TOptions options) where TJob : EntryJob<TOptions> where TOptions : class, new()
     {
@@ -83,4 +76,30 @@ public abstract class SchedulerFixtureBase
         _host?.Dispose();
         _testScope?.Dispose();
     }
+    
+    protected void AddAndSaveChanges(params object[] entities)
+    {
+        var dbContext = Resolve<DbContext>();
+        dbContext.AddRange(entities);
+        dbContext.SaveChanges();
+    }
+
+    protected void AddToDbContext(params object[] entities)
+    {
+        var dbContext = Resolve<DbContext>();
+        dbContext.AddRange(entities);
+    }
+
+    protected Task SaveChangesAsync() => Resolve<DbContext>().SaveChangesAsync();
+
+    protected IQueryable<T> QueryDb<T>() where T : class => Resolve<DbContext>().Set<T>();
+
+    protected IQueryable<T> QueryDbSkipCache<T>() where T : class => Resolve<DbContext>().QueryDbSkipCache<T>();
+
+    protected Task DeleteByIdsAndSaveChangesAsync<T, TId>(params TId[] ids) where T : class =>
+        Resolve<DbContext>().DeleteByIdsAndSaveChangesAsync<T, TId>(ids);
+
+    private Task DeleteByIdAsync<T, TId>(TId id) where T : class => Resolve<DbContext>().DeleteByIdAsync<T, TId>(id);
+    
+    protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
 }

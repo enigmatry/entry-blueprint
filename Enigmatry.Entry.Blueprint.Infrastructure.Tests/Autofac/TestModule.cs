@@ -1,6 +1,7 @@
 ﻿using System.Security.Principal;
 using Autofac;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
 using JetBrains.Annotations;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Autofac;

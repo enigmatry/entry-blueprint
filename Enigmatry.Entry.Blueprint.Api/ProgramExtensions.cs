@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Logging;
@@ -11,6 +12,7 @@ using Enigmatry.Entry.AspNetCore.Exceptions;
 using Enigmatry.Entry.HealthChecks.Extensions;
 using Microsoft.IdentityModel.Logging;
 using Autofac.Extensions.DependencyInjection;
+using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 using Serilog;
 
 namespace Enigmatry.Entry.Blueprint.Api;
@@ -28,7 +30,7 @@ public static class ProgramExtensions
         services.AppAddAutoMapper();
         services.AddEntryHealthChecks(configuration)
             .AddDbContextCheck<AppDbContext>();
-        services.AppAddMediatR();
+        services.AppAddMediatR(AssemblyFinder.ApiAssembly);
         services.AppAddFluentValidation();
 
         services.AppAddAuthentication(configuration);
@@ -47,8 +49,12 @@ public static class ProgramExtensions
                 .AddAppInsightsToSerilog(configuration, services);
         });
         hostBuilder.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-        hostBuilder.ConfigureContainer<ContainerBuilder>((hostBuilderContext, containerBuilder) =>
-            containerBuilder.AppRegisterModules());
+        hostBuilder.ConfigureContainer<ContainerBuilder>((_, containerBuilder) =>
+        {
+            containerBuilder.AppRegisterClaimsPrincipalProvider();
+            containerBuilder.AppRegisterCurrentUserProvider<CurrentUserProvider>();
+            containerBuilder.AppRegisterModules();
+        });
     }
 
     public static void AppConfigureWebApplication(this WebApplication app)

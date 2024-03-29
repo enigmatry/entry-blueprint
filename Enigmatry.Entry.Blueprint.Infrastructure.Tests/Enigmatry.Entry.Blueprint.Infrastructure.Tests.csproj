@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api" />
     <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests" />
     <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Scheduler.Tests" />
   </ItemGroup>

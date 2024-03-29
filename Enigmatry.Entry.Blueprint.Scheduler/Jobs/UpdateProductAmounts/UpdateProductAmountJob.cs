@@ -1,5 +1,4 @@
-﻿using Enigmatry.Entry.Blueprint.Domain.Products;
-using Enigmatry.Entry.Blueprint.Domain.Products.Commands;
+﻿using Enigmatry.Entry.Blueprint.Domain.Products.Commands;
 using Enigmatry.Entry.Blueprint.Scheduler.Jobs.Requests;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Scheduler;
@@ -9,11 +8,11 @@ using MediatR;
 namespace Enigmatry.Entry.Blueprint.Scheduler.Jobs;
 
 [UsedImplicitly]
-public class UpdateProductAmountJob : EntryJob<EmptyJobRequest>
+public class UpdateProductAmountJob : EntryJob<UpdateProductAmountJobRequest>
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<UpdateProductAmountJob> _logger;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ILogger<UpdateProductAmountJob> _logger;
 
     public UpdateProductAmountJob(ILogger<UpdateProductAmountJob> logger,
         IConfiguration configuration,
@@ -25,10 +24,14 @@ public class UpdateProductAmountJob : EntryJob<EmptyJobRequest>
         _unitOfWork = unitOfWork;
     }
 
-    public override async Task Execute(EmptyJobRequest request)
+    public override async Task Execute(UpdateProductAmountJobRequest request)
     {
-        _logger.LogInformation("Scheduled job executed at {Now}", DateTimeOffset.Now);
-        await _mediator.Send(new ProductUpdateAmount.Command());
+        _logger.LogInformation("Updating product amount for product {ProductId} to {Amount}", request.ProductId, request.Amount);
+        var command = MapToCommand(request);
+        await _mediator.Send(command);
         await _unitOfWork.SaveChangesAsync();
     }
+
+    private static ProductUpdateAmount.Command MapToCommand(UpdateProductAmountJobRequest request) =>
+        new() { ProductId = request.ProductId, Amount = request.Amount };
 }

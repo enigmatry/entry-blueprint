@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Entities;
 using Enigmatry.Entry.Core.EntityFramework;
 using JetBrains.Annotations;
 using MediatR;
@@ -8,7 +9,11 @@ namespace Enigmatry.Entry.Blueprint.Domain.Products.Commands;
 
 public static class ProductUpdateAmount
 {
-    public class Command : IRequest;
+    public class Command : IRequest
+    {
+        public required Guid ProductId { get; set; }
+        public required int Amount { get; set; }
+    }
 
     [UsedImplicitly]
     public class RequestHandler : IRequestHandler<Command>
@@ -22,8 +27,8 @@ public static class ProductUpdateAmount
 
         public async Task Handle(Command request, CancellationToken cancellationToken)
         {
-            var products = await _repository.QueryAll().ToListAsync(cancellationToken);
-            products.ForEach(product => product.DecreaseAmount());
+            var product = await _repository.QueryAll().QueryById(request.ProductId).SingleOrNotFoundAsync(cancellationToken);
+            product.UpdateAmount(request.Amount);
         }
     }
 }

@@ -72,12 +72,9 @@ public class Product : EntityWithCreatedUpdated
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
 
-    public void DecreaseAmount()
+    public void UpdateAmount(int value)
     {
-        if (Amount > 0)
-        {
-            Amount--;
-        }
+        Amount = value;
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
 }

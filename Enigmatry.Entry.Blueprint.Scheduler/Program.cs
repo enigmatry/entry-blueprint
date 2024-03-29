@@ -23,19 +23,18 @@ internal class Program
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services))
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
-            {
-                containerBuilder.AppRegisterModulesExceptIPrincipal();
-
-                containerBuilder.RegisterType<SchedulerUserProvider>()
-                    .As<ICurrentUserProvider>().InstancePerLifetimeScope();
-            })
             .ConfigureServices((context, services) =>
             {
-                services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyFinder.DomainAssembly));
+                services.AppAddMediatR(AssemblyFinder.SchedulerAssembly);
+
                 using var factory = new SerilogLoggerFactory();
-                services.AddEntryQuartz(context.Configuration, Assembly.GetExecutingAssembly(), factory.CreateLogger<Program>(),
+                services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>(),
                     quartz => quartz.AddEntryApplicationInsights());
                 services.AddApplicationInsightsTelemetryWorkerService();
+            })
+            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
+            {
+                containerBuilder.AppRegisterModules();
+                containerBuilder.AppRegisterCurrentUserProvider<SystemUserProvider>();
             });
 }

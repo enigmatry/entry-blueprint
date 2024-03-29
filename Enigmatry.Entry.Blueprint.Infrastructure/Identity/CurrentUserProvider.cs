@@ -50,7 +50,8 @@ public class CurrentUserProvider : ICurrentUserProvider
                 .QueryByEmailAddress(_claimsProvider.Email)
                 .Include(u => u.Role)
                 .ThenInclude(r => r.Permissions)
-                .AsNoTracking().AsSplitQuery()
+                .AsNoTracking()
+                .AsSplitQuery()
                 .SingleOrDefault();
 
             return _user;
