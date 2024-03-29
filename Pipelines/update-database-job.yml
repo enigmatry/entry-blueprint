@@ -30,7 +30,11 @@ jobs:
       displayName: Install Sql Server PS Module
       inputs:
         targetType: 'inline'
-        script: 'Install-Module -Name SQLServer -Force -Scope CurrentUser'
+        script: |
+          if ($Null -eq (Get-PackageProvider -Name NuGet -ErrorAction Ignore)) {
+              Install-PackageProvider -Name NuGet -Force -Scope CurrentUser;
+          }
+          Install-Module -Name SQLServer -Force -Scope CurrentUser
 
     - task: DownloadPipelineArtifact@2
       displayName: Download migrations artifact
