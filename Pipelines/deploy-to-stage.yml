@@ -1,6 +1,7 @@
 parameters:
 - name: environment
 - name: serviceConnection
+- name: artifactName
   
 jobs:
 - template: take-web-app-offline.yml@templates
