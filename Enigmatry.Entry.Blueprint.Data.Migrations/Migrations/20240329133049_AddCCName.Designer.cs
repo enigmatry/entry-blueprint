@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240329130710_AddCCName")]
+    [Migration("20240329133049_AddCCName")]
     partial class AddCCName
     {
         /// <inheritdoc />
