@@ -13,6 +13,7 @@ public class User : EntityWithCreatedUpdated
     public string FullName { get; private set; } = String.Empty;
     public Guid RoleId { get; private set; }
     public Role Role { get; private set; } = null!;
+    public string CreditCardNumber { get; set; } = null!;
 
     public static User Create(CreateOrUpdateUser.Command command)
     {
