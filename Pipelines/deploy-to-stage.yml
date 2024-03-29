@@ -28,11 +28,11 @@ jobs:
 #    subscription: ${{ parameters.serviceConnection }}
 #    webAppName: $(webJobWebAppName)
 
-- template: update-database-job.yml@templates
+- template: update-database-job.yml
   parameters:
-    dotnetVersion: '8.x'
-    dotnetEfToolVersion: '8.0.2'
-    dbContextName: $(dbContextName)
+    # dotnetVersion: '8.x'
+    # dotnetEfToolVersion: '8.0.2'
+    # dbContextName: $(dbContextName)
     displayName: 'Update the database'
     dependsOn:
     - take_web_app_offline
@@ -40,7 +40,9 @@ jobs:
     #- take_webjob_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
-    projectNamePrefix: $(projectNamePrefix)
+    # projectNamePrefix: $(projectNamePrefix)
+    artifactName: $(artifactName)
+    subscription: ${{ parameters.serviceConnection }}
 
 - template: deploy-web-app.yml@templates
   parameters:
