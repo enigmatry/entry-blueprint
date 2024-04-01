@@ -7,7 +7,6 @@ using Enigmatry.Entry.Blueprint.Scheduler;
 using Enigmatry.Entry.Scheduler;
 using Serilog;
 using Serilog.Extensions.Logging;
-using System.Reflection;
 
 internal class Program
 {

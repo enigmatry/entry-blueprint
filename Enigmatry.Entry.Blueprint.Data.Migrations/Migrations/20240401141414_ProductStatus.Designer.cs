@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240325193921_AddTestUser")]
-    partial class AddTestUser
+    [Migration("20240401141414_ProductStatus")]
+    partial class ProductStatus
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -156,6 +156,11 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -220,6 +225,19 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
                     b.HasIndex("UpdatedById");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("dfb44aa8-bfc9-4d95-8f45-ed6da241dcfc"),
+                            CreatedById = new Guid("dfb44aa8-bfc9-4d95-8f45-ed6da241dcfc"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2024, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            EmailAddress = "N/A",
+                            FullName = "System User",
+                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0"),
+                            UpdatedById = new Guid("dfb44aa8-bfc9-4d95-8f45-ed6da241dcfc"),
+                            UpdatedOn = new DateTimeOffset(new DateTime(2024, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        });
                 });
 
             modelBuilder.Entity("Enigmatry.Entry.Blueprint.Infrastructure.Data.Configurations.RolePermission", b =>

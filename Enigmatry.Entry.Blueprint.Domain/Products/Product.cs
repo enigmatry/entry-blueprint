@@ -21,6 +21,7 @@ public class Product : EntityWithCreatedUpdated
     public string Name { get; private set; } = String.Empty;
     public string Code { get; private set; } = String.Empty;
     public ProductType Type { get; private set; } = ProductType.Food;
+    public ProductStatus Status { get; private set; } = ProductStatus.Active;
     public string Description { get; set; } = String.Empty;
     public double Price { get; private set; }
     public int Amount { get; private set; }
@@ -48,7 +49,8 @@ public class Product : EntityWithCreatedUpdated
             ExpiresOn = request.ExpiresOn,
             FreeShipping = request.FreeShipping,
             HasDiscount = request.HasDiscount,
-            Discount = request.Discount
+            Discount = request.Discount,
+            Status = ProductStatus.Active
         };
         product.AddDomainEvent(new ProductCreatedDomainEvent(product));
         return product;
@@ -72,9 +74,9 @@ public class Product : EntityWithCreatedUpdated
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
 
-    public void UpdateAmount(int value)
+    public void UpdateStatus(ProductStatus value)
     {
-        Amount = value;
+        Status = value;
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
 }

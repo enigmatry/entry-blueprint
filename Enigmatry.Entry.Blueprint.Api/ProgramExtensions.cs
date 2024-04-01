@@ -51,9 +51,10 @@ public static class ProgramExtensions
         hostBuilder.UseServiceProviderFactory(new AutofacServiceProviderFactory());
         hostBuilder.ConfigureContainer<ContainerBuilder>((_, containerBuilder) =>
         {
+            containerBuilder.AppRegisterModules();
+            
             containerBuilder.AppRegisterClaimsPrincipalProvider();
             containerBuilder.AppRegisterCurrentUserProvider<CurrentUserProvider>();
-            containerBuilder.AppRegisterModules();
         });
     }
 

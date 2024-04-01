@@ -49,7 +49,8 @@ public abstract class SchedulerFixtureBase
             })
             .ConfigureContainer<ContainerBuilder>(container =>
             {
-                container.RegisterModule<TestModule>();
+                // in the schedule jobs we do not need to replace current user, everything is executed under system user
+                container.RegisterModule(new TestModule(false));
 
                 container.RegisterAssemblyTypes(typeof(Program).Assembly)
                     .Where(t => t.Name.EndsWith("Job", StringComparison.InvariantCulture)).AsSelf();
@@ -102,4 +103,10 @@ public abstract class SchedulerFixtureBase
     private Task DeleteByIdAsync<T, TId>(TId id) where T : class => Resolve<DbContext>().DeleteByIdAsync<T, TId>(id);
     
     protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
+    
+    protected void SetFixedUtcNow(DateTimeOffset value)
+    {
+        var settableTimeProvider = Resolve<SettableTimeProvider>();
+        settableTimeProvider.SetNow(value);
+    }
 }

@@ -28,10 +28,10 @@ public static class ContainerBuilderStartupExtensions
         builder.RegisterType<T>().AsImplementedInterfaces().InstancePerLifetimeScope();
 
     public static void AppRegisterClaimsPrincipalProvider(this ContainerBuilder builder) =>
-        builder.Register(GetPrincipal)
+        builder.Register(GetPrincipalFromHttpContext)
             .As<IPrincipal>().InstancePerLifetimeScope();
 
-    private static ClaimsPrincipal GetPrincipal(IComponentContext c)
+    private static ClaimsPrincipal GetPrincipalFromHttpContext(IComponentContext c)
     {
         var httpContextAccessor = c.Resolve<IHttpContextAccessor>();
         if (httpContextAccessor.HttpContext == null)

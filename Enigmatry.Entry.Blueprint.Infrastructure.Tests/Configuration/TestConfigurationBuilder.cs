@@ -63,7 +63,7 @@ public class TestConfigurationBuilder
             { $"ConnectionStrings:{_dbContextName}", _connectionString },
             { "ApplicationInsights:ConnectionString", "" },
             { "Scheduling:Host:quartz.scheduler.instanceName", "Enigmatry.Entry.Scheduler" },
-            { "Scheduling:Jobs:UpdateProductAmountJob:Cronex", "0 0 0 * * ?" }
+            { "Scheduling:Jobs:CleanOldProductsJob:Cronex", "0 0 0 * * ?" }
         };
 
         configurationBuilder.AddInMemoryCollection(dict);

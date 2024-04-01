@@ -55,7 +55,8 @@ internal class ApiWebApplicationFactory(IConfiguration configuration, bool isUse
 
     private static void ConfigureContainer(ContainerBuilder builder)
     {
-        builder.RegisterModule<TestModule>(); // this allows certain components to be overriden
+        // in the api tests we need to replace current user with TestUser
+        builder.RegisterModule(new TestModule(true)); // this allows certain components to be overriden
 
         // Api does not depend on migrations assembly, tests are
         builder.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });

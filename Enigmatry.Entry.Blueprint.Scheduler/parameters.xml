@@ -5,7 +5,10 @@
                defaultValue="">
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsConnectionString__" />
     </parameter>
-    <parameter name="Entry Blueprint Example Job Cron Expression" description="Entry Blueprint Example Job Cron Expression">
-        <parameterEntry kind="TextFile" scope="appsettings.json" match="__entryBlueprintExampleJobCronExpression__" />
+    <parameter name="Clean Old Products Job Cron Expression" description="Clean Old Products Job Cron Expression">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__cleanOldProductsJobCronExpression__" />
+    </parameter>
+    <parameter name="Clean Old Products Job Deactive Older Than" description="Clean Old Products Job Deactive Older Than">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__cleanOldProductsJobDeactivateOlderThan__" />
     </parameter>
 </parameters>

@@ -83,4 +83,10 @@ public class IntegrationFixtureBase
     private Task DeleteByIdAsync<T, TId>(TId id) where T : class => Resolve<DbContext>().DeleteByIdAsync<T, TId>(id);
     
     protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
+    
+    protected void SetFixedUtcNow(DateTimeOffset value)
+    {
+        var settableTimeProvider = Resolve<SettableTimeProvider>();
+        settableTimeProvider.SetNow(value);
+    }
 }
