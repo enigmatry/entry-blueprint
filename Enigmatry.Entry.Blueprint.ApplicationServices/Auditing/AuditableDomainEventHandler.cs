@@ -1,6 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Auditing;
 using Enigmatry.Entry.Blueprint.Domain.Identity;
-using Enigmatry.Entry.Blueprint.Domain.Users.DomainEvents;
 using JetBrains.Annotations;
 using MediatR;
 using Microsoft.Extensions.Logging;

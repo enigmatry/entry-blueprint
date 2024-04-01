@@ -1,12 +1,12 @@
 ﻿using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
 using System.Net;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using FluentAssertions;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using System.Net.Http.Json;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
+using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -67,7 +67,7 @@ public class AuthorizationFixture : IntegrationFixtureBase
 
         if (_testRole != null)
         {
-            await DeleteByIdsAndSaveChanges<Role, Guid>(_testRole.Id);
+            await DeleteByIdsAndSaveChangesAsync<Role, Guid>(_testRole.Id);
         }
     }
 

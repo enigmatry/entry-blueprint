@@ -9,6 +9,8 @@ public class User : EntityWithCreatedUpdated
     public const int NameMaxLength = 200;
     public const int EmailAddressMaxLength = 200;
 
+    public static readonly Guid SystemUserId = new("DFB44AA8-BFC9-4D95-8F45-ED6DA241DCFC");
+    
     public string EmailAddress { get; private set; } = String.Empty;
     public string FullName { get; private set; } = String.Empty;
     public Guid RoleId { get; private set; }

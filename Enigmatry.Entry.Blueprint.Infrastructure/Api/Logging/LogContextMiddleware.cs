@@ -27,7 +27,8 @@ public class LogContextMiddleware
         }
     }
 
-    private static ILogEventEnricher[] CreateEnrichers(HttpContext context) => new ILogEventEnricher[] { new PropertyEnricher("User", GetCurrentUserId(context)!), new PropertyEnricher("Address", context.Connection.RemoteIpAddress!) };
+    private static ILogEventEnricher[] CreateEnrichers(HttpContext context) => [new PropertyEnricher("User", GetCurrentUserId(context)!), new PropertyEnricher("Address", context.Connection.RemoteIpAddress!)
+    ];
 
     private static Guid? GetCurrentUserId(HttpContext context)
     {

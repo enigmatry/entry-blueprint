@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="FakeItEasy" />
+        <PackageReference Include="Verify.NUnit" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Data.Migrations\Enigmatry.Entry.Blueprint.Data.Migrations.csproj" />
+      <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure.Tests\Enigmatry.Entry.Blueprint.Infrastructure.Tests.csproj" />
+      <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Scheduler\Enigmatry.Entry.Blueprint.Scheduler.csproj" />
+    </ItemGroup>
+
+</Project>

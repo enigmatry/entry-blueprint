@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240110110915_Initial")]
-    partial class Initial
+    [Migration("20240329162818_SeedSystemUser")]
+    partial class SeedSystemUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -220,6 +220,19 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
                     b.HasIndex("UpdatedById");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("dfb44aa8-bfc9-4d95-8f45-ed6da241dcfc"),
+                            CreatedById = new Guid("dfb44aa8-bfc9-4d95-8f45-ed6da241dcfc"),
+                            CreatedOn = new DateTimeOffset(new DateTime(2024, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            EmailAddress = "N/A",
+                            FullName = "System User",
+                            RoleId = new Guid("028e686d-51de-4dd9-91e9-dfb5ddde97d0"),
+                            UpdatedById = new Guid("dfb44aa8-bfc9-4d95-8f45-ed6da241dcfc"),
+                            UpdatedOn = new DateTimeOffset(new DateTime(2024, 3, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        });
                 });
 
             modelBuilder.Entity("Enigmatry.Entry.Blueprint.Infrastructure.Data.Configurations.RolePermission", b =>

@@ -23,7 +23,7 @@ jobs:
 #- template: take-web-app-offline.yml@templates
 #  parameters:
 #    jobName: 'take_webjob_offline'
-#    displayName: 'Take WebJob offline'
+#    displayName: 'Take Scheduler offline'
 #    environment: ${{ parameters.environment }}
 #    subscription: ${{ parameters.serviceConnection }}
 #    webAppName: $(webJobWebAppName)
@@ -37,7 +37,7 @@ jobs:
     dependsOn:
     - take_web_app_offline
     - take_api_offline
-    #- take_webjob_offline
+  #  - take_webjob_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
     projectNamePrefix: $(projectNamePrefix)
@@ -69,7 +69,7 @@ jobs:
 #  parameters:
 #    jobName: 'deploy_webjob'
 #    artifactName: $(artifactName)
-#    displayName: Deploy the Scheduler Web Job
+#    displayName: Deploy the Scheduler
 #    environment: ${{ parameters.environment }}
 #    packageName: $(projectNamePrefix).Scheduler
 #    subscription: ${{ parameters.serviceConnection }}
@@ -82,7 +82,7 @@ jobs:
   dependsOn:
   - deploy_angular_app
   - deploy_api
-  #- deploy_webjob
+ # - deploy_webjob
   steps:
     - checkout: self
       displayName: 'Checkout current repo'

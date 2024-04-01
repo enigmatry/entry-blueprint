@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using NUnit.Framework;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
 
@@ -41,6 +42,28 @@ public class TestConfigurationBuilder
             { "HealthChecks:TokenAuthorizationEnabled", "false" },
             { "KeyVault:Enabled", "false" },
             { "ApplicationInsights:ConnectionString", "" }
+        };
+
+        configurationBuilder.AddInMemoryCollection(dict);
+        return configurationBuilder.Build();
+    }
+
+    public IConfiguration BuildSchedulerConfiguration()
+    {
+        EnsureParametersBeforeBuild();
+        var configurationBuilder = new ConfigurationBuilder();
+
+        var dict = new Dictionary<string, string?>
+        {
+            { "UseDeveloperExceptionPage", "true" },
+            { "DbContext:SensitiveDataLoggingEnabled", "true" },
+            { "DbContext:UseAccessToken", "false" },
+            { "DbContext:ConnectionResiliencyMaxRetryCount", "10" },
+            { "DbContext:ConnectionResiliencyMaxRetryDelay", "0.00:00:30" },
+            { $"ConnectionStrings:{_dbContextName}", _connectionString },
+            { "ApplicationInsights:ConnectionString", "" },
+            { "Scheduling:Host:quartz.scheduler.instanceName", "Enigmatry.Entry.Scheduler" },
+            { "Scheduling:Jobs:CleanOldProductsJob:Cronex", "0 0 0 * * ?" }
         };
 
         configurationBuilder.AddInMemoryCollection(dict);

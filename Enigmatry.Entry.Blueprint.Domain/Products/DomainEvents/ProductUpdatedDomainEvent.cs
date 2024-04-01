@@ -8,10 +8,12 @@ public record ProductUpdatedDomainEvent : AuditableDomainEvent
     {
         Name = product.Name;
         Code = product.Code;
+        Status = product.Status;
     }
 
+    public ProductStatus Status { get; set; }
     public string Name { get; }
     public string Code { get; }
 
-    public override object AuditPayload => new { Name, Code };
+    public override object AuditPayload => new { Name, Code, Status };
 }

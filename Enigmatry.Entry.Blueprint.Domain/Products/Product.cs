@@ -17,9 +17,11 @@ public class Product : EntityWithCreatedUpdated
     public const float DiscountMaxValue = 100.0F;
     public const int DescriptionMaxLength = 1500;
 
+    public static readonly Guid TestProductId = new("8A690056-DE31-4203-830F-8E08E4A22A75");
     public string Name { get; private set; } = String.Empty;
     public string Code { get; private set; } = String.Empty;
     public ProductType Type { get; private set; } = ProductType.Food;
+    public ProductStatus Status { get; private set; } = ProductStatus.Active;
     public string Description { get; set; } = String.Empty;
     public double Price { get; private set; }
     public int Amount { get; private set; }
@@ -47,7 +49,8 @@ public class Product : EntityWithCreatedUpdated
             ExpiresOn = request.ExpiresOn,
             FreeShipping = request.FreeShipping,
             HasDiscount = request.HasDiscount,
-            Discount = request.Discount
+            Discount = request.Discount,
+            Status = ProductStatus.Active
         };
         product.AddDomainEvent(new ProductCreatedDomainEvent(product));
         return product;
@@ -68,6 +71,12 @@ public class Product : EntityWithCreatedUpdated
         FreeShipping = request.FreeShipping;
         HasDiscount = request.HasDiscount;
         Discount = HasDiscount ? request.Discount : null;
+        AddDomainEvent(new ProductUpdatedDomainEvent(this));
+    }
+
+    public void UpdateStatus(ProductStatus value)
+    {
+        Status = value;
         AddDomainEvent(new ProductUpdatedDomainEvent(this));
     }
 }

@@ -10,7 +10,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-components/table';
 
-import { GetProductsResponseItem } from '@api';
+import { GetProductsResponseItem } from 'src/app/api/api-reference';
 
 @Component({
   selector: 'app-g-product-list',
@@ -36,14 +36,14 @@ export class ProductListGeneratedComponent implements OnInit {
 
   @Input() headerTemplate: TemplateRef<any> | CellTemplate;
   @Input() cellTemplate: TemplateRef<any> | CellTemplate;
-
+      
   @Input() noResultText: string;
   @Input() noResultTemplate: TemplateRef<any> | null;
 
   @Input() showContextMenu = true;
   @Input() contextMenuItems: ContextMenuItem[] = [];
   @Input() rowContextMenuFormatter: RowContextMenuFormatter;
-
+  
   @Input() rowClassFormatter: RowClassFormatter;
   @Input() rowSelectionFormatter: RowSelectionFormatter = {};
 

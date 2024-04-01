@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
 using System.Security.Principal;
 using Autofac;
+using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 
@@ -12,23 +12,26 @@ public static class ContainerBuilderStartupExtensions
 {
     public static void AppRegisterModules(this ContainerBuilder builder)
     {
-        builder.Register(GetPrincipal)
-            .As<IPrincipal>().InstancePerLifetimeScope();
-
         builder.RegisterAssemblyModules(AssemblyFinder.InfrastructureAssembly);
 
         builder.RegisterModule(new ServiceModule
         {
             Assemblies = new[]
             {
-                AssemblyFinder.Find("Enigmatry.Entry.Infrastructure"),
-                AssemblyFinder.ApplicationServicesAssembly,
+                AssemblyFinder.Find("Enigmatry.Entry.Infrastructure"), AssemblyFinder.ApplicationServicesAssembly,
                 AssemblyFinder.InfrastructureAssembly
             }
         });
     }
 
-    private static ClaimsPrincipal GetPrincipal(IComponentContext c)
+    public static void AppRegisterCurrentUserProvider<T>(this ContainerBuilder builder) where T : ICurrentUserProvider =>
+        builder.RegisterType<T>().AsImplementedInterfaces().InstancePerLifetimeScope();
+
+    public static void AppRegisterClaimsPrincipalProvider(this ContainerBuilder builder) =>
+        builder.Register(GetPrincipalFromHttpContext)
+            .As<IPrincipal>().InstancePerLifetimeScope();
+
+    private static ClaimsPrincipal GetPrincipalFromHttpContext(IComponentContext c)
     {
         var httpContextAccessor = c.Resolve<IHttpContextAccessor>();
         if (httpContextAccessor.HttpContext == null)
