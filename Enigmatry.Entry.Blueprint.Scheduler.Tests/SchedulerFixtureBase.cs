@@ -36,7 +36,7 @@ public abstract class SchedulerFixtureBase
         _testScope = _host.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
         await TestDatabase.ResetAsync(_testScope.Resolve<AppDbContext>());
-
+        
         SeedTestUsers();
     }
 
