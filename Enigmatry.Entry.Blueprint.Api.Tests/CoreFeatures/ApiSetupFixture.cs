@@ -8,6 +8,7 @@ using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Tests.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
+using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
