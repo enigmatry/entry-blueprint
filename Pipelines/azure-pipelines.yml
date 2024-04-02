@@ -9,7 +9,7 @@ variables:
   dbContextName: 'AppDbContext'
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   majorMinorVersion: 1.0
-  nodeVersion: '16.20.2'
+  nodeVersion: '18.18.2'
   projectNameAngularApp: enigmatry-entry-blueprint-app
   projectNamePrefix: Enigmatry.Entry.Blueprint
 
@@ -48,6 +48,7 @@ stages:
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
+  condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), contains(variables['Build.SourceBranch'], 'BP-XYZ'))
   variables:
   - template: variables/variables.test.yml
   jobs:
