@@ -20,13 +20,13 @@ jobs:
     webAppName: $(webAppName)
     virtualApplication: 'api'
 
-#- template: take-web-app-offline.yml@templates
-#  parameters:
-#    jobName: 'take_webjob_offline'
-#    displayName: 'Take Scheduler offline'
-#    environment: ${{ parameters.environment }}
-#    subscription: ${{ parameters.serviceConnection }}
-#    webAppName: $(webJobWebAppName)
+- template: take-web-app-offline.yml@templates
+  parameters:
+    jobName: 'take_scheduler_offline'
+    displayName: 'Take Scheduler offline'
+    environment: ${{ parameters.environment }}
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: $(schedulerWebAppName)
 
 - template: update-database-job.yml@templates
   parameters:
@@ -37,16 +37,32 @@ jobs:
     dependsOn:
     - take_web_app_offline
     - take_api_offline
-  #  - take_webjob_offline
+    - take_scheduler_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
     projectNamePrefix: $(projectNamePrefix)
 
 - template: deploy-web-app.yml@templates
   parameters:
+    jobName: 'deploy_scheduler'
+    artifactName: $(artifactName)
+    displayName: Deploy the Scheduler Web Job
+    dependsOn:
+      - take_web_app_offline
+    environment: ${{ parameters.environment }}
+    packageName: $(projectNamePrefix).Scheduler
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: $(schedulerWebAppName)
+    publishProfilePostfix: scheduler
+    excludeFilesFromAppDataFlag: false
+
+- template: deploy-web-app.yml@templates
+  parameters:
     jobName: 'deploy_angular_app'
     artifactName: $(artifactName)
     displayName: Deploy the Angular web app
+    dependsOn:
+      - deploy_scheduler #must be after scheduler since they are deployed into same webApp (this is Blueprint specific only)
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).App
     subscription: ${{ parameters.serviceConnection }}
@@ -65,24 +81,11 @@ jobs:
     publishProfilePostfix: api
     virtualApplication: api
 
-#- template: deploy-web-app.yml@templates
-#  parameters:
-#    jobName: 'deploy_webjob'
-#    artifactName: $(artifactName)
-#    displayName: Deploy the Scheduler
-#    environment: ${{ parameters.environment }}
-#    packageName: $(projectNamePrefix).Scheduler
-#    subscription: ${{ parameters.serviceConnection }}
-#    webAppName: $(webJobWebAppName)
-#    publishProfilePostfix: scheduler
-#    excludeFilesFromAppDataFlag: false
-
 - job: git_tag
   displayName: Create Git tag
   dependsOn:
-  - deploy_angular_app
   - deploy_api
- # - deploy_webjob
+  - deploy_scheduler
   steps:
     - checkout: self
       displayName: 'Checkout current repo'
