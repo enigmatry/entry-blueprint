@@ -4,9 +4,16 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>dotnet-Enigmatry.Entry.Blueprint.Scheduler-9F70C5ED-7F1B-4AC5-AE3F-6F845572F167</UserSecretsId>
+        <IsWebJobProject>true</IsWebJobProject>
+        <WebJobName>Scheduler</WebJobName>
+        <WebJobType>Continuous</WebJobType>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Content Update="appsettings.Development.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Enigmatry.Entry.Scheduler" />
         <PackageReference Include="Serilog.AspNetCore" />
@@ -18,6 +25,12 @@
     <ItemGroup>
       <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure\Enigmatry.Entry.Blueprint.Infrastructure.csproj" />
     </ItemGroup>
+
+  <ItemGroup>
+    <None Update="settings.job">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   
     <ItemGroup>
       <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Scheduler.Tests" />
