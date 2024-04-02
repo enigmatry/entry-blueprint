@@ -2,10 +2,6 @@ parameters:
 # - name: dbContextName
 - name: dependsOn
   type: object
-# - name: dotnetVersion
-#   default: '8.x'
-# - name: dotnetEfToolVersion
-#   default: 8.0.2
 - name: displayName
   default: Update Database
 - name: environment
@@ -13,8 +9,7 @@ parameters:
   default: update_databases
 - name: migrationConnectionString
 - name: artifactName
-- name: subscription
-# - name: projectNamePrefix
+# - name: subscription
 
 jobs:
 - job: ${{ parameters.jobName }}
@@ -26,15 +21,15 @@ jobs:
   ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
     pool: 'enigmatry-hosted-windows-agents-production'
   steps:
-    - task: PowerShell@2
-      displayName: Install Sql Server PS Module
-      inputs:
-        targetType: 'inline'
-        script: |
-          if ($Null -eq (Get-PackageProvider -Name NuGet -ErrorAction Ignore)) {
-              Install-PackageProvider -Name NuGet -Force -Scope CurrentUser;
-          }
-          Install-Module -Name SQLServer -Force -Scope CurrentUser
+    # - task: PowerShell@2
+    #   displayName: Install Sql Server PS Module
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       if ($Null -eq (Get-PackageProvider -Name NuGet -ErrorAction Ignore)) {
+    #           Install-PackageProvider -Name NuGet -Force -Scope CurrentUser;
+    #       }
+    #       Install-Module -Name SQLServer -Force -Scope CurrentUser
 
     - task: DownloadPipelineArtifact@2
       displayName: Download migrations artifact
@@ -43,37 +38,16 @@ jobs:
         artifactName: '${{ parameters.artifactName }}-migrations-$(Build.BuildNumber)'
         targetPath: '$(Pipeline.Workspace)'
 
-    - task: SqlAzureDacpacDeployment@1
-      displayName: Execute migration scripts
+    - task: CmdLine@2
       inputs:
-        azureSubscription: ${{ parameters.subscription }}
-        AuthenticationType: 'connectionString'
-        ConnectionString: ${{ parameters.migrationConnectionString }}
-        deployType: 'SqlTask'
-        SqlFile: '$(Pipeline.Workspace)\**\migrations.sql' 
-        IpDetectionMethod: 'AutoDetect'
-        
-    # - task: UseDotNet@2
-    #   displayName: Install .net ${{ parameters.dotnetVersion }}
-    #   inputs:
-    #     packageType: 'sdk'
-    #     version: ${{ parameters.dotnetVersion }}
-    # - task: DotNetCoreCLI@2
-    #   displayName: New Manifest for EF tool
-    #   inputs:
-    #     command: custom
-    #     custom: new
-    #     arguments: tool-manifest
-    # - task: DotNetCoreCLI@2
-    #   displayName: Install EF Tool
-    #   inputs:
-    #     command: custom
-    #     custom: tool
-    #     arguments: install dotnet-ef --version ${{ parameters.dotnetEfToolVersion }}
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'Update Database'
-    #   inputs:
-    #     command: custom
-    #     custom: ef
-    #     arguments: 'database update --verbose --configuration Release --context ${{ parameters.dbContextName }} --startup-project ${{ parameters.projectNamePrefix }}.Data.Migrations --project ${{ parameters.projectNamePrefix }}.Data.Migrations -- "${{ parameters.migrationConnectionString }}"'
+        script: migrations\efbundle.exe --connection ${{ parameters.migrationConnectionString }}
 
+    # - task: SqlAzureDacpacDeployment@1
+    #   displayName: Execute migration scripts
+    #   inputs:
+    #     azureSubscription: ${{ parameters.subscription }}
+    #     AuthenticationType: 'connectionString'
+    #     ConnectionString: ${{ parameters.migrationConnectionString }}
+    #     deployType: 'SqlTask'
+    #     SqlFile: '$(Pipeline.Workspace)\**\migrations.sql' 
+    #     IpDetectionMethod: 'AutoDetect'
