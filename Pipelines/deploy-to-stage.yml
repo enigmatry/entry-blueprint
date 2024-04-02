@@ -43,7 +43,7 @@ jobs:
     migrationConnectionString: $(migrationConnectionString)
     # projectNamePrefix: $(projectNamePrefix)
     artifactName: $(artifactName)
-    subscription: ${{ parameters.serviceConnection }}
+    # subscription: ${{ parameters.serviceConnection }}
 
 - template: deploy-web-app.yml@templates
   parameters:
