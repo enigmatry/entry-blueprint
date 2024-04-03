@@ -186,11 +186,6 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("CreditCardNumber")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(200)
