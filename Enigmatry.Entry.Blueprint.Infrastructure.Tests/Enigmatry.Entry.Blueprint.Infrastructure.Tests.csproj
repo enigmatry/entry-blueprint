@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <PackageReference Include="Respawn" />
     <PackageReference Include="Testcontainers.MsSql" />
+    <PackageReference Include="Verify.NUnit" />
   </ItemGroup>
 
   <ItemGroup>

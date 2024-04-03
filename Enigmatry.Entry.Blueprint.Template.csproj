@@ -3,7 +3,7 @@
   <PropertyGroup>
 
     <Authors>Enigmatry</Authors>
-    <Copyright>Copyright © 2023 Enigmatry. All rights reserved.</Copyright>
+    <Copyright>Copyright © 2024 Enigmatry. All rights reserved.</Copyright>
     <Company>Enigmatry</Company>
     <ContentTargetFolders>content</ContentTargetFolders>
     <Description>Template to use when creating an asp.net core/Angular application with Entry.</Description>
@@ -17,7 +17,7 @@
     <PackageProjectUrl>https://github.com/enigmatry/entry-blueprint</PackageProjectUrl>
     <PackageTags>Enigmatry;Entry;dotnet-new;template</PackageTags>
     <PackageType>Template</PackageType>
-    <PackageVersion>2.0</PackageVersion>
+    <PackageVersion>3.3</PackageVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/enigmatry/entry-blueprint</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
