@@ -20,7 +20,7 @@ where VERSION should be replaced with the specific version you want to install, 
 ``dotnet new blueprint --name Customer.Project --projectName Customer.Project --appProjectName customer-project --friendlyName "Customer Project" --allow-scripts yes``
 
 ## Uninstall the template (when installed from nupkg)
-``dotnet new -u Enigmatry.Entry.Blueprint.Template``
+``dotnet new uninstall Enigmatry.Entry.Blueprint.Template``
 
 ## Uninstall the template (when installed from local source)
-``dotnet new -u <path to solution e.g. D:\Projects\Enigmatry\enigmatry-entry-blueprint-template>``
+``dotnet new uninstall <path to solution e.g. D:\Projects\Enigmatry\enigmatry-entry-blueprint-template>``
