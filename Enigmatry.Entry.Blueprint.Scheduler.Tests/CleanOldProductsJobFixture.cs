@@ -2,7 +2,7 @@
 using Enigmatry.Entry.Blueprint.Domain.Products;
 using Enigmatry.Entry.Blueprint.Domain.Products.Commands;
 using Enigmatry.Entry.Blueprint.Scheduler.Jobs;
-using Enigmatry.Entry.Blueprint.Scheduler.Jobs.Requests;
+using Enigmatry.Entry.Blueprint.Scheduler.Jobs.CleanOldProducts;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
 

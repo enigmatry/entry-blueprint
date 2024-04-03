@@ -1,12 +1,11 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Products;
-using Enigmatry.Entry.Blueprint.Scheduler.Jobs.Requests;
 using Enigmatry.Entry.Core;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Scheduler;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Enigmatry.Entry.Blueprint.Scheduler.Jobs;
+namespace Enigmatry.Entry.Blueprint.Scheduler.Jobs.CleanOldProducts;
 
 [UsedImplicitly]
 public class CleanOldProductsJob : EntryJob<CleanOldProductsJobRequest>
