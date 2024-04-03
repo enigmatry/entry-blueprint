@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" />
+    <PackageReference Include="Automapper" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore" />
     <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization" />
@@ -21,6 +21,7 @@
     <PackageReference Include="Serilog.Enrichers.Environment" />
     <PackageReference Include="Serilog.Enrichers.Process" />
     <PackageReference Include="Serilog.Enrichers.Thread" />
+    <PackageReference Include="Serilog.Extensions.Logging"/>
     <PackageReference Include="Serilog.Settings.Configuration" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" />
     <PackageReference Include="Serilog.Sinks.Console" />

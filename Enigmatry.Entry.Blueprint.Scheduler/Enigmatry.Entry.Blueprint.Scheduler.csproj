@@ -1,8 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <IsWebJobProject>true</IsWebJobProject>
     <WebJobName>Scheduler</WebJobName>
     <WebJobType>Continuous</WebJobType>
@@ -15,10 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Enigmatry.Entry.Scheduler"/>
-    <PackageReference Include="Serilog.AspNetCore"/>
-    <PackageReference Include="Serilog.Enrichers.Thread"/>
-    <PackageReference Include="Serilog.Extensions.Logging"/>
-    <PackageReference Include="Serilog.Sinks.Console"/>
   </ItemGroup>
 
   <ItemGroup>
