@@ -37,7 +37,7 @@ stages:
         echo '##vso[build.updatebuildnumber]'$VERSION
       displayName: 'Set Build number'
  
-  - template: build-angular-app-and-dotnet-api.yml
+  - template: build-angular-app-and-dotnet-api.yml@templates
     parameters:
       artifactName: $(artifactName)
       displayName: 'Build Angular App and .net API'
