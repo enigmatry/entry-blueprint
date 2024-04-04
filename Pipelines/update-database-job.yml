@@ -1,5 +1,5 @@
 parameters:
-# - name: dbContextName
+- name: dbContextName
 - name: dependsOn
   type: object
 - name: dotnetVersion
@@ -11,7 +11,6 @@ parameters:
   default: update_databases
 - name: migrationConnectionString
 - name: artifactName
-# - name: subscription
 
 jobs:
 - job: ${{ parameters.jobName }}
@@ -28,15 +27,6 @@ jobs:
       inputs:
         packageType: 'sdk'
         version: ${{ parameters.dotnetVersion }}
-    # - task: PowerShell@2
-    #   displayName: Install Sql Server PS Module
-    #   inputs:
-    #     targetType: 'inline'
-    #     script: |
-    #       if ($Null -eq (Get-PackageProvider -Name NuGet -ErrorAction Ignore)) {
-    #           Install-PackageProvider -Name NuGet -Force -Scope CurrentUser;
-    #       }
-    #       Install-Module -Name SQLServer -Force -Scope CurrentUser
 
     - task: DownloadPipelineArtifact@2
       displayName: Download migrations artifact
@@ -47,14 +37,4 @@ jobs:
 
     - task: CmdLine@2
       inputs:
-        script: $(Pipeline.Workspace)\efbundle.exe --connection "${{ parameters.migrationConnectionString }}"
-
-    # - task: SqlAzureDacpacDeployment@1
-    #   displayName: Execute migration scripts
-    #   inputs:
-    #     azureSubscription: ${{ parameters.subscription }}
-    #     AuthenticationType: 'connectionString'
-    #     ConnectionString: ${{ parameters.migrationConnectionString }}
-    #     deployType: 'SqlTask'
-    #     SqlFile: '$(Pipeline.Workspace)\**\migrations.sql' 
-    #     IpDetectionMethod: 'AutoDetect'
+        script: $(Pipeline.Workspace)\${{ parameters.dbContextName }}-efbundle.exe --connection "${{ parameters.migrationConnectionString }}"
