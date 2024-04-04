@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable unused-imports/no-unused-vars */
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -76,7 +74,7 @@ export class ProductEditComponent
       (model: IGetProductDetailsResponse): boolean =>
         model.hasDiscount === undefined || model.hasDiscount === false;
     this.fieldsHideExpressions.resetFormBtn =
-      (model: IGetProductDetailsResponse): boolean =>
+      (_model: IGetProductDetailsResponse): boolean =>
         !this.isEdit();
   };
 
