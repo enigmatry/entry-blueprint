@@ -65,11 +65,16 @@ jobs:
   
   - task: DotNetCoreCLI@2
     inputs:
-      command: 'publish'
-      publishWebProjects: true
-      arguments: '-p:SkipInvalidConfigurations=true;PackageLocation=$(Build.ArtifactStagingDirectory);Version=$(Build.BuildNumber);TreatWarningsAsErrors=true;WarningsNotAsErrors=CS0612;EnforceCodeStyleInBuild=true'
+      command: 'build'
+      arguments: '-p:SkipInvalidConfigurations=true -p:Version=$(Build.BuildNumber) -p:TreatWarningsAsErrors=true -p:WarningsNotAsErrors=CS0612 -p:EnforceCodeStyleInBuild=true'
       configuration: '$(buildConfiguration)'
       projects: '${{ parameters.projectNamePrefix }}.sln'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      arguments: '--no-build --output $(Build.ArtifactStagingDirectory)'
 
   # - task: VSBuild@1
   #   displayName: Build package
