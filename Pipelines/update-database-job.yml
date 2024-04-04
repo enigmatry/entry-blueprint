@@ -47,7 +47,7 @@ jobs:
 
     - task: CmdLine@2
       inputs:
-        script: $(Pipeline.Workspace)\efbundle.exe --connection ${{ parameters.migrationConnectionString }}
+        script: $(Pipeline.Workspace)\efbundle.exe --connection "${{ parameters.migrationConnectionString }}"
 
     # - task: SqlAzureDacpacDeployment@1
     #   displayName: Execute migration scripts
