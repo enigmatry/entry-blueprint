@@ -56,5 +56,4 @@ stages:
     parameters:
       environment: test
       serviceConnection: 'Enigmatry - Entry Template (Test)'
-      artifactName: $(artifactName)
       
