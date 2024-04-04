@@ -10,7 +10,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-components/table';
 
-import { GetUsersResponseItem } from '@api';
+import { GetUsersResponseItem } from 'src/app/api/api-reference';
 
 @Component({
   selector: 'app-g-user-list',
@@ -36,14 +36,14 @@ export class UserListGeneratedComponent implements OnInit {
 
   @Input() headerTemplate: TemplateRef<any> | CellTemplate;
   @Input() cellTemplate: TemplateRef<any> | CellTemplate;
-
+      
   @Input() noResultText: string;
   @Input() noResultTemplate: TemplateRef<any> | null;
 
   @Input() showContextMenu = true;
   @Input() contextMenuItems: ContextMenuItem[] = [];
   @Input() rowContextMenuFormatter: RowContextMenuFormatter;
-
+  
   @Input() rowClassFormatter: RowClassFormatter;
   @Input() rowSelectionFormatter: RowSelectionFormatter = {};
 

@@ -6,6 +6,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="FakeItEasy" />
+    <PackageReference Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" />
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NUnit" />
@@ -14,10 +15,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <PackageReference Include="Respawn" />
+    <PackageReference Include="Testcontainers.MsSql" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure\Enigmatry.Entry.Blueprint.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests" />
+    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Scheduler.Tests" />
   </ItemGroup>
 
 </Project>

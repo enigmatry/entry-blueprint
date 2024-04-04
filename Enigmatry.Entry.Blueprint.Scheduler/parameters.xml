@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<parameters>
+    <parameter name="SQLDB Connection String" description="SQLDB Connection String" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__sqlDbConnectionString__"/>
+    </parameter>
+    <parameter name="ApplicationInsights ConnectionString" description="ApplicationInsights ConnectionString"
+               defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsConnectionString__"/>
+    </parameter>
+    <parameter name="Default Log Level" description="Default Log Level" defaultValue="Information">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__defaultLogLevel__" />
+    </parameter>
+    <parameter name="Rolling Log File Path" description="Rolling Log File Path" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__rollingLogFilePath__" />
+    </parameter>
+    <parameter name="Clean Old Products Job Cron Expression" description="Clean Old Products Job Cron Expression">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__cleanOldProductsJobCronExpression__"/>
+    </parameter>
+    <parameter name="Clean Old Products Job Deactive Older Than"
+               description="Clean Old Products Job Deactive Older Than">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__cleanOldProductsJobDeactivateOlderThan__"/>
+    </parameter>
+</parameters>

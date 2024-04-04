@@ -612,6 +612,7 @@ dotnet_diagnostic.IDE0083.severity = warning # IDE0083: Use pattern matching (no
 dotnet_diagnostic.IDE0090.severity = warning # IDE0090: Simplify new expression
 dotnet_diagnostic.IDE0100.severity = error # IDE0100: Remove unnecessary equality operator
 dotnet_diagnostic.IDE0110.severity = error # IDE0110: Remove unnecessary discard
+dotnet_diagnostic.IDE0290.severity = none # IDE0290: Use primary constructor
 dotnet_diagnostic.IDE1005.severity = error # IDE1005: Delegate invocation can be simplified
 dotnet_diagnostic.IDE1005WithoutSuggestion.severity = error # IDE1005: Delegate invocation can be simplified
 dotnet_diagnostic.IDE1006.severity = error # IDE1006: Naming styles

@@ -7,10 +7,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
 {
-    /// <inheritdoc />
     public partial class Initial : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -214,25 +212,6 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
                 name: "IX_User_UpdatedById",
                 table: "User",
                 column: "UpdatedById");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Product");
-
-            migrationBuilder.DropTable(
-                name: "RolePermission");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Permission");
-
-            migrationBuilder.DropTable(
-                name: "Role");
         }
     }
 }

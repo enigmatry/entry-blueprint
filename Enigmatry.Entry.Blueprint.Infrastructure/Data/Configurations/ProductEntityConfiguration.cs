@@ -14,6 +14,7 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(x => x.ContactEmail).IsRequired().HasMaxLength(Product.ContactEmailMaxLength);
         builder.Property(x => x.ContactPhone).IsRequired().HasMaxLength(Product.ContactPhoneMaxLength);
         builder.Property(x => x.Description).HasMaxLength(Product.DescriptionMaxLength);
+        builder.Property(x => x.Status).HasSentinel(ProductStatus.Active).HasDefaultValue(ProductStatus.Active);
 
         builder.HasCreatedByAndUpdatedBy();
 
