@@ -65,10 +65,11 @@ jobs:
   
   - task: DotNetCoreCLI@2
     inputs:
-      command: 'build'
+      command: 'publish'
       publishWebProjects: true
-      arguments: '-p:DeployOnBuild=true;WebPublishMethod=Package;PackageAsSingleFile=true;SkipInvalidConfigurations=true;PackageLocation=$(Build.ArtifactStagingDirectory);Version=$(Build.BuildNumber);TreatWarningsAsErrors=true;WarningsNotAsErrors=CS0612;EnforceCodeStyleInBuild=true'
+      arguments: '-p:SkipInvalidConfigurations=true;PackageLocation=$(Build.ArtifactStagingDirectory);Version=$(Build.BuildNumber);TreatWarningsAsErrors=true;WarningsNotAsErrors=CS0612;EnforceCodeStyleInBuild=true'
       configuration: '$(buildConfiguration)'
+      projects: '${{ parameters.projectNamePrefix }}.sln'
 
   # - task: VSBuild@1
   #   displayName: Build package
