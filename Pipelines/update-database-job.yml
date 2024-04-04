@@ -2,6 +2,8 @@ parameters:
 # - name: dbContextName
 - name: dependsOn
   type: object
+- name: dotnetVersion
+  default: '8.x'
 - name: displayName
   default: Update Database
 - name: environment
@@ -21,6 +23,11 @@ jobs:
   ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
     pool: 'enigmatry-hosted-windows-agents-production'
   steps:
+    - task: UseDotNet@2
+      displayName: Install .net ${{ parameters.dotnetVersion }}
+      inputs:
+        packageType: 'sdk'
+        version: ${{ parameters.dotnetVersion }}
     # - task: PowerShell@2
     #   displayName: Install Sql Server PS Module
     #   inputs:
