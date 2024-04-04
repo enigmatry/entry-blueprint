@@ -1,0 +1,123 @@
+parameters:
+- name: artifactName
+- name: displayName
+  default: Build Angular App and .net API
+- name: nodeVersion
+  default: '16.13.2'
+- name: projectNameAngularApp
+- name: projectNameSecondAngularApp
+  default: ''
+- name: projectNamePrefix
+- name: preBuildSteps
+  type: object
+  default: []
+- name: postBuildSteps
+  type: object
+  default: []
+
+jobs: 
+- job: 'Build_Angular_and_dotNet'
+  displayName: ${{ parameters.displayName }}
+  dependsOn: build_prerequisites
+  pool:
+    vmImage: 'windows-latest'
+  variables:
+    buildPlatform: 'Any CPU'
+    buildConfiguration: 'Release'
+    NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+
+  steps:
+  - task: NodeTool@0
+    displayName: 'Set Node version'
+    inputs:
+      versionSource: 'spec'
+      versionSpec: ${{ parameters.nodeVersion }}
+
+  - ${{ parameters.preBuildSteps }}
+
+  - template: build-angular-app-job.yml
+    parameters:
+      projectNameAngularApp: ${{ parameters.projectNameAngularApp }}
+  
+  - ${{ if ne(parameters.projectNameSecondAngularApp, '') }}:
+    - template: build-angular-app-job.yml
+      parameters:
+        projectNameAngularApp: ${{ parameters.projectNameSecondAngularApp }}
+        appName: ${{ parameters.projectNameSecondAngularApp }}
+  
+  - task: NuGetToolInstaller@1
+    displayName: Install NuGet Tool
+
+  - task: Cache@2
+    displayName: 'NuGet Cache'
+    inputs:
+      key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**,!**/obj/**'
+      restoreKeys: |
+          nuget | "$(Agent.OS)"
+          nuget
+      path: $(NUGET_PACKAGES)
+      cacheHitVar: 'NUGET_CACHE_RESTORED'
+
+  - task: NuGetCommand@2
+    displayName: Nuget Restore
+    inputs:
+      restoreSolution: '${{ parameters.projectNamePrefix }}.sln'
+  
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      arguments: '-p:DeployOnBuild=true;WebPublishMethod=Package;PackageAsSingleFile=true;SkipInvalidConfigurations=true;PackageLocation=$(Build.ArtifactStagingDirectory);Version=$(Build.BuildNumber);TreatWarningsAsErrors=true;WarningsNotAsErrors=CS0612;EnforceCodeStyleInBuild=true'
+      configuration: '$(buildConfiguration)'
+
+  # - task: VSBuild@1
+  #   displayName: Build package
+  #   inputs:
+  #     solution: '${{ parameters.projectNamePrefix }}.sln'
+  #     msbuildArgs: '/p:DeployOnBuild=true;WebPublishMethod=Package;PackageAsSingleFile=true;SkipInvalidConfigurations=true;PackageLocation=$(Build.ArtifactStagingDirectory);Version=$(Build.BuildNumber);TreatWarningsAsErrors=true;WarningsNotAsErrors=CS0612;EnforceCodeStyleInBuild=true'
+  #     platform: '$(buildPlatform)'
+  #     configuration: '$(buildConfiguration)'
+
+  - task: DotNetCoreCLI@2
+    displayName: Run Unit Tests
+    inputs:
+      command: 'test'
+      projects: ${{ parameters.projectNamePrefix }}**/*.Tests.csproj
+      arguments: '--filter TestCategory=unit|TestCategory=smoke --configuration $(buildConfiguration) --no-build'
+  
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Build artifacts
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: ${{ parameters.artifactName }}-$(Build.BuildNumber)
+      publishLocation: 'Container'
+
+  - task: DotNetCoreCLI@2
+    displayName: New Manifest for EF tool
+    inputs:
+      command: custom
+      custom: new
+      arguments: tool-manifest
+
+  - task: DotNetCoreCLI@2
+    displayName: Install EF Tool
+    inputs:
+      command: custom
+      custom: tool
+      arguments: install dotnet-ef --version 8.0.2
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Generate migration script'
+    inputs:
+      command: custom
+      custom: ef
+      arguments: 'migrations bundle --no-build --output migrations\$(dbContextName)-efbundle.exe --startup-project ${{ parameters.projectNamePrefix }}.Data.Migrations --project ${{ parameters.projectNamePrefix }}.Data.Migrations'
+  
+  - task: PublishBuildArtifacts@1
+    displayName: Publish migrations
+    inputs:
+      PathtoPublish: Migrations
+      ArtifactName: ${{ parameters.artifactName }}-migrations-$(Build.BuildNumber)
+      publishLocation: 'Container'
+  
+  - ${{ parameters.postBuildSteps }}

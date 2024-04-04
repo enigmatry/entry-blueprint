@@ -28,7 +28,7 @@ jobs:
     subscription: ${{ parameters.serviceConnection }}
     webAppName: $(schedulerWebAppName)
 
-- template: update-database-job.yml@templates
+- template: update-database-job.yml
   parameters:
     dbContextName: $(dbContextName)
     displayName: 'Update the database'
