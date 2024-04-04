@@ -65,7 +65,7 @@ jobs:
   
   - task: DotNetCoreCLI@2
     inputs:
-      command: 'publish'
+      command: 'build'
       publishWebProjects: true
       arguments: '-p:DeployOnBuild=true;WebPublishMethod=Package;PackageAsSingleFile=true;SkipInvalidConfigurations=true;PackageLocation=$(Build.ArtifactStagingDirectory);Version=$(Build.BuildNumber);TreatWarningsAsErrors=true;WarningsNotAsErrors=CS0612;EnforceCodeStyleInBuild=true'
       configuration: '$(buildConfiguration)'
