@@ -5,7 +5,7 @@
 ``dotnet pack Enigmatry.Entry.Blueprint.Template.csproj -c Release``
 
 ## Install the template locally from nupkg file
-``dotnet new -i "bin\Release\Enigmatry.Entry.Blueprint.Template.1.0.0.nupkg"``
+``dotnet new -i "bin\Release\Enigmatry.Entry.Blueprint.Template.3.3.0.nupkg"``
 
 ## Install the template from NuGet.org
 ``dotnet new install Enigmatry.Entry.Blueprint.Template``
