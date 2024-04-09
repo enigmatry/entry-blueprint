@@ -38,7 +38,6 @@ jobs:
     - take_scheduler_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
-    artifactName: $(artifactName)
 
 - template: deploy-web-app.yml@templates
   parameters:
