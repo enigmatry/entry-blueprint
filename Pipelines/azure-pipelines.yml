@@ -44,6 +44,8 @@ stages:
       nodeVersion: $(nodeVersion)
       projectNameAngularApp: $(projectNameAngularApp)
       projectNamePrefix: $(projectNamePrefix)
+      dbContextNames:
+      - $(dbContextName)
 
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
