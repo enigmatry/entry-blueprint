@@ -44,6 +44,7 @@ stages:
       nodeVersion: $(nodeVersion)
       projectNameAngularApp: $(projectNameAngularApp)
       projectNamePrefix: $(projectNamePrefix)
+      runAngularTests: true
       dbContextNames:
       - $(dbContextName)
 
