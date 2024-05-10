@@ -76,7 +76,7 @@ const defaultFormConfig: EntryFormConfig = {
         }
       ],
       validationMessages: [
-        { name: FORM_FIELD_ERROR_KEY, message: (error, _) => error },
+        { name: FORM_FIELD_ERROR_KEY, message: error => error },
         { name: 'required', message: 'Required field.' }
       ]
     })
