@@ -29,6 +29,7 @@
     "**/obj": true,
     "**/.git": true,
     "**/.angular": true,
+    "**/.nx": true,
     "**/node_modules": true,
     "**/bower_components": true,
     "**/tmp": true,
