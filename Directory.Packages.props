@@ -22,32 +22,32 @@
     <PackageVersion Include="Enigmatry.Entry.MediatR" Version="3.2.0" />
     <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="3.2.0" />
     <PackageVersion Include="Enigmatry.Entry.Swagger" Version="3.2.0" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="16.0.0" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="16.0.0" />
-    <PackageVersion Include="FakeItEasy" Version="8.1.0" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="17.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="17.0.0" />
+    <PackageVersion Include="FakeItEasy" Version="8.2.0" />
     <PackageVersion Include="FakeItEasy.Analyzer.CSharp" Version="6.1.1" />
     <PackageVersion Include="FluentAssertions" Version="6.12.0" />
-    <PackageVersion Include="FluentValidation" Version="11.9.0" />
-    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+    <PackageVersion Include="FluentValidation" Version="11.9.1" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
     <PackageVersion Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="8.0.3" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="8.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="8.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.Identity.Web" Version="2.17.4" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="2.18.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="4.7.4" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageVersion Include="NUnit" Version="4.1.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
-    <PackageVersion Include="Polly" Version="8.3.1" />
+    <PackageVersion Include="Polly" Version="8.4.0" />
     <PackageVersion Include="Respawn" Version="6.2.1" />
     <PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.3.0" />
@@ -59,6 +59,6 @@
     <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageVersion Include="Testcontainers.MsSql" Version="3.8.0" />
-    <PackageVersion Include="Verify.NUnit" Version="23.6.0" />
+    <PackageVersion Include="Verify.NUnit" Version="24.2.0" />
   </ItemGroup>
 </Project>
