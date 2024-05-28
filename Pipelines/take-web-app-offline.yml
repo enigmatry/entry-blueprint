@@ -1,0 +1,51 @@
+parameters:
+- name: displayName
+  default: Take api offline
+- name: environment
+- name: jobName
+  default: take_api_offline
+- name: subscription
+- name: virtualApplication
+  default: ''
+- name: webAppName
+- name: appOfflinePackage
+  default: '$(Pipeline.Workspace)/ci-cd-tools/offline_files'
+# - name: vmImage
+#   default: 'windows-latest'
+
+jobs:
+- deployment: ${{ parameters.jobName }}
+  displayName: ${{ parameters.displayName }}
+  environment: ${{ parameters.environment }}
+  # pool:
+  #   vmImage: ${{ parameters.vmImage }}
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - ${{ if eq(parameters.appOfflinePackage, '$(Pipeline.Workspace)/ci-cd-tools/offline_files') }}:
+          - task: DownloadPipelineArtifact@2
+            displayName: Download Enigmatry CI/CD Tools
+            inputs:
+              buildType: 'specific'
+              project: 'c0606c0e-8bbb-4102-974a-ba01fcf58b56'
+              definition: '49'
+              buildVersionToDownload: 'latest'
+              targetPath: '$(Pipeline.Workspace)'
+        - ${{ else }}:
+          - checkout: self
+
+        - task: AzureRmWebAppDeployment@4
+          displayName: 'Deploy App Offline'
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: ${{ parameters.subscription }}
+            appType: 'webApp'
+            WebAppName: ${{ parameters.webAppName }}
+            packageForLinux: ${{ parameters.appOfflinePackage }}
+            enableCustomDeployment: true
+            DeploymentType: 'webDeploy'
+            VirtualApplication: ${{ parameters.virtualApplication }}
+            RemoveAdditionalFilesFlag: false
+            TakeAppOfflineFlag: false
+            

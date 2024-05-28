@@ -49,9 +49,10 @@ stages:
       - $(dbContextName)
 
 - stage: 'Deploy_Test'
+  pool: 'enigmatry-hosted-windows-agents-test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
-  condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), contains(variables['Build.SourceBranch'], 'BP-XYZ'))
+  # condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), contains(variables['Build.SourceBranch'], 'BP-XYZ'))
   variables:
   - template: variables/variables.test.yml
   jobs:
