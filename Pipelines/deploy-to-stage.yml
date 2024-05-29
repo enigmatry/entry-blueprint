@@ -85,10 +85,9 @@ jobs:
     - checkout: self
       displayName: 'Checkout current repo'
       persistCredentials: true
-    - task: Bash@3
+    - task: CmdLine@2
       displayName: Create Git tag
       inputs:
-        targetType: 'inline'
         script: |
           git tag ${{ parameters.environment }}-$(Build.SourceBranchName)-$(Build.BuildNumber)
           git push origin ${{ parameters.environment }}-$(Build.SourceBranchName)-$(Build.BuildNumber)
