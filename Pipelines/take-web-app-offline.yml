@@ -17,8 +17,10 @@ jobs:
 - deployment: ${{ parameters.jobName }}
   displayName: ${{ parameters.displayName }}
   environment: ${{ parameters.environment }}
-  # pool:
-  #   vmImage: ${{ parameters.vmImage }}
+  ${{ if in( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-${{ parameters.environment }}'
+  ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-production'
   strategy:
     runOnce:
       deploy:

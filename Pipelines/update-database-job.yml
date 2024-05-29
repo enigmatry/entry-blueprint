@@ -14,10 +14,10 @@ jobs:
   ${{ if parameters.dependsOn }}:
     dependsOn: '${{ parameters.dependsOn }}'
   displayName: ${{ parameters.displayName }}
-  # ${{ if in( parameters['environment'], 'test', 'acceptance') }}:
-  #   pool: 'enigmatry-hosted-windows-agents-${{ parameters.environment }}'
-  # ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
-  #   pool: 'enigmatry-hosted-windows-agents-production'
+  ${{ if in( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-${{ parameters.environment }}'
+  ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-production'
   steps:
     - task: DownloadPipelineArtifact@2
       displayName: Download migrations artifact

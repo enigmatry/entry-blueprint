@@ -28,8 +28,10 @@ jobs:
 - deployment: ${{ parameters.jobName }}
   displayName: ${{ parameters.displayName }}
   dependsOn: '${{ parameters.dependsOn }}'
-  # pool:
-  #   vmImage: 'windows-latest'
+  ${{ if in( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-${{ parameters.environment }}'
+  ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-production'
   environment: ${{ parameters.environment }}
   variables:
   - name: publishProfile
