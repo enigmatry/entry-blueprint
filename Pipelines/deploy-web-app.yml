@@ -1,0 +1,106 @@
+parameters:
+- name: additionalArguments
+  default: -retryAttempts:6 -retryInterval:10000
+- name: artifactName
+- name: dependsOn
+  type: object
+  default:
+  - update_databases
+- name: displayName
+  default: Deploy Web App
+- name: environment
+- name: excludeFilesFromAppDataFlag
+  default: true
+- name: jobName
+  default: deploy_web_app
+- name: packageName
+- name: publishProfilePostfix
+  default: api
+- name: subscription
+- name: virtualApplication
+  default: ''
+- name: webAppName
+- name: envVariablesForDeployParams
+  type: object
+  default: []
+
+jobs:
+- deployment: ${{ parameters.jobName }}
+  displayName: ${{ parameters.displayName }}
+  dependsOn: '${{ parameters.dependsOn }}'
+  ${{ if in( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-${{ parameters.environment }}'
+  ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
+    pool: 'enigmatry-hosted-windows-agents-production'
+  environment: ${{ parameters.environment }}
+  variables:
+  - name: publishProfile
+    ${{ if eq( parameters['environment'], 'acceptance') }}:
+      value: 'publish-web-profile-acc-${{ parameters.publishProfilePostfix }}.proj'
+    ${{ if eq( parameters['environment'], 'production' ) }}:
+      value: 'publish-web-profile-prod-${{ parameters.publishProfilePostfix }}.proj'
+    ${{ if notIn( parameters['environment'], 'acceptance', 'production') }}:
+      value: 'publish-web-profile-${{ parameters.environment }}-${{ parameters.publishProfilePostfix }}.proj'
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '8.x'
+        - checkout: self
+          displayName: 'Checkout current repo'
+        - download: current
+          displayName: 'Download build artifacts'
+        - task: CopyFiles@2
+          displayName: 'Copy build artifacts'
+          inputs:
+            SourceFolder: '$(Pipeline.Workspace)/${{ parameters.artifactName }}-$(Build.BuildNumber)'
+            Contents: '**'
+            TargetFolder: 'Artifacts'
+        - task: DownloadPipelineArtifact@2
+          displayName: Download Enigmatry CI/CD Tools
+          inputs:
+            buildType: 'specific'
+            project: 'c0606c0e-8bbb-4102-974a-ba01fcf58b56'
+            definition: '49'
+            buildVersionToDownload: 'latest'
+            targetPath: '$(Pipeline.Workspace)'
+        - task: CopyFiles@2
+          displayName: 'Copy publish-web'
+          inputs:
+            SourceFolder: '$(Pipeline.Workspace)/ci-cd-tools/tools'
+            Contents: 'publish-web-pipelines.proj'
+            TargetFolder: $(Build.SourcesDirectory)  
+        - task: MSBuild@1
+          displayName: 'Prepare Deployment Parameters'
+          inputs:
+            solution: $(Build.SourcesDirectory)/publish-web-pipelines.proj
+            msbuildVersion: '17.0'
+            msbuildArchitecture: 'x64'
+            msbuildArguments: '-t:PatchParameters -p:PublishProfile=$(Build.SourcesDirectory)/Deployment/$(publishProfile) -p:SetParametersFile=Artifacts/${{ parameters.packageName }}.SetParameters.xml'
+          env:
+            ${{ each variable in parameters.envVariablesForDeployParams }} :
+              ${{ variable.name }}: ${{ variable.value }}
+          
+        - task: AzureRmWebAppDeployment@4
+          displayName: 'Deploy Web App'
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: ${{ parameters.subscription }}
+            appType: 'webApp'
+            WebAppName: ${{ parameters.webAppName }}
+            packageForLinux: 'Artifacts/${{ parameters.packageName }}.zip'
+            enableCustomDeployment: true
+            DeploymentType: 'webDeploy'
+            SetParametersFile: 'Artifacts/${{ parameters.packageName }}.SetParameters.xml'
+            VirtualApplication: ${{ parameters.virtualApplication }}
+            RemoveAdditionalFilesFlag: true
+            ExcludeFilesFromAppDataFlag: ${{ parameters.excludeFilesFromAppDataFlag }}
+            TakeAppOfflineFlag: false
+            AdditionalArguments: ${{ parameters.additionalArguments }}
+            ScriptType: 'Inline Script'
+            InlineScript: |
+              del App_Offline.htm
+              del disable.job

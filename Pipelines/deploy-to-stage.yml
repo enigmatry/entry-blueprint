@@ -39,7 +39,7 @@ jobs:
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
 
-- template: deploy-web-app.yml@templates
+- template: deploy-web-app.yml
   parameters:
     jobName: 'deploy_scheduler'
     artifactName: $(artifactName)
@@ -51,7 +51,7 @@ jobs:
     publishProfilePostfix: scheduler
     excludeFilesFromAppDataFlag: false
 
-- template: deploy-web-app.yml@templates
+- template: deploy-web-app.yml
   parameters:
     jobName: 'deploy_angular_app'
     artifactName: $(artifactName)
@@ -64,7 +64,7 @@ jobs:
     webAppName: $(webAppName)
     publishProfilePostfix: app
 
-- template: deploy-web-app.yml@templates
+- template: deploy-web-app.yml
   parameters:
     jobName: 'deploy_api'
     artifactName: $(artifactName)
