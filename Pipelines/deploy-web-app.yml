@@ -73,20 +73,20 @@ jobs:
             SourceFolder: '$(Pipeline.Workspace)/ci-cd-tools/tools'
             Contents: 'publish-web-pipelines.proj'
             TargetFolder: $(Build.SourcesDirectory)  
-        # - task: MSBuild@1
-        #   displayName: 'Prepare Deployment Parameters'
-        #   inputs:
-        #     solution: $(Build.SourcesDirectory)/publish-web-pipelines.proj
-        #     msbuildVersion: '17.0'
-        #     msbuildArchitecture: 'x64'
-        #     msbuildArguments: '-t:PatchParameters -p:PublishProfile=$(Build.SourcesDirectory)/Deployment/$(publishProfile) -p:SetParametersFile=Artifacts/${{ parameters.packageName }}.SetParameters.xml'
-        #   env:
-        #     ${{ each variable in parameters.envVariablesForDeployParams }} :
-        #       ${{ variable.name }}: ${{ variable.value }}
-        - task: VSBuild@1
+        - task: MSBuild@1
+          displayName: 'Prepare Deployment Parameters'
           inputs:
             solution: $(Build.SourcesDirectory)/publish-web-pipelines.proj
-            msbuildArgs: '-t:PatchParameters -p:PublishProfile=$(Build.SourcesDirectory)/Deployment/$(publishProfile) -p:SetParametersFile=Artifacts/${{ parameters.packageName }}.SetParameters.xml'
+            msbuildVersion: '17.0'
+            msbuildArchitecture: 'x86'
+            msbuildArguments: '-t:PatchParameters -p:PublishProfile=$(Build.SourcesDirectory)/Deployment/$(publishProfile) -p:SetParametersFile=Artifacts/${{ parameters.packageName }}.SetParameters.xml'
+          env:
+            ${{ each variable in parameters.envVariablesForDeployParams }} :
+              ${{ variable.name }}: ${{ variable.value }}
+        # - task: VSBuild@1
+        #   inputs:
+        #     solution: $(Build.SourcesDirectory)/publish-web-pipelines.proj
+        #     msbuildArgs: '-t:PatchParameters -p:PublishProfile=$(Build.SourcesDirectory)/Deployment/$(publishProfile) -p:SetParametersFile=Artifacts/${{ parameters.packageName }}.SetParameters.xml'
           
         - task: AzureRmWebAppDeployment@4
           displayName: 'Deploy Web App'
