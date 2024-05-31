@@ -28,10 +28,11 @@ jobs:
 - deployment: ${{ parameters.jobName }}
   displayName: ${{ parameters.displayName }}
   dependsOn: '${{ parameters.dependsOn }}'
-  ${{ if in( parameters['environment'], 'test', 'acceptance') }}:
-    pool: 'enigmatry-hosted-windows-agents-${{ parameters.environment }}'
-  ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
-    pool: 'enigmatry-hosted-windows-agents-production'
+  pool: 'enigmatry-hosted-windows-2019-agents-test'
+  # ${{ if in( parameters['environment'], 'test', 'acceptance') }}:
+  #   pool: 'enigmatry-hosted-windows-agents-${{ parameters.environment }}'
+  # ${{ if notIn( parameters['environment'], 'test', 'acceptance') }}:
+  #   pool: 'enigmatry-hosted-windows-agents-production'
   environment: ${{ parameters.environment }}
   variables:
   - name: publishProfile
