@@ -9,7 +9,7 @@
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__applicationInsightsConnectionString__" />
     </parameter>
     <parameter name="HealthChecks Token" description="HealthChecks Token" defaultValue="">
-        <parameterValidation kind="AllowEmpty" />
+        <parameterValidation type="AllowEmpty" />
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__healthChecksToken__" />
     </parameter>
     <parameter name="Default Log Level" description="Default Log Level" defaultValue="Information">
