@@ -14,7 +14,7 @@
       <Value>InstrumentationKey=477b870b-733d-4a69-a780-9bc363f075c7;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/</Value>
     </ParameterValue>
     <ParameterValue Include="HealthChecks Token">
-      <Value>d5d97ea1-5709-45e1-a414-0bac78e8aecb</Value>
+      <Value></Value>
     </ParameterValue>
     <ParameterValue Include="Default Log Level">
       <Value>Information</Value>
