@@ -4,9 +4,9 @@
     "net8.0": {
       "Microsoft.AspNetCore.SpaServices.Extensions": {
         "type": "Direct",
-        "requested": "[8.0.5, )",
-        "resolved": "8.0.5",
-        "contentHash": "+kdU9406Yd81sQZBtsKVAZNf2jhaGNxUs1LtAxhBwaMls0Zn2FJK4lECf2WKidPxM7VRlF1cLitqnQvF6CK7bg==",
+        "requested": "[8.0.6, )",
+        "resolved": "8.0.6",
+        "contentHash": "c16MKR+VPjUuCMbJn4wWMdiAuGiQIMofAEHmoOlkhDrHz8Ot+DIQ1B2uuGlZw3ROA0L/WT4eRCBk5+nBO233ZQ==",
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Physical": "8.0.0"
         }
