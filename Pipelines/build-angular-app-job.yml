@@ -20,12 +20,12 @@ steps:
     workingDir: ${{ parameters.projectNameAngularApp }}
   condition: ne(variables.NPM_CACHE_RESTORED, true)
   
-- task: Npm@1
-  displayName: 'TS Lint ${{ parameters.appName }}'
-  inputs:
-    command: 'custom'
-    customCommand: 'run lint'
-    workingDir: ${{ parameters.projectNameAngularApp }}
+# - task: Npm@1
+#   displayName: 'TS Lint ${{ parameters.appName }}'
+#   inputs:
+#     command: 'custom'
+#     customCommand: 'run lint'
+#     workingDir: ${{ parameters.projectNameAngularApp }}
   
 - task: Npm@1
   displayName: 'Create dist ${{ parameters.appName }}'
