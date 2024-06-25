@@ -6,26 +6,26 @@ parameters:
   default: false
 
 steps:
-# - task: Cache@2
-#   displayName: 'Cache npm Dependencies ${{ parameters.appName }}'
-#   inputs:
-#     key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/${{ parameters.projectNameAngularApp }}/package-lock.json'
-#     path: '$(Build.SourcesDirectory)/${{ parameters.projectNameAngularApp }}/node_modules'
-#     cacheHitVar: 'NPM_CACHE_RESTORED'
+- task: Cache@2
+  displayName: 'Cache npm Dependencies ${{ parameters.appName }}'
+  inputs:
+    key: 'npm | "$(Agent.OS)" | $(Build.SourcesDirectory)/${{ parameters.projectNameAngularApp }}/package-lock.json'
+    path: '$(Build.SourcesDirectory)/${{ parameters.projectNameAngularApp }}/node_modules'
+    cacheHitVar: 'NPM_CACHE_RESTORED'
 
 - task: Npm@1
   displayName: 'Install node modules ${{ parameters.appName }}'
   inputs:
     command: 'ci'
     workingDir: ${{ parameters.projectNameAngularApp }}
-  # condition: ne(variables.NPM_CACHE_RESTORED, true)
+  condition: ne(variables.NPM_CACHE_RESTORED, true)
   
-# - task: Npm@1
-#   displayName: 'TS Lint ${{ parameters.appName }}'
-#   inputs:
-#     command: 'custom'
-#     customCommand: 'run lint'
-#     workingDir: ${{ parameters.projectNameAngularApp }}
+- task: Npm@1
+  displayName: 'TS Lint ${{ parameters.appName }}'
+  inputs:
+    command: 'custom'
+    customCommand: 'run lint'
+    workingDir: ${{ parameters.projectNameAngularApp }}
   
 - task: Npm@1
   displayName: 'Create dist ${{ parameters.appName }}'
