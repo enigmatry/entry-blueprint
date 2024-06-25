@@ -39,17 +39,17 @@ jobs:
 
   - ${{ parameters.preBuildSteps }}
 
-  - template: build-angular-app-job.yml
-    parameters:
-      projectNameAngularApp: ${{ parameters.projectNameAngularApp }}
-      runAngularTests: ${{ parameters.runAngularTests }}
+  # - template: build-angular-app-job.yml
+  #   parameters:
+  #     projectNameAngularApp: ${{ parameters.projectNameAngularApp }}
+  #     runAngularTests: ${{ parameters.runAngularTests }}
   
-  - ${{ if ne(parameters.projectNameSecondAngularApp, '') }}:
-    - template: build-angular-app-job.yml
-      parameters:
-        projectNameAngularApp: ${{ parameters.projectNameSecondAngularApp }}
-        appName: ${{ parameters.projectNameSecondAngularApp }}
-        runAngularTests: ${{ parameters.runAngularTests }}
+  # - ${{ if ne(parameters.projectNameSecondAngularApp, '') }}:
+  #   - template: build-angular-app-job.yml
+  #     parameters:
+  #       projectNameAngularApp: ${{ parameters.projectNameSecondAngularApp }}
+  #       appName: ${{ parameters.projectNameSecondAngularApp }}
+  #       runAngularTests: ${{ parameters.runAngularTests }}
   
   - task: NuGetToolInstaller@1
     displayName: Install NuGet Tool
