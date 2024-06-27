@@ -6,6 +6,7 @@
     <ShouldRunBuildScript>false</ShouldRunBuildScript>
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\</BuildOutputFolder>
+    <BuildCommand>npm run build -- --configuration production</BuildCommand>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="coverage\**" />
