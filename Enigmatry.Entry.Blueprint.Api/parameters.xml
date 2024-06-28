@@ -37,6 +37,7 @@
         <parameterEntry kind="TextFile" scope="main.*.js" match="__appVersion__" />
     </parameter>
     <parameter name="API Uri" description="API Uri" defaultValue="">
+        <parameterValidation kind="AllowEmpty" />
         <parameterEntry kind="TextFile" scope="main.*.js" match="__apiUrl__" />
     </parameter>
     <parameter name="ApplicationInsights ConnectionString" description="ApplicationInsights ConnectionString" defaultValue="">

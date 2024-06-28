@@ -42,7 +42,7 @@
       <Value>$(AppVersion)</Value>
     </ParameterValue>
     <ParameterValue Include="API Uri">
-      <Value>/</Value>
+      <Value></Value>
     </ParameterValue>
     <ParameterValue Include="ApplicationInsights ConnectionString">
       <Value>InstrumentationKey=477b870b-733d-4a69-a780-9bc363f075c7;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/</Value>
@@ -57,7 +57,7 @@
       <Value>https://enigmatryb2ctest.onmicrosoft.com/462923fc-3dcd-4b81-943d-590b9cb45ec4/api</Value>
     </ParameterValue>
     <ParameterValue Include="Content Security Policy">
-      <Value>default-src 'none'; script-src 'self' 'unsafe-eval'; connect-src 'self' enigmatryb2ctest.b2clogin.com westeurope-5.in.applicationinsights.azure.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'</Value>
+      <Value>default-src 'none'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; connect-src 'self' enigmatryb2ctest.b2clogin.com westeurope-5.in.applicationinsights.azure.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'</Value>
     </ParameterValue>
   </ItemGroup>
 </Project>
