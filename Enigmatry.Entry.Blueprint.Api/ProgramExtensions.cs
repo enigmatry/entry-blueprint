@@ -66,6 +66,12 @@ public static class ProgramExtensions
         app.UseDefaultFiles();
         app.UseStaticFiles();
 
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapFallbackToFile("index.html");
+        });
+
+        //app.UsePathBase(new PathString("/api"));
         app.UseRouting();
 
         if (configuration.AppUseDeveloperExceptionPage())
