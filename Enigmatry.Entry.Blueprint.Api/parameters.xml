@@ -32,4 +32,26 @@
     <parameter name="Azure AD SignUpSignInPolicyId" description="Azure AD SignUpSignInPolicyId" defaultValue="">
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__azureAdSignUpSignInPolicyId__" />
     </parameter>
+    <!-- Front-end params-->
+    <parameter name="App Version" description="App Version" defaultValue="">
+        <parameterEntry kind="TextFile" scope="main.*.js" match="__appVersion__" />
+    </parameter>
+    <parameter name="API Uri" description="API Uri" defaultValue="">
+        <parameterEntry kind="TextFile" scope="main.*.js" match="__apiUrl__" />
+    </parameter>
+    <parameter name="ApplicationInsights ConnectionString" description="ApplicationInsights ConnectionString" defaultValue="">
+        <parameterEntry kind="TextFile" scope="main.*.js" match="__applicationInsightsConnectionString__" />
+    </parameter>
+    <parameter name="Azure AD ClientId" description="Azure AD ClientId" defaultValue="">
+        <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdClientId__" />
+    </parameter>
+    <parameter name="Azure AD Authority" description="Azure AD Authority" defaultValue="">
+        <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdAuthority__" />
+    </parameter>
+    <parameter name="Azure AD Scopes" description="Azure AD Scopes" defaultValue="">
+        <parameterEntry kind="TextFile" scope="main.*.js" match="__azureAdScopes__" />
+    </parameter>
+    <parameter name="Content Security Policy">
+        <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/location/system.webServer/httpProtocol/customHeaders/add[@name='Content-Security-Policy']/@value" />
+    </parameter>
 </parameters>
