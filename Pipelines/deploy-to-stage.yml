@@ -52,7 +52,7 @@ jobs:
     packageName: $(projectNamePrefix).Api
     subscription: ${{ parameters.serviceConnection }}
     webAppName: $(webAppName)
-    publishProfilePostfix: new
+    publishProfilePostfix: app
 
 - job: git_tag
   displayName: Create Git tag
