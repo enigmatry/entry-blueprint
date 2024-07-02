@@ -98,10 +98,10 @@ public static class ProgramExtensions
         app.MapControllers().RequireAuthorization();
         app.MapEntryHealthCheck(configuration);
 
-        //if (env.IsDevelopment())
-        //{
+        if (env.IsDevelopment())
+        {
             app.AppUseSwaggerWithAzureAdAuth(configuration);
-        //}
+        }
         app.AppConfigureFluentValidation();
     }
 }

@@ -11,22 +11,13 @@ jobs:
     subscription: ${{ parameters.serviceConnection }}
     webAppName: $(webAppName)
 
-# - template: take-web-app-offline.yml@templates
-#   parameters:
-#     jobName: 'take_api_offline'
-#     displayName: 'Take API offline'
-#     environment: ${{ parameters.environment }}
-#     subscription: ${{ parameters.serviceConnection }}
-#     webAppName: $(webAppName)
-#     virtualApplication: 'api'
-
-# - template: take-web-app-offline.yml@templates
-#   parameters:
-#     jobName: 'take_scheduler_offline'
-#     displayName: 'Take Scheduler offline'
-#     environment: ${{ parameters.environment }}
-#     subscription: ${{ parameters.serviceConnection }}
-#     webAppName: $(schedulerWebAppName)
+- template: take-web-app-offline.yml@templates
+  parameters:
+    jobName: 'take_scheduler_offline'
+    displayName: 'Take Scheduler offline'
+    environment: ${{ parameters.environment }}
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: $(schedulerWebAppName)
 
 - template: update-database-job.yml@templates
   parameters:
@@ -34,53 +25,40 @@ jobs:
     displayName: 'Update the database'
     dependsOn:
     - take_web_app_offline
-    # - take_api_offline
-    # - take_scheduler_offline
+    - take_scheduler_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
 
-# - template: deploy-web-app.yml@templates
-#   parameters:
-#     jobName: 'deploy_scheduler'
-#     artifactName: $(artifactName)
-#     displayName: Deploy the Scheduler Web Job
-#     environment: ${{ parameters.environment }}
-#     packageName: $(projectNamePrefix).Scheduler
-#     subscription: ${{ parameters.serviceConnection }}
-#     webAppName: $(schedulerWebAppName)
-#     publishProfilePostfix: scheduler
-#     excludeFilesFromAppDataFlag: false
+- template: deploy-web-app.yml@templates
+  parameters:
+    jobName: 'deploy_scheduler'
+    artifactName: $(artifactName)
+    displayName: Deploy the Scheduler Web Job
+    environment: ${{ parameters.environment }}
+    packageName: $(projectNamePrefix).Scheduler
+    subscription: ${{ parameters.serviceConnection }}
+    webAppName: $(schedulerWebAppName)
+    publishProfilePostfix: scheduler
+    excludeFilesFromAppDataFlag: false
 
 - template: deploy-web-app.yml@templates
   parameters:
     jobName: 'deploy_web_app'
     artifactName: $(artifactName)
     displayName: Deploy the Web app
-    # dependsOn:
-    #   - deploy_scheduler #must be after scheduler since they are deployed into same webApp (this is Blueprint specific only)
+    dependsOn:
+      - deploy_scheduler #must be after scheduler since they are deployed into same webApp (this is Blueprint specific only)
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).Api
     subscription: ${{ parameters.serviceConnection }}
     webAppName: $(webAppName)
     publishProfilePostfix: new
 
-# - template: deploy-web-app.yml@templates
-#   parameters:
-#     jobName: 'deploy_api'
-#     artifactName: $(artifactName)
-#     displayName: Deploy the BackEnd API
-#     environment: ${{ parameters.environment }}
-#     packageName: $(projectNamePrefix).Api
-#     subscription: ${{ parameters.serviceConnection }}
-#     webAppName: $(webAppName)
-#     publishProfilePostfix: api
-#     virtualApplication: api
-
 - job: git_tag
   displayName: Create Git tag
   dependsOn:
   - deploy_web_app
-  # - deploy_scheduler
+  - deploy_scheduler
   steps:
     - checkout: self
       displayName: 'Checkout current repo'
