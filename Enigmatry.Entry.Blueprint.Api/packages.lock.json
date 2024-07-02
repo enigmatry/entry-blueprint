@@ -1450,6 +1450,9 @@
         "resolved": "13.7.1",
         "contentHash": "X4m1PnFcJwvAj1sCDMntg/eZcX96CJLrWMiYnq41KqhFVZPuw63ZTSxIGqgdCwHWHvCAyTxheELC/VDf1HsU2A=="
       },
+      "enigmatry.entry.blueprint.app": {
+        "type": "Project"
+      },
       "enigmatry.entry.blueprint.applicationservices": {
         "type": "Project",
         "dependencies": {

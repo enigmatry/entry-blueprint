@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Entry.Blueprint.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Entry.Blueprint.Domain.Tests", "Enigmatry.Entry.Blueprint.Domain.Tests\Enigmatry.Entry.Blueprint.Domain.Tests.csproj", "{1CC1BD9F-6D40-42AA-97F2-937AF2AD0B70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Entry.Blueprint.App", "enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.csproj", "{798EB599-36B3-4855-86D6-9ADD8EE266B5}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Enigmatry.Entry.Blueprint.App", "enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj", "{798EB599-36B3-4855-86D6-9ADD8EE266B5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Entry.Blueprint.ApplicationServices", "Enigmatry.Entry.Blueprint.ApplicationServices\Enigmatry.Entry.Blueprint.ApplicationServices.csproj", "{E81F6E69-85ED-4768-9DFF-10E0D94AE0F4}"
 EndProject

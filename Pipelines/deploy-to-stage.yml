@@ -6,19 +6,10 @@ jobs:
 - template: take-web-app-offline.yml@templates
   parameters:
     jobName: 'take_web_app_offline'
-    displayName: 'Take Angular App offline'
+    displayName: 'Take Web App offline'
     environment: ${{ parameters.environment }}
     subscription: ${{ parameters.serviceConnection }}
     webAppName: $(webAppName)
-
-- template: take-web-app-offline.yml@templates
-  parameters:
-    jobName: 'take_api_offline'
-    displayName: 'Take API offline'
-    environment: ${{ parameters.environment }}
-    subscription: ${{ parameters.serviceConnection }}
-    webAppName: $(webAppName)
-    virtualApplication: 'api'
 
 - template: take-web-app-offline.yml@templates
   parameters:
@@ -34,7 +25,6 @@ jobs:
     displayName: 'Update the database'
     dependsOn:
     - take_web_app_offline
-    - take_api_offline
     - take_scheduler_offline
     environment: ${{ parameters.environment }}
     migrationConnectionString: $(migrationConnectionString)
@@ -53,33 +43,21 @@ jobs:
 
 - template: deploy-web-app.yml@templates
   parameters:
-    jobName: 'deploy_angular_app'
+    jobName: 'deploy_web_app'
     artifactName: $(artifactName)
-    displayName: Deploy the Angular web app
+    displayName: Deploy the Web app
     dependsOn:
       - deploy_scheduler #must be after scheduler since they are deployed into same webApp (this is Blueprint specific only)
-    environment: ${{ parameters.environment }}
-    packageName: $(projectNamePrefix).App
-    subscription: ${{ parameters.serviceConnection }}
-    webAppName: $(webAppName)
-    publishProfilePostfix: app
-
-- template: deploy-web-app.yml@templates
-  parameters:
-    jobName: 'deploy_api'
-    artifactName: $(artifactName)
-    displayName: Deploy the BackEnd API
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).Api
     subscription: ${{ parameters.serviceConnection }}
     webAppName: $(webAppName)
-    publishProfilePostfix: api
-    virtualApplication: api
+    publishProfilePostfix: app
 
 - job: git_tag
   displayName: Create Git tag
   dependsOn:
-  - deploy_api
+  - deploy_web_app
   - deploy_scheduler
   steps:
     - checkout: self
