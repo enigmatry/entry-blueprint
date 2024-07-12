@@ -30,7 +30,8 @@ public abstract class SchedulerFixtureBase
         var configuration = new TestConfigurationBuilder()
             .WithDbContextName(nameof(AppDbContext))
             .WithConnectionString(database.ConnectionString)
-            .BuildSchedulerConfiguration();
+            .WithSchedulerConfiguration()
+            .Build();
 
         _host = CreateHostBuilder(configuration).Build();
 
@@ -56,7 +57,7 @@ public abstract class SchedulerFixtureBase
                 container.RegisterAssemblyTypes(typeof(Program).Assembly)
                     .Where(t => t.Name.EndsWith("Job", StringComparison.InvariantCulture)).AsSelf();
 
-                container.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
+                container.RegisterModule(new EntityFrameworkModule());
             }).UseSerilog((_, _, loggerConfiguration) =>
             {
                 loggerConfiguration.ConfigureSerilogForIntegrationTests();

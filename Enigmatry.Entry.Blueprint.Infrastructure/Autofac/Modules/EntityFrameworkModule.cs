@@ -14,15 +14,8 @@ namespace Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 
 public class EntityFrameworkModule : Module
 {
-    public bool RegisterMigrationsAssembly { get; set; }
-
     protected override void Load(ContainerBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
         builder.RegisterGeneric(typeof(EntityFrameworkRepository<>))
             .As(typeof(IRepository<>))
             .InstancePerLifetimeScope();
@@ -91,7 +84,7 @@ public class EntityFrameworkModule : Module
             dbContextSettings.ConnectionResiliencyMaxRetryDelay,
             null);
 
-        if (RegisterMigrationsAssembly)
+        if (dbContextSettings.RegisterMigrationsAssembly)
         {
             sqlOptions = sqlOptions.MigrationsAssembly("Enigmatry.Entry.Blueprint.Data.Migrations");
         }

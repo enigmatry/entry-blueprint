@@ -59,12 +59,8 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
         return base.CreateHost(builder);
     }
 
-    private static void ConfigureContainer(ContainerBuilder builder)
-    {
+    private static void ConfigureContainer(ContainerBuilder builder) =>
+
         // in the api tests we need to replace current user with TestUser
         builder.RegisterModule(new TestModule(true)); // this allows certain components to be overriden
-
-        // Api does not depend on migrations assembly, tests are
-        builder.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
-    }
 }
