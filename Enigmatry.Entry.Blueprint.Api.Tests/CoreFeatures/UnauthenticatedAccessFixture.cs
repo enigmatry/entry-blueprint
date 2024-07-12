@@ -4,6 +4,7 @@ using FluentAssertions;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
+[Category("integration")]
 public class UnauthenticatedAccessFixture : IntegrationFixtureBase
 {
     public UnauthenticatedAccessFixture() => DisableUserAuthentication();
