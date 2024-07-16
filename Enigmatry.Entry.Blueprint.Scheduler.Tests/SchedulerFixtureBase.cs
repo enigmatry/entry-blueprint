@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Enigmatry.Entry.Blueprint.Scheduler.Tests;
 
@@ -36,7 +37,7 @@ public abstract class SchedulerFixtureBase
         _testScope = _host.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
         await TestDatabase.ResetAsync(_testScope.Resolve<AppDbContext>());
-        
+
         SeedTestUsers();
     }
 
@@ -56,8 +57,11 @@ public abstract class SchedulerFixtureBase
                     .Where(t => t.Name.EndsWith("Job", StringComparison.InvariantCulture)).AsSelf();
 
                 container.RegisterModule(new EntityFrameworkModule { RegisterMigrationsAssembly = true });
+            }).UseSerilog((_, _, loggerConfiguration) =>
+            {
+                loggerConfiguration.ConfigureSerilogForIntegrationTests();
             });
-    
+
     private void SeedTestUsers()
     {
         var dbContext = Resolve<DbContext>();
@@ -74,10 +78,10 @@ public abstract class SchedulerFixtureBase
     [TearDown]
     public void TearDown()
     {
-        _host?.Dispose();
-        _testScope?.Dispose();
+        _host.Dispose();
+        _testScope.Dispose();
     }
-    
+
     protected void AddAndSaveChanges(params object[] entities)
     {
         var dbContext = Resolve<DbContext>();
@@ -101,9 +105,9 @@ public abstract class SchedulerFixtureBase
         Resolve<DbContext>().DeleteByIdsAndSaveChangesAsync<T, TId>(ids);
 
     private Task DeleteByIdAsync<T, TId>(TId id) where T : class => Resolve<DbContext>().DeleteByIdAsync<T, TId>(id);
-    
+
     protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
-    
+
     protected void SetFixedUtcNow(DateTimeOffset value)
     {
         var settableTimeProvider = Resolve<SettableTimeProvider>();
