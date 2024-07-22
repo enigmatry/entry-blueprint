@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
 
@@ -7,6 +6,7 @@ public class TestConfigurationBuilder
 {
     private string _dbContextName = String.Empty;
     private string _connectionString = String.Empty;
+    private Action<ConfigurationBuilder>? _extraConfiguration;
 
     public TestConfigurationBuilder WithDbContextName(string contextName)
     {
@@ -32,6 +32,7 @@ public class TestConfigurationBuilder
             { "DbContext:UseAccessToken", "false" },
             { "DbContext:ConnectionResiliencyMaxRetryCount", "10" },
             { "DbContext:ConnectionResiliencyMaxRetryDelay", "0.00:00:30" },
+            { "DbContext:RegisterMigrationsAssembly", "true" },
             { $"ConnectionStrings:{_dbContextName}", _connectionString },
             { "App:Smtp:UsePickupDirectory", "true" },
             { "App:Smtp:PickupDirectoryLocation", GetSmtpPickupDirectoryLocation() },
@@ -45,29 +46,24 @@ public class TestConfigurationBuilder
         };
 
         configurationBuilder.AddInMemoryCollection(dict);
+        _extraConfiguration?.Invoke(configurationBuilder);
         return configurationBuilder.Build();
     }
-
-    public IConfiguration BuildSchedulerConfiguration()
+    
+    public TestConfigurationBuilder WithSchedulerConfiguration()
     {
-        EnsureParametersBeforeBuild();
-        var configurationBuilder = new ConfigurationBuilder();
-
-        var dict = new Dictionary<string, string?>
+        _extraConfiguration = configurationBuilder =>
         {
-            { "UseDeveloperExceptionPage", "true" },
-            { "DbContext:SensitiveDataLoggingEnabled", "true" },
-            { "DbContext:UseAccessToken", "false" },
-            { "DbContext:ConnectionResiliencyMaxRetryCount", "10" },
-            { "DbContext:ConnectionResiliencyMaxRetryDelay", "0.00:00:30" },
-            { $"ConnectionStrings:{_dbContextName}", _connectionString },
-            { "ApplicationInsights:ConnectionString", "" },
-            { "Scheduling:Host:quartz.scheduler.instanceName", "Enigmatry.Entry.Scheduler" },
-            { "Scheduling:Jobs:CleanOldProductsJob:Cronex", "0 0 0 * * ?" }
-        };
+            var dict = new Dictionary<string, string?>
+            {
+                { "ApplicationInsights:ConnectionString", "" },
+                { "Scheduling:Host:quartz.scheduler.instanceName", "Enigmatry.Entry.Scheduler" },
+                { "Scheduling:Jobs:CleanOldProductsJob:Cronex", "0 0 0 * * ?" }
+            };
 
-        configurationBuilder.AddInMemoryCollection(dict);
-        return configurationBuilder.Build();
+            configurationBuilder.AddInMemoryCollection(dict);
+        };
+        return this;
     }
 
     private static string GetSmtpPickupDirectoryLocation() => TestContext.CurrentContext.TestDirectory;
