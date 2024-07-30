@@ -8,8 +8,10 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\</BuildOutputFolder>
     <BuildCommand>npm run build -- --configuration production</BuildCommand>
   </PropertyGroup>
+  
   <ItemGroup>
     <None Remove="coverage\**" />
     <TypeScriptConfiguration Remove="coverage\**" />
   </ItemGroup>
+    
 </Project>

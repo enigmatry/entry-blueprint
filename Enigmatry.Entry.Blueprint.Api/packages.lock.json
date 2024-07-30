@@ -51,6 +51,12 @@
           "System.Text.Encodings.Web": "4.7.2"
         }
       },
+      "Microsoft.AspNetCore.SpaProxy": {
+        "type": "Direct",
+        "requested": "[8.0.7, )",
+        "resolved": "8.0.7",
+        "contentHash": "31Tcbla9XXgcKaso1VYPy5LBMzYSbY0i8taXYEyO6bknvak4DqKhWJ/FxDp7A9k21rT6QHyKT2P0Kl5FaeHDzA=="
+      },
       "AspNetCore.HealthChecks.System": {
         "type": "Transitive",
         "resolved": "8.0.1",
