@@ -26,9 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj" />
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure\Enigmatry.Entry.Blueprint.Infrastructure.csproj" />
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Domain\Enigmatry.Entry.Blueprint.Domain.csproj" />
+  </ItemGroup>
+
+  <!-- By default, the msbuild javascript sdk targets the .Net Framework 4.7.2, so building only works on Windows machines -->
+  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
+    <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,5 +42,6 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests" />
   </ItemGroup>
+
 
 </Project>
