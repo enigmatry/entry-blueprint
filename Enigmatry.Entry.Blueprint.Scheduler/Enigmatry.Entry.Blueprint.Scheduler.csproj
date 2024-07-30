@@ -3,6 +3,7 @@
     <IsWebJobProject>true</IsWebJobProject>
     <WebJobName>Scheduler</WebJobName>
     <WebJobType>Continuous</WebJobType>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
