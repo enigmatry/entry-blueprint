@@ -30,9 +30,9 @@
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Domain\Enigmatry.Entry.Blueprint.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
+  <!--<ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
     <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />

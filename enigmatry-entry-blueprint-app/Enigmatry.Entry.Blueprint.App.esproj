@@ -12,4 +12,8 @@
     <None Remove="coverage\**" />
     <TypeScriptConfiguration Remove="coverage\**" />
   </ItemGroup>
+    <PropertyGroup Condition=" '$(OS)' == 'Unix' " >
+        <FrameworkPathOverride>/usr/local/share/dotnet/shared/Microsoft.NETCore.App/8.0.7/mscorlib.dll</FrameworkPathOverride>
+    </PropertyGroup>
+    
 </Project>
