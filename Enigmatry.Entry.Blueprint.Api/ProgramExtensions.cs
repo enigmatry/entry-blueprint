@@ -63,6 +63,11 @@ public static class ProgramExtensions
         var configuration = app.Configuration;
         var env = app.Environment;
 
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
+
+        app.MapFallbackToFile("index.html");
+
         app.UseRouting();
 
         if (configuration.AppUseDeveloperExceptionPage())

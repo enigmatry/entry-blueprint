@@ -12,8 +12,10 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:44394/",
+      "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     },
     "Enigmatry.Entry.Blueprint.Api": {
@@ -21,7 +23,8 @@
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5441/",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     }
   }
