@@ -1422,7 +1422,8 @@
           "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
           "Enigmatry.Entry.CodeGeneration.Validation": "[17.0.0, )",
           "Enigmatry.Entry.HealthChecks": "[3.3.1, )",
-          "Microsoft.ApplicationInsights.AspNetCore": "[2.22.0, )"
+          "Microsoft.ApplicationInsights.AspNetCore": "[2.22.0, )",
+          "Microsoft.AspNetCore.SpaProxy": "[8.0.7, )"
         }
       },
       "enigmatry.entry.blueprint.app": {
@@ -1670,6 +1671,12 @@
           "Microsoft.Extensions.Logging.ApplicationInsights": "2.22.0",
           "System.Text.Encodings.Web": "4.7.2"
         }
+      },
+      "Microsoft.AspNetCore.SpaProxy": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.7, )",
+        "resolved": "8.0.7",
+        "contentHash": "31Tcbla9XXgcKaso1VYPy5LBMzYSbY0i8taXYEyO6bknvak4DqKhWJ/FxDp7A9k21rT6QHyKT2P0Kl5FaeHDzA=="
       },
       "Microsoft.EntityFrameworkCore": {
         "type": "CentralTransitive",

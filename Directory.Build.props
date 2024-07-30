@@ -4,7 +4,6 @@
         <Company>Enigmatry</Company>
         <!--Authors>TODO</Authors-->
         <!--Product>TODO</Product-->
-        <TargetFramework>net8.0</TargetFramework>
         <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
         <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
