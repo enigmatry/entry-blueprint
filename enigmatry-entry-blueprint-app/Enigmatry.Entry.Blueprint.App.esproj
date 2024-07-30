@@ -8,12 +8,16 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\</BuildOutputFolder>
     <BuildCommand>npm run build -- --configuration production</BuildCommand>
   </PropertyGroup>
+  
   <ItemGroup>
     <None Remove="coverage\**" />
     <TypeScriptConfiguration Remove="coverage\**" />
   </ItemGroup>
-    <PropertyGroup Condition=" '$(OS)' == 'Unix' " >
-        <FrameworkPathOverride>/usr/local/share/dotnet/shared/Microsoft.NETCore.App/8.0.7/mscorlib.dll</FrameworkPathOverride>
-    </PropertyGroup>
+
+  <!-- This is needed to make the build succeed on non-Windows machines (in particular for integration tests on Azure Devops) -->
+  <!-- By default, this sdk targets the .Net Framework 4.7.2 -->
+  <PropertyGroup Condition=" '$(OS)' == 'Unix' " >
+    <FrameworkPathOverride>/usr/local/share/dotnet/shared/Microsoft.NETCore.App/8.0.7/mscorlib.dll</FrameworkPathOverride>
+  </PropertyGroup>
     
 </Project>
