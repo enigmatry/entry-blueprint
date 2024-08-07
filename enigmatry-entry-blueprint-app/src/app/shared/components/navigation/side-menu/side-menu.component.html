@@ -1,18 +1,23 @@
 <mat-toolbar class="header">Menu</mat-toolbar>
 <mat-nav-list class="navigation-list" role="navigation" *ngIf="currentUser">
   <div *ngFor="let menuItem of menuItems">
-    <mat-list-item *ngIf="show(menuItem)" class="item" [routerLink]="[menuItem.url]"
+    <a mat-list-item *ngIf="show(menuItem)" class="item" [routerLink]="[menuItem.url]"
       routerLinkActive="router-link-active">
       <mat-icon class="icon" aria-hidden="false" [ariaLabel]="menuItem.aria" [fontIcon]="menuItem.icon"></mat-icon>
       <span class="description">{{ menuItem.description }}</span>
-    </mat-list-item>
+    </a>
   </div>
-  <mat-list-item class="item user-item" (click)="toggleUserActions($event)">
-    <mat-icon class="icon" aria-hidden="false" aria-label="Toggle icon"
-      [fontIcon]="showUserActions ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"></mat-icon>
-    <span class="description">{{ currentUser!.fullName }}</span>
-  </mat-list-item>
-  <mat-list-item class="item" *ngIf="showUserActions" (click)='onLogout()'>
-    <span class="description">Logout</span>
-  </mat-list-item>
+  <div class="user-actions">
+    <button mat-list-item class="item user-item" (click)="toggleUserActions($event)"
+      [attr.aria-expanded]="showUserActions" aria-controls="user-actions-menu" aria-haspopup="true">
+      <span class="description">{{ currentUser!.fullName }}</span>
+      <mat-icon class="icon" aria-hidden="false" aria-label="Toggle icon"
+        [fontIcon]="showUserActions ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"></mat-icon>
+    </button>
+    <div *ngIf="showUserActions" id="user-actions-menu">
+      <button mat-list-item class="item" (click)='onLogout()'>
+        <span class="description">Logout</span>
+      </button>
+    </div>
+  </div>
 </mat-nav-list>
