@@ -9,8 +9,13 @@
 		color: vars.$primary;
 	}
 
-	.user-item {
+	.user-actions {
 		border-top: 2px vars.$primary solid;
+
+		.item {
+			border: none;
+			text-align: left;
+		}
 	}
 }
 
