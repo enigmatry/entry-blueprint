@@ -8,14 +8,14 @@
     </a>
   </div>
   <div class="user-actions">
-    <button mat-list-item class="item user-item" (click)="toggleUserActions($event)"
+    <button mat-list-item class="item user-item" type="button" (click)="toggleUserActions($event)"
       [attr.aria-expanded]="showUserActions" aria-controls="user-actions-menu" aria-haspopup="true">
       <span class="description">{{ currentUser!.fullName }}</span>
       <mat-icon class="icon" aria-hidden="false" aria-label="Toggle icon"
         [fontIcon]="showUserActions ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"></mat-icon>
     </button>
     <div *ngIf="showUserActions" id="user-actions-menu">
-      <button mat-list-item class="item" (click)='onLogout()'>
+      <button mat-list-item class="item" type="button" (click)='onLogout()'>
         <span class="description">Logout</span>
       </button>
     </div>
