@@ -14,7 +14,7 @@
         <span class="description">{{ menuItem.description }}</span>
       </button>
     </div>
-    <button mat-button data-testId="username-button" color="primary" class="user-item" [matMenuTriggerFor]="login_menu">
+    <button mat-button data-testId="username-button" type="button" color="primary" class="user-item" [matMenuTriggerFor]="login_menu">
       <span>{{ currentUser!.fullName }}</span>
       <mat-icon class="icon" aria-hidden="false" aria-label="Toggle icon" fontIcon="keyboard_arrow_down"></mat-icon>
     </button>
