@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
+using NSwag.Generation.AspNetCore;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Security;
 
@@ -14,7 +15,11 @@ public static class SwaggerAuthenticationStartupExtensions
         app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!, path: "/swagger");
     }
 
-    public static void AppAddSwaggerWithAzureAdAuth(this IServiceCollection services, IConfiguration configuration, string appTitle)
+    public static void AppAddSwaggerWithAzureAdAuth(this IServiceCollection services,
+        IConfiguration configuration,
+        string appTitle,
+        string appVersion = "v1",
+        Action<AspNetCoreOpenApiDocumentGeneratorSettings>? configureSettings = null)
     {
         var aadOptions = configuration.GetSection(AuthenticationStartupExtensions.AzureAdSection).Get<MicrosoftIdentityOptions>()!;
         var authorityUrl = $"{aadOptions.Instance}/{aadOptions.TenantId ?? aadOptions.Domain}";
@@ -30,7 +35,9 @@ public static class SwaggerAuthenticationStartupExtensions
             appTitle,
             $"{authorityUrl}/oauth2/v2.0/authorize",
             $"{authorityUrl}/oauth2/v2.0/token",
-            scopesDictionary
+            scopesDictionary,
+            appVersion,
+            configureSettings
         );
     }
 }

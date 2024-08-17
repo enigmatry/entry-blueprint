@@ -5,6 +5,7 @@
   
   <ItemGroup>
     <PackageReference Include="Enigmatry.Entry.Core" />
+    <PackageReference Include="Enigmatry.Entry.SmartEnums" />
   </ItemGroup>
 
 </Project>

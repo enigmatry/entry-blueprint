@@ -13,6 +13,9 @@
     <PackageReference Include="Enigmatry.Entry.Infrastructure" />
     <PackageReference Include="Enigmatry.Entry.EntityFramework" />
     <PackageReference Include="Enigmatry.Entry.MediatR" />
+    <PackageReference Include="Enigmatry.Entry.SmartEnums.EntityFramework" />
+    <PackageReference Include="Enigmatry.Entry.SmartEnums.Swagger" />
+    <PackageReference Include="Enigmatry.Entry.SmartEnums.SystemTextJson" />
     <PackageReference Include="Enigmatry.Entry.Swagger" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />

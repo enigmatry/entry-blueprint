@@ -49,7 +49,7 @@ public class TestConfigurationBuilder
         _extraConfiguration?.Invoke(configurationBuilder);
         return configurationBuilder.Build();
     }
-    
+
     public TestConfigurationBuilder WithSchedulerConfiguration()
     {
         _extraConfiguration = configurationBuilder =>
