@@ -1,5 +1,7 @@
-﻿using System.Reflection;
-using Autofac;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Enigmatry.Entry.AspNetCore.Authorization;
+using Enigmatry.Entry.AspNetCore.Exceptions;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Logging;
@@ -7,12 +9,10 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Api.Security;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
-using Enigmatry.Entry.AspNetCore.Authorization;
-using Enigmatry.Entry.AspNetCore.Exceptions;
-using Enigmatry.Entry.HealthChecks.Extensions;
-using Microsoft.IdentityModel.Logging;
-using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
+using Enigmatry.Entry.HealthChecks.Extensions;
+using Enigmatry.Entry.SmartEnums.Swagger;
+using Microsoft.IdentityModel.Logging;
 using Serilog;
 
 namespace Enigmatry.Entry.Blueprint.Api;
@@ -36,7 +36,10 @@ public static class ProgramExtensions
         services.AppAddAuthentication(configuration);
         services.AddEntryAuthorization<PermissionId>();
 
-        services.AppAddSwaggerWithAzureAdAuth(configuration, "Enigmatry Blueprint Api");
+        services.AppAddSwaggerWithAzureAdAuth(configuration, "Enigmatry Blueprint Api", "v1", configureSettings =>
+        {
+            configureSettings.EntryConfigureSmartEnums();
+        });
         services.AppAddMvc();
     }
 
@@ -52,7 +55,7 @@ public static class ProgramExtensions
         hostBuilder.ConfigureContainer<ContainerBuilder>((_, containerBuilder) =>
         {
             containerBuilder.AppRegisterModules();
-            
+
             containerBuilder.AppRegisterClaimsPrincipalProvider();
             containerBuilder.AppRegisterCurrentUserProvider<CurrentUserProvider>();
         });

@@ -1,7 +1,9 @@
-﻿
+﻿using System.Reflection;
+using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
+using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Blueprint.Infrastructure.Tests;
 using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
@@ -40,6 +42,8 @@ public class IntegrationFixtureBase
         await TestDatabase.ResetAsync(dbContext);
 
         SeedTestUsers();
+
+        AddApiJsonConverters();
     }
 
     protected void DisableUserAuthentication() => _isUserAuthenticated = false;
@@ -71,6 +75,18 @@ public class IntegrationFixtureBase
         dbContext.AddRange(entities);
     }
 
+    private static void AddApiJsonConverters()
+    {
+        var converters = HttpSerializationOptions.Options.Converters;
+
+        // Guard if multiple tests are run in one context.
+        if (converters.Count > 0)
+        {
+            return;
+        }
+        converters.AppRegisterJsonConverters();
+    }
+
     protected Task SaveChangesAsync() => Resolve<DbContext>().SaveChangesAsync();
 
     protected IQueryable<T> QueryDb<T>() where T : class => Resolve<DbContext>().Set<T>();
@@ -81,9 +97,9 @@ public class IntegrationFixtureBase
         Resolve<DbContext>().DeleteByIdsAndSaveChangesAsync<T, TId>(ids);
 
     private Task DeleteByIdAsync<T, TId>(TId id) where T : class => Resolve<DbContext>().DeleteByIdAsync<T, TId>(id);
-    
+
     protected T Resolve<T>() where T : notnull => _testScope.Resolve<T>();
-    
+
     protected void SetFixedUtcNow(DateTimeOffset value)
     {
         var settableTimeProvider = Resolve<SettableTimeProvider>();

@@ -1,3 +1,4 @@
+
 using System.Globalization;
 using Serilog;
 using Serilog.Events;
