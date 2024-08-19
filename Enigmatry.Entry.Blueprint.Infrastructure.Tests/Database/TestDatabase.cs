@@ -1,15 +1,16 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Authorization;
+using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
 using Testcontainers.MsSql;
 
-namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
+namespace Enigmatry.Entry.Blueprint.Infrastructure.Tests.Database;
 
 internal class TestDatabase
 {
     public string ConnectionString { get; }
     private static MsSqlContainer? _container;
+    private static readonly IEnumerable<string> TablesToIgnore = ["__EFMigrationsHistory", nameof(Role), nameof(RolePermission), nameof(Permission), nameof(UserStatus)];
 
     public TestDatabase()
     {
@@ -39,7 +40,7 @@ internal class TestDatabase
                 _container!.StartAsync().Wait();
                 ConnectionString = _container.GetConnectionString();
                 WriteLine($"Docker SQL connection string: {ConnectionString}");
-}
+            }
             catch (Exception e)
             {
                 WriteLine($"Failed to start docker container: {e.Message}");
@@ -48,9 +49,7 @@ internal class TestDatabase
         }
     }
 
-    public static async Task ResetAsync(DbContext dbContext) =>
-        await DatabaseInitializer.RecreateDatabaseAsync(dbContext,
-            new[] { "__EFMigrationsHistory", nameof(Role), nameof(RolePermission), nameof(Permission) });
+    public static Task ResetAsync(DbContext dbContext) => DatabaseInitializer.RecreateDatabaseAsync(dbContext, TablesToIgnore);
 
     private static void WriteLine(string value) => TestContext.WriteLine(value);
 }

@@ -58,14 +58,26 @@
         "resolved": "4.5.0",
         "contentHash": "s8JpqTe9bI2f49Pfr3dFRfoVSuFQyraTj68c3XXjIS/MRGvvkLnrg6RLqnTjdShX+AdFUCCU/4Xex58AdUfs6A=="
       },
+      "Verify": {
+        "type": "Direct",
+        "requested": "[26.2.0, )",
+        "resolved": "26.2.0",
+        "contentHash": "CMFZ2/DzMxGhpiuYiI/lAZ8QetkX/4M7s4OWw4uIk5gJuO3CSmDhKYIgkecDDSSvP9v+HZvkpaUfPsyHjHNZgw==",
+        "dependencies": {
+          "Argon": "0.21.0",
+          "DiffEngine": "15.5.0",
+          "SimpleInfoName": "2.3.0",
+          "System.IO.Hashing": "8.0.0"
+        }
+      },
       "Verify.NUnit": {
         "type": "Direct",
-        "requested": "[24.2.0, )",
-        "resolved": "24.2.0",
-        "contentHash": "Dgi2i0Dzzv0t+KoaLZNx995koRlw9XVRwZiM5agtcn2cJoBJRsEKd5kMj9y4hml+qWcFshfHqSiwtS735z4jlQ==",
+        "requested": "[26.2.0, )",
+        "resolved": "26.2.0",
+        "contentHash": "zLyHSE+j2OCqeM9cy/GproAIVTVCHKvJOulQi4YgpXRlJX7M8H8Blejr3dshezNpQ5BR5jEVord1zm5p5zpHbw==",
         "dependencies": {
           "NUnit": "4.1.0",
-          "Verify": "24.2.0"
+          "Verify": "26.2.0"
         }
       },
       "Ardalis.SmartEnum": {
@@ -1296,17 +1308,6 @@
         "contentHash": "IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
         "dependencies": {
           "System.Drawing.Common": "6.0.0"
-        }
-      },
-      "Verify": {
-        "type": "Transitive",
-        "resolved": "26.2.0",
-        "contentHash": "CMFZ2/DzMxGhpiuYiI/lAZ8QetkX/4M7s4OWw4uIk5gJuO3CSmDhKYIgkecDDSSvP9v+HZvkpaUfPsyHjHNZgw==",
-        "dependencies": {
-          "Argon": "0.21.0",
-          "DiffEngine": "15.5.0",
-          "SimpleInfoName": "2.3.0",
-          "System.IO.Hashing": "8.0.0"
         }
       },
       "YamlDotNet": {

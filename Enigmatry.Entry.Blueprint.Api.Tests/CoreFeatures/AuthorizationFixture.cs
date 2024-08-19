@@ -6,7 +6,7 @@ using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using System.Net.Http.Json;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
-using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -22,10 +22,7 @@ public class AuthorizationFixture : IntegrationFixtureBase
         _testRole.SetPermissions(QueryDb<Permission>().Where(p => p.Id == PermissionId.UsersRead));
 
         var currentUser = QueryCurrentUser();
-        currentUser.Update(new CreateOrUpdateUser.Command
-        {
-            RoleId = _testRole.Id
-        });
+        currentUser.UpdateRole(_testRole);
         AddAndSaveChanges(_testRole);
     }
 
@@ -41,9 +38,11 @@ public class AuthorizationFixture : IntegrationFixtureBase
     {
         var command = new CreateOrUpdateUser.Command
         {
+            Id = null,
             FullName = "some user",
             EmailAddress = "someuser@test.com",
-            RoleId = Role.SystemAdminRoleId
+            RoleId = Role.SystemAdminRoleId,
+            StatusId = UserStatusId.Active
         };
         var response = await Client.PostAsJsonAsync("users", command, HttpSerializationOptions.Options);
         response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
@@ -60,10 +59,8 @@ public class AuthorizationFixture : IntegrationFixtureBase
     public async Task TearDown()
     {
         var currentUser = QueryCurrentUser();
-        currentUser.Update(new CreateOrUpdateUser.Command
-        {
-            RoleId = Role.SystemAdminRoleId
-        });
+        var role = QueryDb<Role>().First(r => r.Id == Role.SystemAdminRoleId);
+        currentUser.UpdateRole(role);
 
         if (_testRole != null)
         {

@@ -65,6 +65,7 @@
     <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageVersion Include="Testcontainers.MsSql" Version="3.8.0" />
-    <PackageVersion Include="Verify.NUnit" Version="24.2.0" />
+    <PackageVersion Include="Verify" Version="26.2.0" />
+    <PackageVersion Include="Verify.NUnit" Version="26.2.0" />
   </ItemGroup>
 </Project>

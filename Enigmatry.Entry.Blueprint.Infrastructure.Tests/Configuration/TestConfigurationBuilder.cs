@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
+namespace Enigmatry.Entry.Blueprint.Infrastructure.Tests.Configuration;
 
 public class TestConfigurationBuilder
 {

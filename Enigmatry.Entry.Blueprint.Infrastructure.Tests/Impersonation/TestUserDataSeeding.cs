@@ -1,7 +1,7 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+namespace Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
 
 public class TestUserDataSeeding(DbContext context)
 {
@@ -11,7 +11,7 @@ public class TestUserDataSeeding(DbContext context)
         RecreateUser(TestUserData.CreateSystemUser());
         context.SaveChanges();
     }
-    
+
     private void RecreateUser(User user)
     {
         var usersSet = context.Set<User>();

@@ -4,16 +4,15 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
+namespace Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
 
-public class TestUserAuthenticationHandler : AuthenticationHandler<TestAuthenticationOptions>
+public class TestUserAuthenticationHandler(
+    IOptionsMonitor<TestAuthenticationOptions> options,
+    ILoggerFactory logger,
+    UrlEncoder encoder)
+    : AuthenticationHandler<TestAuthenticationOptions>(options, logger, encoder)
 {
     public const string AuthenticationScheme = "TestUserAuth";
-
-    public TestUserAuthenticationHandler(IOptionsMonitor<TestAuthenticationOptions> options, ILoggerFactory logger,
-        UrlEncoder encoder) : base(options, logger, encoder)
-    {
-    }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {

@@ -1,16 +1,16 @@
-﻿using Enigmatry.Entry.Blueprint.Api.Features.Users;
+﻿using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Entry.Blueprint.Api.Features.Users;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Entry.Core.Paging;
-using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Tests.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
-using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Core.Paging;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Features;
 
 [Category("integration")]
+
 // Basic example of an integration test.
 // For every public api method add appropriate test.
 // Integration tests should be used for happy flows.
@@ -26,8 +26,9 @@ public class UsersControllerFixture : IntegrationFixtureBase
         _user = new UserBuilder()
             .WithEmailAddress("john_doe@john.doe")
             .WithFullName("John Doe")
-            .WithRoleId(Role.SystemAdminRoleId);
-        
+            .WithRoleId(Role.SystemAdminRoleId)
+            .WithStatusId(UserStatusId.Active);
+
         AddAndSaveChanges(_user);
     }
 
@@ -52,7 +53,14 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestCreate()
     {
-        var command = new CreateOrUpdateUser.Command { FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command
+        {
+            Id = null,
+            FullName = "some user",
+            EmailAddress = "someuser@test.com",
+            RoleId = Role.SystemAdminRoleId,
+            StatusId = UserStatusId.Active
+        };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
@@ -62,7 +70,14 @@ public class UsersControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestUpdate()
     {
-        var command = new CreateOrUpdateUser.Command { Id = _user.Id, FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command
+        {
+            Id = _user.Id,
+            FullName = "some user",
+            EmailAddress = "someuser@test.com",
+            RoleId = Role.SystemAdminRoleId,
+            StatusId = UserStatusId.Inactive
+        };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 

@@ -1,4 +1,4 @@
-﻿namespace Enigmatry.Entry.Blueprint.Core;
+﻿namespace Enigmatry.Entry.Blueprint.Core.Entities;
 
 public interface IEntityWithCreatedUpdated
 {

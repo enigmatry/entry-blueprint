@@ -4,5 +4,13 @@
   FullName: some user,
   RoleId: Guid_2,
   CreatedOn: DateTimeOffset_1,
-  UpdatedOn: DateTimeOffset_1
+  UpdatedOn: DateTimeOffset_1,
+  Status: {
+    Id: {
+      Name: Inactive,
+      Value: 2
+    },
+    Name: Inactive,
+    Description: Inactive Status Description
+  }
 }

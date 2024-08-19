@@ -5,6 +5,7 @@ using Enigmatry.Entry.Core.Entities;
 using Enigmatry.Entry.Core.EntityFramework;
 using JetBrains.Annotations;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Entry.Blueprint.Api.Features.Users;
 
@@ -26,35 +27,39 @@ public static class GetUserDetails
         public Guid RoleId { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
         public DateTimeOffset UpdatedOn { get; set; }
+
+        public UserStatusResponse Status { get; set; } = new();
+    }
+
+    public class UserStatusResponse
+    {
+        public UserStatusId Id { get; set; } = UserStatusId.Active;
+        public string Name { get; set; } = String.Empty;
+        public string Description { get; set; } = String.Empty;
     }
 
     [UsedImplicitly]
     public class MappingProfile : Profile
     {
-        public MappingProfile() => CreateMap<User, Response>();
+        public MappingProfile()
+        {
+            CreateMap<User, Response>();
+            CreateMap<UserStatus, UserStatusResponse>();
+        }
     }
 
     [UsedImplicitly]
-    public class RequestHandler : IRequestHandler<Request, Response>
+    public class RequestHandler(IRepository<User> repository, IMapper mapper) : IRequestHandler<Request, Response>
     {
-        private readonly IRepository<User> _repository;
-        private readonly IMapper _mapper;
-
-        public RequestHandler(IRepository<User> repository, IMapper mapper)
-        {
-            _repository = repository;
-            _mapper = mapper;
-        }
-
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            var response = await _repository.QueryAll()
+            var response = await repository.QueryAll()
                 .BuildInclude()
                 .QueryById(request.Id)
-                .SingleOrDefaultMappedAsync<User, Response>(_mapper, cancellationToken: cancellationToken);
+                .SingleOrDefaultMappedAsync<User, Response>(mapper, cancellationToken: cancellationToken);
             return response;
         }
     }
 
-    private static IQueryable<User> BuildInclude(this IQueryable<User> query) => query;
+    private static IQueryable<User> BuildInclude(this IQueryable<User> query) => query.Include(x => x.Status);
 }

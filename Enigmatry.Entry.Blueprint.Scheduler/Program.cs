@@ -1,9 +1,9 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
-using Enigmatry.Entry.Blueprint.Scheduler;
+using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
+using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.Scheduler;
 using Serilog;
 using Serilog.Extensions.Logging;
@@ -34,6 +34,6 @@ internal class Program
             .ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
                 containerBuilder.AppRegisterModules();
-                containerBuilder.AppRegisterCurrentUserProvider<SystemUserProvider>();
+                containerBuilder.RegisterModule<IdentityModule<SystemUserProvider>>();
             });
 }

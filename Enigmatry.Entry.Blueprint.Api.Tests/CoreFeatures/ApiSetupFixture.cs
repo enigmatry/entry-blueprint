@@ -1,14 +1,13 @@
 ﻿using System.Net.Http.Json;
+using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.Blueprint.Api.Features.Users;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
-using Enigmatry.Entry.Core.Paging;
-using FluentAssertions;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Tests.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
-using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Core.Paging;
+using FluentAssertions;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -25,7 +24,8 @@ public class ApiSetupFixture : IntegrationFixtureBase
         _user = new UserBuilder()
             .WithEmailAddress("john_doe@john.doe")
             .WithFullName("John Doe")
-            .WithRoleId(Role.SystemAdminRoleId);
+            .WithRoleId(Role.SystemAdminRoleId)
+            .WithStatusId(UserStatusId.Active);
 
         AddAndSaveChanges(_user);
     }
@@ -59,7 +59,14 @@ public class ApiSetupFixture : IntegrationFixtureBase
     [Test]
     public async Task TestCreate()
     {
-        var command = new CreateOrUpdateUser.Command { FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command
+        {
+            Id = null,
+            FullName = "some user",
+            EmailAddress = "someuser@test.com",
+            RoleId = Role.SystemAdminRoleId,
+            StatusId = UserStatusId.Inactive
+        };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
@@ -69,7 +76,14 @@ public class ApiSetupFixture : IntegrationFixtureBase
     [Test]
     public async Task TestUpdate()
     {
-        var command = new CreateOrUpdateUser.Command { Id = _user.Id, FullName = "some user", EmailAddress = "someuser@test.com", RoleId = Role.SystemAdminRoleId };
+        var command = new CreateOrUpdateUser.Command
+        {
+            Id = _user.Id,
+            FullName = "some user",
+            EmailAddress = "someuser@test.com",
+            RoleId = Role.SystemAdminRoleId,
+            StatusId = UserStatusId.Inactive
+        };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
 
@@ -85,8 +99,15 @@ public class ApiSetupFixture : IntegrationFixtureBase
         string validationField,
         string validationErrorMessage)
     {
-        var command = new CreateOrUpdateUser.Command { FullName = name, EmailAddress = emailAddress };
-        var response = await Client.PostAsJsonAsync("users", command);
+        var command = new CreateOrUpdateUser.Command
+        {
+            Id = null,
+            FullName = name,
+            EmailAddress = emailAddress,
+            RoleId = Role.SystemAdminRoleId,
+            StatusId = UserStatusId.Inactive
+        };
+        var response = await Client.PostAsJsonAsync("users", command, HttpSerializationOptions.Options);
 
         response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
     }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Data.Configurations;
 
 [UsedImplicitly]
-public class UserEntityConfiguration : IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
@@ -16,6 +16,8 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.CreatedOn).IsRequired();
 
         builder.HasIndex(u => u.EmailAddress).IsUnique();
+        
+        builder.HasLookupTableRelation(x => x.Status, x => x.StatusId);
 
         builder.HasOne(u => u.Role).WithMany(x => x.Users).OnDelete(DeleteBehavior.NoAction);
         builder.HasCreatedByAndUpdatedBy();

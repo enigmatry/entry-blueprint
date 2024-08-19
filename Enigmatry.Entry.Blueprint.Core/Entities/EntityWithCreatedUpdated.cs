@@ -1,7 +1,6 @@
-﻿using Enigmatry.Entry.Blueprint.Core;
-using Enigmatry.Entry.Core.Entities;
+﻿using Enigmatry.Entry.Core.Entities;
 
-namespace Enigmatry.Entry.Blueprint.Domain;
+namespace Enigmatry.Entry.Blueprint.Core.Entities;
 
 public abstract class EntityWithCreatedUpdated : EntityWithGuidId, IEntityWithCreatedUpdated
 {

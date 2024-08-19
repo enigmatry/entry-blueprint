@@ -1,11 +1,10 @@
 ﻿using System.Globalization;
 using Autofac;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Autofac;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Impersonation;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Tests;
-using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Autofac;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -59,8 +58,9 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
         return base.CreateHost(builder);
     }
 
-    private static void ConfigureContainer(ContainerBuilder builder) =>
-
-        // in the api tests we need to replace current user with TestUser
-        builder.RegisterModule(new TestModule(true)); // this allows certain components to be overriden
+    private static void ConfigureContainer(ContainerBuilder builder)
+    {
+        builder.RegisterModule<IdentityModule<TestUserProvider>>();
+        builder.RegisterModule<TestModule>(); // this allows certain components to be overriden
+    }
 }

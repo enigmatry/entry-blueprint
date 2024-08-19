@@ -1,4 +1,5 @@
-﻿using Enigmatry.Entry.Blueprint.Domain.Products.Commands;
+﻿using Enigmatry.Entry.Blueprint.Core.Entities;
+using Enigmatry.Entry.Blueprint.Domain.Products.Commands;
 using Enigmatry.Entry.Blueprint.Domain.Products.DomainEvents;
 
 namespace Enigmatry.Entry.Blueprint.Domain.Products;

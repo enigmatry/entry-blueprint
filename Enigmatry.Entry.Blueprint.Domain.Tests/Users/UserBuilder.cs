@@ -10,6 +10,8 @@ public class UserBuilder
     private Guid _roleId = Guid.Empty;
     private string _emailAddress = String.Empty;
     private Guid _id = SequentialGuidGenerator.Generate();
+    
+    private UserStatusId _statusId = UserStatusId.Active;
 
     public UserBuilder WithEmailAddress(string value)
     {
@@ -29,9 +31,15 @@ public class UserBuilder
         return this;
     }
 
-    public UserBuilder WithId(Guid id)
+    public UserBuilder WithId(Guid value)
     {
-        _id = id;
+        _id = value;
+        return this;
+    }
+    
+    public UserBuilder WithStatusId(UserStatusId value)
+    {
+        _statusId = value;
         return this;
     }
 
@@ -41,12 +49,14 @@ public class UserBuilder
 
     public User Build()
     {
-        User result = User.Create(new CreateOrUpdateUser.Command
+        var result = User.Create(new CreateOrUpdateUser.Command
         {
+            Id = _id,
             FullName = _fullName,
             EmailAddress = _emailAddress,
-            RoleId = _roleId
-        }).WithId(_id);
+            RoleId = _roleId,
+            StatusId = _statusId
+        });
 
         return result;
     }

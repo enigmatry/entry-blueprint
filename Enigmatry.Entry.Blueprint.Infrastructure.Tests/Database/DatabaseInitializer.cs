@@ -2,11 +2,10 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using NUnit.Framework;
 using Respawn;
 using Respawn.Graph;
 
-namespace Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
+namespace Enigmatry.Entry.Blueprint.Infrastructure.Tests.Database;
 
 internal static class DatabaseInitializer
 {

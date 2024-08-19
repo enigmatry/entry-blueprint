@@ -10,14 +10,14 @@
     Id: Guid_2,
     EmailAddress: N/A,
     FullName: System User,
-    CreatedOn: DateTimeOffset_2,
-    UpdatedOn: DateTimeOffset_2
+    CreatedOn: DateTimeOffset_1,
+    UpdatedOn: DateTimeOffset_1
   },
   {
     Id: Guid_3,
     EmailAddress: test_user@xyz.com,
     FullName: INTEGRATION_TEST,
-    CreatedOn: DateTimeOffset_2,
-    UpdatedOn: DateTimeOffset_2
+    CreatedOn: DateTimeOffset_1,
+    UpdatedOn: DateTimeOffset_1
   }
 ]
