@@ -34,7 +34,7 @@ public class CleanOldProductsJobFixture : SchedulerFixtureBase
         await ExecuteJob<CleanOldProductsJob, CleanOldProductsJobRequest>(aRequest);
 
         var updatedProducts = _repository.QueryAllSkipCache()
-            .QueryByIds(new[] { _aProductThatWillBeDeactivated.Id, _aProductThatWillNotBeDeactivated.Id });
+            .QueryByIds([_aProductThatWillBeDeactivated.Id, _aProductThatWillNotBeDeactivated.Id]);
 
         // we want to explicitly see the values in this test
         await Verify(updatedProducts)

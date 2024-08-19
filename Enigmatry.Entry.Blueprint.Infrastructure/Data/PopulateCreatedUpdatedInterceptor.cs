@@ -1,4 +1,4 @@
-﻿using Enigmatry.Entry.Blueprint.Core;
+﻿using Enigmatry.Entry.Blueprint.Core.Entities;
 using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Core;
 using Enigmatry.Entry.Core.Entities;
@@ -36,20 +36,14 @@ public class PopulateCreatedUpdatedInterceptor : SaveChangesInterceptor
 
     private void PopulateCreatedUpdated(DbContext dbContext)
     {
-        var currentUser = _currentUserProvider().User;
-        if (currentUser == null)
-        {
-            // TODO: Discuss throwing an exception here; Currently seeding data in the integration tests would fail because of it
-            return;
-        }
+        var currentUserProvider = _currentUserProvider();
+        var userId = currentUserProvider.UserId ?? throw new InvalidOperationException("Current userId is not set");
 
         var changedEntities = dbContext.ChangeTracker
             .Entries<Entity>()
             .Where(entry => entry.State is EntityState.Added or EntityState.Modified &&
                             entry.Entity is IEntityWithCreatedUpdated)
             .Select(entry => (entry.State, Entity: (IEntityWithCreatedUpdated)entry.Entity)).ToList();
-
-        var userId = currentUser.Id;
 
         var currentDateTime = _timeProvider.FixedUtcNow;
 

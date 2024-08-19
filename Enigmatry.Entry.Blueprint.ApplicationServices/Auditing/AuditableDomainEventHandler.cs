@@ -7,21 +7,15 @@ using Microsoft.Extensions.Logging;
 namespace Enigmatry.Entry.Blueprint.ApplicationServices.Auditing;
 
 [UsedImplicitly]
-public class AuditableDomainEventNotificationHandler<T> : INotificationHandler<T> where T : AuditableDomainEvent
+public class AuditableDomainEventNotificationHandler<T>(
+    ILogger<AuditableDomainEventNotificationHandler<T>> log)
+    : INotificationHandler<T>
+    where T : AuditableDomainEvent
 {
-    private readonly ILogger<AuditableDomainEventNotificationHandler<T>> _log;
-    private readonly ICurrentUserProvider _currentUserProvider;
-
-    public AuditableDomainEventNotificationHandler(ILogger<AuditableDomainEventNotificationHandler<T>> log, ICurrentUserProvider currentUserProvider)
-    {
-        _log = log;
-        _currentUserProvider = currentUserProvider;
-    }
-
     public Task Handle(T notification, CancellationToken cancellationToken)
     {
         // here you can enter record in Audit table, 
-        _log.LogDebug("Event name: {EventName}, Payload: {@Payload}, initiated by: {EmailAddress}", notification.EventName, notification.AuditPayload, _currentUserProvider.User?.EmailAddress);
+        log.LogDebug("Event name: {EventName}, Payload: {@Payload}", notification.EventName, notification.AuditPayload);
         return Task.CompletedTask;
     }
 }

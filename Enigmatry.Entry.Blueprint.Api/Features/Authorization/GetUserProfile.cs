@@ -2,8 +2,12 @@
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Domain.Users;
+using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Entities;
+using Enigmatry.Entry.Core.EntityFramework;
 using JetBrains.Annotations;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Entry.Blueprint.Api.Features.Authorization;
 
@@ -19,7 +23,7 @@ public static class GetUserProfile
         public Guid Id { get; init; }
         public string FullName { get; init; } = String.Empty;
         public string EmailAddress { get; init; } = String.Empty;
-        public IEnumerable<PermissionId> Permissions { get; init; } = Enumerable.Empty<PermissionId>();
+        public IEnumerable<PermissionId> Permissions { get; init; } = [];
     }
 
     [UsedImplicitly]
@@ -33,18 +37,17 @@ public static class GetUserProfile
     }
 
     [UsedImplicitly]
-    public class RequestHandler : IRequestHandler<Request, Response>
+    public class RequestHandler(IMapper mapper, ICurrentUserProvider currentUserProvider, IRepository<User> repository)
+        : IRequestHandler<Request, Response>
     {
-        private readonly IMapper _mapper;
-        private readonly ICurrentUserProvider _currentUserProvider;
-
-        public RequestHandler(IMapper mapper, ICurrentUserProvider currentUserProvider)
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            _mapper = mapper;
-            _currentUserProvider = currentUserProvider;
+            var user = await repository.QueryAll().QueryById(currentUserProvider.UserId!.Value)
+                .Include(u => u.Role).ThenInclude(r => r.Permissions)
+                .Include(u => u.Status)
+                .SingleOrNotFoundAsync(cancellationToken);
+            var response = mapper.Map<Response>(user);
+            return response;
         }
-
-        public Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => Task.FromResult(_mapper.Map<Response>(_currentUserProvider.User));
     }
 }

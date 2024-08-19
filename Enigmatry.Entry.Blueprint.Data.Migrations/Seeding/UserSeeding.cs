@@ -20,6 +20,7 @@ internal class UserSeeding : ISeeding
             CreatedOn = asOf,
             UpdatedById = User.SystemUserId,
             UpdatedOn = asOf,
+            StatusId = UserStatusId.Active
         };
         modelBuilder.Entity<User>().HasData(user);
     }

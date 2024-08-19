@@ -1,12 +1,12 @@
 ﻿using Autofac;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Autofac;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Blueprint.Infrastructure.Tests;
-using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Autofac;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Configuration;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Database;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
 using Enigmatry.Entry.Scheduler;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -52,8 +52,7 @@ public abstract class SchedulerFixtureBase
             .ConfigureContainer<ContainerBuilder>(container =>
             {
                 // in the schedule jobs we do not need to replace current user, everything is executed under system user
-                container.RegisterModule(new TestModule(false));
-
+                container.RegisterModule<TestModule>();
                 container.RegisterAssemblyTypes(typeof(Program).Assembly)
                     .Where(t => t.Name.EndsWith("Job", StringComparison.InvariantCulture)).AsSelf();
 

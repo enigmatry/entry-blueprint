@@ -4,7 +4,7 @@ using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
 using Enigmatry.Entry.Core.Entities;
 
-namespace Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+namespace Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
 
 public static class TestUserData
 {
@@ -13,16 +13,22 @@ public static class TestUserData
     private static readonly DateTimeOffset CreatedDate = new(2024, 1, 9, 0, 0, 0, TimeSpan.Zero);
 
     public static ClaimsPrincipal CreateClaimsPrincipal() =>
-        new(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Upn, TestEmailAddress) }, "TestAuth"));
+        new(new ClaimsIdentity([new Claim(ClaimTypes.Upn, TestEmailAddress)], "TestAuth"));
 
     public static User CreateTestUser() => CreateUser(TestUserId, TestEmailAddress, "INTEGRATION_TEST", Role.SystemAdminRoleId);
+
     public static User CreateSystemUser() => CreateUser(User.SystemUserId, "N/A", "System User", Role.SystemAdminRoleId);
 
     private static User CreateUser(Guid id, string email, string fullName, Guid roleId)
     {
-        var user = User.Create(new CreateOrUpdateUser.Command { RoleId = roleId, EmailAddress = email, FullName = fullName }).WithId(id);
-        user.SetCreated(CreatedDate, id);
-        user.SetUpdated(CreatedDate, id);
+        var user = User.Create(new CreateOrUpdateUser.Command
+        {
+            Id = null,
+            RoleId = roleId,
+            EmailAddress = email,
+            FullName = fullName,
+            StatusId = UserStatusId.Active
+        }).WithId(id);
         return user;
     }
 }

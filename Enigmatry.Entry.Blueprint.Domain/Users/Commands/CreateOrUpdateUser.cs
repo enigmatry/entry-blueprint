@@ -11,10 +11,11 @@ public static class CreateOrUpdateUser
     [PublicAPI]
     public class Command : IRequest<User>
     {
-        public Guid? Id { get; set; }
-        public string EmailAddress { get; set; } = String.Empty;
-        public string FullName { get; set; } = String.Empty;
-        public Guid RoleId { get; set; }
+        public required Guid? Id { get; set; }
+        public required string EmailAddress { get; set; } = String.Empty;
+        public required string FullName { get; set; } = String.Empty;
+        public required Guid RoleId { get; set; }
+        public UserStatusId StatusId { get; set; } = UserStatusId.Active;
     }
 
     [UsedImplicitly]

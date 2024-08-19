@@ -2,21 +2,21 @@
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
-namespace Enigmatry.Entry.Blueprint.Scheduler;
+using DomainUser = Enigmatry.Entry.Blueprint.Domain.Users.User;
 
-public class SystemUserProvider : ICurrentUserProvider
+namespace Enigmatry.Entry.Blueprint.Infrastructure.Identity;
+
+[UsedImplicitly]
+public class SystemUserProvider(IRepository<DomainUser> userRepository, ILogger<SystemUserProvider> logger) : ICurrentUserProvider
 {
-    private readonly IRepository<User> _userRepository;
-    private User? _user;
+    public virtual Guid? UserId => DomainUser.SystemUserId;
+    private UserContext? _user;
 
-    public SystemUserProvider(IRepository<User> userRepository)
-    {
-        _userRepository = userRepository;
-    }
-
-    public User? User
+    public UserContext? User
     {
         get
         {
@@ -25,18 +25,23 @@ public class SystemUserProvider : ICurrentUserProvider
                 return _user;
             }
 
-            _user = _userRepository
+            var user = userRepository
                 .QueryAll()
-                .QueryById(User.SystemUserId)
-                .Include(u => u.Role)
-                .ThenInclude(r => r.Permissions)
+                .QueryById(UserId!.Value)
+                .BuildAggregateInclude()
                 .AsNoTracking()
                 .AsSplitQuery()
                 .SingleOrDefault();
 
+            if (user == null)
+            {
+                logger.LogWarning("User with Id: {SystemUserId} not found in the database. This user might not have been seeded", UserId);
+                return null;
+            }
+
+            _user = new UserContext(user.Id, new PermissionsContext(user.GetPermissionIds()));
+
             return _user;
         }
     }
-
-    public bool IsAuthenticated => true;
 }

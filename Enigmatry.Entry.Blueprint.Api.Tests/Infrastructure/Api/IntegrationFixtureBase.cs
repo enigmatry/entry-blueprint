@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.AspNetCore.Tests.Utilities;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Configuration;
-using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Database;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Blueprint.Infrastructure.Tests;
-using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Configuration;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Database;
+using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

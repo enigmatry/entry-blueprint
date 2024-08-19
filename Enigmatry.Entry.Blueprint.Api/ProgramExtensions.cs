@@ -7,6 +7,7 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Security;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
+using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
@@ -55,9 +56,8 @@ public static class ProgramExtensions
         hostBuilder.ConfigureContainer<ContainerBuilder>((_, containerBuilder) =>
         {
             containerBuilder.AppRegisterModules();
-
             containerBuilder.AppRegisterClaimsPrincipalProvider();
-            containerBuilder.AppRegisterCurrentUserProvider<CurrentUserProvider>();
+            containerBuilder.RegisterModule<IdentityModule<PrincipalProviderCurrentUserProvider>>();
         });
     }
 

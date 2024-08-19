@@ -11,8 +11,8 @@ public class Role : EntityWithGuidId
 
     public string Name { get; init; } = String.Empty;
 
-    private readonly IList<User> _users = new List<User>();
-    private IList<Permission> _permissions = new List<Permission>();
+    private readonly IList<User> _users = [];
+    private IList<Permission> _permissions = [];
 
     public IReadOnlyCollection<Permission> Permissions => _permissions.AsReadOnly();
     public IReadOnlyCollection<User> Users => _users.AsReadOnly();
@@ -26,6 +26,6 @@ public class Role : EntityWithGuidId
 
     public static IEnumerable<(Guid RoleId, PermissionId[] Permissions)> GetAllRolePermissions()
     {
-        yield return new(SystemAdminRoleId, Enum.GetValues<PermissionId>().Except(new[] { PermissionId.None }).ToArray()); // all permissions
+        yield return new ValueTuple<Guid, PermissionId[]>(SystemAdminRoleId, Enum.GetValues<PermissionId>().Except([PermissionId.None]).ToArray()); // all permissions
     }
 }
