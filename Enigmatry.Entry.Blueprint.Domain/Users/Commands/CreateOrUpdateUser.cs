@@ -15,7 +15,7 @@ public static class CreateOrUpdateUser
         public required string EmailAddress { get; set; } = String.Empty;
         public required string FullName { get; set; } = String.Empty;
         public required Guid RoleId { get; set; }
-        public UserStatusId StatusId { get; set; } = UserStatusId.Active;
+        public UserStatusId UserStatusId { get; set; } = UserStatusId.Active;
     }
 
     [UsedImplicitly]

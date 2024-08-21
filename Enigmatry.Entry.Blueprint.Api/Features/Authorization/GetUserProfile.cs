@@ -13,9 +13,8 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Authorization;
 
 public static class GetUserProfile
 {
-    public class Request : IRequest<Response>
-    {
-    }
+    [PublicAPI]
+    public class Request : IRequest<Response>;
 
     [PublicAPI]
     public class Response
@@ -42,9 +41,14 @@ public static class GetUserProfile
     {
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            var user = await repository.QueryAll().QueryById(currentUserProvider.UserId!.Value)
-                .Include(u => u.Role).ThenInclude(r => r.Permissions)
-                .Include(u => u.Status)
+            if(currentUserProvider.UserId is null)
+            {
+                throw new InvalidOperationException("UserId could not be determined. This could happen if user is authenticated but it could not be found in the database.");
+            }
+            var user = await repository.QueryAll().QueryById(currentUserProvider.UserId.Value)
+                .Include(u => u.Role)
+                .ThenInclude(r => r.Permissions)
+                .Include(u => u.UserStatus)
                 .SingleOrNotFoundAsync(cancellationToken);
             var response = mapper.Map<Response>(user);
             return response;

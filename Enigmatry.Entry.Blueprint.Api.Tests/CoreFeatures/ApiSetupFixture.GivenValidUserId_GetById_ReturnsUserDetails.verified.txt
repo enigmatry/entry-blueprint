@@ -5,12 +5,7 @@
   RoleId: Guid_2,
   CreatedOn: DateTimeOffset_1,
   UpdatedOn: DateTimeOffset_1,
-  Status: {
-    Id: {
-      Name: Active,
-      Value: 1
-    },
-    Name: Active,
-    Description: Active Status Description
-  }
+  UserStatusId: Active,
+  UserStatusName: Active,
+  UserStatusDescription: Active Status Description
 }

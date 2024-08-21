@@ -15,6 +15,7 @@ public static class GetUserDetails
     public class Request : IRequest<Response>
     {
         public Guid Id { get; set; }
+
         public static Request ById(Guid id) => new() { Id = id };
     }
 
@@ -27,15 +28,9 @@ public static class GetUserDetails
         public Guid RoleId { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
         public DateTimeOffset UpdatedOn { get; set; }
-
-        public UserStatusResponse Status { get; set; } = new();
-    }
-
-    public class UserStatusResponse
-    {
-        public UserStatusId Id { get; set; } = UserStatusId.Active;
-        public string Name { get; set; } = String.Empty;
-        public string Description { get; set; } = String.Empty;
+        public UserStatusId UserStatusId { get; set; } = UserStatusId.Active;
+        public string UserStatusName { get; set; } = String.Empty;
+        public string UserStatusDescription { get; set; } = String.Empty;
     }
 
     [UsedImplicitly]
@@ -44,7 +39,6 @@ public static class GetUserDetails
         public MappingProfile()
         {
             CreateMap<User, Response>();
-            CreateMap<UserStatus, UserStatusResponse>();
         }
     }
 
@@ -56,10 +50,10 @@ public static class GetUserDetails
             var response = await repository.QueryAll()
                 .BuildInclude()
                 .QueryById(request.Id)
-                .SingleOrDefaultMappedAsync<User, Response>(mapper, cancellationToken: cancellationToken);
+                .SingleOrDefaultMappedAsync<User, Response>(mapper, cancellationToken);
             return response;
         }
     }
 
-    private static IQueryable<User> BuildInclude(this IQueryable<User> query) => query.Include(x => x.Status);
+    private static IQueryable<User> BuildInclude(this IQueryable<User> query) => query.Include(x => x.UserStatus);
 }

@@ -17,7 +17,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasIndex(u => u.EmailAddress).IsUnique();
         
-        builder.HasLookupTableRelation(x => x.Status, x => x.StatusId);
+        builder.HasLookupTableRelation(x => x.UserStatus, x => x.UserStatusId);
 
         builder.HasOne(u => u.Role).WithMany(x => x.Users).OnDelete(DeleteBehavior.NoAction);
         builder.HasCreatedByAndUpdatedBy();

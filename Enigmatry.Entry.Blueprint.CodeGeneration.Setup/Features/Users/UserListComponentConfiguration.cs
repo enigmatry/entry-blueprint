@@ -27,6 +27,9 @@ public class UserListComponentConfiguration : IListComponentConfiguration<GetUse
         builder.Column(x => x.EmailAddress)
             .WithHeaderName("E-mail");
 
+        builder.Column(x => x.UserStatusName)
+            .WithHeaderName("Status");
+
         // Configure selection:
         // None, Single or Multiple     (default None)
 

@@ -5,9 +5,8 @@ using Enigmatry.Entry.SmartEnums.VerifyTests;
 
 namespace Enigmatry.Entry.Blueprint.Common.Tests;
 
-public static class VerifierSettingsInitializer
+public static class CommonVerifierSettingsInitializer
 {
-    [ModuleInitializer]
     public static void Init()
     {
         VerifierSettings.IncludeObsoletes();

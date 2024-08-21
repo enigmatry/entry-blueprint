@@ -55,7 +55,7 @@ public class UserBuilder
             FullName = _fullName,
             EmailAddress = _emailAddress,
             RoleId = _roleId,
-            StatusId = _statusId
+            UserStatusId = _statusId
         });
 
         return result;

@@ -6,6 +6,7 @@ using Enigmatry.Entry.Core.Paging;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.EntityFramework;
 using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Entry.Blueprint.Api.Features.Users;
 
@@ -27,6 +28,7 @@ public static class GetUsers
             public Guid Id { get; set; }
             public string EmailAddress { get; set; } = String.Empty;
             public string FullName { get; set; } = String.Empty;
+            public string UserStatusName { get; set; } = String.Empty;
             public DateTimeOffset CreatedOn { get; set; }
             public DateTimeOffset UpdatedOn { get; set; }
         }
@@ -39,22 +41,14 @@ public static class GetUsers
     }
 
     [UsedImplicitly]
-    public class RequestHandler : IPagedRequestHandler<Request, Response.Item>
+    public class RequestHandler(IRepository<User> repository, IMapper mapper) : IPagedRequestHandler<Request, Response.Item>
     {
-        private readonly IRepository<User> _repository;
-        private readonly IMapper _mapper;
-
-        public RequestHandler(IRepository<User> repository, IMapper mapper)
-        {
-            _repository = repository;
-            _mapper = mapper;
-        }
-
         public async Task<PagedResponse<Response.Item>> Handle(Request request, CancellationToken cancellationToken) =>
-            await _repository.QueryAll()
+            await repository.QueryAll()
+                .Include(u => u.UserStatus)
                 .QueryByName(request.Name)
                 .QueryByEmail(request.Email)
-                .ProjectTo<Response.Item>(_mapper.ConfigurationProvider, cancellationToken)
+                .ProjectTo<Response.Item>(mapper.ConfigurationProvider, cancellationToken)
                 .ToPagedResponseAsync(request, cancellationToken);
     }
 }

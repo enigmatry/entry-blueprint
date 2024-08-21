@@ -76,7 +76,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
             FullName = "some user",
             EmailAddress = "someuser@test.com",
             RoleId = Role.SystemAdminRoleId,
-            StatusId = UserStatusId.Active
+            UserStatusId = UserStatusId.Active
         };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
@@ -93,7 +93,7 @@ public class UsersControllerFixture : IntegrationFixtureBase
             FullName = "some user",
             EmailAddress = "someuser@test.com",
             RoleId = Role.SystemAdminRoleId,
-            StatusId = UserStatusId.Inactive
+            UserStatusId = UserStatusId.Inactive
         };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);

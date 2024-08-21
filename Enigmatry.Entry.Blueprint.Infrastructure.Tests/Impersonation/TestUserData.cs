@@ -27,7 +27,7 @@ public static class TestUserData
             RoleId = roleId,
             EmailAddress = email,
             FullName = fullName,
-            StatusId = UserStatusId.Active
+            UserStatusId = UserStatusId.Active
         }).WithId(id);
         return user;
     }
