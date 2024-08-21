@@ -57,6 +57,32 @@
         "resolved": "8.0.7",
         "contentHash": "31Tcbla9XXgcKaso1VYPy5LBMzYSbY0i8taXYEyO6bknvak4DqKhWJ/FxDp7A9k21rT6QHyKT2P0Kl5FaeHDzA=="
       },
+      "Ardalis.SmartEnum": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "qGIfpKhSQeLouycBLosGD4qFqgPa5NKzzkH/59oSHyfs3FSbaO6JChpNEMnkslOyQRLbRXj2ImkA0uZdX19IZA==",
+        "dependencies": {
+          "System.ComponentModel.Annotations": "5.0.0"
+        }
+      },
+      "Ardalis.SmartEnum.EFCore": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "IQ4B6wYBSsklE4xaSexCbV+Lf0v3XFoH8UpkDwXImzKpyU99GJS+rysyAnvTOePOHM/ymmCn9VXYJhcc06eXNA==",
+        "dependencies": {
+          "Ardalis.SmartEnum": "8.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.13"
+        }
+      },
+      "Ardalis.SmartEnum.SystemTextJson": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "44zmhq/di+5uutsaOxI56bnNQb/yFuQbh6NAASIvR2hMcXt2WdCofps10u+527sbGGZh+0m4C8Rb9k7vg55qZg==",
+        "dependencies": {
+          "Ardalis.SmartEnum": "8.0.0",
+          "System.Text.Json": "7.0.3"
+        }
+      },
       "AspNetCore.HealthChecks.System": {
         "type": "Transitive",
         "resolved": "8.0.1",
@@ -1456,9 +1482,6 @@
         "resolved": "15.1.4",
         "contentHash": "IjWucOgVbhm72da0Ck3KcyvMuKT/TfilHcvtwvhLLnkn2zr5st8BkH3lDoY5lkMH9Z3jsJeLDrnBS4GpAViUqg=="
       },
-      "enigmatry.entry.blueprint.app": {
-        "type": "Project"
-      },
       "enigmatry.entry.blueprint.applicationservices": {
         "type": "Project",
         "dependencies": {
@@ -1471,7 +1494,8 @@
       "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
-          "Enigmatry.Entry.Core": "[3.3.1, )"
+          "Enigmatry.Entry.Core": "[3.3.1, )",
+          "Enigmatry.Entry.SmartEnums": "[1.0.0, )"
         }
       },
       "enigmatry.entry.blueprint.domain": {
@@ -1498,6 +1522,9 @@
           "Enigmatry.Entry.EntityFramework": "[3.3.1, )",
           "Enigmatry.Entry.Infrastructure": "[3.3.1, )",
           "Enigmatry.Entry.MediatR": "[3.3.1, )",
+          "Enigmatry.Entry.SmartEnums.EntityFramework": "[1.0.0, )",
+          "Enigmatry.Entry.SmartEnums.Swagger": "[1.0.0, )",
+          "Enigmatry.Entry.SmartEnums.SystemTextJson": "[1.0.0, )",
           "Enigmatry.Entry.Swagger": "[3.3.1, )",
           "FluentValidation.DependencyInjectionExtensions": "[11.9.1, )",
           "Microsoft.Extensions.DependencyInjection": "[8.0.0, )",
@@ -1623,6 +1650,46 @@
           "MediatR": "12.3.0",
           "Microsoft.Extensions.Logging": "8.0.0",
           "Serilog": "4.0.0"
+        }
+      },
+      "Enigmatry.Entry.SmartEnums": {
+        "type": "CentralTransitive",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "VRx/kGJdwKVlqikGEN/VbeaS1CXANgvEUGFy/Nh8n7lrr4lwBsZLQt78h4azffBwc5TBW/rBKALuX9Q4RoDM2w==",
+        "dependencies": {
+          "Ardalis.SmartEnum": "8.0.0",
+          "JetBrains.Annotations": "2023.3.0"
+        }
+      },
+      "Enigmatry.Entry.SmartEnums.EntityFramework": {
+        "type": "CentralTransitive",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "pBATQ1ck+D6HHTvCZ+iVkKoCTiMQUesm3429zH56+chFftgJ284sLhK43uWhfEdPU9qiCrCcmforaazYxFVgNw==",
+        "dependencies": {
+          "Ardalis.SmartEnum.EFCore": "8.0.0",
+          "Enigmatry.Entry.SmartEnums": "1.0.0"
+        }
+      },
+      "Enigmatry.Entry.SmartEnums.Swagger": {
+        "type": "CentralTransitive",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "ts1bJphd0hdE8vOzaczwIsU9VQbvyXo3vYF6Rr7Eb6pfTs6YAX5gXj4a3FmzIGNZ5wLaF79sv4pvjw2sbG7drg==",
+        "dependencies": {
+          "Enigmatry.Entry.SmartEnums": "1.0.0",
+          "NSwag.Generation.AspNetCore": "14.0.8"
+        }
+      },
+      "Enigmatry.Entry.SmartEnums.SystemTextJson": {
+        "type": "CentralTransitive",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "qqATJ64Thwg/RCRViqG2+JZNoxdOAx2GgAZ9qoxKU8h04xNpM1pqiDkGyvStKuNNqi2foTbPGOyKAKe/+dddrw==",
+        "dependencies": {
+          "Ardalis.SmartEnum.SystemTextJson": "8.0.0",
+          "Enigmatry.Entry.SmartEnums": "1.0.0"
         }
       },
       "Enigmatry.Entry.Swagger": {

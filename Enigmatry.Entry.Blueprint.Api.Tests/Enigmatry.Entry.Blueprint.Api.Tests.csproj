@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <Content Include="..\Enigmatry.Entry.Blueprint.Api\Resources\*.json" LinkBase="Resources" />
   </ItemGroup>
