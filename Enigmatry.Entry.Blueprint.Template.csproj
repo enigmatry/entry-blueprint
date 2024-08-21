@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
     <Authors>Enigmatry</Authors>
     <Copyright>Copyright © 2024 Enigmatry. All rights reserved.</Copyright>
     <Company>Enigmatry</Company>
