@@ -1,0 +1,16 @@
+﻿[
+  {
+    Value: {
+      Name: Active,
+      Value: 1
+    },
+    Label: Active
+  },
+  {
+    Value: {
+      Name: Inactive,
+      Value: 2
+    },
+    Label: Inactive
+  }
+]

@@ -1,9 +1,9 @@
 ﻿using System.Net.Mime;
+using Enigmatry.Entry.AspNetCore;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
 using Enigmatry.Entry.Blueprint.Infrastructure.Authorization;
-using Enigmatry.Entry.AspNetCore;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Paging;
 using MediatR;
@@ -13,25 +13,16 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Users;
 
 [Produces(MediaTypeNames.Application.Json)]
 [Route("[controller]")]
-public class UsersController : Controller
+public class UsersController(
+    IUnitOfWork unitOfWork,
+    IMediator mediator) : Controller
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMediator _mediator;
-
-    public UsersController(
-        IUnitOfWork unitOfWork,
-        IMediator mediator)
-    {
-        _unitOfWork = unitOfWork;
-        _mediator = mediator;
-    }
-
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [UserHasPermission(PermissionId.UsersRead)]
     public async Task<ActionResult<PagedResponse<GetUsers.Response.Item>>> Search([FromQuery] GetUsers.Request query)
     {
-        var response = await _mediator.Send(query);
+        var response = await mediator.Send(query);
         return response.ToActionResult();
     }
 
@@ -42,7 +33,7 @@ public class UsersController : Controller
     [UserHasPermission(PermissionId.UsersRead)]
     public async Task<ActionResult<GetUserDetails.Response>> Get(Guid id)
     {
-        var response = await _mediator.Send(GetUserDetails.Request.ById(id));
+        var response = await mediator.Send(GetUserDetails.Request.ById(id));
         return response.ToActionResult();
     }
 
@@ -53,8 +44,8 @@ public class UsersController : Controller
     [UserHasPermission(PermissionId.UsersWrite)]
     public async Task<ActionResult<GetUserDetails.Response>> Post(CreateOrUpdateUser.Command command)
     {
-        User user = await _mediator.Send(command);
-        await _unitOfWork.SaveChangesAsync();
+        var user = await mediator.Send(command);
+        await unitOfWork.SaveChangesAsync();
         return await Get(user.Id);
     }
 
@@ -64,7 +55,17 @@ public class UsersController : Controller
     [UserHasPermission(PermissionId.UsersRead)]
     public async Task<ActionResult<IEnumerable<LookupResponse<Guid>>>> GetRolesLookup()
     {
-        var response = await _mediator.Send(new GetRoleLookup.Request());
+        var response = await mediator.Send(new GetRoleLookup.Request());
+        return response.ToActionResult();
+    }
+
+    [HttpGet]
+    [Route("statuses")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [UserHasPermission(PermissionId.UsersRead)]
+    public async Task<ActionResult<IEnumerable<LookupResponse<UserStatusId>>>> GetStatusesLookup()
+    {
+        var response = await mediator.Send(new GetStatusesLookup.Request());
         return response.ToActionResult();
     }
 }
