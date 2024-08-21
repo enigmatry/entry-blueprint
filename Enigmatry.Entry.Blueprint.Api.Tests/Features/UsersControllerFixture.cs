@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Entry.Blueprint.Api.Features;
 using Enigmatry.Entry.Blueprint.Api.Features.Users;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
@@ -46,6 +47,22 @@ public class UsersControllerFixture : IntegrationFixtureBase
     public async Task TestGetById()
     {
         var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
+
+        await Verify(user);
+    }
+
+    [Test]
+    public async Task TestGetRoles()
+    {
+        var user = await Client.GetAsync<IEnumerable<LookupResponse<Guid>>>($"users/roles");
+
+        await Verify(user);
+    }
+
+    [Test]
+    public async Task TestGetStatuses()
+    {
+        var user = await Client.GetAsync<IEnumerable<LookupResponse<UserStatusId>>>($"users/statuses");
 
         await Verify(user);
     }
