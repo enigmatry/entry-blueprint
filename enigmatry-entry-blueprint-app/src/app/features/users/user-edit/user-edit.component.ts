@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   CreateOrUpdateUserCommand, IGetUserDetailsResponse,
   IValidationProblemDetails,
-  LookupResponseOfGuid, PermissionId, UsersClient
+  LookupResponseOfGuid, LookupResponseOfUserStatusId, PermissionId, UsersClient
 } from '@api';
 import { setServerSideValidationErrors } from '@enigmatry/entry-components';
 import { Observable } from 'rxjs';
@@ -21,6 +21,7 @@ export class UserEditComponent implements OnInit {
 
   model: IGetUserDetailsResponse = {};
   $roleLookup: Observable<LookupResponseOfGuid[]>;
+  $userStatusLookup: Observable<LookupResponseOfUserStatusId[]>;
   PermissionId = PermissionId;
 
   constructor(private client: UsersClient,
@@ -35,6 +36,7 @@ export class UserEditComponent implements OnInit {
       });
 
     this.$roleLookup = this.client.getRolesLookup();
+    this.$userStatusLookup = this.client.getStatusesLookup();
   }
 
   save(model: IGetUserDetailsResponse) {
@@ -42,6 +44,7 @@ export class UserEditComponent implements OnInit {
       id: model.id,
       emailAddress: model.emailAddress,
       roleId: model.roleId,
+      userStatusId: model.userStatusId,
       fullName: model.fullName
     });
     this.client.post(command)

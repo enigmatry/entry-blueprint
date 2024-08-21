@@ -24,11 +24,14 @@ public class UserEditComponentConfiguration : IFormComponentConfiguration<GetUse
             .WithOptions(options => options.WithDynamicValues())
             .WithLabel("Role");
 
+        userSection.SelectFormControl(x => x.UserStatusId)
+            .WithOptions(options => options.WithDynamicValues())
+            .WithLabel("Status");
+
         var historySection = userSection.FormControlGroup("History");
 
         historySection.FormControl(x => x.CreatedOn).IsReadonly(true);
         historySection.FormControl(x => x.UpdatedOn).IsReadonly(true);
-
 
         builder.WithValidationConfiguration(new UserEditComponentValidationConfiguration());
     }

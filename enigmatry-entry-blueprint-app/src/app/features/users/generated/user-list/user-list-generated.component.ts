@@ -64,6 +64,7 @@ export class UserListGeneratedComponent implements OnInit {
 { field: 'id', hide: true, sortable: true },
 { field: 'emailAddress', header: $localize `:@@users.user-list.email-address:E-mail`, hide: false, sortable: true },
 { field: 'fullName', header: $localize `:@@users.user-list.full-name:Full name`, hide: false, sortable: true },
+{ field: 'userStatusName', header: $localize `:@@users.user-list.user-status-name:Status`, hide: false, sortable: true },
 { field: 'createdOn', header: $localize `:@@users.user-list.created-on:Created on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } },
 { field: 'updatedOn', header: $localize `:@@users.user-list.updated-on:Updated on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } }
 ];

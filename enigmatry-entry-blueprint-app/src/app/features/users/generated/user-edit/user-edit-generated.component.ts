@@ -51,6 +51,11 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
             get roleIdOptions(): any[] { return this.roleIdOptions$.value; }
             set roleIdOptions(value: any[]) { this.roleIdOptions$.next(value); }
             @Input() roleIdOptionsConfiguration: SelectConfiguration = {};
+            private userStatusIdOptions$ = new BehaviorSubject<any[]>([]);
+            @Input()
+            get userStatusIdOptions(): any[] { return this.userStatusIdOptions$.value; }
+            set userStatusIdOptions(value: any[]) { this.userStatusIdOptions$.next(value); }
+            @Input() userStatusIdOptionsConfiguration: SelectConfiguration = {};
 
   _isReadonly: boolean;
   form = new FormGroup({});
@@ -158,6 +163,30 @@ className: `entry-role-id-field entry-select`,
             options: this.roleIdOptions$.pipe(map(opts => sortOptions(opts, this.roleIdOptionsConfiguration.valueProperty, this.roleIdOptionsConfiguration.sortProperty, this._localeId))),
             valueProp: this.roleIdOptionsConfiguration.valueProperty,
             labelProp: this.roleIdOptionsConfiguration.labelProperty,
+            attributes: {  },
+            hidden: !true,
+            typeFormatDef: undefined
+        },
+        },
+        {
+        key: 'userStatusId',
+        type: this.resolveFieldType('select', false),
+        focus: false,
+className: `entry-user-status-id-field entry-select`,
+        hideExpression: this.fieldsHideExpressions?.userStatusId ?? false,
+        expressionProperties: {
+        'templateOptions.disabled': (model) => (this.isReadonly || (this.fieldsDisableExpressions?.userStatusId ? this.fieldsDisableExpressions.userStatusId(model) : false)),
+        'templateOptions.required': (model) => (this.fieldsRequiredExpressions?.userStatusId ? this.fieldsRequiredExpressions.userStatusId(model) : false),
+        'templateOptions.label': (model) => (this.fieldsLabelExpressions?.userStatusId ? this.fieldsLabelExpressions.userStatusId(model) : $localize `:@@users.user-edit.user-status-id.label:Status`),
+        'model.userStatusId': (model) => (this.fieldsPropertyExpressions?.userStatusId ? this.fieldsPropertyExpressions.userStatusId(model) : model.userStatusId),
+        },
+        templateOptions: {
+        label: $localize `:@@users.user-edit.user-status-id.label:Status`,
+        placeholder: $localize `:@@users.user-edit.user-status-id.placeholder:Status`,
+        description: ``,
+            options: this.userStatusIdOptions$.pipe(map(opts => sortOptions(opts, this.userStatusIdOptionsConfiguration.valueProperty, this.userStatusIdOptionsConfiguration.sortProperty, this._localeId))),
+            valueProp: this.userStatusIdOptionsConfiguration.valueProperty,
+            labelProp: this.userStatusIdOptionsConfiguration.labelProperty,
             attributes: {  },
             hidden: !true,
             typeFormatDef: undefined

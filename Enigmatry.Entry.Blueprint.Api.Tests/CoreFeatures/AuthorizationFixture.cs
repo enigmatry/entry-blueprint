@@ -42,7 +42,7 @@ public class AuthorizationFixture : IntegrationFixtureBase
             FullName = "some user",
             EmailAddress = "someuser@test.com",
             RoleId = Role.SystemAdminRoleId,
-            StatusId = UserStatusId.Active
+            UserStatusId = UserStatusId.Active
         };
         var response = await Client.PostAsJsonAsync("users", command, HttpSerializationOptions.Options);
         response.StatusCode.Should().Be(HttpStatusCode.Forbidden);

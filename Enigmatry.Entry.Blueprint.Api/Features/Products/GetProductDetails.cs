@@ -39,7 +39,7 @@ public static class GetProductDetails
     [UsedImplicitly]
     public class MappingProfile : Profile
     {
-        public MappingProfile() => CreateMap<Product, Response>();
+        public MappingProfile() => CreateMap<Product, Response>().ForMember(x => x.AdditionalInfo, opt => opt.Ignore());
     }
 
     [UsedImplicitly]

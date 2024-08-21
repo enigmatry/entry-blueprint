@@ -4,6 +4,7 @@
     (save)="save($event)"
     (cancel)="cancel()"
     [isReadonly]="!([PermissionId.UsersWrite] | entryHasPermissions)"
-    [roleIdOptions]="$roleLookup | async | notNull"></app-g-user-edit>
+    [roleIdOptions]="$roleLookup | async | notNull"
+    [userStatusIdOptions]="$userStatusLookup | async | notNull"></app-g-user-edit>
 </app-form-wrapper>
 

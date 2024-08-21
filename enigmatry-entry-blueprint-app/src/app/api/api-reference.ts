@@ -20,6 +20,7 @@ export interface IUsersClient {
     post(command: CreateOrUpdateUserCommand): Observable<GetUserDetailsResponse>;
     get(id: string): Observable<GetUserDetailsResponse>;
     getRolesLookup(): Observable<LookupResponseOfGuid[]>;
+    getStatusesLookup(): Observable<LookupResponseOfUserStatusId[]>;
 }
 
 @Injectable({
@@ -268,6 +269,61 @@ export class UsersClient implements IUsersClient {
                 result200 = [] as any;
                 for (let item of resultData200)
                     result200!.push(LookupResponseOfGuid.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    getStatusesLookup(): Observable<LookupResponseOfUserStatusId[]> {
+        let url_ = this.baseUrl + "/Users/statuses";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetStatusesLookup(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetStatusesLookup(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<LookupResponseOfUserStatusId[]>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<LookupResponseOfUserStatusId[]>;
+        }));
+    }
+
+    protected processGetStatusesLookup(response: HttpResponseBase): Observable<LookupResponseOfUserStatusId[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(LookupResponseOfUserStatusId.fromJS(item));
             }
             else {
                 result200 = <any>null;
@@ -814,6 +870,7 @@ export class GetUsersResponseItem implements IGetUsersResponseItem {
     id?: string;
     emailAddress?: string;
     fullName?: string;
+    userStatusName?: string;
     createdOn?: Date;
     updatedOn?: Date;
 
@@ -831,6 +888,7 @@ export class GetUsersResponseItem implements IGetUsersResponseItem {
             this.id = _data["id"];
             this.emailAddress = _data["emailAddress"];
             this.fullName = _data["fullName"];
+            this.userStatusName = _data["userStatusName"];
             this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
             this.updatedOn = _data["updatedOn"] ? new Date(_data["updatedOn"].toString()) : <any>undefined;
         }
@@ -848,6 +906,7 @@ export class GetUsersResponseItem implements IGetUsersResponseItem {
         data["id"] = this.id;
         data["emailAddress"] = this.emailAddress;
         data["fullName"] = this.fullName;
+        data["userStatusName"] = this.userStatusName;
         data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
         data["updatedOn"] = this.updatedOn ? this.updatedOn.toISOString() : <any>undefined;
         return data;
@@ -858,6 +917,7 @@ export interface IGetUsersResponseItem {
     id?: string;
     emailAddress?: string;
     fullName?: string;
+    userStatusName?: string;
     createdOn?: Date;
     updatedOn?: Date;
 }
@@ -869,6 +929,9 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
     roleId?: string;
     createdOn?: Date;
     updatedOn?: Date;
+    userStatusId?: UserStatusId;
+    userStatusName?: string;
+    userStatusDescription?: string;
 
     constructor(data?: IGetUserDetailsResponse) {
         if (data) {
@@ -887,6 +950,9 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
             this.roleId = _data["roleId"];
             this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
             this.updatedOn = _data["updatedOn"] ? new Date(_data["updatedOn"].toString()) : <any>undefined;
+            this.userStatusId = _data["userStatusId"];
+            this.userStatusName = _data["userStatusName"];
+            this.userStatusDescription = _data["userStatusDescription"];
         }
     }
 
@@ -905,6 +971,9 @@ export class GetUserDetailsResponse implements IGetUserDetailsResponse {
         data["roleId"] = this.roleId;
         data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
         data["updatedOn"] = this.updatedOn ? this.updatedOn.toISOString() : <any>undefined;
+        data["userStatusId"] = this.userStatusId;
+        data["userStatusName"] = this.userStatusName;
+        data["userStatusDescription"] = this.userStatusDescription;
         return data;
     }
 }
@@ -916,6 +985,63 @@ export interface IGetUserDetailsResponse {
     roleId?: string;
     createdOn?: Date;
     updatedOn?: Date;
+    userStatusId?: UserStatusId;
+    userStatusName?: string;
+    userStatusDescription?: string;
+}
+
+export enum UserStatusId {
+    Active = 1,
+    Inactive = 2,
+}
+
+export enum SmartEnumOfUserStatusId {
+    Active = 1,
+    Inactive = 2,
+}
+
+/** A base type to use for creating smart enums. */
+export abstract class SmartEnumOfUserStatusIdAndInteger implements ISmartEnumOfUserStatusIdAndInteger {
+    /** Gets the name. */
+    name?: string | undefined;
+    /** Gets the value. */
+    value?: number;
+
+    constructor(data?: ISmartEnumOfUserStatusIdAndInteger) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.name = _data["name"];
+            this.value = _data["value"];
+        }
+    }
+
+    static fromJS(data: any): SmartEnumOfUserStatusIdAndInteger {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'SmartEnumOfUserStatusIdAndInteger' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["value"] = this.value;
+        return data;
+    }
+}
+
+/** A base type to use for creating smart enums. */
+export interface ISmartEnumOfUserStatusIdAndInteger {
+    /** Gets the name. */
+    name?: string | undefined;
+    /** Gets the value. */
+    value?: number;
 }
 
 export class ProblemDetails implements IProblemDetails {
@@ -987,6 +1113,7 @@ export class CreateOrUpdateUserCommand implements ICreateOrUpdateUserCommand {
     emailAddress?: string;
     fullName?: string;
     roleId?: string;
+    userStatusId?: UserStatusId;
 
     constructor(data?: ICreateOrUpdateUserCommand) {
         if (data) {
@@ -1003,6 +1130,7 @@ export class CreateOrUpdateUserCommand implements ICreateOrUpdateUserCommand {
             this.emailAddress = _data["emailAddress"];
             this.fullName = _data["fullName"];
             this.roleId = _data["roleId"];
+            this.userStatusId = _data["userStatusId"];
         }
     }
 
@@ -1019,6 +1147,7 @@ export class CreateOrUpdateUserCommand implements ICreateOrUpdateUserCommand {
         data["emailAddress"] = this.emailAddress;
         data["fullName"] = this.fullName;
         data["roleId"] = this.roleId;
+        data["userStatusId"] = this.userStatusId;
         return data;
     }
 }
@@ -1028,6 +1157,7 @@ export interface ICreateOrUpdateUserCommand {
     emailAddress?: string;
     fullName?: string;
     roleId?: string;
+    userStatusId?: UserStatusId;
 }
 
 export class LookupResponseOfGuid implements ILookupResponseOfGuid {
@@ -1067,6 +1197,46 @@ export class LookupResponseOfGuid implements ILookupResponseOfGuid {
 
 export interface ILookupResponseOfGuid {
     value?: string;
+    label?: string;
+}
+
+export class LookupResponseOfUserStatusId implements ILookupResponseOfUserStatusId {
+    value?: UserStatusId | undefined;
+    label?: string;
+
+    constructor(data?: ILookupResponseOfUserStatusId) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.value = _data["value"];
+            this.label = _data["label"];
+        }
+    }
+
+    static fromJS(data: any): LookupResponseOfUserStatusId {
+        data = typeof data === 'object' ? data : {};
+        let result = new LookupResponseOfUserStatusId();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["value"] = this.value;
+        data["label"] = this.label;
+        return data;
+    }
+}
+
+export interface ILookupResponseOfUserStatusId {
+    value?: UserStatusId | undefined;
     label?: string;
 }
 

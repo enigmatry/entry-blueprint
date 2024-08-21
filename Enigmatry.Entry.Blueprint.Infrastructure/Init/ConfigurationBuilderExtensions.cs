@@ -6,7 +6,6 @@ namespace Enigmatry.Entry.Blueprint.Infrastructure.Init;
 
 public static class ConfigurationBuilderExtensions
 {
- 
     public static void AppAddAzureKeyVault(this IConfigurationBuilder builder, IConfiguration configuration)
     {
         var settings = configuration.ReadKeyVaultSettings();

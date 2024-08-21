@@ -7,7 +7,7 @@ public static class UserQueryableExtensions
 {
     public static IQueryable<User> BuildAggregateInclude(this IQueryable<User> query) =>
         query
-            .Include(u => u.Status)
+            .Include(u => u.UserStatus)
             .Include(u => u.Role)
             .ThenInclude(r => r.Permissions);
     public static IQueryable<User> QueryByName(this IQueryable<User> query, string? name) =>

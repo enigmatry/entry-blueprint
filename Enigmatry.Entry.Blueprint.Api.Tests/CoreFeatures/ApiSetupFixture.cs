@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using AutoMapper;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.Blueprint.Api.Features.Users;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
@@ -65,7 +66,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
             FullName = "some user",
             EmailAddress = "someuser@test.com",
             RoleId = Role.SystemAdminRoleId,
-            StatusId = UserStatusId.Inactive
+            UserStatusId = UserStatusId.Inactive
         };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
@@ -82,7 +83,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
             FullName = "some user",
             EmailAddress = "someuser@test.com",
             RoleId = Role.SystemAdminRoleId,
-            StatusId = UserStatusId.Inactive
+            UserStatusId = UserStatusId.Inactive
         };
         var user =
             await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
@@ -105,10 +106,17 @@ public class ApiSetupFixture : IntegrationFixtureBase
             FullName = name,
             EmailAddress = emailAddress,
             RoleId = Role.SystemAdminRoleId,
-            StatusId = UserStatusId.Inactive
+            UserStatusId = UserStatusId.Inactive
         };
         var response = await Client.PostAsJsonAsync("users", command, HttpSerializationOptions.Options);
 
         response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
+    }
+
+    [Test]
+    public void TestAutoMapperMappings()
+    {
+        var mapper = Resolve<IMapper>();
+        mapper.ConfigurationProvider.AssertConfigurationIsValid();
     }
 }

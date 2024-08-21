@@ -14,14 +14,14 @@ public class User : EntityWithCreatedUpdated
     public string FullName { get; private set; } = String.Empty;
     public Guid RoleId { get; private set; }
     public Role Role { get; private set; } = null!;
-    public UserStatusId StatusId { get; private set; } = null!;
-    public UserStatus Status { get; private set; } = null!;
+    public UserStatusId UserStatusId { get; private set; } = null!;
+    public UserStatus UserStatus { get; private set; } = null!;
 
     public static User Create(CreateOrUpdateUser.Command command)
     {
         var result = new User
         {
-            EmailAddress = command.EmailAddress, FullName = command.FullName, RoleId = command.RoleId, StatusId = command.StatusId
+            EmailAddress = command.EmailAddress, FullName = command.FullName, RoleId = command.RoleId, UserStatusId = command.UserStatusId
         };
 
         result.AddDomainEvent(new UserCreatedDomainEvent(result.EmailAddress));
@@ -32,7 +32,7 @@ public class User : EntityWithCreatedUpdated
     {
         FullName = command.FullName;
         RoleId = command.RoleId;
-        StatusId = command.StatusId;
+        UserStatusId = command.UserStatusId;
         AddDomainEvent(new UserUpdatedDomainEvent(EmailAddress));
     }
 

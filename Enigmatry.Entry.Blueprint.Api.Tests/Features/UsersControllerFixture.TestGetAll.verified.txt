@@ -3,6 +3,7 @@
     Id: Guid_1,
     EmailAddress: john_doe@john.doe,
     FullName: John Doe,
+    UserStatusName: Active,
     CreatedOn: DateTimeOffset_1,
     UpdatedOn: DateTimeOffset_1
   },
@@ -10,6 +11,7 @@
     Id: Guid_2,
     EmailAddress: N/A,
     FullName: System User,
+    UserStatusName: Active,
     CreatedOn: DateTimeOffset_1,
     UpdatedOn: DateTimeOffset_1
   },
@@ -17,6 +19,7 @@
     Id: Guid_3,
     EmailAddress: test_user@xyz.com,
     FullName: INTEGRATION_TEST,
+    UserStatusName: Active,
     CreatedOn: DateTimeOffset_1,
     UpdatedOn: DateTimeOffset_1
   }
