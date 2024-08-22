@@ -34,7 +34,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigmatry.Entry.Blueprint.I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{B11717EB-1E91-4227-97FA-2F4A73899289}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment\publish-web-profile-test-api.proj = Deployment\publish-web-profile-test-api.proj
 		Deployment\publish-web-profile-test-app.proj = Deployment\publish-web-profile-test-app.proj
 		Deployment\publish-web-profile-test-scheduler.proj = Deployment\publish-web-profile-test-scheduler.proj
 	EndProjectSection
