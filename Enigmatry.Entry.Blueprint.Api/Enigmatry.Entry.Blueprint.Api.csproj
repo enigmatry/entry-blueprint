@@ -4,9 +4,10 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <TargetFramework>net8.0</TargetFramework>
-    <SpaRoot>..\Enigmatry.Entry.Blueprint.App</SpaRoot>
-    <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
-    <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
+    <SpaRoot>..\enigmatry-entry-blueprint-app</SpaRoot>
+    <!-- Uncomment the following 2 lines to automatically start FrontEnd when debugging the API: -->
+    <!--<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+    <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +33,9 @@
 
   <!-- By default, the msbuild javascript sdk targets the .Net Framework 4.7.2, so building only works on Windows machines -->
   <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj" />
+    <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
