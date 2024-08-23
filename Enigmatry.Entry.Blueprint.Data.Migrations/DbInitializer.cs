@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Data.Migrations.Seeding;
+using Enigmatry.Entry.Core.EntityFramework.Seeding;
 using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Entry.Blueprint.Data.Migrations;

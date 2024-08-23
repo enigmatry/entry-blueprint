@@ -8,7 +8,7 @@ public class Permission : EntityWithTypedId<PermissionId>
 {
     public const int NameMaxLength = 100;
 
-    private readonly IList<Role> _roles = new List<Role>();
+    private readonly IList<Role> _roles = [];
 
     public string Name { get; private init; } = String.Empty;
     public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
@@ -21,9 +21,4 @@ public class Permission : EntityWithTypedId<PermissionId>
         Id = permissionId;
         Name = permissionId.ToString();
     }
-
-    public static IEnumerable<Permission> CreateAll() =>
-        Enum.GetValues<PermissionId>()
-            .Except(new[] { PermissionId.None })
-            .Select(permissionId => new Permission(permissionId));
 }
