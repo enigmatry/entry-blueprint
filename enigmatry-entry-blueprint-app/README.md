@@ -1,17 +1,19 @@
 # Enigmatry Blueprint Template project
 
-* [Starting the app](#starting-the-app)
-  * [1. Starting the API](#1-starting-the-api)
-  * [2. Configuring the App](#2-configuring-the-app)
-  * [3. Starting the App](#3-starting-the-app)
-* [Code generation](#code-generation)
-  * [1. Installing code generator tool](#1-installing-code-generator-tool)
-  * [2. Configuring the code to be generated](#2-configuring-the-code-to-be-generated)
-  * [3. Generating code](#3-generating-code)
-* [Code generator configuration](#code-generator-configuration)
-  * [Custom validators](#custom-validators)
-  * [Form fields conditional visibility](#form-fields-conditional-visibility)
-* [Theming Customization](#theming-customization)
+- [Enigmatry Blueprint Template project](#enigmatry-blueprint-template-project)
+  - [Starting the app](#starting-the-app)
+    - [1. Starting the API](#1-starting-the-api)
+    - [2. Configuring the App](#2-configuring-the-app)
+    - [3. Starting the App](#3-starting-the-app)
+  - [Code generation](#code-generation)
+    - [1. Installing code generator tool](#1-installing-code-generator-tool)
+    - [2. Configuring the code to be generated](#2-configuring-the-code-to-be-generated)
+    - [3. Generating code](#3-generating-code)
+  - [Code generator configuration](#code-generator-configuration)
+    - [Custom validators](#custom-validators)
+    - [Form fields conditional visibility](#form-fields-conditional-visibility)
+  - [Theming Customization](#theming-customization)
+  - [Enums](#enums)
 
 ## Starting the app
 
@@ -110,3 +112,18 @@ After creating the dictionary, we pass it to form `fieldsHideExpressions` input:
 
 ## Theming Customization
 Blueprint comes with a pre-configured theme. If you need to customize or alter theme, please refer to detailed documentation [here](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md).
+
+## Enums
+Blueprint comes with the support of Smart enums. Smart enums are [type-safe object-oriented alternative](https://codeblog.jonskeet.uk/2006/01/05/classenum/) to [C# Enum](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum). Since the smart enums are not built into the .NET framework we are using a 3rd party library [Ardalis.SmartEnum](https://github.com/ardalis/SmartEnum) as a base for adding this support. Beside the Ardalis.SmartEnum library, Entry is providing various utilities, extension methods and helper classes to provide more comprehensive support needed for real life system.
+
+This support includes:
+
+- Registration of System.TextJson converters used for de/serializing from/to Smart enums. See ```MvcStartupExtensions.cs```
+- Registration of Argon Json converters (used by VerifyTests) used for serializing/deserializing from/to Smart enums in tests projects. See ```CommonVerifierSettingsInitializer.cs```
+- Registration of Entity Framework Value converters. See ```AppDbContext.OnModelCreating```
+- Utility and base classes for modeling EntityFramework entities that have SmartEnums a primary id:
+  - Base class ```EntityWithEnumId``` - used for entities that have Smart enum as a primary key (see usage in ```UserStatus.cs```),
+  - Base class ```EntityWithEnumIdConfiguration``` - used for entity configurations for the entities that have Smart enums as primary keys (see usage in ```UserStatusConfiguration.cs```),
+  - Base class ```EntityWithEnumIdSeeding``` - used for seeding of the entities that have Smart enums as primary keys (see usage in ```UserStatusSeeding.cs```)
+  - Extension method: ```HasReferenceTableRelationWithEnumAsForeignKey``` - used for defining foreign key relationship (and navigational property) between an entity and a entity with Smart enum as primary key (referenced table) - (see usage in ```UserConfiguration.cs```)
+  - Configuration of Swagger to generate enum (from Smart enum value) and x-enumNames (fromSmart enum name) values for the types/properties defined as Smart enums - see usage in ```ProgramExtensions.cs``` call to method ```configureSettings.EntryConfigureSmartEnums()```
