@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Users;
+using Enigmatry.Entry.SmartEnums.EntityFramework.Seeding;
 
 namespace Enigmatry.Entry.Blueprint.Data.Migrations.Seeding;
 

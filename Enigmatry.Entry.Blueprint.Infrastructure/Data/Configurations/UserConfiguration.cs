@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Users;
+using Enigmatry.Entry.SmartEnums.EntityFramework;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -16,8 +17,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.CreatedOn).IsRequired();
 
         builder.HasIndex(u => u.EmailAddress).IsUnique();
-        
-        builder.HasLookupTableRelation(x => x.UserStatus, x => x.UserStatusId);
+
+        builder.HasReferenceTableRelationWithEnumAsForeignKey(x => x.UserStatus, x => x.UserStatusId);
 
         builder.HasOne(u => u.Role).WithMany(x => x.Users).OnDelete(DeleteBehavior.NoAction);
         builder.HasCreatedByAndUpdatedBy();

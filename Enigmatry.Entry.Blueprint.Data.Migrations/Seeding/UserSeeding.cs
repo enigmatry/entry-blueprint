@@ -1,9 +1,9 @@
-﻿using Enigmatry.Entry.Blueprint.Data.Migrations.Seeding;
-using Enigmatry.Entry.Blueprint.Domain.Authorization;
+﻿using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Users;
+using Enigmatry.Entry.Core.EntityFramework.Seeding;
 using Microsoft.EntityFrameworkCore;
 
-namespace Enigmatry.Entry.Blueprint.Data.Migrations;
+namespace Enigmatry.Entry.Blueprint.Data.Migrations.Seeding;
 
 internal class UserSeeding : ISeeding
 {

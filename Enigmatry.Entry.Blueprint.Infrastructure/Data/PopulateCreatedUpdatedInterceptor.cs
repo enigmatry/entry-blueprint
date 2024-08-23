@@ -7,19 +7,11 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Data;
 
-public class PopulateCreatedUpdatedInterceptor : SaveChangesInterceptor
+public class PopulateCreatedUpdatedInterceptor(ITimeProvider timeProvider, Func<ICurrentUserProvider> userProvider)
+    : SaveChangesInterceptor
 {
-    private readonly ITimeProvider _timeProvider;
-
     // Injecting Func to avoid circular DI dependency between DbContext and CurrentUserProvider
     // CurrentUserProvider -> (depends on) IRepository<User> -> DbContext -> ISaveChangesInterceptors (PopulateCreatedUpdatedInterceptor) -> CurrentUserProvider
-    private readonly Func<ICurrentUserProvider> _currentUserProvider;
-
-    public PopulateCreatedUpdatedInterceptor(ITimeProvider timeProvider, Func<ICurrentUserProvider> currentUserProvider)
-    {
-        _timeProvider = timeProvider;
-        _currentUserProvider = currentUserProvider;
-    }
 
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
@@ -36,7 +28,7 @@ public class PopulateCreatedUpdatedInterceptor : SaveChangesInterceptor
 
     private void PopulateCreatedUpdated(DbContext dbContext)
     {
-        var currentUserProvider = _currentUserProvider();
+        var currentUserProvider = userProvider();
         var userId = currentUserProvider.UserId ?? throw new InvalidOperationException("Current userId is not set");
 
         var changedEntities = dbContext.ChangeTracker
@@ -45,7 +37,7 @@ public class PopulateCreatedUpdatedInterceptor : SaveChangesInterceptor
                             entry.Entity is IEntityWithCreatedUpdated)
             .Select(entry => (entry.State, Entity: (IEntityWithCreatedUpdated)entry.Entity)).ToList();
 
-        var currentDateTime = _timeProvider.FixedUtcNow;
+        var currentDateTime = timeProvider.FixedUtcNow;
 
         foreach (var (state, entity) in changedEntities)
         {

@@ -4,9 +4,4 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Data;
 
-public class UserRepository : EntityFrameworkRepository<User, Guid>
-{
-    public UserRepository(DbContext context) : base(context)
-    {
-    }
-}
+public class UserRepository(DbContext context) : EntityFrameworkRepository<User, Guid>(context);
