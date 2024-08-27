@@ -4,9 +4,9 @@
     "net8.0": {
       "Enigmatry.Entry.Core": {
         "type": "Direct",
-        "requested": "[3.4.1, )",
-        "resolved": "3.4.1",
-        "contentHash": "j6V/AEHn59pw/r0d0khwpSk89+hzYg/e2p9Y02e1LB19RpSACOrF9hQZQ0xtI3RmQhK7aR82B8M5oEdHsoKFEA==",
+        "requested": "[3.3.2-preview.7, )",
+        "resolved": "3.3.2-preview.7",
+        "contentHash": "fwwxrOTvQhx9XEi0zsrW9RQW2WYwT4k932GTdeWOofWVgcjXzjw/cpN7fn51ZSFYDUPW7x2pH0GfeHROU3c9qA==",
         "dependencies": {
           "JetBrains.Annotations": "2023.3.0",
           "MediatR": "12.3.0",
@@ -17,12 +17,12 @@
       },
       "Enigmatry.Entry.SmartEnums": {
         "type": "Direct",
-        "requested": "[3.4.1, )",
-        "resolved": "3.4.1",
-        "contentHash": "ukGj13PIXmwQCIaiayebyUtjQR+vIhwDI5Fn7JvLY4ZcpGvLAMvzzpkcMuyZhYJK2antl8ELCCw8TukNOh6yBA==",
+        "requested": "[3.3.2-preview.7, )",
+        "resolved": "3.3.2-preview.7",
+        "contentHash": "delXVQhax1UwLPjbhBFyKwduVTGRVo3ArGb4Y0PDP/zainW/zoe+fku2lfLrq4upKALLiH4RfqBY0ySBGMSgFw==",
         "dependencies": {
           "Ardalis.SmartEnum": "8.0.0",
-          "Enigmatry.Entry.Core": "3.4.1",
+          "Enigmatry.Entry.Core": "3.3.2-preview.7",
           "JetBrains.Annotations": "2023.3.0"
         }
       },

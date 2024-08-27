@@ -9,5 +9,5 @@ namespace Enigmatry.Entry.Blueprint.Api.Tests;
 public static class VerifierSettingsInitializer
 {
     [ModuleInitializer]
-    public static void Init() => CommonVerifierSettingsInitializer.Init();
+    public static void Init() => CommonVerifierSettingsInitializer.Init(AssemblyFinder.ApiAssembly);
 }
