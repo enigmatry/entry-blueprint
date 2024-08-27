@@ -1,7 +1,7 @@
 namespace Enigmatry.Entry.Blueprint.Domain.Identity;
 
-public class UserContext(Guid id, PermissionsContext permissions)
+public class UserContext(Guid userId, PermissionsContext permissions)
 {
-    public Guid Id => id;
+    public Guid UserId => userId;
     public PermissionsContext Permissions => permissions;
 }

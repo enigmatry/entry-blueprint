@@ -32,7 +32,7 @@ public class LogContextMiddleware
 
     private static Guid? GetCurrentUserId(HttpContext context)
     {
-        var userId = context.Resolve<ICurrentUserProvider>().User?.Id;
+        var userId = context.Resolve<ICurrentUserProvider>().User?.UserId;
         return userId;
     }
 }
