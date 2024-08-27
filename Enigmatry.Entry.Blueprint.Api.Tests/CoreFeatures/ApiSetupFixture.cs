@@ -1,14 +1,13 @@
-﻿using System.Net.Http.Json;
+﻿using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.Blueprint.Api.Features.Users;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
-using Enigmatry.Entry.Core.Paging;
-using FluentAssertions;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Tests.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
-using Enigmatry.Entry.Blueprint.Tests.Infrastructure.Impersonation;
+using Enigmatry.Entry.Core.Paging;
+using FluentAssertions;
+using System.Net.Http.Json;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -41,7 +40,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     }
 
     [Test]
-    public async Task GivenValidUserId_GetById_ReturnsUserDetails()
+    public async Task GivenValidUserIdGetByIdReturnsUserDetails()
     {
         var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
 
@@ -49,7 +48,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     }
 
     [Test]
-    public async Task GivenNonExistingUserId_GetById_ReturnsNotFound()
+    public async Task GivenNonExistingUserIdGetByIdReturnsNotFound()
     {
         var response = await Client.GetAsync($"users/{Guid.NewGuid()}");
 
