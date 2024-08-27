@@ -16,7 +16,7 @@ public class PrincipalProviderCurrentUserProvider(
 {
     private UserContext? _user;
     private bool IsAuthenticated => claimsProvider.IsAuthenticated;
-    public Guid? UserId => User?.Id;
+    public Guid? UserId => User?.UserId;
 
     public UserContext? User
     {
