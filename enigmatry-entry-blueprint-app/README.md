@@ -121,7 +121,7 @@ This support includes:
 - Registration of System.TextJson converters used for de/serializing from/to Smart enums. See ```MvcStartupExtensions.cs```
 - Registration of Argon Json converters (used by VerifyTests) used for serializing/deserializing from/to Smart enums in tests projects. See ```CommonVerifierSettingsInitializer.cs```
 - Registration of Entity Framework Value converters. See ```AppDbContext.OnModelCreating```
-- Utility and base classes for modeling EntityFramework entities that have SmartEnums a primary id:
+- Utility and base classes for modeling EntityFramework entities that have SmartEnums as a primary id:
   - Base class ```EntityWithEnumId``` - used for entities that have Smart enum as a primary key (see usage in ```UserStatus.cs```),
   - Base class ```EntityWithEnumIdConfiguration``` - used for entity configurations for the entities that have Smart enums as primary keys (see usage in ```UserStatusConfiguration.cs```),
   - Base class ```EntityWithEnumIdSeeding``` - used for seeding of the entities that have Smart enums as primary keys (see usage in ```UserStatusSeeding.cs```)
