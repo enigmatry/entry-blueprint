@@ -8,10 +8,10 @@ using Microsoft.Extensions.Logging;
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 
 [UsedImplicitly]
-public class PrincipalProviderCurrentUserProvider(
+public class CurrentUserProvider(
     IClaimsProvider claimsProvider,
     IRepository<User> userRepository,
-    ILogger<PrincipalProviderCurrentUserProvider> logger)
+    ILogger<CurrentUserProvider> logger)
     : ICurrentUserProvider
 {
     private UserContext? _user;

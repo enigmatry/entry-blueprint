@@ -57,7 +57,7 @@ public static class ProgramExtensions
         {
             containerBuilder.AppRegisterModules();
             containerBuilder.AppRegisterClaimsPrincipalProvider();
-            containerBuilder.RegisterModule<IdentityModule<PrincipalProviderCurrentUserProvider>>();
+            containerBuilder.RegisterModule<IdentityModule<CurrentUserProvider>>();
         });
     }
 
