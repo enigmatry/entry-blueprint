@@ -37,7 +37,7 @@ export class UsersClient implements IUsersClient {
     }
 
     search(name: string | null | undefined, email: string | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | undefined, sortDirection: string | undefined): Observable<PagedResponseOfGetUsersResponseItem> {
-        let url_ = this.baseUrl + "/Users?";
+        let url_ = this.baseUrl + "/api/Users?";
         if (name !== undefined && name !== null)
             url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (email !== undefined && email !== null)
@@ -105,7 +105,7 @@ export class UsersClient implements IUsersClient {
     }
 
     post(command: CreateOrUpdateUserCommand): Observable<GetUserDetailsResponse> {
-        let url_ = this.baseUrl + "/Users";
+        let url_ = this.baseUrl + "/api/Users";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(command);
@@ -171,7 +171,7 @@ export class UsersClient implements IUsersClient {
     }
 
     get(id: string): Observable<GetUserDetailsResponse> {
-        let url_ = this.baseUrl + "/Users/{id}";
+        let url_ = this.baseUrl + "/api/Users/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -229,7 +229,7 @@ export class UsersClient implements IUsersClient {
     }
 
     getRolesLookup(): Observable<LookupResponseOfGuid[]> {
-        let url_ = this.baseUrl + "/Users/roles";
+        let url_ = this.baseUrl + "/api/Users/roles";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -284,7 +284,7 @@ export class UsersClient implements IUsersClient {
     }
 
     getStatusesLookup(): Observable<LookupResponseOfUserStatusId[]> {
-        let url_ = this.baseUrl + "/Users/statuses";
+        let url_ = this.baseUrl + "/api/Users/statuses";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -362,7 +362,7 @@ export class ProductsClient implements IProductsClient {
     }
 
     search(name: string | null | undefined, code: string | null | undefined, expiresBefore: Date | null | undefined, pageNumber: number | undefined, pageSize: number | undefined, sortBy: string | undefined, sortDirection: string | undefined): Observable<PagedResponseOfGetProductsResponseItem> {
-        let url_ = this.baseUrl + "/Products?";
+        let url_ = this.baseUrl + "/api/Products?";
         if (name !== undefined && name !== null)
             url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (code !== undefined && code !== null)
@@ -432,7 +432,7 @@ export class ProductsClient implements IProductsClient {
     }
 
     post(command: ProductCreateOrUpdateCommand): Observable<ProductCreateOrUpdateResult> {
-        let url_ = this.baseUrl + "/Products";
+        let url_ = this.baseUrl + "/api/Products";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(command);
@@ -498,7 +498,7 @@ export class ProductsClient implements IProductsClient {
     }
 
     get(id: string): Observable<GetProductDetailsResponse> {
-        let url_ = this.baseUrl + "/Products/{id}";
+        let url_ = this.baseUrl + "/api/Products/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -556,7 +556,7 @@ export class ProductsClient implements IProductsClient {
     }
 
     remove(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/Products/{id}";
+        let url_ = this.baseUrl + "/api/Products/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -603,7 +603,7 @@ export class ProductsClient implements IProductsClient {
     }
 
     isCodeUnique(id: string | null | undefined, code: string | undefined): Observable<IsProductCodeUniqueResponse> {
-        let url_ = this.baseUrl + "/Products/code-unique?";
+        let url_ = this.baseUrl + "/api/Products/code-unique?";
         if (id !== undefined && id !== null)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         if (code === null)
@@ -664,7 +664,7 @@ export class ProductsClient implements IProductsClient {
     }
 
     isNameUnique(id: string | null | undefined, name: string | undefined): Observable<IsProductNameUniqueResponse> {
-        let url_ = this.baseUrl + "/Products/name-unique?";
+        let url_ = this.baseUrl + "/api/Products/name-unique?";
         if (id !== undefined && id !== null)
             url_ += "Id=" + encodeURIComponent("" + id) + "&";
         if (name === null)
@@ -743,7 +743,7 @@ export class ProfileClient implements IProfileClient {
     }
 
     getProfile(): Observable<GetUserProfileResponse> {
-        let url_ = this.baseUrl + "/Profile";
+        let url_ = this.baseUrl + "/api/Profile";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {

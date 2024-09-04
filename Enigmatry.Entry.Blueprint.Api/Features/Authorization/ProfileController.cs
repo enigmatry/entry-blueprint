@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Enigmatry.Entry.Blueprint.Api.Features.Authorization;
 
 [Produces(MediaTypeNames.Application.Json)]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ProfileController : Controller
 {
     private readonly IMediator _mediator;
