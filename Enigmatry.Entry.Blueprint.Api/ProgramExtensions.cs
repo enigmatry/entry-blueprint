@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Entry.AspNetCore.Authorization;
 using Enigmatry.Entry.AspNetCore.Exceptions;
+using Enigmatry.Entry.AspNetCore.Security;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Logging;
@@ -13,14 +14,17 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.HealthChecks.Extensions;
 using Enigmatry.Entry.SmartEnums.Swagger;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Logging;
+using Polly;
 using Serilog;
+using System.Reflection.PortableExecutable;
 
 namespace Enigmatry.Entry.Blueprint.Api;
 
 public static class ProgramExtensions
 {
-    public static void AppAddServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AppAddServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
     {
         services.AddCors();
         services.AddHttpContextAccessor();
@@ -33,6 +37,7 @@ public static class ProgramExtensions
             .AddDbContextCheck<AppDbContext>();
         services.AppAddMediatR(AssemblyFinder.ApiAssembly);
         services.AppAddFluentValidation();
+        services.AddEntryHttps(env);
 
         services.AppAddAuthentication(configuration);
         services.AddEntryAuthorization<PermissionId>();
@@ -67,7 +72,22 @@ public static class ProgramExtensions
         var env = app.Environment;
 
         app.UseDefaultFiles();
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            OnPrepareResponse = context =>
+            {
+                if (context.File.Name != "index.html")
+                {
+                    context.Context.Response.Headers["Cache-Control"] = "public, max-age: 604800";
+                    context.Context.Response.Headers.Add("Expires", "604800");
+                }
+                else
+                {
+                    context.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store");
+                    context.Context.Response.Headers.Add("Expires", "-1");
+                }
+            }
+        });
 
         app.MapFallbackToFile("index.html");
 
@@ -87,10 +107,8 @@ public static class ProgramExtensions
                 .AllowAnyHeader());
             IdentityModelEventSource.ShowPII = true;
         }
-
-        app.UseHttpsRedirection();
-        app.UseHsts();
-
+        
+        app.UseEntryHttps(app.Environment);
         app.UseEntryExceptionHandler();
 
         app.UseAuthentication();
@@ -101,10 +119,10 @@ public static class ProgramExtensions
         app.MapControllers().RequireAuthorization();
         app.MapEntryHealthCheck(configuration);
 
-        //if (env.IsDevelopment())
-        //{
-        app.AppUseSwaggerWithAzureAdAuth(configuration);
-        //}
+        if (env.IsDevelopment())
+        {
+            app.AppUseSwaggerWithAzureAdAuth(configuration);
+        }
         app.AppConfigureFluentValidation();
     }
 }
