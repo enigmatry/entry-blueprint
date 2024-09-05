@@ -101,10 +101,10 @@ public static class ProgramExtensions
         app.MapControllers().RequireAuthorization();
         app.MapEntryHealthCheck(configuration);
 
-        if (env.IsDevelopment())
-        {
-            app.AppUseSwaggerWithAzureAdAuth(configuration);
-        }
+        //if (env.IsDevelopment())
+        //{
+        app.AppUseSwaggerWithAzureAdAuth(configuration);
+        //}
         app.AppConfigureFluentValidation();
     }
 }
