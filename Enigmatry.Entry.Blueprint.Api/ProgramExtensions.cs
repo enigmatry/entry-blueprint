@@ -78,13 +78,13 @@ public static class ProgramExtensions
             {
                 if (context.File.Name != "index.html")
                 {
-                    context.Context.Response.Headers["Cache-Control"] = "public, max-age: 604800";
-                    context.Context.Response.Headers.Add("Expires", "604800");
+                    context.Context.Response.Headers.Append("Cache-Control", "public, max-age: 604800");
+                    context.Context.Response.Headers.Append("Expires", "604800");
                 }
                 else
                 {
-                    context.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store");
-                    context.Context.Response.Headers.Add("Expires", "-1");
+                    context.Context.Response.Headers.Append("Cache-Control", "no-cache, no-store");
+                    context.Context.Response.Headers.Append("Expires", "-1");
                 }
             }
         });
