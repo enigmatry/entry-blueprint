@@ -51,8 +51,7 @@ stages:
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
-  # Replace BP-XYZ with the branch name you want to deploy to the test environment
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), contains(variables['Build.SourceBranch'], 'api-routes')))
+  condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), contains(variables['Build.SourceBranch'], 'BP-XYZ'))
   variables:
   - template: variables/variables.test.yml
   jobs:
