@@ -35,7 +35,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     public async Task TestGetAll()
     {
         var users = (await Client.GetAsync<PagedResponse<GetUsers.Response.Item>>(
-                new Uri("users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "EmailAddress")))
+                new Uri("api/users", UriKind.RelativeOrAbsolute), new KeyValuePair<string, string>("SortBy", "EmailAddress")))
             ?.Items.ToList()!;
 
         await Verify(users);
@@ -44,7 +44,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     [Test]
     public async Task GivenValidUserId_GetById_ReturnsUserDetails()
     {
-        var user = await Client.GetAsync<GetUserDetails.Response>($"users/{_user.Id}");
+        var user = await Client.GetAsync<GetUserDetails.Response>($"api/users/{_user.Id}");
 
         await Verify(user);
     }
@@ -52,7 +52,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     [Test]
     public async Task GivenNonExistingUserId_GetById_ReturnsNotFound()
     {
-        var response = await Client.GetAsync($"users/{Guid.NewGuid()}");
+        var response = await Client.GetAsync($"api/users/{Guid.NewGuid()}");
 
         response.Should().BeNotFound();
     }
@@ -69,7 +69,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
             UserStatusId = UserStatusId.Inactive
         };
         var user =
-            await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
+            await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("api/users", command);
 
         await Verify(user);
     }
@@ -86,7 +86,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
             UserStatusId = UserStatusId.Inactive
         };
         var user =
-            await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("users", command);
+            await Client.PostAsync<CreateOrUpdateUser.Command, GetUserDetails.Response>("api/users", command);
 
         await Verify(user);
     }
@@ -108,7 +108,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
             RoleId = Role.SystemAdminRoleId,
             UserStatusId = UserStatusId.Inactive
         };
-        var response = await Client.PostAsJsonAsync("users", command, HttpSerializationOptions.Options);
+        var response = await Client.PostAsJsonAsync("api/users", command, HttpSerializationOptions.Options);
 
         response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
     }

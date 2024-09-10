@@ -24,7 +24,7 @@ internal class Program
             });
 
             builder.Configuration.AppAddAzureKeyVault(builder.Configuration);
-            builder.Services.AppAddServices(builder.Configuration);
+            builder.Services.AppAddServices(builder.Configuration, builder.Environment);
             builder.Host.AppConfigureHost(builder.Configuration);
 
             var app = builder.Build();

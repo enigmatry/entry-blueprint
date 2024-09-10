@@ -12,14 +12,14 @@ public class UnauthenticatedAccessFixture : IntegrationFixtureBase
     [Test]
     public async Task EndpointWithAuthorizeAttributeIsNotAllowed()
     {
-        var response = await Client.GetAsync("users");
+        var response = await Client.GetAsync("api/users");
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
     [Test]
     public async Task EndpointWithNoAuthorizeAttributeIsNotAllowed()
     {
-        var response = await Client.GetAsync("profile");
+        var response = await Client.GetAsync("api/profile");
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 }

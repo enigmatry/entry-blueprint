@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Entry.AspNetCore.Authorization;
 using Enigmatry.Entry.AspNetCore.Exceptions;
+using Enigmatry.Entry.AspNetCore.Security;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Logging;
@@ -20,7 +21,7 @@ namespace Enigmatry.Entry.Blueprint.Api;
 
 public static class ProgramExtensions
 {
-    public static void AppAddServices(this IServiceCollection services, IConfiguration configuration)
+    public static void AppAddServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
     {
         services.AddCors();
         services.AddHttpContextAccessor();
@@ -33,6 +34,7 @@ public static class ProgramExtensions
             .AddDbContextCheck<AppDbContext>();
         services.AppAddMediatR(AssemblyFinder.ApiAssembly);
         services.AppAddFluentValidation();
+        services.AddEntryHttps(env);
 
         services.AppAddAuthentication(configuration);
         services.AddEntryAuthorization<PermissionId>();
@@ -67,7 +69,16 @@ public static class ProgramExtensions
         var env = app.Environment;
 
         app.UseDefaultFiles();
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            OnPrepareResponse = context =>
+            {
+                if (context.File.Name != "index.html")
+                {
+                    context.Context.Response.Headers.Append("Cache-Control", "public, max-age: 604800");
+                }
+            }
+        });
 
         app.MapFallbackToFile("index.html");
 
@@ -87,10 +98,8 @@ public static class ProgramExtensions
                 .AllowAnyHeader());
             IdentityModelEventSource.ShowPII = true;
         }
-
-        app.UseHttpsRedirection();
-        app.UseHsts();
-
+        
+        app.UseEntryHttps(app.Environment);
         app.UseEntryExceptionHandler();
 
         app.UseAuthentication();

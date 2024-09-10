@@ -10,7 +10,7 @@ public class ProfileControllerFixture : IntegrationFixtureBase
     [Test]
     public async Task TestGetProfileDetails()
     {
-        var profile = await Client.GetAsync<GetUserProfile.Response>("profile");
+        var profile = await Client.GetAsync<GetUserProfile.Response>("api/profile");
         await Verify(profile);
     }
 }

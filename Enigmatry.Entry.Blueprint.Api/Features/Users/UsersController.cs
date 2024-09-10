@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Enigmatry.Entry.Blueprint.Api.Features.Users;
 
 [Produces(MediaTypeNames.Application.Json)]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class UsersController(
     IUnitOfWork unitOfWork,
     IMediator mediator) : Controller

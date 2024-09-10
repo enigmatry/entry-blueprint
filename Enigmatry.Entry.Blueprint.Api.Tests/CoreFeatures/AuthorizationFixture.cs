@@ -29,7 +29,7 @@ public class AuthorizationFixture : IntegrationFixtureBase
     [Test]
     public async Task UserWithPermissionIsAllowed()
     {
-        var response = await Client.GetAsync("users");
+        var response = await Client.GetAsync("api/users");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 
@@ -44,14 +44,14 @@ public class AuthorizationFixture : IntegrationFixtureBase
             RoleId = Role.SystemAdminRoleId,
             UserStatusId = UserStatusId.Active
         };
-        var response = await Client.PostAsJsonAsync("users", command, HttpSerializationOptions.Options);
+        var response = await Client.PostAsJsonAsync("api/users", command, HttpSerializationOptions.Options);
         response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
     }
 
     [Test]
     public async Task EndpointWithoutAuthorizeAttributeIsAllowed()
     {
-        var response = await Client.GetAsync("profile");
+        var response = await Client.GetAsync("api/profile");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 

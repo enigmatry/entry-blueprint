@@ -11,7 +11,7 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Authorization;
 namespace Enigmatry.Entry.Blueprint.Api.Features.Products;
 
 [Produces(MediaTypeNames.Application.Json)]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ProductsController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

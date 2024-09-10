@@ -12,7 +12,7 @@ public static class SwaggerAuthenticationStartupExtensions
     public static void AppUseSwaggerWithAzureAdAuth(this IApplicationBuilder app, IConfiguration configuration)
     {
         var aadOptions = configuration.GetSection(AuthenticationStartupExtensions.AzureAdSection).Get<MicrosoftIdentityOptions>()!;
-        app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!, path: "/swagger");
+        app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!, path: "/api");
     }
 
     public static void AppAddSwaggerWithAzureAdAuth(this IServiceCollection services,
