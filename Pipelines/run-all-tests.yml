@@ -5,7 +5,7 @@ jobs:
     displayName: 'run all tests'
     timeoutInMinutes: 0
     pool:
-      vmImage: 'ubuntu-22.04'
+      vmImage: 'ubuntu-18.04'
     steps:
       - task: DotNetCoreCLI@2
         displayName: Build solution
