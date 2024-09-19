@@ -1,18 +1,23 @@
 trigger: none
 
-resources:
-  repositories:
-    - repository: templates
-      type: git
-      name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
-
 jobs:
-- template: run-all-angular-tests.yml@templates
-  parameters:
-    displayName: 'Run all Angular tests'
-    projectNameAngularApp: 'enigmatry-entry-blueprint-app'
+  - job: 'run_all_dotnet_tests'
+    displayName: 'run all tests'
+    timeoutInMinutes: 0
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - task: DotNetCoreCLI@2
+        displayName: Build solution
+        inputs:
+          command: 'build'
+          projects: '**/*.sln'
+          arguments: '/p:WarningsNotAsErrors=IDE0055'
 
-- template: run-all-dotnet-tests.yml@templates
-  parameters:
-    displayName: 'Run all .net tests'
+      - task: DotNetCoreCLI@2
+        displayName: Run all tests
+        inputs:
+          command: 'test'
+          projects: '**/*.Tests.csproj'
+          arguments: '--no-build --collect "XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[*.Data.Migrations]*'
         
