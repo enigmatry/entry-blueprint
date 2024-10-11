@@ -22,5 +22,6 @@ public static class MvcStartupExtensions
     private static void ConfigureMvc(this MvcOptions options) => options.Filters.Add(new CancelSavingTransactionAttribute());
 
     public static void AppRegisterJsonConverters(this IList<JsonConverter> converters) =>
-        converters.EntryAddSmartEnumJsonConverters([AssemblyFinder.ApiAssembly, AssemblyFinder.DomainAssembly]);
+        converters.EntryAddSmartEnumJsonConverters(SmartEnumConverterType.ValueConverter,
+            [AssemblyFinder.ApiAssembly, AssemblyFinder.DomainAssembly]);
 }
