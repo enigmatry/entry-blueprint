@@ -4,45 +4,42 @@
     "net8.0": {
       "Enigmatry.Entry.Core": {
         "type": "Direct",
-        "requested": "[3.3.2, )",
-        "resolved": "3.3.2",
-        "contentHash": "hBhzxpjUYlEjuCG0N1MqbSK6tF50xRXrMg/Pd4Ox7BRSMLNmTedRYMPoyWjStnR06d1oeFt9g+WITDJlOmFk8A==",
+        "requested": "[3.4.2, )",
+        "resolved": "3.4.2",
+        "contentHash": "NMcstDl4ex6ocon4df6djqhuwm+lLS6zOw+B+dD7unrRBP3VnMLHMrBCo5+64pfpzPRJ8nHuYSXfe5AsOfaTpg==",
         "dependencies": {
-          "JetBrains.Annotations": "2023.3.0",
-          "MediatR": "12.3.0",
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.1",
-          "Serilog": "4.0.0",
+          "JetBrains.Annotations": "2024.2.0",
+          "MediatR": "12.4.1",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
+          "Serilog": "4.0.2",
           "System.ComponentModel.Annotations": "5.0.0"
         }
       },
       "Enigmatry.Entry.SmartEnums": {
         "type": "Direct",
-        "requested": "[3.3.2, )",
-        "resolved": "3.3.2",
-        "contentHash": "X6v67Ra6yQgGPp09gPnsf/YvTOrK4nC69ptgjnf0rB8WoocrhK90cSIMg/KLcxKJ16qGivAXYUoRCuFHwbObNg==",
+        "requested": "[3.4.2, )",
+        "resolved": "3.4.2",
+        "contentHash": "+9lTVrNvcUkNcYGzk7+VFMEQW9SOHcXUjceLOgZ2m7/mMFEscbPZmxyYD9jRcKbBEXiUYSHyreeHRNLqbTaEcA==",
         "dependencies": {
-          "Ardalis.SmartEnum": "8.0.0",
-          "Enigmatry.Entry.Core": "3.3.2",
-          "JetBrains.Annotations": "2023.3.0"
+          "Ardalis.SmartEnum": "8.1.0",
+          "Enigmatry.Entry.Core": "3.4.2",
+          "JetBrains.Annotations": "2024.2.0"
         }
       },
       "Ardalis.SmartEnum": {
         "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "qGIfpKhSQeLouycBLosGD4qFqgPa5NKzzkH/59oSHyfs3FSbaO6JChpNEMnkslOyQRLbRXj2ImkA0uZdX19IZA==",
-        "dependencies": {
-          "System.ComponentModel.Annotations": "5.0.0"
-        }
+        "resolved": "8.1.0",
+        "contentHash": "+OpcDNwgfwdKEhEwq6U5lrXiBpdA3LxfZR7nTtF6vzbkXc1hKa2Uv/rHduzxwNLYrzOfR/7QUVyjWTliSS7pOA=="
       },
       "JetBrains.Annotations": {
         "type": "Transitive",
-        "resolved": "2023.3.0",
-        "contentHash": "PHfnvdBUdGaTVG9bR/GEfxgTwWM0Z97Y6X3710wiljELBISipSfF5okn/vz+C2gfO+ihoEyVPjaJwn8ZalVukA=="
+        "resolved": "2024.2.0",
+        "contentHash": "GNnqCFW/163p1fOehKx0CnAqjmpPrUSqrgfHM6qca+P+RN39C9rhlfZHQpJhxmQG/dkOYe/b3Z0P8b6Kv5m1qw=="
       },
       "MediatR": {
         "type": "Transitive",
-        "resolved": "12.3.0",
-        "contentHash": "DuXRw/qux2n7pTRPond4WK9XImO+30TZrGPCeOmjYIXDWokpjZQDFRsdZMoP0WqWU7inC4m0D+Zbu5dSc4z6NQ==",
+        "resolved": "12.4.1",
+        "contentHash": "0tLxCgEC5+r1OCuumR3sWyiVa+BMv3AgiU4+pz8xqTc+2q1WbUEXFOr7Orm96oZ9r9FsldgUtWvB2o7b9jDOaw==",
         "dependencies": {
           "MediatR.Contracts": "[2.0.1, 3.0.0)",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
@@ -55,13 +52,13 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "8.0.1",
-        "contentHash": "fGLiCRLMYd00JYpClraLjJTNKLmMJPnqxMaiRzEBIIvevlzxz33mXy39Lkd48hu1G+N21S7QpaO5ZzKsI6FRuA=="
+        "resolved": "8.0.2",
+        "contentHash": "3iE7UF7MQkCv1cxzCahz+Y/guQbTqieyxyaWKhrRO91itI9cOKO76OHeQDahqG4MmW5umr3CcCvGmK92lWNlbg=="
       },
       "Serilog": {
         "type": "Transitive",
-        "resolved": "4.0.0",
-        "contentHash": "2jDkUrSh5EofOp7Lx5Zgy0EB+7hXjjxE2ktTb1WVQmU00lDACR2TdROGKU0K1pDTBSJBN1PqgYpgOZF8mL7NJw=="
+        "resolved": "4.0.2",
+        "contentHash": "Vehq4uNYtURe/OnHEpWGvMgrvr5Vou7oZLdn3BuEH5FSCeHXDpNJtpzWoqywXsSvCTuiv0I65mZDRnJSeUvisA=="
       },
       "System.ComponentModel.Annotations": {
         "type": "Transitive",
@@ -70,11 +67,11 @@
       },
       "Microsoft.Extensions.Logging.Abstractions": {
         "type": "CentralTransitive",
-        "requested": "[8.0.1, )",
-        "resolved": "8.0.1",
-        "contentHash": "RIFgaqoaINxkM2KTOw72dmilDmTrYA0ns2KW4lDz4gZ2+o6IQ894CzmdL3StM2oh7QQq44nCWiqKqc4qUI9Jmg==",
+        "requested": "[8.0.2, )",
+        "resolved": "8.0.2",
+        "contentHash": "nroMDjS7hNBPtkZqVBbSiQaQjWRDxITI8Y7XnDs97rqG3EbzVTNLZQf7bIeUJcaHOV8bca47s1Uxq94+2oGdxA==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
         }
       }
     }
