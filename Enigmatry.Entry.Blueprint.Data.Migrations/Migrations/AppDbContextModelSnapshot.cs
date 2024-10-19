@@ -70,7 +70,6 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
             modelBuilder.Entity("Enigmatry.Entry.Blueprint.Domain.Authorization.Role", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -96,7 +95,6 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
             modelBuilder.Entity("Enigmatry.Entry.Blueprint.Domain.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Amount")
@@ -182,7 +180,6 @@ namespace Enigmatry.Entry.Blueprint.Data.Migrations.Migrations
             modelBuilder.Entity("Enigmatry.Entry.Blueprint.Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedById")

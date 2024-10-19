@@ -17,6 +17,7 @@ public class AppDbContext(DbContextOptions options) : BaseDbContext(CreateOption
     {
         // first we need to build the model so that we can later configure the smart enums
         base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyEntityWithGuidIdConvention();
         modelBuilder.EntryConfigureSmartEnums();
     }
 
