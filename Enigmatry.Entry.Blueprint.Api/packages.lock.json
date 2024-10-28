@@ -13,9 +13,9 @@
       },
       "Enigmatry.Entry.CodeGeneration.Validation": {
         "type": "Direct",
-        "requested": "[17.1.0, )",
-        "resolved": "17.1.0",
-        "contentHash": "WV0lzpM8qJAfBmzvJ05Hu7GIDpJJBxwWZ8YEY2syORYI7YINhc1H+bYaC+pDanUkiTN1TnHy7sQuFcsmVrIr+Q==",
+        "requested": "[17.2.0, )",
+        "resolved": "17.2.0",
+        "contentHash": "lAi4J1NYDD1g3xRDA7j1GwaE3Gzfmc/+5spDbZl2mxpLtuij5ecXlQPxdHOwO0sXwgQbmTIaWBbPaVVbkZygMA==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.SourceLink.GitHub": "1.1.1"

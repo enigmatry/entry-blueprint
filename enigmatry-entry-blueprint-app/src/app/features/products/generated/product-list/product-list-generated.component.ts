@@ -44,6 +44,7 @@ export class ProductListGeneratedComponent implements OnInit {
   @Input() contextMenuItems: ContextMenuItem[] = [];
   @Input() rowContextMenuFormatter: RowContextMenuFormatter;
   
+  @Input() rowFocusVisible: boolean;
   @Input() rowClassFormatter: RowClassFormatter;
   @Input() rowSelectionFormatter: RowSelectionFormatter = {};
 

@@ -4,11 +4,11 @@
     "net8.0": {
       "Enigmatry.Entry.CodeGeneration.Configuration": {
         "type": "Direct",
-        "requested": "[17.1.0, )",
-        "resolved": "17.1.0",
-        "contentHash": "76wYK72MULRVz9O3SIK9CUY9Q+by+WOsSyPYwmW9+0XfLHk6RN+6JqqjsI01I4oEfkLjWJFPPbK+cRqAYWz2QA==",
+        "requested": "[17.2.0, )",
+        "resolved": "17.2.0",
+        "contentHash": "nm34VPWsC1ujZ47QT6I5VN+zq2h+QWV9+Yo1FSg3IumDSg3sE+or0mzPgd3CQcxmMEuxUDqXDSss/peq8q54rg==",
         "dependencies": {
-          "Enigmatry.Entry.CodeGeneration.Validation": "17.1.0",
+          "Enigmatry.Entry.CodeGeneration.Validation": "17.2.0",
           "Humanizer.Core": "2.14.1",
           "JetBrains.Annotations": "2022.3.1",
           "Microsoft.SourceLink.GitHub": "1.1.1"
@@ -1446,7 +1446,7 @@
           "Enigmatry.Entry.AspNetCore.Authorization": "[3.4.3, )",
           "Enigmatry.Entry.Blueprint.Domain": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
-          "Enigmatry.Entry.CodeGeneration.Validation": "[17.1.0, )",
+          "Enigmatry.Entry.CodeGeneration.Validation": "[17.2.0, )",
           "Enigmatry.Entry.HealthChecks": "[3.4.3, )",
           "Microsoft.ApplicationInsights.AspNetCore": "[2.22.0, )",
           "Microsoft.AspNetCore.SpaProxy": "[8.0.10, )"
@@ -1575,9 +1575,9 @@
       },
       "Enigmatry.Entry.CodeGeneration.Validation": {
         "type": "CentralTransitive",
-        "requested": "[17.1.0, )",
-        "resolved": "17.1.0",
-        "contentHash": "WV0lzpM8qJAfBmzvJ05Hu7GIDpJJBxwWZ8YEY2syORYI7YINhc1H+bYaC+pDanUkiTN1TnHy7sQuFcsmVrIr+Q==",
+        "requested": "[17.2.0, )",
+        "resolved": "17.2.0",
+        "contentHash": "lAi4J1NYDD1g3xRDA7j1GwaE3Gzfmc/+5spDbZl2mxpLtuij5ecXlQPxdHOwO0sXwgQbmTIaWBbPaVVbkZygMA==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.SourceLink.GitHub": "1.1.1"

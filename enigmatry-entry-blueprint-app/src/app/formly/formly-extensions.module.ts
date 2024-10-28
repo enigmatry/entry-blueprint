@@ -6,6 +6,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { FORM_FIELD_ERROR_KEY } from '@enigmatry/entry-components/validation';
 import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
+import { BasicConfiguration, provideRedactorDefaultConfiguration, RedactorFormlyModule } from '@enigmatry-internal/redactor';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { EntryComponentsModule } from '@shared/entry-components.module';
@@ -46,6 +47,7 @@ const defaultFormConfig: EntryFormConfig = {
     MatButtonModule,
     EntryFormModule,
     EntryComponentsModule,
+    RedactorFormlyModule,
     FormlyMaterialModule,
     FormlyModule.forChild({
       types: [
@@ -84,6 +86,8 @@ const defaultFormConfig: EntryFormConfig = {
   providers: [{
     provide: ENTRY_FORM_CONFIG,
     useValue: defaultFormConfig
-  }]
+  },
+  provideRedactorDefaultConfiguration(BasicConfiguration)
+  ]
 })
 export class FormlyExtensionsModule { }

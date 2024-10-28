@@ -3,6 +3,7 @@ using Enigmatry.Entry.Blueprint.Api.Features.Validations;
 using Enigmatry.Entry.Blueprint.Domain.Products;
 using Enigmatry.Entry.CodeGeneration.Configuration;
 using Enigmatry.Entry.CodeGeneration.Configuration.Form;
+using Enigmatry.Entry.CodeGeneration.Configuration.Form.Controls;
 using Enigmatry.Entry.CodeGeneration.Configuration.Formatters;
 using JetBrains.Annotations;
 
@@ -31,8 +32,8 @@ public class ProductEditComponentConfiguration : IFormComponentConfiguration<Get
         builder.AutocompleteFormControl(x => x.Type)
             .WithOptions(options => options.WithFixedValues<ProductType>().WithSortKey("displayName"));
 
-        builder.TextareaFormControl(x => x.Description)
-            .WithRows(2);
+        builder.RichTextInputFormControl(x => x.Description)
+            .WithEditor(RichTextEditor.Redactor);
 
         builder.FormControl(x => x.Price)
             .WithLabel("Price per unit")

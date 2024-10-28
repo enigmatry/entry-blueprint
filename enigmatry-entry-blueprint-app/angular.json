@@ -38,7 +38,8 @@
               }
             ],
             "styles": [
-              "src/styles/partials/main.scss"
+              "src/styles/partials/main.scss",
+              "node_modules/@enigmatry-internal/redactor/redactor/redactor.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -46,7 +47,9 @@
                 "node_modules/@enigmatry"
               ]
             },
-            "scripts": [],
+            "scripts": [
+              "node_modules/@enigmatry-internal/redactor/redactor/redactor.min.js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
