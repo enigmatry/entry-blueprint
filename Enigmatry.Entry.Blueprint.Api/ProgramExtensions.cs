@@ -106,7 +106,8 @@ public static class ProgramExtensions
         app.UseAuthorization();
 
         app.UseMiddleware<LogContextMiddleware>();
-
+        app.UseEntryExceptionHandler();
+        
         app.MapControllers().RequireAuthorization();
         app.MapEntryHealthCheck(configuration);
 
