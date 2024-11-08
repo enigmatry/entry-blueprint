@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿using Enigmatry.Entry.Core.Cqrs;
 
 namespace Enigmatry.Entry.Blueprint.Api.Features;
 
-public class LookupRequest<T> : IRequest<IEnumerable<LookupResponse<T>>>;
+public class LookupRequest<T> : IQuery<IEnumerable<LookupResponse<T>>>;

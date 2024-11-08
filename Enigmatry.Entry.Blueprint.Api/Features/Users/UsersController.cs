@@ -4,7 +4,6 @@ using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
 using Enigmatry.Entry.Blueprint.Infrastructure.Authorization;
-using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +12,7 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Users;
 
 [Produces(MediaTypeNames.Application.Json)]
 [Route("api/[controller]")]
-public class UsersController(
-    IUnitOfWork unitOfWork,
-    IMediator mediator) : Controller
+public class UsersController(IMediator mediator) : Controller
 {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -45,7 +42,6 @@ public class UsersController(
     public async Task<ActionResult<GetUserDetails.Response>> Post(CreateOrUpdateUser.Command command)
     {
         var user = await mediator.Send(command);
-        await unitOfWork.SaveChangesAsync();
         return await Get(user.Id);
     }
 

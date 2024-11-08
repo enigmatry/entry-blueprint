@@ -5,6 +5,7 @@ using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Settings;
 using Enigmatry.Entry.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -59,7 +60,10 @@ public class EntityFrameworkModule : Module
 
         optionsBuilder
             .UseLoggerFactory(loggerFactory)
-            .EnableSensitiveDataLogging(dbContextSettings.SensitiveDataLoggingEnabled);
+            .EnableSensitiveDataLogging(dbContextSettings.SensitiveDataLoggingEnabled)
+            // Suppress warning introduced with SaveChangesBehavior (and the explicit transactions):
+            // 'Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples.'
+            .ConfigureWarnings(w => w.Ignore(SqlServerEventId.SavepointsDisabledBecauseOfMARS));
 
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("AppDbContext")!,
             sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));

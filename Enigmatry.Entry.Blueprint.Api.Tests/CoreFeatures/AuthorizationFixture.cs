@@ -1,12 +1,12 @@
-﻿using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
-using System.Net;
-using Enigmatry.Entry.Blueprint.Domain.Authorization;
-using FluentAssertions;
-using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+﻿using System.Net;
 using System.Net.Http.Json;
+using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
+using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
 using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
+using FluentAssertions;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 

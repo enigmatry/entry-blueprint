@@ -4,9 +4,9 @@
     "net8.0": {
       "Enigmatry.Entry.Core": {
         "type": "Direct",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "BsAqMzhl8gxSpExFV7XsEhqCbbuuIvle//i8KJdd/6Ap3Z7fEmNdF9b07fu1UIHiArGmk3kN9EBMkrl9NZItww==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "rHCunT427JRLXBK+kXere9ZqmLjTAHWhAxQ+BL1KUJhe319kRDo8WDoQ2IvT9iNulXlpkSoQBUJS+l5Nre+zOw==",
         "dependencies": {
           "JetBrains.Annotations": "2024.2.0",
           "MediatR": "12.4.1",
@@ -17,12 +17,12 @@
       },
       "Enigmatry.Entry.Core.EntityFramework": {
         "type": "Direct",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "SE/5r9HXuoSclJS7UKimZth2NHTHLQsKfC7Xh39EJ1gdhfsrfu5GnGPohBlc3pe0X7cHR1H0/JE1kGmCE2V5PA==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "G8sNfAfLiR0GUKfsXIQy6BmSW4230zHlKs+OsZ/3SlNrOx1D0IoVbdVa+Yeg9aL1R+ReHOYajVesa6IiKER5qw==",
         "dependencies": {
           "AutoMapper": "13.0.1",
-          "Enigmatry.Entry.Core": "3.4.3",
+          "Enigmatry.Entry.Core": "3.4.6-alpha.0.4",
           "Microsoft.EntityFrameworkCore": "8.0.10",
           "System.Linq.Dynamic.Core": "1.4.5"
         }
@@ -134,8 +134,8 @@
       "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
-          "Enigmatry.Entry.Core": "[3.4.3, )",
-          "Enigmatry.Entry.SmartEnums": "[3.4.3, )"
+          "Enigmatry.Entry.Core": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.SmartEnums": "[3.4.6-alpha.0.4, )"
         }
       },
       "AutoMapper": {
@@ -149,12 +149,12 @@
       },
       "Enigmatry.Entry.SmartEnums": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "Vd0s5Vom4KQ8jhkwl+2ksYC+QfNk5lzAZZBQUmBDfZpnArNlMUjYryHEZGRba5xUBKoLDezZTTZk12TYGESgyA==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "9t9VFfAyULI4MosGgGM9LbU1LYZCmLUhKkPdNv3Awf1HAijBTeXjZNuffrBOgSahjBOFqwK9JOXoK1GhoSj60Q==",
         "dependencies": {
           "Ardalis.SmartEnum": "8.1.0",
-          "Enigmatry.Entry.Core": "3.4.3",
+          "Enigmatry.Entry.Core": "3.4.6-alpha.0.4",
           "JetBrains.Annotations": "2024.2.0"
         }
       },

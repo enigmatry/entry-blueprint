@@ -1,11 +1,9 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Identity;
-using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
 using DomainUser = Enigmatry.Entry.Blueprint.Domain.Users.User;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Identity;

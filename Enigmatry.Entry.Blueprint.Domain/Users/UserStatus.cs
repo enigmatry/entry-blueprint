@@ -1,4 +1,3 @@
-using Enigmatry.Entry.Blueprint.Core.Entities;
 using Enigmatry.Entry.SmartEnums.Entities;
 using JetBrains.Annotations;
 
