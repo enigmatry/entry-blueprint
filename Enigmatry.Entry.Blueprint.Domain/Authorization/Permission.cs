@@ -1,5 +1,6 @@
 ﻿using Enigmatry.Entry.Core.Entities;
 using JetBrains.Annotations;
+
 #pragma warning disable CA1711
 
 namespace Enigmatry.Entry.Blueprint.Domain.Authorization;

@@ -10,11 +10,11 @@
       },
       "Enigmatry.Entry.AspNetCore.Tests.SystemTextJson": {
         "type": "Direct",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "1lBwrg7sI8AFRBe4SlX4vc8NoNVcdeu5ISzZSnGuJeXdZHIPiUyL2pRvYsWV1ITuIBFYeH1Guz9KOpx5UH+hlw==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "oTV8OoMPprkHZVX3U/CTN9MTMkBYiof76yr2CWsZiaROSI5W+SmEiIOMyP0soRw0pKyP44i6F/ivGX999BYGcA==",
         "dependencies": {
-          "Enigmatry.Entry.AspNetCore.Tests.Utilities": "3.4.3"
+          "Enigmatry.Entry.AspNetCore.Tests.Utilities": "3.4.6-alpha.0.4"
         }
       },
       "Microsoft.NET.Test.Sdk": {
@@ -196,10 +196,10 @@
       },
       "Enigmatry.Entry.AspNetCore.Tests.Utilities": {
         "type": "Transitive",
-        "resolved": "3.4.3",
-        "contentHash": "Ia+BOZpfIj/acuUJFDoAv8Cd9LJG0oTsxV73qJxVOeQdDd3uuJxuenpSeaduy7N1ZDIGrExpWBjRvvacdFZ6eQ==",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "HFaPeJHDEgJQtvW2cnpwTelLtSE1sI2JTcIVKtmdkFiHdI7y/wXN5H9lGKNgkOTkIZHvA86umkm6PqJZvD+/Eg==",
         "dependencies": {
-          "Enigmatry.Entry.Core": "3.4.3",
+          "Enigmatry.Entry.Core": "3.4.6-alpha.0.4",
           "FluentAssertions": "6.12.1",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
           "System.Net.Http.Json": "8.0.1"
@@ -2122,16 +2122,16 @@
       },
       "System.Text.Encodings.Web": {
         "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ=="
+        "resolved": "6.0.0",
+        "contentHash": "Vg8eB5Tawm1IFqj4TVK1czJX89rhFxJo9ELqc/Eiq0eXy13RK00eubyU6TJE6y+GQXjyV5gSfiewDUZjQgSE0w==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
       },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "8.0.4",
-        "contentHash": "bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
-        "dependencies": {
-          "System.Text.Encodings.Web": "8.0.0"
-        }
+        "resolved": "8.0.5",
+        "contentHash": "0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg=="
       },
       "System.Threading": {
         "type": "Transitive",
@@ -2205,7 +2205,7 @@
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
-          "Enigmatry.Entry.SmartEnums.VerifyTests": "[3.4.3, )",
+          "Enigmatry.Entry.SmartEnums.VerifyTests": "[3.4.6-alpha.0.4, )",
           "FakeItEasy": "[8.3.0, )",
           "FluentAssertions": "[6.12.1, )",
           "Microsoft.NET.Test.Sdk": "[17.11.1, )",
@@ -2217,16 +2217,16 @@
       "enigmatry.entry.blueprint.core": {
         "type": "Project",
         "dependencies": {
-          "Enigmatry.Entry.Core": "[3.4.3, )",
-          "Enigmatry.Entry.SmartEnums": "[3.4.3, )"
+          "Enigmatry.Entry.Core": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.SmartEnums": "[3.4.6-alpha.0.4, )"
         }
       },
       "enigmatry.entry.blueprint.domain": {
         "type": "Project",
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",
-          "Enigmatry.Entry.Core": "[3.4.3, )",
-          "Enigmatry.Entry.Core.EntityFramework": "[3.4.3, )",
+          "Enigmatry.Entry.Core": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.Core.EntityFramework": "[3.4.6-alpha.0.4, )",
           "FluentValidation": "[11.10.0, )"
         }
       },
@@ -2237,18 +2237,18 @@
           "Autofac.Extensions.DependencyInjection": "[10.0.0, )",
           "Automapper": "[13.0.1, )",
           "Azure.Extensions.AspNetCore.Configuration.Secrets": "[1.3.2, )",
-          "Enigmatry.Entry.AspNetCore": "[3.4.3, )",
-          "Enigmatry.Entry.AspNetCore.Authorization": "[3.4.3, )",
+          "Enigmatry.Entry.AspNetCore": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.AspNetCore.Authorization": "[3.4.6-alpha.0.4, )",
           "Enigmatry.Entry.Blueprint.ApplicationServices": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.Core": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.Domain": "[1.0.0, )",
-          "Enigmatry.Entry.EntityFramework": "[3.4.3, )",
-          "Enigmatry.Entry.Infrastructure": "[3.4.3, )",
-          "Enigmatry.Entry.MediatR": "[3.4.3, )",
-          "Enigmatry.Entry.SmartEnums.EntityFramework": "[3.4.3, )",
-          "Enigmatry.Entry.SmartEnums.Swagger": "[3.4.3, )",
-          "Enigmatry.Entry.SmartEnums.SystemTextJson": "[3.4.3, )",
-          "Enigmatry.Entry.Swagger": "[3.4.3, )",
+          "Enigmatry.Entry.EntityFramework": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.Infrastructure": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.MediatR": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.SmartEnums.EntityFramework": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.SmartEnums.Swagger": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.SmartEnums.SystemTextJson": "[3.4.6-alpha.0.4, )",
+          "Enigmatry.Entry.Swagger": "[3.4.6-alpha.0.4, )",
           "FluentValidation.DependencyInjectionExtensions": "[11.10.0, )",
           "Microsoft.Extensions.DependencyInjection": "[8.0.1, )",
           "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "[8.0.10, )",
@@ -2307,30 +2307,30 @@
       },
       "Enigmatry.Entry.AspNetCore": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "nOa6eLMMTC8UnQedeQIMRIGbEfMHyBWqwVYYZ11N0Xy4R6CokSVmzpuU0AJ3gzL1rsnh6n1KrFIyq2KIXt1LnQ==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "hZOezkrD/jQAg7X5khnlcTRpt1qQeW1tC6TSffQkvkb3A+dUZ9YFjefzEtEfrBH+ibJKX7qgvLEKDV4WcVglmA==",
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Ben.Demystifier": "0.4.1",
-          "Enigmatry.Entry.Core": "3.4.3",
+          "Enigmatry.Entry.Core": "3.4.6-alpha.0.4",
           "FluentValidation": "11.10.0"
         }
       },
       "Enigmatry.Entry.AspNetCore.Authorization": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "sP6l2Pwemc34qC1y2wKZBEUjdbcCMhIF/mbC0akiDOh2vAzxDzVecHn65BetI9rduKmu5oIsD2CI372LtPW9Zw==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "rfoBqggzODK+I8KXFIGYPsZD4rI0b/1G2vQ53s7FTQeuYJJn9ZeWZL+Yy4gDx8Mse82uj1SfdzJyySH7pSbwug==",
         "dependencies": {
-          "Enigmatry.Entry.AspNetCore": "3.4.3"
+          "Enigmatry.Entry.AspNetCore": "3.4.6-alpha.0.4"
         }
       },
       "Enigmatry.Entry.Core": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "BsAqMzhl8gxSpExFV7XsEhqCbbuuIvle//i8KJdd/6Ap3Z7fEmNdF9b07fu1UIHiArGmk3kN9EBMkrl9NZItww==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "rHCunT427JRLXBK+kXere9ZqmLjTAHWhAxQ+BL1KUJhe319kRDo8WDoQ2IvT9iNulXlpkSoQBUJS+l5Nre+zOw==",
         "dependencies": {
           "JetBrains.Annotations": "2024.2.0",
           "MediatR": "12.4.1",
@@ -2341,43 +2341,44 @@
       },
       "Enigmatry.Entry.Core.EntityFramework": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "SE/5r9HXuoSclJS7UKimZth2NHTHLQsKfC7Xh39EJ1gdhfsrfu5GnGPohBlc3pe0X7cHR1H0/JE1kGmCE2V5PA==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "G8sNfAfLiR0GUKfsXIQy6BmSW4230zHlKs+OsZ/3SlNrOx1D0IoVbdVa+Yeg9aL1R+ReHOYajVesa6IiKER5qw==",
         "dependencies": {
           "AutoMapper": "13.0.1",
-          "Enigmatry.Entry.Core": "3.4.3",
+          "Enigmatry.Entry.Core": "3.4.6-alpha.0.4",
           "Microsoft.EntityFrameworkCore": "8.0.10",
           "System.Linq.Dynamic.Core": "1.4.5"
         }
       },
       "Enigmatry.Entry.EntityFramework": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "2sP5hHHK2j1kpdf3jkUJ8cpBnmiLiFmqnoIBb3hrX0CeOaqqaDilep6JYGBTnL5+1giiUaEGpxCB+t/32mYO1w==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "Tl1rAMqK0oTMfYZej7GSfzU9LKPCWpfv09epulYW9HjCxOMBXa8zotIA9Yo7rzns9QkJPOLLmFsX4/h2jGzuYw==",
         "dependencies": {
           "Azure.Identity": "1.12.1",
-          "Enigmatry.Entry.Core.EntityFramework": "3.4.3",
+          "Enigmatry.Entry.Core.EntityFramework": "3.4.6-alpha.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.10",
           "Microsoft.Extensions.Logging.Abstractions": "8.0.2",
-          "System.Formats.Asn1": "8.0.1"
+          "System.Formats.Asn1": "8.0.1",
+          "System.Text.Json": "8.0.5"
         }
       },
       "Enigmatry.Entry.Infrastructure": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "OcILvsl775b1eEVkd7edQ5nXW6O613xqOeiZ0JHJvH0/jd58z3/HWoa6VVT69Ni9uYgRcps0R8S23N/qVy/qnQ==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "BqsonI14y5Q09T6a5D3ZtkhP6FVKjy+4IzFTEwZyiaQLUMaXyy/WPdwTqxaJCzjniszWysSRNm0CNmJD4Mhayg==",
         "dependencies": {
-          "Enigmatry.Entry.Core": "3.4.3"
+          "Enigmatry.Entry.Core": "3.4.6-alpha.0.4"
         }
       },
       "Enigmatry.Entry.MediatR": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "lsWQiboVBIPUHQGV6O/5WUomcWHumUvOSbenXgLlymRbQ8SJddxZFjyAOkQWFqTtb01Dy0eJwLfl8cT5Lb015Q==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "iSz88/N4Bci601vrf0G/uFPr7yxmH3yE+aTE77bWR5ZJqEQpN9d2wfyo9irpSk3RZ3/CEERgkOq5NcZG0loveQ==",
         "dependencies": {
           "FluentValidation": "11.10.0",
           "MediatR": "12.4.1",
@@ -2387,61 +2388,62 @@
       },
       "Enigmatry.Entry.SmartEnums": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "Vd0s5Vom4KQ8jhkwl+2ksYC+QfNk5lzAZZBQUmBDfZpnArNlMUjYryHEZGRba5xUBKoLDezZTTZk12TYGESgyA==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "9t9VFfAyULI4MosGgGM9LbU1LYZCmLUhKkPdNv3Awf1HAijBTeXjZNuffrBOgSahjBOFqwK9JOXoK1GhoSj60Q==",
         "dependencies": {
           "Ardalis.SmartEnum": "8.1.0",
-          "Enigmatry.Entry.Core": "3.4.3",
+          "Enigmatry.Entry.Core": "3.4.6-alpha.0.4",
           "JetBrains.Annotations": "2024.2.0"
         }
       },
       "Enigmatry.Entry.SmartEnums.EntityFramework": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "8OfiNn6Jo1DmkmQx7DyADFHrkXB8Ee7ESWbHBR8c2wRFh+OYwjkkpC8VZamQs4jQhTlaZgLWK1LONQexW/Pp5A==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "bJT7aOaMrowoPJsoInRXSYYyNpc+ZNwJTrAnfbZWOiEenMT3TCLNDeuIuS3VwzPQyZkwGgKwVQsou2whQoi2mA==",
         "dependencies": {
           "Ardalis.SmartEnum.EFCore": "8.1.0",
-          "Enigmatry.Entry.Core.EntityFramework": "3.4.3",
-          "Enigmatry.Entry.SmartEnums": "3.4.3"
+          "Enigmatry.Entry.Core.EntityFramework": "3.4.6-alpha.0.4",
+          "Enigmatry.Entry.SmartEnums": "3.4.6-alpha.0.4",
+          "System.Text.Json": "8.0.5"
         }
       },
       "Enigmatry.Entry.SmartEnums.Swagger": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "4cGZalU5/H6rnaRcdcpxP/lMKdXUOagYCoQQ8mU+/LMjT7RRIVVrC3OuoZjEt0LVy8tOzEOShDHHFoR2+sq84w==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "gKoa/p4qMi9C3rvEoHsrJ2Ts3sM3u3SBy/kd73OtWZ2LOOPqYAlEpbvOWF8RvhqoTMvZcM2ElEP0AFaDfqKHmw==",
         "dependencies": {
-          "Enigmatry.Entry.SmartEnums": "3.4.3",
+          "Enigmatry.Entry.SmartEnums": "3.4.6-alpha.0.4",
           "NSwag.Generation.AspNetCore": "14.1.0"
         }
       },
       "Enigmatry.Entry.SmartEnums.SystemTextJson": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "Ef+mp0DH58OopsGFZB2hL/7/Ftw1a5lUilE/tkzXUmS8Drv5Lckqgf/Nz/antiVV9wKUEXfiX/bVP5TFaTOL2Q==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "pQSoM6YjJ2zdhTb/b6FUYIfGMu+tDdUJAVxtObR/47kGcZMyH0ZxKQI9wrga61hyABYZJVcoThDL7Sbwyofk3w==",
         "dependencies": {
           "Ardalis.SmartEnum.SystemTextJson": "8.1.0",
-          "Enigmatry.Entry.SmartEnums": "3.4.3"
+          "Enigmatry.Entry.SmartEnums": "3.4.6-alpha.0.4"
         }
       },
       "Enigmatry.Entry.SmartEnums.VerifyTests": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "N/aWzzjzlVjjx6zOtYDwmZeZoEwFOVtulRtBK4zU8UUs/Ikc9TqKvpYRbakTX2RcG3AE260dwuGpSno6/vGUcg==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "wpNS2E6lCd4ImIUdcybFNoLa9z4fMuT4rUeJKfnNUaAIbB9uPJ9adMijwDqSXwio4m6YV4lpVEKB4ZsYqacWow==",
         "dependencies": {
-          "Enigmatry.Entry.SmartEnums": "3.4.3",
+          "Enigmatry.Entry.SmartEnums": "3.4.6-alpha.0.4",
           "Verify": "26.6.0"
         }
       },
       "Enigmatry.Entry.Swagger": {
         "type": "CentralTransitive",
-        "requested": "[3.4.3, )",
-        "resolved": "3.4.3",
-        "contentHash": "G7YIezqb0QL5WnBSLx7k4heHGIAKi5juot2yHAEfHZQbsXR5oCDRFLsaPtUiEYbd1UGiHSEfjkS80M20/8As0Q==",
+        "requested": "[3.4.6-alpha.0.4, )",
+        "resolved": "3.4.6-alpha.0.4",
+        "contentHash": "T9csFeNfdnkcJvTaLMckcpCHDmNN0yRHqpLgp9vaJfzz3/OY5vL2zqKmXtqichGKmwY0j+Zc3gAzapPYXQwp/A==",
         "dependencies": {
           "JetBrains.Annotations": "2024.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",

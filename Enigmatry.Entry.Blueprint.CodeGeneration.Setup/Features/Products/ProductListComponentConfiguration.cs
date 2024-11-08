@@ -1,8 +1,8 @@
-﻿using Enigmatry.Entry.Blueprint.Api.Features.Products;
+﻿using System.Linq.Expressions;
+using Enigmatry.Entry.Blueprint.Api.Features.Products;
 using Enigmatry.Entry.CodeGeneration.Configuration.Formatters;
 using Enigmatry.Entry.CodeGeneration.Configuration.List;
 using Enigmatry.Entry.CodeGeneration.Configuration.List.Model;
-using System.Linq.Expressions;
 
 namespace Enigmatry.Entry.Blueprint.CodeGeneration.Setup.Features.Products;
 

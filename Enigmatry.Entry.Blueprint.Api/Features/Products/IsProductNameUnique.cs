@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Products;
+using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
 using MediatR;
@@ -9,7 +10,7 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Products;
 public static class IsProductNameUnique
 {
     [PublicAPI]
-    public class Request : IRequest<Response>
+    public class Request : IQuery<Response>
     {
         public Guid? Id { get; set; }
         public string Name { get; set; } = String.Empty;
@@ -22,18 +23,11 @@ public static class IsProductNameUnique
     }
 
     [UsedImplicitly]
-    public class RequestHandler : IRequestHandler<Request, Response>
+    public class RequestHandler(IRepository<Product> productRepository) : IRequestHandler<Request, Response>
     {
-        private readonly IRepository<Product> _productRepository;
-
-        public RequestHandler(IRepository<Product> productRepository)
-        {
-            _productRepository = productRepository;
-        }
-
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            var isUnique = !await _productRepository.QueryAll()
+            var isUnique = !await productRepository.QueryAll()
                 .Where(x => x.Id != request.Id)
                 .AnyAsync(x => x.Name == request.Name, cancellationToken);
             return new Response { IsUnique = isUnique };

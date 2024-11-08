@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Enigmatry.Entry.Blueprint.Domain.Users;
+using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
 using Enigmatry.Entry.Core.EntityFramework;
@@ -12,7 +13,7 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Users;
 public static class GetUserDetails
 {
     [PublicAPI]
-    public class Request : IRequest<Response>
+    public class Request : IQuery<Response>
     {
         public Guid Id { get; set; }
 

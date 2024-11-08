@@ -2,6 +2,7 @@
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Domain.Users;
+using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
 using Enigmatry.Entry.Core.EntityFramework;
@@ -14,7 +15,7 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Authorization;
 public static class GetUserProfile
 {
     [PublicAPI]
-    public class Request : IRequest<Response>;
+    public class Request : IQuery<Response>;
 
     [PublicAPI]
     public class Response

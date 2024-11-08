@@ -62,10 +62,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Entry.Blueprint.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Entry.Blueprint.Common.Tests", "Enigmatry.Entry.Blueprint.Common.Tests\Enigmatry.Entry.Blueprint.Common.Tests.csproj", "{A8D4A4DD-20EB-472B-B329-C697DA9D95C0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{E5AA13FF-B40E-4C44-90F1-7310DA6F90D2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{E5AA13FF-B40E-4C44-90F1-7310DA6F90D2}"
 	ProjectSection(SolutionItems) = preProject
-		Scripts\add-migration.ps1 = Scripts\add-migration.ps1
-		Scripts\update-databases.ps1 = Scripts\update-databases.ps1
+		scripts\add-migration.ps1 = scripts\add-migration.ps1
+		scripts\open-api-logs.ps1 = scripts\open-api-logs.ps1
+		scripts\open-scheduler-logs.ps1 = scripts\open-scheduler-logs.ps1
+		scripts\update-databases.ps1 = scripts\update-databases.ps1
 	EndProjectSection
 EndProject
 Global

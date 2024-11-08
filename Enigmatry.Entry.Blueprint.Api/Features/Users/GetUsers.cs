@@ -2,9 +2,10 @@
 using AutoMapper.QueryableExtensions;
 using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Domain.Users;
-using Enigmatry.Entry.Core.Paging;
+using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.EntityFramework;
+using Enigmatry.Entry.Core.Paging;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Users;
 public static class GetUsers
 {
     [PublicAPI]
-    public class Request : PagedRequest<Response.Item>
+    public class Request : PagedRequest<Response.Item>, IQuery<PagedResponse<Response.Item>>
     {
         public string? Name { get; set; }
         public string? Email { get; set; }

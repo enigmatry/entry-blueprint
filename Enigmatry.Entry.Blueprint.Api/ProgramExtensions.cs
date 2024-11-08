@@ -12,6 +12,7 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
+using Enigmatry.Entry.Blueprint.Infrastructure.Init;
 using Enigmatry.Entry.HealthChecks.Extensions;
 using Enigmatry.Entry.SmartEnums.Swagger;
 using Microsoft.IdentityModel.Logging;

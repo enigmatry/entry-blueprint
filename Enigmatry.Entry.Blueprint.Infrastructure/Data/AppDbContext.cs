@@ -1,8 +1,8 @@
-﻿using Enigmatry.Entry.EntityFramework;
-using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
+﻿using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
+using Enigmatry.Entry.EntityFramework;
+using Enigmatry.Entry.SmartEnums.EntityFramework;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
-using Enigmatry.Entry.SmartEnums.EntityFramework;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Data;
 
