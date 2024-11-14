@@ -11,22 +11,22 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.Core" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.Core.EntityFramework" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.EntityFramework" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.Swagger" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="3.4.6-alpha.0.4" />
-    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="3.4.6-alpha.0.4" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.Core" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.Core.EntityFramework" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.EntityFramework" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.Swagger" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="3.4.6-alpha.0.8" />
+    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="3.4.6-alpha.0.8" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="17.1.0" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="17.1.0" />
     <PackageVersion Include="FakeItEasy" Version="8.3.0" />

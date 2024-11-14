@@ -2,6 +2,6 @@
 
 public interface ICurrentUserProvider
 {
-    UserContext? User { get; }
-    Guid? UserId { get; }
+    public UserContext? User { get; }
+    public Guid? UserId { get; }
 }

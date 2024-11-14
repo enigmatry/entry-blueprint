@@ -2,6 +2,7 @@
 
 public interface IEntityWithCreatedUpdated
 {
-    void SetCreated(DateTimeOffset createdOn, Guid createdBy);
-    void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy);
+    public void SetCreated(DateTimeOffset createdOn, Guid createdBy);
+
+    public void SetUpdated(DateTimeOffset updatedOn, Guid updatedBy);
 }
