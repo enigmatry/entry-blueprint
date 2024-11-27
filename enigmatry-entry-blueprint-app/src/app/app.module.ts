@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,30 +12,24 @@ import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    CoreModule,
-    ApiModule,
-    SharedModule,
-    HomeModule,
-    EntryCommonModule.forRoot(),
-    EntryComponentsModule.forRoot(),
-    AppRoutingModule
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initFactory,
-      deps: [AppInitService],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        CoreModule,
+        ApiModule,
+        SharedModule,
+        HomeModule,
+        EntryCommonModule.forRoot(),
+        EntryComponentsModule.forRoot(),
+        AppRoutingModule], providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initFactory,
+            deps: [AppInitService],
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
