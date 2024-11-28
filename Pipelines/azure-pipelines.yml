@@ -47,6 +47,7 @@ stages:
       runAngularTests: true
       dbContextNames:
       - $(dbContextName)
+      migrationCommandParams: '--verbose'
 
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
