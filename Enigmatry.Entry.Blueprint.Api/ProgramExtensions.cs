@@ -107,7 +107,9 @@ public static class ProgramExtensions
         app.UseAuthorization();
 
         app.UseMiddleware<LogContextMiddleware>();
-
+        // We add the Exception middleware twice; first time for exceptions during auth setup; second time to enrich Exception logs with the LogContext
+        app.UseEntryExceptionHandler();
+        
         app.MapControllers().RequireAuthorization();
         app.MapEntryHealthCheck(configuration);
 
