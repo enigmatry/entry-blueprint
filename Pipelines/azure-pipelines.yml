@@ -9,7 +9,7 @@ variables:
   dbContextName: 'AppDbContext'
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   majorMinorVersion: 1.0
-  nodeVersion: '18.18.2'
+  nodeVersion: '22.11.0'
   projectNameAngularApp: enigmatry-entry-blueprint-app
   projectNamePrefix: Enigmatry.Entry.Blueprint
 
