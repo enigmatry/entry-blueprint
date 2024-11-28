@@ -215,6 +215,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
         }
       }
-    }
+    },
+    "net8.0/win-x64": {}
   }
 }
