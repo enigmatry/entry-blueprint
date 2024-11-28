@@ -4,6 +4,7 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
+using Enigmatry.Entry.Blueprint.Infrastructure.Init;
 using Enigmatry.Entry.Scheduler;
 using Serilog;
 using Serilog.Extensions.Logging;

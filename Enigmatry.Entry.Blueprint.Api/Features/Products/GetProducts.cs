@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Enigmatry.Entry.Blueprint.Domain.Products;
+using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.EntityFramework;
 using Enigmatry.Entry.Core.Paging;
@@ -11,7 +12,7 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Products;
 public static class GetProducts
 {
     [PublicAPI]
-    public class Request : PagedRequest<Response.Item>
+    public class Request : PagedRequest<Response.Item>, IQuery<PagedResponse<Response.Item>>
     {
         public string? Name { get; set; }
         public string? Code { get; set; }

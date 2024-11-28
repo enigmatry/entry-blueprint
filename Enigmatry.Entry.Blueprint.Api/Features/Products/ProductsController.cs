@@ -1,34 +1,24 @@
-﻿using Enigmatry.Entry.AspNetCore;
-using Enigmatry.Entry.Core.Data;
-using Enigmatry.Entry.Core.Paging;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Mime;
+﻿using System.Net.Mime;
+using Enigmatry.Entry.AspNetCore;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Products.Commands;
 using Enigmatry.Entry.Blueprint.Infrastructure.Authorization;
+using Enigmatry.Entry.Core.Paging;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Enigmatry.Entry.Blueprint.Api.Features.Products;
 
 [Produces(MediaTypeNames.Application.Json)]
 [Route("api/[controller]")]
-public class ProductsController : Controller
+public class ProductsController(IMediator mediator) : Controller
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMediator _mediator;
-
-    public ProductsController(IUnitOfWork unitOfWork, IMediator mediator)
-    {
-        _unitOfWork = unitOfWork;
-        _mediator = mediator;
-    }
-
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<PagedResponse<GetProducts.Response.Item>>> Search([FromQuery] GetProducts.Request query)
     {
-        var response = await _mediator.Send(query);
+        var response = await mediator.Send(query);
         return response.ToActionResult();
     }
 
@@ -39,7 +29,7 @@ public class ProductsController : Controller
     [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<GetProductDetails.Response>> Get(Guid id)
     {
-        var response = await _mediator.Send(new GetProductDetails.Request { Id = id });
+        var response = await mediator.Send(new GetProductDetails.Request { Id = id });
         return response.ToActionResult();
     }
 
@@ -50,7 +40,7 @@ public class ProductsController : Controller
     [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<IsProductCodeUnique.Response>> IsCodeUnique([FromQuery] IsProductCodeUnique.Request request)
     {
-        var response = await _mediator.Send(request);
+        var response = await mediator.Send(request);
         return response.ToActionResult();
     }
 
@@ -61,7 +51,7 @@ public class ProductsController : Controller
     [UserHasPermission(PermissionId.ProductsRead)]
     public async Task<ActionResult<IsProductNameUnique.Response>> IsNameUnique([FromQuery] IsProductNameUnique.Request request)
     {
-        var response = await _mediator.Send(request);
+        var response = await mediator.Send(request);
         return response.ToActionResult();
     }
 
@@ -72,8 +62,7 @@ public class ProductsController : Controller
     [UserHasPermission(PermissionId.ProductsWrite)]
     public async Task<ActionResult<ProductCreateOrUpdate.Result>> Post(ProductCreateOrUpdate.Command command)
     {
-        var result = await _mediator.Send(command);
-        await _unitOfWork.SaveChangesAsync();
+        var result = await mediator.Send(command);
         return result;
     }
 
@@ -81,9 +70,5 @@ public class ProductsController : Controller
     [Route("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [UserHasPermission(PermissionId.ProductsDelete)]
-    public async Task Remove(Guid id)
-    {
-        await _mediator.Send(new RemoveProduct.Command { Id = id });
-        await _unitOfWork.SaveChangesAsync();
-    }
+    public async Task Remove(Guid id) => await mediator.Send(new RemoveProduct.Command { Id = id });
 }

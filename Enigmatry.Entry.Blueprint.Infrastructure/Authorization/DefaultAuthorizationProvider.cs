@@ -1,6 +1,6 @@
-﻿using Enigmatry.Entry.Blueprint.Domain.Authorization;
+﻿using Enigmatry.Entry.AspNetCore.Authorization;
+using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Identity;
-using Enigmatry.Entry.AspNetCore.Authorization;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Authorization;
 

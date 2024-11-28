@@ -1,6 +1,6 @@
-﻿using Enigmatry.Entry.Blueprint.Api.Features.Authorization;
+﻿using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
+using Enigmatry.Entry.Blueprint.Api.Features.Authorization;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
-using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.Features;
 

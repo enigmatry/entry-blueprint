@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Enigmatry.Entry.Blueprint.Domain.Products;
+using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
 using Enigmatry.Entry.Core.EntityFramework;
@@ -11,7 +12,7 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Products;
 public static class GetProductDetails
 {
     [PublicAPI]
-    public class Request : IRequest<Response>
+    public class Request : IQuery<Response>
     {
         public Guid Id { get; set; }
     }
@@ -43,22 +44,13 @@ public static class GetProductDetails
     }
 
     [UsedImplicitly]
-    public class RequestHandler : IRequestHandler<Request, Response>
+    public class RequestHandler(IRepository<Product> productRepository, IMapper mapper) : IRequestHandler<Request, Response>
     {
-        private readonly IRepository<Product> _productRepository;
-        private readonly IMapper _mapper;
-
-        public RequestHandler(IRepository<Product> productRepository, IMapper mapper)
-        {
-            _productRepository = productRepository;
-            _mapper = mapper;
-        }
-
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            var response = await _productRepository.QueryAll()
+            var response = await productRepository.QueryAll()
                 .QueryById(request.Id)
-                .SingleOrDefaultMappedAsync<Product, Response>(_mapper, cancellationToken: cancellationToken);
+                .SingleOrDefaultMappedAsync<Product, Response>(mapper, cancellationToken: cancellationToken);
             return response;
         }
     }

@@ -7,21 +7,14 @@ namespace Enigmatry.Entry.Blueprint.Api.Features.Authorization;
 
 [Produces(MediaTypeNames.Application.Json)]
 [Route("api/[controller]")]
-public class ProfileController : Controller
+public class ProfileController(IMediator mediator) : Controller
 {
-    private readonly IMediator _mediator;
-
-    public ProfileController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<GetUserProfile.Response>> GetProfile()
     {
-        var response = await _mediator.Send(new GetUserProfile.Request());
+        var response = await mediator.Send(new GetUserProfile.Request());
         return response.ToActionResult();
     }
 }
