@@ -23,7 +23,6 @@ let tester: AngularTester;
 beforeEach(async () => {
   tokenMock.mockClear();
   tester = await new AngularTesterBuilder()
-    .withProviders()
     .withProviders([
       provideHttpClient(withInterceptorsFromDi()),
       provideHttpClientTesting(),
