@@ -20,7 +20,7 @@ const mockAuthService = (): AuthService => ({
 
 let tester: AngularTester;
 
-beforeEach(async () => {
+beforeEach(async() => {
   tokenMock.mockClear();
   tester = await new AngularTesterBuilder()
     .withProviders([
