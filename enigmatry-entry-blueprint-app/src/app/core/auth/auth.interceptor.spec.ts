@@ -1,6 +1,6 @@
-import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { HttpClientTestingModule, TestRequest } from '@angular/common/http/testing';
-import { AngularTesterBuilder, AngularTester } from '@test/builders/angular-tester-builder';
+import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpStatusCode, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClientTesting, TestRequest } from '@angular/common/http/testing';
+import { AngularTester, AngularTesterBuilder } from '@test/builders/angular-tester-builder';
 import { of, throwError } from 'rxjs';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
@@ -23,18 +23,19 @@ let tester: AngularTester;
 beforeEach(async() => {
   tokenMock.mockClear();
   tester = await new AngularTesterBuilder()
-    .withProviders([{
-      provide: AuthService,
-      useFactory: mockAuthService
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      deps: [AuthService],
-      useClass: AuthInterceptor,
-      multi: true
-    }
-    ])
-    .withImports(HttpClientTestingModule)
+    .withProviders([
+      provideHttpClient(withInterceptorsFromDi()),
+      provideHttpClientTesting(),
+      {
+        provide: AuthService,
+        useFactory: mockAuthService
+      },
+      {
+        provide: HTTP_INTERCEPTORS,
+        deps: [AuthService],
+        useClass: AuthInterceptor,
+        multi: true
+      }])
     .withInterceptors()
     .build();
 });
@@ -64,15 +65,15 @@ describe('Testing auth interceptor...', () => {
   it(`should throw in case when any other status but 401`, (done: jest.DoneCallback) => {
     throwCustomError = false;
     tester.requestFailure(HttpStatusCode.Forbidden, HttpStatusCode.Forbidden.toString(), done, () => {
-        expect(tokenMock).toHaveBeenCalledTimes(1);
-      });
+      expect(tokenMock).toHaveBeenCalledTimes(1);
+    });
   });
 
   it(`should redirect to login screen when response status 401`, (done: jest.DoneCallback) => {
     throwCustomError = false;
     tester.requestFailure(HttpStatusCode.Unauthorized, HttpStatusCode.Unauthorized.toString(), done, () => {
-        expect(tokenMock).toHaveBeenCalledTimes(1);
-        expect(loginMock).toHaveBeenCalledTimes(1);
-      });
+      expect(tokenMock).toHaveBeenCalledTimes(1);
+      expect(loginMock).toHaveBeenCalledTimes(1);
+    });
   });
 });
