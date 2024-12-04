@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 import { MSAL_CONFIG, msalConfigFactory } from './msal-config';
 
@@ -19,11 +17,6 @@ export class AuthModule {
         {
           provide: MSAL_CONFIG,
           useFactory: msalConfigFactory
-        },
-        {
-          provide: HTTP_INTERCEPTORS,
-          useClass: AuthInterceptor,
-          multi: true
         },
         AuthService
       ]

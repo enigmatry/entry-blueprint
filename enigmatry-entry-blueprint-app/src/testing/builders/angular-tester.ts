@@ -12,12 +12,9 @@ export class AngularTester {
     location: Location;
     router: Router;
 
-    constructor(private readonly testingInterceptors: boolean) {
-        if (this.testingInterceptors) {
-            this.httpMock = TestBed.inject(HttpTestingController);
-            this.httpClient = TestBed.inject(HttpClient);
-        }
-
+    constructor() {
+        this.httpMock = TestBed.inject(HttpTestingController);
+        this.httpClient = TestBed.inject(HttpClient);
         this.router = TestBed.inject(Router);
         this.location = TestBed.inject(Location);
         this.router.initialNavigation();
@@ -46,9 +43,9 @@ export class AngularTester {
     };
 
     readonly requestSuccess = (done: jest.DoneCallback, expectedResults: (result: any) => void,
-    url: string | undefined = this.testEndpoint) => {
+        url: string | undefined = this.testEndpoint) => {
         let request: TestRequest | null = null;
-            this.httpClient.get<object>(url).subscribe({
+        this.httpClient.get<object>(url).subscribe({
             next: () => {
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 expectedResults(request!);
