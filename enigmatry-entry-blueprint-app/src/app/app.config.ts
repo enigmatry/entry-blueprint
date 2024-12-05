@@ -7,7 +7,6 @@ import { CoreModule } from '@app/core.module';
 import { AppInitService, initFactory } from '@app/services/app-init.service';
 
 import { acceptLanguageInterceptor, EntryCommonModule } from '@enigmatry/entry-components';
-import { HomeModule } from '@features/home/home.module';
 import { EntryComponentsModule } from '@shared/entry-components.module';
 import { SharedModule } from '@shared/shared.module';
 import { ApiModule } from './api/api.module';
@@ -24,7 +23,6 @@ export const appConfig = (i18n: { localeId: 'en-US' | 'nl-NL' }): ApplicationCon
             CoreModule,
             ApiModule,
             SharedModule,
-            HomeModule,
             EntryCommonModule.forRoot(),
             EntryComponentsModule.forRoot(),
             AppRoutingModule
