@@ -1,9 +1,9 @@
-import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpStatusCode, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideHttpClientTesting, TestRequest } from '@angular/common/http/testing';
 import { AngularTester, AngularTesterBuilder } from '@test/builders/angular-tester-builder';
 import { of, throwError } from 'rxjs';
-import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
+import { authenticationInterceptor } from './authentication.interceptor';
 
 const expectedTokenValue = 'token123';
 const expectedErrorMessage = 'fatal error';
@@ -24,19 +24,12 @@ beforeEach(async() => {
   tokenMock.mockClear();
   tester = await new AngularTesterBuilder()
     .withProviders([
-      provideHttpClient(withInterceptorsFromDi()),
+      provideHttpClient(withInterceptors([authenticationInterceptor])),
       provideHttpClientTesting(),
       {
         provide: AuthService,
         useFactory: mockAuthService
-      },
-      {
-        provide: HTTP_INTERCEPTORS,
-        deps: [AuthService],
-        useClass: AuthInterceptor,
-        multi: true
       }])
-    .withInterceptors()
     .build();
 });
 

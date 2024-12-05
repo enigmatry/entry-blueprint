@@ -1,22 +1,16 @@
-/* eslint-disable func-style */
 import { InjectionToken } from '@angular/core';
 import { Configuration, LogLevel } from '@azure/msal-browser';
 import { environment } from '@env';
 import { getCurrentLanguage } from 'src/i18n/language';
 
-export const MSAL_CONFIG = new InjectionToken<string>('MSAL_CONFIG');
-
-// eslint-disable-next-line camelcase
-export const extraQueryParameters = { ui_locales: getCurrentLanguage() };
-
-export function msalLoggerCallback(_: LogLevel, message: string) {
+const msalLoggerCallback = (_: LogLevel, message: string) => {
   if (!environment.production) {
     // eslint-disable-next-line no-console
     console.log(message);
   }
-}
+};
 
-export function msalConfigFactory(): Configuration {
+const msalConfigFactory = (): Configuration => {
   const authorityDomain = new URL(environment.azureAd.authority).hostname;
   return {
     auth: {
@@ -36,4 +30,14 @@ export function msalConfigFactory(): Configuration {
       }
     }
   };
-}
+};
+
+export const extraQueryParameters = {
+  // eslint-disable-next-line camelcase
+  ui_locales: getCurrentLanguage()
+};
+
+export const MSAL_CONFIG = new InjectionToken<Configuration>('msal_config', {
+  providedIn: 'root',
+  factory: () => msalConfigFactory()
+});
