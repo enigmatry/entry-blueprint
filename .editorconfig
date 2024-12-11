@@ -407,6 +407,7 @@ dotnet_diagnostic.CA2119.severity = error # CA2119: Seal methods that satisfy pr
 dotnet_diagnostic.CA2153.severity = error # CA2153: Avoid handling Corrupted State Exceptions
 dotnet_diagnostic.CA2200.severity = error # CA2200: Rethrow to preserve stack details
 dotnet_diagnostic.CA2201.severity = error # CA2201: Do not raise reserved exception types
+dotnet_diagnostic.CA2202.severity = warning # CA2022: Avoid inexact read with Stream.Read
 dotnet_diagnostic.CA2207.severity = error # CA2207: Initialize value type static fields inline
 dotnet_diagnostic.CA2208.severity = error # CA2208: Instantiate argument exceptions correctly
 dotnet_diagnostic.CA2211.severity = error # CA2211: Non-constant fields should not be visible
@@ -450,6 +451,7 @@ dotnet_diagnostic.CA2261.severity = error # CA2261: Do not use ConfigureAwaitOpt
 dotnet_diagnostic.CA2262.severity = error # CA2262: Set 'MaxResponseHeadersLength' properly
 dotnet_diagnostic.CA2263.severity = warning # CA2263: Prefer generic overload when type is known
 dotnet_diagnostic.CA2264.severity = error # CA2264: Do not pass a non-nullable value to 'ArgumentNullException.ThrowIfNull'
+dotnet_diagnostic.CA2265.severity = error # CA2265: Do not compare Span<T> to null or default
 dotnet_diagnostic.CA2300.severity = error # CA2300: Do not use insecure deserializer BinaryFormatter
 dotnet_diagnostic.CA2301.severity = error # CA2301: Do not call BinaryFormatter.Deserialize without first setting BinaryFormatter.Binder
 dotnet_diagnostic.CA2302.severity = error # CA2302: Ensure BinaryFormatter.Binder is set before calling BinaryFormatter.Deserialize
@@ -546,6 +548,8 @@ dotnet_diagnostic.IL3000.severity = warning # IL3000: Avoid using accessing Asse
 dotnet_diagnostic.IL3001.severity = warning # IL3001: Avoid using accessing Assembly file path when publishing as a single-file
 dotnet_diagnostic.IL3002.severity = warning # IL3002: Avoid calling members annotated with 'RequiresAssemblyFilesAttribute' when publishing as a single file.
 dotnet_diagnostic.IL3003.severity = error # IL3003: 'RequiresAssemblyFilesAttribute' annotations must match across all interface implementations or overrides
+dotnet_diagnostic.IL3005.severity = error # IL3005: RequiresAssemblyFilesAttribute cannot be placed directly on application entry point
+
 ############################### 
 # Legacy severity definitions # 
 ###############################
@@ -700,11 +704,12 @@ dotnet_diagnostic.IDE0302.severity = suggestion # IDE0302: Use collection expres
 dotnet_diagnostic.IDE0303.severity = suggestion # IDE0303: Use collection expression for Create()
 dotnet_diagnostic.IDE0304.severity = suggestion # IDE0304: Use collection expression for builder
 dotnet_diagnostic.IDE0305.severity = suggestion # IDE0305: Use collection expression for fluent
+dotnet_diagnostic.IDE0320.severity = warning # IDE0320: Make anonymous function static
+dotnet_diagnostic.IDE0330.severity = error # IDE0330: Prefer 'System.Threading.Lock'
 dotnet_diagnostic.IDE1005.severity = error # IDE1005: Delegate invocation can be simplified
 dotnet_diagnostic.IDE1005WithoutSuggestion.severity = error # IDE1005: Delegate invocation can be simplified
 dotnet_diagnostic.IDE1006.severity = error # IDE1006: Naming styles
 dotnet_diagnostic.IDE1006WithoutSuggestion.severity = error # IDE1006: Naming styles
-
 
 [*/Program.cs]
 dotnet_diagnostic.CA1050.severity = none # CA1050: Declare types in namespaces
