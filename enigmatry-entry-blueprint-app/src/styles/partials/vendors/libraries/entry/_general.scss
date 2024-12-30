@@ -1,14 +1,68 @@
 @use 'entry-components/styles/partials/theming';
 @use 'entry-components/styles/generator';
 @use 'variables' as vars;
+@use 'sass:map';
 
 $custom-theme: (
 	general: (
 		colors: (
-			primary: vars.$primary,
-			accent: vars.$accent
+			primary: green,
+			accent: orange,
+			font: red
+		),
+		fonts: (
+			body: (
+				family: 'CeraPRO-Regular',
+				size: 20px,
+				letter-spacing: normal
+			),
+			hero-titles: (
+				family: 'CeraPRO-Bold',
+				size: 25px,
+			),
+			titles: (
+				family: 'CeraPRO-Bold',
+				size: 20px
+			),
+			buttons: (
+				family: 'CeraPRO-Bold',
+				size: 30px,
+				letter-spacing: 2px
+			),
+		),
+		checkboxes: (
+			background: red,
+			border-hover-color: orange
+		),
+		inputs: (
+			background: yellow
+		),
+	),
+	tables: (
+		header: (
+			font-size: 40px
+		),
+		cells: (
+			edge-gap: 4px,
+			padding: null
+		),
+		rows: (
+			odd-even-background: (
+				odd: red,
+				even: green,
+			),
+			selected-color: #FFF,
+			selected-background: null,
+			disabled-color: #F5F5F5,
+		),
+		contents: (
+			no-result: (
+				font-size: 13px,
+				font-weight: 500
+			)
 		)
 	)
 );
 
 @include generator.generate-from($custom-theme);
+// @include generator.generate-from();
