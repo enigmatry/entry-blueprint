@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 const addAuthorizationHeader = (req: HttpRequest<any>, accessToken: string): HttpRequest<any> =>
     req.clone({ setHeaders: { Authorization: `Bearer ${accessToken}` } });
 
-export function authenticationInterceptor(request: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+export const authenticationInterceptor = (request: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
     const authService = inject(AuthService);
 
     if (!request.url.startsWith(environment.apiUrl)) {
