@@ -15,7 +15,11 @@ internal class Program
 
         try
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
+            {
+                WebRootPath = "wwwroot/browser",
+                Args = args
+            });
             builder.Configuration.AddTestConfiguration();
 
             builder.WebHost.ConfigureKestrel(options =>
