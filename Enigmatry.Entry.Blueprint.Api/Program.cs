@@ -17,7 +17,7 @@ internal class Program
         {
             var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
             {
-                WebRootPath = "wwwroot/browser",
+                WebRootPath = "browser",
                 Args = args
             });
             builder.Configuration.AddTestConfiguration();
