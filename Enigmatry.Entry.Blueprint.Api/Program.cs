@@ -15,11 +15,11 @@ internal class Program
 
         try
         {
-            var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
-            {
-                WebRootPath = "browser",
-                Args = args
-            });
+            var builder = WebApplication.CreateBuilder(args);
+            //{
+            //    WebRootPath = "browser",
+            //    Args = args
+            //});
             builder.Configuration.AddTestConfiguration();
 
             builder.WebHost.ConfigureKestrel(options =>
