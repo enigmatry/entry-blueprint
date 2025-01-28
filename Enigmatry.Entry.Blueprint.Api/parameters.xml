@@ -33,7 +33,7 @@
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__azureAdSignUpSignInPolicyId__" />
     </parameter>
     <!-- Front-end params-->
-    <!-- <parameter name="App Version" description="App Version" defaultValue="">
+    <parameter name="App Version" description="App Version" defaultValue="">
         <parameterEntry kind="TextFile" scope="main*.js" match="__appVersion__" />
     </parameter>
     <parameter name="API Uri" description="API Uri" defaultValue="">
@@ -51,8 +51,8 @@
     </parameter>
     <parameter name="Azure AD Scopes" description="Azure AD Scopes" defaultValue="">
         <parameterEntry kind="TextFile" scope="main*.js" match="__azureAdScopes__" />
-    </parameter> -->
-    <parameter name="App Version" description="App Version" defaultValue="">
+    </parameter>
+    <!-- <parameter name="App Version" description="App Version" defaultValue="">
         <parameterEntry kind="TextFile" scope="chunk*.js" match="__appVersion__" />
     </parameter>
     <parameter name="API Uri" description="API Uri" defaultValue="">
@@ -70,7 +70,7 @@
     </parameter>
     <parameter name="Azure AD Scopes" description="Azure AD Scopes" defaultValue="">
         <parameterEntry kind="TextFile" scope="chunk*.js" match="__azureAdScopes__" />
-    </parameter>
+    </parameter> -->
     <parameter name="Content Security Policy">
         <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/system.webServer/httpProtocol/customHeaders/add[@name='Content-Security-Policy']/@value" />
     </parameter>
