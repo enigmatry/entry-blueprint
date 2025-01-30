@@ -5,9 +5,6 @@
     <ParameterValue Include="SQLDB Connection String">
       <Value>Server=tcp:enigmatry-test.database.windows.net,1433;Database=enigmatry-entry-blueprint-test-001;Authentication=Active Directory Default;Connection Timeout=30</Value>
     </ParameterValue>
-    <ParameterValue Include="ApplicationInsights ConnectionString">
-      <Value>InstrumentationKey=477b870b-733d-4a69-a780-9bc363f075c7;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/</Value>
-    </ParameterValue>
     <ParameterValue Include="HealthChecks Token">
       <Value>d5d97ea1-5709-45e1-a414-0bac78e8aecb</Value>
     </ParameterValue>
@@ -22,9 +19,6 @@
     </ParameterValue>
     <ParameterValue Include="Azure AD Instance">
       <Value>https://enigmatryb2ctest.b2clogin.com</Value>
-    </ParameterValue>
-    <ParameterValue Include="Azure AD ClientId">
-      <Value>462923fc-3dcd-4b81-943d-590b9cb45ec4</Value>
     </ParameterValue>
     <ParameterValue Include="Azure AD Domain">
       <Value>enigmatryb2ctest.onmicrosoft.com</Value>
@@ -52,7 +46,7 @@
       <Value>https://enigmatryb2ctest.onmicrosoft.com/462923fc-3dcd-4b81-943d-590b9cb45ec4/api</Value>
     </ParameterValue>
     <ParameterValue Include="Content Security Policy">
-      <Value>default-src 'none'; script-src 'self'; connect-src 'self' enigmatryb2ctest.b2clogin.com westeurope-5.in.applicationinsights.azure.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'</Value>
+      <Value>default-src 'none'; script-src 'self'; connect-src 'self' enigmatryb2ctest.b2clogin.com westeurope-5.in.applicationinsights.azure.com https://js.monitor.azure.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'</Value>
     </ParameterValue>
   </ItemGroup>
 </Project>
