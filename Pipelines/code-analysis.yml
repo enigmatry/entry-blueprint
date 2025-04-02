@@ -18,6 +18,7 @@ resources:
     - repository: templates
       type: git
       name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
+      ref: managed-devops-pools
 
 jobs:
 - template: code-analysis.yml@templates

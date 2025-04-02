@@ -5,6 +5,7 @@ resources:
     - repository: templates
       type: git
       name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
+      ref: managed-devops-pools
 
 jobs:
 - template: run-all-angular-tests.yml@templates
