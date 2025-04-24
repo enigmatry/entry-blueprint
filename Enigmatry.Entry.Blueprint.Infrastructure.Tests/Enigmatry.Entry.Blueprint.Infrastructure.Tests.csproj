@@ -17,6 +17,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <PackageReference Include="Respawn" />
+    <PackageReference Include="Shouldly" />
     <PackageReference Include="Testcontainers.MsSql" />
   </ItemGroup>
 
