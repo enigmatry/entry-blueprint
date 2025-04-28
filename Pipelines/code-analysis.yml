@@ -25,6 +25,7 @@ jobs:
     projectName: 'Enigmatry Blueprint Template'
     sonarProjectKey: 'AspNetCoreAngular_EnigmatryEntryBlueprint'
     displayName: 'Code Analysis'
+    dotNetVersion: '9.0.x'
     projectNameAngularApp: $(projectNameAngularApp)
 
 - template: build-report-job.yml@templates
