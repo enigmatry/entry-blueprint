@@ -8,6 +8,9 @@ variables:
   projectNameAngularApp: enigmatry-entry-blueprint-app
   projectNamePrefix: Enigmatry.Entry.Blueprint
 
+pool:
+  vmImage: windows-latest
+
 resources:
   repositories:
     - repository: templates
