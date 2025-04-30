@@ -15,14 +15,14 @@
     <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Core" Version="9.0.0" />
-    <PackageVersion Include="Enigmatry.Entry.Core.EntityFramework" Version="9.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.Core" Version="$(EnigmatryEntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.Core.EntityFramework" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.MediatR" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="9.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.EntityFramework" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.Swagger" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
