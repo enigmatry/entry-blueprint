@@ -8,14 +8,7 @@ variables:
   projectNameAngularApp: enigmatry-entry-blueprint-app
   projectNamePrefix: Enigmatry.Entry.Blueprint
 
-pool:
-  vmImage: windows-latest
-
-resources:
-  repositories:
-    - repository: templates
-      type: git
-      name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
+pool: 'enigmatry-managed-devops-test'
 
 stages:
 - stage: 'ci_build'
