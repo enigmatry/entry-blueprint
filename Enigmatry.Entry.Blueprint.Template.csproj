@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
     <Authors>Enigmatry</Authors>
-    <Copyright>Copyright © 2024 Enigmatry. All rights reserved.</Copyright>
+    <Copyright>Copyright © 2025 Enigmatry. All rights reserved.</Copyright>
     <Company>Enigmatry</Company>
     <ContentTargetFolders>content</ContentTargetFolders>
     <Description>Template to use when creating an asp.net core/Angular application with Entry.</Description>

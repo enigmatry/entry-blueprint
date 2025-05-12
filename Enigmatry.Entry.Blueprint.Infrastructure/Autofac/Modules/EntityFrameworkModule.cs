@@ -63,7 +63,9 @@ public class EntityFrameworkModule : Module
             .EnableSensitiveDataLogging(dbContextSettings.SensitiveDataLoggingEnabled)
             // Suppress warning introduced with SaveChangesBehavior (and the explicit transactions):
             // 'Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples.'
-            .ConfigureWarnings(w => w.Ignore(SqlServerEventId.SavepointsDisabledBecauseOfMARS));
+            .ConfigureWarnings(w => w.Ignore(SqlServerEventId.SavepointsDisabledBecauseOfMARS))
+            // https://github.com/dotnet/efcore/issues/35285
+            .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
 
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("AppDbContext")!,
             sqlOptions => SetupSqlOptions(sqlOptions, dbContextSettings));
