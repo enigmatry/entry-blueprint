@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 namespace Enigmatry.Entry.ServiceDefaults;
@@ -65,14 +66,19 @@ public static class ProgrgamExtensions
         return builder;
     }
 
-    public static IServiceCollection AddOpenTelemetryWorkerService(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddOpenTelemetryWorkerService(this IServiceCollection services, IConfiguration configuration, string serviceName)
     {
         services.AddOpenTelemetry()
             .WithTracing(tracing =>
             {
                 if (IsAzureMonitorConfigured(configuration))
                 {
-                    tracing.AddAzureMonitorTraceExporter();
+                    // Add a resource with service information
+                    tracing.SetResourceBuilder(ResourceBuilder.CreateDefault()
+                        .AddService(serviceName))
+                        // Register your ActivitySource - use the same name as in your listener
+                        .AddSource(serviceName)
+                        .AddAzureMonitorTraceExporter();
                 }
             })
             .WithMetrics(metrics =>

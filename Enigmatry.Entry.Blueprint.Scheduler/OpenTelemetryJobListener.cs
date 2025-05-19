@@ -3,10 +3,8 @@ using Quartz;
 
 namespace Enigmatry.Entry.Blueprint.Scheduler;
 
-internal sealed class OpenTelemetryJobListener : IJobListener
+internal sealed class OpenTelemetryJobListener() : IJobListener
 {
-    private static readonly ActivitySource ActivitySource = new("Enigmatry.Entry.Scheduler");
-
     public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default) => Task.CompletedTask;
 
     public Task JobExecutionVetoed(IJobExecutionContext context, CancellationToken cancellationToken = default) => Task.CompletedTask;
@@ -20,8 +18,8 @@ internal sealed class OpenTelemetryJobListener : IJobListener
     private void TrackJobExecution(IJobExecutionContext context, JobExecutionException? jobException = null)
     {
         var jobName = context.JobDetail.Key.Name;
-
-        using var activity = ActivitySource.StartActivity(jobName, ActivityKind.Server);
+        using var activitySource = new ActivitySource(context.Scheduler.SchedulerName);
+        using var activity = activitySource.StartActivity(jobName, ActivityKind.Server);
         if (activity == null)
         {
             return;
