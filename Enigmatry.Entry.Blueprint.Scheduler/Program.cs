@@ -8,7 +8,7 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
 using Enigmatry.Entry.Blueprint.Scheduler;
 using Enigmatry.Entry.Scheduler;
-using Enigmatry.Yessa.ServiceDefaults;
+using Enigmatry.Entry.ServiceDefaults;
 using Serilog;
 using Serilog.Extensions.Logging;
 
@@ -26,8 +26,8 @@ internal class Program
             {
                 services.AppAddMediatR(AssemblyFinder.SchedulerAssembly);
 
-                using var factory = new SerilogLoggerFactory();
-                services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>());
+                //using var factory = new SerilogLoggerFactory();
+                //services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>());
                     //quartz => quartz.AddJobListener<OpenTelemetryJobListener>());
 
                 services.AddOpenTelemetryWorkerService(context.Configuration);

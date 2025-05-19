@@ -2,7 +2,7 @@
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
-using Enigmatry.Yessa.ServiceDefaults;
+using Enigmatry.Entry.ServiceDefaults;
 using Serilog;
 
 internal class Program
