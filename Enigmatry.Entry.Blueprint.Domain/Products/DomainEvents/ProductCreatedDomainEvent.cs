@@ -8,6 +8,7 @@ public record ProductCreatedDomainEvent : AuditableDomainEvent
     {
         Name = product.Name;
         Code = product.Code;
+        throw new InvalidOperationException("Kaboom!");
     }
 
     public string Name { get; }

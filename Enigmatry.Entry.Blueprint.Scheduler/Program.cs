@@ -27,7 +27,7 @@ internal class Program
                 services.AppAddMediatR(AssemblyFinder.SchedulerAssembly);
 
                 using var factory = new SerilogLoggerFactory();
-                services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>());,
+                services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>());
                     //quartz => quartz.AddJobListener<OpenTelemetryJobListener>());
 
                 services.AddOpenTelemetryWorkerService(context.Configuration);
