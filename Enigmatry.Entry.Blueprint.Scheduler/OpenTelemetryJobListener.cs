@@ -19,16 +19,16 @@ internal sealed class OpenTelemetryJobListener(ILogger<OpenTelemetryJobListener>
     private void TrackJobExecution(IJobExecutionContext context, JobExecutionException? jobException = null)
     {
         logger.LogInformation("Job {JobName} executed at {FireTimeUtc}", context.JobDetail.Key.Name, context.FireTimeUtc.UtcDateTime);
-        //var jobName = context.JobDetail.Key.Name;
-        //using var activitySource = new ActivitySource(context.Scheduler.SchedulerName);
-        //using var activity = activitySource.StartActivity(jobName, ActivityKind.Server);
-        //if (activity == null)
-        //{
-        //    return;
-        //}
+        var jobName = context.JobDetail.Key.Name;
+        using var activitySource = new ActivitySource(context.Scheduler.SchedulerName);
+        using var activity = activitySource.StartActivity(jobName, ActivityKind.Server);
+        if (activity == null)
+        {
+            return;
+        }
 
-        //activity.SetStartTime(context.FireTimeUtc.UtcDateTime);
-        //activity.DisplayName = jobName;
+        activity.SetStartTime(context.FireTimeUtc.UtcDateTime);
+        activity.DisplayName = jobName;
         //activity.SetEndTime(DateTime.UtcNow);
 
         //if (jobException != null)
