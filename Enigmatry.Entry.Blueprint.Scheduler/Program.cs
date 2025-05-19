@@ -24,13 +24,13 @@ internal class Program
             .UseServiceProviderFactory(new AutofacServiceProviderFactory())
             .ConfigureServices((context, services) =>
             {
-                services.AppAddMediatR(AssemblyFinder.SchedulerAssembly);
+            services.AppAddMediatR(AssemblyFinder.SchedulerAssembly);
 
-                //using var factory = new SerilogLoggerFactory();
-                //services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>());
-                    //quartz => quartz.AddJobListener<OpenTelemetryJobListener>());
+            using var factory = new SerilogLoggerFactory();
+            services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>(),
+                quartz => quartz.AddJobListener<OpenTelemetryJobListener>());
 
-                services.AddOpenTelemetryWorkerService(context.Configuration);
+            services.AddOpenTelemetryWorkerService(context.Configuration);
             })
             .ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
@@ -45,6 +45,6 @@ internal class Program
             {
                 loggerConfiguration
                     .ReadFrom.Configuration(context.Configuration);
-                    //.ReadFrom.Services(services);
+                    .ReadFrom.Services(services);
             }, writeToProviders: true);
 }
