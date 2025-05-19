@@ -47,8 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{
 		Pipelines\azure-pipelines.yml = Pipelines\azure-pipelines.yml
 		Pipelines\build-publish-nuget.yml = Pipelines\build-publish-nuget.yml
 		Pipelines\code-analysis.yml = Pipelines\code-analysis.yml
-		Pipelines\run-all-tests.yml = Pipelines\run-all-tests.yml
 		Pipelines\deploy-to-stage.yml = Pipelines\deploy-to-stage.yml
+		Pipelines\run-all-tests.yml = Pipelines\run-all-tests.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Variables", "Variables", "{DAB90BB5-1BB4-4012-9D4E-34525412DF0A}"
@@ -69,6 +69,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{E5AA
 		scripts\open-scheduler-logs.ps1 = scripts\open-scheduler-logs.ps1
 		scripts\update-databases.ps1 = scripts\update-databases.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Entry.Blueprint.AppHost", "Enigmatry.Entry.Blueprint.AppHost\Enigmatry.Entry.Blueprint.AppHost.csproj", "{61762FFB-E5B5-468E-B647-CE01F769FCA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigmatry.Entry.Blueprint.ServiceDefaults", "Enigmatry.Entry.Blueprint.ServiceDefaults\Enigmatry.Entry.Blueprint.ServiceDefaults.csproj", "{8C90F993-CA64-267D-8E3E-69382CA25A22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +140,14 @@ Global
 		{A8D4A4DD-20EB-472B-B329-C697DA9D95C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8D4A4DD-20EB-472B-B329-C697DA9D95C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8D4A4DD-20EB-472B-B329-C697DA9D95C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61762FFB-E5B5-468E-B647-CE01F769FCA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61762FFB-E5B5-468E-B647-CE01F769FCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61762FFB-E5B5-468E-B647-CE01F769FCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61762FFB-E5B5-468E-B647-CE01F769FCA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C90F993-CA64-267D-8E3E-69382CA25A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C90F993-CA64-267D-8E3E-69382CA25A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C90F993-CA64-267D-8E3E-69382CA25A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C90F993-CA64-267D-8E3E-69382CA25A22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

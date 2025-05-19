@@ -41,8 +41,7 @@ public class TestConfigurationBuilder
             { "App:AzureAd:Domain", "enigmatryb2cdev.onmicrosoft.com" },
             { "App:AzureAd:SignUpSignInPolicyId", "B2C_1_entry_blueprint_sign_in" },
             { "HealthChecks:TokenAuthorizationEnabled", "false" },
-            { "KeyVault:Enabled", "false" },
-            { "ApplicationInsights:ConnectionString", "" }
+            { "KeyVault:Enabled", "false" }
         };
 
         configurationBuilder.AddInMemoryCollection(dict);
@@ -56,7 +55,6 @@ public class TestConfigurationBuilder
         {
             var dict = new Dictionary<string, string?>
             {
-                { "ApplicationInsights:ConnectionString", "" },
                 { "Scheduling:Host:quartz.scheduler.instanceName", "Enigmatry.Entry.Scheduler" },
                 { "Scheduling:Jobs:CleanOldProductsJob:Cronex", "0 0 0 * * ?" }
             };

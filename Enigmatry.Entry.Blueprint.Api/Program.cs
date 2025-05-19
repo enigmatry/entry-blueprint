@@ -2,6 +2,7 @@
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
+using Enigmatry.Yessa.ServiceDefaults;
 using Serilog;
 
 internal class Program
@@ -26,8 +27,11 @@ internal class Program
             builder.Configuration.AppAddAzureKeyVault(builder.Configuration);
             builder.Services.AppAddServices(builder.Configuration, builder.Environment);
             builder.Host.AppConfigureHost(builder.Configuration);
+            builder.AddServiceDefaults();
 
             var app = builder.Build();
+
+            app.MapDefaultEndpoints();
             app.AppConfigureWebApplication();
             app.Run();
         }
