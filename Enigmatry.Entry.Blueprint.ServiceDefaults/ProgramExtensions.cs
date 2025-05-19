@@ -74,10 +74,11 @@ public static class ProgrgamExtensions
                 if (IsAzureMonitorConfigured(configuration))
                 {
                     // Add a resource with service information
-                    tracing.SetResourceBuilder(ResourceBuilder.CreateDefault()
-                        .AddService(serviceName))
-                        // Register your ActivitySource - use the same name as in your listener
-                        .AddSource(serviceName)
+                    tracing
+                        //.SetResourceBuilder(ResourceBuilder.CreateDefault()
+                        //.AddService(serviceName))
+                        //// Register your ActivitySource - use the same name as in your listener
+                        //.AddSource(serviceName)
                         .AddAzureMonitorTraceExporter();
                 }
             })
