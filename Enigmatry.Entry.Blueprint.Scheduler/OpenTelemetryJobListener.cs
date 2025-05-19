@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace Enigmatry.Entry.Blueprint.Scheduler;
 
-internal sealed class OpenTelemetryJobListener() : IJobListener
+internal sealed class OpenTelemetryJobListener(ILogger<OpenTelemetryJobListener> logger) : IJobListener
 {
     public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default) => Task.CompletedTask;
 
@@ -17,6 +18,7 @@ internal sealed class OpenTelemetryJobListener() : IJobListener
 
     private void TrackJobExecution(IJobExecutionContext context, JobExecutionException? jobException = null)
     {
+        logger.LogInformation("Job {JobName} executed at {FireTimeUtc}", context.JobDetail.Key.Name, context.FireTimeUtc.UtcDateTime);
         var jobName = context.JobDetail.Key.Name;
         using var activitySource = new ActivitySource(context.Scheduler.SchedulerName);
         using var activity = activitySource.StartActivity(jobName, ActivityKind.Server);
