@@ -44,7 +44,7 @@ internal class Program
             .UseSerilog((context, services, loggerConfiguration) =>
             {
                 loggerConfiguration
-                    .ReadFrom.Configuration(context.Configuration)
-                    .ReadFrom.Services(services);
+                    .ReadFrom.Configuration(context.Configuration);
+                    //.ReadFrom.Services(services);
             }, writeToProviders: true);
 }
