@@ -77,7 +77,7 @@ public static class ProgrgamExtensions
                     tracing
                         .SetResourceBuilder(ResourceBuilder.CreateDefault()
                         .AddService(serviceName))
-                        //.AddSource(serviceName)
+                        .AddSource(serviceName)
                         .AddAzureMonitorTraceExporter();
                 }
             })
@@ -87,8 +87,8 @@ public static class ProgrgamExtensions
                 {
                     metrics.AddAzureMonitorMetricExporter();
                 }
-            })
-            .AddOpenTelemetryExporters(configuration);
+            });
+            //.AddOpenTelemetryExporters(configuration);
 
         return services;
     }
