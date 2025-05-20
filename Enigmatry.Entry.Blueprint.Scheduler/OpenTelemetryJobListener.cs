@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics;
-using Microsoft.Extensions.Logging;
+using System.Reflection;
 using Quartz;
 
 namespace Enigmatry.Entry.Blueprint.Scheduler;
 
-internal sealed class OpenTelemetryJobListener(ILogger<OpenTelemetryJobListener> logger) : IJobListener
+internal sealed class OpenTelemetryJobListener(ILogger<OpenTelemetryJobListener> logger) : IJobListener, IDisposable
 {
+    private ActivitySource _activitySource = new(Assembly.GetExecutingAssembly().GetName().Name!);
+    private bool _disposed;
+
     public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default) => Task.CompletedTask;
 
     public Task JobExecutionVetoed(IJobExecutionContext context, CancellationToken cancellationToken = default) => Task.CompletedTask;
@@ -20,28 +23,33 @@ internal sealed class OpenTelemetryJobListener(ILogger<OpenTelemetryJobListener>
     {
         logger.LogInformation("Job {JobName} executed at {FireTimeUtc}", context.JobDetail.Key.Name, context.FireTimeUtc.UtcDateTime);
         var jobName = context.JobDetail.Key.Name;
-        using var activitySource = new ActivitySource(context.Scheduler.SchedulerName);
-        using var activity = activitySource.StartActivity(jobName, ActivityKind.Server);
+        using var activity = _activitySource.StartActivity(jobName, ActivityKind.Server);
         if (activity == null)
         {
             return;
         }
 
         activity.SetStartTime(context.FireTimeUtc.UtcDateTime);
-        activity.DisplayName = jobName;
-        //activity.SetEndTime(DateTime.UtcNow);
 
-        //if (jobException != null)
-        //{
-        //    activity.SetStatus(ActivityStatusCode.Error);
-        //    activity.AddException(jobException);
-        //}
-        //else
-        //{
-        //    activity.SetStatus(ActivityStatusCode.Ok);
-        //}
+        if (jobException != null)
+        {
+            activity.SetStatus(ActivityStatusCode.Error)
+                .AddException(jobException);
+        }
+        else
+        {
+            _ = activity.SetStatus(ActivityStatusCode.Ok);
+        }
     }
 
-
     public string Name => nameof(OpenTelemetryJobListener);
+    
+    public void Dispose()
+    {
+        if (!_disposed)
+        {
+            _activitySource.Dispose();
+            _disposed = true;
+        }
+    }
 }
