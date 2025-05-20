@@ -1,4 +1,5 @@
-﻿using Azure.Monitor.OpenTelemetry.AspNetCore;
+﻿using System.Reflection;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 using Azure.Monitor.OpenTelemetry.Exporter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -66,8 +67,9 @@ public static class ProgrgamExtensions
         return builder;
     }
 
-    public static IServiceCollection AddOpenTelemetryWorkerService(this IServiceCollection services, IConfiguration configuration, string serviceName)
+    public static IServiceCollection AddOpenTelemetryWorkerService(this IServiceCollection services, IConfiguration configuration)
     {
+        var serviceName = Assembly.GetExecutingAssembly().FullName!;
         services.AddOpenTelemetry()
             .WithTracing(tracing =>
             {

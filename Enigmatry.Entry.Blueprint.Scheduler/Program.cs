@@ -30,7 +30,7 @@ internal class Program
             services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>(),
                 quartz => quartz.AddJobListener<OpenTelemetryJobListener>());
 
-            services.AddOpenTelemetryWorkerService(context.Configuration, "Enigmatry.Entry.Blueprint.Scheduler");
+            services.AddOpenTelemetryWorkerService(context.Configuration);
             })
             .ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {

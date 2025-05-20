@@ -6,7 +6,7 @@ namespace Enigmatry.Entry.Blueprint.Scheduler;
 
 internal sealed class OpenTelemetryJobListener(ILogger<OpenTelemetryJobListener> logger) : IJobListener, IDisposable
 {
-    private ActivitySource _activitySource = new(Assembly.GetExecutingAssembly().GetName().Name!);
+    private ActivitySource _activitySource = new(Assembly.GetExecutingAssembly().FullName!);
     private bool _disposed;
 
     public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default) => Task.CompletedTask;
