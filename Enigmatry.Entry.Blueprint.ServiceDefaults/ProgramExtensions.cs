@@ -77,8 +77,7 @@ public static class ProgrgamExtensions
                     tracing
                         .SetResourceBuilder(ResourceBuilder.CreateDefault()
                         .AddService(serviceName))
-                        // Register your ActivitySource - use the same name as in your listener
-                        .AddSource(serviceName)
+                        //.AddSource(serviceName)
                         .AddAzureMonitorTraceExporter();
                 }
             })
