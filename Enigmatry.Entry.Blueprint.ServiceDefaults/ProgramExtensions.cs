@@ -99,6 +99,7 @@ public static class ProgrgamExtensions
         {
             options.IncludeFormattedMessage = true;
             options.IncludeScopes = true;
+            options.AddAzureMonitorLogExporter();
         });
     }
 

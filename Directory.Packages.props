@@ -4,13 +4,13 @@
     <EnigmatryEntryVersion>9.0.0</EnigmatryEntryVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.2.1" />
-    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="9.2.1" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.3.0" />
+    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="9.3.0" />
     <PackageVersion Include="Autofac" Version="8.2.1" />
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageVersion Include="AutoMapper" Version="14.0.0" />
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.4.0" />
-    <PackageVersion Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.2.0" />
+    <PackageVersion Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.3.0" />
     <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.3.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>
