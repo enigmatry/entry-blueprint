@@ -25,7 +25,7 @@ export class MainMenuComponent {
   @Input() currentUser: UserProfile | null;
 
   get showSideMenu(): boolean {
-    return this.sizeService.lastKnownSize.supportsSideMenu;
+    return this.sizeService.lastKnownSize()?.supportsSideMenu ?? false;
   }
 
   constructor(readonly sizeService: SizeService, readonly permissionService: PermissionService) { }

@@ -7,12 +7,16 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
+// @ts-nocheck
+// @ts-ignore
+// @ts-expect-error
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-components/table';
 
 import { GetProductsResponseItem } from 'src/app/api/api-reference';
 
 @Component({
+  standalone: false,
   selector: 'app-g-product-list',
   templateUrl: './product-list-generated.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

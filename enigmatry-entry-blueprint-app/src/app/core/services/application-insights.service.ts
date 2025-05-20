@@ -51,14 +51,12 @@ export class ApplicationInsightsService implements OnDestroy {
     this.appInsights?.trackTrace({ message }, properties);
   }
 
-  private createApplicationInsights(): ApplicationInsights {
-    return new ApplicationInsights({
+  createApplicationInsights = (): ApplicationInsights => new ApplicationInsights({
       config: {
         connectionString: environment.applicationInsights.connectionString,
         enableCorsCorrelation: environment.applicationInsights.enableCorsCorrelation
       }
     });
-  }
 
   private trackPageViewsOnRouterNavigation() {
     this.router.events

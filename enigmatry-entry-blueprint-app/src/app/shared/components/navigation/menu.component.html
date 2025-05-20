@@ -1,5 +1,5 @@
 <mat-sidenav-container class="navigation-container" [hasBackdrop]="true" color="primary">
-  <mat-sidenav #drawer class="side-menu" fixedInViewport (click)="toggleDrawer()" [attr.role]="menuRole"
+  <mat-sidenav #drawer class="side-menu" fixedInViewport (click)="toggleDrawer()" [attr.role]="menuRole()"
     mode="over">
     <app-side-menu [currentUser]="currentUser" [menuItems]="menuItems" [show]="show" [onLogout]="onLogout"></app-side-menu>
   </mat-sidenav>

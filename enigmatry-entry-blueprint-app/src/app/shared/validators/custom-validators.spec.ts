@@ -6,11 +6,9 @@ const defaultControl = (dirty = true, returnNull = false) => ({
     dirty,
     value: returnNull,
     parent: {
-        get: (key: string) => {
-            return {
+        get: (key: string) => ({
                 value: key
-            };
-        }
+            })
     }
 } as unknown as UntypedFormControl);
 const getService = (withUniqueCode: boolean, withUniqueName: boolean) => ({

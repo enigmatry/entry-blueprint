@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, computed, effect, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { PermissionId } from '@api';
 import { AuthService } from '@app/auth/auth.service';
@@ -22,6 +22,14 @@ export class MenuComponent {
     return this.currentUserService.currentUser;
   }
 
+  menuRole = computed(() => {
+    if (this.sizeService.lastKnownSize()?.supportsSideMenu) {
+      return 'navigation';
+    }
+
+    return 'dialog';
+  });
+
   menuItems = [
     { description: 'Home', icon: 'home', aria: 'Home icon', url: '/home', permission: PermissionId.None },
     {
@@ -40,22 +48,18 @@ export class MenuComponent {
     }
   ];
 
-  get menuRole(): 'dialog' | 'navigation' {
-    if (this.sizeService.lastKnownSize.supportsSideMenu) {
-      return 'navigation';
-    }
-
-    this.drawer?.close();
-    return 'dialog';
-  }
-
   constructor(private readonly currentUserService: CurrentUserService,
     private readonly permissionService: PermissionService,
     private readonly authService: AuthService,
-    readonly sizeService: SizeService) { }
+    readonly sizeService: SizeService) {
+    effect(async() => {
+      this.menuRole();
+      await this.drawer?.close();
+    });
+  }
 
-  toggleDrawer = () => {
-    this.drawer.toggle();
+  readonly toggleDrawer = async() => {
+    await this.drawer.toggle();
   };
 
   readonly show = (menuItem: { permission: PermissionId }) =>

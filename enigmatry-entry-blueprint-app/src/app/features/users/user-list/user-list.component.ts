@@ -10,6 +10,7 @@ import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { GetUsersQuery } from '../models/qet-users-query.model';
 
 @Component({
+  standalone: false,
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
@@ -39,15 +40,15 @@ export class UserListComponent extends BaseListComponent implements OnInit {
     }];
   }
 
-  onRowSelected(rowData: GetUsersResponseItem) {
-    this.router.navigate([RouteSegments.edit, rowData.id], { relativeTo: this.activatedRoute });
-  }
+  readonly onRowSelected = async(rowData: GetUsersResponseItem) => {
+    await this.router.navigate([RouteSegments.edit, rowData.id], { relativeTo: this.activatedRoute });
+  };
 
-  onContextMenuItemSelected(contextMenuItem: { itemId: string; rowData: GetUsersResponseItem }) {
+  readonly onContextMenuItemSelected = async(contextMenuItem: { itemId: string; rowData: GetUsersResponseItem }) => {
     if (contextMenuItem.itemId === RouteSegments.edit) {
-      this.router.navigate([RouteSegments.edit, contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
+      await this.router.navigate([RouteSegments.edit, contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
     }
-  }
+  };
 
   private getUsers(query: SearchFilterPagedQuery): Observable<PagedData<GetUsersResponseItem>> {
     return this.client.search(this.query.name.value, this.query.email.value,

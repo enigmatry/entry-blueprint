@@ -3,6 +3,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FieldType } from '@ngx-formly/material/form-field';
 
 @Component({
+  standalone: false,
   selector: 'app-formly-readonly-input',
   templateUrl: './formly-readonly-input.component.html',
   styleUrls: ['./formly-readonly-input.component.scss']

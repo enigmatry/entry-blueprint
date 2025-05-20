@@ -9,6 +9,7 @@ import { Observable, Subscription, switchMap, tap } from 'rxjs';
 import { GetProductsQuery } from '../models/get-products-query.model';
 
 @Component({
+  standalone: false,
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
@@ -32,13 +33,13 @@ export class ProductListComponent extends BaseListComponent implements OnInit {
   }
 
 
-  onRowSelected(rowData: GetProductsResponseItem) {
-    this.router.navigate([RouteSegments.edit, rowData.id], { relativeTo: this.activatedRoute });
-  }
+  readonly onRowSelected = async(rowData: GetProductsResponseItem) => {
+    await this.router.navigate([RouteSegments.edit, rowData.id], { relativeTo: this.activatedRoute });
+  };
 
-  onContextMenuItemSelected = (contextMenuItem: { itemId: string; rowData: GetProductsResponseItem }) => {
+  readonly onContextMenuItemSelected = async(contextMenuItem: { itemId: string; rowData: GetProductsResponseItem }) => {
     if (contextMenuItem.itemId === RouteSegments.edit) {
-      this.router.navigate([RouteSegments.edit, contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
+      await this.router.navigate([RouteSegments.edit, contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
     } else if (contextMenuItem.itemId === 'delete' && contextMenuItem.rowData.id !== undefined) {
       this.client
         .remove(contextMenuItem.rowData.id)

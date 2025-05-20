@@ -34,12 +34,10 @@ export class SearchFilterPagedQuery extends PagedQuery {
     return filterValue;
   }
 
-  private isFilterValueEmpty(filterValue: any): boolean {
-    return filterValue === undefined
+  isFilterValueEmpty = (filterValue: any): boolean => filterValue === undefined
       || filterValue === null
       || filterValue?.length === 0
       || filterValue[0] === undefined;
-  }
 
   override getRouteQueryParams(): Params {
     const pagedParams = super.getRouteQueryParams();

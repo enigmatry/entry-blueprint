@@ -4,25 +4,17 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { getCurrentLanguage } from 'src/i18n/language';
 import { cultures } from './culture-info';
 
-export const provideCurrencyCode = (): Provider => {
-  return { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' };
-};
+export const provideCurrencyCode = (): Provider => ({ provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' });
 
-export const provideDatePipeOptions = (): Provider => {
-  return {
+export const provideDatePipeOptions = (): Provider => ({
     provide: DATE_PIPE_DEFAULT_OPTIONS,
-    useFactory: () => {
-      return { dateFormat: cultures[getCurrentLanguage()].datePipeFormat };
-    }
-  };
-};
+    useFactory: () => ({ dateFormat: cultures[getCurrentLanguage()].datePipeFormat })
+  });
 
-export const provideMatDateLocale = (): Provider => {
-  return {
+export const provideMatDateLocale = (): Provider => ({
     provide: MAT_DATE_LOCALE,
     useFactory: () => cultures[getCurrentLanguage()].matDateLocale
-  };
-};
+  });
 
 export const provideMatDateFormats = (): Provider => {
   const matDateFormat = cultures[getCurrentLanguage()].matDateFormat;

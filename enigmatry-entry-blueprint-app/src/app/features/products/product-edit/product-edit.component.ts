@@ -14,6 +14,7 @@ import { FormComponent } from '@shared/form-component/form-component.model';
 import { ProductEditGeneratedComponent } from '../generated/product-edit/product-edit-generated.component';
 
 @Component({
+  standalone: false,
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss']
@@ -50,8 +51,7 @@ export class ProductEditComponent
     }
   };
 
-  toCommand(response: IGetProductDetailsResponse): ProductCreateOrUpdateCommand {
-    return new ProductCreateOrUpdateCommand({
+  toCommand = (response: IGetProductDetailsResponse): ProductCreateOrUpdateCommand => new ProductCreateOrUpdateCommand({
       id: response.id,
       name: response.name,
       code: response.code,
@@ -67,7 +67,6 @@ export class ProductEditComponent
       hasDiscount: response.hasDiscount,
       discount: response.discount
     });
-  }
 
   private initHideExpressions = () => {
     this.fieldsHideExpressions.discount =

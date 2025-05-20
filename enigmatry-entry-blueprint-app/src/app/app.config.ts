@@ -1,5 +1,5 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, inject, LOCALE_ID, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authenticationInterceptor } from '@app/auth/authentication.interceptor';
@@ -28,12 +28,11 @@ export const appConfig = (i18n: { localeId: 'en-US' | 'nl-NL' }): ApplicationCon
             AppRoutingModule
         ]),
         provideZoneChangeDetection({ eventCoalescing: true }),
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initFactory,
-            deps: [AppInitService],
-            multi: true
-        },
+        provideAppInitializer(() => {
+            const initializationService = inject(AppInitService);
+            const initializerFn = initFactory(initializationService);
+            return initializerFn();
+        }),
         { provide: LOCALE_ID, useValue: i18n.localeId }
     ]
 });

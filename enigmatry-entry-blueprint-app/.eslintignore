@@ -1,8 +1,0 @@
-# Exclude generated files
-**/generated
-*-generated.*.*
-
-src/polyfills.ts
-src/@enigmatry/**
-
-**/api-reference.ts
