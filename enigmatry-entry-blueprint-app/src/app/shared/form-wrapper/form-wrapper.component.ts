@@ -2,6 +2,7 @@ import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { GeneratedFormComponent } from '../form-component/generated-form-component.model';
 
 @Component({
+  standalone: false,
   selector: 'app-form-wrapper',
   templateUrl: './form-wrapper.component.html',
   styleUrls: ['./form-wrapper.component.scss']

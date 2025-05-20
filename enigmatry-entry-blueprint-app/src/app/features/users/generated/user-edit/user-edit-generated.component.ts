@@ -7,6 +7,9 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
+// @ts-nocheck
+// @ts-ignore
+// @ts-expect-error
 import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, OnDestroy, Optional, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -17,6 +20,7 @@ import { map, throttleTime } from 'rxjs/operators';
 
 
 @Component({
+  standalone: false,
   selector: 'app-g-user-edit',
   templateUrl: './user-edit-generated.component.html'
 })
@@ -94,7 +98,7 @@ export class UserEditGeneratedComponent implements OnInit, OnDestroy {
 fieldGroupClassName: `entry-field-group`,
         templateOptions: {
         label: $localize `:@@users.user-edit.user.label:User`,
-        placeholder: $localize `:@@users.user-edit.user.placeholder:User`,
+        placeholder: $localize `:@@users.user-edit.user.label:User`,
         disabled: this.isReadonly || false,
         description: ``
         },
@@ -113,7 +117,7 @@ className: `entry-email-address-field entry-input`,
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.email-address.label:Email address`,
-        placeholder: $localize `:@@users.user-edit.email-address.placeholder:Email address`,
+        placeholder: $localize `:@@users.user-edit.email-address.label:Email address`,
         description: ``,
             attributes: {  },
             hidden: !true,
@@ -134,7 +138,7 @@ className: `entry-full-name-field entry-input`,
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.full-name.label:Full name`,
-        placeholder: $localize `:@@users.user-edit.full-name.placeholder:Full name`,
+        placeholder: $localize `:@@users.user-edit.full-name.label:Full name`,
         description: ``,
             attributes: {  },
             hidden: !true,
@@ -158,7 +162,7 @@ className: `entry-role-id-field entry-select`,
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.role-id.label:Role`,
-        placeholder: $localize `:@@users.user-edit.role-id.placeholder:Role`,
+        placeholder: $localize `:@@users.user-edit.role-id.label:Role`,
         description: ``,
             options: this.roleIdOptions$.pipe(map(opts => sortOptions(opts, this.roleIdOptionsConfiguration.valueProperty, this.roleIdOptionsConfiguration.sortProperty, this._localeId))),
             valueProp: this.roleIdOptionsConfiguration.valueProperty,
@@ -182,7 +186,7 @@ className: `entry-user-status-id-field entry-select`,
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.user-status-id.label:Status`,
-        placeholder: $localize `:@@users.user-edit.user-status-id.placeholder:Status`,
+        placeholder: $localize `:@@users.user-edit.user-status-id.label:Status`,
         description: ``,
             options: this.userStatusIdOptions$.pipe(map(opts => sortOptions(opts, this.userStatusIdOptionsConfiguration.valueProperty, this.userStatusIdOptionsConfiguration.sortProperty, this._localeId))),
             valueProp: this.userStatusIdOptionsConfiguration.valueProperty,
@@ -197,7 +201,7 @@ className: `entry-user-status-id-field entry-select`,
 fieldGroupClassName: `entry-field-group`,
         templateOptions: {
         label: $localize `:@@users.user-edit.history.label:History`,
-        placeholder: $localize `:@@users.user-edit.history.placeholder:History`,
+        placeholder: $localize `:@@users.user-edit.history.label:History`,
         disabled: this.isReadonly || false,
         description: ``
         },
@@ -216,7 +220,7 @@ className: `entry-created-on-field entry-datepicker`,
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.created-on.label:Created on`,
-        placeholder: $localize `:@@users.user-edit.created-on.placeholder:Created on`,
+        placeholder: $localize `:@@users.user-edit.created-on.label:Created on`,
         description: ``,
             attributes: {  },
             hidden: !true,
@@ -238,7 +242,7 @@ className: `entry-updated-on-field entry-datepicker`,
         },
         templateOptions: {
         label: $localize `:@@users.user-edit.updated-on.label:Updated on`,
-        placeholder: $localize `:@@users.user-edit.updated-on.placeholder:Updated on`,
+        placeholder: $localize `:@@users.user-edit.updated-on.label:Updated on`,
         description: ``,
             attributes: {  },
             hidden: !true,

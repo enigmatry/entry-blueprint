@@ -37,12 +37,12 @@ public class ProductListComponentConfiguration : IListComponentConfiguration<Get
             .Column(x => x.Price)
             .WithHeaderName("Price per unit")
             .WithFormat(new CurrencyPropertyFormatter().WithCurrencyCode("EUR").WithDisplay("€"))
-            .WithTranslationId(ProductTranslationId.Price)
+            .WithTranslationId(ProductEditComponentConfiguration.PriceLabel)
             .WithCustomCssClass("products-price");
         builder
             .Column(x => x.Amount)
             .WithHeaderName("Units")
-            .WithTranslationId(ProductTranslationId.Amount);
+            .WithTranslationId(ProductEditComponentConfiguration.AmountLabel);
         builder
             .Column(x => x.FreeShipping);
 

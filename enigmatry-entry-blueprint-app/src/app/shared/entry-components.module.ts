@@ -32,8 +32,7 @@ import { EntryValidationModule } from '@enigmatry/entry-components/validation';
   ]
 })
 export class EntryComponentsModule {
-  static forRoot(): ModuleWithProviders<EntryComponentsModule> {
-    return {
+  static forRoot = (): ModuleWithProviders<EntryComponentsModule> => ({
       ngModule: EntryComponentsModule,
       providers: [
         {
@@ -41,6 +40,5 @@ export class EntryComponentsModule {
           useClass: PermissionService
         }
       ]
-    };
-  }
+    });
 }
