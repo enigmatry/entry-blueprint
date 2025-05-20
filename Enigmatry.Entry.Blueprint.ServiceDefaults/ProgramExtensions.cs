@@ -61,42 +61,32 @@ public static class ProgrgamExtensions
                         options.SetDbStatementForText = true;
                     });
             })
-            .Services.AddOpenTelemetryExporters(builder.Configuration);
+            .AddOpenTelemetryExporters(builder.Configuration);
 
         return builder;
     }
 
     public static IServiceCollection AddOpenTelemetryWorkerService(this IServiceCollection services, IConfiguration configuration, string serviceName)
     {
-        services.AddOpenTelemetry();
-        services.Configure<TracerProviderBuilder>(options =>
-        {
-            options
-                .SetResourceBuilder(ResourceBuilder.CreateDefault()
-                .AddService(serviceName))
-                .AddSource(serviceName)
-                .AddAzureMonitorTraceExporter();
-        })
-
-            //.WithTracing(tracing =>
-            //{
-            //    if (IsAzureMonitorConfigured(configuration))
-            //    {
-            //        // Add a resource with service information
-            //        tracing
-            //            .SetResourceBuilder(ResourceBuilder.CreateDefault()
-            //            .AddService(serviceName))
-            //            .AddSource(serviceName)
-            //            .AddAzureMonitorTraceExporter();
-            //    }
-            //})
-            //.WithMetrics(metrics =>
-            //{
-            //    if (IsAzureMonitorConfigured(configuration))
-            //    {
-            //        metrics.AddAzureMonitorMetricExporter();
-            //    }
-            .AddOpenTelemetryExporters(configuration);
+        services.AddOpenTelemetry()
+            .WithTracing(tracing =>
+            {
+                if (IsAzureMonitorConfigured(configuration))
+                {
+                    tracing
+                        .SetResourceBuilder(ResourceBuilder.CreateDefault()
+                        .AddService(serviceName))
+                        .AddSource(serviceName)
+                        .AddAzureMonitorTraceExporter();
+                }
+            })
+            .WithMetrics(metrics =>
+            {
+                if (IsAzureMonitorConfigured(configuration))
+                {
+                    metrics.AddAzureMonitorMetricExporter();
+                }
+            });
 
         return services;
     }
@@ -112,17 +102,17 @@ public static class ProgrgamExtensions
         });
     }
 
-    private static void AddOpenTelemetryExporters(this IServiceCollection services, IConfiguration configuration)
+    private static void AddOpenTelemetryExporters(this OpenTelemetryBuilder builder, IConfiguration configuration)
     {
-        //if (IsOtlpCollectorConfigured(configuration))
-        //{
-        //    builder.Services.AddOpenTelemetry().UseOtlpExporter();
-        //}
+        if (IsOtlpCollectorConfigured(configuration))
+        {
+            builder.Services.AddOpenTelemetry().UseOtlpExporter();
+        }
 
         // Uncomment the following lines to enable the Azure Monitor exporter (requires the Azure.Monitor.OpenTelemetry.AspNetCore package)
         if (IsAzureMonitorConfigured(configuration))
         {
-            services.AddOpenTelemetry()
+            builder.Services.AddOpenTelemetry()
                 .UseAzureMonitor();
         }
     }
