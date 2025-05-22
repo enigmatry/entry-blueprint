@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Auditing;
+using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Entry.Blueprint.Domain.Products.DomainEvents;
 
