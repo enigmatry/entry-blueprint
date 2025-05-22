@@ -8,24 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="appsettings.Development.json"/>
+    <Content Remove="appsettings.Development.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="appsettings.Development.json"/>
+    <None Include="appsettings.Development.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization"/>
-    <PackageReference Include="Enigmatry.Entry.HealthChecks"/>
-    <PackageReference Include="Enigmatry.Entry.CodeGeneration.Validation"/>
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore"/>
-    <PackageReference Include="Microsoft.AspNetCore.SpaProxy"/>
+    <PackageReference Include="Enigmatry.Entry.AspNetCore.Authorization" />
+    <PackageReference Include="Enigmatry.Entry.HealthChecks" />
+    <PackageReference Include="Enigmatry.Entry.CodeGeneration.Validation" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure\Enigmatry.Entry.Blueprint.Infrastructure.csproj"/>
-    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Domain\Enigmatry.Entry.Blueprint.Domain.csproj"/>
+    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Infrastructure\Enigmatry.Entry.Blueprint.Infrastructure.csproj" />
+    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Domain\Enigmatry.Entry.Blueprint.Domain.csproj" />
+    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.ServiceDefaults\Enigmatry.Entry.Blueprint.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <!-- By default, the msbuild javascript sdk targets the .Net Framework 4.7.2, so building only works on Windows machines -->
@@ -36,11 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <WCFMetadata Include="Connected Services"/>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests"/>
+    <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests" />
   </ItemGroup>
 
 

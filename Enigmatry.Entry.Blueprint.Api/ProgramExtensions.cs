@@ -26,7 +26,6 @@ public static class ProgramExtensions
     {
         services.AddCors();
         services.AddHttpContextAccessor();
-        services.AddApplicationInsightsTelemetry();
 
         services.AppAddSettings(configuration);
         services.AppAddPolly();
@@ -51,10 +50,8 @@ public static class ProgramExtensions
     {
         hostBuilder.UseSerilog((context, services, loggerConfiguration) =>
         {
-            loggerConfiguration
-                .AppConfigureSerilog(configuration)
-                .AddAppInsightsToSerilog(configuration, services);
-        });
+            loggerConfiguration.AppConfigureSerilog(configuration);
+        }, writeToProviders: true);
         hostBuilder.UseServiceProviderFactory(new AutofacServiceProviderFactory());
         hostBuilder.ConfigureContainer<ContainerBuilder>((_, containerBuilder) =>
         {
