@@ -35,9 +35,9 @@ internal class Program
                 containerBuilder.AppRegisterModules();
                 containerBuilder.RegisterModule<IdentityModule<SystemUserProvider>>();
             })
-            .ConfigureLogging(logging =>
+            .ConfigureLogging((context, logging) =>
             {
-                logging.ConfigureOpenTelemetryLogging();
+                logging.ConfigureOpenTelemetryLogging(context.Configuration);
             })
             .UseSerilog((context, services, loggerConfiguration) =>
             {

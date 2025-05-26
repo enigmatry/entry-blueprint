@@ -18,7 +18,7 @@ namespace Enigmatry.Entry.ServiceDefaults;
 // Adds common .NET Aspire services: service discovery, resilience, health checks, and OpenTelemetry.
 // This project should be referenced by each service project in your solution.
 // To learn more about using this project, see https://aka.ms/dotnet/aspire/service-defaults
-public static class ProgrgamExtensions
+public static class ProgramExtensions
 {
     public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
     {
@@ -42,7 +42,7 @@ public static class ProgrgamExtensions
 
     public static IHostApplicationBuilder ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
-        builder.Logging.ConfigureOpenTelemetryLogging();
+        builder.Logging.ConfigureOpenTelemetryLogging(builder.Configuration);
 
         builder.Services.AddOpenTelemetry()
             .WithMetrics(metrics =>
@@ -93,7 +93,7 @@ public static class ProgrgamExtensions
         return services;
     }
 
-    public static void ConfigureOpenTelemetryLogging(this ILoggingBuilder loggingBuilder)
+    public static void ConfigureOpenTelemetryLogging(this ILoggingBuilder loggingBuilder, IConfiguration configuration)
     {
         // Clear all logging providers and add OpenTelemetry logging provider
         loggingBuilder.ClearProviders();
@@ -101,7 +101,10 @@ public static class ProgrgamExtensions
         {
             options.IncludeFormattedMessage = true;
             options.IncludeScopes = true;
-            options.AddAzureMonitorLogExporter();
+            if (IsAzureMonitorConfigured(configuration))
+            {
+                options.AddAzureMonitorLogExporter();
+            }
         });
     }
 
