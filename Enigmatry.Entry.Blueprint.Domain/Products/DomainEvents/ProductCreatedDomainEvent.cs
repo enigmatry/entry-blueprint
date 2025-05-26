@@ -8,7 +8,6 @@ public record ProductCreatedDomainEvent : AuditableDomainEvent
     {
         Name = product.Name;
         Code = product.Code;
-        Thread.Sleep(5000);
     }
 
     public string Name { get; }

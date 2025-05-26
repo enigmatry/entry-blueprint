@@ -616,8 +616,8 @@
       },
       "MediatR": {
         "type": "Transitive",
-        "resolved": "12.4.1",
-        "contentHash": "0tLxCgEC5+r1OCuumR3sWyiVa+BMv3AgiU4+pz8xqTc+2q1WbUEXFOr7Orm96oZ9r9FsldgUtWvB2o7b9jDOaw==",
+        "resolved": "12.5.0",
+        "contentHash": "vqm2H8/nqL5NAJHPhsG1JOPwfkmbVrPyh4svdoRzu+uZh6Ex7PRoHBGsLYC0/RWCEJFqD1ohHNpteQvql9OktA==",
         "dependencies": {
           "MediatR.Contracts": "[2.0.1, 3.0.0)",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
@@ -1884,29 +1884,29 @@
       },
       "Quartz": {
         "type": "Transitive",
-        "resolved": "3.13.1",
-        "contentHash": "0S4/gYb/FRQfek65OPAmszbdEmtc4Fq/jSeA5XFnvMIjYL9Zr8g9jWoKneEFzAFJGlESjFULtaUFzValHvqu4A==",
+        "resolved": "3.14.0",
+        "contentHash": "j8mY6S0FWbtuEFbStUEZAkkGpZLbSuTT0us1w0DUQqhi+vwg/7XXS36TeH3o34zZoqYGyXvk6jrKnW/p6kS8sg==",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "2.1.1"
         }
       },
       "Quartz.Extensions.DependencyInjection": {
         "type": "Transitive",
-        "resolved": "3.13.1",
-        "contentHash": "I3uXVIYMEo00TrEzzHG3koWNTGdinPGjvgBWse7SqMt3ZW7qlKBXB4a5bJsxkKSMjAs4i2Ykx2cJSi/r6zhiCw==",
+        "resolved": "3.14.0",
+        "contentHash": "CUY9ZaUsmnl8YxPcl3eXmg/1UVWv1NdyATKGaBjfxf8MYH36vgCoerv7aCSjM/oRbdiaBwNnPfNgHMzxUu1p1g==",
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
-          "Microsoft.Extensions.Options": "8.0.0",
-          "Quartz": "3.13.1"
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.0",
+          "Microsoft.Extensions.Options": "9.0.0",
+          "Quartz": "3.14.0"
         }
       },
       "Quartz.Extensions.Hosting": {
         "type": "Transitive",
-        "resolved": "3.13.1",
-        "contentHash": "pwGofFs0VoIwq8JFXBEeEKFrA/6wJDFekLzQA5oev7+Ow0+lqBlZlzBpPd10hkgVAItL+uZ2SEjP8Ual3QZTww==",
+        "resolved": "3.14.0",
+        "contentHash": "kbxBND5Nift+qwOud8cjywoLvjcQX+aLt6R7qQcQVg8w84NUNjTsjzZ5zIod9vz7ricSvIaQXGVbhpm7X6yVQA==",
         "dependencies": {
-          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
-          "Quartz.Extensions.DependencyInjection": "3.13.1"
+          "Microsoft.Extensions.Hosting.Abstractions": "9.0.0",
+          "Quartz.Extensions.DependencyInjection": "3.14.0"
         }
       },
       "Serilog": {
@@ -2353,7 +2353,7 @@
         "dependencies": {
           "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.ServiceDefaults": "[1.0.0, )",
-          "Enigmatry.Entry.Scheduler": "[9.0.0, )"
+          "Enigmatry.Entry.Scheduler": "[9.0.1-preview.8, )"
         }
       },
       "enigmatry.entry.blueprint.servicedefaults": {
@@ -2467,12 +2467,13 @@
       "Enigmatry.Entry.Core": {
         "type": "CentralTransitive",
         "requested": "[9.0.0, )",
-        "resolved": "9.0.0",
-        "contentHash": "DDkH1mQsy4ODf5+P9JIuVf6LRlmEuGRPcDaC6zeUkZm2Wj524CePcv0YTDlnqIz6xcLLd7Y63tbOv3NsAzRKwA==",
+        "resolved": "9.0.1-preview.8",
+        "contentHash": "Cuz2HM1K5kNaV8DAriqzXcCbNUrpAi9unWRTLvQNTdPGKXjBd0OiT8/gwgWKpUAOTwt65+C3EiP/yswawKhVbw==",
         "dependencies": {
+          "FluentValidation": "11.11.0",
           "JetBrains.Annotations": "2024.3.0",
-          "MediatR": "12.4.1",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
+          "MediatR": "12.5.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.4",
           "Serilog": "4.2.0",
           "System.ComponentModel.Annotations": "5.0.0"
         }
@@ -2525,16 +2526,16 @@
       },
       "Enigmatry.Entry.Scheduler": {
         "type": "CentralTransitive",
-        "requested": "[9.0.0, )",
-        "resolved": "9.0.0",
-        "contentHash": "+82XjkiShvMaGs3c/AqxtTEOdo5vM+TF850SERSCYIO8PaBaQdxEOzX7hjHHOQ55QnJ3zzh3LwcwbY/0W+WoIQ==",
+        "requested": "[9.0.1-preview.8, )",
+        "resolved": "9.0.1-preview.8",
+        "contentHash": "fDylyZBfwAuwZLM5Dot/JubsvdV7nzwzv8L/e+lvlb5Kiqotw3S0H+2A8kUt2mQkv4Zua2DFFWWY1hWchJ+bvg==",
         "dependencies": {
-          "Enigmatry.Entry.Core": "9.0.0",
+          "Enigmatry.Entry.Core": "9.0.1-preview.8",
           "Microsoft.ApplicationInsights.WorkerService": "2.23.0",
-          "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.2",
-          "Quartz": "3.13.1",
-          "Quartz.Extensions.DependencyInjection": "3.13.1",
-          "Quartz.Extensions.Hosting": "3.13.1"
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.4",
+          "Quartz": "3.14.0",
+          "Quartz.Extensions.DependencyInjection": "3.14.0",
+          "Quartz.Extensions.Hosting": "3.14.0"
         }
       },
       "Enigmatry.Entry.SmartEnums": {

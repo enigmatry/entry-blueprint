@@ -1,12 +1,10 @@
 ﻿using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
-using Enigmatry.Entry.Blueprint.Scheduler;
 using Enigmatry.Entry.Scheduler;
 using Enigmatry.Entry.ServiceDefaults;
 using Serilog;
@@ -28,7 +26,7 @@ internal class Program
 
             using var factory = new SerilogLoggerFactory();
             services.AddEntryQuartz(context.Configuration, AssemblyFinder.SchedulerAssembly, factory.CreateLogger<Program>(),
-                quartz => quartz.AddJobListener<OpenTelemetryJobListener>());
+                quartz => quartz.AddEntryOpenTelemetry());
 
             services.AddOpenTelemetryWorkerService(context.Configuration);
             })

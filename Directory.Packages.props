@@ -25,7 +25,7 @@
     <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.MediatR" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="$(EnigmatryEntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="9.0.1-preview.8" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.EntityFramework" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.Swagger" Version="$(EnigmatryEntryVersion)" />
