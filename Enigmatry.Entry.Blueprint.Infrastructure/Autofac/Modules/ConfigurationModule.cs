@@ -18,10 +18,5 @@ public class ConfigurationModule : Module
         builder.Register(c => c.Resolve<IConfiguration>().ReadSettingsSection<DbContextSettings>("DbContext"))
             .AsSelf()
             .SingleInstance();
-
-        builder.Register(c => c.Resolve<IConfiguration>()
-                .ReadSettingsSection<ApplicationInsightsSettings>("ApplicationInsights"))
-            .AsSelf()
-            .SingleInstance();
     }
 }

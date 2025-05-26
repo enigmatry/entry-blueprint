@@ -4,6 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:aspire": "run-script-os",
+    "start:aspire:win32": "ng serve --port %PORT%",
+    "start:aspire:default": "ng serve --port $PORT",
     "build": "ng build",
     "test": "jest --coverage=false",
     "test:ci": "jest --ci --coverage=true",
@@ -57,6 +60,7 @@
     "json-sort-cli": "^4.0.3",
     "npm-audit-reporter-teamcity": "0.4.0",
     "nswag": "^14.2.0",
+    "run-script-os": "^1.1.6",
     "typescript": "5.5.4"
   }
 }
