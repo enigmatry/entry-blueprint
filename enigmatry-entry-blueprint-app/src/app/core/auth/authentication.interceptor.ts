@@ -1,4 +1,4 @@
-/* eslint-disable func-style */
+
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { environment } from '@env';
@@ -27,4 +27,4 @@ export const authenticationInterceptor = (request: HttpRequest<unknown>, next: H
                 throw error;
             })
         );
-}
+};

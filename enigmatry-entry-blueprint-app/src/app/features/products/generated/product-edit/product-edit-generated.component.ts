@@ -7,6 +7,9 @@
 // </auto-generated>
 // ------------------------------------------------------------------------------;
 /* eslint-disable */
+// @ts-nocheck
+// @ts-ignore
+// @ts-expect-error
 import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, OnDestroy, Optional, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -17,6 +20,7 @@ import { map, throttleTime } from 'rxjs/operators';
 
 
 @Component({
+  standalone: false,
   selector: 'app-g-product-edit',
   templateUrl: './product-edit-generated.component.html'
 })
@@ -151,7 +155,7 @@ className: `entry-type-field entry-autocomplete`,
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.type.label:Type`,
-        placeholder: $localize `:@@products.product-edit.type.placeholder:Type`,
+        placeholder: $localize `:@@products.product-edit.type.label:Type`,
         description: ``,
             options: of(this.typeOptions).pipe(map(opts => sortOptions(opts, this.typeOptionsConfiguration.valueProperty, this.typeOptionsConfiguration.sortProperty, this._localeId))),
             valueProp: this.typeOptionsConfiguration.valueProperty,
@@ -177,7 +181,7 @@ className: `entry-description-field entry-textarea`,
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.description.label:Description`,
-        placeholder: $localize `:@@products.product-edit.description.placeholder:Description`,
+        placeholder: $localize `:@@products.product-edit.description.label:Description`,
         description: ``,
             rows: 2,
             cols: 0,
@@ -352,7 +356,7 @@ className: `entry-free-shipping-field entry-checkbox`,
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
-        placeholder: $localize `:@@products.product-edit.free-shipping.placeholder:Free shipping`,
+        placeholder: $localize `:@@products.product-edit.free-shipping.label:Free shipping`,
         description: ``,
             attributes: {  },
             hidden: !true,
@@ -373,7 +377,7 @@ className: `entry-has-discount-field entry-checkbox`,
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.has-discount.label:Has discount`,
-        placeholder: $localize `:@@products.product-edit.has-discount.placeholder:Has discount`,
+        placeholder: $localize `:@@products.product-edit.has-discount.label:Has discount`,
         description: ``,
             attributes: {  },
             hidden: !true,
@@ -394,7 +398,7 @@ className: `entry-discount-field entry-input`,
         },
         templateOptions: {
         label: $localize `:@@products.product-edit.discount.label:Discount`,
-        placeholder: $localize `:@@products.product-edit.discount.placeholder:Discount`,
+        placeholder: $localize `:@@products.product-edit.discount.label:Discount`,
         description: ``,
             attributes: {  },
             hidden: !true,

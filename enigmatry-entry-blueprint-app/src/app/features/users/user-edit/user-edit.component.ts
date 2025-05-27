@@ -12,6 +12,7 @@ import { switchMap } from 'rxjs/operators';
 import { UserEditGeneratedComponent } from '../generated/user-edit/user-edit-generated.component';
 
 @Component({
+  standalone: false,
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']

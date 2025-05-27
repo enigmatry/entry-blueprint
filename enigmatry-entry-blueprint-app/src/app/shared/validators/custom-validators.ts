@@ -25,8 +25,7 @@ const validate = async<T>(control: UntypedFormControl,
   return Promise.resolve(null);
 };
 
-export const customValidatorsFactory = (service: CustomValidatorsService) => {
-  return {
+export const customValidatorsFactory = (service: CustomValidatorsService) => ({
     validationMessages: [
       { name: 'productCodeIsUnique', message: $localize`:@@validators.productCodeIsUnique:Code is not unique` },
       // eslint-disable-next-line no-secrets/no-secrets
@@ -43,5 +42,4 @@ export const customValidatorsFactory = (service: CustomValidatorsService) => {
         validation: (control: UntypedFormControl) => productNameIsUniqueValidator(control, service)
       }
     ]
-  };
-};
+  });

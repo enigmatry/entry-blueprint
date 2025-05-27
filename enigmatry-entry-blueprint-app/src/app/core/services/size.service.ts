@@ -1,26 +1,17 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { ElementRef, Injectable, signal } from '@angular/core';
 import { ScreenSizeFactory } from '@app/models/screen-sizes/factory';
 import { Size } from '@app/models/screen-sizes/size';
-import { Observable, Subject, fromEvent } from 'rxjs';
-import { distinctUntilKeyChanged } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SizeService {
-    lastKnownSize: Size;
-    onResize$: Observable<Size>;
+    lastKnownSize = signal<Size | undefined>(undefined);
 
     private readonly sizeHolderSelector = '.root-container';
     private readonly holderPseudoSelector = '::before';
     private readonly holderPropertyName: string = 'content';
-
-    private resizeSubject = new Subject<Size>();
-
-    constructor() {
-        this.onResize$ = this.resizeSubject.asObservable()
-            .pipe(distinctUntilKeyChanged('name'));
-    }
 
     readonly startTrackingResizeOf = (element: ElementRef) => {
         fromEvent(window, 'resize')
@@ -36,7 +27,6 @@ export class SizeService {
         const value = placeholderStyle.getPropertyValue(this.holderPropertyName);
         const size = value.replace(/"/gu, '');
 
-        this.lastKnownSize = ScreenSizeFactory.createFrom(size);
-        this.resizeSubject.next(this.lastKnownSize);
+        this.lastKnownSize.set(ScreenSizeFactory.createFrom(size));
     };
 }
