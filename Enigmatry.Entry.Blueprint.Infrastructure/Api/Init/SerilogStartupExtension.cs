@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Enigmatry.Entry.AspNetCore.ApplicationInsights;
+using Enigmatry.Entry.AspNetCore.OpenTelemetry;
 using Enigmatry.Entry.Core.Helpers;
 using Enigmatry.Entry.Core.Settings;
 using Microsoft.Extensions.Configuration;
