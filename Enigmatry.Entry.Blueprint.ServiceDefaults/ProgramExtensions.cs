@@ -56,11 +56,17 @@ public static class ProgramExtensions
                 tracing.AddAspNetCoreInstrumentation()
                     // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
                     //.AddGrpcClientInstrumentation()
-                    .AddHttpClientInstrumentation()
-                    .AddSqlClientInstrumentation(options =>
+                    .AddHttpClientInstrumentation();
+                    // Uncomment the following line to enable sampling on collecting traces. 
+                    //.SetSampler(new TraceIdRatioBasedSampler(0.5));
+
+                if (builder.Environment.IsDevelopment())
+                {
+                    tracing.AddSqlClientInstrumentation(options =>
                     {
                         options.SetDbStatementForText = true;
                     });
+                }
             })
             .AddOpenTelemetryExporters(builder.Configuration);
 
