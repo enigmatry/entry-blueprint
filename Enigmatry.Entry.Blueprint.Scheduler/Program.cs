@@ -5,8 +5,8 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
+using Enigmatry.Entry.Blueprint.ServiceDefaults;
 using Enigmatry.Entry.Scheduler;
-using Enigmatry.Entry.ServiceDefaults;
 using Serilog;
 using Serilog.Extensions.Logging;
 
