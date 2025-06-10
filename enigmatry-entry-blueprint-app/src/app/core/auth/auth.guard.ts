@@ -4,7 +4,7 @@ import { CurrentUserService } from '@services/current-user.service';
 import { from, map, tap } from 'rxjs';
 import { AuthService } from './auth.service';
 
-export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const authGuard: CanActivateFn = (_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService = inject(AuthService);
   const currentUserService = inject(CurrentUserService);
 

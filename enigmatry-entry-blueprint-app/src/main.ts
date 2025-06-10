@@ -7,6 +7,11 @@ import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 import { getCurrentLanguage, localizations } from './i18n/language';
 
+const handleError = (error: Error) => {
+  // eslint-disable-next-line no-console
+  console.error(error);
+};
+
 if (environment.production) {
   enableProdMode();
 }
@@ -18,7 +23,8 @@ getLanguageData()
   .then(i18n => {
     registerLocaleData(i18n.locale, i18n.localeId, i18n.localeExtra);
     loadTranslations(i18n.messages.translations);
-    bootstrapApplication(AppComponent, appConfig(i18n));
+    bootstrapApplication(AppComponent, appConfig(i18n))
+      .catch(error => handleError(error));
   })
-  // eslint-disable-next-line no-console
-  .catch(err => console.error(err));
+  .catch(error => handleError(error));
+
