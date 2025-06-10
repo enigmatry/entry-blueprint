@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>253200df-f2b9-4f59-ae41-33c701dee0f5</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+    <PackageReference Include="Aspire.Hosting.NodeJs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj" />
+    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Api\Enigmatry.Entry.Blueprint.Api.csproj" />
+    <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Scheduler\Enigmatry.Entry.Blueprint.Scheduler.csproj" />
+  </ItemGroup>
+
+</Project>

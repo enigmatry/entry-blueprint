@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
-using Enigmatry.Entry.AspNetCore.ApplicationInsights;
+using Enigmatry.Entry.AspNetCore.OpenTelemetry;
 using Enigmatry.Entry.Core.Helpers;
 using Enigmatry.Entry.Core.Settings;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -33,17 +32,5 @@ public static class SerilogStartupExtension
         // Serilog.Debugging.SelfLog.Enable(Console.Error);
 
         return loggerConfiguration;
-    }
-
-    public static void AddAppInsightsToSerilog(this LoggerConfiguration loggerConfiguration, IConfiguration configuration, IServiceProvider serviceProvider)
-    {
-        var settings = configuration.GetSection(ApplicationInsightsSettings.ApplicationInsightsSectionName).Get<ApplicationInsightsSettings>()!;
-        if (!settings.ConnectionString.HasContent())
-        {
-            return;
-        }
-
-        var telemetryConfiguration = serviceProvider.GetRequiredService<TelemetryConfiguration>();
-        loggerConfiguration.WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces, LogEventLevel.Information);
     }
 }
