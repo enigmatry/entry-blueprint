@@ -1,7 +1,6 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom, inject, LOCALE_ID, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authenticationInterceptor } from '@app/auth/authentication.interceptor';
 import { CoreModule } from '@app/core.module';
 import { AppInitService, initFactory } from '@app/services/app-init.service';
@@ -19,7 +18,6 @@ export const appConfig = (i18n: { localeId: 'en-US' | 'nl-NL' }): ApplicationCon
         ),
         importProvidersFrom([
             BrowserModule,
-            BrowserAnimationsModule,
             CoreModule,
             ApiModule,
             SharedModule,

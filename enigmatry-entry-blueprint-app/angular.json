@@ -108,15 +108,6 @@
           "options": {
             "buildTarget": "enigmatry-entry-blueprint-app:build"
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
-          }
         }
       }
     }
