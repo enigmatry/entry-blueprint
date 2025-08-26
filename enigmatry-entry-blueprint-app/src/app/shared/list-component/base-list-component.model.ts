@@ -1,3 +1,4 @@
+import { inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SearchFilterParams } from '@enigmatry/entry-components/search-filter';
 import { PageEvent, SortEvent } from '@enigmatry/entry-components/table';
@@ -5,8 +6,8 @@ import { SearchFilterPagedQuery } from './search-filter-paged-query';
 
 export abstract class BaseListComponent {
   query: SearchFilterPagedQuery;
-
-  constructor(protected router: Router, protected activatedRoute: ActivatedRoute) { }
+  protected router: Router = inject(Router);
+  protected activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
   // Handle search filters change
   readonly searchFilterChange = async(searchParams: SearchFilterParams) => {

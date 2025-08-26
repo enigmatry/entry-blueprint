@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { PermissionId } from '@api';
 import { EntryPermissionService } from '@enigmatry/entry-components/permissions';
 import { CurrentUserService } from '@services/current-user.service';
@@ -7,7 +7,7 @@ import { CurrentUserService } from '@services/current-user.service';
   providedIn: 'root'
 })
 export class PermissionService implements EntryPermissionService<PermissionId> {
-  constructor(private currentUserService: CurrentUserService) {}
+  private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
 
   hasPermissions(permissions: PermissionId[]): boolean {
     const currentUser = this.currentUserService.currentUser;

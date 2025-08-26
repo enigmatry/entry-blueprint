@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router, TitleStrategy } from '@angular/router';
 import { environment } from '@env';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
@@ -15,9 +15,9 @@ import { CurrentUserService } from './current-user.service';
 export class ApplicationInsightsService implements OnDestroy {
   private appInsights: ApplicationInsights | undefined;
   private destroy$ = new Subject<void>();
-
-  constructor(private router: Router, private titleStrategy: TitleStrategy,
-    private currentUserService: CurrentUserService) { }
+  private readonly router: Router = inject(Router);
+  private readonly titleStrategy: TitleStrategy = inject(TitleStrategy);
+  private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
 
   initialize(): void {
     if (!environment.applicationInsights.connectionString) {
@@ -52,11 +52,11 @@ export class ApplicationInsightsService implements OnDestroy {
   }
 
   createApplicationInsights = (): ApplicationInsights => new ApplicationInsights({
-      config: {
-        connectionString: environment.applicationInsights.connectionString,
-        enableCorsCorrelation: environment.applicationInsights.enableCorsCorrelation
-      }
-    });
+    config: {
+      connectionString: environment.applicationInsights.connectionString,
+      enableCorsCorrelation: environment.applicationInsights.enableCorsCorrelation
+    }
+  });
 
   private trackPageViewsOnRouterNavigation() {
     this.router.events

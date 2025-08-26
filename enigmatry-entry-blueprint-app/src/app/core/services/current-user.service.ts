@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ProfileClient } from '@api';
 import { UserProfile } from '@app/auth/user-profile';
 import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } from 'rxjs';
@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } fro
 })
 export class CurrentUserService {
 	private currentUserSubject = new BehaviorSubject<UserProfile | null>(null);
+	private readonly profileClient: ProfileClient = inject(ProfileClient);
 
 	public get currentUser$(): Observable<UserProfile | null> {
 		return this.currentUserSubject.asObservable();
@@ -17,8 +18,6 @@ export class CurrentUserService {
 	public get currentUser(): UserProfile | null {
 		return this.currentUserSubject.value;
 	}
-
-	constructor(private profileClient: ProfileClient) { }
 
 	loadUser(): Observable<UserProfile | null> {
 		if (this.currentUserSubject.value) {

@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, ViewChild } from '@angular/core';
 import {
   IGetProductDetailsResponse,
   IProductCreateOrUpdateCommand,
@@ -22,14 +21,11 @@ import { ProductEditGeneratedComponent } from '../generated/product-edit/product
 export class ProductEditComponent
   extends FormComponent<IProductCreateOrUpdateCommand, IGetProductDetailsResponse> {
   @ViewChild('formComponent') formComponent: ProductEditGeneratedComponent;
-
   PermissionId = PermissionId;
+  private readonly client: ProductsClient = inject(ProductsClient);
 
-  constructor(
-    protected override router: Router,
-    protected override activatedRoute: ActivatedRoute,
-    private client: ProductsClient) {
-    super(router, activatedRoute);
+  constructor() {
+    super();
     this.initHideExpressions();
     this.initDisableExpressions();
     this.initRequiredExpressions();
@@ -52,21 +48,21 @@ export class ProductEditComponent
   };
 
   toCommand = (response: IGetProductDetailsResponse): ProductCreateOrUpdateCommand => new ProductCreateOrUpdateCommand({
-      id: response.id,
-      name: response.name,
-      code: response.code,
-      type: response.type,
-      description: response.description,
-      price: response.price,
-      contactEmail: response.contactEmail,
-      contactPhone: response.contactPhone,
-      infoLink: response.infoLink,
-      amount: response.amount,
-      expiresOn: response.expiresOn,
-      freeShipping: response.freeShipping,
-      hasDiscount: response.hasDiscount,
-      discount: response.discount
-    });
+    id: response.id,
+    name: response.name,
+    code: response.code,
+    type: response.type,
+    description: response.description,
+    price: response.price,
+    contactEmail: response.contactEmail,
+    contactPhone: response.contactPhone,
+    infoLink: response.infoLink,
+    amount: response.amount,
+    expiresOn: response.expiresOn,
+    freeShipping: response.freeShipping,
+    hasDiscount: response.hasDiscount,
+    discount: response.discount
+  });
 
   private initHideExpressions = () => {
     this.fieldsHideExpressions['discount'] =

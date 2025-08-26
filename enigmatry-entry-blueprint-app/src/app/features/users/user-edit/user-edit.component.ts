@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   CreateOrUpdateUserCommand, IGetUserDetailsResponse,
@@ -25,9 +25,9 @@ export class UserEditComponent implements OnInit {
   $userStatusLookup: Observable<LookupResponseOfUserStatusId[]>;
   PermissionId = PermissionId;
 
-  constructor(private client: UsersClient,
-    protected activatedRoute: ActivatedRoute,
-    public location: Location) { }
+  private readonly client: UsersClient = inject(UsersClient);
+  private readonly activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  readonly location: Location = inject(Location);
 
   ngOnInit(): void {
     this.activatedRoute.params

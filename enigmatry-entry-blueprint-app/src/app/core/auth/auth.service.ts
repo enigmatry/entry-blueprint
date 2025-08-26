@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import {
   AccountInfo, AuthenticationResult, Configuration, PublicClientApplication, RedirectRequest
@@ -14,9 +14,7 @@ import { extraQueryParameters, MSAL_CONFIG } from './msal-config';
 })
 export class AuthService {
   private msalInstance: PublicClientApplication;
-
-  constructor(@Inject(MSAL_CONFIG) private msalConfig: Configuration) {
-  }
+  private readonly msalConfig: Configuration = inject(MSAL_CONFIG);
 
   async initialize(): Promise<void> {
     if (!this.msalInstance) {

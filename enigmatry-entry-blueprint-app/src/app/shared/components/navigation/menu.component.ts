@@ -1,4 +1,4 @@
-import { Component, computed, effect, ViewChild } from '@angular/core';
+import { Component, computed, effect, inject, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { PermissionId } from '@api';
 import { AuthService } from '@app/auth/auth.service';
@@ -17,6 +17,11 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 })
 export class MenuComponent {
   @ViewChild('drawer') drawer: MatSidenav;
+
+  private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
+  private readonly permissionService: PermissionService = inject(PermissionService);
+  private readonly authService: AuthService = inject(AuthService);
+  readonly sizeService: SizeService = inject(SizeService);
 
   get currentUser() {
     return this.currentUserService.currentUser;
@@ -48,10 +53,7 @@ export class MenuComponent {
     }
   ];
 
-  constructor(private readonly currentUserService: CurrentUserService,
-    private readonly permissionService: PermissionService,
-    private readonly authService: AuthService,
-    readonly sizeService: SizeService) {
+  constructor() {
     effect(async() => {
       this.menuRole();
       await this.drawer?.close();

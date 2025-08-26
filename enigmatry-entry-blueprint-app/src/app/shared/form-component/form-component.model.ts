@@ -1,3 +1,4 @@
+import { inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary }
   from '@enigmatry/entry-form';
@@ -11,9 +12,11 @@ export abstract class FormComponent<TCommandModel, TDetailsModel> {
   fieldsDisableExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
   fieldsRequiredExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
   fieldsPropertyExpressions: IFieldPropertyExpressionDictionary<TDetailsModel> = {};
+  protected router: Router = inject(Router);
+  protected activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor(protected router: Router, protected activatedRoute: ActivatedRoute) {
-    this.formMode = this.getFormAccessMode(router.url);
+  constructor() {
+    this.formMode = this.getFormAccessMode(this.router.url);
 
     if (this.isEdit()) {
       this.activatedRoute.data.subscribe(data => {

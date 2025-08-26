@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
 import { GetUsersResponseItem, PermissionId, UsersClient } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
@@ -19,12 +18,8 @@ export class UserListComponent extends BaseListComponent implements OnInit {
   contextMenuItems: ContextMenuItem[] = [];
   data: PagedData<GetUsersResponseItem>;
   override query = new GetUsersQuery();
-
-  constructor(private client: UsersClient, private permissionService: PermissionService,
-    protected override router: Router, protected override activatedRoute: ActivatedRoute
-  ) {
-    super(router, activatedRoute);
-  }
+  private readonly permissionService: PermissionService = inject(PermissionService);
+  private readonly client: UsersClient = inject(UsersClient);
 
   ngOnInit(): void {
     this.watchQueryParamsAndGetUsers();

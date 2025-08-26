@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
 import { GetProductsResponseItem, PermissionId, ProductsClient } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
@@ -19,19 +18,13 @@ export class ProductListComponent extends BaseListComponent implements OnInit {
   override query = new GetProductsQuery();
   PermissionId = PermissionId;
   contextMenuItems: ContextMenuItem[] = [];
-
-  constructor(private client: ProductsClient,
-    protected override router: Router,
-    protected override activatedRoute: ActivatedRoute,
-    private permissionService: PermissionService) {
-    super(router, activatedRoute);
-  }
+  private readonly permissionService: PermissionService = inject(PermissionService);
+  private readonly client: ProductsClient = inject(ProductsClient);
 
   ngOnInit(): void {
     this.watchQueryParamsAndGetProducts();
     this.initContextMenuItems();
   }
-
 
   readonly onRowSelected = async(rowData: GetProductsResponseItem) => {
     await this.router.navigate([RouteSegments.edit, rowData.id], { relativeTo: this.activatedRoute });

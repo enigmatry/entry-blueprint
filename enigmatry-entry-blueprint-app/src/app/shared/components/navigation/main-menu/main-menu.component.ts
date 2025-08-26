@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
@@ -23,10 +23,10 @@ export class MainMenuComponent {
   @Input() onLogout: () => void;
   @Input() show: (menuItem: { permission: PermissionId }) => void;
   @Input() currentUser: UserProfile | null;
+  private readonly sizeService: SizeService = inject(SizeService);
+  readonly permissionService: PermissionService = inject(PermissionService);
 
   get showSideMenu(): boolean {
     return this.sizeService.lastKnownSize()?.supportsSideMenu ?? false;
   }
-
-  constructor(readonly sizeService: SizeService, readonly permissionService: PermissionService) { }
 }
