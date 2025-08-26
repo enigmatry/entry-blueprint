@@ -16,13 +16,13 @@ import { GetProductsQuery } from '../models/get-products-query.model';
 })
 export class ProductListComponent extends BaseListComponent implements OnInit {
   data: PagedData<GetProductsResponseItem>;
-  query = new GetProductsQuery();
+  override query = new GetProductsQuery();
   PermissionId = PermissionId;
   contextMenuItems: ContextMenuItem[] = [];
 
   constructor(private client: ProductsClient,
-    protected router: Router,
-    protected activatedRoute: ActivatedRoute,
+    protected override router: Router,
+    protected override activatedRoute: ActivatedRoute,
     private permissionService: PermissionService) {
     super(router, activatedRoute);
   }

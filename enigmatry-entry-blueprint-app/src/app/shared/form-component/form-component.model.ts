@@ -17,7 +17,7 @@ export abstract class FormComponent<TCommandModel, TDetailsModel> {
 
     if (this.isEdit()) {
       this.activatedRoute.data.subscribe(data => {
-        this.initialModelData = this.toCommand(data.response);
+        this.initialModelData = this.toCommand(data['response']);
         this.resetModel();
       });
     }

@@ -26,8 +26,8 @@ export class ProductEditComponent
   PermissionId = PermissionId;
 
   constructor(
-    protected router: Router,
-    protected activatedRoute: ActivatedRoute,
+    protected override router: Router,
+    protected override activatedRoute: ActivatedRoute,
     private client: ProductsClient) {
     super(router, activatedRoute);
     this.initHideExpressions();
@@ -69,34 +69,34 @@ export class ProductEditComponent
     });
 
   private initHideExpressions = () => {
-    this.fieldsHideExpressions.discount =
+    this.fieldsHideExpressions['discount'] =
       (model: IGetProductDetailsResponse): boolean =>
         model.hasDiscount === undefined || model.hasDiscount === false;
-    this.fieldsHideExpressions.resetFormBtn =
+    this.fieldsHideExpressions['resetFormBtn'] =
       (_model: IGetProductDetailsResponse): boolean =>
         !this.isEdit();
   };
 
   private initDisableExpressions = () => {
-    this.fieldsDisableExpressions.price =
+    this.fieldsDisableExpressions['price'] =
       (model: IGetProductDetailsResponse): boolean =>
         model.type === undefined ||
         model.type === ProductType.Book && this.formMode === FormAccessMode.edit;
-    this.fieldsDisableExpressions.expiresOn =
+    this.fieldsDisableExpressions['expiresOn'] =
       (model: IGetProductDetailsResponse): boolean =>
         model.type === ProductType.Car || model.type === ProductType.Book;
   };
 
   private initRequiredExpressions = () => {
-    this.fieldsRequiredExpressions.discount =
+    this.fieldsRequiredExpressions['discount'] =
       (model: IGetProductDetailsResponse): boolean => !!model.hasDiscount;
-    this.fieldsRequiredExpressions.expiresOn =
+    this.fieldsRequiredExpressions['expiresOn'] =
       (model: IGetProductDetailsResponse): boolean =>
         model.type === ProductType.Drink || model.type === ProductType.Food;
   };
 
   private initPropertyExpressions = () => {
-    this.fieldsPropertyExpressions.expiresOn =
+    this.fieldsPropertyExpressions['expiresOn'] =
       (model: IGetProductDetailsResponse): Date | undefined =>
         model.type === ProductType.Car || model.type === ProductType.Book ? undefined : model.expiresOn;
   };

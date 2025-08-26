@@ -20,7 +20,7 @@ const routes: Routes = [
 		path: `${RouteSegments.edit}/:id`,
 		component: ProductEditComponent,
 		resolve: {
-			response: (route: ActivatedRouteSnapshot) => inject(ProductsClient).get(route.params.id)
+			response: (route: ActivatedRouteSnapshot) => inject(ProductsClient).get(route.params['id'])
 		},
 		title: $localize`:@@route.products.edit:Update product`
 	}

@@ -31,7 +31,7 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-      .pipe(switchMap(params => this.client.get(params.id)))
+      .pipe(switchMap(params => this.client.get(params['id'])))
       .subscribe(response => {
         this.model = response;
       });

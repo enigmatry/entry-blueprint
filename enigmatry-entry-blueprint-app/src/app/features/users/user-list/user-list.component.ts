@@ -18,10 +18,10 @@ import { GetUsersQuery } from '../models/qet-users-query.model';
 export class UserListComponent extends BaseListComponent implements OnInit {
   contextMenuItems: ContextMenuItem[] = [];
   data: PagedData<GetUsersResponseItem>;
-  query = new GetUsersQuery();
+  override query = new GetUsersQuery();
 
   constructor(private client: UsersClient, private permissionService: PermissionService,
-    protected router: Router, protected activatedRoute: ActivatedRoute
+    protected override router: Router, protected override activatedRoute: ActivatedRoute
   ) {
     super(router, activatedRoute);
   }
