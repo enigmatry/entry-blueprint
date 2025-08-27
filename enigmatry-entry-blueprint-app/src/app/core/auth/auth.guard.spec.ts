@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterStateSnapshot } from '@angular/router';
 import { CurrentUserService } from '@services/current-user.service';
 import { mockClass } from '@test/mocks/class-mocker';
-import { Observable, lastValueFrom, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { authGuard } from './auth.guard';
 import { userCases } from './auth.guard.spec.data';
 import { AuthService } from './auth.service';
@@ -20,13 +20,14 @@ const mockServicesWith = (user: UserProfile | null | undefined) => {
         loginRedirect: loginRedirectMock
     }));
     mockClass(CurrentUserService, () => Object({
-        loadUser: () => of(user)
+        loadUser: () => jest.fn(),
+        currentUser: () => user
     }));
 };
 
 const act = async() =>
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    lastValueFrom(await authGuard(undefined!, {} as unknown as RouterStateSnapshot) as Observable<boolean>);
+    await authGuard(undefined!, {} as unknown as RouterStateSnapshot) as Observable<boolean>;
 
 beforeEach(() => {
     logoutMock.mockClear();

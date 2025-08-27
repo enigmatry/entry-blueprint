@@ -19,7 +19,7 @@ import { SizeService } from '@services/size.service';
 })
 export class MainMenuComponent {
   readonly menuItems = input.required<{ description: string; icon: string; aria: string; url: string; permission: PermissionId }[]>();
-  readonly onHamburgerClick = input.required<() => Promise<void>>();
+  readonly onHamburgerClick = input.required<() => void>();
   readonly onLogout = input.required<() => void>();
   readonly show = input.required<(menuItem: { permission: PermissionId }) => void>();
   readonly currentUser = input<UserProfile | null>(null);

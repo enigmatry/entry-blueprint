@@ -1,4 +1,4 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
+import { effect, inject, Injectable, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router, TitleStrategy } from '@angular/router';
 import { environment } from '@env';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
@@ -29,7 +29,15 @@ export class ApplicationInsightsService implements OnDestroy {
     this.appInsights.loadAppInsights();
 
     this.appInsights.context.application.ver = environment.appVersion;
-    this.setAuthenticatedUserContext();
+
+    effect(() => {
+      const userId = this.currentUserService.currentUser()?.id;
+      if (userId) {
+        this.appInsights?.setAuthenticatedUserContext(userId);
+      } else {
+        this.appInsights?.clearAuthenticatedUserContext();
+      }
+    });
 
     this.trackPageViewsOnRouterNavigation();
   }
@@ -68,21 +76,6 @@ export class ApplicationInsightsService implements OnDestroy {
       .subscribe(event => {
         const title = this.titleStrategy.buildTitle(this.router.routerState.snapshot);
         this.appInsights?.trackPageView({ name: title, uri: event.url });
-      });
-  }
-
-  private setAuthenticatedUserContext(): void {
-    this.currentUserService.currentUser$
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(currentUser => {
-        const userId = currentUser?.id;
-        if (userId) {
-          this.appInsights?.setAuthenticatedUserContext(userId);
-        } else {
-          this.appInsights?.clearAuthenticatedUserContext();
-        }
       });
   }
 }

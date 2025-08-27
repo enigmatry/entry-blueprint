@@ -10,7 +10,7 @@ export class PermissionService implements EntryPermissionService<PermissionId> {
   private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
 
   hasPermissions(permissions: PermissionId[]): boolean {
-    const currentUser = this.currentUserService.currentUser;
+    const currentUser = this.currentUserService.currentUser();
     if (!currentUser) {
       return false;
     }
