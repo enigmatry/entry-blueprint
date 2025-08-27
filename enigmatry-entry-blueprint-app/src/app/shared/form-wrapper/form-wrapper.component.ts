@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, input, OnInit, TemplateRef, viewChild } from '@angular/core';
 import { GeneratedFormComponent } from '../form-component/generated-form-component.model';
 
 @Component({
@@ -8,19 +8,18 @@ import { GeneratedFormComponent } from '../form-component/generated-form-compone
   styleUrls: ['./form-wrapper.component.scss']
 })
 export class FormWrapperComponent<T> implements OnInit {
-  @Input() formComponent: GeneratedFormComponent<T>;
-
-  @ViewChild('defaultFormButtonsTpl', { static: true }) defaultFormButtonsTpl: TemplateRef<any>;
+  readonly formComponent = input.required<GeneratedFormComponent<T>>();
+  readonly defaultFormButtonsTpl = viewChild<TemplateRef<unknown>>('defaultFormButtonsTpl');
 
   ngOnInit(): void {
-    if (this.formComponent) {
+    if (this.formComponent()) {
       this.setDefaultFormButtonsTemplate();
     }
   }
 
   private setDefaultFormButtonsTemplate() {
-    if (!this.formComponent.formButtonsTemplate) {
-      this.formComponent.formButtonsTemplate = this.defaultFormButtonsTpl;
+    if (!this.formComponent().formButtonsTemplate) {
+      this.formComponent().formButtonsTemplate = this.defaultFormButtonsTpl();
     }
   }
 }

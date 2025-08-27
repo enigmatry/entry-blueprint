@@ -1,15 +1,15 @@
-<entry-form-errors [form]="formComponent.form"></entry-form-errors>
+<entry-form-errors [form]="formComponent().form"></entry-form-errors>
 
 <ng-content></ng-content>
 
 <ng-template #defaultFormButtonsTpl>
 
     <div class="action-buttons align-center">
-        <button mat-button entry-submit-button *ngIf="!formComponent.isReadonly" type="submit">
-            {{formComponent.saveButtonText}}
+        <button mat-button entry-submit-button *ngIf="!formComponent().isReadonly" type="submit">
+            {{formComponent().saveButtonText}}
         </button>
-        <button mat-button entry-cancel-button *ngIf="!formComponent.isReadonly" type="button" (click)="formComponent.cancel.emit()">
-            {{formComponent.cancelButtonText}}
+        <button mat-button entry-cancel-button *ngIf="!formComponent().isReadonly" type="button" (click)="formComponent().cancel.emit()">
+            {{formComponent().cancelButtonText}}
         </button>
     </div>
 </ng-template>

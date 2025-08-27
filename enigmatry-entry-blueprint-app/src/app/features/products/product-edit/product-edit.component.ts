@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import {
   IGetProductDetailsResponse,
   IProductCreateOrUpdateCommand,
@@ -20,7 +20,8 @@ import { ProductEditGeneratedComponent } from '../generated/product-edit/product
 })
 export class ProductEditComponent
   extends FormComponent<IProductCreateOrUpdateCommand, IGetProductDetailsResponse> {
-  @ViewChild('formComponent') formComponent: ProductEditGeneratedComponent;
+  readonly formComponent = viewChild<ProductEditGeneratedComponent>('formComponent');
+
   PermissionId = PermissionId;
   private readonly client: ProductsClient = inject(ProductsClient);
 
@@ -38,7 +39,8 @@ export class ProductEditComponent
       .subscribe({
         next: () => this.goBack(),
         error: (error: IValidationProblemDetails) =>
-          setServerSideValidationErrors(error, this.formComponent.form)
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          setServerSideValidationErrors(error, this.formComponent()!.form)
       });
 
   buttonClick = (name: string) => {

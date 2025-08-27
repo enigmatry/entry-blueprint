@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
@@ -18,15 +18,16 @@ import { SizeService } from '@services/size.service';
   styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent {
-  @Input() menuItems: { description: string; icon: string; aria: string; url: string; permission: PermissionId }[];
-  @Input() onHamburgerClick: () => void;
-  @Input() onLogout: () => void;
-  @Input() show: (menuItem: { permission: PermissionId }) => void;
-  @Input() currentUser: UserProfile | null;
+  readonly menuItems = input.required<{ description: string; icon: string; aria: string; url: string; permission: PermissionId }[]>();
+  readonly onHamburgerClick = input.required<() => Promise<void>>();
+  readonly onLogout = input.required<() => void>();
+  readonly show = input.required<(menuItem: { permission: PermissionId }) => void>();
+  readonly currentUser = input<UserProfile | null>(null);
+
   private readonly sizeService: SizeService = inject(SizeService);
   readonly permissionService: PermissionService = inject(PermissionService);
 
-  get showSideMenu(): boolean {
+  readonly showSideMenu = computed(() => {
     return this.sizeService.lastKnownSize()?.supportsSideMenu ?? false;
-  }
+  });
 }

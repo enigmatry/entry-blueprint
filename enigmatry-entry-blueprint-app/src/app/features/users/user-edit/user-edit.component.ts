@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   CreateOrUpdateUserCommand, IGetUserDetailsResponse,
@@ -18,7 +18,7 @@ import { UserEditGeneratedComponent } from '../generated/user-edit/user-edit-gen
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
-  @ViewChild('formComponent') formComponent: UserEditGeneratedComponent;
+  readonly formComponent = viewChild<UserEditGeneratedComponent>('formComponent');
 
   model: IGetUserDetailsResponse = {};
   $roleLookup: Observable<LookupResponseOfGuid[]>;
@@ -52,7 +52,8 @@ export class UserEditComponent implements OnInit {
       .subscribe({
         next: () => this.location.back(),
         error: (error: IValidationProblemDetails) => {
-          setServerSideValidationErrors(error, this.formComponent.form);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          setServerSideValidationErrors(error, this.formComponent()!.form);
         }
       });
   }

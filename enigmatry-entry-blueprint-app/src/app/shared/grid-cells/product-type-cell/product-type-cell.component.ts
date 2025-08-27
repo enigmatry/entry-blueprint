@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { GetProductsResponseItem, ProductType } from '@api';
 
 @Component({
@@ -8,8 +8,8 @@ import { GetProductsResponseItem, ProductType } from '@api';
     styleUrls: ['./product-type-cell.component.scss']
 })
 export class ProductTypeCellComponent {
-    @Input() rowData: GetProductsResponseItem;
-    @Input() colDef: any;
+    readonly rowData = input.required<GetProductsResponseItem>();
+    readonly colDef = input.required<unknown>();
 
     productTypes = ProductType;
 }

@@ -1,6 +1,6 @@
-<span *ngIf="rowData.infoLink">
-    <a href="{{rowData.infoLink}}" target="_blank">{{rowData.name}}</a>
+<span *ngIf="rowData().infoLink">
+    <a href="{{rowData().infoLink}}" target="_blank">{{rowData().name}}</a>
 </span>
-<span *ngIf="!rowData.infoLink">
-    {{rowData.name}}
+<span *ngIf="!rowData().infoLink">
+    {{rowData().name}}
 </span>

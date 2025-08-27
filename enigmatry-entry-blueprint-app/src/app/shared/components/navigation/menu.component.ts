@@ -1,5 +1,5 @@
-import { Component, computed, effect, inject, ViewChild } from '@angular/core';
-import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
+import { Component, computed, effect, inject, viewChild } from '@angular/core';
+import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
 import { PermissionId } from '@api';
 import { AuthService } from '@app/auth/auth.service';
 import { PermissionService } from '@app/auth/permissions.service';
@@ -11,12 +11,12 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 @Component({
   standalone: true,
   selector: 'app-menu',
-  imports: [MatSidenavContent, MatSidenav, MatSidenavContainer, MainMenuComponent, SideMenuComponent],
+  imports: [MatDrawerContainer, MatDrawer, MatDrawerContent, MainMenuComponent, SideMenuComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-  @ViewChild('drawer') drawer: MatSidenav;
+  readonly drawer = viewChild<MatDrawer>('drawer');
 
   private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
   private readonly permissionService: PermissionService = inject(PermissionService);
@@ -56,12 +56,12 @@ export class MenuComponent {
   constructor() {
     effect(async() => {
       this.menuRole();
-      await this.drawer?.close();
+      await this.drawer()?.close();
     });
   }
 
   readonly toggleDrawer = async() => {
-    await this.drawer.toggle();
+    await this.drawer()?.toggle();
   };
 
   readonly show = (menuItem: { permission: PermissionId }) =>

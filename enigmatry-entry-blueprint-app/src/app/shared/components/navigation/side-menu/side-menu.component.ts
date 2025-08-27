@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -16,10 +16,10 @@ import { UserProfile } from '@app/auth/user-profile';
 })
 export class SideMenuComponent {
   showUserActions = false;
-  @Input() show: (menuItem: { permission: PermissionId }) => void;
-  @Input() menuItems: { description: string; icon: string; aria: string; url: string; permission: PermissionId }[];
-  @Input() onLogout: () => void;
-  @Input() currentUser: UserProfile | null;
+  readonly show = input.required<(menuItem: { permission: PermissionId }) => void>();
+  readonly menuItems = input.required<{ description: string; icon: string; aria: string; url: string; permission: PermissionId }[]>();
+  readonly onLogout = input.required<() => void>();
+  readonly currentUser = input<UserProfile | null>(null);
 
   readonly toggleUserActions = ($event: Event) => {
     $event.stopImmediatePropagation();
