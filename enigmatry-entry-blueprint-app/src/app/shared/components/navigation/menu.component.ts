@@ -51,16 +51,17 @@ export class MenuComponent {
 
   constructor() {
     let lastRole: string | undefined;
-    effect(async () => {
+    effect(async() => {
       const role = this.menuRole();
       if (role === 'dialog' && lastRole !== 'dialog') {
         await this.drawer()?.close();
       }
+      // eslint-disable-next-line require-atomic-updates
       lastRole = role;
     });
   }
 
-  readonly toggleDrawer = async () => {
+  readonly toggleDrawer = async() => {
     await this.drawer()?.toggle();
   };
 

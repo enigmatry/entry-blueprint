@@ -1,12 +1,14 @@
-<span *ngIf="rowData().type === productTypes.Food">
+@switch (rowData().type) {
+  @case (productTypes.Food) {
     <mat-icon aria-hidden="false" aria-label="Example lunch_dining icon">lunch_dining</mat-icon>
-</span>
-<span *ngIf="rowData().type === productTypes.Drink">
+  }
+  @case (productTypes.Drink) {
     <mat-icon aria-hidden="false" aria-label="Example local_bar icon">local_bar</mat-icon>
-</span>
-<span *ngIf="rowData().type === productTypes.Car">
+  }
+  @case (productTypes.Car) {
     <mat-icon aria-hidden="false" aria-label="Example drive_eta icon">drive_eta</mat-icon>
-</span>
-<span *ngIf="rowData().type === productTypes.Book">
+  }
+  @case (productTypes.Book) {
     <mat-icon aria-hidden="false" aria-label="Example menu_book icon">menu_book</mat-icon>
-</span>
+  }
+}

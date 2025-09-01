@@ -3,13 +3,15 @@
 <ng-content></ng-content>
 
 <ng-template #defaultFormButtonsTpl>
-
     <div class="action-buttons align-center">
-        <button mat-button entry-submit-button *ngIf="!formComponent().isReadonly" type="submit">
-            {{formComponent().saveButtonText}}
-        </button>
-        <button mat-button entry-cancel-button *ngIf="!formComponent().isReadonly" type="button" (click)="formComponent().cancel.emit()">
-            {{formComponent().cancelButtonText}}
-        </button>
+        @if(!formComponent().isReadonly)
+        {
+            <button mat-button entry-submit-button type="submit">
+                {{formComponent().saveButtonText}}
+            </button>
+            <button mat-button entry-cancel-button type="button" (click)="formComponent().cancel.emit()">
+                {{formComponent().cancelButtonText}}
+            </button>
+        }
     </div>
 </ng-template>

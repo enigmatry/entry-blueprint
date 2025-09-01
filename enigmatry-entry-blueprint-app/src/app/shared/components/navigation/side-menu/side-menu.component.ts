@@ -16,7 +16,7 @@ import { UserProfile } from '@app/auth/user-profile';
 })
 export class SideMenuComponent {
   showUserActions = false;
-  readonly show = input.required<(menuItem: { permission: PermissionId }) => void>();
+  readonly show = input.required<(menuItem: { permission: PermissionId }) => boolean>();
   readonly menuItems = input.required<{ description: string; icon: string; aria: string; url: string; permission: PermissionId }[]>();
   readonly onLogout = input.required<() => void>();
   readonly currentUser = input<UserProfile | null>(null);

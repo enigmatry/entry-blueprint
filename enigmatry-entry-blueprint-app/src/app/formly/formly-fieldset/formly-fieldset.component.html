@@ -1,4 +1,10 @@
-<fieldset *ngIf="field.fieldGroup as fieldGroup">
-  <legend>{{ to.label }}</legend>
-  <formly-field *ngFor="let field of fieldGroup" [field]="field"></formly-field>
-</fieldset>
+@if(field.fieldGroup)
+{
+  <fieldset>
+    <legend>{{ props.label }}</legend>
+    @for(foundField of field.fieldGroup; track field.id)
+    {
+      <formly-field [field]="foundField"></formly-field>
+    }
+  </fieldset>
+}

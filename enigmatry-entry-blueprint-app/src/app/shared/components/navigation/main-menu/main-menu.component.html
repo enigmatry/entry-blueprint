@@ -1,27 +1,43 @@
-<mat-toolbar class="main-menu" *ngIf="currentUser()">
-  <button type="button" class="item" aria-label="Toggle sidenav" mat-icon-button (click)="onHamburgerClick()()"
-    *ngIf="showSideMenu()">
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-  </button>
-  <a class="logo item clickable" mat-button [routerLink]="['/home']" routerLinkActive="router-link-active">
-    <img class="logo-image" src="/assets/images/logo.png" alt="Enigmatry Logo">
-  </a>
-  <nav class="content" *ngIf="!showSideMenu()">
-    <div *ngFor="let menuItem of menuItems()">
-      <button mat-button color="primary" class="item" [routerLink]="[menuItem.url]"
-        routerLinkActive="router-link-active" type="button" *ngIf="show()(menuItem)">
-        <mat-icon class="icon" aria-hidden="false" [ariaLabel]="menuItem.aria" [fontIcon]="menuItem.icon"></mat-icon>
-        <span class="description">{{ menuItem.description }}</span>
+@if(currentUser())
+{
+  <mat-toolbar class="main-menu">
+    @if(showSideMenu())
+    {
+      <button type="button" class="item" aria-label="Toggle sidenav" mat-icon-button (click)="onHamburgerClick()()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-    </div>
-    <button mat-button data-testId="username-button" type="button" color="primary" class="user-item" [matMenuTriggerFor]="login_menu">
-      <span>{{ currentUser()!.fullName }}</span>
-      <mat-icon class="icon" aria-hidden="false" aria-label="Toggle icon" fontIcon="keyboard_arrow_down"></mat-icon>
-    </button>
-    <mat-menu class="main-user-actions" #login_menu="matMenu" [overlapTrigger]="false">
-      <button class="action" type="button" mat-button color="primary" (click)='onLogout()()'>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
-  </nav>
-</mat-toolbar>
+    }
+    <a class="logo item clickable" mat-button [routerLink]="['/home']" routerLinkActive="router-link-active">
+      <img class="logo-image" src="/assets/images/logo.png" alt="Enigmatry Logo">
+    </a>
+    @if(!showSideMenu())
+    {
+      <nav class="content">
+        <div>
+          @for(menuItem of menuItems(); track menuItem.url)
+          {
+            @if(show()(menuItem))
+            {
+              <button mat-button color="primary" class="item" [routerLink]="[menuItem.url]"
+                routerLinkActive="router-link-active" type="button">
+                <mat-icon class="icon" aria-hidden="false" [ariaLabel]="menuItem.aria" [fontIcon]="menuItem.icon"></mat-icon>
+                <span class="description">{{ menuItem.description }}</span>
+              </button>
+            }
+          }
+        </div>
+
+        <button mat-button data-testId="username-button" type="button" color="primary" class="user-item"
+          [matMenuTriggerFor]="login_menu">
+          <span>{{ currentUser()!.fullName }}</span>
+          <mat-icon class="icon" aria-hidden="false" aria-label="Toggle icon" fontIcon="keyboard_arrow_down"></mat-icon>
+        </button>
+        <mat-menu class="main-user-actions" #login_menu="matMenu" [overlapTrigger]="false">
+          <button class="action" type="button" mat-button color="primary" (click)='onLogout()()'>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </nav>
+    }
+  </mat-toolbar>
+}
