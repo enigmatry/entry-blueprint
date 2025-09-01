@@ -1,13 +1,13 @@
-<a *entryPermissionsOnly="[PermissionId.ProductsWrite]" mat-raised-button class="create-product-action" color="accent" routerLink="./create">Create</a>
-<entry-search-filter 
-    [searchFilters]="query.filters" 
+<a [entryPermissionsOnly]="[PermissionId.ProductsWrite]" mat-raised-button class="create-product-action" color="accent" routerLink="./create">Create</a>
+<entry-search-filter
+    [searchFilters]="query.filters"
     (searchFilterChange)="searchFilterChange($event)">
 </entry-search-filter>
 <app-g-product-list
-    [data]="data" 
+    [data]="data"
     [defaultSort]="query"
     [contextMenuItems]="contextMenuItems"
-    (sortChange)="sortChange($event)" 
+    (sortChange)="sortChange($event)"
     (pageChange)="pageChange($event)"
     (rowClick)="onRowSelected($event)"
     (contextMenuItemSelected)="onContextMenuItemSelected($event)">
