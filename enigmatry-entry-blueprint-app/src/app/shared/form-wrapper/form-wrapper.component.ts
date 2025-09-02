@@ -1,8 +1,10 @@
 import { Component, input, OnInit, TemplateRef, viewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { EntryButtonModule, EntryValidationModule } from '@enigmatry/entry-components';
 import { GeneratedFormComponent } from '../form-component/generated-form-component.model';
 
 @Component({
-  standalone: false,
+  imports: [EntryValidationModule, MatButtonModule, EntryButtonModule],
   selector: 'app-form-wrapper',
   templateUrl: './form-wrapper.component.html',
   styleUrls: ['./form-wrapper.component.scss']

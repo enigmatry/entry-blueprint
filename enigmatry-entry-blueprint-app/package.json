@@ -15,8 +15,8 @@
     "lint:ts": "eslint --fix",
     "lint:styles": "stylelint --fix src/**/*.scss",
     "nswag": "node_modules\\.bin\\nswag run nswag.json",
-    "codegen:run": "entry-codegen --source-assembly ../Enigmatry.Entry.Blueprint.CodeGeneration.Setup/bin/Debug/net9.0/Enigmatry.Entry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features",
-    "codegen:run-i18n": "entry-codegen --source-assembly ../Enigmatry.Entry.Blueprint.CodeGeneration.Setup/bin/Debug/net9.0/Enigmatry.Entry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features --enable-i18n true",
+    "codegen:run": "entry-codegen --source-assembly ../Enigmatry.Entry.Blueprint.CodeGeneration.Setup/bin/Debug/net9.0/Enigmatry.Entry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features --standalone-components true",
+    "codegen:run-i18n": "entry-codegen --source-assembly ../Enigmatry.Entry.Blueprint.CodeGeneration.Setup/bin/Debug/net9.0/Enigmatry.Entry.Blueprint.CodeGeneration.Setup.dll --destination-directory ./src/app/features --enable-i18n true --standalone-components true",
     "codegen:install": "dotnet tool install enigmatry.entry.codegeneration.tools -g",
     "codegen:update": "dotnet tool update enigmatry.entry.codegeneration.tools -g",
     "i18n": "ng extract-i18n --format json --output-path src/i18n --out-file messages.en.json & sortjson src/i18n"

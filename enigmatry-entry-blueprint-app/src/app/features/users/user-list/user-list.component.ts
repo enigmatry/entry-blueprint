@@ -1,15 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { GetUsersResponseItem, PermissionId, UsersClient } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
+import { EntrySearchFilterModule } from '@enigmatry/entry-components';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
 import { BaseListComponent } from '@shared/list-component/base-list-component.model';
 import { SearchFilterPagedQuery } from '@shared/list-component/search-filter-paged-query';
 import { RouteSegments } from '@shared/model/route-segments';
 import { Observable, Subscription, switchMap, tap } from 'rxjs';
+import { UsersGeneratedModule } from '../generated/users-generated.module';
 import { GetUsersQuery } from '../models/qet-users-query.model';
 
 @Component({
-  standalone: false,
+  imports: [EntrySearchFilterModule, UsersGeneratedModule],
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']

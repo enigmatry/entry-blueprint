@@ -13,6 +13,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
+    import { StandaloneModule } from 'src/app/shared/standalone.module';
 import { EntryTableModule } from '@enigmatry/entry-components/table';
     import { FormlyModule, FORMLY_CONFIG } from '@ngx-formly/core';
     import { FormlyMaterialModule } from '@ngx-formly/material';
@@ -41,6 +42,7 @@ import { UserListGeneratedComponent } from './user-list/user-list-generated.comp
         ),
         FormlyMaterialModule,
         FormlyMatDatepickerModule,
+        StandaloneModule,
     ],
     exports: [UserEditGeneratedComponent, UserListGeneratedComponent],
     providers: [

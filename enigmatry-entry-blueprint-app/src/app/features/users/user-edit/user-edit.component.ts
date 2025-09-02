@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -6,13 +6,16 @@ import {
   IValidationProblemDetails,
   LookupResponseOfGuid, LookupResponseOfUserStatusId, PermissionId, UsersClient
 } from '@api';
-import { setServerSideValidationErrors } from '@enigmatry/entry-components';
+import { EntryPermissionModule, setServerSideValidationErrors } from '@enigmatry/entry-components';
+import { FormWrapperComponent } from '@shared/form-wrapper/form-wrapper.component';
+import { NotNullPipe } from '@shared/pipes/not-null.pipe';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UserEditGeneratedComponent } from '../generated/user-edit/user-edit-generated.component';
+import { UsersGeneratedModule } from '../generated/users-generated.module';
 
 @Component({
-  standalone: false,
+  imports: [CommonModule, FormWrapperComponent, EntryPermissionModule, UsersGeneratedModule, NotNullPipe],
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']

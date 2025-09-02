@@ -9,7 +9,6 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 
 @Component({
-  standalone: true,
   selector: 'app-menu',
   imports: [MatSidenavModule, MainMenuComponent, SideMenuComponent],
   templateUrl: './menu.component.html',

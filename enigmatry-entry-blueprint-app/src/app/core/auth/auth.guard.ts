@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@ang
 import { CurrentUserService } from '@services/current-user.service';
 import { AuthService } from './auth.service';
 
-export const authGuard: CanActivateFn = async (_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const authGuard: CanActivateFn = async(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService = inject(AuthService);
   const currentUserService = inject(CurrentUserService);
 

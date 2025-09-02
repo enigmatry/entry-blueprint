@@ -30,15 +30,13 @@ const defaultFormConfig: EntryFormConfig = {
 };
 
 @NgModule({
-  declarations: [
+  imports: [
     FormlyExpansionPanelComponent,
     FormlyFieldsetComponent,
     ReadonlyInputComponent,
     ReadonlyRadioComponent,
     ReadonlyBooleanComponent,
-    FormlyButtonComponent
-  ],
-  imports: [
+    FormlyButtonComponent,
     CommonModule,
     ReactiveFormsModule,
     MatExpansionModule,

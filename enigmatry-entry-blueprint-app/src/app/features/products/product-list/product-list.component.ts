@@ -1,14 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { GetProductsResponseItem, PermissionId, ProductsClient } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
+import { EntryPermissionModule, EntrySearchFilterModule } from '@enigmatry/entry-components';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
 import { BaseListComponent } from '@shared/list-component/base-list-component.model';
 import { RouteSegments } from '@shared/model/route-segments';
 import { Observable, Subscription, switchMap, tap } from 'rxjs';
+import { ProductsGeneratedModule } from '../generated/products-generated.module';
 import { GetProductsQuery } from '../models/get-products-query.model';
 
 @Component({
-  standalone: false,
+    imports: [EntrySearchFilterModule, ProductsGeneratedModule, EntryPermissionModule, MatButton],
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']

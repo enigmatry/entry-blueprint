@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { FieldType, FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 
 @Component({
-  standalone: false,
+    imports: [FormlyModule, MatExpansionModule],
   templateUrl: './formly-expansion-panel.component.html',
   styleUrls: ['./formly-expansion-panel.component.scss']
 })

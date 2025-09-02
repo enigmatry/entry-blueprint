@@ -11,7 +11,7 @@ export class CurrentUserService {
 	readonly currentUser = signal<UserProfile | null>(null);
 	private readonly profileClient: ProfileClient = inject(ProfileClient);
 
-	readonly loadUser = async () => {
+	readonly loadUser = async() => {
 		if (this.currentUser()) {
 			return;
 		}
@@ -20,14 +20,12 @@ export class CurrentUserService {
 			const response = await lastValueFrom(this.profileClient.getProfile());
 			const profile = UserProfile.fromResponse(response);
 			this.currentUser.set(profile);
-		}
-
-		catch (error) {
+		} catch (error) {
 			if (error as Record<string, unknown>['status'] === HttpStatusCode.NotFound) {
 				this.currentUser.set(null);
 				return;
 			}
 			throw error;
 		}
-	}
+	};
 }

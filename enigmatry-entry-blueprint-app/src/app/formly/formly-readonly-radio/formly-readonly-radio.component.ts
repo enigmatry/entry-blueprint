@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FieldType } from '@ngx-formly/material/form-field';
@@ -10,7 +11,7 @@ declare interface SelectOption {
 }
 
 @Component({
-  standalone: false,
+  imports: [CommonModule],
   templateUrl: './formly-readonly-radio.component.html',
   styleUrls: ['./formly-readonly-radio.component.scss']
 })

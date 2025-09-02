@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
-import { MatToolbar } from '@angular/material/toolbar';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { PermissionId } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
@@ -11,8 +11,7 @@ import { UserProfile } from '@app/auth/user-profile';
 import { SizeService } from '@services/size.service';
 
 @Component({
-  standalone: true,
-  imports: [MatButton, MatToolbar, MatIcon, MatMenu, MatMenuTrigger, CommonModule, RouterLink],
+  imports: [MatButtonModule, MatToolbarModule, MatIcon, MatMenuModule, MatMenuTrigger, CommonModule, RouterLink],
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.scss']

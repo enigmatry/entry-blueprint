@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, viewChild } from '@angular/core';
 import {
   IGetProductDetailsResponse,
@@ -7,13 +8,16 @@ import {
   ProductsClient,
   ProductType
 } from '@api';
+import { EntryPermissionModule } from '@enigmatry/entry-components';
 import { IValidationProblemDetails, setServerSideValidationErrors } from '@enigmatry/entry-components/validation';
 import { FormAccessMode } from '@shared/form-component/form-access-mode.enum';
 import { FormComponent } from '@shared/form-component/form-component.model';
+import { FormWrapperComponent } from '@shared/form-wrapper/form-wrapper.component';
 import { ProductEditGeneratedComponent } from '../generated/product-edit/product-edit-generated.component';
+import { ProductsGeneratedModule } from '../generated/products-generated.module';
 
 @Component({
-  standalone: false,
+    imports: [CommonModule, FormWrapperComponent, EntryPermissionModule, ProductsGeneratedModule],
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss']
@@ -49,7 +53,7 @@ export class ProductEditComponent
     }
   };
 
-  toCommand = (response: IGetProductDetailsResponse): ProductCreateOrUpdateCommand => new ProductCreateOrUpdateCommand({
+  override toCommand = (response: IGetProductDetailsResponse): ProductCreateOrUpdateCommand => new ProductCreateOrUpdateCommand({
     id: response.id,
     name: response.name,
     code: response.code,

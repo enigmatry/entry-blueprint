@@ -1,13 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NotNullPipe } from './not-null.pipe';
 
 @NgModule({
-    declarations: [
-        NotNullPipe
-    ],
     imports: [
-        CommonModule
+        NotNullPipe
     ],
     exports: [
         NotNullPipe

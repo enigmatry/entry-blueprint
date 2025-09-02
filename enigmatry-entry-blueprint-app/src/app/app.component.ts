@@ -4,7 +4,6 @@ import { SizeService } from '@services/size.service';
 import { MenuComponent } from '@shared/components/navigation/menu.component';
 
 @Component({
-  standalone: true,
   imports: [RouterOutlet, MenuComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
