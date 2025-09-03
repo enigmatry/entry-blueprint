@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { PermissionId } from '@api';
 import { authGuard } from '@app/auth/auth.guard';
-import { entryPermissionGuard } from '@enigmatry/entry-components/permissions';
 import { HomeComponent } from '@features/home/home.component';
 import { productRoutes } from '@features/products/product-routes';
 import { userRoutes } from '@features/users/user-routes';
@@ -19,7 +18,6 @@ export const routes: Routes = [
   {
     path: RouteSegments.users,
     canActivate: [authGuard],
-    canActivateChild: [entryPermissionGuard],
     title: $localize`:@@route.users:Users`,
     data: {
       permissions: {
@@ -31,7 +29,6 @@ export const routes: Routes = [
   {
     path: RouteSegments.products,
     canActivate: [authGuard],
-    canActivateChild: [entryPermissionGuard],
     title: $localize`:@@route.products:Products`,
     data: {
       permissions: {

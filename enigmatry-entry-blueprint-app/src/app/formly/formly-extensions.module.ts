@@ -8,7 +8,6 @@ import { FORM_FIELD_ERROR_KEY } from '@enigmatry/entry-components/validation';
 import { EntryFormConfig, EntryFormModule, ENTRY_FORM_CONFIG } from '@enigmatry/entry-form';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
-import { EntryComponentsModule } from '@shared/entry-components.module';
 import { FormlyButtonComponent } from './formly-button/formly-button.component';
 import { FormlyExpansionPanelComponent } from './formly-expansion-panel/formly-expansion-panel.component';
 import { FormlyFieldsetComponent } from './formly-fieldset/formly-fieldset.component';
@@ -43,7 +42,6 @@ const defaultFormConfig: EntryFormConfig = {
     MatSelectModule,
     MatButtonModule,
     EntryFormModule,
-    EntryComponentsModule,
     FormlyMaterialModule,
     FormlyModule.forChild({
       types: [

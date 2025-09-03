@@ -1,17 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 import { GetProductsResponseItem, PermissionId, ProductsClient } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
 import { EntryPermissionModule, EntrySearchFilterModule } from '@enigmatry/entry-components';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
 import { BaseListComponent } from '@shared/list-component/base-list-component.model';
 import { RouteSegments } from '@shared/model/route-segments';
-import { Observable, Subscription, switchMap, tap } from 'rxjs';
+import { lastValueFrom, Subscription, switchMap, tap } from 'rxjs';
 import { ProductsGeneratedModule } from '../generated/products-generated.module';
 import { GetProductsQuery } from '../models/get-products-query.model';
 
 @Component({
-    imports: [EntrySearchFilterModule, ProductsGeneratedModule, EntryPermissionModule, MatButton],
+  imports: [EntrySearchFilterModule, RouterModule, ProductsGeneratedModule, EntryPermissionModule, MatButton],
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
@@ -37,9 +38,8 @@ export class ProductListComponent extends BaseListComponent implements OnInit {
     if (contextMenuItem.itemId === RouteSegments.edit) {
       await this.router.navigate([RouteSegments.edit, contextMenuItem.rowData.id], { relativeTo: this.activatedRoute });
     } else if (contextMenuItem.itemId === 'delete' && contextMenuItem.rowData.id !== undefined) {
-      this.client
-        .remove(contextMenuItem.rowData.id)
-        .subscribe(() => this.getProducts(this.query));
+      await lastValueFrom(this.client.remove(contextMenuItem.rowData.id));
+      this.data = await this.getProducts(this.query);
     }
   };
 
@@ -62,12 +62,14 @@ export class ProductListComponent extends BaseListComponent implements OnInit {
     return this.activatedRoute.queryParams
       .pipe(
         tap(params => this.query.applyRouteChanges(params)),
-        switchMap(() => this.getProducts(this.query))
+        // eslint-disable-next-line @typescript-eslint/return-await
+        switchMap(async() => await this.getProducts(this.query))
       )
       .subscribe(response => this.data = response);
   }
 
-  private getProducts = (query: GetProductsQuery): Observable<PagedData<GetProductsResponseItem>> =>
-    this.client.search(query.name.value, query.code.value, query.expiresBeforeDate(),
-      query.pageNumber, query.pageSize, query.sortBy, query.sortDirection);
+  private getProducts = async(query: GetProductsQuery) =>
+    // eslint-disable-next-line @typescript-eslint/return-await
+    await lastValueFrom(this.client.search(query.name.value, query.code.value, query.expiresBeforeDate(),
+      query.pageNumber, query.pageSize, query.sortBy, query.sortDirection));
 }

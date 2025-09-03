@@ -27,6 +27,7 @@
     ".spec.data.ts"
   ],
   "moduleNameMapper": {
+    "@enigmatry/entry-components": "<rootDir>/node_modules/@enigmatry/entry-components/fesm2022/enigmatry-entry-components.mjs",
     "^@api$": "<rootDir>/src/app/api/api-reference",
     "^@env$": "<rootDir>/src/environments/environment",
     "^@app/(.*)$": "<rootDir>/src/app/core/$1",
@@ -49,5 +50,8 @@
     "json",
     "node"
   ],
-  "reporters": ["default", "jest-junit"]
+  "reporters": [
+    "default",
+    "jest-junit"
+  ]
 }
