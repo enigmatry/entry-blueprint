@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 const arrangePermissionService = (user: UserProfile | null) => {
     mockClass(CurrentUserService, () => Object({
-        currentUser: user
+        currentUser: () => user
     }));
     return TestBed.inject(PermissionService);
 };

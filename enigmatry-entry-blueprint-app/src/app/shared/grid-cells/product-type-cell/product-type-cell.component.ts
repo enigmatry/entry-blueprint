@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { GetProductsResponseItem, ProductType } from '@api';
 
 @Component({
-    standalone: false,
+    imports: [MatIconModule],
     selector: 'app-product-type-cell',
     templateUrl: './product-type-cell.component.html',
     styleUrls: ['./product-type-cell.component.scss']
 })
 export class ProductTypeCellComponent {
-    @Input() rowData: GetProductsResponseItem;
-    @Input() colDef: any;
+    readonly rowData = input.required<GetProductsResponseItem>();
+    readonly colDef = input.required<unknown>();
 
     productTypes = ProductType;
 }

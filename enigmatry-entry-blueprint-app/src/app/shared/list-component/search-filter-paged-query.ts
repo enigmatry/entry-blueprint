@@ -12,7 +12,7 @@ export class SearchFilterPagedQuery extends PagedQuery {
     this.pageNumber = 1;
   }
 
-  applyRouteChanges(queryParams: Params): void {
+  override applyRouteChanges(queryParams: Params): void {
     super.applyRouteChanges(queryParams);
     this.filters.forEach(filter => {
       const value = this.getValueFromQueryParam(queryParams, filter.key);

@@ -12,7 +12,7 @@
       "className": "{controller}Client",
       "moduleName": "",
       "namespace": "",
-      "typeScriptVersion": 3.7,
+      "typeScriptVersion": 5.9,
       "template": "Angular",
       "promiseType": "Promise",
       "httpClass": "HttpClient",

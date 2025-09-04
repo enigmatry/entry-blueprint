@@ -1,27 +1,33 @@
-import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
+import { inject, Injector, runInInjectionContext } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { entryPermissionGuard } from '@enigmatry/entry-components';
 import { CurrentUserService } from '@services/current-user.service';
-import { from, map, tap } from 'rxjs';
 import { AuthService } from './auth.service';
 
-export const authGuard: CanActivateFn = (_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const authGuard = async(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService = inject(AuthService);
   const currentUserService = inject(CurrentUserService);
-
+  const injector = inject(Injector);
   const isAuthenticated = authService.isAuthenticated();
 
   if (!isAuthenticated) {
-    return from(authService.loginRedirect({ redirectStartPage: state.url }))
-      .pipe(map(_ => false));
+    await authService.loginRedirect({ redirectStartPage: state.url });
+    return false;
   }
 
-  return currentUserService.loadUser()
-    .pipe(
-      tap(user => {
-        if (!user) {
-          authService.logout();
-        }
-      }),
-      map(user => !!user)
-    );
+  await currentUserService.loadUser();
+  const user = currentUserService.currentUser();
+
+  if (!user) {
+    authService.logout();
+    return false;
+  }
+
+  // If no permission is required, allow authenticated user to pass.
+  if(!route.data['permissions']) {
+    return true;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/return-await
+  return runInInjectionContext(injector, async() => await entryPermissionGuard(route, state));
 };

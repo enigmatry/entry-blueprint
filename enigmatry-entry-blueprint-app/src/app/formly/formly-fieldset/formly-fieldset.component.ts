@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
+import { FieldType, FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 
 @Component({
-  standalone: false,
+  imports: [FormlyModule],
   templateUrl: './formly-fieldset.component.html',
   styleUrls: ['./formly-fieldset.component.scss']
 })

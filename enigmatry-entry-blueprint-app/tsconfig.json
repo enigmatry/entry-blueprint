@@ -1,6 +1,9 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "exclude": [
+    "src/app/api/**/*"
+  ],
   "compilerOptions": {
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -19,8 +22,12 @@
     "strict": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
     "declaration": false,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
@@ -64,6 +71,8 @@
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
+    "enableI18nLegacyMessageIdFormat": false,
+    "typeCheckHostBindings": true,
     "strictTemplates": true
   }
 }

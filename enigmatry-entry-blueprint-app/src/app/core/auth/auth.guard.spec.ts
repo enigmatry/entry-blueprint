@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { CurrentUserService } from '@services/current-user.service';
 import { mockClass } from '@test/mocks/class-mocker';
-import { Observable, lastValueFrom, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { authGuard } from './auth.guard';
 import { userCases } from './auth.guard.spec.data';
 import { AuthService } from './auth.service';
@@ -10,6 +10,10 @@ import { UserProfile } from './user-profile';
 
 jest.mock('./auth.service');
 jest.mock('../services/current-user.service');
+jest.mock('@enigmatry/entry-components', () => ({
+    __esModule: true,
+    entryPermissionGuard: jest.fn(() => false)
+}));
 const loginRedirectMock = jest.fn().mockReturnValue(Promise.resolve());
 const logoutMock = jest.fn();
 
@@ -20,13 +24,13 @@ const mockServicesWith = (user: UserProfile | null | undefined) => {
         loginRedirect: loginRedirectMock
     }));
     mockClass(CurrentUserService, () => Object({
-        loadUser: () => of(user)
+        loadUser: () => jest.fn(),
+        currentUser: () => user
     }));
 };
 
-const act = async() =>
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    lastValueFrom(await authGuard(undefined!, {} as unknown as RouterStateSnapshot) as Observable<boolean>);
+const act = async(route: ActivatedRouteSnapshot) =>
+    await authGuard(route, {} as unknown as RouterStateSnapshot) as Observable<boolean>;
 
 beforeEach(() => {
     logoutMock.mockClear();
@@ -39,7 +43,8 @@ describe.each(userCases)('Testing authentication guard...', userCase => {
         await TestBed.runInInjectionContext(async() => {
             mockServicesWith(userCase.user);
 
-            const result = await act();
+            const result = await act(userCase.permissionsRequired ?
+                { data: { permissions: [] } } as unknown as ActivatedRouteSnapshot : { data: {} } as ActivatedRouteSnapshot);
 
             expect(result).toBe(userCase.allowedAccess);
             expect(loginRedirectMock).toHaveBeenCalledTimes(userCase.redirectedToLogin ? 1 : 0);

@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { GetProductsResponseItem } from '@api';
 
 @Component({
-    standalone: false,
     selector: 'app-product-name-with-link-cell',
     templateUrl: './product-name-with-link-cell.component.html',
     styleUrls: ['./product-name-with-link-cell.component.scss']
 })
 export class ProductNameWithLinkCellComponent {
-    @Input() rowData: GetProductsResponseItem;
-    @Input() colDef: any;
+    readonly rowData = input.required<GetProductsResponseItem>();
+    readonly colDef = input.required<unknown>();
+    readonly infoLink = computed(() => this.rowData().infoLink);
+    readonly name = computed(() => this.rowData().name);
 }

@@ -6,20 +6,31 @@ export const userCases = [
         user: undefined,
         allowedAccess: false,
         redirectedToLogin: true,
-        logout: false
+        logout: false,
+        permissionsRequired: false
     },
     {
         description: 'it should logout user if we cannot retrieve its profile',
         user: null,
         allowedAccess: false,
         redirectedToLogin: false,
-        logout: true
+        logout: true,
+        permissionsRequired: false
     },
     {
-        description: 'it should allow user to enter if profile reachable',
+        description: 'it should allow user to pass if no permissions required',
         user: new UserProfile({ fullName: 'John Doe' }),
         allowedAccess: true,
         redirectedToLogin: false,
-        logout: false
+        logout: false,
+        permissionsRequired: false
+    },
+    {
+        description: 'it should pass request to entryPermissionGuard if all else fine and permissions required',
+        user: new UserProfile({ fullName: 'John Doe' }),
+        allowedAccess: false,
+        redirectedToLogin: false,
+        logout: false,
+        permissionsRequired: true
     }
 ];

@@ -1,3 +1,5 @@
+import { inject, effect } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IFieldExpressionDictionary, IFieldPropertyExpressionDictionary }
   from '@enigmatry/entry-form';
@@ -11,19 +13,23 @@ export abstract class FormComponent<TCommandModel, TDetailsModel> {
   fieldsDisableExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
   fieldsRequiredExpressions: IFieldExpressionDictionary<TDetailsModel> = {};
   fieldsPropertyExpressions: IFieldPropertyExpressionDictionary<TDetailsModel> = {};
+  protected router: Router = inject(Router);
+  protected activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private readonly routeData = toSignal(this.activatedRoute.data);
 
-  constructor(protected router: Router, protected activatedRoute: ActivatedRoute) {
-    this.formMode = this.getFormAccessMode(router.url);
-
-    if (this.isEdit()) {
-      this.activatedRoute.data.subscribe(data => {
-        this.initialModelData = this.toCommand(data.response);
+  constructor() {
+    this.formMode = this.getFormAccessMode(this.router.url);
+    effect(() => {
+      const data = this.routeData();
+      if (this.isEdit()) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        this.initialModelData = this.toCommand(data!['response']);
         this.resetModel();
-      });
-    }
+      }
+    });
   }
 
-  abstract toCommand(response: TDetailsModel): TCommandModel;
+  abstract toCommand: (response: TDetailsModel) => TCommandModel;
 
   resetModel(): void {
     this.model = { ...this.initialModelData };

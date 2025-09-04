@@ -1,26 +1,27 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, input, OnInit, TemplateRef, viewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { EntryButtonModule, EntryValidationModule } from '@enigmatry/entry-components';
 import { GeneratedFormComponent } from '../form-component/generated-form-component.model';
 
 @Component({
-  standalone: false,
+  imports: [EntryValidationModule, MatButtonModule, EntryButtonModule],
   selector: 'app-form-wrapper',
   templateUrl: './form-wrapper.component.html',
   styleUrls: ['./form-wrapper.component.scss']
 })
 export class FormWrapperComponent<T> implements OnInit {
-  @Input() formComponent: GeneratedFormComponent<T>;
-
-  @ViewChild('defaultFormButtonsTpl', { static: true }) defaultFormButtonsTpl: TemplateRef<any>;
+  readonly formComponent = input.required<GeneratedFormComponent<T>>();
+  readonly defaultFormButtonsTpl = viewChild<TemplateRef<unknown>>('defaultFormButtonsTpl');
 
   ngOnInit(): void {
-    if (this.formComponent) {
+    if (this.formComponent()) {
       this.setDefaultFormButtonsTemplate();
     }
   }
 
   private setDefaultFormButtonsTemplate() {
-    if (!this.formComponent.formButtonsTemplate) {
-      this.formComponent.formButtonsTemplate = this.defaultFormButtonsTpl;
+    if (!this.formComponent().formButtonsTemplate) {
+      this.formComponent().formButtonsTemplate = this.defaultFormButtonsTpl();
     }
   }
 }

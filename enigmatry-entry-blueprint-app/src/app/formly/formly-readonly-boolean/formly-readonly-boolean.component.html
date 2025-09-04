@@ -1,2 +1,9 @@
-<span *ngIf="formControl.value" i18n="@@common.yes">Yes</span>
-<span *ngIf="!formControl.value" i18n="@@common.no">No</span>
+@if(formControl.value)
+{
+    <span i18n="@@common.yes">Yes</span>
+}
+
+@else
+{
+    <span i18n="@@common.no">No</span>
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
     IsProductCodeUniqueResponse,
     IsProductNameUniqueResponse,
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class ValidatorsService {
-    constructor(private productsClient: ProductsClient) { }
+    private readonly productsClient: ProductsClient = inject(ProductsClient);
 
     isCodeUnique = (id: string | undefined, code: string): Observable<IsProductCodeUniqueResponse> =>
         this.productsClient.isCodeUnique(id, code);

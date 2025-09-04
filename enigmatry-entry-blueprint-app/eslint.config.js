@@ -10,7 +10,9 @@ export default [
             "**/*.ts"
         ],
         "rules": {
-            "@angular-eslint/prefer-standalone": "off"
+            "@typescript-eslint/dot-notation": ["error", {
+                "allowIndexSignaturePropertyAccess": true
+            }]
         }
     },
     {

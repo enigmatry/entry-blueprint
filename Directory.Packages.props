@@ -32,8 +32,8 @@
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Swagger" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="19.0.0" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="19.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="20.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="20.0.0" />
     <PackageVersion Include="FakeItEasy" Version="8.3.0" />
     <PackageVersion Include="FakeItEasy.Analyzer.CSharp" Version="6.1.1" />
     <PackageVersion Include="FluentAssertions" Version="6.12.2" />

@@ -1,5 +1,5 @@
-import { Component, computed, effect, ViewChild } from '@angular/core';
-import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
+import { Component, computed, effect, inject, viewChild } from '@angular/core';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { PermissionId } from '@api';
 import { AuthService } from '@app/auth/auth.service';
 import { PermissionService } from '@app/auth/permissions.service';
@@ -9,18 +9,18 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 
 @Component({
-  standalone: true,
   selector: 'app-menu',
-  imports: [MatSidenavContent, MatSidenav, MatSidenavContainer, MainMenuComponent, SideMenuComponent],
+  imports: [MatSidenavModule, MainMenuComponent, SideMenuComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
-  @ViewChild('drawer') drawer: MatSidenav;
-
-  get currentUser() {
-    return this.currentUserService.currentUser;
-  }
+  readonly drawer = viewChild<MatSidenav>('drawer');
+  private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
+  private readonly permissionService: PermissionService = inject(PermissionService);
+  private readonly authService: AuthService = inject(AuthService);
+  readonly sizeService: SizeService = inject(SizeService);
+  readonly currentUser = computed(() => this.currentUserService.currentUser());
 
   menuRole = computed(() => {
     if (this.sizeService.lastKnownSize()?.supportsSideMenu) {
@@ -48,18 +48,20 @@ export class MenuComponent {
     }
   ];
 
-  constructor(private readonly currentUserService: CurrentUserService,
-    private readonly permissionService: PermissionService,
-    private readonly authService: AuthService,
-    readonly sizeService: SizeService) {
+  constructor() {
+    let lastRole: string | undefined;
     effect(async() => {
-      this.menuRole();
-      await this.drawer?.close();
+      const role = this.menuRole();
+      if (role === 'dialog' && lastRole !== 'dialog') {
+        await this.drawer()?.close();
+      }
+      // eslint-disable-next-line require-atomic-updates
+      lastRole = role;
     });
   }
 
   readonly toggleDrawer = async() => {
-    await this.drawer.toggle();
+    await this.drawer()?.toggle();
   };
 
   readonly show = (menuItem: { permission: PermissionId }) =>
