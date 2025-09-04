@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { GetProductsResponseItem } from '@api';
 
 @Component({
@@ -9,4 +9,6 @@ import { GetProductsResponseItem } from '@api';
 export class ProductNameWithLinkCellComponent {
     readonly rowData = input.required<GetProductsResponseItem>();
     readonly colDef = input.required<unknown>();
+    readonly infoLink = computed(() => this.rowData().infoLink);
+    readonly name = computed(() => this.rowData().name);
 }

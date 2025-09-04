@@ -1,10 +1,10 @@
 <span>
-    @if(rowData().infoLink)
+    @if(infoLink())
     {
-        <a href="{{rowData().infoLink}}" target="_blank">{{rowData().name}}</a>
+        <a href="{{infoLink()}}" target="_blank">{{name()}}</a>
     }
     @else
     {
-        {{rowData().name}}
+        {{name()}}
     }
 </span>

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { GetProductsResponseItem, PermissionId, ProductsClient } from '@api';
+import { GetProductsResponseItem, PagedResponseOfGetProductsResponseItem, PermissionId, ProductsClient } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
 import { EntryPermissionModule, EntrySearchFilterModule } from '@enigmatry/entry-components';
 import { ContextMenuItem, PagedData } from '@enigmatry/entry-components/table';
@@ -68,8 +68,9 @@ export class ProductListComponent extends BaseListComponent implements OnInit {
       .subscribe(response => this.data = response);
   }
 
-  private getProducts = async(query: GetProductsQuery) =>
-    // eslint-disable-next-line @typescript-eslint/return-await
-    await lastValueFrom(this.client.search(query.name.value, query.code.value, query.expiresBeforeDate(),
+  private getProducts = async(query: GetProductsQuery): Promise<PagedResponseOfGetProductsResponseItem> => {
+    const result = await lastValueFrom(this.client.search(query.name.value, query.code.value, query.expiresBeforeDate(),
       query.pageNumber, query.pageSize, query.sortBy, query.sortDirection));
+    return result;
+  };
 }

@@ -9,7 +9,7 @@ import {
 import { EntryPermissionModule, setServerSideValidationErrors } from '@enigmatry/entry-components';
 import { FormWrapperComponent } from '@shared/form-wrapper/form-wrapper.component';
 import { NotNullPipe } from '@shared/pipes/not-null.pipe';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UserEditGeneratedComponent } from '../generated/user-edit/user-edit-generated.component';
 import { UsersGeneratedModule } from '../generated/users-generated.module';
@@ -43,7 +43,7 @@ export class UserEditComponent implements OnInit {
     this.$userStatusLookup = this.client.getStatusesLookup();
   }
 
-  save(model: IGetUserDetailsResponse) {
+  readonly save = async(model: IGetUserDetailsResponse) => {
     const command = new CreateOrUpdateUserCommand({
       id: model.id,
       emailAddress: model.emailAddress,
@@ -51,17 +51,17 @@ export class UserEditComponent implements OnInit {
       userStatusId: model.userStatusId,
       fullName: model.fullName
     });
-    this.client.post(command)
-      .subscribe({
-        next: () => this.location.back(),
-        error: (error: IValidationProblemDetails) => {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          setServerSideValidationErrors(error, this.formComponent()!.form);
-        }
-      });
-  }
 
-  cancel() {
+    try {
+      await lastValueFrom(this.client.post(command));
+      this.location.back();
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setServerSideValidationErrors(error as IValidationProblemDetails, this.formComponent()!.form);
+    }
+  };
+
+  readonly cancel = () => {
     this.location.back();
-  }
+  };
 }

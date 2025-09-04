@@ -58,6 +58,7 @@
     "users.user-list.email-address": "E-mail",
     "users.user-list.full-name": "Volledige naam",
     "users.user-list.updated-on": "Bijgewerkt op",
+    "users.user-list.user-status-name": "Status",
     "validators.max": "De waarde van {$property-name} moet minder zijn dan {$max-value}",
     "validators.maxLength": "De waarde van {$property-name} moet minder zijn dan {$max-value} tekens",
     "validators.min": "De waarde van {$property-name} moet meer zijn dan {$min-value}",
