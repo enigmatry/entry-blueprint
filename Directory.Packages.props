@@ -1,11 +1,12 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <EnigmatryEntryVersion>9.0.0</EnigmatryEntryVersion>
+    <EnigmatryEntryVersion>9.2.0</EnigmatryEntryVersion>
+    <DotnetVersion>9.0.9</DotnetVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.3.0" />
-    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="9.3.0" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.5.1" />
+    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="9.5.1" />
     <PackageVersion Include="Autofac" Version="8.2.1" />
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageVersion Include="AutoMapper" Version="14.0.0" />
@@ -16,16 +17,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="9.1.0" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Core" Version="9.1.0" />
+    <PackageVersion Include="Enigmatry.Entry.Core" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Core.EntityFramework" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.MediatR" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="9.1.0" />
+    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.EntityFramework" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.Swagger" Version="$(EnigmatryEntryVersion)" />
@@ -39,31 +40,31 @@
     <PackageVersion Include="FluentAssertions" Version="6.12.2" />
     <PackageVersion Include="FluentValidation" Version="12.0.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="9.0.4" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(DotnetVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.5" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(DotnetVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(DotnetVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(DotnetVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(DotnetVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(DotnetVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="9.0.4" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(DotnetVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(DotnetVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.1.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.1.0" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="3.8.4" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="4.7.4" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-    <PackageVersion Include="NUnit" Version="4.3.2" />
+    <PackageVersion Include="NUnit" Version="4.4.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -86,7 +87,7 @@
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Testcontainers.MsSql" Version="4.4.0" />
-    <PackageVersion Include="Verify" Version="29.3.1" />
-    <PackageVersion Include="Verify.NUnit" Version="29.3.1" />
+    <PackageVersion Include="Verify" Version="30.18.0" />
+    <PackageVersion Include="Verify.NUnit" Version="30.18.0" />
   </ItemGroup>
 </Project>

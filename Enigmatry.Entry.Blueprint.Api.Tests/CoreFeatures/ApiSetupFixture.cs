@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
 using AutoMapper;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.Blueprint.Api.Features.Users;
@@ -8,7 +9,7 @@ using Enigmatry.Entry.Blueprint.Domain.Tests.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
 using Enigmatry.Entry.Core.Paging;
-using FluentAssertions;
+using Shouldly;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -54,7 +55,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
     {
         var response = await Client.GetAsync($"api/users/{Guid.NewGuid()}");
 
-        response.Should().BeNotFound();
+        response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
     }
 
     [Test]
@@ -110,7 +111,8 @@ public class ApiSetupFixture : IntegrationFixtureBase
         };
         var response = await Client.PostAsJsonAsync("api/users", command, HttpSerializationOptions.Options);
 
-        response.Should().BeBadRequest().And.ContainValidationError(validationField, validationErrorMessage);
+        response.BeNotFound();
+        response.ContainValidationError(validationField, validationErrorMessage);
     }
 
     [Test]
