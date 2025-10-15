@@ -32,12 +32,16 @@ internal class TestDatabase
                 // default username: sa
                 // default password: yourStrong(!)Password
 
-                _container ??= new MsSqlBuilder()
-                    .WithAutoRemove(true)
-                    .WithCleanUp(true)
-                    .Build();
+                if (_container == null)
+                {
+                    _container = new MsSqlBuilder()
+                        .WithAutoRemove(true)
+                        .WithCleanUp(true)
+                        .Build();
 
-                _container!.StartAsync().Wait();
+                    _container!.StartAsync().Wait();
+                }
+
                 ConnectionString = _container.GetConnectionString();
                 WriteLine($"Docker SQL connection string: {ConnectionString}");
             }

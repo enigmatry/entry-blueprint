@@ -6,7 +6,7 @@ using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Blueprint.Domain.Users.Commands;
 using Enigmatry.Entry.Blueprint.Infrastructure.Tests.Impersonation;
-using FluentAssertions;
+using Shouldly;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -30,7 +30,7 @@ public class AuthorizationFixture : IntegrationFixtureBase
     public async Task UserWithPermissionIsAllowed()
     {
         var response = await Client.GetAsync("api/users");
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
 
     [Test]
@@ -45,14 +45,14 @@ public class AuthorizationFixture : IntegrationFixtureBase
             UserStatusId = UserStatusId.Active
         };
         var response = await Client.PostAsJsonAsync("api/users", command, HttpSerializationOptions.Options);
-        response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
+        response.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
     }
 
     [Test]
     public async Task EndpointWithoutAuthorizeAttributeIsAllowed()
     {
         var response = await Client.GetAsync("api/profile");
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
 
     [TearDown]

@@ -1,6 +1,6 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Users;
-using FluentAssertions;
+using Shouldly;
 
 namespace Enigmatry.Entry.Blueprint.Domain.Tests.Users;
 
@@ -30,7 +30,7 @@ public class UserQueryableExtensionsFixture
     public void TestQueryEmptyList()
     {
         var result = new List<User>().AsQueryable().QueryByEmailAddress("some").ToList();
-        result.Should().BeEmpty();
+        result.ShouldBeEmpty();
     }
 
     [TestCase("emailAddress1", 1, TestName = "Case sensitive-should find")]
@@ -43,6 +43,6 @@ public class UserQueryableExtensionsFixture
         //change to use expectedCount instead of Verify
         var result = _query.QueryByEmailAddress(emailAddress).ToList();
 
-        result.Count.Should().Be(expectedCount);
+        result.Count.ShouldBe(expectedCount);
     }
 }

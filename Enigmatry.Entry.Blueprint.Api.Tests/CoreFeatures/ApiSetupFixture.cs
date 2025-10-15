@@ -111,7 +111,7 @@ public class ApiSetupFixture : IntegrationFixtureBase
         };
         var response = await Client.PostAsJsonAsync("api/users", command, HttpSerializationOptions.Options);
 
-        response.BeNotFound();
+        response.BeBadRequest();
         response.ContainValidationError(validationField, validationErrorMessage);
     }
 
