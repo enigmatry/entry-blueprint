@@ -1,11 +1,7 @@
 ﻿using System.Reflection;
 using Enigmatry.Entry.AspNetCore.OpenTelemetry;
-using Enigmatry.Entry.Core.Helpers;
-using Enigmatry.Entry.Core.Settings;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Serilog.Events;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 

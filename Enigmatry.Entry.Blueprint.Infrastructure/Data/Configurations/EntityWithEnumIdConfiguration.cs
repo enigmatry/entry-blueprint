@@ -6,7 +6,7 @@ namespace Enigmatry.Entry.Blueprint.Infrastructure.Data.Configurations;
 
 [UsedImplicitly]
 public abstract class EntityWithEnumIdConfiguration<TEntity, TId>()
-    : SmartEnums.EntityFramework.EntityWithEnumIdConfiguration<TEntity, TId>(NameMaxLength)
+    : Enigmatry.Entry.SmartEnums.EntityFramework.EntityWithEnumIdConfiguration<TEntity, TId>(NameMaxLength)
     where TEntity : EntityWithEnumId<TId>
     where TId : SmartEnum<TId>
 {

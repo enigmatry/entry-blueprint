@@ -4,15 +4,12 @@ trigger:
 variables:
   artifactName: 'enigmatry-entry-blueprint-template'
   buildConfiguration: 'Release'
-  nodeVersion: '16.20.2'
-  projectNameAngularApp: enigmatry-entry-blueprint-app
-  projectNamePrefix: Enigmatry.Entry.Blueprint
 
 pool: 'enigmatry-managed-devops-test'
 
 stages:
 - stage: 'ci_build'
-  displayName: 'Build the web application'
+  displayName: 'Create package'
   jobs: 
   - job: build_prerequisites
     displayName: Get the version for the build
