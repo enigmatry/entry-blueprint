@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <EnigmatryEntryVersion>9.2.0</EnigmatryEntryVersion>
+    <EnigmatryEntryVersion>9.3.0</EnigmatryEntryVersion>
     <DotnetVersion>9.0.10</DotnetVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -61,7 +61,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.5.2" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="4.0.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="4.7.4" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     <PackageVersion Include="NUnit" Version="4.4.0" />
@@ -87,8 +87,8 @@
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Testcontainers.MsSql" Version="4.8.1" />
-    <PackageVersion Include="Verify" Version="31.5.1" />
-    <PackageVersion Include="Verify.NUnit" Version="31.5.1" />
+    <PackageVersion Include="Verify" Version="31.5.3" />
+    <PackageVersion Include="Verify.NUnit" Version="31.5.3" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <!--transitive packages-->
     <PackageVersion Include="Microsoft.Build" Version="17.14.28" />

@@ -4,26 +4,26 @@
     "net9.0": {
       "Enigmatry.Entry.Core": {
         "type": "Direct",
-        "requested": "[9.2.0, )",
-        "resolved": "9.2.0",
-        "contentHash": "kibj7MVFBntT/ncxxIDcX77hEuwicVQNjL1nhHR8POg0ZGpvJv8JUM3bf7AR8ExWbV3u3MAo3a8VwmJbmCqdqQ==",
+        "requested": "[9.3.0, )",
+        "resolved": "9.3.0",
+        "contentHash": "LHV1BRcKOlbuLMVh96PqDIUbC7bTRQx+kIHok9jTyGhmKR1qQGSLAQmarGcmw8AY0y6gzTKBRG1VOweV5+9GMw==",
         "dependencies": {
-          "FluentValidation": "12.0.0",
+          "FluentValidation": "12.1.0",
           "JetBrains.Annotations": "2025.2.2",
           "MediatR": "[12.4.1]",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.9",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.10",
           "Serilog": "4.3.0",
           "System.ComponentModel.Annotations": "5.0.0"
         }
       },
       "Enigmatry.Entry.SmartEnums": {
         "type": "Direct",
-        "requested": "[9.2.0, )",
-        "resolved": "9.2.0",
-        "contentHash": "vdtH3nKAwh3ODpTLNOqdF0Oo/hfC1pVtzIQdXnT+GOoNo2eUWhmbWvEAsJqdaHovHLNeZT1wOweoaKPlKXfq5g==",
+        "requested": "[9.3.0, )",
+        "resolved": "9.3.0",
+        "contentHash": "tN6KWK5cvMbtDDxGsfUZyhjc5y7M1qMSFFYgBJOxnlNKJjYhFOAY4NNZk2bab/CVdE0KSGFbJxkjqRShT762IA==",
         "dependencies": {
           "Ardalis.SmartEnum": "8.2.0",
-          "Enigmatry.Entry.Core": "9.2.0",
+          "Enigmatry.Entry.Core": "9.3.0",
           "JetBrains.Annotations": "2025.2.2"
         }
       },
@@ -53,8 +53,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "9.0.9",
-        "contentHash": "/hymojfWbE9AlDOa0mczR44m00Jj+T3+HZO0ZnVTI032fVycI0ZbNOVFP6kqZMcXiLSYXzR2ilcwaRi6dzeGyA=="
+        "resolved": "9.0.10",
+        "contentHash": "r9waLiOPe9ZF1PvzUT+RDoHvpMmY8MW+lb4lqjYGObwKpnyPMLI3odVvlmshwuZcdoHynsGWOrCPA0hxZ63lIA=="
       },
       "Serilog": {
         "type": "Transitive",
@@ -69,16 +69,16 @@
       "FluentValidation": {
         "type": "CentralTransitive",
         "requested": "[12.1.0, )",
-        "resolved": "12.0.0",
-        "contentHash": "8NVLxtMUXynRHJIX3Hn1ACovaqZIJASufXIIFkD0EUbcd5PmMsL1xUD5h548gCezJ5BzlITaR9CAMrGe29aWpA=="
+        "resolved": "12.1.0",
+        "contentHash": "FqWEn8BdbbFEHGanj9K8SVo+LyBeFWy2rolaE+e1TNUbifr8M7Iss+I1AqTSc8kjKtvjl/WN4XIHiRpslh42bA=="
       },
       "Microsoft.Extensions.Logging.Abstractions": {
         "type": "CentralTransitive",
         "requested": "[9.0.10, )",
-        "resolved": "9.0.9",
-        "contentHash": "FEgpSF+Z9StMvrsSViaybOBwR0f0ZZxDm8xV5cSOFiXN/t+ys+rwAlTd/6yG7Ld1gfppgvLcMasZry3GsI9lGA==",
+        "resolved": "9.0.10",
+        "contentHash": "MFUPv/nN1rAQ19w43smm6bbf0JDYN/1HEPHoiMYY50pvDMFpglzWAuoTavByDmZq7UuhjaxwrET3joU69ZHoHQ==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.9"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.10"
         }
       }
     }
