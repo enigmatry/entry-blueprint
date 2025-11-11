@@ -5,11 +5,11 @@ using MediatR;
 namespace Enigmatry.Entry.Blueprint.Domain.Products.Commands;
 
 [UsedImplicitly]
-public class ProductCreateOrUpdateCommandHanlder : IRequestHandler<ProductCreateOrUpdate.Command, ProductCreateOrUpdate.Result>
+public class ProductCreateOrUpdateCommandHandler : IRequestHandler<ProductCreateOrUpdate.Command, ProductCreateOrUpdate.Result>
 {
     private readonly IRepository<Product, Guid> _productRepository;
 
-    public ProductCreateOrUpdateCommandHanlder(IRepository<Product, Guid> productRepository)
+    public ProductCreateOrUpdateCommandHandler(IRepository<Product, Guid> productRepository)
     {
         _productRepository = productRepository;
     }
