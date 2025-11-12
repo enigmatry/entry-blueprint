@@ -40,7 +40,7 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
     protected override IHost CreateHost(IHostBuilder builder)
     {
         // https://github.com/dotnet/aspnetcore/issues/37680
-        builder.ConfigureHostConfiguration(configBuilder =>
+        builder.ConfigureHostConfiguration(_ =>
         {
             TestConfiguration.Create(b =>
             {
@@ -49,7 +49,7 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
             });
         });
         builder.ConfigureContainer<ContainerBuilder>(ConfigureContainer);
-        builder.UseSerilog((context, services, loggerConfiguration) =>
+        builder.UseSerilog((_, _, loggerConfiguration) =>
         {
             loggerConfiguration.ConfigureSerilogForIntegrationTests();
         });

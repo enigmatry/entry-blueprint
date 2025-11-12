@@ -10,6 +10,8 @@ using Enigmatry.Entry.Scheduler;
 using Serilog;
 using Serilog.Extensions.Logging;
 
+namespace Enigmatry.Entry.Blueprint.Scheduler;
+
 internal class Program
 {
     public static void Main() =>

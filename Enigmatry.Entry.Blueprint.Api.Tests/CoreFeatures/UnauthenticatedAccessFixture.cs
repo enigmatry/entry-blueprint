@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
-using FluentAssertions;
+using Shouldly;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures;
 
@@ -13,13 +13,13 @@ public class UnauthenticatedAccessFixture : IntegrationFixtureBase
     public async Task EndpointWithAuthorizeAttributeIsNotAllowed()
     {
         var response = await Client.GetAsync("api/users");
-        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
     }
 
     [Test]
     public async Task EndpointWithNoAuthorizeAttributeIsNotAllowed()
     {
         var response = await Client.GetAsync("api/profile");
-        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
     }
 }

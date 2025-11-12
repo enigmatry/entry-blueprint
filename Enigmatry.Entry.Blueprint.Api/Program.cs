@@ -1,9 +1,10 @@
-﻿using Enigmatry.Entry.Blueprint.Api;
-using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
+﻿using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
 using Enigmatry.Entry.Blueprint.ServiceDefaults;
 using Serilog;
+
+namespace Enigmatry.Entry.Blueprint.Api;
 
 internal class Program
 {
