@@ -39,7 +39,7 @@ internal class TestDatabase
                         .WithCleanUp(true)
                         .Build();
 
-                    _container!.StartAsync().Wait();
+                    _container.StartAsync().Wait();
                 }
 
                 ConnectionString = _container.GetConnectionString();
