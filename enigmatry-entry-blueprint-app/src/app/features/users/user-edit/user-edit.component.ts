@@ -55,7 +55,7 @@ export class UserEditComponent implements OnInit {
     try {
       await lastValueFrom(this.client.post(command));
       this.location.back();
-    } catch (error) {
+    } catch(error) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       setServerSideValidationErrors(error as IValidationProblemDetails, this.formComponent()!.form);
     }

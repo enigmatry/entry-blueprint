@@ -19,7 +19,6 @@ export const authenticationInterceptor = (request: HttpRequest<unknown>, next: H
         .pipe(
             switchMap(accessToken => next(addAuthorizationHeader(request, accessToken))),
             catchError(async error => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
                 if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Unauthorized) {
                     await authService.loginRedirect();
                 }

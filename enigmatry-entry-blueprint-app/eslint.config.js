@@ -1,10 +1,8 @@
 import defaultEnigmatryConfiguration from "@enigmatry/eslint-config";
+import { defineConfig } from "eslint/config";
 
-export default [
+export default defineConfig([
     ...defaultEnigmatryConfiguration,
-    {
-        ignores: ['.angular/**']
-    },
     {
         "files": [
             "**/*.ts"
@@ -23,4 +21,4 @@ export default [
             "import/unambiguous": "off"
         }
     }
-];
+]);

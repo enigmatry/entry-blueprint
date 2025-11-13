@@ -20,7 +20,7 @@ export class CurrentUserService {
 			const response = await lastValueFrom(this.profileClient.getProfile());
 			const profile = UserProfile.fromResponse(response);
 			this.currentUser.set(profile);
-		} catch (error) {
+		} catch(error) {
 			if (error as Record<string, unknown>['status'] === HttpStatusCode.NotFound) {
 				this.currentUser.set(null);
 				return;
