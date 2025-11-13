@@ -38,6 +38,7 @@
     "^@test/(.*)$": "<rootDir>/src/testing/$1",
     "^src/(.*)$": "<rootDir>/src/$1"
   },
+  "testEnvironment": "jsdom",
   "testMatch": [
     "<rootDir>/src/app/**/*.spec.ts"
   ],
