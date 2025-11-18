@@ -19,6 +19,17 @@ export class ApplicationInsightsService implements OnDestroy {
   private readonly titleStrategy: TitleStrategy = inject(TitleStrategy);
   private readonly currentUserService: CurrentUserService = inject(CurrentUserService);
 
+  constructor() {
+    effect(() => {
+      const userId = this.currentUserService.currentUser()?.id;
+      if (userId) {
+        this.appInsights?.setAuthenticatedUserContext(userId);
+      } else {
+        this.appInsights?.clearAuthenticatedUserContext();
+      }
+    });
+  }
+
   initialize(): void {
     if (!environment.applicationInsights.connectionString) {
       // Skip initialization when connection string is not set
@@ -29,16 +40,6 @@ export class ApplicationInsightsService implements OnDestroy {
     this.appInsights.loadAppInsights();
 
     this.appInsights.context.application.ver = environment.appVersion;
-
-    effect(() => {
-      const userId = this.currentUserService.currentUser()?.id;
-      if (userId) {
-        this.appInsights?.setAuthenticatedUserContext(userId);
-      } else {
-        this.appInsights?.clearAuthenticatedUserContext();
-      }
-    });
-
     this.trackPageViewsOnRouterNavigation();
   }
 
