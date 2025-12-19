@@ -1,4 +1,5 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Auditing;
+using Enigmatry.Entry.Core.Logging;
 using JetBrains.Annotations;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ public class AuditableDomainEventNotificationHandler<T>(
     public Task Handle(T notification, CancellationToken cancellationToken)
     {
         // here you can enter record in Audit table, 
-        log.LogDebug("Event name: {EventName}, Payload: {@Payload}", notification.EventName, notification.AuditPayload);
+        log.LogSecurityDebug("Event name: {EventName}, Payload: {@Payload}", notification.EventName, notification.AuditPayload);
         return Task.CompletedTask;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
+using Enigmatry.Entry.Core.Logging;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,7 @@ public class SystemUserProvider(IRepository<DomainUser> userRepository, ILogger<
 
             if (user == null)
             {
-                logger.LogWarning("User with Id: {SystemUserId} not found in the database. This user might not have been seeded", UserId);
+                logger.LogSecurityWarning("User with Id: {SystemUserId} not found in the database. This user might not have been seeded", UserId);
                 return null;
             }
 

@@ -13,6 +13,9 @@
     <parameter name="Rolling Log File Path" description="Rolling Log File Path" defaultValue="">
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__rollingLogFilePath__" />
     </parameter>
+    <parameter name="Rolling Log Security File Path" description="Rolling Log Security File Path" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__rollingLogSecurityFilePath__" />
+    </parameter>
     <parameter name="Key Vault Name" description="Key Vault Name" defaultValue="">
         <parameterEntry kind="TextFile" scope="appsettings.json" match="__keyVaultName__" />
     </parameter>
