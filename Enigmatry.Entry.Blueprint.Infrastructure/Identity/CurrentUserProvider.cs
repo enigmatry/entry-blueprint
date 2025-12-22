@@ -1,6 +1,7 @@
 ﻿using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
+using Enigmatry.Entry.Core.Logging;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -29,13 +30,13 @@ public class CurrentUserProvider(
 
             if (!IsAuthenticated)
             {
-                logger.LogWarning("User is not authenticated");
+                logger.LogSecurityWarning("User is not authenticated");
                 return null;
             }
 
             if (String.IsNullOrEmpty(claimsProvider.Email))
             {
-                logger.LogWarning("User's email was not found in the claims");
+                logger.LogSecurityWarning("User's email was not found in the claims");
                 return null;
             }
 

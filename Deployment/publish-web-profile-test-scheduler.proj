@@ -8,6 +8,9 @@
     <ParameterValue Include="Rolling Log File Path">
       <Value>D:/home/LogFiles/scheduler/enigmatry-entry-blueprint-scheduler-.log</Value>
     </ParameterValue>
+    <ParameterValue Include="Rolling Log Security File Path">
+      <Value>D:/home/LogFiles/scheduler/enigmatry-entry-blueprint-scheduler-security-.log</Value>
+    </ParameterValue>
     <ParameterValue Include="Clean Old Products Job Cron Expression"><!-- https://www.freeformatter.com/cron-expression-generator-quartz.html -->
       <Value>0 0 16 ? * * *</Value><!-- 4PM every day -->
     </ParameterValue>
