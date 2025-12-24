@@ -35,10 +35,7 @@ public static class OpenTelemetryExtensions
 
                 if (builder.Environment.IsDevelopment())
                 {
-                    tracing.AddSqlClientInstrumentation(options =>
-                    {
-                        options.SetDbStatementForText = true;
-                    });
+                    tracing.AddSqlClientInstrumentation();
                 }
             })
             .AddOpenTelemetryExporters(builder.Configuration);

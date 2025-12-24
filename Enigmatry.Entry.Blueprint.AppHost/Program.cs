@@ -4,7 +4,7 @@ var entryApi =builder.AddProject<Projects.Enigmatry_Entry_Blueprint_Api>("enigma
 
 builder.AddProject<Projects.Enigmatry_Entry_Blueprint_Scheduler>("enigmatry-entry-blueprint-scheduler");
 
-builder.AddNpmApp("enigmatry-entry-blueprint-app", "../enigmatry-entry-blueprint-app", "start:aspire")
+builder.AddJavaScriptApp("enigmatry-entry-blueprint-app", "../enigmatry-entry-blueprint-app", "start:aspire")
     .WithReference(entryApi)
     .WaitFor(entryApi)
     .WithHttpEndpoint(port: 4200, env: "PORT")
