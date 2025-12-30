@@ -28,7 +28,6 @@
     <PackageReference Include="Serilog.Settings.Configuration" />
     <PackageReference Include="Serilog.Sinks.Console" />
     <PackageReference Include="Serilog.Sinks.File" />
-    <PackageReference Include="System.Private.Uri" />
   </ItemGroup>
 
   <ItemGroup>

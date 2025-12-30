@@ -45,15 +45,22 @@ internal static class DatabaseInitializer
 
     private static async Task ResetDataAsync(DbContext dbContext, IEnumerable<string> tablesToIgnore)
     {
-        var connectionString = dbContext.Database.GetConnectionString() ?? String.Empty;
+        try
+        {
+            await dbContext.Database.OpenConnectionAsync();
+            var connection = dbContext.Database.GetDbConnection();
+            var respawner = await Respawner.CreateAsync(connection,
+                new RespawnerOptions
+                {
+                    TablesToIgnore = tablesToIgnore.Select(name => new Table(name)).ToArray()
+                });
 
-        var respawner = await Respawner.CreateAsync(connectionString,
-            new RespawnerOptions
-            {
-                TablesToIgnore = tablesToIgnore.Select(name => new Table(name)).ToArray()
-            });
-
-        await respawner.ResetAsync(connectionString);
+            await respawner.ResetAsync(connection);
+        }
+        finally
+        {
+            await dbContext.Database.CloseConnectionAsync();
+        }
     }
 
     private static void DropAllDbObjects(DatabaseFacade database)

@@ -4,27 +4,34 @@
     "net9.0": {
       "Enigmatry.Entry.Core": {
         "type": "Direct",
-        "requested": "[9.3.1-preview.3, )",
-        "resolved": "9.3.1-preview.3",
-        "contentHash": "nFz4bWUBmTJtga0XfsmumWa66Mg97N4+7NggFiclzOid5NvBmH2E0To9GnBxVqVTC+mgiXEVRpMu+9xtR1Famg==",
+        "requested": "[9.4.0, )",
+        "resolved": "9.4.0",
+        "contentHash": "JyxZEhF4fSUwRLGVfM3P1B+5KPwYh8E6ZmICEf/8yF5kFWgoZ5XqQ2Rfxf+IC7GSM/SJYFtPEGvukd1eY2v12g==",
         "dependencies": {
-          "FluentValidation": "12.1.0",
-          "JetBrains.Annotations": "2025.2.2",
+          "FluentValidation": "12.1.1",
+          "JetBrains.Annotations": "2025.2.4",
           "MediatR": "[12.4.1]",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.10",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.11",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.11",
           "Serilog": "4.3.0",
           "System.ComponentModel.Annotations": "5.0.0"
         }
       },
       "Enigmatry.Entry.SmartEnums": {
         "type": "Direct",
-        "requested": "[9.3.1-preview.3, )",
-        "resolved": "9.3.1-preview.3",
-        "contentHash": "FaC+E+N7pAoV4dd+hitzasMtmfAbhH7Lnt0LeZzuy/WcmZjDIGEBtVvS2nY3QJL3lBNroUDGmlOma6O6dWetvg==",
+        "requested": "[9.4.0, )",
+        "resolved": "9.4.0",
+        "contentHash": "zHkYmBjcwaImeZs7TZ9AA12aWbbqElZv6PIYJNpFnzfhrUthv09KN+x1sBe2SEA9rOu3Irgkyk3oPKWcYTO6iA==",
         "dependencies": {
           "Ardalis.SmartEnum": "8.2.0",
-          "Enigmatry.Entry.Core": "9.3.1-preview.3",
-          "JetBrains.Annotations": "2025.2.2"
+          "Enigmatry.Entry.Core": "9.4.0",
+          "FluentValidation": "12.1.1",
+          "JetBrains.Annotations": "2025.2.4",
+          "MediatR": "[12.4.1]",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.11",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.11",
+          "Serilog": "4.3.0",
+          "System.ComponentModel.Annotations": "5.0.0"
         }
       },
       "Ardalis.SmartEnum": {
@@ -34,8 +41,8 @@
       },
       "JetBrains.Annotations": {
         "type": "Transitive",
-        "resolved": "2025.2.2",
-        "contentHash": "0X56ZRizuHdrnPpgXjWV7f2tQO1FlQg5O1967OGKnI/4ZRNOK642J8L7brM1nYvrxTTU5TP1yRyXLRLaXLPQ8A=="
+        "resolved": "2025.2.4",
+        "contentHash": "TwbgxAkXxY+vNEhNVx/QXjJ4vqxmepOjsgRvvImQPbHkHMMb4W+ahL3laMsxXKtNT7iMy+E1B3xkqao2hf1n3A=="
       },
       "MediatR": {
         "type": "Transitive",
@@ -53,8 +60,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "9.0.10",
-        "contentHash": "r9waLiOPe9ZF1PvzUT+RDoHvpMmY8MW+lb4lqjYGObwKpnyPMLI3odVvlmshwuZcdoHynsGWOrCPA0hxZ63lIA=="
+        "resolved": "9.0.11",
+        "contentHash": "+ZxxZzcVU+IEzq12GItUzf/V3mEc5nSLiXijwvDc4zyhbjvSZZ043giSZqGnhakrjwRWjkerIHPrRwm9okEIpw=="
       },
       "Serilog": {
         "type": "Transitive",
@@ -68,17 +75,17 @@
       },
       "FluentValidation": {
         "type": "CentralTransitive",
-        "requested": "[12.1.0, )",
-        "resolved": "12.1.0",
-        "contentHash": "FqWEn8BdbbFEHGanj9K8SVo+LyBeFWy2rolaE+e1TNUbifr8M7Iss+I1AqTSc8kjKtvjl/WN4XIHiRpslh42bA=="
+        "requested": "[12.1.1, )",
+        "resolved": "12.1.1",
+        "contentHash": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw=="
       },
       "Microsoft.Extensions.Logging.Abstractions": {
         "type": "CentralTransitive",
-        "requested": "[9.0.10, )",
-        "resolved": "9.0.10",
-        "contentHash": "MFUPv/nN1rAQ19w43smm6bbf0JDYN/1HEPHoiMYY50pvDMFpglzWAuoTavByDmZq7UuhjaxwrET3joU69ZHoHQ==",
+        "requested": "[9.0.11, )",
+        "resolved": "9.0.11",
+        "contentHash": "UKWFTDwtZQIoypyt1YPVsxTnDK+0sKn26+UeSGeNlkRQddrkt9EC6kP4g94rgO/WOZkz94bKNlF1dVZN3QfPFQ==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.10"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.11"
         }
       }
     }
