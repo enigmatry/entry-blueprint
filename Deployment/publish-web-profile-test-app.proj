@@ -21,13 +21,10 @@
       <Value>enigmatry-entry-blueprint-test</Value>
     </ParameterValue>
     <ParameterValue Include="Azure AD Instance">
-      <Value>https://enigmatryb2ctest.b2clogin.com</Value>
+      <Value>https://enigmatryexternaltest.ciamlogin.com</Value>
     </ParameterValue>
-    <ParameterValue Include="Azure AD Domain">
-      <Value>enigmatryb2ctest.onmicrosoft.com</Value>
-    </ParameterValue>
-    <ParameterValue Include="Azure AD SignUpSignInPolicyId">
-      <Value>B2C_1_entry_blueprint_sign_in</Value>
+    <ParameterValue Include="Azure AD TenantId">
+      <Value>140213c3-2fbb-430c-98e1-3616b1fe94af</Value>
     </ParameterValue>
     <!-- Front-end params-->
     <ParameterValue Include="App Version">
@@ -40,16 +37,16 @@
       <Value>InstrumentationKey=477b870b-733d-4a69-a780-9bc363f075c7;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/</Value>
     </ParameterValue>
     <ParameterValue Include="Azure AD ClientId">
-      <Value>462923fc-3dcd-4b81-943d-590b9cb45ec4</Value>
+      <Value>ca1d29d8-f0c4-46f4-a308-cf18d06f3e00</Value>
     </ParameterValue>
     <ParameterValue Include="Azure AD Authority">
-      <Value>https://enigmatryb2ctest.b2clogin.com/enigmatryb2ctest.onmicrosoft.com/B2C_1_entry_blueprint_sign_in</Value>
+      <Value>https://enigmatryexternaltest.ciamlogin.com</Value>
     </ParameterValue>
     <ParameterValue Include="Azure AD Scopes">
-      <Value>https://enigmatryb2ctest.onmicrosoft.com/462923fc-3dcd-4b81-943d-590b9cb45ec4/api</Value>
+      <Value>api://ca1d29d8-f0c4-46f4-a308-cf18d06f3e00/api</Value>
     </ParameterValue>
     <ParameterValue Include="Content Security Policy">
-      <Value>default-src 'none'; script-src 'self'; connect-src 'self' enigmatryb2ctest.b2clogin.com westeurope-5.in.applicationinsights.azure.com https://js.monitor.azure.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'</Value>
+      <Value>default-src 'none'; script-src 'self'; connect-src 'self' westeurope-5.in.applicationinsights.azure.com https://js.monitor.azure.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'</Value>
     </ParameterValue>
   </ItemGroup>
 </Project>

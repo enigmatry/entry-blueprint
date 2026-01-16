@@ -7,10 +7,9 @@ export const environment = {
   appVersion: '0.0.0',
   apiUrl: 'https://localhost:7251',
   azureAd: {
-    clientId: 'a8793ce9-86dc-4d7e-aa70-361a3c5a5150',
-    /* eslint-disable no-secrets/no-secrets */
-    authority: 'https://enigmatryb2cdev.b2clogin.com/enigmatryb2cdev.onmicrosoft.com/B2C_1_entry_blueprint_sign_in',
-    scopes: ['https://enigmatryb2cdev.onmicrosoft.com/a8793ce9-86dc-4d7e-aa70-361a3c5a5150/api']
+    clientId: 'e11274d2-cc0b-489a-8d79-838bb6136363',
+    authority: 'https://enigmatryexternaldev.ciamlogin.com',
+    scopes: ['api://e11274d2-cc0b-489a-8d79-838bb6136363/api']
   },
   applicationInsights: {
     connectionString: '',
