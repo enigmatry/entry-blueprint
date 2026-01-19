@@ -28,6 +28,7 @@ jobs:
     dotNetVersion: '9.0.x'
     projectNameAngularApp: $(projectNameAngularApp)
     useMsBuild: true
+    pool: enigmatry-managed-devops-test
 
 - template: build-report-job.yml@templates
   parameters:
