@@ -27,6 +27,7 @@ jobs:
     displayName: 'Code Analysis'
     dotNetVersion: '9.0.x'
     projectNameAngularApp: $(projectNameAngularApp)
+    useMsBuild: true
 
 - template: build-report-job.yml@templates
   parameters:
