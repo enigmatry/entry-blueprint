@@ -34,6 +34,7 @@ jobs:
     demands: 
     - 'ImageOverride -equals ubuntu-24.04'
   variables:
+    buildConfiguration: 'Release'
     solutionExtension: 'sln'
   steps:
   - task: UseDotNet@2
