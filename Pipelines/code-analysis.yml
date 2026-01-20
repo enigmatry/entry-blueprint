@@ -39,20 +39,21 @@ jobs:
   steps:
   - task: UseDotNet@2
     displayName: Set .Net version
-    version: '9.0.x'
+    inputs:
+      version: '9.0.x'
 
   - task: DotNetCoreCLI@2
     displayName: Restore Packages
     inputs:
-    command: 'restore'
-    projects: '**/*.$(solutionExtension)'
+      command: 'restore'
+      projects: '**/*.$(solutionExtension)'
 
   - task: DotNetCoreCLI@2
     displayName: Build solution (.NET Core CLI)
     inputs:
-    command: 'build'
-    projects: '**/*.$(solutionExtension)'
-    arguments: '--no-restore --configuration $(buildConfiguration) /p:WarningsNotAsErrors=IDE0055'
+      command: 'build'
+      projects: '**/*.$(solutionExtension)'
+      arguments: '--no-restore --configuration $(buildConfiguration) /p:WarningsNotAsErrors=IDE0055'
 
   - task: DotNetCoreCLI@2
     displayName: Run all .net tests
