@@ -46,13 +46,13 @@ jobs:
     displayName: Restore Packages
     inputs:
       command: 'restore'
-      projects: '**/*.$(solutionExtension)'
+      projects: '**/*.csproj'
 
   - task: DotNetCoreCLI@2
     displayName: Build solution (.NET Core CLI)
     inputs:
       command: 'build'
-      projects: '**/*.$(solutionExtension)'
+      projects: '**/*.csproj'
       arguments: '--no-restore --configuration $(buildConfiguration) /p:WarningsNotAsErrors=IDE0055'
 
   - task: DotNetCoreCLI@2
