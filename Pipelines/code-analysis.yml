@@ -35,7 +35,7 @@ jobs:
     - 'ImageOverride -equals ubuntu-24.04'
   variables:
     buildConfiguration: 'Release'
-    solutionExtension: 'sln'
+    solutionExtension: 'slnf'
   steps:
   - task: UseDotNet@2
     displayName: Set .Net version
@@ -52,7 +52,7 @@ jobs:
     displayName: Build solution (.NET Core CLI)
     inputs:
       command: 'build'
-      projects: '**/*.csproj'
+      projects: '**/*.$(solutionExtension)'
       arguments: '--no-restore --configuration $(buildConfiguration) /p:WarningsNotAsErrors=IDE0055'
 
   - task: DotNetCoreCLI@2
