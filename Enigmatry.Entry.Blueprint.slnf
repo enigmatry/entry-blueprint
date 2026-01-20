@@ -1,0 +1,22 @@
+{
+  "solution": {
+    "path": "Enigmatry.Entry.Blueprint.sln",
+    "projects": [
+      "Enigmatry.Entry.Blueprint.Api.Tests\\Enigmatry.Entry.Blueprint.Api.Tests.csproj",
+      "Enigmatry.Entry.Blueprint.Api\\Enigmatry.Entry.Blueprint.Api.csproj",
+      "Enigmatry.Entry.Blueprint.AppHost\\Enigmatry.Entry.Blueprint.AppHost.csproj",
+      "Enigmatry.Entry.Blueprint.ApplicationServices\\Enigmatry.Entry.Blueprint.ApplicationServices.csproj",
+      "Enigmatry.Entry.Blueprint.CodeGeneration.Setup\\Enigmatry.Entry.Blueprint.CodeGeneration.Setup.csproj",
+      "Enigmatry.Entry.Blueprint.Common.Tests\\Enigmatry.Entry.Blueprint.Common.Tests.csproj",
+      "Enigmatry.Entry.Blueprint.Core\\Enigmatry.Entry.Blueprint.Core.csproj",
+      "Enigmatry.Entry.Blueprint.Data.Migrations\\Enigmatry.Entry.Blueprint.Data.Migrations.csproj",
+      "Enigmatry.Entry.Blueprint.Domain.Tests\\Enigmatry.Entry.Blueprint.Domain.Tests.csproj",
+      "Enigmatry.Entry.Blueprint.Domain\\Enigmatry.Entry.Blueprint.Domain.csproj",
+      "Enigmatry.Entry.Blueprint.Infrastructure.Tests\\Enigmatry.Entry.Blueprint.Infrastructure.Tests.csproj",
+      "Enigmatry.Entry.Blueprint.Infrastructure\\Enigmatry.Entry.Blueprint.Infrastructure.csproj",
+      "Enigmatry.Entry.Blueprint.Scheduler.Tests\\Enigmatry.Entry.Blueprint.Scheduler.Tests.csproj",
+      "Enigmatry.Entry.Blueprint.Scheduler\\Enigmatry.Entry.Blueprint.Scheduler.csproj",
+      "Enigmatry.Entry.Blueprint.ServiceDefaults\\Enigmatry.Entry.Blueprint.ServiceDefaults.csproj"
+    ]
+  }
+}

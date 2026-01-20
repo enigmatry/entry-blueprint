@@ -35,7 +35,7 @@ jobs:
     - 'ImageOverride -equals ubuntu-24.04'
   variables:
     buildConfiguration: 'Release'
-    solutionExtension: 'sln'
+    solutionExtension: 'slnf'
   steps:
   - task: UseDotNet@2
     displayName: Set .Net version
