@@ -26,13 +26,6 @@
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.ServiceDefaults\Enigmatry.Entry.Blueprint.ServiceDefaults.csproj" />
   </ItemGroup>
 
-  <!-- By default, the msbuild javascript sdk targets the .Net Framework 4.7.2, so building only works on Windows machines -->
-  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Enigmatry.Entry.Blueprint.Api.Tests" />
   </ItemGroup>
@@ -40,5 +33,11 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ResolvedFileToPublish Include="../enigmatry-entry-blueprint-app/dist/**">
+      <RelativePath>dist/%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
+    </ResolvedFileToPublish>
+  </ItemGroup>  
 
 </Project>
