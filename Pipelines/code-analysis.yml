@@ -20,61 +20,14 @@ resources:
       name: Enigmatry - Azure Pipelines Templates/enigmatry-azure-pipelines-templates
 
 jobs:
-# - template: code-analysis.yml@templates
-#   parameters:
-#     projectName: 'Enigmatry Blueprint Template'
-#     sonarProjectKey: 'AspNetCoreAngular_EnigmatryEntryBlueprint'
-#     displayName: 'Code Analysis'
-#     dotNetVersion: '9.0.x'
-#     projectNameAngularApp: $(projectNameAngularApp)
-- job: 'code_analysis'
-  timeoutInMinutes: 0
-  pool:
-    name: 'enigmatry-managed-devops-test'
-    demands: 
-    - 'ImageOverride -equals ubuntu-24.04'
-  variables:
-    buildConfiguration: 'Release'
-    solutionExtension: 'slnx'
-  steps:
-  - task: UseDotNet@2
-    displayName: Set .Net version
-    inputs:
-      version: '9.0.x'
-
-  - task: DotNetCoreCLI@2
-    displayName: Restore Packages
-    inputs:
-      command: 'restore'
-      projects: '**/*.$(solutionExtension)'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build solution (.NET Core CLI)
-    inputs:
-      command: 'build'
-      projects: '**/*.$(solutionExtension)'
-      arguments: '--no-restore --configuration $(buildConfiguration) /p:WarningsNotAsErrors=IDE0055'
-
-  - task: DotNetCoreCLI@2
-    displayName: Run all .net tests
-    inputs:
-      command: 'test'
-      projects: |
-        **/*.Test.csproj
-        **/*.Tests.csproj
-      arguments: '--configuration $(buildConfiguration) --no-build --collect "XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[*.Data.Migrations]*'
-
-  - task: reportgenerator@5
-    displayName: Generate Coverage reports
-    inputs:
-      reports: 'tests/**/coverage.cobertura.xml;$(Agent.TempDirectory)/**/coverage.cobertura.xml'
-      targetdir: 'coveragereport'
-      reporttypes: 'HtmlInline_AzurePipelines;Cobertura;SonarQube'
-
-  - task: PublishCodeCoverageResults@2
-    inputs:
-      codeCoverageTool: 'Cobertura'
-      summaryFileLocation: 'coveragereport/Cobertura.xml'
+- template: code-analysis.yml@templates
+  parameters:
+    projectName: 'Enigmatry Blueprint Template'
+    sonarProjectKey: 'AspNetCoreAngular_EnigmatryEntryBlueprint'
+    displayName: 'Code Analysis'
+    dotNetVersion: '9.0.x'
+    projectNameAngularApp: $(projectNameAngularApp)
+    useSlnx: true
 
 - template: build-report-job.yml@templates
   parameters:
@@ -82,3 +35,4 @@ jobs:
     displayName: 'Generate Reports'
     projectNameAngularApp: $(projectNameAngularApp)
     projectNamePrefix: $(projectNamePrefix)
+    useSlnx: true
