@@ -35,8 +35,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ResolvedFileToPublish Include="../enigmatry-entry-blueprint-app/dist/**">
-      <RelativePath>dist/%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
+    <ResolvedFileToPublish Include="../enigmatry-entry-blueprint-app/dist/browser**">
+      <RelativePath>wwwroot/%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
     </ResolvedFileToPublish>
   </ItemGroup>  
 
