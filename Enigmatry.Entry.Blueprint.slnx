@@ -18,7 +18,6 @@
     <File Path=".runsettings" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
-    <File Path="Enigmatry.Entry.Blueprint.slnf" />
     <File Path="nuget.config" />
   </Folder>
   <Folder Name="/Solution Items/scripts/">
@@ -27,9 +26,6 @@
     <File Path="scripts/open-scheduler-logs.ps1" />
     <File Path="scripts/update-databases.ps1" />
   </Folder>
-  <Project Path="enigmatry-entry-blueprint-app/Enigmatry.Entry.Blueprint.App.esproj">
-    <Build Solution="Debug|*" />
-  </Project>
   <Project Path="Enigmatry.Entry.Blueprint.Api.Tests/Enigmatry.Entry.Blueprint.Api.Tests.csproj" />
   <Project Path="Enigmatry.Entry.Blueprint.Api/Enigmatry.Entry.Blueprint.Api.csproj" />
   <Project Path="Enigmatry.Entry.Blueprint.AppHost/Enigmatry.Entry.Blueprint.AppHost.csproj" />

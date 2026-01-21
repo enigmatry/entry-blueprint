@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\enigmatry-entry-blueprint-app\Enigmatry.Entry.Blueprint.App.esproj" />
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Api\Enigmatry.Entry.Blueprint.Api.csproj" />
     <ProjectReference Include="..\Enigmatry.Entry.Blueprint.Scheduler\Enigmatry.Entry.Blueprint.Scheduler.csproj" />
   </ItemGroup>
