@@ -45,6 +45,7 @@ stages:
       projectNameAngularApp: $(projectNameAngularApp)
       projectNamePrefix: $(projectNamePrefix)
       runAngularTests: true
+      useSlnx: true
       dbContextNames:
       - $(dbContextName)
       migrationCommandParams: '--verbose'

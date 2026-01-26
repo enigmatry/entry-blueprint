@@ -27,6 +27,7 @@ jobs:
     displayName: 'Code Analysis'
     dotNetVersion: '9.0.x'
     projectNameAngularApp: $(projectNameAngularApp)
+    useSlnx: true
 
 - template: build-report-job.yml@templates
   parameters:
@@ -34,3 +35,4 @@ jobs:
     displayName: 'Generate Reports'
     projectNameAngularApp: $(projectNameAngularApp)
     projectNamePrefix: $(projectNamePrefix)
+    useSlnx: true

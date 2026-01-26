@@ -1,0 +1,45 @@
+<Solution>
+  <Folder Name="/Deployment/">
+    <File Path="Deployment/publish-web-profile-test-app.proj" />
+    <File Path="Deployment/publish-web-profile-test-scheduler.proj" />
+  </Folder>
+  <Folder Name="/Pipelines/">
+    <File Path="Pipelines/azure-pipelines.yml" />
+    <File Path="Pipelines/build-publish-nuget.yml" />
+    <File Path="Pipelines/code-analysis.yml" />
+    <File Path="Pipelines/deploy-to-stage.yml" />
+    <File Path="Pipelines/run-all-tests.yml" />
+  </Folder>
+  <Folder Name="/Pipelines/Variables/">
+    <File Path="Pipelines/variables/variables.test.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".runsettings" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="nuget.config" />
+  </Folder>
+  <Folder Name="/Solution Items/scripts/">
+    <File Path="scripts/add-migration.ps1" />
+    <File Path="scripts/open-api-logs.ps1" />
+    <File Path="scripts/open-scheduler-logs.ps1" />
+    <File Path="scripts/update-databases.ps1" />
+  </Folder>
+  <Project Path="Enigmatry.Entry.Blueprint.Api.Tests/Enigmatry.Entry.Blueprint.Api.Tests.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Api/Enigmatry.Entry.Blueprint.Api.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.AppHost/Enigmatry.Entry.Blueprint.AppHost.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.ApplicationServices/Enigmatry.Entry.Blueprint.ApplicationServices.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.CodeGeneration.Setup/Enigmatry.Entry.Blueprint.CodeGeneration.Setup.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Common.Tests/Enigmatry.Entry.Blueprint.Common.Tests.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Core/Enigmatry.Entry.Blueprint.Core.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Data.Migrations/Enigmatry.Entry.Blueprint.Data.Migrations.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Domain.Tests/Enigmatry.Entry.Blueprint.Domain.Tests.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Domain/Enigmatry.Entry.Blueprint.Domain.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Infrastructure.Tests/Enigmatry.Entry.Blueprint.Infrastructure.Tests.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Infrastructure/Enigmatry.Entry.Blueprint.Infrastructure.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Scheduler.Tests/Enigmatry.Entry.Blueprint.Scheduler.Tests.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Scheduler/Enigmatry.Entry.Blueprint.Scheduler.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.ServiceDefaults/Enigmatry.Entry.Blueprint.ServiceDefaults.csproj" />
+  <Project Path="Enigmatry.Entry.Blueprint.Template.csproj" />
+</Solution>
