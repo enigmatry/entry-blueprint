@@ -339,6 +339,7 @@ dotnet_diagnostic.CA1847.severity = error # CA1847: Use string.Contains(char) in
 dotnet_diagnostic.CA1848.severity = none # CA1848: Use the LoggerMessage delegates
 dotnet_diagnostic.CA1849.severity = error # CA1849: Call async methods when in an async method
 dotnet_diagnostic.CA1850.severity = warning # CA1850: Prefer static HashData method over ComputeHash
+dotnet_diagnostic.CA1873.severity = none # CA1873: Avoid potentially expensive logging
 dotnet_diagnostic.CA2000.severity = error # CA2000: Dispose objects before losing scope
 dotnet_diagnostic.CA2002.severity = error # CA2002: Do not lock on objects with weak identity
 dotnet_diagnostic.CA2007.severity = none # CA2007: Do not directly await a Task
