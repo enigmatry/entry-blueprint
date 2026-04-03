@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Enigmatry.Entry.Blueprint.Domain.Authorization;
+﻿using Enigmatry.Entry.Blueprint.Domain.Authorization;
 using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Cqrs;
@@ -27,22 +26,12 @@ public static class GetUserProfile
     }
 
     [UsedImplicitly]
-    public class MappingProfile : Profile
-    {
-        public MappingProfile()
-        {
-            CreateMap<User, Response>()
-                .ForMember(dest => dest.Permissions, opt => opt.MapFrom(user => user.GetPermissionIds()));
-        }
-    }
-
-    [UsedImplicitly]
-    public class RequestHandler(IMapper mapper, ICurrentUserProvider currentUserProvider, IRepository<User> repository)
+    public class RequestHandler(ICurrentUserProvider currentUserProvider, IRepository<User> repository)
         : IRequestHandler<Request, Response>
     {
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            if(currentUserProvider.UserId is null)
+            if (currentUserProvider.UserId is null)
             {
                 throw new InvalidOperationException("UserId could not be determined. This could happen if user is authenticated but it could not be found in the database.");
             }
@@ -50,9 +39,18 @@ public static class GetUserProfile
                 .Include(u => u.Role)
                 .ThenInclude(r => r.Permissions)
                 .Include(u => u.UserStatus)
+                .MapToUserProfile()
                 .SingleOrNotFoundAsync(cancellationToken);
-            var response = mapper.Map<Response>(user);
-            return response;
+            return user;
         }
     }
+
+    public static IQueryable<Response> MapToUserProfile(this IQueryable<User> query) =>
+        query.Select(x => new Response
+        {
+            Id = x.Id,
+            EmailAddress = x.EmailAddress,
+            FullName = x.FullName,
+            Permissions = x.GetPermissionIds()
+        });
 }

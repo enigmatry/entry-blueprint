@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Enigmatry.Entry.Blueprint.Domain.Users;
+﻿using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
@@ -35,26 +34,32 @@ public static class GetUserDetails
     }
 
     [UsedImplicitly]
-    public class MappingProfile : Profile
-    {
-        public MappingProfile()
-        {
-            CreateMap<User, Response>();
-        }
-    }
-
-    [UsedImplicitly]
-    public class RequestHandler(IRepository<User> repository, IMapper mapper) : IRequestHandler<Request, Response>
+    public class RequestHandler(IRepository<User> repository) : IRequestHandler<Request, Response>
     {
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
             var response = await repository.QueryAll()
                 .BuildInclude()
                 .QueryById(request.Id)
-                .SingleOrDefaultMappedAsync<User, Response>(mapper, cancellationToken);
+                .MapToUserDetailsItem()
+                .SingleOrNotFoundAsync(cancellationToken);
             return response;
         }
     }
+
+    public static IQueryable<Response> MapToUserDetailsItem(this IQueryable<User> query) =>
+        query.Select(x => new Response
+        {
+            Id = x.Id,
+            CreatedOn = x.CreatedOn,
+            UpdatedOn = x.UpdatedOn,
+            EmailAddress = x.EmailAddress,
+            FullName = x.FullName,
+            RoleId = x.RoleId,
+            UserStatusId = x.UserStatusId,
+            UserStatusName = x.UserStatus.Name,
+            UserStatusDescription = x.UserStatus.Description
+        });
 
     private static IQueryable<User> BuildInclude(this IQueryable<User> query) => query.Include(x => x.UserStatus);
 }

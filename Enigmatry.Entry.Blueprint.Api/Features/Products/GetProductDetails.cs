@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Enigmatry.Entry.Blueprint.Domain.Products;
+﻿using Enigmatry.Entry.Blueprint.Domain.Products;
 using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
@@ -38,20 +37,34 @@ public static class GetProductDetails
     }
 
     [UsedImplicitly]
-    public class MappingProfile : Profile
-    {
-        public MappingProfile() => CreateMap<Product, Response>().ForMember(x => x.AdditionalInfo, opt => opt.Ignore());
-    }
-
-    [UsedImplicitly]
-    public class RequestHandler(IRepository<Product> productRepository, IMapper mapper) : IRequestHandler<Request, Response>
+    public class RequestHandler(IRepository<Product> productRepository) : IRequestHandler<Request, Response>
     {
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
             var response = await productRepository.QueryAll()
                 .QueryById(request.Id)
-                .SingleOrDefaultMappedAsync<Product, Response>(mapper, cancellationToken: cancellationToken);
+                .MapToProductDetailsItem()
+                .SingleOrNotFoundAsync(cancellationToken);
             return response;
         }
     }
+
+    public static IQueryable<Response> MapToProductDetailsItem(this IQueryable<Product> query) =>
+        query.Select(x => new Response
+        {
+            Id = x.Id,
+            Name = x.Name,
+            Code = x.Code,
+            Type = x.Type,
+            Description = x.Description,
+            Price = x.Price,
+            Amount = x.Amount,
+            ContactEmail = x.ContactEmail,
+            ContactPhone = x.ContactPhone,
+            InfoLink = x.InfoLink,
+            ExpiresOn = x.ExpiresOn,
+            HasDiscount = x.HasDiscount,
+            Discount = x.Discount ?? 0,
+            FreeShipping = x.FreeShipping
+        });
 }

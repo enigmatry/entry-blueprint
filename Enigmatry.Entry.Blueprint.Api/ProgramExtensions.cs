@@ -29,7 +29,6 @@ public static class ProgramExtensions
 
         services.AppAddSettings(configuration);
         services.AppAddPolly();
-        services.AppAddAutoMapper();
         services.AddEntryHealthChecks(configuration)
             .AddDbContextCheck<AppDbContext>();
         services.AppAddMediatR(AssemblyFinder.ApiAssembly);

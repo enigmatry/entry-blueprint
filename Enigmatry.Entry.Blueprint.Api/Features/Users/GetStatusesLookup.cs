@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Enigmatry.Entry.Blueprint.Domain.Users;
+﻿using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
 using JetBrains.Annotations;
 using MediatR;
@@ -14,25 +12,21 @@ public static class GetStatusesLookup
     public class Request : LookupRequest<UserStatusId>;
 
     [UsedImplicitly]
-    public class MappingProfile : Profile
-    {
-        public MappingProfile()
-        {
-            CreateMap<UserStatus, LookupResponse<UserStatusId>>()
-                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Label, opt => opt.MapFrom(src => src.Name));
-        }
-    }
-
-    [UsedImplicitly]
-    public class RequestHandler(IMapper mapper, IRepository<UserStatus, UserStatusId> roleRepository)
+    public class RequestHandler(IRepository<UserStatus, UserStatusId> roleRepository)
         : IRequestHandler<Request, IEnumerable<LookupResponse<UserStatusId>>>
     {
         public async Task<IEnumerable<LookupResponse<UserStatusId>>> Handle(Request request, CancellationToken cancellationToken) =>
             await roleRepository
-                .QueryAll()
-                .ProjectTo<LookupResponse<UserStatusId>>(mapper.ConfigurationProvider, cancellationToken)
-                .OrderBy(r => r.Label)
-                .ToListAsync(cancellationToken);
+            .QueryAll()
+            .MapToUserStatusLookup()
+            .OrderBy(r => r.Label)
+            .ToListAsync(cancellationToken);
     }
+
+    public static IQueryable<LookupResponse<UserStatusId>> MapToUserStatusLookup(this IQueryable<UserStatus> query) =>
+        query.Select(x => new LookupResponse<UserStatusId>
+        {
+            Value = x.Id,
+            Label = x.Name
+        });
 }

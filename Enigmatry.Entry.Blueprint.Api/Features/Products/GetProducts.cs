@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Enigmatry.Entry.Blueprint.Domain.Products;
+﻿using Enigmatry.Entry.Blueprint.Domain.Products;
 using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.EntityFramework;
@@ -39,24 +37,16 @@ public static class GetProducts
             public bool HasDiscount { get; set; }
             public float Discount { get; set; }
         }
-
-        [UsedImplicitly]
-        public class MappingProfile : Profile
-        {
-            public MappingProfile() => CreateMap<Product, Item>();
-        }
     }
 
     [UsedImplicitly]
     public class RequestHandler : IPagedRequestHandler<Request, Response.Item>
     {
         private readonly IRepository<Product> _productRepository;
-        private readonly IMapper _mapper;
 
-        public RequestHandler(IRepository<Product> productRepository, IMapper mapper)
+        public RequestHandler(IRepository<Product> productRepository)
         {
             _productRepository = productRepository;
-            _mapper = mapper;
         }
 
         public async Task<PagedResponse<Response.Item>> Handle(Request request, CancellationToken cancellationToken) =>
@@ -64,7 +54,25 @@ public static class GetProducts
                 .QueryByCode(request.Code)
                 .QueryByName(request.Name)
                 .QueryExpiresBefore(request.ExpiresBefore)
-                .ProjectTo<Response.Item>(_mapper.ConfigurationProvider, cancellationToken)
+                .MapToProductItem()
                 .ToPagedResponseAsync(request, cancellationToken);
     }
+
+    public static IQueryable<Response.Item> MapToProductItem(this IQueryable<Product> query) =>
+    query.Select(x => new Response.Item
+    {
+        Id = x.Id,
+        Amount = x.Amount,
+        Code = x.Code,
+        ContactEmail = x.ContactEmail,
+        ContactPhone = x.ContactPhone,
+        ExpiresOn = x.ExpiresOn,
+        FreeShipping = x.FreeShipping,
+        HasDiscount = x.HasDiscount,
+        InfoLink = x.InfoLink,
+        Name = x.Name,
+        Price = x.Price,
+        Type = x.Type,
+        Discount = x.Discount ?? 0
+    });
 }
