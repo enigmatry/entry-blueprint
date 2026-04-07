@@ -1,1 +1,0 @@
-C:/Source/entry-blueprint/.github/copilot-instructions.md

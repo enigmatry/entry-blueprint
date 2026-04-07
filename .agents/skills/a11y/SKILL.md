@@ -1,6 +1,6 @@
 ---
-description: "Guidance for creating more accessible code"
-applyTo: "**"
+name: a11y
+description: Guidance for creating accessible code conforming to WCAG 2.2 Level AA. Use this when building or reviewing UI components, forms, navigation, or any user-facing HTML/Angular templates.
 ---
 
 # Accessibility instructions
@@ -18,7 +18,7 @@ You are an expert in accessibility with deep software engineering expertise.
 - Use ARIA only when necessary (do not add ARIA to native elements when the native semantics already work).
 - Ensure correct accessible **name, role, value, states, and properties**.
 - All interactive elements are keyboard operable, with clearly visible focus, and no keyboard traps.
-- Do not claim the output is “fully accessible”.
+- Do not claim the output is "fully accessible".
 
 ## Inclusive language (MUST)
 
@@ -43,7 +43,7 @@ You are an expert in accessibility with deep software engineering expertise.
 ### Page title (SHOULD)
 
 - Set a descriptive `<title>`.
-- Prefer: “Unique page - section - site”.
+- Prefer: "Unique page - section - site".
 
 ## Keyboard and focus
 
@@ -131,10 +131,6 @@ Roving tabindex (SHOULD):
 - Define and use tokens like: `--color-bg`, `--color-text`, `--color-muted-text`, `--color-link`, `--color-border`, `--color-focus`, `--color-danger`, `--color-success`.
 - Only assign UI colors via these tokens (avoid scattered inline hex values).
 
-### Verification (MUST)
-
-Contrast verification is covered by the Final verification checklist.
-
 ## High contrast / forced colors mode (MUST)
 
 ### Support OS-level accessibility features (MUST)
@@ -149,14 +145,11 @@ Use `@media (forced-colors: active)` only when system defaults are not sufficien
 
 ```css
 @media (forced-colors: active) {
-  /* Example: Replace box-shadow (suppressed in forced-colors) with a border */
   .button {
     border: 2px solid ButtonBorder;
   }
 }
 
-/* if using box-shadow for a focus style, also use a transparent outline
-    so that the outline will render when the high contrast setting is enabled */
 .button:focus {
   box-shadow: 0 0 4px 3px rgba(90, 50, 200, .7);
   outline: 2px solid transparent;
@@ -192,33 +185,22 @@ svg {
 
 ## Reflow (WCAG 2.2 SC 1.4.10) (MUST)
 
-### Goal (MUST)
-
-Multi-line text must be able to fit within 320px wide containers or viewports, so that users do not need to scroll in two-dimensions to read sections of content.
-
 ### Core principles (MUST)
 
 - Preserve information and function: nothing essential is removed, obscured, or truncated.
 - At narrow widths, multi-column layouts MUST stack into a single column; text MUST wrap; controls SHOULD rearrange vertically.
 - Users MUST NOT need to scroll left/right to read multi-line text.
-- If content is collapsed in the narrow layout, the full content/function MUST be available within 1 click (e.g., overflow menu, dialog, tooltip).
+- If content is collapsed in the narrow layout, the full content/function MUST be available within 1 click.
 
 ### Engineering requirements (MUST)
 
 - Use responsive layout primitives (`flex`, `grid`) with fluid sizing; enable text wrapping.
 - Avoid fixed widths that force two-dimensional scrolling at 320px.
-- Avoid absolute positioning and `overflow: hidden` when it causes content loss, or would result in the obscuring of content at smaller viewport sizes.
-- Media and containers SHOULD NOT overflow the viewport at 320px (for example, prefer `max-width: 100%` for images/video/canvas/iframes).
+- Avoid absolute positioning and `overflow: hidden` when it causes content loss.
+- Media and containers SHOULD NOT overflow the viewport at 320px (prefer `max-width: 100%` for images/video/canvas/iframes).
 - In flex/grid layouts, ensure children can shrink/wrap (common fix: `min-width: 0` on flex/grid children).
-- Handle long strings (URLs, tokens) without forcing overflow (common fix: `overflow-wrap: anywhere` or equivalent).
+- Handle long strings (URLs, tokens) without forcing overflow (common fix: `overflow-wrap: anywhere`).
 - Ensure all interactive elements remain visible, reachable, and operable at 320px.
-
-### Exceptions (SHOULD)
-
-If a component truly requires a two-dimensional layout for meaning/usage (e.g., large data tables, maps, diagrams, charts, games, presentations), allow horizontal scrolling only at the component level.
-
-- The page as a whole MUST still reflow (unless the page layout truly requires two-dimensional layout for usage).
-- The component MUST remain fully usable (all content reachable; controls operable).
 
 ## Controls and labels
 
@@ -231,7 +213,7 @@ If a component truly requires a two-dimensional layout for meaning/usage (e.g., 
 
 - The accessible name of each interactive element MUST contain the visible label.
   - If using `aria-label`, include the visual label text.
-- If multiple controls share the same visible label (e.g., many “Remove” buttons), use an `aria-label` that keeps the visible label text and adds context (e.g., “Remove item: Socks”).
+- If multiple controls share the same visible label (e.g., many "Remove" buttons), use an `aria-label` that keeps the visible label text and adds context.
 
 ## Forms
 
@@ -256,8 +238,6 @@ If a component truly requires a two-dimensional layout for meaning/usage (e.g., 
 
 ## Graphics and images
 
-All graphics include `img`, `svg`, icon fonts, and emojis.
-
 - Informative graphics MUST have meaningful alternatives.
   - `img`: use `alt`.
   - `svg`: prefer `role="img"` and `aria-label`/`aria-labelledby`.
@@ -279,13 +259,11 @@ All graphics include `img`, `svg`, icon fonts, and emojis.
 
 - Use `<table>` for static tabular data.
 - Use `<th>` to associate headers.
-  - Column headers are in the first row.
-  - Row headers (when present) use `<th>` in each row.
 
 ### Grids for dynamic UIs (SHOULD)
 
 - Use grid roles only for truly interactive/dynamic experiences.
-- If using `role="grid"`, grid cells MUST be nested in rows so header/cell relationships are determinable.
+- If using `role="grid"`, grid cells MUST be nested in rows.
 - Use arrow navigation to navigate within the grid.
 
 ## Final verification checklist (MUST)
@@ -298,10 +276,10 @@ Before finalizing output, explicitly verify:
 - Forms: labels, required indicators, errors (`aria-invalid` + `aria-describedby`), focus first invalid.
 - Contrast: meets 4.5:1 / 3:1 thresholds, focus/boundaries meet 3:1, color not the only cue.
 - Forced colors: does not break OS High Contrast / Forced Colors; uses system colors in `forced-colors: active`.
-- Reflow: sections of content should be able to adjust to 320px width without the need for two-dimensional scrolling to read multi-line text; no content loss; controls remain operable.
+- Reflow: content adjusts to 320px width without two-dimensional scrolling; no content loss; controls remain operable.
 - Graphics: informative alternatives; decorative graphics hidden.
 - Tables/grids: tables use `<th>`; grids (when needed) are structured with rows and cells.
 
 ## Final note
 
-Generate the HTML with accessibility in mind, but accessibility issues may still exist; manual review and testing (for example with Accessibility Insights) is still recommended.
+Generate HTML with accessibility in mind, but accessibility issues may still exist; manual review and testing (for example with Accessibility Insights) is still recommended.

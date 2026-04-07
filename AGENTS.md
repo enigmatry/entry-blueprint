@@ -1,23 +1,5 @@
 # Copilot Instructions
 
-## Granular Stack Instructions
-
-The `.github/instructions/` folder contains per-technology instruction files (`*.instructions.md`).
-**Always check and apply the relevant file(s) from that folder** when the user's request touches a specific tech stack:
-
-| Title | Description |
-| ----- | ----------- |
-| [Accessibility instructions](instructions/a11y.instructions.md) | Guidance for creating more accessible code |
-| [ASP.NET REST API Development](instructions/aspnet-rest-apis.instructions.md) | Guidelines for building REST APIs with ASP.NET |
-| [Azure DevOps Pipeline YAML Best Practices](instructions/azure-devops-pipelines.instructions.md) | Best practices for Azure DevOps Pipeline YAML files |
-| [Generic Code Review Instructions](instructions/code-review-generic.instructions.md) | Generic code review instructions customized for this project |
-| [C# Development](instructions/csharp.instructions.md) | Guidelines for building C# applications |
-| [DDD Systems & .NET Guidelines](instructions/dotnet-architecture-good-practices.instructions.md) | DDD and .NET architecture guidelines |
-| [TypeScript Development](instructions/typescript-5-es2022.instructions.md) | Guidelines for TypeScript Development targeting TypeScript 5.x and ES2022 output |
-
-These files take precedence over the general conventions described below for their respective areas.
-New files may be added to `.github/instructions/` at any time — always scan the folder for relevant matches before starting work.
-
 ## Project Overview
 
 Enigmatry Entry Blueprint is a **production-ready full-stack starter template** for .NET 9 + Angular 20 applications. It demonstrates enterprise patterns: Vertical Slice Architecture, CQRS via MediatR, DDD-style domain entities, EF Core with SQL Server, Autofac DI, background scheduling, and Angular code generation from C# configuration. The working features (Users, Products) serve as reference implementations to copy when adding new features.
@@ -131,16 +113,17 @@ When the user asks to create a PR (pull request):
 1. **Fetch the Jira ticket** (if not already known) to get the title.
    - Jira cloud ID: `enigmatry.atlassian.net`
 2. **Get current branch name**: `git branch --show-current`
-3. **Create the PR** via GitHub using:
+3. **Create the PR** via Azure DevOps using:
    - `sourceRefName`: current branch (`refs/heads/<branch-name>`)
    - `targetRefName`: `refs/heads/master`
    - `title`: `BP-<TICKET-ID> - <Jira ticket title>`
    - `description`: `https://enigmatry.atlassian.net/browse/BP-<TICKET-ID>`
    - `isDraft`: false (unless user requests a draft)
-4. Confirm the PR URL to the user.
+4. Set **Squash** merge strategy and enable **auto-complete**: call `azure-devops-repo_update_pull_request` with `mergeStrategy: Squash` and `autoComplete: true`.
+5. Confirm the PR URL to the user.
 
 **Known identifiers:**
-- GitHub org/repo: `enigmatry/entry-blueprint`
+- Azure DevOps org/repo: `enigmatry/entry-blueprint`
 - Default branch: `master`
 - Jira project: `BP`
 
