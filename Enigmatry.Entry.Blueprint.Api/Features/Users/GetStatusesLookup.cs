@@ -17,16 +17,9 @@ public static class GetStatusesLookup
     {
         public async Task<IEnumerable<LookupResponse<UserStatusId>>> Handle(Request request, CancellationToken cancellationToken) =>
             await roleRepository
-            .QueryAll()
-            .MapToUserStatusLookup()
-            .OrderBy(r => r.Label)
-            .ToListAsync(cancellationToken);
+                .QueryAll()
+                .MapToLookup()
+                .OrderBy(r => r.Label)
+                .ToListAsync(cancellationToken);
     }
-
-    public static IQueryable<LookupResponse<UserStatusId>> MapToUserStatusLookup(this IQueryable<UserStatus> query) =>
-        query.Select(x => new LookupResponse<UserStatusId>
-        {
-            Value = x.Id,
-            Label = x.Name
-        });
 }

@@ -1,9 +1,10 @@
-﻿using Enigmatry.Entry.Blueprint.Domain.Users;
+﻿using Enigmatry.Entry.Blueprint.Core.Entities;
+using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Entities;
 
 namespace Enigmatry.Entry.Blueprint.Domain.Authorization;
 
-public class Role : EntityWithGuidId
+public class Role : EntityWithGuidId, ILookupItem<Guid>
 {
     public const int NameMaxLength = 100;
 
@@ -29,3 +30,4 @@ public class Role : EntityWithGuidId
         yield return new ValueTuple<Guid, PermissionId[]>(SystemAdminRoleId, Enum.GetValues<PermissionId>().Except([PermissionId.None]).ToArray()); // all permissions
     }
 }
+

@@ -18,15 +18,8 @@ public static class GetRoleLookup
         public async Task<IEnumerable<LookupResponse<Guid>>> Handle(Request request, CancellationToken cancellationToken) =>
             await roleRepository
                 .QueryAll()
-                .MapToRoleLookup()
+                .MapToLookup()
                 .OrderBy(r => r.Label)
                 .ToListAsync(cancellationToken);
     }
-
-    public static IQueryable<LookupResponse<Guid>> MapToRoleLookup(this IQueryable<Role> query) =>
-        query.Select(x => new LookupResponse<Guid>
-        {
-            Value = x.Id,
-            Label = x.Name
-        });
 }
