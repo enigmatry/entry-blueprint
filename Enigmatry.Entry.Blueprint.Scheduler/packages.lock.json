@@ -52,6 +52,14 @@
           "Ardalis.SmartEnum": "8.1.0"
         }
       },
+      "AutoMapper": {
+        "type": "Transitive",
+        "resolved": "14.0.0",
+        "contentHash": "OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "8.0.0"
+        }
+      },
       "Azure.Core": {
         "type": "Transitive",
         "resolved": "1.50.0",
@@ -1187,7 +1195,6 @@
         "dependencies": {
           "Autofac": "[9.0.0, )",
           "Autofac.Extensions.DependencyInjection": "[10.0.0, )",
-          "Automapper": "[14.0.0, 14.0.0]",
           "Azure.Extensions.AspNetCore.Configuration.Secrets": "[1.4.0, )",
           "Enigmatry.Entry.AspNetCore": "[9.4.0, )",
           "Enigmatry.Entry.AspNetCore.Authorization": "[9.4.0, )",
@@ -1249,15 +1256,6 @@
         "dependencies": {
           "Autofac": "8.1.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1"
-        }
-      },
-      "AutoMapper": {
-        "type": "CentralTransitive",
-        "requested": "[14.0.0, 14.0.0]",
-        "resolved": "14.0.0",
-        "contentHash": "OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
-        "dependencies": {
-          "Microsoft.Extensions.Options": "8.0.0"
         }
       },
       "Azure.Extensions.AspNetCore.Configuration.Secrets": {

@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using AutoMapper;
 using Enigmatry.Entry.AspNetCore.Tests.SystemTextJson.Http;
 using Enigmatry.Entry.Blueprint.Api.Features.Users;
 using Enigmatry.Entry.Blueprint.Api.Tests.Infrastructure.Api;
@@ -113,12 +112,5 @@ public class ApiSetupFixture : IntegrationFixtureBase
 
         response.BeBadRequest();
         response.ContainValidationError(validationField, validationErrorMessage);
-    }
-
-    [Test]
-    public void TestAutoMapperMappings()
-    {
-        var mapper = Resolve<IMapper>();
-        mapper.ConfigurationProvider.AssertConfigurationIsValid();
     }
 }

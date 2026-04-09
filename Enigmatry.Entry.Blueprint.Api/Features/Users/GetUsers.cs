@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Enigmatry.Entry.Blueprint.Domain.Identity;
+﻿using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Cqrs;
 using Enigmatry.Entry.Core.Data;
@@ -33,23 +31,28 @@ public static class GetUsers
             public DateTimeOffset CreatedOn { get; set; }
             public DateTimeOffset UpdatedOn { get; set; }
         }
-
-        [UsedImplicitly]
-        public class MappingProfile : Profile
-        {
-            public MappingProfile() => CreateMap<User, Item>();
-        }
     }
 
     [UsedImplicitly]
-    public class RequestHandler(IRepository<User> repository, IMapper mapper) : IPagedRequestHandler<Request, Response.Item>
+    public class RequestHandler(IRepository<User> repository) : IPagedRequestHandler<Request, Response.Item>
     {
         public async Task<PagedResponse<Response.Item>> Handle(Request request, CancellationToken cancellationToken) =>
             await repository.QueryAll()
                 .Include(u => u.UserStatus)
                 .QueryByName(request.Name)
                 .QueryByEmail(request.Email)
-                .ProjectTo<Response.Item>(mapper.ConfigurationProvider, cancellationToken)
+                .MapToUserItem()
                 .ToPagedResponseAsync(request, cancellationToken);
     }
+
+    public static IQueryable<Response.Item> MapToUserItem(this IQueryable<User> query) =>
+    query.Select(x => new Response.Item
+    {
+        Id = x.Id,
+        CreatedOn = x.CreatedOn,
+        UpdatedOn = x.UpdatedOn,
+        EmailAddress = x.EmailAddress,
+        FullName = x.FullName,
+        UserStatusName = x.UserStatus.Name
+    });
 }
