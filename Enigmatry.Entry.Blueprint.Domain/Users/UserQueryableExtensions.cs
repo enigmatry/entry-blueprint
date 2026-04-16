@@ -4,10 +4,13 @@ namespace Enigmatry.Entry.Blueprint.Domain.Users;
 
 public static class UserQueryableExtensions
 {
-    public static IQueryable<User> QueryByEmailAddress(this IQueryable<User> query, string emailAddress) => query.Where(e => e.EmailAddress == emailAddress);
+    extension(IQueryable<User> query)
+    {
+        public IQueryable<User> QueryByEmailAddress(string emailAddress) => query.Where(e => e.EmailAddress == emailAddress);
 
-    public static IQueryable<User> QueryByKeyword(this IQueryable<User> query, string keyword) =>
-        keyword.HasContent()
-            ? query.Where(e => e.EmailAddress.Contains(keyword))
-            : query;
+        public IQueryable<User> QueryByKeyword(string keyword) =>
+            keyword.HasContent()
+                ? query.Where(e => e.EmailAddress.Contains(keyword))
+                : query;
+    }
 }

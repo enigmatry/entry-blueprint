@@ -15,7 +15,6 @@ public class CurrentUserProvider(
     ILogger<CurrentUserProvider> logger)
     : ICurrentUserProvider
 {
-    private UserContext? _user;
     private bool IsAuthenticated => claimsProvider.IsAuthenticated;
     public Guid? UserId => User?.UserId;
 
@@ -23,9 +22,9 @@ public class CurrentUserProvider(
     {
         get
         {
-            if (_user != null)
+            if (field != null)
             {
-                return _user;
+                return field;
             }
 
             if (!IsAuthenticated)
@@ -48,11 +47,11 @@ public class CurrentUserProvider(
                 .AsSplitQuery()
                 .SingleOrDefault();
 
-            _user = user != null
+            field = user != null
                 ? new UserContext(user.Id, new PermissionsContext(user.Role.Permissions.Select(x => x.Id).Distinct().ToArray()))
                 : null;
 
-            return _user;
+            return field;
         }
     }
 }

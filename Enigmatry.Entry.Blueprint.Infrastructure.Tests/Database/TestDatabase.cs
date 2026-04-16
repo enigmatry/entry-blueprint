@@ -34,7 +34,7 @@ internal class TestDatabase
 
                 if (_container == null)
                 {
-                    _container = new MsSqlBuilder()
+                    _container = new MsSqlBuilder("mcr.microsoft.com/mssql/server:2022-latest")
                         .WithAutoRemove(true)
                         .WithCleanUp(true)
                         .Build();
