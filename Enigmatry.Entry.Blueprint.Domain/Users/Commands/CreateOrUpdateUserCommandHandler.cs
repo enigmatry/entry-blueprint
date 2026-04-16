@@ -20,11 +20,7 @@ public class CreateOrUpdateUserCommandHandler : IRequestHandler<CreateOrUpdateUs
         User? user;
         if (request.Id.HasValue)
         {
-            user = await _userRepository.FindByIdAsync(request.Id.Value);
-            if (user == null)
-            {
-                throw new InvalidOperationException("missing user");
-            }
+            user = await _userRepository.FindByIdAsync(request.Id.Value) ?? throw new InvalidOperationException("missing user");
             user.Update(request);
         }
         else

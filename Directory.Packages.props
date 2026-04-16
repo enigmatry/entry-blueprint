@@ -3,6 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <EnigmatryEntryVersion>9.4.0</EnigmatryEntryVersion>
+    <EnigmatryCodegenVersion>21.0.0</EnigmatryCodegenVersion>
     <DotnetVersion>9.0.11</DotnetVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -33,8 +34,8 @@
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Swagger" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="20.0.0" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="20.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="$(EnigmatryCodegenVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="$(EnigmatryCodegenVersion)" />
     <PackageVersion Include="FakeItEasy" Version="8.3.0" />
     <PackageVersion Include="FakeItEasy.Analyzer.CSharp" Version="6.1.1" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />

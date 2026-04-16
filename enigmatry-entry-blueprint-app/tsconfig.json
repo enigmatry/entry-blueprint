@@ -16,8 +16,6 @@
     "strictNullChecks": true,
     "useUnknownInCatchVariables": true,
     "allowArbitraryExtensions": false,
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "esModuleInterop": true,
@@ -31,7 +29,7 @@
     "declaration": false,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
@@ -43,28 +41,37 @@
     "useDefineForClassFields": false,
     "paths": {
       "@api": [
-        "src/app/api/api-reference"
+        "./src/app/api/api-reference"
       ],
       "@env": [
-        "src/environments/environment"
+        "./src/environments/environment"
       ],
       "@app/*": [
-        "src/app/core/*"
+        "./src/app/core/*"
       ],
       "@services/*": [
-        "src/app/core/services/*"
+        "./src/app/core/services/*"
       ],
       "@features/*": [
-        "src/app/features/*"
+        "./src/app/features/*"
       ],
       "@shared/*": [
-        "src/app/shared/*"
+        "./src/app/shared/*"
       ],
       "@components/*": [
-        "src/app/shared/components/*"
+        "./src/app/shared/components/*"
       ],
       "@test/*": [
-        "src/testing/*"
+        "./src/testing/*"
+      ],
+      "@i18n/*": [
+        "./src/i18n/*"
+      ],
+      "src/app/*": [
+        "./src/app/*"
+      ],
+      "src/i18n/*": [
+        "./src/i18n/*"
       ]
     }
   },

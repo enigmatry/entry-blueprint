@@ -4,11 +4,11 @@
     "net9.0": {
       "Enigmatry.Entry.CodeGeneration.Configuration": {
         "type": "Direct",
-        "requested": "[20.0.0, )",
-        "resolved": "20.0.0",
-        "contentHash": "DlkO3VVyoNV4VsS540gqzsDwted0NmJEmZwRI8oFxtXdKZILw4Kxc69Qfx8OtTvaTSZ6em0ny5yqVfe7IJgHPg==",
+        "requested": "[21.0.0, )",
+        "resolved": "21.0.0",
+        "contentHash": "/wU6xHytyh9o3hX5YWIDFH8HkUHc428M9Hss4sL6jwxtHvmVfeH57qhnehdUOWa1Q3XoSh5/TW46LVfNJ9Qhig==",
         "dependencies": {
-          "Enigmatry.Entry.CodeGeneration.Validation": "20.0.0",
+          "Enigmatry.Entry.CodeGeneration.Validation": "21.0.0",
           "Humanizer.Core": "2.14.1",
           "JetBrains.Annotations": "2024.3.0"
         }
@@ -1059,7 +1059,7 @@
           "Enigmatry.Entry.Blueprint.Domain": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
           "Enigmatry.Entry.Blueprint.ServiceDefaults": "[1.0.0, )",
-          "Enigmatry.Entry.CodeGeneration.Validation": "[20.0.0, )",
+          "Enigmatry.Entry.CodeGeneration.Validation": "[21.0.0, )",
           "Enigmatry.Entry.HealthChecks": "[9.4.0, )",
           "Microsoft.AspNetCore.SpaProxy": "[9.0.11, )"
         }
@@ -1233,9 +1233,9 @@
       },
       "Enigmatry.Entry.CodeGeneration.Validation": {
         "type": "CentralTransitive",
-        "requested": "[20.0.0, )",
-        "resolved": "20.0.0",
-        "contentHash": "wks7ZKO4aOheXXB8U9SGnjYfYyDJLpaPbaT88L4JrhtENSuMQQc9ICrsIhJQdzqMOqgKYAXE5OGPlkKkdubs8w==",
+        "requested": "[21.0.0, )",
+        "resolved": "21.0.0",
+        "contentHash": "lEweRsA2yIX0f9Jsp30iQInAhWoN26wSVCPwgca+/evpybxFTyorJZsaStetyJ/rjWXF+VjcqrHOZkkNbcNv8Q==",
         "dependencies": {
           "Humanizer.Core": "2.14.1"
         }
