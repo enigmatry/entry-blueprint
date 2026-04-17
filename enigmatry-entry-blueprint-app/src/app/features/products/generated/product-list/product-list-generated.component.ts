@@ -60,26 +60,26 @@ export class ProductListGeneratedComponent implements OnInit {
   @Output() contextMenuItemSelected = new EventEmitter<{ itemId: string; rowData: GetProductsResponseItem }>();
   @Output() rowClick = new EventEmitter<GetProductsResponseItem>();
 
-@ViewChild('nameTpl', { static: true }) nameTpl: TemplateRef<any>;
-@ViewChild('typeTpl', { static: true }) typeTpl: TemplateRef<any>;
+@ViewChild('nameTemplate', { static: true }) nameTemplate: TemplateRef<unknown>;
+@ViewChild('typeTemplate', { static: true }) typeTemplate: TemplateRef<unknown>;
 
   constructor() { }
 
   ngOnInit(): void {
    this.columns = [
-{ field: 'id', hide: true, sortable: true },
-{ field: 'name', header: $localize `:@@products.product-list.name:Product name`, hide: false, sortable: true, cellTemplate: this.nameTpl },
-{ field: 'code', header: $localize `:@@products.product-list.code:Code`, hide: false, sortable: true, class: 'hide-on-mobile ' },
-{ field: 'type', header: $localize `:@@products.product-list.type:Type`, hide: false, sortable: true, cellTemplate: this.typeTpl },
-{ field: 'price', header: $localize `:@@products.price:Price per unit`, hide: false, sortable: true, type: 'currency', typeParameter: { name: 'currency', currencyCode: 'EUR', display: '€', digitsInfo: '', locale: '' }, class: 'products-price' },
-{ field: 'amount', header: $localize `:@@products.amount:Units`, hide: false, sortable: true },
-{ field: 'contactEmail', header: $localize `:@@products.product-list.contact-email:Contact email`, hide: false, sortable: true, class: 'hide-on-mobile ' },
-{ field: 'contactPhone', header: $localize `:@@products.product-list.contact-phone:Contact phone`, hide: false, sortable: true, class: 'hide-on-mobile ' },
-{ field: 'infoLink', hide: true, sortable: true },
-{ field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' }, class: 'hide-on-mobile hide-on-tablet' },
-{ field: 'freeShipping', header: $localize `:@@products.product-list.free-shipping:Free shipping`, hide: false, sortable: true, type: 'boolean', typeParameter: { name: 'boolean' }, class: 'hide-on-mobile ' },
-{ field: 'hasDiscount', hide: true, sortable: true, type: 'boolean', typeParameter: { name: 'boolean' } },
-{ field: 'discount', hide: true, sortable: true, type: 'number', typeParameter: { name: 'number' } }
-];
+		{ field: 'id', hide: true, sortable: true },
+		{ field: 'name', header: $localize `:@@products.product-list.name:Product name`, hide: false, sortable: true, cellTemplate: this.nameTemplate },
+		{ field: 'code', header: $localize `:@@products.product-list.code:Code`, hide: false, sortable: true, class: 'hide-on-mobile ' },
+		{ field: 'type', header: $localize `:@@products.product-list.type:Type`, hide: false, sortable: true, cellTemplate: this.typeTemplate },
+		{ field: 'price', header: $localize `:@@products.price:Price per unit`, hide: false, sortable: true, type: 'currency', typeParameter: { name: 'currency', currencyCode: 'EUR', display: '€', digitsInfo: '', locale: '' }, class: 'products-price' },
+		{ field: 'amount', header: $localize `:@@products.amount:Units`, hide: false, sortable: true },
+		{ field: 'contactEmail', header: $localize `:@@products.product-list.contact-email:Contact email`, hide: false, sortable: true, class: 'hide-on-mobile ' },
+		{ field: 'contactPhone', header: $localize `:@@products.product-list.contact-phone:Contact phone`, hide: false, sortable: true, class: 'hide-on-mobile ' },
+		{ field: 'infoLink', hide: true, sortable: true },
+		{ field: 'expiresOn', header: $localize `:@@products.product-list.expires-on:Expires on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' }, class: 'hide-on-mobile hide-on-tablet' },
+		{ field: 'freeShipping', header: $localize `:@@products.product-list.free-shipping:Free shipping`, hide: false, sortable: true, type: 'boolean', typeParameter: { name: 'boolean' }, class: 'hide-on-mobile ' },
+		{ field: 'hasDiscount', hide: true, sortable: true, type: 'boolean', typeParameter: { name: 'boolean' } },
+		{ field: 'discount', hide: true, sortable: true, type: 'number', typeParameter: { name: 'number' } }
+	];
   }
 }
