@@ -2,12 +2,15 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <AspireVersion>13.2.2</AspireVersion>
     <EnigmatryEntryVersion>10.1.0</EnigmatryEntryVersion>
+    <EnigmatryEntryCodeGenVersion>21.0.0</EnigmatryEntryCodeGenVersion>
     <DotnetVersion>10.0.6</DotnetVersion>
+    <VerifyVersion>31.16.1</VerifyVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="13.2.2" />
-    <PackageVersion Include="Aspire.Hosting.JavaScript" Version="13.2.2" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.JavaScript" Version="$(AspireVersion)" />
     <PackageVersion Include="Autofac" Version="9.1.0" />
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.5.0" />
@@ -33,13 +36,13 @@
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Swagger" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="21.0.0" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="21.0.0" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="$(EnigmatryEntryCodeGenVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="$(EnigmatryEntryCodeGenVersion)" />
     <PackageVersion Include="FakeItEasy" Version="9.0.1" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(DotnetVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="10.0.6" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(DotnetVersion)">
       <PrivateAssets>all</PrivateAssets>
@@ -84,8 +87,8 @@
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageVersion Include="Testcontainers.MsSql" Version="4.11.0" />
-    <PackageVersion Include="Verify" Version="31.16.1" />
-    <PackageVersion Include="Verify.NUnit" Version="31.16.1" />
+    <PackageVersion Include="Verify" Version="$(VerifyVersion)" />
+    <PackageVersion Include="Verify.NUnit" Version="$(VerifyVersion)" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <!--transitive packages-->
     <PackageVersion Include="Microsoft.Build" Version="17.14.28" />
