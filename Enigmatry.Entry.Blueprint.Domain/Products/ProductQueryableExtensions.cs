@@ -3,24 +3,23 @@ namespace Enigmatry.Entry.Blueprint.Domain.Products;
 
 public static class ProductQueryableExtensions
 {
-    public static IQueryable<Product> QueryByName(this IQueryable<Product> query, string? name) =>
-        !String.IsNullOrEmpty(name)
-            ? query.Where(e => e.Name.Contains(name))
-            : query;
+    extension(IQueryable<Product> query)
+    {
+        public IQueryable<Product> QueryByName(string? name) =>
+            name is null or "" ? query : query.Where(e => e.Name.Contains(name));
 
-    public static IQueryable<Product> QueryByCode(this IQueryable<Product> query, string? code) =>
-        !String.IsNullOrEmpty(code)
-            ? query.Where(e => e.Code.Contains(code))
-            : query;
+        public IQueryable<Product> QueryByCode(string? code) =>
+            code is null or "" ? query : query.Where(e => e.Code.Contains(code));
 
-    public static IQueryable<Product> QueryExpiresBefore(this IQueryable<Product> query, DateOnly? expiresBefore) =>
-        expiresBefore is not null
-            ? query.Where(e => e.ExpiresOn <= expiresBefore)
-            : query;
-    
-    public static IQueryable<Product> QueryInStatus(this IQueryable<Product> query, ProductStatus status) =>
-        query.Where(e => e.Status == status);
-    
-    public static IQueryable<Product> QueryCreatedBefore(this IQueryable<Product> query, DateTimeOffset dateTime) =>
-        query.Where(e => e.CreatedOn < dateTime);
+        public IQueryable<Product> QueryExpiresBefore(DateOnly? expiresBefore) =>
+            expiresBefore is not null
+                ? query.Where(e => e.ExpiresOn <= expiresBefore)
+                : query;
+
+        public IQueryable<Product> QueryInStatus(ProductStatus status) =>
+            query.Where(e => e.Status == status);
+
+        public IQueryable<Product> QueryCreatedBefore(DateTimeOffset dateTime) =>
+            query.Where(e => e.CreatedOn < dateTime);
+    }
 }

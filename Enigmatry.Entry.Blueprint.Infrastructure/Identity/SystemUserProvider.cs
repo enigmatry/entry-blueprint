@@ -13,15 +13,14 @@ namespace Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 public class SystemUserProvider(IRepository<DomainUser> userRepository, ILogger<SystemUserProvider> logger) : ICurrentUserProvider
 {
     public virtual Guid? UserId => DomainUser.SystemUserId;
-    private UserContext? _user;
 
     public UserContext? User
     {
         get
         {
-            if (_user != null)
+            if (field != null)
             {
-                return _user;
+                return field;
             }
 
             var user = userRepository
@@ -38,9 +37,9 @@ public class SystemUserProvider(IRepository<DomainUser> userRepository, ILogger<
                 return null;
             }
 
-            _user = new UserContext(user.Id, new PermissionsContext(user.GetPermissionIds()));
+            field = new UserContext(user.Id, new PermissionsContext(user.GetPermissionIds()));
 
-            return _user;
+            return field;
         }
     }
 }
