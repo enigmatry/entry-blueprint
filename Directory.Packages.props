@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <EnigmatryEntryVersion>9.4.0</EnigmatryEntryVersion>
-    <EnigmatryCodegenVersion>21.0.0</EnigmatryCodegenVersion>
+    <EnigmatryCodegenVersion>21.1.0</EnigmatryCodegenVersion>
     <DotnetVersion>9.0.11</DotnetVersion>
   </PropertyGroup>
   <ItemGroup>

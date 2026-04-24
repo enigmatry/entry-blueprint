@@ -23,9 +23,9 @@
       },
       "Enigmatry.Entry.CodeGeneration.Validation": {
         "type": "Direct",
-        "requested": "[21.0.0, )",
-        "resolved": "21.0.0",
-        "contentHash": "lEweRsA2yIX0f9Jsp30iQInAhWoN26wSVCPwgca+/evpybxFTyorJZsaStetyJ/rjWXF+VjcqrHOZkkNbcNv8Q==",
+        "requested": "[21.1.0, )",
+        "resolved": "21.1.0",
+        "contentHash": "nR6QBcFcxy2SGjgL/O793AA48xw/ai6ZoIS+yljWFmy7HIyaJG1mQxKxBLt+S8EzrFXUFcHeD9jim0Eq/iMJzA==",
         "dependencies": {
           "Humanizer.Core": "2.14.1"
         }
