@@ -47,7 +47,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles/modules",
-                "node_modules/@enigmatry"
+                "node_modules/@enigmatry",
+                "node_modules"
               ]
             },
             "scripts": [],

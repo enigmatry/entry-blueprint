@@ -10,8 +10,10 @@
 // @ts-nocheck
 // @ts-ignore
 // @ts-expect-error
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter, RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-components/table';
+import { ChangeDetectionStrategy, Component, computed, EventEmitter, Input, OnInit, Output, 
+    TemplateRef, viewChild, ViewChild } from '@angular/core';
+import { EntryTableComponent, PagedData, SortDirection, CellTemplate, ContextMenuItem, RowContextMenuFormatter, RowClassFormatter,
+    RowSelectionFormatter, ColumnDef, PageEvent, SortEvent } from '@enigmatry/entry-components/table';
 
 import { GetUsersResponseItem } from 'src/app/api/api-reference';
 
@@ -56,9 +58,12 @@ export class UserListGeneratedComponent implements OnInit {
 
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() sortChange = new EventEmitter<SortEvent>();
-  @Output() selectionChange = new EventEmitter<GetUsersResponseItem[]>();
   @Output() contextMenuItemSelected = new EventEmitter<{ itemId: string; rowData: GetUsersResponseItem }>();
   @Output() rowClick = new EventEmitter<GetUsersResponseItem>();
+
+  private readonly _entryTable = viewChild(EntryTableComponent);
+  readonly selectedItems = computed<GetUsersResponseItem[]>(() => 
+    this._entryTable()?.rowSelection().selected as GetUsersResponseItem[] ?? []);
 
 
 
@@ -66,12 +71,12 @@ export class UserListGeneratedComponent implements OnInit {
 
   ngOnInit(): void {
    this.columns = [
-{ field: 'id', hide: true, sortable: true },
-{ field: 'emailAddress', header: $localize `:@@users.user-list.email-address:E-mail`, hide: false, sortable: true },
-{ field: 'fullName', header: $localize `:@@users.user-list.full-name:Full name`, hide: false, sortable: true },
-{ field: 'userStatusName', header: $localize `:@@users.user-list.user-status-name:Status`, hide: false, sortable: true },
-{ field: 'createdOn', header: $localize `:@@users.user-list.created-on:Created on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } },
-{ field: 'updatedOn', header: $localize `:@@users.user-list.updated-on:Updated on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } }
-];
+		{ field: 'id', hide: true, sortable: true },
+		{ field: 'emailAddress', header: $localize `:@@users.user-list.email-address:E-mail`, hide: false, sortable: true },
+		{ field: 'fullName', header: $localize `:@@users.user-list.full-name:Full name`, hide: false, sortable: true },
+		{ field: 'userStatusName', header: $localize `:@@users.user-list.user-status-name:Status`, hide: false, sortable: true },
+		{ field: 'createdOn', header: $localize `:@@users.user-list.created-on:Created on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } },
+		{ field: 'updatedOn', header: $localize `:@@users.user-list.updated-on:Updated on`, hide: false, sortable: true, type: 'date', typeParameter: { name: 'date' } }
+	];
   }
 }

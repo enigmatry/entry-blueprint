@@ -3,6 +3,10 @@ import { SearchFilterBase, SearchFilterParams } from '@enigmatry/entry-component
 import { PagedQuery } from '@enigmatry/entry-components/table';
 
 export class SearchFilterPagedQuery extends PagedQuery {
+  // Capture parent field implementations before child overrides replace them
+  private readonly _parentApplyRouteChanges = this.applyRouteChanges;
+  private readonly _parentGetRouteQueryParams = this.getRouteQueryParams;
+
   constructor(public filters: SearchFilterBase<any>[] = []) {
     super();
   }
@@ -12,8 +16,8 @@ export class SearchFilterPagedQuery extends PagedQuery {
     this.pageNumber = 1;
   }
 
-  override applyRouteChanges(queryParams: Params): void {
-    super.applyRouteChanges(queryParams);
+  override readonly applyRouteChanges = (queryParams: Params): void => {
+    this._parentApplyRouteChanges(queryParams);
     this.filters.forEach(filter => {
       const value = this.getValueFromQueryParam(queryParams, filter.key);
       filter.setValue(value);
@@ -39,8 +43,8 @@ export class SearchFilterPagedQuery extends PagedQuery {
       || filterValue?.length === 0
       || filterValue[0] === undefined;
 
-  override getRouteQueryParams(): Params {
-    const pagedParams = super.getRouteQueryParams();
+  override readonly getRouteQueryParams = (): Params => {
+    const pagedParams = this._parentGetRouteQueryParams();
     const filterParams: Params = {};
     this.filters.forEach(filter => filterParams[filter.key] = filter.value);
     return {

@@ -4,9 +4,9 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AspireVersion>13.2.2</AspireVersion>
     <EnigmatryEntryVersion>10.1.0</EnigmatryEntryVersion>
-    <EnigmatryEntryCodeGenVersion>21.0.0</EnigmatryEntryCodeGenVersion>
-    <DotnetVersion>10.0.6</DotnetVersion>
+    <DotnetVersion>10.0.7</DotnetVersion>
     <VerifyVersion>31.16.1</VerifyVersion>
+    <EnigmatryCodegenVersion>21.1.0</EnigmatryCodegenVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
@@ -36,8 +36,8 @@
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="$(EnigmatryEntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.Swagger" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="$(EnigmatryEntryCodeGenVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="$(EnigmatryEntryCodeGenVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="$(EnigmatryCodegenVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="$(EnigmatryCodegenVersion)" />
     <PackageVersion Include="FakeItEasy" Version="9.0.1" />
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
@@ -92,8 +92,9 @@
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <!--transitive packages-->
     <PackageVersion Include="Microsoft.Build" Version="17.14.28" />
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="10.0.7" />
     <PackageVersion Include="NuGet.Packaging" Version="6.12.5" />
     <PackageVersion Include="NuGet.Protocol" Version="6.12.5" />
-    <PackageVersion Include="System.Security.Cryptography.Xml" Version="10.0.6" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="10.0.7" />
   </ItemGroup>
 </Project>
