@@ -1,0 +1,14 @@
+{
+  "env": {
+    "ENABLE_LSP_TOOL": "1"
+  },
+  "enabledMcpjsonServers": [
+    "azure-devops",
+    "atlassian",
+    "Context7"
+  ],
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": true
+  }
+}
