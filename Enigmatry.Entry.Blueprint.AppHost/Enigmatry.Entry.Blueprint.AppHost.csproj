@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Sdk Name="Aspire.AppHost.Sdk" Version="13.2.2" />
+  <Sdk Name="Aspire.AppHost.Sdk" Version="13.5.0" />
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>253200df-f2b9-4f59-ae41-33c701dee0f5</UserSecretsId>
+    <NoWarn>$(NoWarn);ASPIRE010</NoWarn><!-- Aspire CLI bundle not used -->
   </PropertyGroup>
 
   <ItemGroup>
