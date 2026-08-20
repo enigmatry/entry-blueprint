@@ -1,4 +1,4 @@
-﻿{
+{
   Id: Guid_1,
   EmailAddress: john_doe@john.doe,
   FullName: John Doe,

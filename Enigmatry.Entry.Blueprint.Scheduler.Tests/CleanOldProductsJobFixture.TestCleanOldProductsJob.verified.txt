@@ -1,4 +1,4 @@
-﻿[
+[
   {
     Name: AnActiveProduct,
     Code: Code2,

@@ -1,4 +1,4 @@
-﻿[
+[
   {
     Value: Guid_1,
     Label: SystemAdmin
