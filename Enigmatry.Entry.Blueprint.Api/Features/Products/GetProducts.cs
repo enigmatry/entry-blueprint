@@ -31,6 +31,9 @@ public static class GetProducts
             public int Amount { get; set; }
             public string ContactEmail { get; set; } = String.Empty;
             public string ContactPhone { get; set; } = String.Empty;
+            // InfoLink, HasDiscount and Discount are never displayed in the product list. They are returned
+            // only to demonstrate hidden list columns (IsVisible(false) in ProductListComponentConfiguration).
+            // In a real project, do not return fields in a list response that the list never displays (BP-1599).
             public string InfoLink { get; set; } = String.Empty;
             public DateOnly? ExpiresOn { get; set; }
             public bool FreeShipping { get; set; }
