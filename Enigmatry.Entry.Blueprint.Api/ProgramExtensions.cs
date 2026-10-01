@@ -81,7 +81,7 @@ public static class ProgramExtensions
 
         app.UseRouting();
 
-        if (configuration.AppUseDeveloperExceptionPage())
+        if (env.IsDevelopment() && configuration.AppUseDeveloperExceptionPage())
         {
             app.UseDeveloperExceptionPage();
         }
