@@ -34,6 +34,7 @@ This is a full-stack **blueprint template** using **Vertical Slice Architecture 
 - **Domain entities** inherit from `EntityWithCreatedUpdated`, have `private` setters, expose a static `Create(Command)` factory and an `Update(Command)` method, and raise domain events via `AddDomainEvent()`.
 - **Smart Enums** — use `Ardalis.SmartEnum` instead of C# `enum` for all status/type values; ID types live in `Domain/{Feature}/{Name}Id.cs`; EF, JSON, and Swagger converters are wired automatically via `Enigmatry.Entry.SmartEnums.*`.
 - **DI** is configured via Autofac modules in `Infrastructure/Autofac/Modules/`; `ServiceModule` auto-registers any class whose name ends with `Service`.
+- **Security logging** — inject `ISecurityLogger<TEnclosingClass>` (from `Core/Logging/`) for authentication, authorization and audit events; it writes to a standalone Serilog logger configured by the `SecuritySerilog` appsettings section, never to the application log. Use `ILogger<T>` for everything else.
 - **EF configurations** live in `Infrastructure/Data/Configurations/` as `IEntityTypeConfiguration<T>` classes; use `EntityWithEnumIdConfiguration<T>` for entities with SmartEnum primary keys.
 - **Central Package Management** — all NuGet versions are declared in `Directory.Packages.props` only; never add `Version=` to a `<PackageReference>` in a `.csproj`.
 - **Code quality** — `TreatWarningsAsErrors`, `EnforceCodeStyleInBuild`, and `Nullable` are all enabled; use `[PublicAPI]` on DTOs/request/response types and `[UsedImplicitly]` on handlers and validators.

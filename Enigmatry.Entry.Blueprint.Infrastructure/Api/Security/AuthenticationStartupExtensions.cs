@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
@@ -11,5 +11,10 @@ public static class AuthenticationStartupExtensions
 
     public static void AppAddAuthentication(this IServiceCollection services, IConfiguration configuration) =>
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApi(configuration.GetSection(AzureAdSection));
+            .AddMicrosoftIdentityWebApi(jwtBearerOptions =>
+                {
+                    configuration.Bind(AzureAdSection, jwtBearerOptions);
+                    jwtBearerOptions.Events = new SecurityLoggingJwtBearerEvents();
+                },
+                identityOptions => configuration.Bind(AzureAdSection, identityOptions));
 }
