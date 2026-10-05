@@ -249,9 +249,12 @@ New:
 - `Enigmatry.Entry.Blueprint.Infrastructure/Api/Csp/SwaggerNonceMiddleware.cs`
 - `Enigmatry.Entry.Blueprint.Infrastructure/Api/Startup/SpaStartupExtensions.cs`
 - `Enigmatry.Entry.Blueprint.Infrastructure/Api/Startup/IndexHtmlHidingFileProvider.cs`
-- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/SpaStartupExtensionsFixture.cs`
-- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/SwaggerNonceMiddlewareFixture.cs`
-- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/SecurityHeadersFixture.cs`
+- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/Csp/NonceProviderFixture.cs`
+- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/Csp/CspMiddlewareFixture.cs`
+- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/Csp/SwaggerNonceMiddlewareFixture.cs`
+- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/Csp/IndexHtmlHidingFileProviderFixture.cs`
+- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/Csp/SpaStartupExtensionsFixture.cs`
+- `Enigmatry.Entry.Blueprint.Api.Tests/CoreFeatures/Csp/SecurityHeadersFixture.cs`
 
 Changed:
 
@@ -260,6 +263,8 @@ Changed:
 - `Enigmatry.Entry.Blueprint.Api/parameters.xml`
 - `Enigmatry.Entry.Blueprint.Api/appsettings.json`
 - `Enigmatry.Entry.Blueprint.Api/appsettings.Development.json`
+- `Enigmatry.Entry.Blueprint.Infrastructure.Tests/Configuration/TestConfigurationBuilder.cs` (the
+  integration host uses only this in-memory configuration, so the SPA policy must be added here)
 - `Deployment/publish-web-profile-test-app.proj`
 - `enigmatry-entry-blueprint-app/src/index.html`
 - `CLAUDE.md` (one bullet under Key Conventions describing where the CSP lives and the placeholder)
