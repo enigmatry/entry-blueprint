@@ -40,6 +40,7 @@ This is a full-stack **blueprint template** using **Vertical Slice Architecture 
 - **Integration tests** inherit from `IntegrationFixtureBase` (WebApplicationFactory + Testcontainers SQL Server), use `Client.GetAsync<T>()` / `Client.PostAsync<>()` helpers, assert with `Verify()` snapshot files (`.verified.txt`), and are marked `[Category("integration")]`.
 - **Test builders** in `Domain.Tests/{Feature}/{Entity}Builder.cs` use fluent `With*()` methods and an implicit conversion to the entity type for seeding test data.
 - **Angular code generation** — add `IListComponentConfiguration<T>` / `IFormComponentConfiguration<T>` to `CodeGeneration.Setup/Features/{Feature}/`, rebuild that project, then run `npm run codegen:run`; generated files in `src/app/features/` must not be edited manually.
+- **Content Security Policy** — the CSP header is set by `CspMiddleware` (Infrastructure/Api/Csp), not by web.config. The SPA policy lives in `SpaContentSecurityPolicyValue` (appsettings, Web Deploy token `__spaContentSecurityPolicyValue__`) and must contain `**PLACEHOLDER_NONCE_SERVER**`; the placeholder is replaced per request in the header and in `wwwroot/index.html` (`ngCspNonce` on `<app-root>`), which is served only by the nonce-injecting SPA fallback. Never add `'unsafe-inline'` back.
 
 ## Backend Scripts
 

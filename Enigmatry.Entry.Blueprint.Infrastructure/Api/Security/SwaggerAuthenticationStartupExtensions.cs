@@ -12,7 +12,9 @@ public static class SwaggerAuthenticationStartupExtensions
     public static void AppUseSwaggerWithAzureAdAuth(this IApplicationBuilder app, IConfiguration configuration)
     {
         var aadOptions = configuration.GetSection(AuthenticationStartupExtensions.AzureAdSection).Get<MicrosoftIdentityOptions>()!;
-        app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!, path: "/api");
+        // Served under /swagger (not /api) so CspMiddleware applies the nonce-based policy and SwaggerNonceMiddleware
+        // can stamp the nonce on Swagger UI's inline script and style tags; /api stays strictly API.
+        app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!, path: "/swagger");
     }
 
     public static void AppAddSwaggerWithAzureAdAuth(this IServiceCollection services,
