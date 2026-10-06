@@ -5,10 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Csp;
 
-/// <summary>
-/// Buffers Swagger UI HTML responses and adds nonce="..." to every script and style tag so that the browser
-/// accepts them under the nonce-based Content-Security-Policy. Other responses pass through unchanged.
-/// </summary>
 [UsedImplicitly]
 public partial class SwaggerNonceMiddleware(RequestDelegate next)
 {

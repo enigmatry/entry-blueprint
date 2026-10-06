@@ -2,10 +2,7 @@ using System.Security.Cryptography;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Csp;
 
-/// <summary>
-/// Holds the CSP nonce for the current request. Registered as a scoped service so that every request
-/// gets its own value, which the CSP header and the served HTML must share.
-/// </summary>
+// Registered as a scoped service: one nonce per request, shared by the CSP header and the served HTML.
 public sealed class NonceProvider : IDisposable
 {
     private readonly RandomNumberGenerator _random = RandomNumberGenerator.Create();

@@ -52,7 +52,7 @@ exposes them base64-encoded as `Nonce`. Registered with `services.AddScoped<Nonc
 | Constant | Value |
 |---|---|
 | `HeaderName` | `Content-Security-Policy` |
-| `SettingsName` | `ContentSecurityPolicyValue` (used for `/swagger`) |
+| `SwaggerSettingsName` | `ContentSecurityPolicyValue` (used for `/swagger`) |
 | `SpaSettingsName` | `SpaContentSecurityPolicyValue` (used for the SPA) |
 | `NoncePlaceholder` | `**PLACEHOLDER_NONCE_SERVER**` |
 

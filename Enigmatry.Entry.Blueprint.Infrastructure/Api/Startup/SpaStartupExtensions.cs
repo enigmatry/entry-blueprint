@@ -11,23 +11,16 @@ public static partial class SpaStartupExtensions
 {
     private const string IndexHtml = "index.html";
 
-    // Matches the content hash the Angular application builder appends with outputHashing "all",
-    // e.g. main-A1B2C3D4.js. Files copied via the angular.json "assets" option (favicon.ico, assets/**)
-    // keep stable names and must not be cached long-lived.
+    // Angular output hashing, e.g. main-A1B2C3D4.js; assets copied via angular.json keep stable names and must not be cached long-lived.
     [GeneratedRegex(@"-[A-Z0-9]{8}\.[a-z0-9]+$")]
     private static partial Regex HashedFileNameRegex();
 
-    // Matches the opening of a stylesheet <link> regardless of attribute order, skipping tags that already carry a nonce.
     [GeneratedRegex(@"<link\s(?![^>]*\bnonce=)(?=[^>]*\brel=""stylesheet"")", RegexOptions.IgnoreCase)]
     private static partial Regex StylesheetLinkRegex();
 
-    /// <summary>
-    /// Serves the built Angular app from wwwroot with long-lived caching for hashed bundles. index.html is hidden
-    /// from the static-file middleware so that the only way to the SPA shell is the nonce-injecting fallback; the
-    /// canonical /index.html is rewritten to "/" to keep direct navigation working.
-    /// </summary>
     public static void AppUseSpaStaticFiles(this WebApplication app)
     {
+        // index.html is hidden from static files below, so route direct navigation to it through the fallback.
         app.Use((context, next) =>
         {
             if (context.Request.Path.Equals("/" + IndexHtml, StringComparison.OrdinalIgnoreCase))
@@ -51,14 +44,10 @@ public static partial class SpaStartupExtensions
         });
     }
 
-    /// <summary>
-    /// Serves wwwroot/index.html for unmatched non-API document requests (Angular deep links), injecting the
-    /// per-request CSP nonce. Paths with a file extension are asset requests (favicon, mistyped bundle names)
-    /// and get a real 404 instead of a 200 with the shell.
-    /// </summary>
     public static void AppMapSpaFallback(this WebApplication app) =>
         app.MapFallback(async context =>
         {
+            // Paths with an extension are asset requests (e.g. a mistyped bundle name) and get a real 404, not the shell.
             if (context.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase) ||
                 context.Request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase) ||
                 Path.HasExtension(context.Request.Path.Value))

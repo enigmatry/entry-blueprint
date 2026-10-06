@@ -4,10 +4,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Api.Csp;
 
-/// <summary>
-/// Sets the Content-Security-Policy header on every response: a strict policy for API endpoints and the
-/// configured nonce-based policies for Swagger UI and for the Angular application.
-/// </summary>
 [UsedImplicitly]
 public class CspMiddleware(RequestDelegate next, IConfiguration configuration)
 {
@@ -24,7 +20,7 @@ public class CspMiddleware(RequestDelegate next, IConfiguration configuration)
     {
         if (path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase))
         {
-            return GetConfiguredCsp(CspConstants.SettingsName, nonce) ?? StrictCsp;
+            return GetConfiguredCsp(CspConstants.SwaggerSettingsName, nonce) ?? StrictCsp;
         }
 
         if (path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase))
@@ -35,8 +31,7 @@ public class CspMiddleware(RequestDelegate next, IConfiguration configuration)
         return GetConfiguredCsp(CspConstants.SpaSettingsName, nonce) ?? StrictCsp;
     }
 
-    // An empty value (e.g. a Web Deploy parameter left at its empty default) counts as missing, so the strict
-    // policy is sent instead of an empty header that would disable CSP altogether.
+    // An empty value (e.g. an unset Web Deploy parameter) counts as missing; an empty header would disable CSP.
     private string? GetConfiguredCsp(string settingsName, string nonce)
     {
         var value = configuration.GetValue<string>(settingsName);

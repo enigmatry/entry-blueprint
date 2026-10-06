@@ -67,14 +67,14 @@ public static class ProgramExtensions
         var configuration = app.Configuration;
         var env = app.Environment;
 
-        // First, so every response (static files included) carries the header.
+        // First, so static files carry the header too.
         app.UseMiddleware<CspMiddleware>();
 
         app.AppUseSpaStaticFiles();
 
         app.UseRouting();
 
-        // Must run before the Swagger UI middleware (registered at the end) so it can rewrite its HTML.
+        // Before the Swagger UI middleware (registered at the end) so it can rewrite its HTML.
         app.UseMiddleware<SwaggerNonceMiddleware>();
 
         if (configuration.AppUseDeveloperExceptionPage())

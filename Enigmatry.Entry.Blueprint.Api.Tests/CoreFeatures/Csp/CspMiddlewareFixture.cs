@@ -138,7 +138,7 @@ public class CspMiddlewareFixture
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { CspConstants.SpaSettingsName, spaCsp },
-                { CspConstants.SettingsName, swaggerCsp }
+                { CspConstants.SwaggerSettingsName, swaggerCsp }
             })
             .Build();
 }
