@@ -61,6 +61,24 @@ public class CspMiddlewareFixture
         header.ShouldBe(StrictCsp);
     }
 
+    [TestCase("")]
+    [TestCase("   ")]
+    public async Task GivenEmptySpaPolicy_StrictPolicyIsSet(string emptyPolicy)
+    {
+        // A Web Deploy parameter left at its empty default must not disable the CSP.
+        var header = await InvokeAsync("/", emptyPolicy, swaggerCsp: null, out _);
+
+        header.ShouldBe(StrictCsp);
+    }
+
+    [Test]
+    public async Task GivenEmptySwaggerPolicy_StrictPolicyIsSet()
+    {
+        var header = await InvokeAsync("/swagger/index.html", spaCsp: null, swaggerCsp: "", out _);
+
+        header.ShouldBe(StrictCsp);
+    }
+
     [Test]
     public async Task GivenSpaPolicyWithoutPlaceholder_ValueIsSentUnchanged()
     {

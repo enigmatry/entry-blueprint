@@ -78,7 +78,8 @@ public partial class SecurityHeadersFixture : IntegrationFixtureBase
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var nonce = NonceRegex().Match(GetCsp(response)).Groups[1].Value;
-                body.ShouldContain($"ngCspNonce=\"{nonce}\"");
+                // The Angular build lower-cases the attribute name to ngcspnonce.
+                body.ShouldContain($"ngcspnonce=\"{nonce}\"", Case.Insensitive);
             }
             else
             {

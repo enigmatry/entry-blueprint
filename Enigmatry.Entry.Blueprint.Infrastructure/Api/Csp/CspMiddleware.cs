@@ -35,7 +35,13 @@ public class CspMiddleware(RequestDelegate next, IConfiguration configuration)
         return GetConfiguredCsp(CspConstants.SpaSettingsName, nonce) ?? StrictCsp;
     }
 
-    private string? GetConfiguredCsp(string settingsName, string nonce) =>
-        configuration.GetValue<string>(settingsName)?
-            .Replace(CspConstants.NoncePlaceholder, nonce, StringComparison.Ordinal);
+    // An empty value (e.g. a Web Deploy parameter left at its empty default) counts as missing, so the strict
+    // policy is sent instead of an empty header that would disable CSP altogether.
+    private string? GetConfiguredCsp(string settingsName, string nonce)
+    {
+        var value = configuration.GetValue<string>(settingsName);
+        return String.IsNullOrWhiteSpace(value)
+            ? null
+            : value.Replace(CspConstants.NoncePlaceholder, nonce, StringComparison.Ordinal);
+    }
 }
