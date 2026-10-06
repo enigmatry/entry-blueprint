@@ -48,7 +48,7 @@
     <parameter name="Azure AD Scopes" description="Azure AD Scopes" defaultValue="">
         <parameterEntry kind="TextFile" scope="chunk.*.js" match="__azureAdScopes__" />
     </parameter>
-    <parameter name="Content Security Policy">
-        <parameterEntry kind="XmlFile" scope="\\web.config$" match="/configuration/system.webServer/httpProtocol/customHeaders/add[@name='Content-Security-Policy']/@value" />
+    <parameter name="SPA Content Security Policy" description="Content Security Policy for the Angular app; must contain **PLACEHOLDER_NONCE_SERVER**" defaultValue="">
+        <parameterEntry kind="TextFile" scope="appsettings.json" match="__spaContentSecurityPolicyValue__" />
     </parameter>
 </parameters>
