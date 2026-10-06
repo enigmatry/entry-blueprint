@@ -207,8 +207,10 @@ parameter with a `SPA Content Security Policy` TextFile parameter that matches
 
 ### 8. Error handling
 
-- Missing configuration never breaks requests: the middleware falls back to the built-in strict
-  policy, which is the safe direction.
+- Missing or empty configuration never breaks requests: the middleware falls back to the built-in
+  strict policy, which is the safe direction.
+- A configured policy that lacks the placeholder can never carry the nonce, so `CspMiddleware`
+  throws at startup (fail closed) rather than sending it.
 - A missing `wwwroot/index.html` yields 404 from the fallback rather than an exception.
 - `SwaggerNonceMiddleware` restores the original response body stream even when the downstream
   response is not HTML.
@@ -222,14 +224,18 @@ Unit (`Enigmatry.Entry.Blueprint.Api.Tests`, `[Category("unit")]`, Shouldly):
 - `SwaggerNonceMiddleware` nonce injection: `<script>` and `<style>` tags gain a nonce; tags that
   already have one are unchanged; `<script src=…>` keeps its attributes.
 
-Integration (`IntegrationFixtureBase`, `[Category("integration")]`):
+Integration (`IntegrationFixtureBase`, `[Category("integration")]`). The test factory points the
+web root at `Enigmatry.Entry.Blueprint.Api.Tests/TestWebRoot/`, which holds a minimal `index.html`
+with the placeholder and a hashed bundle, so the fallback is exercised deterministically:
 
-- `GET /api/products` response carries `Content-Security-Policy: default-src 'none'; frame-ancestors 'none'`.
-- `GET /api/does-not-exist` returns 404 (not the SPA shell).
-- `GET /some/asset.js` returns 404.
-- `GET /` returns 404 in the test host (no built SPA in `wwwroot`) and still carries a CSP header
-  whose value is the configured SPA policy with a nonce substituted (the test configuration sets
-  `SpaContentSecurityPolicyValue`), and the nonce differs between two requests.
+- `GET /api/does-not-exist` returns 404 (not the SPA shell) with the strict policy.
+- `GET /users/john.doe` returns 404 (extension paths are asset requests).
+- `GET /`, `/index.html` and `/users/42` return the shell with the header nonce substituted into
+  `ngCspNonce` and the stylesheet link, no placeholder, and `no-store` caching.
+- The nonce differs between two requests.
+- `GET //index.html` returns 404 (the raw shell is never served by static files).
+- `GET /main-A1B2C3D4.js` is served with the `immutable` cache header and a CSP header.
+- `GET /swagger/index.html` returns Swagger UI with the nonce on every script tag.
 
 Manual smoke (recorded in the PR):
 

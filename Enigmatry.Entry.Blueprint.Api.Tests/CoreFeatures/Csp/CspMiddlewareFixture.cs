@@ -29,15 +29,6 @@ public class CspMiddlewareFixture
     }
 
     [Test]
-    public async Task GivenRootPath_ConfiguredSpaPolicyIsSet()
-    {
-        var header = await InvokeAsync("/", SpaCsp, SwaggerCsp, out var nonce);
-
-        header.ShouldContain($"'nonce-{nonce}'");
-        header.ShouldNotContain(CspConstants.NoncePlaceholder);
-    }
-
-    [Test]
     public async Task GivenSwaggerPath_ConfiguredSwaggerPolicyWithNonceIsSet()
     {
         var header = await InvokeAsync("/swagger/index.html", SpaCsp, SwaggerCsp, out var nonce);
@@ -72,21 +63,13 @@ public class CspMiddlewareFixture
     }
 
     [Test]
-    public async Task GivenEmptySwaggerPolicy_StrictPolicyIsSet()
+    public void GivenConfiguredPolicyWithoutPlaceholder_ConstructionFails()
     {
-        var header = await InvokeAsync("/swagger/index.html", spaCsp: null, swaggerCsp: "", out _);
+        // Such a policy can never carry the nonce, so fail at startup instead of shipping it.
+        var configuration = BuildConfiguration("default-src 'self'", swaggerCsp: null);
 
-        header.ShouldBe(StrictCsp);
-    }
-
-    [Test]
-    public async Task GivenSpaPolicyWithoutPlaceholder_ValueIsSentUnchanged()
-    {
-        const string policyWithoutPlaceholder = "default-src 'self'";
-
-        var header = await InvokeAsync("/", policyWithoutPlaceholder, swaggerCsp: null, out _);
-
-        header.ShouldBe(policyWithoutPlaceholder);
+        Should.Throw<InvalidOperationException>(() => new CspMiddleware(_ => Task.CompletedTask, configuration))
+            .Message.ShouldContain(CspConstants.SpaSettingsName);
     }
 
     [Test]

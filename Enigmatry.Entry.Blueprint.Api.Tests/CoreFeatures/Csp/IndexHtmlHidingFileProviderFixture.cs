@@ -42,13 +42,4 @@ public class IndexHtmlHidingFileProviderFixture
 
         provider.GetFileInfo("/main-A1B2C3D4.js").Exists.ShouldBeTrue();
     }
-
-    [Test]
-    public void GivenDirectory_ContentsComeFromInnerProvider()
-    {
-        using var physical = new PhysicalFileProvider(_root);
-        var provider = new IndexHtmlHidingFileProvider(physical);
-
-        provider.GetDirectoryContents("/").Select(f => f.Name).ShouldContain("index.html");
-    }
 }

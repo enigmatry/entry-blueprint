@@ -6,6 +6,7 @@ using Shouldly;
 
 namespace Enigmatry.Entry.Blueprint.Api.Tests.CoreFeatures.Csp;
 
+// The SPA shell comes from the test web root configured in ApiWebApplicationFactory (TestWebRoot/).
 [Category("integration")]
 public partial class SecurityHeadersFixture : IntegrationFixtureBase
 {
@@ -15,16 +16,7 @@ public partial class SecurityHeadersFixture : IntegrationFixtureBase
     private static partial Regex NonceRegex();
 
     [Test]
-    public async Task ApiResponse_HasStrictCsp()
-    {
-        var response = await Client.GetAsync("api/users");
-
-        response.StatusCode.ShouldBe(HttpStatusCode.OK);
-        GetCsp(response).ShouldBe(StrictCsp);
-    }
-
-    [Test]
-    public async Task UnknownApiPath_Returns404AndNotTheSpaShell()
+    public async Task UnknownApiPath_Returns404WithStrictCsp()
     {
         var response = await Client.GetAsync("api/does-not-exist");
 
@@ -42,17 +34,26 @@ public partial class SecurityHeadersFixture : IntegrationFixtureBase
         response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
     }
 
-    [Test]
-    public async Task SpaPath_HasConfiguredPolicyWithNonceSubstituted()
+    [TestCase("")]
+    [TestCase("index.html")]
+    [TestCase("users/42")]
+    public async Task SpaShell_IsServedWithTheNonceSubstituted(string path)
     {
-        var response = await Client.GetAsync("users/42");
+        var response = await Client.GetAsync(path);
 
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
+        response.Content.Headers.ContentType?.MediaType.ShouldBe("text/html");
+        response.Headers.CacheControl?.NoStore.ShouldBe(true);
         var csp = GetCsp(response);
         csp.ShouldNotContain(CspConstants.NoncePlaceholder);
         csp.ShouldContain("base-uri 'self'");
         var nonces = NonceRegex().Matches(csp).Select(m => m.Groups[1].Value).Distinct().ToList();
         nonces.Count.ShouldBe(1, "script-src and style-src must share the request nonce");
         Convert.FromBase64String(nonces[0]).Length.ShouldBe(32);
+        var body = await response.Content.ReadAsStringAsync();
+        body.ShouldNotContain(CspConstants.NoncePlaceholder);
+        body.ShouldContain($"ngCspNonce=\"{nonces[0]}\"");
+        body.ShouldContain($"<link nonce=\"{nonces[0]}\" rel=\"stylesheet\"");
     }
 
     [Test]
@@ -65,27 +66,22 @@ public partial class SecurityHeadersFixture : IntegrationFixtureBase
     }
 
     [Test]
-    public async Task SpaShell_NeverContainsThePlaceholder()
+    public async Task NonCanonicalIndexHtmlPath_IsNotServedRaw()
     {
-        // The test host has no built SPA in wwwroot, so the fallback answers 404. If a developer has copied a
-        // build into wwwroot, the shell is served and must carry the substituted nonce instead.
-        foreach (var path in new[] { "", "index.html", "//index.html" })
-        {
-            var response = await Client.GetAsync(path);
-            var body = await response.Content.ReadAsStringAsync();
+        // "//index.html" as a relative URI would resolve to a host, so build the absolute URI by hand.
+        var response = await Client.GetAsync(new Uri(Client.BaseAddress + "/index.html"));
 
-            body.ShouldNotContain(CspConstants.NoncePlaceholder);
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                var nonce = NonceRegex().Match(GetCsp(response)).Groups[1].Value;
-                // The Angular build lower-cases the attribute name to ngcspnonce.
-                body.ShouldContain($"ngcspnonce=\"{nonce}\"", Case.Insensitive);
-            }
-            else
-            {
-                response.StatusCode.ShouldBe(HttpStatusCode.NotFound, $"path '{path}'");
-            }
-        }
+        response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+    }
+
+    [Test]
+    public async Task HashedBundle_IsServedWithImmutableCacheAndCsp()
+    {
+        var response = await Client.GetAsync("main-A1B2C3D4.js");
+
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
+        response.Headers.CacheControl?.ToString().ShouldContain("immutable");
+        GetCsp(response).ShouldContain("'nonce-");
     }
 
     [Test]
