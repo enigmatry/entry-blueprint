@@ -4,6 +4,7 @@ using Enigmatry.Entry.AspNetCore.Authorization;
 using Enigmatry.Entry.AspNetCore.Exceptions;
 using Enigmatry.Entry.AspNetCore.Security;
 using Enigmatry.Entry.Blueprint.Domain.Authorization;
+using Enigmatry.Entry.Blueprint.Infrastructure.Api.Csp;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Init;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Security;
@@ -26,6 +27,7 @@ public static class ProgramExtensions
     {
         services.AddCors();
         services.AddHttpContextAccessor();
+        services.AddScoped<NonceProvider>();
 
         services.AppAddSettings(configuration);
         services.AppAddPolly();
@@ -65,21 +67,15 @@ public static class ProgramExtensions
         var configuration = app.Configuration;
         var env = app.Environment;
 
-        app.UseDefaultFiles();
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            OnPrepareResponse = context =>
-            {
-                if (context.File.Name != "index.html")
-                {
-                    context.Context.Response.Headers.Append("Cache-Control", "public, max-age: 604800");
-                }
-            }
-        });
+        // First, so static files carry the header too.
+        app.UseMiddleware<CspMiddleware>();
 
-        app.MapFallbackToFile("index.html");
+        app.AppUseSpaStaticFiles();
 
         app.UseRouting();
+
+        // Before the Swagger UI middleware (registered at the end) so it can rewrite its HTML.
+        app.UseMiddleware<SwaggerNonceMiddleware>();
 
         if (configuration.AppUseDeveloperExceptionPage())
         {
@@ -108,6 +104,7 @@ public static class ProgramExtensions
         
         app.MapControllers().RequireAuthorization();
         app.MapEntryHealthCheck(configuration);
+        app.AppMapSpaFallback();
 
         if (env.IsDevelopment())
         {
