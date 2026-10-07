@@ -27,7 +27,6 @@ public class TestConfigurationBuilder
 
         var dict = new Dictionary<string, string?>
         {
-            { "UseDeveloperExceptionPage", "true" },
             { "DbContext:SensitiveDataLoggingEnabled", "true" },
             { "DbContext:UseAccessToken", "false" },
             { "DbContext:ConnectionResiliencyMaxRetryCount", "10" },
