@@ -20,9 +20,9 @@
       },
       "NUnit": {
         "type": "Direct",
-        "requested": "[4.6.1, )",
-        "resolved": "4.6.1",
-        "contentHash": "xS4+YaBFUv1r8bcAbjitSfYaRZGfMwUiMdiaRziBXZpKgVxKDSHhjUn0mV5mObHGZRZq6eNa+WFWr3g8grj66A=="
+        "requested": "[5.0.0, )",
+        "resolved": "5.0.0",
+        "contentHash": "tW5Juazgh4CI4pXo5c9c2J9J4i9vwZMm/FJ+gRRe0plJHLCz7Ck/raPuE5q1xWmLAUwpao4Ht1Uy1uRN3Wo5sw=="
       },
       "NUnit3TestAdapter": {
         "type": "Direct",
@@ -59,8 +59,8 @@
       },
       "Argon": {
         "type": "Transitive",
-        "resolved": "0.35.2",
-        "contentHash": "o0I9+qxk1r4EB8vqRaC49kHog8/UUuFPSqpUwi5husDuqTBbbWIhLOwO2uhzA6pdM4UJoz+owN/c1p05YxAs3A=="
+        "resolved": "0.38.0",
+        "contentHash": "5MJwC4xUJEDHZpQopGRf9NqycfsAtkLF4JuuMbLoiPHZja6XMFLbhpdrn24l/qpRpWRoLHBclQIcu8cd5HEULQ=="
       },
       "Azure.Core": {
         "type": "Transitive",
@@ -120,10 +120,10 @@
       },
       "DiffEngine": {
         "type": "Transitive",
-        "resolved": "19.3.3",
-        "contentHash": "9dgeYqMOYA5BREQj5PNEuNHOe3q8xmkLj9jPPbxrJ2roxupVmJ3LlUgForWlxXgt0zoutfPE+sbVjif3YHC3zw==",
+        "resolved": "20.7.0",
+        "contentHash": "GGyb96POGjAeMyDFTa2PfDxK7KVKtMl3rXs1EjNsKCNVvTRMY9R5s+SM7XpbxcZtKxYpzI6OcgJxyYqKG8g+rw==",
         "dependencies": {
-          "EmptyFiles": "8.18.2"
+          "EmptyFiles": "8.20.0"
         }
       },
       "Docker.DotNet.Enhanced": {
@@ -189,8 +189,8 @@
       },
       "EmptyFiles": {
         "type": "Transitive",
-        "resolved": "8.18.2",
-        "contentHash": "9TKkDyiREYxgTDeoBrVlmBP83w7Hjhj5sDACQhketSgRhgaXRKpjPW7sazx3PEOg0i5PbrwLjoJG9caavf69hg=="
+        "resolved": "8.20.0",
+        "contentHash": "KnbcQk4Gvc+TSTttmSmdxGiQb+2AA739jcZ3Ics9R2l7UvDIHrL+aTtYTfn3PJIGA/NMqkd26aN/ACtJ4MCKZA=="
       },
       "Enigmatry.Entry.AspNetCore.Tests.Utilities": {
         "type": "Transitive",
@@ -2273,10 +2273,10 @@
           "Enigmatry.Entry.SmartEnums.VerifyTests": "[10.3.1, )",
           "FakeItEasy": "[9.0.1, )",
           "Microsoft.NET.Test.Sdk": "[18.9.0, )",
-          "NUnit": "[4.6.1, )",
+          "NUnit": "[5.0.0, )",
           "Shouldly": "[4.3.0, )",
-          "Verify": "[31.28.0, )",
-          "Verify.NUnit": "[31.28.0, )"
+          "Verify": "[33.3.1, )",
+          "Verify.NUnit": "[33.3.1, )"
         }
       },
       "enigmatry.entry.blueprint.core": {
@@ -2346,7 +2346,7 @@
           "Enigmatry.Entry.Blueprint.Infrastructure": "[1.0.0, )",
           "Microsoft.NET.Test.Sdk": "[18.9.0, )",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "[10.0.2, )",
-          "NUnit": "[4.6.1, )",
+          "NUnit": "[5.0.0, )",
           "Respawn": "[7.0.0, )",
           "Testcontainers.MsSql": "[4.14.0, )"
         }
@@ -3143,26 +3143,26 @@
       },
       "Verify": {
         "type": "CentralTransitive",
-        "requested": "[31.28.0, )",
-        "resolved": "31.28.0",
-        "contentHash": "rPmMCEEcTzui+yGYQfrloUutPC5ZK0NOBdP1tpTbf+TzU35lWSlzmDzD78Os2eN5FAWPwXy89LxQLqNqEDaVaw==",
+        "requested": "[33.3.1, )",
+        "resolved": "33.3.1",
+        "contentHash": "+Eo9c7LeyCacE3ukdqzzd5TQQBBqN93s5DnMPKlNeIFaAaEgEHZIppWan8LyYu2zf3dfddF7Z6txorKa4MY3pA==",
         "dependencies": {
-          "Argon": "0.35.2",
-          "DiffEngine": "19.3.3",
+          "Argon": "0.38.0",
+          "DiffEngine": "20.7.0",
           "SimpleInfoName": "3.2.0"
         }
       },
       "Verify.NUnit": {
         "type": "CentralTransitive",
-        "requested": "[31.28.0, )",
-        "resolved": "31.28.0",
-        "contentHash": "u2zL0YHwYnzdkhESVirPRkVerjOp/6hDpYIRPH2Gw4LBDr197R/rwiD83umvMnNEJsZp9vN7HlsnsWRrtlAdaw==",
+        "requested": "[33.3.1, )",
+        "resolved": "33.3.1",
+        "contentHash": "SzvQJQ7Kyyt27fxr854xWrGOm2T3PisLos+Sw8Psvz089Lg7ivK43zFdlthdo7lJmVeQyQBOm1M3YirOalyx9A==",
         "dependencies": {
-          "Argon": "0.35.2",
-          "DiffEngine": "19.3.3",
-          "NUnit": "4.6.1",
+          "Argon": "0.38.0",
+          "DiffEngine": "20.7.0",
+          "NUnit": "5.0.0",
           "SimpleInfoName": "3.2.0",
-          "Verify": "31.28.0"
+          "Verify": "33.3.1"
         }
       }
     }
