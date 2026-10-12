@@ -39,6 +39,8 @@ stages:
       artifactName: $(artifactName)
       displayName: 'Build Angular App and .net API'
       nodeVersion: $(nodeVersion)
+      dotNetVersion: '10.0.x'
+      dotnetEfVersion: '10.0.*'
       projectNameAngularApp: $(projectNameAngularApp)
       projectNamePrefix: $(projectNamePrefix)
       runAngularTests: true
