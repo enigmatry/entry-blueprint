@@ -22,6 +22,7 @@ These are the Known identifiers the `entry-blueprint:jira-branch` and `entry-blu
 
 ## Template authoring
 
-- Text that must follow the generated project's names uses one of the replaced values: `Enigmatry.Entry.Blueprint` (`--projectName`), `enigmatry-entry-blueprint` (`--appProjectName`), `EnigmatryEntryBlueprint` (projectName without dots) or `Enigmatry Blueprint` (`--friendlyName`). Other template-specific text survives generation unchanged.
+- Text that must follow the generated project's names uses one of the replaced values: `Enigmatry.Entry.Blueprint` (`--projectName`), `enigmatry-entry-blueprint` (`--appProjectName`), `EnigmatryEntryBlueprint` (projectName without dots) or `Entry Blueprint` (`--friendlyName`). Other template-specific text survives generation unchanged.
+- Replacement is plain text matching, also inside longer text: "Enigmatry Entry Blueprint" in a copied file becomes "Enigmatry <friendlyName>". Write template-wide names that must stay as they are without the replaced values.
 - Files that only serve this repository go in `sources.exclude` in `template.json`.
 - Verify a template change by generating a project with multi-word names, e.g. `dotnet new blueprint --name Enigmatry.DrillSergeant --projectName Enigmatry.DrillSergeant --appProjectName enigmatry-drill-sergeant --friendlyName "Drill Sergeant" --no-git --allow-scripts yes`, after `dotnet new install .\` (`templating.md` has the commands).
