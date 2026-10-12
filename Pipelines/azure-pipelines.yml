@@ -53,8 +53,8 @@ stages:
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
-  # The branch must be the repository's default branch
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  # Deploys master/main builds. To deploy a feature branch to test, replace BP-XYZ with (part of) its name.
+  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), contains(variables['Build.SourceBranch'], 'BP-XYZ')))
   variables:
   - template: variables/variables.test.yml
   jobs:
