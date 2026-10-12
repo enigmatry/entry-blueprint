@@ -28,18 +28,12 @@ Coding standards, testing, code review and the Jira/Azure DevOps workflows come 
 
 ## Key Conventions
 
-- **Commands** (writes) live in `Domain/{Feature}/Commands/` as a static class with a nested `Command : IRequest<T>`, a nested `Validator : AbstractValidator<Command>`, and a separate `*CommandHandler.cs` in the same folder.
-- **Queries** (reads) live in `Api/Features/{Feature}/Get*.cs` as a static class with a nested `Request`, a nested `Response` (the DTO), and a `RequestHandler`; entities are projected to the response with an `IQueryable` `MapTo*` extension method.
-- **Controllers** only dispatch via MediatR — no business logic. Use primary-constructor `IMediator` injection, return `response.ToActionResult()`, and decorate every endpoint with `[UserHasPermission(PermissionId.X)]`.
-- **Domain entities** inherit from `EntityWithCreatedUpdated`, have `private` setters, expose a static `Create(Command)` factory and an `Update(Command)` method, and raise domain events via `AddDomainEvent()`.
-- **Smart Enums** — use `Ardalis.SmartEnum` instead of C# `enum` for all status/type values; ID types live in `Domain/{Feature}/{Name}Id.cs`; EF, JSON, and Swagger converters are wired automatically via `Enigmatry.Entry.SmartEnums.*`.
-- **DI** is configured via Autofac modules in `Infrastructure/Autofac/Modules/`; `ServiceModule` auto-registers any class whose name ends with `Service`.
-- **EF configurations** live in `Infrastructure/Data/Configurations/` as `IEntityTypeConfiguration<T>` classes; use `EntityWithEnumIdConfiguration<T>` for entities with SmartEnum primary keys.
+- **Feature patterns** (queries, commands, controllers, domain entities, EF configurations, Autofac modules) follow the `entry-blueprint:aspnet-rest-apis` skill; the Products and Users features are the reference implementations.
+- **Enums** — value types such as `ProductType`, `ProductStatus` and `PermissionId` are plain C# enums. Reference data with its own table uses an `Ardalis.SmartEnum` id (`UserStatusId`) on an `EntityWithEnumId` entity, configured with `EntityWithEnumIdConfiguration<TEntity, TId>` (see `UserStatusConfiguration`); EF, JSON and Swagger converters come from `Enigmatry.Entry.SmartEnums.*`.
 - **Central Package Management** — all NuGet versions are declared in `Directory.Packages.props` only; never add `Version=` to a `<PackageReference>` in a `.csproj`.
-- **Code quality** — `TreatWarningsAsErrors`, `EnforceCodeStyleInBuild`, and `Nullable` are all enabled; use `[PublicAPI]` on DTOs/request/response types and `[UsedImplicitly]` on handlers and validators.
-- **Integration tests** inherit from `IntegrationFixtureBase` (WebApplicationFactory + Testcontainers SQL Server), use `Client.GetAsync<T>()` / `Client.PostAsync<>()` helpers, assert with `Verify()` snapshot files (`.verified.txt`), and are marked `[Category("integration")]`.
-- **Test builders** in `Domain.Tests/{Feature}/{Entity}Builder.cs` use fluent `With*()` methods and an implicit conversion to the entity type for seeding test data.
-- **Frontend unit tests** run on Jest (`jest-preset-angular`, config in `jest.config.json`); shared setup and mocks live in `src/testing/`.
+- **Code quality** — `TreatWarningsAsErrors`, `EnforceCodeStyleInBuild`, and `Nullable` are all enabled.
+- **Backend tests** use NUnit 5 (the version in `Directory.Packages.props`), Shouldly, FakeItEasy and Verify. Integration tests inherit from `IntegrationFixtureBase` (WebApplicationFactory + Testcontainers SQL Server), use the `Client.GetAsync<T>()` / `Client.PostAsync<>()` helpers, assert with `Verify()` snapshot files (`.verified.txt`), and are marked `[Category("integration")]`. Test builders in `Domain.Tests/{Feature}/{Entity}Builder.cs` use fluent `With*()` methods and an implicit conversion to the entity.
+- **Frontend unit tests** run on Jest (`jest-preset-angular`, config in `jest.config.json`; shared setup and mocks in `src/testing/`). New specs extend this Jest suite; moving the suite to Vitest is a separate, dedicated change.
 - **Angular code generation** — add `IListComponentConfiguration<T>` / `IFormComponentConfiguration<T>` to `CodeGeneration.Setup/Features/{Feature}/`, rebuild that project, then run `npm run codegen:run`; generated files in `src/app/features/` must not be edited manually.
 
 ## Backend Scripts
@@ -84,4 +78,4 @@ npm run codegen:run    # regenerate Angular form/list components
 
 ## CI/CD
 
-Azure DevOps Pipelines (`Pipelines/azure-pipelines.yml`): builds and tests every branch, and deploys the default branch to the test environment. Deployment uses publish profiles in `Deployment/`.
+Azure DevOps Pipelines (`Pipelines/azure-pipelines.yml`): builds and tests every branch, and deploys `master` to the test environment. Deployment uses publish profiles in `Deployment/`.
