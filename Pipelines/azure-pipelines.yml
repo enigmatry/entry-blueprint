@@ -26,20 +26,16 @@ resources:
 stages:
 - stage: 'ci_build'
   displayName: 'Build the web application'
-  jobs: 
-  - job: build_prerequisites
-    displayName: Get the prerequisites for the build
-    steps:
-    - bash: |
-        HASH=$(git rev-parse --short $BUILD_SOURCEVERSION)
-        VERSION=$BUILD_BUILDNUMBER-$HASH
-      
-        echo "Hash: $HASH. Setting build number to: $VERSION"
-        echo '##vso[build.updatebuildnumber]'$VERSION
-      displayName: 'Set Build number'
- 
+  jobs:
   - template: build-angular-app-and-dotnet-api.yml@templates
     parameters:
+      prerequisiteJobName: ''
+      fetchDepth: 1
+      preBuildSteps:
+      - pwsh: |
+          $hash = $env:BUILD_SOURCEVERSION.Substring(0, 7)
+          echo "##vso[build.updatebuildnumber]$($env:BUILD_BUILDNUMBER -replace "-g?$hash$")-g$hash"
+        displayName: Set build number
       artifactName: $(artifactName)
       displayName: 'Build Angular App and .net API'
       nodeVersion: $(nodeVersion)
