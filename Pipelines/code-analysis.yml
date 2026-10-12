@@ -9,7 +9,7 @@ schedules:
   always: false
 
 variables:
-  artifactName: 'enigmatry-entry-blueprint-template'
+  artifactName: 'enigmatry-entry-blueprint'
   projectNameAngularApp: enigmatry-entry-blueprint-app
   projectNamePrefix: Enigmatry.Entry.Blueprint
 
@@ -22,7 +22,7 @@ resources:
 jobs:
 - template: code-analysis.yml@templates
   parameters:
-    projectName: 'Enigmatry Blueprint Template'
+    projectName: 'Enigmatry Blueprint'
     sonarProjectKey: 'AspNetCoreAngular_EnigmatryEntryBlueprint'
     displayName: 'Code Analysis'
     dotNetVersion: '10.0.x'
