@@ -7,6 +7,7 @@ trigger:
 variables:
   artifactName: 'enigmatry-entry-blueprint'
   dbContextName: 'AppDbContext'
+  isMainBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'))]
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   majorMinorVersion: 1.0
   nodeVersion: '22.17.1'
@@ -54,7 +55,7 @@ stages:
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
   # Deploys master/main builds. To deploy a feature branch to test, replace BP-XYZ with (part of) its name.
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), contains(variables['Build.SourceBranch'], 'BP-XYZ')))
+  condition: and(succeeded(), or(eq(variables.isMainBranch, 'true'), contains(variables['Build.SourceBranch'], 'BP-XYZ')))
   variables:
   - template: variables/variables.test.yml
   jobs:
