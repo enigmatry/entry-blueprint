@@ -7,7 +7,7 @@ import { DefaultTitleStrategy, RouterStateSnapshot } from '@angular/router';
  */
 @Injectable()
 export class PageTitleStrategy extends DefaultTitleStrategy {
-  readonly appTitle = $localize`:@@app.title:Entry Blueprint App`;
+  readonly appTitle = $localize`:@@app.title:Enigmatry Blueprint`;
 
   override buildTitle(snapshot: RouterStateSnapshot): string {
     const routeTitle = super.buildTitle(snapshot);

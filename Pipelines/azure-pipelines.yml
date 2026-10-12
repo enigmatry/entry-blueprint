@@ -5,7 +5,7 @@ trigger:
     - '*'
 
 variables:
-  artifactName: 'enigmatry-entry-blueprint-template'
+  artifactName: 'enigmatry-entry-blueprint'
   dbContextName: 'AppDbContext'
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
   majorMinorVersion: 1.0
@@ -53,12 +53,14 @@ stages:
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
-  condition: and(succeeded(),or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), contains(variables['Build.SourceBranch'], 'BP-XYZ')))
+  # The branch must be the repository's default branch
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   variables:
   - template: variables/variables.test.yml
   jobs:
   - template: deploy-to-stage.yml
     parameters:
       environment: test
+      # Each project uses its own Azure DevOps service connection for the test environment
       serviceConnection: 'Enigmatry - Entry Template (Test)'
       

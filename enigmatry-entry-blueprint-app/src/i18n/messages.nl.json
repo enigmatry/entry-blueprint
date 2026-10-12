@@ -1,7 +1,7 @@
 {
   "locale": "nl-NL",
   "translations": {
-    "app.title": "Entry Blueprint App",
+    "app.title": "Enigmatry Blueprint",
     "common.no": "Nee",
     "common.yes": "Ja",
     "enum.product-type.book": "Boek",

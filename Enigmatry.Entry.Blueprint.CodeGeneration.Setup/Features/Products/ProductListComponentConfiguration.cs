@@ -19,7 +19,7 @@ public class ProductListComponentConfiguration : IListComponentConfiguration<Get
         // Configuring list columns:
         // InfoLink, Discount and HasDiscount are hidden columns, included purely to demonstrate IsVisible(false).
         // The list endpoint returns these fields for this reason only. In a real project, do not return fields
-        // in a list response that the list never displays (BP-1599).
+        // in a list response that the list never displays.
         builder
             .Column(x => x.InfoLink)
             .IsVisible(false);

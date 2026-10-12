@@ -47,7 +47,7 @@ jobs:
     artifactName: $(artifactName)
     displayName: Deploy the Web app
     dependsOn:
-      - deploy_scheduler #must be after scheduler since they are deployed into same webApp (this is Blueprint specific only)
+      - deploy_scheduler # webAppName and schedulerWebAppName point to the same web app, so the deployments must not overlap
     environment: ${{ parameters.environment }}
     packageName: $(projectNamePrefix).Api
     subscription: ${{ parameters.serviceConnection }}
