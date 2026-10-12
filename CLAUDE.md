@@ -78,4 +78,4 @@ npm run codegen:run    # regenerate Angular form/list components
 
 ## CI/CD
 
-Azure DevOps Pipelines (`Pipelines/azure-pipelines.yml`): builds and tests every branch, and deploys `master`/`main` builds to the test environment. To deploy a feature branch to test, replace `BP-XYZ` in the `Deploy_Test` condition with (part of) the branch name. Deployment uses publish profiles in `Deployment/`.
+Azure DevOps Pipelines (`Pipelines/azure-pipelines.yml`): pushes to `master`, `main` and `release/*` run the pipeline, and pull requests are validated by a PR build. Deploy branches (`master`, `main`, `release/*`) are packaged and deployed to the test environment; PR builds only build and test. To deploy a feature branch to test, set `manualPublishOverride: true` on that branch (never on a deploy branch). Deployment uses publish profiles in `Deployment/`.
