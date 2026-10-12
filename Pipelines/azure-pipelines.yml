@@ -2,13 +2,17 @@ trigger:
   batch: true
   branches:
     include:
-    - '*'
+    - master
+    - main
+    - release/*
 
 variables:
   artifactName: 'enigmatry-entry-blueprint'
   dbContextName: 'AppDbContext'
-  isMainBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'))]
-  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
+  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
+  # Flip to true to build and deploy a feature branch to Test; must stay false on master/main/release.
+  manualPublishOverride: false
+  isDeployBranch: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['manualPublishOverride'], true), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}
   majorMinorVersion: 1.0
   nodeVersion: '22.17.1'
   projectNameAngularApp: enigmatry-entry-blueprint-app
@@ -41,6 +45,11 @@ stages:
       nodeVersion: $(nodeVersion)
       dotNetVersion: '10.0.x'
       dotnetEfVersion: '10.0.*'
+      useDotNetBuild: true
+      useDotNetRestore: true
+      shouldPackage: ${{ eq(variables.isDeployBranch, true) }}
+      combineLintAndBuild: true
+      useNuGetCache: false
       projectNameAngularApp: $(projectNameAngularApp)
       projectNamePrefix: $(projectNamePrefix)
       runAngularTests: true
@@ -52,8 +61,7 @@ stages:
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
-  # Deploys master/main builds. To deploy a feature branch to test, replace BP-XYZ with (part of) its name.
-  condition: and(succeeded(), or(eq(variables.isMainBranch, 'true'), contains(variables['Build.SourceBranch'], 'BP-XYZ')))
+  condition: and(succeeded(), eq(variables.isDeployBranch, true))
   variables:
   - template: variables/variables.test.yml
   jobs:

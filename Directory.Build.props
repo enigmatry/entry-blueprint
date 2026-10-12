@@ -10,6 +10,7 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
     <NoWarn>$(NoWarn);NU5110;NU5111;NU1608</NoWarn><!-- Suppress warnings for ps1 files and Roslyn analyzer version constraint mismatches -->
   </PropertyGroup>
 </Project>
