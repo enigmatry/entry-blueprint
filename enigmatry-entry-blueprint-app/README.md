@@ -1,4 +1,4 @@
-# Enigmatry Blueprint
+# Entry Blueprint
 
 - [Starting the app](#starting-the-app)
   - [1. Starting the API](#1-starting-the-api)

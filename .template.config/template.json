@@ -55,7 +55,7 @@
     },
     "friendlyName": {
       "type": "parameter",
-      "replaces": "Enigmatry Blueprint"
+      "replaces": "Entry Blueprint"
     },
     "skipRestore": {
       "type": "parameter",
