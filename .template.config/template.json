@@ -21,7 +21,7 @@
   "sourceName": "Enigmatry.Entry.Blueprint",
   "sources": [
     {
-      "exclude": [ "**/Enigmatry.Entry.Blueprint.Template.csproj", "**/Pipelines/build-publish-nuget.yml", "**/.angular/**", "**/.template.config/**", "**/.idea/**", "**/bin/**", "**/obj/**", "**/dist/**", "**/node_modules/**", "**/.git/**", "**/.vs/**", "**/Artifacts/**", "**/_ReSharper.Caches/**", "**/*.user", "**/*.lock.json", "templating.md", "icon-192x192.png" ]
+      "exclude": [ "**/Enigmatry.Entry.Blueprint.Template.csproj", "**/Pipelines/build-publish-nuget.yml", "**/.angular/**", "**/.template.config/**", "**/.idea/**", "**/bin/**", "**/obj/**", "**/dist/**", "**/node_modules/**", "**/.git/**", "**/.vs/**", "**/Artifacts/**", "**/_ReSharper.Caches/**", "**/*.user", "**/*.lock.json", "templating.md", "icon-192x192.png", ".claude/rules/template-repo.md", ".claude/settings.local.json", ".claude/worktrees/**" ]
     }
   ],
   "preferNameDirectory": true,
