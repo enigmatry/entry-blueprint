@@ -1,5 +1,6 @@
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Csp;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Shouldly;
 
@@ -89,11 +90,28 @@ public class CspMiddlewareFixture
             nextCalled = true;
             return Task.CompletedTask;
         }, BuildConfiguration(SpaCsp, SwaggerCsp));
-        using var nonceProvider = new NonceProvider();
 
-        await middleware.InvokeAsync(new DefaultHttpContext { Request = { Path = "/" } }, nonceProvider);
+        await middleware.InvokeAsync(new DefaultHttpContext { Request = { Path = "/" } }, new NonceProvider());
 
         nextCalled.ShouldBeTrue();
+    }
+
+    [Test]
+    public async Task GivenResponseClearedBeforeItStarts_HeaderIsReappliedWithTheSameNonce()
+    {
+        // The exception handler calls Response.Clear() before writing ProblemDetails, which drops the header.
+        var responseFeature = new OnStartingRecordingResponseFeature();
+        var context = new DefaultHttpContext();
+        context.Features.Set<IHttpResponseFeature>(responseFeature);
+        context.Request.Path = "/users/42";
+        var nonceProvider = new NonceProvider();
+        var middleware = new CspMiddleware(_ => Task.CompletedTask, BuildConfiguration(SpaCsp, SwaggerCsp));
+
+        await middleware.InvokeAsync(context, nonceProvider);
+        context.Response.Clear();
+        await responseFeature.RunOnStartingCallbacksAsync();
+
+        context.Response.Headers[CspConstants.HeaderName].ToString().ShouldContain($"'nonce-{nonceProvider.Nonce}'");
     }
 
     private static Task<string> InvokeAsync(string path, string? spaCsp, string? swaggerCsp, out string nonce)
@@ -105,15 +123,12 @@ public class CspMiddlewareFixture
 
     private static async Task<string> InvokeAsync(string path, string? spaCsp, string? swaggerCsp, NonceProvider nonceProvider)
     {
-        using (nonceProvider)
-        {
-            var context = new DefaultHttpContext { Request = { Path = path } };
-            var middleware = new CspMiddleware(_ => Task.CompletedTask, BuildConfiguration(spaCsp, swaggerCsp));
+        var context = new DefaultHttpContext { Request = { Path = path } };
+        var middleware = new CspMiddleware(_ => Task.CompletedTask, BuildConfiguration(spaCsp, swaggerCsp));
 
-            await middleware.InvokeAsync(context, nonceProvider);
+        await middleware.InvokeAsync(context, nonceProvider);
 
-            return context.Response.Headers[CspConstants.HeaderName].ToString();
-        }
+        return context.Response.Headers[CspConstants.HeaderName].ToString();
     }
 
     private static IConfiguration BuildConfiguration(string? spaCsp, string? swaggerCsp) =>
@@ -124,4 +139,20 @@ public class CspMiddlewareFixture
                 { CspConstants.SwaggerSettingsName, swaggerCsp }
             })
             .Build();
+
+    // DefaultHttpContext's response feature discards OnStarting callbacks; this one records them so a test can run them.
+    private sealed class OnStartingRecordingResponseFeature : HttpResponseFeature
+    {
+        private readonly List<(Func<object, Task> Callback, object State)> _callbacks = [];
+
+        public override void OnStarting(Func<object, Task> callback, object state) => _callbacks.Add((callback, state));
+
+        public async Task RunOnStartingCallbacksAsync()
+        {
+            foreach (var (callback, state) in _callbacks)
+            {
+                await callback(state);
+            }
+        }
+    }
 }

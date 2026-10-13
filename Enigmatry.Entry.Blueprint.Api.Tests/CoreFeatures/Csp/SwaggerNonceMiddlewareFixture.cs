@@ -70,7 +70,7 @@ public class SwaggerNonceMiddlewareFixture
             ctx.Response.ContentLength = 20;
             await ctx.Response.WriteAsync("<script>x</script>");
         });
-        using var nonceProvider = new NonceProvider();
+        var nonceProvider = new NonceProvider();
 
         await middleware.InvokeAsync(context, nonceProvider);
 
@@ -88,7 +88,7 @@ public class SwaggerNonceMiddlewareFixture
             ctx.Response.ContentType = "application/json";
             await ctx.Response.WriteAsync(json);
         });
-        using var nonceProvider = new NonceProvider();
+        var nonceProvider = new NonceProvider();
 
         await middleware.InvokeAsync(context, nonceProvider);
 
@@ -105,7 +105,7 @@ public class SwaggerNonceMiddlewareFixture
             ctx.Response.ContentType = "text/html";
             await ctx.Response.WriteAsync(body);
         });
-        using var nonceProvider = new NonceProvider();
+        var nonceProvider = new NonceProvider();
 
         await middleware.InvokeAsync(context, nonceProvider);
 

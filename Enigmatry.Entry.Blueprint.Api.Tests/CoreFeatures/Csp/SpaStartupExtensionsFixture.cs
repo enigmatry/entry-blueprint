@@ -58,12 +58,13 @@ public class SpaStartupExtensionsFixture
         result.ShouldBe($"<app-root ngCspNonce=\"{Nonce}\"></app-root>");
     }
 
-    [TestCase("main-A1B2C3D4.js", true)]
-    [TestCase("styles-54GOK4WX.css", true)]
-    [TestCase("favicon.ico", false)]
-    [TestCase("main-a1b2c3d4.js", false)]
-    public void IsHashedFileName_MatchesAngularOutputHashingOnly(string fileName, bool expected)
+    [TestCase("main-A1B2C3D4.js", "public, max-age=604800, immutable")]
+    [TestCase("styles-54GOK4WX.css", "public, max-age=604800, immutable")]
+    [TestCase("favicon.ico", "no-cache")]
+    [TestCase("assets/i18n/en.json", "no-cache")]
+    [TestCase("main-a1b2c3d4.js", "no-cache")]
+    public void CacheControlFor_IsImmutableOnlyForAngularHashedNames(string fileName, string expected)
     {
-        SpaStartupExtensions.IsHashedFileName(fileName).ShouldBe(expected);
+        SpaStartupExtensions.CacheControlFor(fileName).ShouldBe(expected);
     }
 }

@@ -23,7 +23,18 @@ public class CspMiddleware
     [UsedImplicitly]
     public Task InvokeAsync(HttpContext context, NonceProvider nonceProvider)
     {
-        context.Response.Headers[CspConstants.HeaderName] = GetCspValue(context.Request.Path, nonceProvider.Nonce);
+        var csp = GetCspValue(context.Request.Path, nonceProvider.Nonce);
+        context.Response.Headers[CspConstants.HeaderName] = csp;
+        // The exception handler clears the response (headers included) before writing ProblemDetails; put it back.
+        context.Response.OnStarting(() =>
+        {
+            if (!context.Response.Headers.ContainsKey(CspConstants.HeaderName))
+            {
+                context.Response.Headers[CspConstants.HeaderName] = csp;
+            }
+
+            return Task.CompletedTask;
+        });
         return _next(context);
     }
 

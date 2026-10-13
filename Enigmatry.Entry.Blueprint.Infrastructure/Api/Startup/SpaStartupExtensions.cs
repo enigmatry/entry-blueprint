@@ -11,7 +11,7 @@ public static partial class SpaStartupExtensions
 {
     private const string IndexHtml = "index.html";
 
-    // Angular output hashing, e.g. main-A1B2C3D4.js; assets copied via angular.json keep stable names and must not be cached long-lived.
+    // Angular output hashing, e.g. main-A1B2C3D4.js.
     [GeneratedRegex(@"-[A-Z0-9]{8}\.[a-z0-9]+$")]
     private static partial Regex HashedFileNameRegex();
 
@@ -34,13 +34,7 @@ public static partial class SpaStartupExtensions
         app.UseStaticFiles(new StaticFileOptions
         {
             FileProvider = new IndexHtmlHidingFileProvider(app.Environment.WebRootFileProvider),
-            OnPrepareResponse = context =>
-            {
-                if (IsHashedFileName(context.File.Name))
-                {
-                    context.Context.Response.Headers.CacheControl = "public, max-age=604800, immutable";
-                }
-            }
+            OnPrepareResponse = context => context.Context.Response.Headers.CacheControl = CacheControlFor(context.File.Name)
         });
     }
 
@@ -78,5 +72,7 @@ public static partial class SpaStartupExtensions
             .Replace(html, $"<link nonce=\"{nonce}\" ")
             .Replace(CspConstants.NoncePlaceholder, nonce, StringComparison.Ordinal);
 
-    internal static bool IsHashedFileName(string fileName) => HashedFileNameRegex().IsMatch(fileName);
+    // Unhashed files (favicon, assets/**) keep their names across releases, so they must be revalidated on every use.
+    internal static string CacheControlFor(string fileName) =>
+        HashedFileNameRegex().IsMatch(fileName) ? "public, max-age=604800, immutable" : "no-cache";
 }

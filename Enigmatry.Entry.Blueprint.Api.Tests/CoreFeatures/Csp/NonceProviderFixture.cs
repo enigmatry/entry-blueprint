@@ -9,9 +9,7 @@ public class NonceProviderFixture
     [Test]
     public void Nonce_IsBase64Of32Bytes()
     {
-        using var provider = new NonceProvider();
-
-        var bytes = Convert.FromBase64String(provider.Nonce);
+        var bytes = Convert.FromBase64String(new NonceProvider().Nonce);
 
         bytes.Length.ShouldBe(32);
     }
@@ -19,9 +17,6 @@ public class NonceProviderFixture
     [Test]
     public void TwoProviders_ProduceDifferentNonces()
     {
-        using var first = new NonceProvider();
-        using var second = new NonceProvider();
-
-        first.Nonce.ShouldNotBe(second.Nonce);
+        new NonceProvider().Nonce.ShouldNotBe(new NonceProvider().Nonce);
     }
 }
