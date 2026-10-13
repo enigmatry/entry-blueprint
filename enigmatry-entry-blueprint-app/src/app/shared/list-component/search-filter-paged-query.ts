@@ -22,7 +22,7 @@ export class SearchFilterPagedQuery extends PagedQuery {
       const value = this.getValueFromQueryParam(queryParams, filter.key);
       filter.setValue(value);
     });
-  }
+  };
 
   private getValueFromQueryParam(queryParams: Params, filterKey: string): string | number | null | undefined {
     const filterValue = queryParams[filterKey];
@@ -51,5 +51,5 @@ export class SearchFilterPagedQuery extends PagedQuery {
       ...pagedParams,
       ...filterParams
     };
-  }
+  };
 }
