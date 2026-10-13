@@ -10,7 +10,7 @@ variables:
   artifactName: 'enigmatry-entry-blueprint'
   dbContextName: 'AppDbContext'
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
-  # Flip to true to build and deploy a feature branch to Test; must stay false on master/main/release.
+  # Flip to true to package and deploy a feature branch to Test through its PR build or a manual run; must stay false on master/main/release.
   manualPublishOverride: false
   isDeployBranch: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['manualPublishOverride'], true), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}
   majorMinorVersion: 1.0

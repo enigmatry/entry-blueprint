@@ -63,6 +63,7 @@ jobs:
     - checkout: self
       displayName: 'Checkout current repo'
       fetchDepth: 1
+      fetchTags: false
       persistCredentials: true
     - task: Bash@3
       displayName: Create Git tag
