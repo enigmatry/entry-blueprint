@@ -22,7 +22,7 @@ public class CspMiddleware
     public Task InvokeAsync(HttpContext context, NonceProvider nonceProvider)
     {
         // Swagger UI only runs in local development and relies on inline scripts and styles.
-        if (context.Request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase))
+        if (context.Request.Path.StartsWithSegments(RoutePrefixes.Swagger, StringComparison.OrdinalIgnoreCase))
         {
             return _next(context);
         }
@@ -44,7 +44,7 @@ public class CspMiddleware
 
     private string GetCspValue(PathString path, string nonce)
     {
-        if (path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase) || _spaCsp == null)
+        if (path.StartsWithSegments(RoutePrefixes.Api, StringComparison.OrdinalIgnoreCase) || _spaCsp == null)
         {
             return StrictCsp;
         }

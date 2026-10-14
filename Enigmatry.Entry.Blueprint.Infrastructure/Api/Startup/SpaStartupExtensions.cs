@@ -42,8 +42,8 @@ public static partial class SpaStartupExtensions
         app.MapFallback(async context =>
         {
             // Paths with an extension are asset requests (e.g. a mistyped bundle name) and get a real 404, not the shell.
-            if (context.Request.Path.StartsWithSegments("/api", StringComparison.OrdinalIgnoreCase) ||
-                context.Request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase) ||
+            if (context.Request.Path.StartsWithSegments(RoutePrefixes.Api, StringComparison.OrdinalIgnoreCase) ||
+                context.Request.Path.StartsWithSegments(RoutePrefixes.Swagger, StringComparison.OrdinalIgnoreCase) ||
                 Path.HasExtension(context.Request.Path.Value))
             {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
