@@ -11,46 +11,38 @@ public class CspMiddlewareFixture
 {
     private const string StrictCsp = "default-src 'none'; frame-ancestors 'none'";
     private const string SpaCsp = "default-src 'none'; style-src 'nonce-**PLACEHOLDER_NONCE_SERVER**'; script-src 'self' 'nonce-**PLACEHOLDER_NONCE_SERVER**'";
-    private const string SwaggerCsp = "default-src 'none'; script-src 'nonce-**PLACEHOLDER_NONCE_SERVER**'";
 
     [Test]
     public async Task GivenApiPath_StrictPolicyIsSet()
     {
-        var header = await InvokeAsync("/api/users", SpaCsp, SwaggerCsp, out _);
+        var context = await InvokeAsync("/api/users", SpaCsp, out _);
 
-        header.ShouldBe(StrictCsp);
+        GetCsp(context).ShouldBe(StrictCsp);
     }
 
     [Test]
     public async Task GivenSpaPath_ConfiguredSpaPolicyWithNonceIsSet()
     {
-        var header = await InvokeAsync("/users/42", SpaCsp, SwaggerCsp, out var nonce);
+        var context = await InvokeAsync("/users/42", SpaCsp, out var nonce);
 
-        header.ShouldBe($"default-src 'none'; style-src 'nonce-{nonce}'; script-src 'self' 'nonce-{nonce}'");
+        GetCsp(context).ShouldBe($"default-src 'none'; style-src 'nonce-{nonce}'; script-src 'self' 'nonce-{nonce}'");
     }
 
     [Test]
-    public async Task GivenSwaggerPath_ConfiguredSwaggerPolicyWithNonceIsSet()
+    public async Task GivenSwaggerPath_NoHeaderIsSet()
     {
-        var header = await InvokeAsync("/swagger/index.html", SpaCsp, SwaggerCsp, out var nonce);
+        // Swagger UI only runs in local development and needs inline scripts and styles; it is exempt from CSP.
+        var context = await InvokeAsync("/swagger/index.html", SpaCsp, out _);
 
-        header.ShouldBe($"default-src 'none'; script-src 'nonce-{nonce}'");
+        context.Response.Headers.ContainsKey(CspConstants.HeaderName).ShouldBeFalse();
     }
 
     [Test]
     public async Task GivenSpaPathWithoutConfiguredPolicy_StrictPolicyIsSet()
     {
-        var header = await InvokeAsync("/users/42", spaCsp: null, swaggerCsp: null, out _);
+        var context = await InvokeAsync("/users/42", spaCsp: null, out _);
 
-        header.ShouldBe(StrictCsp);
-    }
-
-    [Test]
-    public async Task GivenSwaggerPathWithoutConfiguredPolicy_StrictPolicyIsSet()
-    {
-        var header = await InvokeAsync("/swagger/index.html", spaCsp: null, swaggerCsp: null, out _);
-
-        header.ShouldBe(StrictCsp);
+        GetCsp(context).ShouldBe(StrictCsp);
     }
 
     [TestCase("")]
@@ -58,16 +50,16 @@ public class CspMiddlewareFixture
     public async Task GivenEmptySpaPolicy_StrictPolicyIsSet(string emptyPolicy)
     {
         // A Web Deploy parameter left at its empty default must not disable the CSP.
-        var header = await InvokeAsync("/", emptyPolicy, swaggerCsp: null, out _);
+        var context = await InvokeAsync("/", emptyPolicy, out _);
 
-        header.ShouldBe(StrictCsp);
+        GetCsp(context).ShouldBe(StrictCsp);
     }
 
     [Test]
     public void GivenConfiguredPolicyWithoutPlaceholder_ConstructionFails()
     {
         // Such a policy can never carry the nonce, so fail at startup instead of shipping it.
-        var configuration = BuildConfiguration("default-src 'self'", swaggerCsp: null);
+        var configuration = BuildConfiguration("default-src 'self'");
 
         Should.Throw<InvalidOperationException>(() => new CspMiddleware(_ => Task.CompletedTask, configuration))
             .Message.ShouldContain(CspConstants.SpaSettingsName);
@@ -76,9 +68,9 @@ public class CspMiddlewareFixture
     [Test]
     public async Task GivenApiPathWithDifferentCasing_StrictPolicyIsSet()
     {
-        var header = await InvokeAsync("/API/Users", SpaCsp, SwaggerCsp, out _);
+        var context = await InvokeAsync("/API/Users", SpaCsp, out _);
 
-        header.ShouldBe(StrictCsp);
+        GetCsp(context).ShouldBe(StrictCsp);
     }
 
     [Test]
@@ -89,7 +81,7 @@ public class CspMiddlewareFixture
         {
             nextCalled = true;
             return Task.CompletedTask;
-        }, BuildConfiguration(SpaCsp, SwaggerCsp));
+        }, BuildConfiguration(SpaCsp));
 
         await middleware.InvokeAsync(new DefaultHttpContext { Request = { Path = "/" } }, new NonceProvider());
 
@@ -105,39 +97,37 @@ public class CspMiddlewareFixture
         context.Features.Set<IHttpResponseFeature>(responseFeature);
         context.Request.Path = "/users/42";
         var nonceProvider = new NonceProvider();
-        var middleware = new CspMiddleware(_ => Task.CompletedTask, BuildConfiguration(SpaCsp, SwaggerCsp));
+        var middleware = new CspMiddleware(_ => Task.CompletedTask, BuildConfiguration(SpaCsp));
 
         await middleware.InvokeAsync(context, nonceProvider);
         context.Response.Clear();
         await responseFeature.RunOnStartingCallbacksAsync();
 
-        context.Response.Headers[CspConstants.HeaderName].ToString().ShouldContain($"'nonce-{nonceProvider.Nonce}'");
+        GetCsp(context).ShouldContain($"'nonce-{nonceProvider.Nonce}'");
     }
 
-    private static Task<string> InvokeAsync(string path, string? spaCsp, string? swaggerCsp, out string nonce)
+    private static Task<HttpContext> InvokeAsync(string path, string? spaCsp, out string nonce)
     {
         var nonceProvider = new NonceProvider();
         nonce = nonceProvider.Nonce;
-        return InvokeAsync(path, spaCsp, swaggerCsp, nonceProvider);
+        return InvokeAsync(path, spaCsp, nonceProvider);
     }
 
-    private static async Task<string> InvokeAsync(string path, string? spaCsp, string? swaggerCsp, NonceProvider nonceProvider)
+    private static async Task<HttpContext> InvokeAsync(string path, string? spaCsp, NonceProvider nonceProvider)
     {
         var context = new DefaultHttpContext { Request = { Path = path } };
-        var middleware = new CspMiddleware(_ => Task.CompletedTask, BuildConfiguration(spaCsp, swaggerCsp));
+        var middleware = new CspMiddleware(_ => Task.CompletedTask, BuildConfiguration(spaCsp));
 
         await middleware.InvokeAsync(context, nonceProvider);
 
-        return context.Response.Headers[CspConstants.HeaderName].ToString();
+        return context;
     }
 
-    private static IConfiguration BuildConfiguration(string? spaCsp, string? swaggerCsp) =>
+    private static string GetCsp(HttpContext context) => context.Response.Headers[CspConstants.HeaderName].ToString();
+
+    private static IConfiguration BuildConfiguration(string? spaCsp) =>
         new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { CspConstants.SpaSettingsName, spaCsp },
-                { CspConstants.SwaggerSettingsName, swaggerCsp }
-            })
+            .AddInMemoryCollection(new Dictionary<string, string?> { { CspConstants.SpaSettingsName, spaCsp } })
             .Build();
 
     // DefaultHttpContext's response feature discards OnStarting callbacks; this one records them so a test can run them.

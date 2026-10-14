@@ -85,21 +85,14 @@ public partial class SecurityHeadersFixture : IntegrationFixtureBase
     }
 
     [Test]
-    public async Task SwaggerUi_IsServedUnderSwaggerPathWithNoncedTags()
+    public async Task SwaggerUi_IsServedWithoutCsp()
     {
-        // The test host runs as Development, where Swagger UI is enabled.
+        // The test host runs as Development, where Swagger UI is enabled; it is exempt from CSP.
         var response = await Client.GetAsync("swagger/index.html");
 
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
         response.Content.Headers.ContentType?.MediaType.ShouldBe("text/html");
-        var csp = GetCsp(response);
-        csp.ShouldNotContain(CspConstants.NoncePlaceholder);
-        var nonce = NonceRegex().Match(csp).Groups[1].Value;
-        nonce.ShouldNotBeNullOrEmpty();
-        var body = await response.Content.ReadAsStringAsync();
-        var scriptTags = Regex.Matches(body, "<script[^>]*>", RegexOptions.IgnoreCase).Select(m => m.Value).ToList();
-        scriptTags.ShouldNotBeEmpty();
-        scriptTags.ShouldAllBe(tag => tag.Contains($"nonce=\"{nonce}\"", StringComparison.Ordinal));
+        response.Headers.Contains(CspConstants.HeaderName).ShouldBeFalse();
     }
 
     private static string GetCsp(HttpResponseMessage response) =>

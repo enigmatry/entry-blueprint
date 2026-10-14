@@ -74,9 +74,6 @@ public static class ProgramExtensions
 
         app.UseRouting();
 
-        // Before the Swagger UI middleware (registered at the end) so it can rewrite its HTML.
-        app.UseMiddleware<SwaggerNonceMiddleware>();
-
         if (configuration.AppUseDeveloperExceptionPage())
         {
             app.UseDeveloperExceptionPage();
