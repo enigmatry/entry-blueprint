@@ -3,12 +3,20 @@
     "ENABLE_LSP_TOOL": "1"
   },
   "enabledMcpjsonServers": [
-    "azure-devops",
-    "atlassian",
-    "Context7"
+    "atlassian"
   ],
+  "extraKnownMarketplaces": {
+    "enigmatry": {
+      "source": {
+        "source": "github",
+        "repo": "enigmatry/claude-plugins"
+      },
+      "autoUpdate": true
+    }
+  },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
-    "csharp-lsp@claude-plugins-official": true
+    "csharp-lsp@claude-plugins-official": true,
+    "entry-blueprint@enigmatry": true
   }
 }
