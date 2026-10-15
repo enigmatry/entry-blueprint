@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AspireVersion>13.6.1</AspireVersion>
+    <AspireVersion>13.5.4</AspireVersion>
     <EnigmatryEntryVersion>10.5.0</EnigmatryEntryVersion>
     <DotnetVersion>10.0.13</DotnetVersion>
     <VerifyVersion>33.3.3</VerifyVersion>
