@@ -37,7 +37,7 @@ public static class ProgramExtensions
         services.AppAddAuthentication(configuration);
         services.AddEntryAuthorization<PermissionId>();
 
-        services.AppAddSwaggerWithAzureAdAuth(configuration, "Enigmatry Blueprint Api", "v1", configureSettings =>
+        services.AppAddSwaggerWithAzureAdAuth(configuration, "Entry Blueprint Api", "v1", configureSettings =>
         {
             configureSettings.EntryConfigureSmartEnums();
         });

@@ -38,7 +38,7 @@ public class TestConfigurationBuilder
             { "App:AzureAd:Instance", "https://enigmatryb2cdev.b2clogin.com" },
             { "App:AzureAd:ClientId", "a8793ce9-86dc-4d7e-aa70-361a3c5a5150" },
             { "App:AzureAd:Domain", "enigmatryb2cdev.onmicrosoft.com" },
-            { "App:AzureAd:SignUpSignInPolicyId", "B2C_1_entry_blueprint_sign_in" },
+            { "App:AzureAd:SignUpSignInPolicyId", "B2C_1_sign_in" },
             { "HealthChecks:TokenAuthorizationEnabled", "false" },
             { "KeyVault:Enabled", "false" }
         };

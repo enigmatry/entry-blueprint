@@ -2,12 +2,17 @@ trigger:
   batch: true
   branches:
     include:
-    - '*'
+    - master
+    - main
+    - release/*
 
 variables:
-  artifactName: 'enigmatry-entry-blueprint-template'
+  artifactName: 'enigmatry-entry-blueprint'
   dbContextName: 'AppDbContext'
-  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/releases/')]
+  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
+  # Flip to true to package and deploy a feature branch to Test through its PR build or a manual run; must stay false on master/main/release.
+  manualPublishOverride: false
+  isDeployBranch: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['manualPublishOverride'], true), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}
   majorMinorVersion: 1.0
   nodeVersion: '22.17.1'
   projectNameAngularApp: enigmatry-entry-blueprint-app
@@ -25,23 +30,26 @@ resources:
 stages:
 - stage: 'ci_build'
   displayName: 'Build the web application'
-  jobs: 
-  - job: build_prerequisites
-    displayName: Get the prerequisites for the build
-    steps:
-    - bash: |
-        HASH=$(git rev-parse --short $BUILD_SOURCEVERSION)
-        VERSION=$BUILD_BUILDNUMBER-$HASH
-      
-        echo "Hash: $HASH. Setting build number to: $VERSION"
-        echo '##vso[build.updatebuildnumber]'$VERSION
-      displayName: 'Set Build number'
- 
+  jobs:
   - template: build-angular-app-and-dotnet-api.yml@templates
     parameters:
+      prerequisiteJobName: ''
+      fetchDepth: 1
+      preBuildSteps:
+      - pwsh: |
+          $hash = $env:BUILD_SOURCEVERSION.Substring(0, 7)
+          echo "##vso[build.updatebuildnumber]$($env:BUILD_BUILDNUMBER -replace "-g?$hash$")-g$hash"
+        displayName: Set build number
       artifactName: $(artifactName)
       displayName: 'Build Angular App and .net API'
       nodeVersion: $(nodeVersion)
+      dotNetVersion: '10.0.x'
+      dotnetEfVersion: '10.0.*'
+      useDotNetBuild: true
+      useDotNetRestore: true
+      shouldPackage: ${{ eq(variables.isDeployBranch, true) }}
+      combineLintAndBuild: true
+      useNuGetCache: false
       projectNameAngularApp: $(projectNameAngularApp)
       projectNamePrefix: $(projectNamePrefix)
       runAngularTests: true
@@ -53,12 +61,13 @@ stages:
 - stage: 'Deploy_Test'
   displayName: 'Deploy to the test environment'
   dependsOn: ci_build
-  condition: and(succeeded(),or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), contains(variables['Build.SourceBranch'], 'BP-XYZ')))
+  condition: and(succeeded(), eq(variables.isDeployBranch, true))
   variables:
   - template: variables/variables.test.yml
   jobs:
   - template: deploy-to-stage.yml
     parameters:
       environment: test
+      # Each project uses its own Azure DevOps service connection for the test environment
       serviceConnection: 'Enigmatry - Entry Template (Test)'
       

@@ -21,7 +21,7 @@
   "sourceName": "Enigmatry.Entry.Blueprint",
   "sources": [
     {
-      "exclude": [ "**/Enigmatry.Entry.Blueprint.Template.csproj", "**/Pipelines/build-publish-nuget.yml", "**/.angular/**", "**/.template.config/**", "**/.idea/**", "**/bin/**", "**/obj/**", "**/dist/**", "**/node_modules/**", "**/.git/**", "**/.vs/**", "**/Artifacts/**", "**/_ReSharper.Caches/**", "**/*.user", "**/*.lock.json" ]
+      "exclude": [ "**/Enigmatry.Entry.Blueprint.Template.csproj", "**/Pipelines/build-publish-nuget.yml", "**/.angular/**", "**/.template.config/**", "**/.idea/**", "**/bin/**", "**/obj/**", "**/dist/**", "**/node_modules/**", "**/.git/**", "**/.vs/**", "**/Artifacts/**", "**/_ReSharper.Caches/**", "**/*.user", "**/*.lock.json", "templating.md", "icon-192x192.png" ]
     }
   ],
   "preferNameDirectory": true,
@@ -55,7 +55,7 @@
     },
     "friendlyName": {
       "type": "parameter",
-      "replaces": "Enigmatry Blueprint"
+      "replaces": "Entry Blueprint"
     },
     "skipRestore": {
       "type": "parameter",
@@ -273,7 +273,7 @@
   ],
   "primaryOutputs": [
     {
-      "path": "Enigmatry.Entry.Blueprint.sln"
+      "path": "Enigmatry.Entry.Blueprint.slnx"
     }
   ],
   "postActions": [
