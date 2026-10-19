@@ -4,31 +4,31 @@
     "net10.0": {
       "Enigmatry.Entry.Core": {
         "type": "Direct",
-        "requested": "[10.3.1, )",
-        "resolved": "10.3.1",
-        "contentHash": "m8jImN06Hp6Z/7Ax4h5x9THCQaEk4v+3Y1gKepacy2jMsRlv1cvLKiMROTZ5G3wM+xEmVKHFt4Zy/lUWperfvQ==",
+        "requested": "[10.5.0, )",
+        "resolved": "10.5.0",
+        "contentHash": "Vs3jA8fXHr8jaFKoF7ODqp/ruyO1OviAg3vZe8mRhc36PjZFIrEZ4y9z6JNl176XevsKWUs96LppY65FGwoaXQ==",
         "dependencies": {
-          "FluentValidation": "12.1.1",
+          "FluentValidation": "12.2.0",
           "JetBrains.Annotations": "2026.2.0",
           "MediatR": "[12.4.1]",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.11",
-          "Microsoft.Extensions.Logging.Abstractions": "10.0.11",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.13",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.13",
           "Serilog": "4.4.0"
         }
       },
       "Enigmatry.Entry.SmartEnums": {
         "type": "Direct",
-        "requested": "[10.3.1, )",
-        "resolved": "10.3.1",
-        "contentHash": "aBdI8Xf0NaWauyvg1g9scf4amp4vlPP3TB3Im5uRWOVIhJwp95zeT0lh8zij2lJsb3UIvAl0jNM6HssytE37fg==",
+        "requested": "[10.5.0, )",
+        "resolved": "10.5.0",
+        "contentHash": "Eq8isS1s/pDhPmy1KhaFC0L2WLbEdabTM42Il5Nqs5x8bquEF2VfXAB9uW+I147nBTUgdiO9peNlZxHIwEIeWg==",
         "dependencies": {
           "Ardalis.SmartEnum": "8.2.0",
-          "Enigmatry.Entry.Core": "10.3.1",
-          "FluentValidation": "12.1.1",
+          "Enigmatry.Entry.Core": "10.5.0",
+          "FluentValidation": "12.2.0",
           "JetBrains.Annotations": "2026.2.0",
           "MediatR": "[12.4.1]",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.11",
-          "Microsoft.Extensions.Logging.Abstractions": "10.0.11",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.13",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.13",
           "Serilog": "4.4.0"
         }
       },
@@ -58,8 +58,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "10.0.11",
-        "contentHash": "/a1aJz4m7ylhEDf25ugQChLQoN5XwoGjWw/BoR/ZWWKsO1v4DdJElS1uyngahz4B/eOzjFk1KNTkarRLE5wsIg=="
+        "resolved": "10.0.13",
+        "contentHash": "G2GrGWNAPZBsii2F6AU8n+JT2tC1/I0Ml/e9ZyNCgPjf3hZqronP7o0X91aAynCmVeae8KkSIUNXXeXCNRmdVQ=="
       },
       "Serilog": {
         "type": "Transitive",
@@ -68,17 +68,17 @@
       },
       "FluentValidation": {
         "type": "CentralTransitive",
-        "requested": "[12.1.1, )",
-        "resolved": "12.1.1",
-        "contentHash": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw=="
+        "requested": "[12.2.0, )",
+        "resolved": "12.2.0",
+        "contentHash": "DR3lFbdnKucaaj1/8zMNOACMz/64igzox1yVZSFVsLxYB5mxAB+wFP1WZ8fjwrZnbU1KA1DoMzHKYKxUfuZ4wQ=="
       },
       "Microsoft.Extensions.Logging.Abstractions": {
         "type": "CentralTransitive",
-        "requested": "[10.0.11, )",
-        "resolved": "10.0.11",
-        "contentHash": "Ljd0Uxoq5XpScD2Bg0nM/r3mwx7Ao5Uq24eo2ARxbGvqJ7Zht6rt2cJtwVRH4Cv+1ZVMdXz6TB43KbpmsxRrvQ==",
+        "requested": "[10.0.13, )",
+        "resolved": "10.0.13",
+        "contentHash": "aSZEhEig4fvNiw2zs8Z6NyDlniKtq6YjcF3DyHuqTEHcZ2VKA/6itMPZ+dW+yWABWExlDcQwwdbqX1Rcb7W8WQ==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.11"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.13"
         }
       }
     }
