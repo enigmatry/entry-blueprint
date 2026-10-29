@@ -1,4 +1,6 @@
-﻿Write-Host "Adding migration to AppDbContext"
+﻿$migrationsProject = Join-Path $PSScriptRoot "../Enigmatry.Entry.Blueprint.Data.Migrations"
+
+Write-Host "Adding migration to AppDbContext"
 $migrationName = Read-Host "Enter migration name (or 'exit' to quit)"
 
 #Write-Host "You have entered: $migrationName"
@@ -12,5 +14,5 @@ if ($migrationName -eq "exit")
 }
 else
 {
-    dotnet-ef migrations add $migrationName --project ../Enigmatry.Entry.Blueprint.Data.Migrations --startup-project ../Enigmatry.Entry.Blueprint.Data.Migrations --context AppDbContext
+    dotnet-ef migrations add $migrationName --project $migrationsProject --startup-project $migrationsProject --context AppDbContext
 }

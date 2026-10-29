@@ -1,12 +1,12 @@
-# Copilot Instructions
+# Entry Blueprint
 
 ## Project Overview
 
-Enigmatry Entry Blueprint is a **production-ready full-stack starter template** for .NET 9 + Angular 20 applications. It demonstrates enterprise patterns: Vertical Slice Architecture, CQRS via MediatR, DDD-style domain entities, EF Core with SQL Server, Autofac DI, background scheduling, and Angular code generation from C# configuration. The working features (Users, Products) serve as reference implementations to copy when adding new features.
+Entry Blueprint is a .NET 10 + Angular 21 application built on Enigmatry Entry's `blueprint` template. It uses Vertical Slice Architecture, CQRS via MediatR, DDD-style domain entities, EF Core with SQL Server, Autofac DI, background scheduling, and Angular code generation from C# configuration. The Users and Products features are reference implementations to copy when adding new features.
+
+Coding standards, testing, code review and the Jira/Azure DevOps workflows come from the `entry-blueprint` Claude Code plugin (enabled in `.claude/settings.json`). This file holds what is specific to this repository. The plugin's branch and pull-request skills read the project's Jira and Azure DevOps identifiers from a `## Known identifiers` section (Jira project key, Atlassian cloud ID, Azure DevOps org/repo/project, default branch).
 
 ## Architecture
-
-This is a full-stack **blueprint template** using **Vertical Slice Architecture + CQRS** with .NET 9 and Angular 20.
 
 **Backend projects:**
 | Project | Role |
@@ -22,23 +22,18 @@ This is a full-stack **blueprint template** using **Vertical Slice Architecture 
 | `ServiceDefaults` | Shared .NET Aspire configuration (OpenTelemetry, health checks) |
 | `AppHost` | .NET Aspire orchestration host |
 
-**Frontend:** Angular 20 standalone components in `enigmatry-entry-blueprint-app/src/app/`, structured as `core/`, `features/`, `shared/`, `api/`.
+**Frontend:** Angular 21 standalone components in `enigmatry-entry-blueprint-app/src/app/`, structured as `core/`, `features/`, `shared/`, `api/`.
 
-**Database:** SQL Server via EF Core 9 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
+**Database:** SQL Server via EF Core 10 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
 
 ## Key Conventions
 
-- **Commands** (writes) live in `Domain/{Feature}/Commands/` as a static class with a nested `Command : IRequest<T>`, a nested `Validator : AbstractValidator<Command>`, and a separate `*CommandHandler.cs` in the same folder.
-- **Queries** (reads) live in `Api/Features/{Feature}/Get*.cs` as a static class with a nested `Request`, a nested `Response` (containing the DTO and an inner `MappingProfile : Profile`), and a `RequestHandler`.
-- **Controllers** only dispatch via MediatR — no business logic. Use primary-constructor `IMediator` injection, return `response.ToActionResult()`, and decorate every endpoint with `[UserHasPermission(PermissionId.X)]`.
-- **Domain entities** inherit from `EntityWithCreatedUpdated`, have `private` setters, expose a static `Create(Command)` factory and an `Update(Command)` method, and raise domain events via `AddDomainEvent()`.
-- **Smart Enums** — use `Ardalis.SmartEnum` instead of C# `enum` for all status/type values; ID types live in `Domain/{Feature}/{Name}Id.cs`; EF, JSON, and Swagger converters are wired automatically via `Enigmatry.Entry.SmartEnums.*`.
-- **DI** is configured via Autofac modules in `Infrastructure/Autofac/Modules/`; `ServiceModule` auto-registers any class whose name ends with `Service`.
-- **EF configurations** live in `Infrastructure/Data/Configurations/` as `IEntityTypeConfiguration<T>` classes; use `EntityWithEnumIdConfiguration<T>` for entities with SmartEnum primary keys.
+- **Feature patterns** (queries, commands, controllers, domain entities, EF configurations, Autofac modules) follow the `entry-blueprint:aspnet-rest-apis` skill; the Products and Users features are the reference implementations.
+- **Enums** — `ProductType`, `ProductStatus` and `PermissionId` are plain C# enums. `UserStatus` is the SmartEnum example: an `EntityWithEnumId` entity with the `Ardalis.SmartEnum` id `UserStatusId`, configured with `EntityWithEnumIdConfiguration<TEntity, TId>` (see `UserStatusConfiguration`); EF, JSON and Swagger converters come from `Enigmatry.Entry.SmartEnums.*`. Existing entities keep their identifier types.
 - **Central Package Management** — all NuGet versions are declared in `Directory.Packages.props` only; never add `Version=` to a `<PackageReference>` in a `.csproj`.
-- **Code quality** — `TreatWarningsAsErrors`, `EnforceCodeStyleInBuild`, and `Nullable` are all enabled; use `[PublicAPI]` on DTOs/request/response types and `[UsedImplicitly]` on handlers and validators.
-- **Integration tests** inherit from `IntegrationFixtureBase` (WebApplicationFactory + Testcontainers SQL Server), use `Client.GetAsync<T>()` / `Client.PostAsync<>()` helpers, assert with `Verify()` snapshot files (`.verified.txt`), and are marked `[Category("integration")]`.
-- **Test builders** in `Domain.Tests/{Feature}/{Entity}Builder.cs` use fluent `With*()` methods and an implicit conversion to the entity type for seeding test data.
+- **Code quality** — `TreatWarningsAsErrors`, `EnforceCodeStyleInBuild`, and `Nullable` are all enabled.
+- **Backend tests** use NUnit 5 (the version in `Directory.Packages.props`), Shouldly, FakeItEasy and Verify. Integration tests inherit from `IntegrationFixtureBase` (WebApplicationFactory + Testcontainers SQL Server), use the `Client.GetAsync<T>()` / `Client.PostAsync<>()` helpers, assert with `Verify()` snapshot files (`.verified.txt`), and are marked `[Category("integration")]`. Test builders in `Domain.Tests/{Feature}/{Entity}Builder.cs` use fluent `With*()` methods and an implicit conversion to the entity.
+- **Frontend unit tests** run on Jest (`jest-preset-angular`, config in `jest.config.json`; shared setup and mocks in `src/testing/`). New specs extend this Jest suite; moving the suite to Vitest is a separate, dedicated change.
 - **Angular code generation** — add `IListComponentConfiguration<T>` / `IFormComponentConfiguration<T>` to `CodeGeneration.Setup/Features/{Feature}/`, rebuild that project, then run `npm run codegen:run`; generated files in `src/app/features/` must not be edited manually.
 - **Content Security Policy** — the CSP header is set by `CspMiddleware` (Infrastructure/Api/Csp), not by web.config. The SPA policy lives in `SpaContentSecurityPolicyValue` (appsettings, Web Deploy token `__spaContentSecurityPolicyValue__`) and must contain `**PLACEHOLDER_NONCE_SERVER**`; the placeholder is replaced per request in the header and in `wwwroot/index.html` (`ngCspNonce` on `<app-root>`), which is served only by the nonce-injecting SPA fallback. Never add `'unsafe-inline'` back.
 
@@ -84,53 +79,4 @@ npm run codegen:run    # regenerate Angular form/list components
 
 ## CI/CD
 
-Azure DevOps Pipelines (`Pipelines/azure-pipelines.yml`). Stages: Build → Test → Acceptance → Production. Deployment uses publish profiles in `Deployment/`.
-- **Organization**: `enigmatry`
-- **Project**: `Enigmatry Blueprint Template` (ID: `b3d80552-b808-495c-9332-82888c12c1bf`)
-
-## Git Branch Workflow
-
-When the user asks to create a new branch and provides a Jira ticket ID:
-
-1. **Fetch the Jira ticket** by its ID to retrieve its **summary/title** and current status.
-2. **Assign the ticket to yourself**: call `atlassian-atlassianUserInfo` to get your account ID, then `atlassian-editJiraIssue` to set `assignee.accountId`.
-3. **Transition to In Progress** (if not already): call `atlassian-getTransitionsForJiraIssue` to find the "In Progress" transition ID, then `atlassian-transitionJiraIssue` to apply it.
-4. Convert the title to **kebab-case** (lowercase, spaces → hyphens, strip special characters).
-5. Create and switch to the branch: `BP-<TICKET-ID>-<kebab-case-title>`
-   - Example: ticket `BP-42` with title "Add product search endpoint" → `BP-42-add-product-search-endpoint`
-6. Run `git checkout -b <branch-name>` (or `git switch -c <branch-name>`) to create and immediately switch to it.
-7. Confirm the active branch, assignment, and ticket status to the user.
-
-**Rules:**
-- Ticket ID is uppercase as-is (e.g. `BP-42`, not `bp-42`).
-- Kebab-case segment: lowercase only, hyphens instead of spaces/underscores, remove any characters that are not alphanumeric or hyphens.
-- Always assign the ticket and transition it before creating the branch.
-- Skip the transition step (but still assign) if the ticket is already "In Progress".
-
-## Pull Request Workflow
-
-When the user asks to create a PR (pull request):
-
-1. **Fetch the Jira ticket** (if not already known) to get the title.
-   - Jira cloud ID: `enigmatry.atlassian.net`
-2. **Get current branch name**: `git branch --show-current`
-3. **Create the PR** via Azure DevOps using:
-   - `sourceRefName`: current branch (`refs/heads/<branch-name>`)
-   - `targetRefName`: `refs/heads/master`
-   - `title`: `BP-<TICKET-ID> - <Jira ticket title>`
-   - `description`: `https://enigmatry.atlassian.net/browse/BP-<TICKET-ID>`
-   - `isDraft`: false (unless user requests a draft)
-4. Set **Squash** merge strategy and enable **auto-complete**: call `azure-devops-repo_update_pull_request` with `mergeStrategy: Squash` and `autoComplete: true`.
-5. Confirm the PR URL to the user.
-
-**Known identifiers:**
-- Azure DevOps org/repo: `enigmatry/entry-blueprint`
-- Default branch: `master`
-- Jira project: `BP`
-
-**Rules:**
-- PR title format: `BP-<TICKET-ID> - <ticket title>` (uppercase ticket ID, space-dash-space separator).
-- PR description must be the direct Jira link.
-- Always use Squash merge strategy.
-- Always enable Auto-complete — verify `autoCompleteSetBy` is non-null in the response.
-- Never create the PR without the Jira ticket title (fetch it if not in context).
+Azure DevOps Pipelines (`Pipelines/azure-pipelines.yml`): pushes to `master`, `main` and `release/*` run the pipeline, and pull requests are validated by a PR build. Deploy branches (`master`, `main`, `release/*`) are packaged and deployed to the test environment; other builds only build and test. To deploy a feature branch to test, set `manualPublishOverride: true` on that branch (never on a deploy branch): its PR build, or a manual pipeline run for the branch, then packages and deploys it. Deployment uses publish profiles in `Deployment/`.

@@ -10,7 +10,6 @@ using Enigmatry.Entry.Blueprint.Infrastructure.Api.Logging;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Security;
 using Enigmatry.Entry.Blueprint.Infrastructure.Api.Startup;
 using Enigmatry.Entry.Blueprint.Infrastructure.Autofac.Modules;
-using Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 using Enigmatry.Entry.Blueprint.Infrastructure.Data;
 using Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 using Enigmatry.Entry.Blueprint.Infrastructure.Init;
@@ -40,7 +39,7 @@ public static class ProgramExtensions
         services.AppAddAuthentication(configuration);
         services.AddEntryAuthorization<PermissionId>();
 
-        services.AppAddSwaggerWithAzureAdAuth(configuration, "Enigmatry Blueprint Api", "v1", configureSettings =>
+        services.AppAddSwaggerWithAzureAdAuth(configuration, "Entry Blueprint Api", "v1", configureSettings =>
         {
             configureSettings.EntryConfigureSmartEnums();
         });
@@ -74,13 +73,9 @@ public static class ProgramExtensions
 
         app.UseRouting();
 
-        if (configuration.AppUseDeveloperExceptionPage())
+        if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
-        }
-
-        if (app.Environment.IsDevelopment())
-        {
             app.UseCors(builder => builder
                 .WithOrigins("http://localhost:4200")
                 .AllowCredentials()

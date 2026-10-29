@@ -1,19 +1,18 @@
-# Enigmatry Blueprint Template project
+# Entry Blueprint
 
-- [Enigmatry Blueprint Template project](#enigmatry-blueprint-template-project)
-  - [Starting the app](#starting-the-app)
-    - [1. Starting the API](#1-starting-the-api)
-    - [2. Configuring the App](#2-configuring-the-app)
-    - [3. Starting the App](#3-starting-the-app)
-  - [Code generation](#code-generation)
-    - [1. Installing code generator tool](#1-installing-code-generator-tool)
-    - [2. Configuring the code to be generated](#2-configuring-the-code-to-be-generated)
-    - [3. Generating code](#3-generating-code)
-  - [Code generator configuration](#code-generator-configuration)
-    - [Custom validators](#custom-validators)
-    - [Form fields conditional visibility](#form-fields-conditional-visibility)
-  - [Theming Customization](#theming-customization)
-  - [Enums](#enums)
+- [Starting the app](#starting-the-app)
+  - [1. Starting the API](#1-starting-the-api)
+  - [2. Configuring the App](#2-configuring-the-app)
+  - [3. Starting the App](#3-starting-the-app)
+- [Code generation](#code-generation)
+  - [1. Installing code generator tool](#1-installing-code-generator-tool)
+  - [2. Configuring the code to be generated](#2-configuring-the-code-to-be-generated)
+  - [3. Generating code](#3-generating-code)
+- [Code generator configuration](#code-generator-configuration)
+  - [Custom validators](#custom-validators)
+  - [Form fields conditional visibility](#form-fields-conditional-visibility)
+- [Theming Customization](#theming-customization)
+- [Enums](#enums)
 
 ## Starting the app
 
@@ -111,10 +110,10 @@ After creating the dictionary, we pass it to form `fieldsHideExpressions` input:
 ```
 
 ## Theming Customization
-Blueprint comes with a pre-configured theme. If you need to customize or alter theme, please refer to detailed documentation [here](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md).
+The app comes with a pre-configured theme. If you need to customize or alter theme, please refer to detailed documentation [here](https://github.com/enigmatry/entry-angular-building-blocks/blob/master/libs/entry-components/configure-theming.md).
 
 ## Enums
-Blueprint comes with the support of Smart enums. Smart enums are [type-safe object-oriented alternative](https://codeblog.jonskeet.uk/2006/01/05/classenum/) to [C# Enum](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum). Since the smart enums are not built into the .NET framework we are using a 3rd party library [Ardalis.SmartEnum](https://github.com/ardalis/SmartEnum) as a base for adding this support. Beside the Ardalis.SmartEnum library, Entry is providing various utilities, extension methods and helper classes to provide more comprehensive support needed for real life system.
+The app comes with the support of Smart enums. Smart enums are [type-safe object-oriented alternative](https://codeblog.jonskeet.uk/2006/01/05/classenum/) to [C# Enum](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum). Since the smart enums are not built into the .NET framework we are using a 3rd party library [Ardalis.SmartEnum](https://github.com/ardalis/SmartEnum) as a base for adding this support. Beside the Ardalis.SmartEnum library, Entry is providing various utilities, extension methods and helper classes to provide more comprehensive support needed for real life system.
 
 This support includes:
 
