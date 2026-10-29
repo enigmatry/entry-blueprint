@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -28,7 +29,12 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
         Server.PreserveExecutionContext = true;
     }
 
-    protected override void ConfigureWebHost(IWebHostBuilder builder) =>
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        // Serve the SPA shell from a fixed test web root so the nonce-injecting fallback is exercised deterministically.
+        builder.ConfigureServices((context, _) =>
+            context.HostingEnvironment.WebRootFileProvider =
+                new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, "TestWebRoot")));
         builder.ConfigureTestServices(services =>
         {
             services.AddAuthentication(TestUserAuthenticationHandler.AuthenticationScheme)
@@ -36,6 +42,7 @@ internal class ApiWebApplicationFactory : WebApplicationFactory<Program>
                     TestUserAuthenticationHandler.AuthenticationScheme,
                     options => options.TestPrincipalFactory = () => _isUserAuthenticated ? TestUserData.CreateClaimsPrincipal() : null);
         });
+    }
 
     protected override IHost CreateHost(IHostBuilder builder)
     {

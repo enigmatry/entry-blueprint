@@ -40,7 +40,8 @@ public class TestConfigurationBuilder
             { "App:AzureAd:Domain", "enigmatryb2cdev.onmicrosoft.com" },
             { "App:AzureAd:SignUpSignInPolicyId", "B2C_1_sign_in" },
             { "HealthChecks:TokenAuthorizationEnabled", "false" },
-            { "KeyVault:Enabled", "false" }
+            { "KeyVault:Enabled", "false" },
+            { "SpaContentSecurityPolicyValue", "default-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'nonce-**PLACEHOLDER_NONCE_SERVER**'; style-src 'self' 'nonce-**PLACEHOLDER_NONCE_SERVER**'; img-src 'self' data:; connect-src 'self'" }
         };
 
         configurationBuilder.AddInMemoryCollection(dict);

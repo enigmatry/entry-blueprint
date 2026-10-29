@@ -4,6 +4,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="TestWebRoot\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Resources\**" />
     <EmbeddedResource Remove="Resources\**" />
     <None Remove="Resources\**" />

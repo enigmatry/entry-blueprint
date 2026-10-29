@@ -12,7 +12,8 @@ public static class SwaggerAuthenticationStartupExtensions
     public static void AppUseSwaggerWithAzureAdAuth(this IApplicationBuilder app, IConfiguration configuration)
     {
         var aadOptions = configuration.GetSection(AuthenticationStartupExtensions.AzureAdSection).Get<MicrosoftIdentityOptions>()!;
-        app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!, path: "/api");
+        // Not under /api: that prefix gets the strict CSP, while /swagger is exempt from CSP (local development only).
+        app.UseEntrySwaggerWithOAuth2Client(aadOptions.ClientId!, path: RoutePrefixes.Swagger);
     }
 
     public static void AppAddSwaggerWithAzureAdAuth(this IServiceCollection services,
