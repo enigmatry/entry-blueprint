@@ -27,7 +27,6 @@ public class TestConfigurationBuilder
 
         var dict = new Dictionary<string, string?>
         {
-            { "UseDeveloperExceptionPage", "true" },
             { "DbContext:SensitiveDataLoggingEnabled", "true" },
             { "DbContext:UseAccessToken", "false" },
             { "DbContext:ConnectionResiliencyMaxRetryCount", "10" },
@@ -39,9 +38,10 @@ public class TestConfigurationBuilder
             { "App:AzureAd:Instance", "https://enigmatryb2cdev.b2clogin.com" },
             { "App:AzureAd:ClientId", "a8793ce9-86dc-4d7e-aa70-361a3c5a5150" },
             { "App:AzureAd:Domain", "enigmatryb2cdev.onmicrosoft.com" },
-            { "App:AzureAd:SignUpSignInPolicyId", "B2C_1_entry_blueprint_sign_in" },
+            { "App:AzureAd:SignUpSignInPolicyId", "B2C_1_sign_in" },
             { "HealthChecks:TokenAuthorizationEnabled", "false" },
-            { "KeyVault:Enabled", "false" }
+            { "KeyVault:Enabled", "false" },
+            { "SpaContentSecurityPolicyValue", "default-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'nonce-**PLACEHOLDER_NONCE_SERVER**'; style-src 'self' 'nonce-**PLACEHOLDER_NONCE_SERVER**'; img-src 'self' data:; connect-src 'self'" }
         };
 
         configurationBuilder.AddInMemoryCollection(dict);

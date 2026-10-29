@@ -1,7 +1,7 @@
 {
   "locale": "en-US",
   "translations": {
-    "app.title": "Entry Blueprint App",
+    "app.title": "Entry Blueprint",
     "common.no": "No",
     "common.yes": "Yes",
     "enum.product-type.book": "Book",

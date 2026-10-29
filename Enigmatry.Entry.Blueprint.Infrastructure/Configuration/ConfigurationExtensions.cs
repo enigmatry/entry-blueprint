@@ -5,8 +5,6 @@ namespace Enigmatry.Entry.Blueprint.Infrastructure.Configuration;
 
 public static class ConfigurationExtensions
 {
-    public static bool AppUseDeveloperExceptionPage(this IConfiguration configuration) => configuration.GetValue("UseDeveloperExceptionPage", false);
-
     public static AppSettings ReadAppSettings(this IConfiguration configuration) => configuration.ReadSettingsSection<AppSettings>("App");
 
     public static KeyVaultSettings ReadKeyVaultSettings(this IConfiguration configuration) =>
