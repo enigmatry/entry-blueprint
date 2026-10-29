@@ -23,9 +23,8 @@ public class SecurityLoggingJwtBearerEvents : JwtBearerEvents
     public override Task AuthenticationFailed(AuthenticationFailedContext context)
     {
         ResolveLogger(context).LogSecurityWarning(context.Exception,
-            "Authentication failed for request to {Method} {Path} from {RemoteIpAddress}: {Reason}.",
-            context.Request.Method, context.Request.Path.Value, context.HttpContext.Connection.RemoteIpAddress,
-            context.Exception.Message);
+            "Authentication failed for request to {Method} {Path} from {RemoteIpAddress}.",
+            context.Request.Method, context.Request.Path.Value, context.HttpContext.Connection.RemoteIpAddress);
         return base.AuthenticationFailed(context);
     }
 
