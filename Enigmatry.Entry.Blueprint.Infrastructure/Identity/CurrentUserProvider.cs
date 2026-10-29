@@ -1,10 +1,9 @@
-﻿using Enigmatry.Entry.Blueprint.Domain.Identity;
+using Enigmatry.Entry.Blueprint.Core.Logging;
+using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Blueprint.Domain.Users;
 using Enigmatry.Entry.Core.Data;
-using Enigmatry.Entry.Core.Logging;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 
@@ -12,7 +11,7 @@ namespace Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 public class CurrentUserProvider(
     IClaimsProvider claimsProvider,
     IRepository<User> userRepository,
-    ILogger<CurrentUserProvider> logger)
+    ISecurityLogger<CurrentUserProvider> logger)
     : ICurrentUserProvider
 {
     private bool IsAuthenticated => claimsProvider.IsAuthenticated;
@@ -47,9 +46,13 @@ public class CurrentUserProvider(
                 .AsSplitQuery()
                 .SingleOrDefault();
 
-            field = user != null
-                ? new UserContext(user.Id, new PermissionsContext(user.Role.Permissions.Select(x => x.Id).Distinct().ToArray()))
-                : null;
+            if (user == null)
+            {
+                logger.LogSecurityWarning("Authenticated user with email {EmailAddress} was not found in the database", claimsProvider.Email);
+                return null;
+            }
+
+            field = new UserContext(user.Id, new PermissionsContext(user.Role.Permissions.Select(x => x.Id).Distinct().ToArray()));
 
             return field;
         }

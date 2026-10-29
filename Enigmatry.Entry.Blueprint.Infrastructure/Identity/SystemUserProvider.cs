@@ -1,16 +1,15 @@
-﻿using Enigmatry.Entry.Blueprint.Domain.Identity;
+using Enigmatry.Entry.Blueprint.Core.Logging;
+using Enigmatry.Entry.Blueprint.Domain.Identity;
 using Enigmatry.Entry.Core.Data;
 using Enigmatry.Entry.Core.Entities;
-using Enigmatry.Entry.Core.Logging;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using DomainUser = Enigmatry.Entry.Blueprint.Domain.Users.User;
 
 namespace Enigmatry.Entry.Blueprint.Infrastructure.Identity;
 
 [UsedImplicitly]
-public class SystemUserProvider(IRepository<DomainUser> userRepository, ILogger<SystemUserProvider> logger) : ICurrentUserProvider
+public class SystemUserProvider(IRepository<DomainUser> userRepository, ISecurityLogger<SystemUserProvider> logger) : ICurrentUserProvider
 {
     public virtual Guid? UserId => DomainUser.SystemUserId;
 
