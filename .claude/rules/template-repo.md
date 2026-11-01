@@ -7,6 +7,7 @@ This repository is the source of the `blueprint` `dotnet new` template (`.templa
 These are the Known identifiers the `entry-blueprint:jira-branch` and `entry-blueprint:pull-request` skills use in this repository.
 
 - Jira project key: `BP`
+- Jira issue types: `Story` (regular work, e.g. package updates), `Improvement`, `Bug`, `Epic`, `Sub-task`, `Risk`
 - Atlassian cloud ID: `enigmatry.atlassian.net`
 - GitHub repository: `enigmatry/entry-blueprint`
 - Azure DevOps org/project (pipelines only): `enigmatry` / `Enigmatry Blueprint Template` (ID `b3d80552-b808-495c-9332-82888c12c1bf`)
