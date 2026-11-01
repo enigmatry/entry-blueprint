@@ -3,9 +3,9 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AspireVersion>13.5.4</AspireVersion>
-    <EnigmatryEntryVersion>10.5.0</EnigmatryEntryVersion>
-    <DotnetVersion>10.0.13</DotnetVersion>
-    <VerifyVersion>33.3.3</VerifyVersion>
+    <EnigmatryEntryVersion>10.5.1</EnigmatryEntryVersion>
+    <DotnetVersion>10.0.14</DotnetVersion>
+    <VerifyVersion>33.3.4</VerifyVersion>
     <EnigmatryCodegenVersion>21.2.0</EnigmatryCodegenVersion>
     <Verify_GitHubSponsorAccount>Enigmatry</Verify_GitHubSponsorAccount>
     <Verify_SponsorshipStart>2026-10-07</Verify_SponsorshipStart>
@@ -70,13 +70,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.19.1" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.19.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.19.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.19.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.19.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.19.0" />
-    <PackageVersion Include="Polly" Version="8.8.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.20.1" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.20.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.20.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.20.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.20.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.20.1" />
+    <PackageVersion Include="Polly" Version="8.9.0" />
     <PackageVersion Include="Respawn" Version="7.0.0" />
     <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
@@ -93,8 +93,12 @@
     <!--transitive packages-->
     <PackageVersion Include="Microsoft.Build" Version="17.14.28" />
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="$(DotnetVersion)" />
-    <PackageVersion Include="NuGet.Packaging" Version="6.14.3" />
     <PackageVersion Include="NuGet.Protocol" Version="6.14.3" />
+    <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="$(DotnetVersion)" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="$(DotnetVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- TEMPORARY: StreamJsonRpc 2.25.29 (via Aspire.Hosting 13.5.x) asks MessagePack 2.5.302 (GHSA-qhrr-8q5h-9q3h). Remove when Aspire moves to 13.6.2+, which depends on 2.5.307 itself. -->
+    <PackageVersion Include="MessagePack" Version="2.5.307" />
   </ItemGroup>
 </Project>
