@@ -26,7 +26,7 @@ where VERSION should be replaced with the specific version you want to install, 
 | `--projectName` | Dotted .NET name, e.g. `Customer.Project` |
 | `--appProjectName` | Kebab-cased name used for the Angular app, database and Azure resources, e.g. `customer-project` |
 | `--friendlyName` | Display name, e.g. `"Customer Project"` |
-| `--no-restore` | Skips the restore after creation |
+| `--no-restore` | Skips the restore after creation, which otherwise writes the `packages.lock.json` files into the initial commit; commit them after the first `dotnet restore` |
 | `--no-git` | Skips `git init` and the initial commit |
 | `--apiHttpPort`, `--apiHttpsPort` | Ports of the API in `launchSettings.json` (generated when omitted) |
 | `--appHostHttpPort`, `--appHostHttpsPort`, `--appHostOtlpHttpPort`, `--appHostOtlpHttpsPort`, `--appHostResourceHttpPort`, `--appHostResourceHttpsPort` | Ports of the Aspire AppHost in `launchSettings.json` (generated when omitted) |

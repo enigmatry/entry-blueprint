@@ -46,7 +46,7 @@ stages:
       dotNetVersion: '10.0.x'
       dotnetEfVersion: '10.0.*'
       useDotNetBuild: true
-      useDotNetRestore: true
+      restoreLockedMode: true
       shouldPackage: ${{ eq(variables.isDeployBranch, true) }}
       combineLintAndBuild: true
       useNuGetCache: false
