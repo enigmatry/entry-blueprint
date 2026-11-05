@@ -20,7 +20,9 @@ const mockAuthService = (): AuthService => ({
 let tester: AngularTester;
 
 beforeEach(async() => {
+  throwCustomError = false;
   tokenMock.mockClear();
+  loginMock.mockClear();
   tester = await new AngularTesterBuilder()
     .withProviders([
       provideHttpClient(withInterceptors([authenticationInterceptor])),
