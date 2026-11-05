@@ -4,6 +4,7 @@ import { HttpTestingController, TestRequest } from '@angular/common/http/testing
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { environment } from '@env';
+import { firstValueFrom } from 'rxjs';
 
 export class AngularTester {
     private readonly testEndpoint = `${environment.apiUrl}/test`;
@@ -20,40 +21,31 @@ export class AngularTester {
         this.router.initialNavigation();
     }
 
-    readonly requestFailure = (statusCode: number | undefined, statusText: string,
+    readonly requestFailure = async(statusCode: number | undefined, statusText: string,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        done: jest.DoneCallback, expectedResults: (error: HttpErrorResponse) => void = () => { },
+        expectedResults: (error: HttpErrorResponse) => void = () => { },
         skipCheck: boolean = false) => {
-        this.httpClient.get<object>(this.testEndpoint).subscribe({
-            next: () => fail(`should have failed with the ${statusCode} error`),
-            error: (error: HttpErrorResponse) => {
-                expect(error.status).toEqual(skipCheck ? undefined : statusCode);
-                expectedResults(error);
-                done();
-            },
-            complete: () => done()
-        });
+        const response = firstValueFrom(this.httpClient.get<never>(this.testEndpoint));
 
         if (skipCheck) {
             this.httpMock.expectNone(this.testEndpoint);
         } else {
             const request = this.httpMock.expectOne(this.testEndpoint);
-            request?.flush({}, { status: statusCode, statusText });
+            request.flush({}, { status: statusCode, statusText });
         }
+
+        await expect(response, `should have failed with the ${statusCode} error`).rejects.toBeDefined();
+        const error = await response.catch((failure: HttpErrorResponse) => failure);
+        expect(error.status).toEqual(skipCheck ? undefined : statusCode);
+        expectedResults(error);
     };
 
-    readonly requestSuccess = (done: jest.DoneCallback, expectedResults: (result: any) => void,
+    readonly requestSuccess = async(expectedResults: (result: TestRequest) => void,
         url: string | undefined = this.testEndpoint) => {
-        let request: TestRequest | null = null;
-        this.httpClient.get<object>(url).subscribe({
-            next: () => {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                expectedResults(request!);
-                done();
-            },
-            error: (_error: HttpErrorResponse) => fail(`should not fail`)
-        });
-        request = this.httpMock.expectOne(url);
+        const response = firstValueFrom(this.httpClient.get<object>(url));
+        const request = this.httpMock.expectOne(url);
         request.flush({});
+        await response;
+        expectedResults(request);
     };
 }

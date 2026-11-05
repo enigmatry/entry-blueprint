@@ -5,11 +5,11 @@
     "outDir": "./out-tsc/spec",
     "emitDecoratorMetadata": false,
     "types": [
-      "jest", "node"
+      "@angular/localize", "vitest/globals", "node"
     ]
   },
   "files": [
-    "src/polyfills.ts"
+    "src/testing/setup.ts"
   ],
   "include": [
     "src/**/*.spec.ts",

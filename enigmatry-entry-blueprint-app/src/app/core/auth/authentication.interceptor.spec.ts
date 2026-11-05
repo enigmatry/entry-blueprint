@@ -8,11 +8,10 @@ import { authenticationInterceptor } from './authentication.interceptor';
 const expectedTokenValue = 'token123';
 const expectedErrorMessage = 'fatal error';
 let throwCustomError = false;
-const loginMock = jest.fn().mockReturnValue(Promise.resolve());
-const tokenMock = jest.fn(() =>
+const loginMock = vi.fn().mockReturnValue(Promise.resolve());
+const tokenMock = vi.fn(() =>
   throwCustomError ? throwError(() => new Error(expectedErrorMessage)) : of(expectedTokenValue));
 
-jest.mock('./auth.service');
 const mockAuthService = (): AuthService => ({
   getAccessToken: tokenMock,
   loginRedirect: loginMock
@@ -34,37 +33,37 @@ beforeEach(async() => {
 });
 
 describe('Testing auth interceptor...', () => {
-  it(`should do nothing if it's non-API request`, (done: jest.DoneCallback) => {
-    tester.requestSuccess(done, () => {
+  it(`should do nothing if it's non-API request`, async() => {
+    await tester.requestSuccess(() => {
       expect(tokenMock).not.toHaveBeenCalled();
     }, `/test`);
   });
 
-  it(`should add bearer token in headers to API requests`, (done: jest.DoneCallback) => {
-    tester.requestSuccess(done, (result: TestRequest) => {
+  it(`should add bearer token in headers to API requests`, async() => {
+    await tester.requestSuccess((result: TestRequest) => {
       expect(tokenMock).toHaveBeenCalledTimes(1);
       expect(result.request.headers.get('Authorization')).toEqual(`Bearer ${expectedTokenValue}`);
     });
   });
 
-  it(`should throw in case of an unknown exception`, (done: jest.DoneCallback) => {
+  it(`should throw in case of an unknown exception`, async() => {
     throwCustomError = true;
-    tester.requestFailure(undefined, '', done, (error: HttpErrorResponse) => {
+    await tester.requestFailure(undefined, '', (error: HttpErrorResponse) => {
       expect(tokenMock).toHaveBeenCalledTimes(1);
       expect(error.message).toBe(expectedErrorMessage);
     }, true);
   });
 
-  it(`should throw in case when any other status but 401`, (done: jest.DoneCallback) => {
+  it(`should throw in case when any other status but 401`, async() => {
     throwCustomError = false;
-    tester.requestFailure(HttpStatusCode.Forbidden, HttpStatusCode.Forbidden.toString(), done, () => {
+    await tester.requestFailure(HttpStatusCode.Forbidden, HttpStatusCode.Forbidden.toString(), () => {
       expect(tokenMock).toHaveBeenCalledTimes(1);
     });
   });
 
-  it(`should redirect to login screen when response status 401`, (done: jest.DoneCallback) => {
+  it(`should redirect to login screen when response status 401`, async() => {
     throwCustomError = false;
-    tester.requestFailure(HttpStatusCode.Unauthorized, HttpStatusCode.Unauthorized.toString(), done, () => {
+    await tester.requestFailure(HttpStatusCode.Unauthorized, HttpStatusCode.Unauthorized.toString(), () => {
       expect(tokenMock).toHaveBeenCalledTimes(1);
       expect(loginMock).toHaveBeenCalledTimes(1);
     });

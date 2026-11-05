@@ -28,7 +28,7 @@
             },
             "index": "src/index.html",
             "polyfills": [
-              "src/polyfills.ts",
+              "zone.js",
               "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
@@ -108,6 +108,50 @@
           "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "enigmatry-entry-blueprint-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "enigmatry-entry-blueprint-app:build",
+            "runnerConfig": "vitest.config.js",
+            "setupFiles": [
+              "src/testing/setup.ts"
+            ],
+            "coverageInclude": [
+              "src/app/core/**/*.ts",
+              "src/app/shared/models/**/*.ts",
+              "src/app/shared/pipes/**/*.ts",
+              "src/app/shared/services/**/*.ts",
+              "src/app/shared/validators/**/*.ts",
+              "src/app/*.ts"
+            ],
+            "coverageExclude": [
+              "**/*enum.ts",
+              "**/*.component.ts",
+              "**/*locale.ts",
+              "**/*.module.ts",
+              "**/*.spec.data.ts"
+            ]
+          },
+          "configurations": {
+            "ci": {
+              "watch": false,
+              "coverage": true,
+              "coverageReporters": [
+                "lcov",
+                "text"
+              ],
+              "reporters": [
+                "default",
+                [
+                  "junit",
+                  {
+                    "outputFile": "junit.xml"
+                  }
+                ]
+              ]
+            }
           }
         }
       }

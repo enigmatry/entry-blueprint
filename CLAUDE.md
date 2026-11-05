@@ -34,7 +34,7 @@ Coding standards, testing, code review and the Jira/Azure DevOps workflows come 
 - **Central Package Management** — all NuGet versions are declared in `Directory.Packages.props` only; never add `Version=` to a `<PackageReference>` in a `.csproj`.
 - **Code quality** — `TreatWarningsAsErrors`, `EnforceCodeStyleInBuild`, and `Nullable` are all enabled.
 - **Backend tests** use NUnit 5 (the version in `Directory.Packages.props`), Shouldly, FakeItEasy and Verify. Integration tests inherit from `IntegrationFixtureBase` (WebApplicationFactory + Testcontainers SQL Server), use the `Client.GetAsync<T>()` / `Client.PostAsync<>()` helpers, assert with `Verify()` snapshot files (`.verified.txt`), and are marked `[Category("integration")]`. Test builders in `Domain.Tests/{Feature}/{Entity}Builder.cs` use fluent `With*()` methods and an implicit conversion to the entity.
-- **Frontend unit tests** run on Jest (`jest-preset-angular`, config in `jest.config.json`; shared setup and mocks in `src/testing/`). New specs extend this Jest suite; moving the suite to Vitest is a separate, dedicated change.
+- **Frontend unit tests** run on Vitest through Angular's `@angular/build:unit-test` builder (the `test` target in `angular.json`: jsdom, Vitest globals, coverage scope in `coverageInclude`/`coverageExclude`). Shared setup is `src/testing/setup.ts` (zone.js Vitest patch, silenced console) and test builders live in `src/testing/builders/`. Mock dependencies through TestBed providers (`useValue`, `TestBed.overrideProvider`); the builder rejects `vi.mock` for relative imports. `npm run test:ci` writes `junit.xml` and `coverage/lcov.info`, the files the CI pipeline templates publish; `vitest.config.js` only sets that coverage directory.
 - **Angular code generation** — add `IListComponentConfiguration<T>` / `IFormComponentConfiguration<T>` to `CodeGeneration.Setup/Features/{Feature}/`, rebuild that project, then run `npm run codegen:run`; generated files in `src/app/features/` must not be edited manually.
 - **Content Security Policy** — the CSP header is set by `CspMiddleware` (Infrastructure/Api/Csp), not by web.config. The SPA policy lives in `SpaContentSecurityPolicyValue` (appsettings, Web Deploy token `__spaContentSecurityPolicyValue__`) and must contain `**PLACEHOLDER_NONCE_SERVER**`; the placeholder is replaced per request in the header and in `wwwroot/index.html` (`ngCspNonce` on `<app-root>`), which is served only by the nonce-injecting SPA fallback. Never add `'unsafe-inline'` back.
 
@@ -65,9 +65,9 @@ All commands run from `enigmatry-entry-blueprint-app/`.
 npm install
 npm start                                              # dev server at http://localhost:4200
 npm run build
-npm test                                               # Jest, no coverage
-npm run test:ci                                        # Jest with coverage (CI)
-npm test -- --testNamePattern="my test name"           # single test
+npm test                                               # Vitest, no coverage (watch mode in an interactive terminal)
+npm run test:ci                                        # single run with coverage and junit.xml (CI)
+npm test -- --filter="my test name"                    # tests whose suite or test name matches
 npm run lint                                           # ESLint + Stylelint, auto-fixes
 npx playwright test                                    # E2E tests (run from enigmatry-entry-blueprint-tests/)
 ```

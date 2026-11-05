@@ -1,32 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { EntryPermissionService } from '@enigmatry/entry-components/permissions';
 import { CurrentUserService } from '@services/current-user.service';
-import { mockClass } from '@test/mocks/class-mocker';
 import { Observable } from 'rxjs';
 import { authGuard } from './auth.guard';
 import { userCases } from './auth.guard.spec.data';
 import { AuthService } from './auth.service';
 import { UserProfile } from './user-profile';
 
-jest.mock('./auth.service');
-jest.mock('../services/current-user.service');
-jest.mock('@enigmatry/entry-components', () => ({
-    __esModule: true,
-    entryPermissionGuard: jest.fn(() => false)
-}));
-const loginRedirectMock = jest.fn().mockReturnValue(Promise.resolve());
-const logoutMock = jest.fn();
+const loginRedirectMock = vi.fn().mockReturnValue(Promise.resolve());
+const logoutMock = vi.fn();
 
 const mockServicesWith = (user: UserProfile | null | undefined) => {
-    mockClass(AuthService, () => Object({
+    TestBed.overrideProvider(AuthService, { useValue: {
         isAuthenticated: () => user !== undefined,
         logout: logoutMock,
         loginRedirect: loginRedirectMock
-    }));
-    mockClass(CurrentUserService, () => Object({
-        loadUser: () => jest.fn(),
+    } });
+    TestBed.overrideProvider(CurrentUserService, { useValue: {
+        loadUser: () => vi.fn(),
         currentUser: () => user
-    }));
+    } });
 };
 
 const act = async(route: ActivatedRouteSnapshot) =>
@@ -35,14 +29,19 @@ const act = async(route: ActivatedRouteSnapshot) =>
 beforeEach(() => {
     logoutMock.mockClear();
     loginRedirectMock.mockClear();
-    TestBed.configureTestingModule({ providers: [AuthService, CurrentUserService] });
+    TestBed.configureTestingModule({
+        providers: [
+            AuthService,
+            CurrentUserService,
+            { provide: EntryPermissionService, useValue: { hasPermissions: () => false } }
+        ]
+    });
 });
 
 describe.each(userCases)('Testing authentication guard...', userCase => {
     it(userCase.description, async() => {
+        mockServicesWith(userCase.user);
         await TestBed.runInInjectionContext(async() => {
-            mockServicesWith(userCase.user);
-
             const result = await act(userCase.permissionsRequired ?
                 { data: { permissions: [] } } as unknown as ActivatedRouteSnapshot : { data: {} } as ActivatedRouteSnapshot);
 

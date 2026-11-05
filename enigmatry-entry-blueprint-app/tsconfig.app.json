@@ -4,11 +4,12 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "noImplicitOverride": false,
-    "types": []
+    "types": [
+      "@angular/localize"
+    ]
   },
   "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
+    "src/main.ts"
   ],
   "include": [
     "src/**/*.d.ts",
