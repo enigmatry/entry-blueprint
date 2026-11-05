@@ -10,8 +10,8 @@
     "start:aspire:default": "ng serve --port $PORT",
     "build": "ng build",
     "build-and-lint": "concurrently -P \"npm run lint:ts:ci\" \"npm run lint:styles:ci\" \"npm run build -- {@}\" --",
-    "test": "jest --coverage=false",
-    "test:ci": "jest --ci --coverage=true",
+    "test": "ng test",
+    "test:ci": "ng test --configuration ci",
     "lint": "concurrently \"npm run lint:ts\" \"npm run lint:styles\"",
     "lint:ts": "eslint --fix",
     "lint:ts:ci": "eslint",
@@ -55,15 +55,14 @@
     "@enigmatry/eslint-config": "21.1.1",
     "@enigmatry/scss-foundation": "21.1.1",
     "@enigmatry/stylelint-config": "21.1.1",
-    "@types/jest": "30.0.0",
+    "@types/node": "22.20.5",
+    "@vitest/coverage-v8": "4.1.12",
     "concurrently": "10.0.4",
-    "jest": "30.3.0",
-    "jest-environment-jsdom": "30.3.0",
-    "jest-junit": "^17.0.0",
-    "jest-preset-angular": "16.1.4",
+    "jsdom": "29.1.1",
     "json-sort-cli": "^4.1.0",
     "nswag": "^14.6.2",
     "run-script-os": "^1.1.6",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
   }
 }

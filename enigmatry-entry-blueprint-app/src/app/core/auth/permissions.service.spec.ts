@@ -1,18 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { PermissionId } from '@api';
 import { PermissionService } from '@app/auth/permissions.service';
-import { mockClass } from '@test/mocks/class-mocker';
 import { CurrentUserService } from '../services/current-user.service';
 import { UserProfile } from './user-profile';
 
-jest.mock('../services/current-user.service');
 beforeEach(() => {
     TestBed.configureTestingModule({ providers: [CurrentUserService, PermissionService] });
 });
 const arrangePermissionService = (user: UserProfile | null) => {
-    mockClass(CurrentUserService, () => Object({
+    TestBed.overrideProvider(CurrentUserService, { useValue: {
         currentUser: () => user
-    }));
+    } });
     return TestBed.inject(PermissionService);
 };
 

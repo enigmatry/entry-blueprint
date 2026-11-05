@@ -2,7 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 describe('HTML Syntax Check', () => {
-    const projectRoot = path.resolve(__dirname, '../'); // Adjusted path to the project root
+    // Not __dirname: with coverage on, specs run from a bundle at the workspace root.
+    const projectRoot = path.resolve('src/app');
     const htmlFiles: string[] = [];
     const excludeFiles = ['-generated.component.html', 'form-wrapper.component.html'];
 
