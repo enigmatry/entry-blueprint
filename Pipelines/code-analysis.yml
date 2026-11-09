@@ -29,6 +29,7 @@ jobs:
     dotNetVersion: '10.0.x'
     projectNameAngularApp: $(projectNameAngularApp)
     useSlnx: true
+    restoreLockedMode: true
 
 - template: build-report-job.yml@templates
   parameters:

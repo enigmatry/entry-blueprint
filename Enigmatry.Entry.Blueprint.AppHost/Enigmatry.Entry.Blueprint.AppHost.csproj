@@ -7,6 +7,8 @@
     <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>253200df-f2b9-4f59-ae41-33c701dee0f5</UserSecretsId>
     <NoWarn>$(NoWarn);ASPIRE010</NoWarn><!-- Aspire CLI bundle not used -->
+    <!-- The Aspire SDK adds packages for the restoring OS (e.g. Aspire.Dashboard.Sdk.win-x64), so the Windows lock file cannot be enforced on Linux agents -->
+    <RestoreLockedMode Condition="'$(OS)' != 'Windows_NT'">false</RestoreLockedMode>
   </PropertyGroup>
 
   <ItemGroup>
