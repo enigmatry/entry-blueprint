@@ -15,8 +15,8 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>icon-192x192.png</PackageIcon>
     <PackageId>Enigmatry.Entry.Blueprint.Template</PackageId>
-    <PackageProjectUrl>https://github.com/enigmatry/entry-blueprint</PackageProjectUrl>
-    <PackageTags>Enigmatry;Entry;dotnet-new;template</PackageTags>
+    <PackageProjectUrl>https://www.enigmatry.com/en/entry/</PackageProjectUrl>
+    <PackageTags>Enigmatry;Entry;dotnet-new;template;blueprint;angular</PackageTags>
     <PackageType>Template</PackageType>
     <PackageVersion>3.3</PackageVersion>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
