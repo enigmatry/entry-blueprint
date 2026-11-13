@@ -60,23 +60,22 @@
     <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.Identity.Web" Version="4.16.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
-    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="4.18.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.3" />
     <PackageVersion Include="NUnit" Version="5.0.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="6.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.20.1" />
-    <PackageVersion Include="Polly" Version="8.9.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.21.0" />
+    <PackageVersion Include="Polly" Version="8.9.1" />
     <PackageVersion Include="Respawn" Version="7.0.0" />
     <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
@@ -91,7 +90,7 @@
     <PackageVersion Include="Verify.NUnit" Version="$(VerifyVersion)" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <!--transitive packages-->
-    <PackageVersion Include="Microsoft.Build" Version="18.9.6" /><!-- 18.10+ targets net11.0 only (NU1701 on net10.0) -->
+    <PackageVersion Include="Microsoft.Build" Version="18.12.2" /><!-- Microsoft.VisualStudio.Web.CodeGeneration.Design asks for 17.11.x -->
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="$(DotnetVersion)" />
     <PackageVersion Include="NuGet.Protocol" Version="6.14.3" />
     <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="$(DotnetVersion)" />

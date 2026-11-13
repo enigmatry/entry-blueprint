@@ -26,7 +26,7 @@ jobs:
     projectName: 'Entry Blueprint'
     sonarProjectKey: 'AspNetCoreAngular_EnigmatryEntryBlueprint'
     displayName: 'Code Analysis'
-    dotNetVersion: '10.0.x'
+    useGlobalJson: true
     projectNameAngularApp: $(projectNameAngularApp)
     useSlnx: true
     restoreLockedMode: true
@@ -38,3 +38,5 @@ jobs:
     projectNameAngularApp: $(projectNameAngularApp)
     projectNamePrefix: $(projectNamePrefix)
     useSlnx: true
+    useGlobalJson: true
+    restoreLockedMode: true

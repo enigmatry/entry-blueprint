@@ -34,15 +34,9 @@ To start the app execute command `npm start`, which will build & run the app on 
 
 ## Code generation
 
-### 1. Installing code generator tool
+### 1. The code generator tool
 
-Install [Azure artifacts credential provider](https://github.com/microsoft/artifacts-credprovider#setup)
-
-`iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) } -AddNetfx"`
-
-To install the tool run npm script `npm run codegen:install`. This will install the tool globally and it needs to be executed only once.
-
-To update the tool run `npm run codegen:update`. This npm script should be executed each time new version of the tool is out.
+The npm scripts run the tool package `enigmatry.entry.codegeneration.tools` with `dnx` from the .NET SDK, at the version pinned in `package.json`; nothing needs to be installed. The tool targets an older .NET major than the configuration assembly, so the scripts set `DOTNET_ROLL_FORWARD=LatestMajor`.
 
 ### 2. Configuring the code to be generated
 
