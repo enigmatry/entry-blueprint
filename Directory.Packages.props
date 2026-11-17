@@ -5,10 +5,9 @@
     <AspireVersion>13.6.5</AspireVersion>
     <EntryVersion>11.0.0-preview.1</EntryVersion>
     <DotnetVersion>11.0.0</DotnetVersion>
-    <VerifyVersion>33.3.4</VerifyVersion>
+    <VerifyVersion>33.5.0</VerifyVersion>
     <EnigmatryCodegenVersion>21.2.0</EnigmatryCodegenVersion>
-    <Verify_GitHubSponsorAccount>Enigmatry</Verify_GitHubSponsorAccount>
-    <Verify_SponsorshipStart>2026-10-07</Verify_SponsorshipStart>
+    <Verify_SponsorshipLicensedUntil>2027-10</Verify_SponsorshipLicensedUntil>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
@@ -18,7 +17,7 @@
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.5.2" />
     <PackageVersion Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.6.0" />
     <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.10.0" />
-    <PackageVersion Include="coverlet.collector" Version="10.1.0">
+    <PackageVersion Include="coverlet.collector" Version="10.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
@@ -85,7 +84,7 @@
     <PackageVersion Include="Serilog.Settings.Configuration" Version="10.0.1" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageVersion Include="Testcontainers.MsSql" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.MsSql" Version="4.17.0" />
     <PackageVersion Include="Verify" Version="$(VerifyVersion)" />
     <PackageVersion Include="Verify.NUnit" Version="$(VerifyVersion)" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
