@@ -1,6 +1,6 @@
 # Entry blueprint
 
-The Entry blueprint is a complete, ready-to-run .NET 10 and Angular 21 application built on the [Entry building blocks](https://github.com/enigmatry/entry-building-blocks), together with the `dotnet new` template that creates a new solution from it. It is the architecture Enigmatry's tech leads kept rebuilding on every project, built once so that a new system starts from a working whole rather than from an empty solution.
+The Entry blueprint is a complete, ready-to-run .NET 11 and Angular 21 application built on the [Entry building blocks](https://github.com/enigmatry/entry-building-blocks), together with the `dotnet new` template that creates a new solution from it. It is the architecture Enigmatry's tech leads kept rebuilding on every project, built once so that a new system starts from a working whole rather than from an empty solution.
 
 What a solution created from the blueprint contains:
 
@@ -24,6 +24,8 @@ dotnet new blueprint --name Customer.Project --projectName Customer.Project --ap
 `dotnet new blueprint -h` lists every option. [templating.md](templating.md) describes the options, installing a specific version, installing the template from this source tree, and building the template package yourself.
 
 ## Run it
+
+Building needs the [.NET 11 SDK](https://dotnet.microsoft.com/download/dotnet/11.0) (`global.json` selects the newest installed 11.0.x SDK) and, in Visual Studio, Visual Studio 2026 18.12 or later. The integration tests need Docker.
 
 From the solution root of a created solution, or of this repository:
 
