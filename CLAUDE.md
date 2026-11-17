@@ -24,7 +24,7 @@ Coding standards, testing, code review and the Jira/Azure DevOps workflows come 
 
 **Frontend:** Angular 21 standalone components in `enigmatry-entry-blueprint-app/src/app/`, structured as `core/`, `features/`, `shared/`, `api/`.
 
-**Database:** SQL Server via EF Core 10 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
+**Database:** SQL Server via EF Core 11 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
 
 ## Key Conventions
 
