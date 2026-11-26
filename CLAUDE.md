@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Entry Blueprint is a .NET 10 + Angular 21 application built on Enigmatry Entry's `blueprint` template. It uses Vertical Slice Architecture, CQRS via MediatR, DDD-style domain entities, EF Core with SQL Server, Autofac DI, background scheduling, and Angular code generation from C# configuration. The Users and Products features are reference implementations to copy when adding new features.
+Entry Blueprint is a .NET 11 + Angular 21 application built on Enigmatry Entry's `blueprint` template. It uses Vertical Slice Architecture, CQRS via MediatR, DDD-style domain entities, EF Core with SQL Server, Autofac DI, background scheduling, and Angular code generation from C# configuration. The Users and Products features are reference implementations to copy when adding new features.
 
 Coding standards, testing, code review and the Jira/Azure DevOps workflows come from the `entry-blueprint` Claude Code plugin (enabled in `.claude/settings.json`). This file holds what is specific to this repository. The plugin's branch and pull-request skills read the project's Jira and Azure DevOps identifiers from a `## Known identifiers` section (Jira project key, Atlassian cloud ID, Azure DevOps org/repo/project, default branch).
 
@@ -24,7 +24,7 @@ Coding standards, testing, code review and the Jira/Azure DevOps workflows come 
 
 **Frontend:** Angular 21 standalone components in `enigmatry-entry-blueprint-app/src/app/`, structured as `core/`, `features/`, `shared/`, `api/`.
 
-**Database:** SQL Server via EF Core 10 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
+**Database:** SQL Server via EF Core 11 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
 
 ## Key Conventions
 

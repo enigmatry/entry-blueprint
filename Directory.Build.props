@@ -4,13 +4,23 @@
     <Company>Enigmatry</Company>
     <!--Authors>TODO</Authors-->
     <!--Product>TODO</Product-->
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <!-- See https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#code-analysis-properties -->
+    <AnalysisLevel>11.0</AnalysisLevel>
+    <AnalysisMode>default</AnalysisMode>
+    <LangVersion>15.0</LangVersion>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+    <!-- Audit every package, direct and transitive, down to low severity (the SDK defaults, pinned here) -->
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
     <NoWarn>$(NoWarn);NU5110;NU5111;NU1608</NoWarn><!-- Suppress warnings for ps1 files and Roslyn analyzer version constraint mismatches -->
   </PropertyGroup>
 </Project>
