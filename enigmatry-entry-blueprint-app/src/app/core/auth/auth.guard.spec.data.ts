@@ -26,7 +26,15 @@ export const userCases = [
         permissionsRequired: false
     },
     {
-        description: 'it should pass request to entryPermissionGuard if all else fine and permissions required',
+        description: 'it should allow user to pass if entryPermissionGuard grants the required permissions',
+        user: new UserProfile({ fullName: 'John Doe' }),
+        allowedAccess: true,
+        redirectedToLogin: false,
+        logout: false,
+        permissionsRequired: true
+    },
+    {
+        description: 'it should deny access if entryPermissionGuard refuses the required permissions',
         user: new UserProfile({ fullName: 'John Doe' }),
         allowedAccess: false,
         redirectedToLogin: false,

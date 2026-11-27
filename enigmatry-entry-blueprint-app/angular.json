@@ -120,9 +120,8 @@
             ],
             "coverageInclude": [
               "src/app/core/**/*.ts",
-              "src/app/shared/models/**/*.ts",
+              "src/app/shared/model/**/*.ts",
               "src/app/shared/pipes/**/*.ts",
-              "src/app/shared/services/**/*.ts",
               "src/app/shared/validators/**/*.ts",
               "src/app/*.ts"
             ],
