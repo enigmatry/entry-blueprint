@@ -7,16 +7,24 @@ trigger:
     - release/*
 
 variables:
-  artifactName: 'enigmatry-entry-blueprint'
-  dbContextName: 'AppDbContext'
-  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
+  - template: variables/variables.node.yml
+  - name: artifactName
+    value: 'enigmatry-entry-blueprint'
+  - name: dbContextName
+    value: 'AppDbContext'
+  - name: isRelease
+    value: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
   # Flip to true to package and deploy a feature branch to Test through its PR build or a manual run; must stay false on master/main/release.
-  manualPublishOverride: false
-  isDeployBranch: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['manualPublishOverride'], true), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}
-  majorMinorVersion: 1.0
-  nodeVersion: '22.17.1'
-  projectNameAngularApp: enigmatry-entry-blueprint-app
-  projectNamePrefix: Enigmatry.Entry.Blueprint
+  - name: manualPublishOverride
+    value: false
+  - name: isDeployBranch
+    value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['manualPublishOverride'], true), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}
+  - name: majorMinorVersion
+    value: 1.0
+  - name: projectNameAngularApp
+    value: enigmatry-entry-blueprint-app
+  - name: projectNamePrefix
+    value: Enigmatry.Entry.Blueprint
 
 # This determines the build number
 name: $(majorMinorVersion)$(Rev:.r)

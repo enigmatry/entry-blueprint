@@ -1,7 +1,10 @@
-import 'zone.js';
-import 'zone.js/testing';
-import '@angular/localize/init';
-import { TestBed } from '@angular/core/testing';
-import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
+import 'zone.js/plugins/vitest-patch';
 
-TestBed.initTestEnvironment(BrowserTestingModule, platformBrowserTesting());
+globalThis.console = {
+    ...console,
+    log: vi.fn(),
+    debug: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn()
+};
