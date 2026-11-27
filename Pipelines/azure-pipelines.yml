@@ -51,10 +51,10 @@ stages:
       artifactName: $(artifactName)
       displayName: 'Build Angular App and .net API'
       nodeVersion: $(nodeVersion)
-      dotNetVersion: '10.0.x'
-      dotnetEfVersion: '10.0.*'
+      useGlobalJson: true
+      dotnetEfVersion: '11.0.*'
       useDotNetBuild: true
-      useDotNetRestore: true
+      restoreLockedMode: true
       shouldPackage: ${{ eq(variables.isDeployBranch, true) }}
       combineLintAndBuild: true
       useNuGetCache: false

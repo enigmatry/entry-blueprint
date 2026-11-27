@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Entry Blueprint is a .NET 10 + Angular 21 application built on Enigmatry Entry's `blueprint` template. It uses Vertical Slice Architecture, CQRS via MediatR, DDD-style domain entities, EF Core with SQL Server, Autofac DI, background scheduling, and Angular code generation from C# configuration. The Users and Products features are reference implementations to copy when adding new features.
+Entry Blueprint is a .NET 11 + Angular 21 application built on Enigmatry Entry's `blueprint` template. It uses Vertical Slice Architecture, CQRS via MediatR, DDD-style domain entities, EF Core with SQL Server, Autofac DI, background scheduling, and Angular code generation from C# configuration. The Users and Products features are reference implementations to copy when adding new features.
 
 Coding standards, testing, code review and the Jira/Azure DevOps workflows come from the `entry-blueprint` Claude Code plugin (enabled in `.claude/settings.json`). This file holds what is specific to this repository. The plugin's branch and pull-request skills read the project's Jira and Azure DevOps identifiers from a `## Known identifiers` section (Jira project key, Atlassian cloud ID, Azure DevOps org/repo/project, default branch).
 
@@ -24,7 +24,7 @@ Coding standards, testing, code review and the Jira/Azure DevOps workflows come 
 
 **Frontend:** Angular 21 standalone components in `enigmatry-entry-blueprint-app/src/app/`, structured as `core/`, `features/`, `shared/`, `api/`.
 
-**Database:** SQL Server via EF Core 10 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
+**Database:** SQL Server via EF Core 11 (code-first, repository pattern). Tests use Testcontainers for isolated SQL Server containers.
 
 ## Key Conventions
 
@@ -81,3 +81,5 @@ npm run codegen:run    # regenerate Angular form/list components
 ## CI/CD
 
 Azure DevOps Pipelines (`Pipelines/azure-pipelines.yml`): pushes to `master`, `main` and `release/*` run the pipeline, and pull requests are validated by a PR build. Deploy branches (`master`, `main`, `release/*`) are packaged and deployed to the test environment; other builds only build and test. To deploy a feature branch to test, set `manualPublishOverride: true` on that branch (never on a deploy branch): its PR build, or a manual pipeline run for the branch, then packages and deploys it. Deployment uses publish profiles in `Deployment/`.
+
+CI restores NuGet packages in locked mode (`restoreLockedMode: true` on the pipeline templates), so the committed `packages.lock.json` files decide which package versions are built. A lock file that no longer matches the package references fails the restore with NU1004: run `dotnet restore` and commit the regenerated `packages.lock.json` files together with every package change. A project opts out with `<RestoreLockedMode>false</RestoreLockedMode>` in its `.csproj`; the AppHost does this on non-Windows agents, because the Aspire SDK adds packages for the operating system that restores it.

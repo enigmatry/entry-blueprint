@@ -2,13 +2,12 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AspireVersion>13.6.4</AspireVersion>
-    <EnigmatryEntryVersion>10.5.1</EnigmatryEntryVersion>
-    <DotnetVersion>10.0.14</DotnetVersion>
-    <VerifyVersion>33.3.4</VerifyVersion>
+    <AspireVersion>13.6.5</AspireVersion>
+    <EntryVersion>11.0.0-preview.1</EntryVersion>
+    <DotnetVersion>11.0.0</DotnetVersion>
+    <VerifyVersion>33.5.0</VerifyVersion>
     <EnigmatryCodegenVersion>21.2.0</EnigmatryCodegenVersion>
-    <Verify_GitHubSponsorAccount>Enigmatry</Verify_GitHubSponsorAccount>
-    <Verify_SponsorshipStart>2026-10-07</Verify_SponsorshipStart>
+    <Verify_SponsorshipLicensedUntil>2027-10</Verify_SponsorshipLicensedUntil>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
@@ -18,26 +17,26 @@
     <PackageVersion Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.5.2" />
     <PackageVersion Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.6.0" />
     <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.10.0" />
-    <PackageVersion Include="coverlet.collector" Version="10.1.0">
+    <PackageVersion Include="coverlet.collector" Version="10.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Core" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Core.EntityFramework" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.EntityFramework" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.Swagger" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="$(EnigmatryEntryVersion)" />
-    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="$(EnigmatryEntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Authorization" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.AspNetCore.Tests.SystemTextJson" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.Core" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.Core.EntityFramework" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.EntityFramework" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.HealthChecks" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.Infrastructure" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.MediatR" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.Scheduler" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.EntityFramework" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.Swagger" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.SystemTextJson" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.SmartEnums.VerifyTests" Version="$(EntryVersion)" />
+    <PackageVersion Include="Enigmatry.Entry.Swagger" Version="$(EntryVersion)" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Configuration" Version="$(EnigmatryCodegenVersion)" />
     <PackageVersion Include="Enigmatry.Entry.CodeGeneration.Validation" Version="$(EnigmatryCodegenVersion)" />
     <PackageVersion Include="FakeItEasy" Version="9.0.1" />
@@ -59,24 +58,23 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(DotnetVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="$(DotnetVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.11.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotnetVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.11.0" />
-    <PackageVersion Include="Microsoft.Identity.Web" Version="4.16.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
-    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.Identity.Web" Version="4.18.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.3" />
     <PackageVersion Include="NUnit" Version="5.0.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="6.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.20.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.20.1" />
-    <PackageVersion Include="Polly" Version="8.9.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.21.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.21.0" />
+    <PackageVersion Include="Polly" Version="8.9.1" />
     <PackageVersion Include="Respawn" Version="7.0.0" />
     <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
@@ -86,12 +84,12 @@
     <PackageVersion Include="Serilog.Settings.Configuration" Version="10.0.1" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageVersion Include="Testcontainers.MsSql" Version="4.16.0" />
+    <PackageVersion Include="Testcontainers.MsSql" Version="4.17.0" />
     <PackageVersion Include="Verify" Version="$(VerifyVersion)" />
     <PackageVersion Include="Verify.NUnit" Version="$(VerifyVersion)" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <!--transitive packages-->
-    <PackageVersion Include="Microsoft.Build" Version="18.9.6" /><!-- 18.10+ targets net11.0 only (NU1701 on net10.0) -->
+    <PackageVersion Include="Microsoft.Build" Version="18.12.2" /><!-- Microsoft.VisualStudio.Web.CodeGeneration.Design asks for 17.11.x -->
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection" Version="$(DotnetVersion)" />
     <PackageVersion Include="NuGet.Protocol" Version="6.14.3" />
     <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="$(DotnetVersion)" />

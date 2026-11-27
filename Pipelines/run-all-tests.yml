@@ -19,4 +19,6 @@ jobs:
 - template: run-all-dotnet-tests.yml@templates
   parameters:
     displayName: 'Run all .net tests'
+    useGlobalJson: true
+    restoreLockedMode: true
         
