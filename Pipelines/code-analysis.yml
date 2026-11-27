@@ -10,9 +10,13 @@ schedules:
   always: false
 
 variables:
-  artifactName: 'enigmatry-entry-blueprint'
-  projectNameAngularApp: enigmatry-entry-blueprint-app
-  projectNamePrefix: Enigmatry.Entry.Blueprint
+  - template: variables/variables.node.yml
+  - name: artifactName
+    value: 'enigmatry-entry-blueprint'
+  - name: projectNameAngularApp
+    value: enigmatry-entry-blueprint-app
+  - name: projectNamePrefix
+    value: Enigmatry.Entry.Blueprint
 
 resources:
   repositories:
@@ -28,6 +32,7 @@ jobs:
     displayName: 'Code Analysis'
     dotNetVersion: '10.0.x'
     projectNameAngularApp: $(projectNameAngularApp)
+    nodeVersion: $(nodeVersion)
     useSlnx: true
 
 - template: build-report-job.yml@templates

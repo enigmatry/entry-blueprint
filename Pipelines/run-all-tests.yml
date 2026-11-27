@@ -1,5 +1,8 @@
 trigger: none
 
+variables:
+  - template: variables/variables.node.yml
+
 resources:
   repositories:
     - repository: templates
@@ -11,6 +14,7 @@ jobs:
   parameters:
     displayName: 'Run all Angular tests'
     projectNameAngularApp: 'enigmatry-entry-blueprint-app'
+    nodeVersion: $(nodeVersion)
 
 - template: run-all-dotnet-tests.yml@templates
   parameters:
